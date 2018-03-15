@@ -228,6 +228,27 @@ color: inherit !important;
 	#passwordErrormsg {
 		text-align:center;
 	}
+	.dash{
+	color: #333333 !important;
+	}
+	.org {
+	color:#ff0052 !important;
+	}
+	.depart {
+	color:#af1d0e !important;
+	}
+	.heir {
+	color: #8e29b9 !important;
+	}
+	.cate {
+	color: #1c4408 !important;
+	}
+	.emp {
+	color: #ef0606 !important;
+	}
+	.task {
+	color:  #1218e4 !important;
+	}
 </style>
 <script type="text/javascript">
 	var isClick = 'No';
@@ -321,7 +342,7 @@ function getHeadersCounts(){
 		</div>
 
 
-    <header class="navbar navbar-inverse navbar-fixed-top" role="banner" style="background:#e78124;">
+    <header class="navbar navbar-inverse navbar-fixed-top" role="banner" style="background:#ffb902;">
         <div class="navbar-header pull-left">
             <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/klogo.png"  style ="width:auto;height:68px;" class="img-responsive"></a>
             <div class="clearfix"></div>
@@ -330,7 +351,7 @@ function getHeadersCounts(){
 	        <ul class="nav navbar-nav pull-right toolbar"><li style="float:left;">
             <div style="box-shadow:none;" class="navbar">
   <div style="border-left:none; margin-right:10px;" class="dropdown">
-    <diV style="color:#e6d9d7; background:#e78124; font-size:25px; margin-top:10px; margin-right:10px;" class="dropbtn"">    
+    <diV style="color:#ffffff; background:#ffb902; font-size:25px; margin-top:10px; margin-right:10px;" class="dropbtn"">    
 
 
     <i class="fa fa-list-alt"></i><!-- <span class="badge">5</span> -->
@@ -371,7 +392,7 @@ function getHeadersCounts(){
             <li style="float:left;">
             <div style="box-shadow:none; margin-right:10px;" class="navbar">
   <div style="border-left:none;" class="dropdown">
-    <diV style="color:#e6d9d7; background:#e78124; font-size:25px; margin-top:10px;" class="dropbtn"">
+    <diV style="color:#ffffff; background:#ffb902; font-size:25px; margin-top:10px;" class="dropbtn"">
 
 
       <i class="fa fa-bell-o"></i><!-- <span class="badge">5</span> -->
@@ -412,10 +433,10 @@ function getHeadersCounts(){
 </div>
                 </li>
 	             <%-- <li style="float:left;margin-right:35px"><a href="${baseurl}/task" style="color:#f3f1f1;">Create Task</a></li> --%>
-	            <li style="float:left; margin-right:5px; margin-top:5px;"><a href="${baseurl}/severity?id=Critical" style="color:#f3f1f1;">Create Task</a></li>
+	            <li style="float:left; margin-right:5px; margin-top:5px;"><a href="${baseurl}/severity?id=Critical" style="color:#ffffff;">Create Task</a></li>
 	   
 	            <li style=" margin-top:5px;" class="dropdown">
-	                <a href="#" class="dropdown-toggle username" data-toggle="dropdown" style="color: #f3f1f1;"><span class="hidden-xs">Master Admin <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
+	                <a href="#" class="dropdown-toggle username" data-toggle="dropdown" style="color: #ffffff;"><span class="hidden-xs">Master Admin <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
 	                <ul class="dropdown-menu userinfo arrow">
 	                    <li class="username">
 	                        <a href="#">
@@ -453,18 +474,18 @@ function getHeadersCounts(){
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="horizontal-navbar">
             <ul class="nav navbar-nav">
             
-            <li class="dashBoard"><a href="${baseurl }/dashBoard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+            <li class="dashBoard"><a href="${baseurl }/dashBoard"><i class="fa fa-dashboard dash"></i> <span>Dashboard</span></a></li>
              <security:authorize access="hasRole('ROLE_MASTERADMIN')">
-              <li class="org"><a href="${baseurl }/kporg"><i class="fa fa-building"></i><span>Organization</span></a></li>
+              <li class="org"><a href="${baseurl }/kporg"><i class="fa fa-building org"></i><span>Organization</span></a></li>
             </security:authorize>
             <security:authorize access="hasRole('ROLE_ADMIN')">
-            <li class="dept"><a href="${baseurl }/dept"><i class="fa fa-american-sign-language-interpreting"></i> <span>Department</span></a></li>
+            <li class="dept"><a href="${baseurl }/dept"><i class="fa fa-american-sign-language-interpreting depart"></i> <span>Department</span></a></li>
               <%-- <li class="desig"><a href="${baseurl }/desig"><i class="fa fa-plane"></i> <span>Designation</span></a></li> --%>
-             <li class="orgDept"><a href="${baseurl }/orgDept"><i class="fa fa-sitemap"></i> <span>Hierarchical</span></a></li>
-              <li class="cate"><a href="${baseurl }/cate"><i class="fa fa-black-tie"></i> <span>Category</span></a></li>
-             	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users"></i> <span>Employees</span></a></li>
+             <li class="orgDept"><a href="${baseurl }/orgDept"><i class="fa fa-sitemap heir"></i> <span>Hierarchical</span></a></li>
+              <li class="cate"><a href="${baseurl }/cate"><i class="fa fa-black-tie cate"></i> <span>Category</span></a></li>
+             	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users emp"></i> <span>Employees</span></a></li>
               </security:authorize>
-              <li class="task"><a href="${baseurl }/task"><i class="fa fa-tasks"></i> <span>Task</span></a></li>
+              <li class="task"><a href="${baseurl }/task"><i class="fa fa-tasks task"></i> <span>Task</span></a></li>
 			</ul>
 		</div>
     </nav>

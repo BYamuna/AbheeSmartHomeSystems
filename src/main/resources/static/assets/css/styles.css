@@ -8990,7 +8990,7 @@ footer #back-to-top {
 #horizontal-navbar .navbar-nav li.active a:hover,
 #horizontal-navbar .navbar-nav li.active a:hover i {
   background-color: #595f69;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 #horizontal-navbar .navbar-nav li.active a:before {
   width: 0px;
