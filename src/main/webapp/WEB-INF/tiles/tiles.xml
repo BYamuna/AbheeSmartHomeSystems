@@ -107,6 +107,11 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/403.jsp" />
 	</definition>
 	
+	<definition name="abBranch" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/abBranch.jsp" />
+	</definition>
+	
+	
 	
 		
 
