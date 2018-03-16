@@ -39,7 +39,8 @@
 					<div class="panel-heading">
 						<h4>Add Branch</h4>
 					</div>
-					<form:form class="form-horizontal" commandName="abheeBranchf" role="form" id="fillingstation-form" action="kporg" method="post">
+					</div>
+					<form:form class="form-horizontal" commandName="abheeBranchf" role="form" id="fillingstation-form" action="abBranch" method="post">
 					<div class="panel-body">
 						<div class="row">
                     		<div class="col-md-6">
@@ -139,7 +140,7 @@ function deleteorg(id,status){
 		var formData = new FormData();
 	    formData.append('id', id);
 	    formData.append('status', status);
-		$.fn.makeMultipartRequest('POST', 'deleteOrg', false, formData, false, 'text', function(data){
+		$.fn.makeMultipartRequest('POST', 'deleteAbBranch', false, formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;
 			displayTable(alldata);
@@ -179,7 +180,7 @@ function inactiveData() {
 		var formData = new FormData();
 		formData.append('status', status);
 		
-		$.fn.makeMultipartRequest('POST', 'inActiveKPorgs', false,
+		$.fn.makeMultipartRequest('POST', 'inActiveAbBranch', false,
 				formData, false, 'text', function(data) {
 			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;
@@ -188,6 +189,6 @@ function inactiveData() {
 				});
 		
 }
-$("#pageName").text("Organization Master");
+$("#pageName").text("Branch Master");
 $(".org").addClass("active"); 
 </script>

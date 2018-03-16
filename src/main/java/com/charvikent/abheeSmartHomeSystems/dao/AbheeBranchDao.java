@@ -14,17 +14,19 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.model.AbheeBranch;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
 @Repository
+@Transactional
 public class AbheeBranchDao {
 	
 	@PersistenceContext
     private EntityManager entityManager;
 	
-	public void saveOrg(AbheeBranch abheeBranch) {
+	public void saveAbheeBranch(AbheeBranch abheeBranch) {
 		entityManager.persist(abheeBranch);
 		
 	}
@@ -33,13 +35,15 @@ public class AbheeBranchDao {
 	public List<AbheeBranch> getAbheeBranchNames()
 	 {
 		  
-		return (List<AbheeBranch>)entityManager.createQuery("from AbheeBranchController where status='1'").getResultList();
+		return (List<AbheeBranch>)entityManager.createQuery("from AbheeBranch where status='1'").getResultList();
 		 
 	 }
 
-	public AbheeBranch getAbheeBranchById(AbheeBranch org) {
+	public AbheeBranch getAbheeBranchById(AbheeBranch abheeBranch) {
 		@SuppressWarnings("unchecked")
-		List<AbheeBranch> abheeBranchList =(List<AbheeBranch>) entityManager.createQuery("SELECT AbheeBranchController FROM AbheeBranchController AbheeBranchController where name =:custName ").setParameter("custName",org.getName()).getResultList();
+		
+		String hql ="";
+		List<AbheeBranch> abheeBranchList =(List<AbheeBranch>) entityManager.createQuery(" FROM  AbheeBranch where name =:custName ").setParameter("custName",abheeBranch.getName()).getResultList();
 		if(abheeBranchList.size() > 0)
 			return abheeBranchList.get(0);
 		return null;
@@ -55,7 +59,7 @@ public class AbheeBranchDao {
 	
 	
 	public void updateAbheeBranch(AbheeBranch abheeBranch) {
-		String hql="update AbheeBranchController set  description =:d, name =:n   where  id =:i";
+		String hql="update AbheeBranch set  description =:d, name =:n   where  id =:i";
 		
 		Query query =entityManager.createQuery(hql); 
 		
@@ -85,7 +89,7 @@ public class AbheeBranchDao {
 	
 	public boolean deleteAbheeBranch(Integer id, String status) {
 		
-		String hql="update AbheeBranchController set status =:s where  id =:i";
+		String hql="update AbheeBranch set status =:s where  id =:i";
 		Query query =entityManager.createQuery(hql);  
 		query.setParameter("s", status);
 		query.setParameter("i", id);
@@ -102,7 +106,7 @@ public class AbheeBranchDao {
 	@SuppressWarnings("unchecked")
 	public List<AbheeBranch> getInActiveList() {
 		// TODO Auto-generated method stub
-		return (List<AbheeBranch>)entityManager.createQuery(" from AbheeBranchController where status='0'").getResultList();
+		return (List<AbheeBranch>)entityManager.createQuery(" from AbheeBranch where status='0'").getResultList();
 		 	}
 	
 	
