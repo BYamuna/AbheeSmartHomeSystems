@@ -39,11 +39,10 @@ public class AbheeBranchController {
 	
 	
 	@RequestMapping("/abBranch")
-	public String  department( @ModelAttribute("abBranch")  AbheeBranch abheeBranchf,Model model ,HttpServletRequest request) {
+	public String  showBranches( @ModelAttribute("abheeBranchf")  AbheeBranch abheeBranchf,Model model ,HttpServletRequest request) {
 		List<AbheeBranch> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
-		model.addAttribute("abheeBranchf", new AbheeBranch());
 		try {
 			listOrderBeans = abheeBranchDao.getAbheeBranchNames();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
@@ -70,7 +69,7 @@ public class AbheeBranchController {
 	
 	
 	@RequestMapping(value = "/abBranch", method = RequestMethod.POST)
-	public String saveAdmin(@Valid @ModelAttribute  AbheeBranch abheeBranch, BindingResult bindingresults,
+	public String saveBranch(@Valid @ModelAttribute  AbheeBranch abheeBranch, BindingResult bindingresults,
 			RedirectAttributes redir) throws IOException {
 		
 		if (bindingresults.hasErrors()) {
@@ -88,12 +87,12 @@ public class AbheeBranchController {
 				dummyId = abheeBranchBean.getId();
 			}
 			
-			if(abheeBranchBean.getId()==null)
+			if(abheeBranch.getId()==null)
 			{
 				if(dummyId ==0)
 				{
 					abheeBranch.setStatus("1");
-					abheeBranchDao.saveOrg(abheeBranch);
+					abheeBranchDao.saveAbheeBranch(abheeBranch);
 
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");
 					redir.addFlashAttribute("cssMsg", "success");
@@ -137,7 +136,7 @@ public class AbheeBranchController {
 	
 	
 	@RequestMapping(value = "/deleteAbBranch")
-	public @ResponseBody String deleteDept(AbheeBranch  abheeBranch,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+	public @ResponseBody String deactiveBranch(AbheeBranch  abheeBranch,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		List<AbheeBranch> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
@@ -179,13 +178,13 @@ public class AbheeBranchController {
 	
 	
 	@RequestMapping(value = "/inActiveAbBranch")
-	public @ResponseBody String getAllActiveOrInactiveOrgnizations(Department  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+	public @ResponseBody String getAllActiveOrInactiveBranches(AbheeBranch  abheeBranch,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		List<AbheeBranch> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
 		String sJson=null;
 		try{
-			if(objdept.getStatus().equals("0"))
+			if(abheeBranch.getStatus().equals("0"))
 				listOrderBeans = abheeBranchDao.getInActiveList();
 				else
 					listOrderBeans = abheeBranchDao.getAbheeBranchNames();
