@@ -6,15 +6,20 @@
 <spring:url var="loginAction" value="/loginAction"></spring:url>
 <!DOCTYPE html>
 <html lang="en">
+
+<header>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</header>
 <head>
     <meta charset="utf-8">
     <title>Abhee Smart Homes</title>
-    <link rel="shortcut icon" href="/assets/img/tlogo.png"/>
+    <link rel="shortcut icon" href="/assets/img/logoicon.jpg"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+</body>
     <link rel="stylesheet" href="assets/css/styles.css">
 <!--     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'> -->
     
@@ -150,36 +155,39 @@
       
     </div>
   </div> 
-<%-- <div id="register-info" class="modal modal fade" role="dialog" data-backdrop="static"
-		data-keyboard="false">
-		<div class="modal-dialog ">
-			<div class="modal-content">
-				<div class="modal-header">
-					
-					<button data-dismiss="modal"
-						class="btn">&times;</button>
-						<h3 class="modal-title">Set up your Account</h3>
-				</div>
-				<div class="modal-body">
+  
+  <div class="modal fade" id="OTPModel" role="dialog">
+    <div class="modal-dialog">
+    
+     
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Set up your Account</h4>
+        </div>
+        <div class="modal-body">
+          <form  action="#"  id="registration1"  method="post" class="login-form">
 
-					<form  action="#"  id="registration"  method="post" class="login-form">
+						<div id="firstForm1">
 
-						<div id="firstForm">
-
+							
 							<div class="form-group">
-								<label for="user_name">Enter Your Email-Id :</label> 
-								<input	type="email" onkeydown="removeBorder(this.id)" class="form-control" placeholder="Enter Email"/>
+								<label for="user_name">Enter OTP :</label> 
+								<input	type="text" name="cotp" id="cotp" onkeydown="removeBorder(this.id)" class="form-control" placeholder="Enter Email"/>
 								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
 							</div>
+							
 						</div>
 					</form>	
-				</div>	
-				
-				</div>
-				
-				</div>
-				
-				</div> --%>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="submit1" onclick="modelsubmit()" class="btn btn-suscces" data-dismiss="modal">Submit</button>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
+
 <script type='text/javascript' src='js/customValidation.js'></script> 
 <script type='text/javascript' src="/js/jquery.blockUI.min.js" ></script>
 </body>
@@ -244,9 +252,9 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		success : function(data) {
 			if(data ==='true')
 				{
-				//alert("username already exists")
-					$('#cmobile').css('border-color', 'red');
-				 $('#submit1').prop('disabled', true);
+				alert("OTP Send to Your Mobile Number ");
+				$("#register-info").modal('toggle');
+				$("#OTPModel").modal('show');
 				}
 			else
 				{

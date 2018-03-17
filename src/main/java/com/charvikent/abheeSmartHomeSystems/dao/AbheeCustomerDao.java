@@ -140,4 +140,17 @@ public class AbheeCustomerDao {
 		 
 	 }
 	
+	public String getOPTByMobileno(String mobile)
+	{
+		
+		String hql ="from a.otp AbheeCustRegistration  a where a.mobileno='"+mobile+"'";
+		
+		
+	String otpStr =	(String) entityManager.createQuery(hql).getResultList().get(0);
+	    
+	
+	return otpStr;
+		
+	}
+	
 }
