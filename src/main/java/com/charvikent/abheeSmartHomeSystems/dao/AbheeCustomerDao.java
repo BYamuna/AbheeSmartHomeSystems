@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
+import com.charvikent.abheeSmartHomeSystems.model.AbheeBranch;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeCustRegistration;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeCustomer;
 
@@ -101,6 +102,12 @@ public class AbheeCustomerDao {
 	return null;
 		
 	}
-	
+	@SuppressWarnings("unchecked")
+	public List<AbheeCustRegistration> getAbheeCustomerNames()
+	 {
+		  
+		return (List<AbheeCustRegistration>)entityManager.createQuery("from AbheeCustRegistration where status='1'").getResultList();
+		 
+	 }
 	
 }
