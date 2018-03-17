@@ -486,6 +486,7 @@ function getHeadersCounts(){
              	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users emp"></i> <span>Employees</span></a></li>
               </security:authorize>
               <li class="task"><a href="${baseurl }/task"><i class="fa fa-tasks task"></i> <span>Task</span></a></li>
+               <li class="abheecust"><a href="${baseurl }/custRegistration"><i class="fa fa-tasks task"></i> <span>Customer Registration</span></a></li>
 			</ul>
 		</div>
     </nav>

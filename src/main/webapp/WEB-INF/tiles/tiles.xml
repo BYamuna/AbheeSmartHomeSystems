@@ -32,6 +32,10 @@
 		<!-- <put-attribute name="title" value="" /> -->
 		<put-attribute name="body" value="/WEB-INF/jsp/editUser.jsp" />
 	</definition>
+	<definition name="abheecustregistration" extends="base.definition">
+		<!-- <put-attribute name="title" value="" /> -->
+		<put-attribute name="body" value="/WEB-INF/jsp/abheecustregistration.jsp" />
+	</definition>
 	
 	
 	
@@ -109,6 +113,9 @@
 	
 	<definition name="abBranch" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/jsp/abBranch.jsp" />
+	</definition>
+	<definition name="custRegistration" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/custRegistration.jsp" />
 	</definition>
 	
 	
