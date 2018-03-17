@@ -476,7 +476,7 @@ function getHeadersCounts(){
             
             <li class="dashBoard"><a href="${baseurl }/dashBoard"><i class="fa fa-dashboard dash"></i> <span>Home</span></a></li>
              <security:authorize access="hasRole('ROLE_MASTERADMIN')">
-              <li class="org"><a href="${baseurl }/abBranch"><i class="fa fa-building org"></i><span>Branch</span></a></li>
+              <li class="branch"><a href="${baseurl }/abBranch"><i class="fa fa-building org"></i><span>Branch</span></a></li>
             </security:authorize>
             <security:authorize access="hasRole('ROLE_ADMIN')">
             <%-- <li class="dept"><a href="${baseurl }/dept"><i class="fa fa-american-sign-language-interpreting depart"></i> <span>Department</span></a></li>

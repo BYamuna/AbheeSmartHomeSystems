@@ -190,5 +190,5 @@ function inactiveData() {
 		
 }
 $("#pageName").text("Branch Master");
-$(".org").addClass("active"); 
+$(".branch").addClass("active"); 
 </script>

@@ -606,7 +606,7 @@ Hi
 	        window.location.reload();
 	    }
 	});
-
+	$("#pageName").text("Dashboard");
 	$(".dashBoard").addClass("active");
 	$(document).ready(function() {
 		$('.dashBoard').on('click', function() {
