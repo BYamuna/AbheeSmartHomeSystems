@@ -102,7 +102,7 @@
 										</form:select>
 									</div>
 								</div></div>
-								<div class="col-md-6">
+								<%-- <div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Department<span class="impColor">*</span></label>
 									<div class="col-md-6">
@@ -111,7 +111,7 @@
 								     		<form:options  items="${departments}"/>
 										</form:select>
 									</div>
-								</div></div>
+								</div></div> --%>
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">ReportTo</label>
@@ -125,10 +125,10 @@
 								 <security:authorize access="hasRole('ROLE_MASTERADMIN')">
 								<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Organization</label>
+									<label class="col-md-3 control-label no-padding-right">Branch</label>
 									<div class="col-md-6">
-										<form:select path ="kpOrgId" class="form-control" onfocus="removeBorder(this.id)">
-											<form:option value="">-- Select Organization --</form:option>
+										<form:select path ="BranchId" class="form-control" onfocus="removeBorder(this.id)">
+											<form:option value="">-- Select Branch--</form:option>
 								     		<form:options items="${orgNames}"/>
 										</form:select>
 									</div>
@@ -212,7 +212,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>User Name</th><th>Report To</th><th>First Name</th><th>Last Name</th><th>Department</th><th>Designation</th><th>Mobile Number</th><th style="text-align: center;">Options</th><th></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>User Name</th><th>Report To</th><th>First Name</th><th>Last Name</th><th>Designation</th><th>Mobile Number</th><th>Branch name</th><th style="text-align: center;">Options</th><th></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -231,9 +231,9 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.reportto+"'>"+ orderObj.reportName + "</td>"
 			+ "<td title='"+orderObj.firstname+"'>"+ orderObj.firstname + "</td>"
 			+ "<td title='"+orderObj.lastname+"'>"+ orderObj.lastname + "</td>"
-			+ "<td title='"+orderObj.departmentName+"'>"+ orderObj.departmentName + "</td>"
 			+ "<td title='"+orderObj.designationName+"'>"+ orderObj.designationName + "</td>"
 			+ "<td title='"+orderObj.mobilenumber+"'>"+ orderObj.mobilenumber + "</td>"
+			+ "<td title='"+orderObj.branchName+"'>"+ orderObj.branchName + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "<td ><a style='cursor:pointer' onclick='getPasswordModal("+ orderObj.id +")'>Change Password</a></td>" 
 			+ "</tr>";
@@ -305,7 +305,6 @@ function editEmployee(id) {
 	$("#lastname").val(serviceUnitArray[id].lastname);
 	$("#mobilenumber").val(serviceUnitArray[id].mobilenumber);
 	$("#designation").val(serviceUnitArray[id].designation);
-	$("#department").val(serviceUnitArray[id].department);
 	$("#reportto").val(serviceUnitArray[id].reportto);
 	$("#email").val(serviceUnitArray[id].email);
 	$("#submit1").val("Update");

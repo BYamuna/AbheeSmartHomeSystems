@@ -14,7 +14,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "kpusers")
+@Table(name = "abheeusers")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,7 +38,7 @@ public class User {
 
 	private String reportto;
 	
-	private String kpOrgId;
+	private String BranchId;
 
 	@Column
 	private String enabled;
@@ -66,6 +66,8 @@ public class User {
 	private String lastname;
 	@Transient
 	private String status;
+	@Transient
+	private String branchName;
 
 	public String getReportName() {
 		return reportName;
@@ -141,6 +143,16 @@ public class User {
 	public void setReportId(String reportId) {
 		this.reportId = reportId;
 	}
+	
+	
+
+	public String getBranchName() {
+		return branchName;
+	}
+
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
+	}
 
 	public User() {
 	}
@@ -168,7 +180,7 @@ public class User {
 		this.firstname = user.firstname;
 		this.lastname = user.lastname;
 		this.reportName=user.reportName;
-		this.kpOrgId=user.kpOrgId;
+		this.BranchId=user.BranchId;
 
 	}
 
@@ -263,19 +275,21 @@ public class User {
 	
 	
 
-	public String getKpOrgId() {
-		return kpOrgId;
+	
+
+	public String getBranchId() {
+		return BranchId;
 	}
 
-	public void setKpOrgId(String kpOrgId) {
-		this.kpOrgId = kpOrgId;
+	public void setBranchId(String branchId) {
+		BranchId = branchId;
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", mobilenumber="
 				+ mobilenumber + ", email=" + email + ", department=" + department + ", reportto=" + reportto
-				+ ", kpOrgId=" + kpOrgId + ", enabled=" + enabled + ", designation=" + designation + ", username="
+				+ ", BranchId=" + BranchId + ", enabled=" + enabled + ", designation=" + designation + ", username="
 				+ username + ", password=" + password + ", npassword=" + npassword + ", cpassword=" + cpassword
 				+ ", departmentName=" + departmentName + ", designationName=" + designationName + ", reportId="
 				+ reportId + ", reportName=" + reportName + ", firstname=" + firstname + ", lastname=" + lastname

@@ -479,11 +479,11 @@ function getHeadersCounts(){
               <li class="org"><a href="${baseurl }/abBranch"><i class="fa fa-building org"></i><span>Branch</span></a></li>
             </security:authorize>
             <security:authorize access="hasRole('ROLE_ADMIN')">
-            <li class="dept"><a href="${baseurl }/dept"><i class="fa fa-american-sign-language-interpreting depart"></i> <span>Department</span></a></li>
-              <%-- <li class="desig"><a href="${baseurl }/desig"><i class="fa fa-plane"></i> <span>Designation</span></a></li> --%>
+            <%-- <li class="dept"><a href="${baseurl }/dept"><i class="fa fa-american-sign-language-interpreting depart"></i> <span>Department</span></a></li>
+              <li class="desig"><a href="${baseurl }/desig"><i class="fa fa-plane"></i> <span>Designation</span></a></li>
              <li class="orgDept"><a href="${baseurl }/orgDept"><i class="fa fa-sitemap heir"></i> <span>Hierarchical</span></a></li>
               <li class="cate"><a href="${baseurl }/cate"><i class="fa fa-black-tie cate"></i> <span>Category</span></a></li>
-             	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users emp"></i> <span>Employees</span></a></li>
+              --%>	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users emp"></i> <span>Employees</span></a></li>
               </security:authorize>
               <li class="task"><a href="${baseurl }/task"><i class="fa fa-tasks task"></i> <span>Task</span></a></li>
 			</ul>

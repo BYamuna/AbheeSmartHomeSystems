@@ -8,12 +8,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeCustomer;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
 @Repository
+@Transactional
 public class AbheeCustomerDao {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -27,7 +29,7 @@ public class AbheeCustomerDao {
 
 	public void saveAbheeCustomer(AbheeCustomer cabheeCustomer ) {
 		logger.info("Registering AbheeCustomer");
-		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String randomNum = utilities.randNum();
 		cabheeCustomer.setCustomerId(randomNum);
 		
