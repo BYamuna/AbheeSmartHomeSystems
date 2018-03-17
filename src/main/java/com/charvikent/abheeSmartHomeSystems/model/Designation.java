@@ -1,6 +1,5 @@
 package com.charvikent.abheeSmartHomeSystems.model;
 
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,11 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="kpdesignation")
+@Table(name="abheedesignation")
 public class Designation {
 	
 	@Id
@@ -26,27 +23,9 @@ public class Designation {
 	@Column
 	private String status;
 	
-	@CreationTimestamp
-	protected Date createdTime ;
+	
 
-	@UpdateTimestamp
-	protected Date updatedTime ;
-
-	public Date getCreatedTime() {
-		return createdTime;
-	}
-
-	public void setCreatedTime(Date createdTime) {
-		this.createdTime = createdTime;
-	}
-
-	public Date getUpdatedTime() {
-		return updatedTime;
-	}
-
-	public void setUpdatedTime(Date updatedTime) {
-		this.updatedTime = updatedTime;
-	}
+	
 
 	public String getName() {
 		return name;
@@ -82,12 +61,10 @@ public class Designation {
 
 	@Override
 	public String toString() {
-		return "Designation [id=" + id + ", name=" + name + ", status=" + status + ", createdTime=" + createdTime
-				+ ", updatedTime=" + updatedTime + "]";
+		return "Designation [id=" + id + ", name=" + name + ", status=" + status + "]";
 	}
 
 	
-
 
 	
 

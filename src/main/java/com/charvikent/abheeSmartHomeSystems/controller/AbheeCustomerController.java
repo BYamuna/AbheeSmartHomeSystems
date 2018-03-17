@@ -31,7 +31,7 @@ public class AbheeCustomerController {
 	
 	//@RequestMapping(value = "/api", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	
-	@RequestMapping(value="/test", method=RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})  
+	@RequestMapping(value="/test", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public void  SaveAbheeCustomer( @RequestBody AbheeCustomer cabheeCustomer) {
 
 		abheeCustomerDao.saveAbheeCustomer(cabheeCustomer);

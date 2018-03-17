@@ -1,4 +1,7 @@
-<style>
+
+Hi
+
+<%-- <style>
 .btn-toolbar {
 	margin-left: 5px;
 }
@@ -95,7 +98,7 @@
 
 														<a href="severity?id=${issue.key}"
 															class="btn btn-danger assigned "> <span
-															id="unseentasks">${issue.value} </span> <%-- <br>${issue.key}  --%></a>
+															id="unseentasks">${issue.value} </span> <br>${issue.key} </a>
 														<!-- <a href="severity?id=Critical"
 													class="btn btn-danger assigned " style=""><span
 													id="unseentasks"> 0 </span> </a> -->
@@ -110,7 +113,7 @@
 													id="unseentasks"> 0 </span> </a> -->
 														<a href="severity?id=${issue.key}"
 															class="btn btn-warning assigned "> <span
-															id="unseentasks">${issue.value} </span> <%-- <br>${issue.key} --%>
+															id="unseentasks">${issue.value} </span> <br>${issue.key}
 														</a>
 													</div>
 												</c:if>
@@ -124,7 +127,7 @@
 
 														<a href="severity?id=${issue.key}"
 															class="btn btn-primary assigned"> <span
-															id="unseentasks">${issue.value} </span> <%-- <br>${issue.key}  --%></a>
+															id="unseentasks">${issue.value} </span> <br>${issue.key} </a>
 													</div>
 												</c:if>
 											</c:forEach></td>
@@ -158,7 +161,7 @@
 														<a href="severityby?id=${issue.key}"
 															class="btn btn-danger assigned "> <span
 															id="unseentasks"> ${issue.value} </span>
-														<%--<br>${issue.key} --%>
+														<br>${issue.key}
 														</a>
 														<!-- <a href="severity?id=Critical"
 													class="btn btn-danger assigned"><span id="unseentasks">
@@ -176,7 +179,7 @@
 														<a href="severityby?id=${issue.key}"
 															class="btn btn-warning assigned "> <span
 															id="unseentasks">${issue.value} </span>
-														<%-- <br>${issue.key}  --%></a>
+														<br>${issue.key} </a>
 													</div>
 												</c:if>
 											</c:forEach></td>
@@ -191,7 +194,7 @@
 															class="btn btn-primary assigned"
 															style="border-radius: 15px;"> <span id="unseentasks">${issue.value}
 														</span>
-														<%-- <br>${issue.key} --%>
+														<br>${issue.key}
 														</a>
 													</div>
 												</c:if>
@@ -225,7 +228,7 @@
 														<a href="severityReportTo?id=${issue.key}"
 															class="btn btn-danger assigned"> <span
 															id="unseentasks"> ${issue.value} </span>
-														<%-- <br>${issue.key} --%>
+														<br>${issue.key}
 														</a>
 													</div>
 												</c:if>
@@ -242,7 +245,7 @@
 														<a href="severityReportTo?id=${issue.key}"
 															class="btn btn-warning assigned"><span
 															id="unseentasks"> ${issue.value} </span>
-														<%-- <br>${issue.key}  --%></a>
+														<br>${issue.key} </a>
 													</div>
 												</c:if>
 											</c:forEach></td>
@@ -257,7 +260,7 @@
 														<a href="severityReportTo?id=${issue.key}"
 															class="btn btn-primary assigned"> <span
 															id="unseentasks"> ${issue.value} </span>
-														<%-- <br>${issue.key}  --%></a>
+														<br>${issue.key} </a>
 													</div>
 												</c:if>
 											</c:forEach></td>
@@ -433,7 +436,7 @@
 				</div>
 			</div> -->
 
-				<%-- <div class="row" style="margin-bottom: 10px"; >
+				<div class="row" style="margin-bottom: 10px"; >
 
 				<c:forEach var="issue" items="${severityCount}">
 					<c:set var="String" value="${issue.key}" />
@@ -525,7 +528,7 @@
 				</c:forEach>
 
 			</div>
- --%>
+
 
 
 				<!-- History table starts Here -->
@@ -911,4 +914,4 @@
 		
 	
 
-</script>
+</script> --%>

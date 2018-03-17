@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.charvikent.abheeSmartHomeSystems.dao.AbheeBranchDao;
 import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
 import com.charvikent.abheeSmartHomeSystems.model.Department;
 import com.charvikent.abheeSmartHomeSystems.model.User;
-import com.charvikent.abheeSmartHomeSystems.service.OrgService;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -40,8 +40,9 @@ public class EmployeeController {
 
 	@Autowired
 	HttpSession session;
+	
 	@Autowired
-	OrgService OrgService;
+	AbheeBranchDao abheeBranchDao;
 
 
 
@@ -51,13 +52,13 @@ public class EmployeeController {
 		ObjectMapper objectMapper = null;
 		String sJson = null;
 		model.addAttribute("userForm", new User());
-		model.addAttribute("departments", userService.getDepartments());
+		//model.addAttribute("departments", userService.getDepartments());
 		model.addAttribute("roles", userService.getRoles());
 		model.addAttribute("userNames", userService.getUserName());
 
 		model.addAttribute("reportto",userService.getReportToUsers());
 		model.addAttribute("allUsers", userService.getAllUsers());
-		model.addAttribute("orgNames", OrgService.getOrgNames());
+		model.addAttribute("orgNames", abheeBranchDao.getAbheeBranchNamesMap());
 
 
 		try {

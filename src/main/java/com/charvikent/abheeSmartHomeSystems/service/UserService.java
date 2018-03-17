@@ -43,17 +43,17 @@ public class UserService {
 
 	public void saveUser(User user) throws IOException
 	{
-		if(user.getKpOrgId() ==null)
+		if(user.getBranchId()==null)
 		{
 			User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			user.setKpOrgId(objuserBean.getKpOrgId());
+			user.setBranchId(objuserBean.getBranchId());
 			
 		}
 		String msg =user.getFirstname()+" "+user.getLastname()+",  Successfully registered with KPTMS. \n You can login using \n Username:  "+user.getUsername()+"\n password: "+user.getPassword();
 		String mbnum=user.getMobilenumber();
 		userDao.saveuser(user);
 		logger.info("Sending message.......");
-		smsTemplate.sendSMS(msg,mbnum);
+		//smsTemplate.sendSMS(msg,mbnum);
 	}
 
 	public List<User> getAllUsers()
@@ -74,7 +74,7 @@ public class UserService {
 			 
 			 for(User entry :usersListForMaster)
 			 {  
-				 if(entry.getKpOrgId().equals(objuserBean.getKpOrgId()))
+				 if(entry.getBranchId().equals(objuserBean.getBranchId()))
 				 {
 					 if(entry.getId()!=(objuserBean.getId()))
 					 usersListForAdmin.add(entry);
@@ -86,7 +86,7 @@ public class UserService {
 	}
 
 
-	public Map<Integer, String> getDepartments()
+	/*public Map<Integer, String> getDepartments()
 	{
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -108,7 +108,7 @@ public class UserService {
 		{
 			for(Department bean: departmentList){
 				
-				if(bean.getKpOrgId().equals(objuserBean.getKpOrgId()))
+				if(bean.getBranchId().equals(objuserBean.getBranchId())
 				{
 				deptsMap.put(bean.getId(), bean.getName());
 				}
@@ -119,7 +119,7 @@ public class UserService {
 		}
 		
 
-	}
+	}*/
 
 
 	public Map<Integer, String> getRoles()
@@ -206,7 +206,7 @@ public class UserService {
 		else
 		{
 			for(User bean: rolesList){
-				if(bean.getKpOrgId().equals(objuserBean.getKpOrgId()))
+				if(bean.getBranchId().equals(objuserBean.getBranchId()))
 				{
 				if(bean.getId()!=(objuserBean.getId()))
 				{
@@ -244,7 +244,7 @@ public class UserService {
 		else
 		{
 			for(User bean: rolesList){
-				if(bean.getKpOrgId().equals(objuserBean.getKpOrgId()))
+				if(bean.getBranchId().equals(objuserBean.getBranchId()))
 				{
 				
 					userMapForMaster.put(bean.getId(), bean.getUsername());

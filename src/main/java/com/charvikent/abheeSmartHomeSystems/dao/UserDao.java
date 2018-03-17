@@ -1,6 +1,5 @@
 package com.charvikent.abheeSmartHomeSystems.dao;
 
-import static org.mockito.Matchers.booleanThat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +39,8 @@ public class UserDao {
 
 
 		try {
-			List<Object[]> rows = em.createQuery("select  u.id,u.username,u.mobilenumber,u.email,u.reportto,u2.username,CASE WHEN u.enabled IN ('0') THEN 'Deactive' WHEN u.enabled IN ('1') THEN 'Active' ELSE '-----' END AS enabled,dep.name,d.name,"
-					+ "u.firstname,u.lastname,u.reportto,u.designation ,u.department , u.enabled as status,u.password,u.kpOrgId from User u,User u2,Designation d,Department dep where u.enabled='1' and u.department=dep.id and u.designation= d.id and  u.reportto=u2.id order by u.username").getResultList();
+			List<Object[]> rows = em.createQuery("select  u.id,u.username,u.mobilenumber,u.email,u.reportto,u2.username,CASE WHEN u.enabled IN ('0') THEN 'Deactive' WHEN u.enabled IN ('1') THEN 'Active' ELSE '-----' END AS enabled,d.name,"
+					+ "u.firstname,u.lastname,u.reportto,u.designation  , u.enabled as status,u.password,u.BranchId,ab.name from User u,User u2,Designation d,AbheeBranch ab where u.enabled='1'  and u.designation= d.id and ab.id=u.BranchId and u.reportto=u2.id order by u.username").getResultList();
 			for (Object[] row : rows) {
 				User users =new User();
 
@@ -53,16 +52,17 @@ public class UserDao {
 				users.setReportto((String) row[4]);
 				users.setReportName((String) row[5]);
 				users.setEnabled((String) row[6]);
-				users.setDepartmentName((String) row[7]);
-				users.setDesignationName((String) row[8]);
-				users.setFirstname((String) row[9]);
-				users.setLastname((String) row[10]);
-				users.setReportId((String) row[11]);
-				users.setDesignation((String) row[12]);
-				users.setDepartment((String) row[13]);
-				users.setStatus((String) row[14]);
-				users.setPassword((String) row[15]);
-				users.setKpOrgId((String) row[16]);
+				//users.setDepartmentName((String) row[7]);
+				users.setDesignationName((String) row[7]);
+				users.setFirstname((String) row[8]);
+				users.setLastname((String) row[9]);
+				users.setReportId((String) row[10]);
+				users.setDesignation((String) row[11]);
+			//	users.setDepartment((String) row[13]);
+				users.setStatus((String) row[12]);
+				users.setPassword((String) row[13]);
+				users.setBranchId((String) row[14]);
+				users.setBranchName((String) row[15]);
 				
 				
 				listusers.add(users);
@@ -292,7 +292,7 @@ public class UserDao {
 	{
 		//List<String> list= em.createNativeQuery("SELECT d.name FROM  kpusers u,kpdesignation d,kpmultiroles m  where u.designation=d.id  and k.username=:Custname").setParameter("Custname", Username).getResultList();
 		//List<String> list= em.createNativeQuery("select m.desigrole from kpusers u,kpdesignation d,kpmultiroles m  where u.designation=d.id and m.designationid=u.designation and u.username =:Custname").setParameter("Custname", Username).getResultList();
-		List<String> list= em.createNativeQuery("select m.desigrole from kpusers u,kpmultiroles m  where  m.designationid=u.designation and u.username =:Custname").setParameter("Custname", Username).getResultList();
+		List<String> list= em.createNativeQuery("select m.desigrole from abheeusers u,kpmultiroles m  where  m.designationid=u.designation and u.username =:Custname").setParameter("Custname", Username).getResultList();
 
 
 		System.out.println(list);

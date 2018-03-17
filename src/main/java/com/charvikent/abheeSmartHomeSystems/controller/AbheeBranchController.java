@@ -22,7 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeBranchDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeBranch;
 import com.charvikent.abheeSmartHomeSystems.model.Department;
-import com.charvikent.abheeSmartHomeSystems.service.MastersService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -33,8 +32,7 @@ public class AbheeBranchController {
 
 	@Autowired
 	AbheeBranchDao abheeBranchDao;
-	@Autowired
-	MastersService  mastersService;
+	
 	
 	
 	
@@ -212,6 +210,14 @@ public class AbheeBranchController {
 			
 		}
 		return String.valueOf(jsonObj);
+	}
+	
+	
+	@RequestMapping("/dashBoard")
+	public String showDashBoard(Model model,HttpServletRequest request) 
+	{
+		 return "dashBoard";
+		
 	}
 
 	

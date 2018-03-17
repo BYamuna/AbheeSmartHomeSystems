@@ -29,7 +29,7 @@ public class AbheeCustomerDao {
 
 	public void saveAbheeCustomer(AbheeCustomer cabheeCustomer ) {
 		logger.info("Registering AbheeCustomer");
-		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String randomNum = utilities.randNum();
 		cabheeCustomer.setCustomerId(randomNum);
 		

@@ -130,7 +130,7 @@ public class AbheeBranchDao {
 			for(AbheeBranch bean: abheeBranchList){
 				
 				
-				if(String.valueOf(bean.getId()).equals(objuserBean.getKpOrgId()))
+				if(String.valueOf(bean.getId()).equals(objuserBean.getBranchId()))
 				{
 					abheeBranchListMap.put(bean.getId(), bean.getName());
 				}
