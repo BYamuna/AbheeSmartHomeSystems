@@ -27,7 +27,17 @@ public class AbheeCustRegistrationController
 	@RequestMapping(value = "/custreg", method = RequestMethod.POST)
 	public String saveAbheeCustRegistration(@Validated @ModelAttribute  AbheeCustRegistration abheecustregistration,Model model) throws IOException 
 	{
+		
+		AbheeCustRegistration custbean =adao.checkCustomerExistOrNot(abheecustregistration);
+		
+		if(custbean == null)
+		{
 		adao.saveabheecustregistration(abheecustregistration);
+		}
+		else
+		{
+			// send only otp screen
+		}
 		return "redirect:custRegistration";
 		
 	}

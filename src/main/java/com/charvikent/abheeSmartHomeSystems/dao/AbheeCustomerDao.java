@@ -1,6 +1,7 @@
 package com.charvikent.abheeSmartHomeSystems.dao;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
 import javax.persistence.EntityManager;
@@ -65,6 +66,40 @@ public class AbheeCustomerDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	
+	
+	public AbheeCustRegistration findCustomerByCustId(String custId)
+	{
+		
+		String hql ="from AbheeCustRegistration where custID='"+custId+"'";
+		
+		
+	List<AbheeCustRegistration> custlist =	entityManager.createQuery(hql).getResultList();
+	    
+	if(custlist.size()>0)
+   return custlist.get(0);
+    else
+	return null;
+		
+	}
+	
+	
+	
+	public AbheeCustRegistration checkCustomerExistOrNot(AbheeCustRegistration cust)
+	{
+		
+		String hql ="from AbheeCustRegistration where custID='"+cust.getMobileno()+"'";
+		
+		
+	List<AbheeCustRegistration> custlist =	entityManager.createQuery(hql).getResultList();
+	    
+	if(custlist.size()>0)
+   return custlist.get(0);
+    else
+	return null;
+		
 	}
 	
 	

@@ -17,20 +17,20 @@ public class AbheeCustRegistration
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	int id;
-	String name;
-	String surname;
-	String custID;
-	String email;
-	String mobileno;
-	String OTP;
-	String OTPstatus;
-	String status;
+	private int id;
+	private String name;
+	private String surname;
+	private String custID;
+	private String email;
+	private String mobileno;
+	private String OTP;
+	private String OTPstatus;
+	private String status;
 	@CreationTimestamp
-	 Date createdTime;
+	private Date createdTime;
 
 	@UpdateTimestamp
-	 Date updatedTime;
+	private Date updatedTime;
 	
 	public AbheeCustRegistration() 
 	{
