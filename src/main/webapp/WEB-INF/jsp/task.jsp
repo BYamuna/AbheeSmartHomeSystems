@@ -1,4 +1,6 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+to be implemented
+
+<%-- <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
@@ -18,16 +20,16 @@
 	                       <form>
 	                        <div class="row">
                     		<div class="col-md-4">
-                    			<%-- <div class="form-horizontal">
+                    			<div class="form-horizontal">
 									<label for="focusedinput" class="col-md-6 control-label" style="padding-top:2px;">Tasks Types <span class="impColor">*</span></label>
 									<select id="ttype"  class="col-xs-10 col-sm-5 " >
 											<c:forEach var="list" items="${tasksSelection}">
 											<option value=${list.key}>${list.value} </option>
 											</c:forEach>
 										</select>
-                    			</div> --%>
+                    			</div>
                     		</div>
-                    		<%-- <div class="col-md-4">
+                    		<div class="col-md-4">
                     			<div class="form-horizontal">
 									<label for="focusedinput" class="col-md-6 control-label" style="padding-top:2px;">Department  <span class="impColor">*</span></label>
 									<select id="deptid"  class="col-xs-10 col-sm-5 " >
@@ -36,7 +38,7 @@
 											</c:forEach>
 										</select>
                     			</div>
-                    		</div> --%>
+                    		</div>
                     		</div>
                     		</form>
                     		</security:authorize>
@@ -154,7 +156,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Task DeadLine <span class="impColor">*</span></label>
 									<div class="col-md-6">
-								    	<%-- <form:input type="datetime-local" path="taskdeadline"  class="form-control validate"   /> --%>
+								    	<form:input type="datetime-local" path="taskdeadline"  class="form-control validate"   />
 								    <form:input  path="taskdeadline"  class="form-control validate"    />
 								    </div>
                     			</div>
@@ -924,4 +926,4 @@ $(".cancel2").click(function()
 
 $("#pageName").text("Task Master");
 $(".task").addClass("active"); 
-</script>
+</script> --%>
