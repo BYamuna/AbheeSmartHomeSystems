@@ -88,7 +88,37 @@ public class AbheeCustomerDao {
 	
 	
 	
-	public AbheeCustRegistration checkCustomerExistOrNot(AbheeCustRegistration cust)
+	public AbheeCustRegistration checkCustomerExistOrNot(AbheeCustRegistration custreg)
+	{
+		
+		String hql ="from AbheeCustRegistration where mobileno='"+custreg.getMobileno()+"'";
+		
+		
+	List<AbheeCustRegistration> custlist =	entityManager.createQuery(hql).getResultList();
+	    
+	if(custlist.size()>0)
+   return custlist.get(0);
+    else
+	return null;
+		
+	}
+	
+	public AbheeCustRegistration checkCustomerExistOrNotbyMobile(String Mobile)
+	{
+		
+		String hql ="from AbheeCustRegistration where mobileno='"+Mobile+"'";
+		
+		
+	List<AbheeCustRegistration> custlist =	entityManager.createQuery(hql).getResultList();
+	    
+	if(custlist.size()>0)
+   return custlist.get(0);
+    else
+	return null;
+		
+	}
+	
+	public AbheeCustRegistration otpVeri(AbheeCustRegistration cust)
 	{
 		
 		String hql ="from AbheeCustRegistration where custID='"+cust.getMobileno()+"'";

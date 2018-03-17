@@ -12,7 +12,9 @@
     <link rel="shortcut icon" href="/assets/img/tlogo.png"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="assets/css/styles.css">
 <!--     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'> -->
     
@@ -101,7 +103,172 @@
 			value="${_csrf.token}" />
 		</form>
 	</div>
+	
+	<a  class="" data-toggle="modal" data-target="#register-info">Register</a>
 </div>
+ <div class="modal fade" id="register-info" role="dialog">
+    <div class="modal-dialog">
+    
+     
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Set up your Account</h4>
+        </div>
+        <div class="modal-body">
+          <form  action="#"  id="registration"  method="post" class="login-form">
+
+						<div id="firstForm">
+
+							<div class="form-group">
+								<label for="user_name">Enter Your Email-Id :</label> 
+								<input	type="email" name="cemail" id="cemail" onkeydown="removeBorder(this.id)" class="form-control" placeholder="Enter Email"/>
+								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
+							</div>
+							<div class="form-group">
+								<label for="user_name">Enter MobileNumber :</label> 
+								<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" class="form-control" placeholder="Enter Email"/>
+								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
+							</div>
+							<div class="form-group">
+								<label for="user_name"> Surname :</label> 
+								<input	type="text"name="csname" id="csname" onkeydown="removeBorder(this.id)" class="form-control" placeholder="Enter Email"/>
+								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
+							</div>
+							<div class="form-group">
+								<label for="user_name">Name :</label> 
+								<input	type="text" name="cname" id="cname" onkeydown="removeBorder(this.id)" class="form-control" placeholder="Enter Email"/>
+								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
+							</div>
+						</div>
+					</form>	
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="submit1" onclick="modelsubmit()" class="btn btn-suscces" data-dismiss="modal">Submit</button>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
+<%-- <div id="register-info" class="modal modal fade" role="dialog" data-backdrop="static"
+		data-keyboard="false">
+		<div class="modal-dialog ">
+			<div class="modal-content">
+				<div class="modal-header">
+					
+					<button data-dismiss="modal"
+						class="btn">&times;</button>
+						<h3 class="modal-title">Set up your Account</h3>
+				</div>
+				<div class="modal-body">
+
+					<form  action="#"  id="registration"  method="post" class="login-form">
+
+						<div id="firstForm">
+
+							<div class="form-group">
+								<label for="user_name">Enter Your Email-Id :</label> 
+								<input	type="email" onkeydown="removeBorder(this.id)" class="form-control" placeholder="Enter Email"/>
+								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
+							</div>
+						</div>
+					</form>	
+				</div>	
+				
+				</div>
+				
+				</div>
+				
+				</div> --%>
 <script type='text/javascript' src='js/customValidation.js'></script> 
+<script type='text/javascript' src="/js/jquery.blockUI.min.js" ></script>
 </body>
+<script type="text/javascript">
+$('#cmobile').blur(function() {
+	var cmobile=$(this).val();
+	
+	/* alert("hi");
+	alert(cmobile);
+ */
+	$.ajax({
+				type : "POST",
+				url : "checkCustExst",
+				data :"cmobile="+cmobile,
+				dataType : "text",
+				beforeSend : function() {
+		             $.blockUI({ message: 'Please wait' });
+		          }, 
+				success : function(data) {
+					if(data ==='true')
+						{
+						//alert("username already exists")
+	 					$('#cmobile').css('border-color', 'red');
+						 $('#submit1').prop('disabled', true);
+						}
+					else
+						{
+						$('#cmobile').css('border-color', 'none');
+						$('#submit1').prop('disabled', false);
+						}
+					
+				},
+				complete: function () {
+		            
+		            $.unblockUI();
+		       },
+				error :  function(e){$.unblockUI();console.log(e);}
+				
+			});
+
+		}); 
+		
+function modelsubmit()
+{
+	
+	var cmobile =$('#cmobile').val();
+	var cemail =$('#cemail').val();
+	var csname =$('#csname').val();
+	var cname =$('#cname').val();
+	
+	
+alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
+	
+	$.ajax({
+		type : "POST",
+		url : "modelSubmit",
+		data :"cmobile="+cmobile+"&cemail="+cemail+"&csname="+csname+"&cname="+cname,
+		dataType : "text",
+		beforeSend : function() {
+             $.blockUI({ message: 'Please wait' });
+          }, 
+		success : function(data) {
+			if(data ==='true')
+				{
+				//alert("username already exists")
+					$('#cmobile').css('border-color', 'red');
+				 $('#submit1').prop('disabled', true);
+				}
+			else
+				{
+				$('#cmobile').css('border-color', 'none');
+				$('#submit1').prop('disabled', false);
+				}
+			
+		},
+		complete: function () {
+            
+            $.unblockUI();
+       },
+		error :  function(e){$.unblockUI();console.log(e);}
+		
+	});
+
+
+	
+	
+}
+		
+
+
+</script>
 </html>
