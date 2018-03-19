@@ -87,6 +87,14 @@ public class EmployeeController {
 	@RequestMapping(value = "/employee" ,method = RequestMethod.POST)
 	public String saveAdmin(@Valid @ModelAttribute  User user, BindingResult bindingresults,
 			RedirectAttributes redir) throws IOException {
+		
+		
+		if(user.getBranchId()==null)
+		{
+			User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			user.setBranchId(objuserBean.getBranchId());
+			
+		}
 
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");

@@ -27,7 +27,7 @@ public class UserDao {
 
 
 	public void saveuser(User user) {
-	  // user.setEnabled("1");
+	  user.setEnabled("1");
 		em.persist(user);
 
 	}
@@ -300,6 +300,11 @@ public class UserDao {
 
 
 	}
+	
+	
+	public boolean isNumeric(String s) {  
+	    return s != null && s.matches("[-+]?\\d*\\.?\\d+");  
+	} 
 
 	public User getUserByObject(User user) {
 

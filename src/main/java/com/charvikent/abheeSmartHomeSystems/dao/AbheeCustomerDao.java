@@ -2,7 +2,6 @@ package com.charvikent.abheeSmartHomeSystems.dao;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -49,13 +48,7 @@ public class AbheeCustomerDao {
 		abheecustregistration.setStatus("1"); //set customer active or not .default set as 1
 		String randomNum = utilities.randNum();
 		abheecustregistration.setCustID(randomNum);  //set customer id
-		Random random = new Random();
-		String optnumber = String.format("%04d", random.nextInt(10000));
-		
-		abheecustregistration.setOTP(optnumber);
 		entityManager.persist(abheecustregistration);
-		
-		Sendsms(optnumber,abheecustregistration.getMobileno()); //send otp to customer
 		
 	}
 	

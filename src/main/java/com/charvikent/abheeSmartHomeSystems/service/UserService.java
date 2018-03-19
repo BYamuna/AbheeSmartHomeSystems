@@ -43,12 +43,7 @@ public class UserService {
 
 	public void saveUser(User user) throws IOException
 	{
-		if(user.getBranchId()==null)
-		{
-			User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			user.setBranchId(objuserBean.getBranchId());
-			
-		}
+		
 		String msg =user.getFirstname()+" "+user.getLastname()+",  Successfully registered with KPTMS. \n You can login using \n Username:  "+user.getUsername()+"\n password: "+user.getPassword();
 		String mbnum=user.getMobilenumber();
 		userDao.saveuser(user);

@@ -8,6 +8,10 @@
 <html lang="en">
 
 <header>
+<link rel='stylesheet' type='text/css' href='assets/plugins/charts-morrisjs/morris.css' /> 
+<link rel='stylesheet' type='text/css' href='assets/plugins/codeprettifier/prettify.css' /> 
+<link rel='stylesheet' type='text/css' href='assets/plugins/form-toggle/toggles.css' /> 
+<link rel='stylesheet' type='text/css' href='assets/plugins/datatables/dataTables.css' />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </header>
@@ -32,10 +36,7 @@
 
     <!-- The following CSS are included as plugins and can be removed if unused-->
 
-<link rel='stylesheet' type='text/css' href='assets/plugins/charts-morrisjs/morris.css' /> 
-<link rel='stylesheet' type='text/css' href='assets/plugins/codeprettifier/prettify.css' /> 
-<link rel='stylesheet' type='text/css' href='assets/plugins/form-toggle/toggles.css' /> 
-<link rel='stylesheet' type='text/css' href='assets/plugins/datatables/dataTables.css' />
+
 
 <style type="text/css">
 .alert-success, .alert-warning, .alert-danger{color: white !important;}
@@ -53,7 +54,7 @@
 }
 </style>
 
-<script type='text/javascript' src='assets/js/jquery-1.10.2.min.js'></script>
+<!-- <script type='text/javascript' src='assets/js/jquery-1.10.2.min.js'></script> -->
 <script type="text/javascript">
 /* window.setTimeout(function() {
     $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
@@ -124,32 +125,47 @@
           <form  action="#"  id="registration"  method="post" class="login-form">
 
 						<div id="firstForm">
-
-							<div class="form-group">
-								<label for="user_name">Enter Your Email-Id :</label> 
-								<input	type="email" name="cemail" id="cemail" onkeydown="removeBorder(this.id)" class="form-control" placeholder="Enter Email"/>
-								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
-							</div>
-							<div class="form-group">
-								<label for="user_name">Enter MobileNumber :</label> 
-								<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" class="form-control" placeholder="Enter Email"/>
-								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
-							</div>
-							<div class="form-group">
+						
+						<div class="form-group">
 								<label for="user_name"> Surname :</label> 
-								<input	type="text"name="csname" id="csname" onkeydown="removeBorder(this.id)" class="form-control" placeholder="Enter Email"/>
+								<input	type="text"name="csname" id="csname" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Email"/>
 								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
 								<label for="user_name">Name :</label> 
-								<input	type="text" name="cname" id="cname" onkeydown="removeBorder(this.id)" class="form-control" placeholder="Enter Email"/>
+								<input	type="text" name="cname" id="cname" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Email"/>
 								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
 							</div>
+							<div class="form-group">
+								<label for="user_name">Enter MobileNumber :</label> 
+								<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Email"/>
+								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
+							</div>
+
+							<div class="form-group">
+								<label for="user_name">Enter Your Email-Id :</label> 
+								<input	type="email" name="cemail" id="cemail" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Email"/>
+								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
+							</div>
+							<div class="form-group">
+								<label for="user_name">Enter  password :</label> 
+								<input	type="email" name="cpassword" id="cpassword" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Email"/>
+								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
+							</div>
+							<div class="form-group">
+								<label for="user_name">Retype password :</label> 
+								<input	type="email" name="crtpassword" id="crtpassword" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Email"/>
+								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
+							</div>
+							
+							
+							
 						</div>
 					</form>	
         </div>
         <div class="modal-footer">
-          <button type="button" id="submit1" onclick="modelsubmit()" class="btn btn-suscces" data-dismiss="modal">Submit</button>
+          <button type="button" id="submit1" onclick="getOTP()" class="btn btn-suscces" data-dismiss="modal">Submit</button>
+           <input type="reset" value="Reset" class="btn-danger btn cancel1"/>
         </div>
       </div>
       
@@ -181,7 +197,8 @@
 					</form>	
         </div>
         <div class="modal-footer">
-          <button type="button" id="submit1" onclick="modelsubmit()" class="btn btn-suscces" data-dismiss="modal">Submit</button>
+          <button type="button" id="submit2" onclick="modelsubmit()" class="btn btn-suscces" data-dismiss="modal">Submit</button>
+         
         </div>
       </div>
       
@@ -230,21 +247,73 @@ $('#cmobile').blur(function() {
 
 		}); 
 		
-function modelsubmit()
+		
+var cmobile =0
+var cemail =0
+var csname =0
+var cname =0
+
+var cpassword =0
+var idArrayCmt11 = null;
+
+idArrayCmt1 = $.makeArray($('.validate1').map(function() {
+	return this.id ;
+	
+}));
+
+var validation = true;
+
+function validationOnModel()
+{
+		
+	validation = true;
+	$.each(idArrayCmt1, function(i, val) {
+		var value = $("#" + idArrayCmt1[i]).val();
+		var placeholder = $("#" + idArrayCmt1[i]).attr('placeholder');
+		if (value == null || value == "" || value == "undefined") {
+			$('style').append(styleBlock);
+			$("#" + idArrayCmt1[i] ).attr("placeholder", placeholder);
+			$("#" + idArrayCmt1[i] ).css('border-color','#e73d4a');
+			$("#" + idArrayCmt1[i] ).css('color','#e73d4a');
+			$("#" + idArrayCmt1[i] ).addClass('placeholder-style your-class');
+			 var id11 = $("#" + idArrayCmt1[i]+"_chosen").length;
+			if ($("#" + idArrayCmt1[i]+"_chosen").length)
+			{
+				$("#" + idArrayCmt1[i]+"_chosen").children('a').css('border-color','#e73d4a');
+			}
+//			$("#" + idArray[i] + "Error").text("Please " + placeholder);
+			validation = false;
+		} 
+	});
+	if(validation) {
+		$("#submit1").attr("disabled",true);
+		$("#submit1").val("Please wait...");
+		$("#submit1").submit();											
+		event.preventDefault();
+	}else {
+		return false;
+		event.preventDefault();
+	}
+	
+	}
+function getOTP()
 {
 	
-	var cmobile =$('#cmobile').val();
-	var cemail =$('#cemail').val();
-	var csname =$('#csname').val();
-	var cname =$('#cname').val();
+	/*  cmobile =$('#cmobile').val();
+	 cemail =$('#cemail').val();
+	 csname =$('#csname').val();
+	 cname =$('#cname').val();
+	 
 	
 	
 alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
-	
+	 */
+	 
+	 validationOnModel();
 	$.ajax({
 		type : "POST",
-		url : "modelSubmit",
-		data :"cmobile="+cmobile+"&cemail="+cemail+"&csname="+csname+"&cname="+cname,
+		url : "getOtp",
+		data :"cmobile="+cmobile,
 		dataType : "text",
 		beforeSend : function() {
              $.blockUI({ message: 'Please wait' });
@@ -252,8 +321,11 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		success : function(data) {
 			if(data ==='true')
 				{
+				//location.reload();
 				alert("OTP Send to Your Mobile Number ");
-				$("#register-info").modal('toggle');
+				$('#register-info').modal('hide');
+				//$("#register-info").modal('toggle');
+				$('#OTPModel').modal('toggle');
 				$("#OTPModel").modal('show');
 				}
 			else
@@ -270,11 +342,76 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		error :  function(e){$.unblockUI();console.log(e);}
 		
 	});
-
-
-	
-	
 }
+	function modelsubmit()
+	{
+		
+		 cmobile =$('#cmobile').val();
+		 cemail =$('#cemail').val();
+		 csname =$('#csname').val();
+		 cname =$('#cname').val();
+		 cotp=$('#cotp').val();
+		 cpassword =$('#cpassword').val();
+		
+	alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
+	alert(cotp+"-->"+cpassword);
+	
+		
+		$.ajax({
+			type : "POST",
+			url : "modelSubmit",
+			data :"cmobile="+cmobile+"&cemail="+cemail+"&csname="+csname+"&cname="+cname+"&cotp="+cotp+"&cpassword="+cpassword,
+			dataType : "text",
+			beforeSend : function() {
+	             $.blockUI({ message: 'Please wait' });
+	          }, 
+			success : function(data) {
+				alert(data);
+				
+				if(data ==='true')
+				{
+					alert(" Customer registered successfully");
+				}
+				else
+					alert("Customer doesnot registered ")
+				
+			},
+			complete: function () {
+	            
+	            $.unblockUI();
+	       },
+			error :  function(e){$.unblockUI();console.log(e);}
+			
+		});
+
+	}
+
+
+	$(".cancel1").click(function()
+			{
+				$("#id").val(0);
+				$.each( idArrayCmt1, function(i, val)
+				{
+					var value = $("#" +  idArrayCmt1[i]).val();
+					if ($("#" + idArrayCmt1[i]+"_chosen").length)
+					{
+						$("#" + idArrayCmt1[i]).val("");
+						$("#" + idArrayCmt1[i]).trigger("chosen:updated");
+					}
+//					$("form")[0].reset();
+					$("#"+ idArrayCmt1[i]).val('');
+					$("#"+ idArrayCmt1[i]).prop('readonly',false);
+					$("#"+ idArrayCmt1[i]).css('border-color','');
+					$("#"+ idArrayCmt1[i]).css('color','black');
+					$("#"+ idArrayCmt1[i]).removeClass('placeholder-style your-class default-class');
+					if ($("#" +  idArrayCmt1[i]+"_chosen").length)
+					{
+						$("#" +  idArrayCmt1[i]+"_chosen").children('a').css('border-color','black');
+					}
+				});
+			});
+	
+
 		
 
 
