@@ -282,5 +282,10 @@ public class UserService {
 		return userDao.getInActiveList();
 	}
 
+	public User checkCustomerExistOrNotbyMobile(String custMobile) {
+		// TODO Auto-generated method stub
+		return userDao.checkCustomerExistOrNotbyMobile(custMobile);
+	}
+
 
 }

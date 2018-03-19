@@ -362,6 +362,20 @@ public class UserDao {
 		return  listusers;
 		 	}
 
+	public User checkCustomerExistOrNotbyMobile(String custMobile) {
+		
+		String hql ="from User where mobilenumber ='"+custMobile+"'";
+		Query query =em.createQuery(hql);
+
+		List<User>usersList =query.getResultList();
+		if(usersList.isEmpty())
+               return null;
+               else
+		return usersList.get(0);
+		
+		
+	}
+
 
 
 

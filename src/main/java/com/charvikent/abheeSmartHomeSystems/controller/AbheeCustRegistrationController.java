@@ -97,7 +97,7 @@ public class AbheeCustRegistrationController
 		
 		String custMobile=request.getParameter("cmobile");
 		
-		AbheeCustRegistration custbean =adao.checkCustomerExistOrNotbyMobile(custMobile);
+		User custbean =userService.checkCustomerExistOrNotbyMobile(custMobile);
 		
 		if(custbean != null)
 		{
