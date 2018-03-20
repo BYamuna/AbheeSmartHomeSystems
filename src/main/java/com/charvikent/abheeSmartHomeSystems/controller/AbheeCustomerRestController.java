@@ -1,11 +1,14 @@
 package com.charvikent.abheeSmartHomeSystems.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,13 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeCustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.charvikent.abheeSmartHomeSystems.model.OTPDetails;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
-public class AbheeCustomerController {
+public class AbheeCustomerRestController {
 	
 	@Autowired
 	AbheeCustomerDao abheeCustomerDao;
@@ -49,25 +52,39 @@ public class AbheeCustomerController {
 	
 	//@RequestMapping(value = "/api", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	
-	@RequestMapping(value="/test", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
-	public void  SaveAbheeCustomer( @RequestBody User user) {
+	@RequestMapping(value="/saveRestCustomer", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public HashMap<String, String>  SaveAbheeCustomer( @RequestBody User user) {
+		
+		String code =null;
 
 		try {
 			userService.saveUser(user);
+			code = "OK";
 		} catch (IOException e) {
+			code="NOT_FOUND";
 			e.printStackTrace();
 		}
+		
+HashMap<String,String> hm =new HashMap<String,String>();
+		
+		hm.put("status", code);
+		return hm;
 	}
 	
 	@RequestMapping(value="/requestsms", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
-	public String getOTP( @RequestBody User user) {
-		
+	public ResponseEntity<String>  getOTP( @RequestBody User user) {
 		String custMobile=user.getMobilenumber();
 		Random random = new Random();
 		String  otpnumber = String.format("%04d", random.nextInt(10000));
 		
+		HttpStatus code =null;
 		try {
-			sendSMS.sendSMS(otpnumber,custMobile);
+			String status = sendSMS.sendSMS(otpnumber,custMobile);
+			if(status.equals("OK")){
+				code = HttpStatus.OK;
+			}else{
+				code=HttpStatus.NOT_FOUND;
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,11 +95,48 @@ public class AbheeCustomerController {
 		oTPDetails.setOTPnumber(otpnumber);
 		
 		oTPDetailsDao.saveOTPdetails(oTPDetails);
-		return otpnumber;
+		ResponseEntity<String> response = new ResponseEntity<String>(otpnumber,code);
+		return response;
 		
 
 		
 	}
+	
+	
+	@RequestMapping(value="/requestsms2", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public HashMap<String, String>  testing2( @RequestBody User user) {
+		
+		String custMobile=user.getMobilenumber();
+		Random random = new Random();
+		String  otpnumber = String.format("%04d", random.nextInt(10000));
+		
+		
+		String code =null;
+		try {
+			String status = sendSMS.sendSMS(otpnumber,custMobile);
+			if(status.equals("OK")){
+				code = "OK";
+			}else{
+				code="NOT_FOUND";
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		HashMap<String,String> hm =new HashMap<String,String>();
+		
+		hm.put("otpnumber", otpnumber);
+		hm.put("statuscode", code);
+		
+	
+		return hm;
+		
+		
+
+		
+	}
+	
 	
 
 }

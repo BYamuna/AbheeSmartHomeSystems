@@ -1,7 +1,7 @@
 
-Hi
 
-<%-- <style>
+
+ <style>
 .btn-toolbar {
 	margin-left: 5px;
 }
@@ -21,6 +21,9 @@ Hi
 	height: 30px;
 	line-height: 0.8;
 	border-radius: 10px;
+}
+.btn-toolbar {
+	margin-top:5px;
 }
 </style>
 
@@ -48,7 +51,7 @@ Hi
 		<div class="page-content container" style="background-color: #fff;">
 			<div class="col-md-12"
 				style="background-color: white !important; padding-top: 15PX;">
-				<div class="panel panel-primary">
+				<div class="panel panel-warning">
 					<div class="panel-heading">
 						<h4>Dashboard</h4>
 						<div class="options">
@@ -64,7 +67,7 @@ Hi
 								<table class="table table-bordered priority prioritybg"
 									style="border: 1px solid #006699; width:;">
 									<tr
-										style="background-color: #006699; color: #fff; text-align: center;">
+										style="background-color: #ffb902; color: #fff; text-align: center;">
 
 										<th>Unclosed Tasks /Severity</th>
 										<th>Critical</th>
@@ -274,10 +277,10 @@ Hi
 							<br>
 							<div class="table-responsive">
 								<table class="table table-bordered priority prioritybg"
-									style="border: 1px solid #006699; width:;" id="statusTable">
+									style="border: 1px solid #ffb902;" id="statusTable">
 									<thead>
 										<tr
-											style="background-color: #006699; color: #fff; text-align: center;">
+											style="background-color: #ffb902; color: #fff; text-align: center;">
 											<th>By Status</th>
 											<th>Open</th>
 											<th>Resolved</th>
@@ -299,10 +302,10 @@ Hi
 							<br>
 							<div class="table-responsive">
 								<table class="table table-bordered priority prioritybg"
-									style="border: 1px solid #006699; width:;" id="categoryTable">
+									style="border: 1px solid #ffb902;" id="categoryTable">
 									<thead>
 										<tr
-											style="background-color: #006699; color: #fff; text-align: center;">
+											style="background-color: #ffb902; color: #fff; text-align: center;">
 
 											<th>By Category</th>
 											<th>Open</th>
@@ -333,10 +336,10 @@ Hi
 							 <security:authorize access="hasRole('ROLE_ADMIN')">
 							<div class="table-responsive">
 								<table class="table table-bordered priority prioritybg"
-									style="border: 1px solid #006699; width:;" id="deptTable">
+									style="border: 1px solid #ffb902;" id="deptTable">
 									<thead>
 										<tr
-											style="background-color: #006699; color: #fff; text-align: center;">
+											style="background-color: #ffb902; color: #fff; text-align: center;">
 
 											<th>Department Name</th>
 											<th>Open</th>

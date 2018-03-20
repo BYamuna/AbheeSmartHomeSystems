@@ -52,6 +52,15 @@
 .panel-primary .panel-body {
   border-top: 2px solid #e43b25;
 }
+.modal-header {
+	background-color:#ffb902;
+}
+.anchor{
+	float:right;
+}
+.tag {
+	color:#FF0000;
+}
 </style>
 
 <!-- <script type='text/javascript' src='assets/js/jquery-1.10.2.min.js'></script> -->
@@ -110,16 +119,16 @@
 		</form>
 	</div>
 	
-	<a  class="" data-toggle="modal" data-target="#register-info">Register</a>
+	<p class="anchor"><a href="#" data-toggle="modal" data-target="#register-info" class="tag">Click here</a> for registering your self</p>
 </div>
- <div class="modal fade" id="register-info" role="dialog">
+ <div  class="modal fade" id="register-info" role="dialog">
     <div class="modal-dialog">
     
      
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Set up your Account</h4>
+          <h4 class="modal-title">Customer Registration</h4>
         </div>
         <div class="modal-body">
           <form  action="#"  id="registration"  method="post" class="login-form">
@@ -127,19 +136,19 @@
 						<div id="firstForm">
 						
 						<div class="form-group">
-								<label for="user_name"> Surname :</label> 
-								<input	type="text"name="csname" id="csname" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Email"/>
-								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
+								<label for="user_name"> First Name :</label> 
+								<input	type="text" name="csname" id="csname" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter First Name"/>
+								<span class="hasError" id="csnamelError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
-								<label for="user_name">Name :</label> 
-								<input	type="text" name="cname" id="cname" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Email"/>
-								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
+								<label for="user_name">Last Name :</label> 
+								<input	type="text" name="cname" id="cname" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Last Name"/>
+								<span class="hasError" id="cnameError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
 								<label for="user_name">Enter MobileNumber :</label> 
-								<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Email"/>
-								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
+								<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Mobile Number"/>
+								<span class="hasError" id="cmobileError" style="font-size: 13px;"></span>
 							</div>
 
 							<div class="form-group">
@@ -149,13 +158,13 @@
 							</div>
 							<div class="form-group">
 								<label for="user_name">Enter  password :</label> 
-								<input	type="email" name="cpassword" id="cpassword" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Email"/>
-								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
+								<input	type="password" name="cpassword" id="cpassword" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter password"/>
+								<span class="hasError" id="cpasswordError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
 								<label for="user_name">Retype password :</label> 
-								<input	type="email" name="crtpassword" id="crtpassword" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Email"/>
-								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
+								<input	type="password" name="crtpassword" id="crtpassword" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Retype Password"/>
+								<span class="hasError" id="crtpasswordError" style="font-size: 13px;"></span>
 							</div>
 							
 							
@@ -164,7 +173,7 @@
 					</form>	
         </div>
         <div class="modal-footer">
-          <button type="button" id="submit1" onclick="getOTP()" class="btn btn-suscces" data-dismiss="modal">Submit</button>
+          <button type="button" id="submitModel"  class="btn btn-primary" data-dismiss="modal">Submit</button>
            <input type="reset" value="Reset" class="btn-danger btn cancel1"/>
         </div>
       </div>
@@ -172,14 +181,14 @@
     </div>
   </div> 
   
-  <div class="modal fade" id="OTPModel" role="dialog">
+  <div class="modal fade" id="OTPModel" data-backdrop="static" data-keyboard="false" role="dialog">
     <div class="modal-dialog">
     
      
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Set up your Account</h4>
+          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+          <h4 class="modal-title">OTP Verification</h4>
         </div>
         <div class="modal-body">
           <form  action="#"  id="registration1"  method="post" class="login-form">
@@ -189,7 +198,7 @@
 							
 							<div class="form-group">
 								<label for="user_name">Enter OTP :</label> 
-								<input	type="text" name="cotp" id="cotp" onkeydown="removeBorder(this.id)" class="form-control" placeholder="Enter Email"/>
+								<input	type="password" name="cotp" id="cotp" onkeydown="removeBorder(this.id)" class="form-control" placeholder="Enter Email"/>
 								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
 							</div>
 							
@@ -197,7 +206,7 @@
 					</form>	
         </div>
         <div class="modal-footer">
-          <button type="button" id="submit2" onclick="modelsubmit()" class="btn btn-suscces" data-dismiss="modal">Submit</button>
+          <button type="button" id="submit2" onclick="modelsubmit()" class="btn btn-primary" data-dismiss="modal">Submit</button>
          
         </div>
       </div>
@@ -228,12 +237,12 @@ $('#cmobile').blur(function() {
 						{
 						//alert("username already exists")
 	 					$('#cmobile').css('border-color', 'red');
-						 $('#submit1').prop('disabled', true);
+	 					 $('#submitModel').prop('disabled', true);
 						}
 					else
 						{
 						$('#cmobile').css('border-color', 'none');
-						$('#submit1').prop('disabled', false);
+						 $('#submitModel').prop('disabled', false);
 						}
 					
 				},
@@ -248,25 +257,49 @@ $('#cmobile').blur(function() {
 		}); 
 		
 		
+$('#crtpassword').blur(function() {
+	
+	 cpassword =$('#cpassword').val();
+	 
+	 crtpassword=$('#crtpassword').val();
+	 
+	 if(cpassword != crtpassword)
+		 {
+		 alert("Password and Retype password should be Matched")
+		 $('#submitModel').prop('disabled', true);
+		 
+		 }
+	 else
+		 {
+		 
+		 $('#submitModel').prop('disabled', false);
+		 }
+	 
+	
+	
+	
+	
+}); 
+		
+		
 var cmobile =0
 var cemail =0
 var csname =0
 var cname =0
 
 var cpassword =0
-var idArrayCmt11 = null;
+var idArrayCmt1 = null;
 
-idArrayCmt1 = $.makeArray($('.validate1').map(function() {
-	return this.id ;
-	
-}));
+
 
 var validation = true;
 
-function validationOnModel()
-{
+	idArrayCmt1 = $.makeArray($('.validate1').map(function() {
+		return this.id ;
+	}));
 		
 	validation = true;
+	$('#submitModel').click(function(event) {
 	$.each(idArrayCmt1, function(i, val) {
 		var value = $("#" + idArrayCmt1[i]).val();
 		var placeholder = $("#" + idArrayCmt1[i]).attr('placeholder');
@@ -283,24 +316,28 @@ function validationOnModel()
 			}
 //			$("#" + idArray[i] + "Error").text("Please " + placeholder);
 			validation = false;
-		} 
+		}else{
+			validation = true;
+		}
 	});
 	if(validation) {
-		$("#submit1").attr("disabled",true);
+	/* 	$("#submit1").attr("disabled",true);
 		$("#submit1").val("Please wait...");
 		$("#submit1").submit();											
-		event.preventDefault();
+		event.preventDefault(); */
+		 getOTP();
 	}else {
 		return false;
-		event.preventDefault();
+		 event.preventDefault(); 
 	}
 	
-	}
+});
+
 function getOTP()
 {
 	
-	/*  cmobile =$('#cmobile').val();
-	 cemail =$('#cemail').val();
+	 cmobile =$('#cmobile').val();
+	 /*cemail =$('#cemail').val();
 	 csname =$('#csname').val();
 	 cname =$('#cname').val();
 	 
@@ -309,7 +346,7 @@ function getOTP()
 alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 	 */
 	 
-	 validationOnModel();
+		
 	$.ajax({
 		type : "POST",
 		url : "getOtp",
@@ -342,6 +379,8 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		error :  function(e){$.unblockUI();console.log(e);}
 		
 	});
+	
+	
 }
 	function modelsubmit()
 	{

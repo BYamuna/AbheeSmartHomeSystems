@@ -283,7 +283,7 @@ public class UserDao {
 
 	public User findByUserName(String userName)
 	{
-		User user= (User) em.createQuery("select user from User user where username=:Custname").setParameter("Custname", userName).getSingleResult();
+		User user= (User) em.createQuery("select user from User user where email=:Custname").setParameter("Custname", userName).getSingleResult();
 		System.out.println(user);
 		return user;
 	}
@@ -292,7 +292,7 @@ public class UserDao {
 	{
 		//List<String> list= em.createNativeQuery("SELECT d.name FROM  kpusers u,kpdesignation d,kpmultiroles m  where u.designation=d.id  and k.username=:Custname").setParameter("Custname", Username).getResultList();
 		//List<String> list= em.createNativeQuery("select m.desigrole from kpusers u,kpdesignation d,kpmultiroles m  where u.designation=d.id and m.designationid=u.designation and u.username =:Custname").setParameter("Custname", Username).getResultList();
-		List<String> list= em.createNativeQuery("select m.desigrole from abheeusers u,kpmultiroles m  where  m.designationid=u.designation and u.username =:Custname").setParameter("Custname", Username).getResultList();
+		List<String> list= em.createNativeQuery("select m.desigrole from abheeusers u,kpmultiroles m  where  m.designationid=u.designation and u.email =:Custname").setParameter("Custname", Username).getResultList();
 
 
 		System.out.println(list);
