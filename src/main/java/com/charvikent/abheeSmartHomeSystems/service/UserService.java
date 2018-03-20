@@ -287,5 +287,10 @@ public class UserService {
 		return userDao.checkCustomerExistOrNotbyMobile(custMobile);
 	}
 
+	public User checkCustomerExistOrNotbyEmail(String custMobile) {
+		// TODO Auto-generated method stub
+		return userDao.checkCustomerExistOrNotByEmail(custMobile);
+	}
+
 
 }

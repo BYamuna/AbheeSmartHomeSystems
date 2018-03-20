@@ -10,8 +10,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.model.Department;
 import com.charvikent.abheeSmartHomeSystems.model.Designation;
 import com.charvikent.abheeSmartHomeSystems.model.User;
@@ -23,11 +25,17 @@ public class UserDao {
 
 	@PersistenceContext
 	private EntityManager em;
+	
+	@Autowired
+	KptsUtil kptsUtil;
 
 
 
 	public void saveuser(User user) {
+		
+		String userid =kptsUtil.randNum();
 	  user.setEnabled("1");
+	  user.setUserId(userid);
 		em.persist(user);
 
 	}
@@ -283,7 +291,7 @@ public class UserDao {
 
 	public User findByUserName(String userName)
 	{
-		User user= (User) em.createQuery("select user from User user where email=:Custname").setParameter("Custname", userName).getSingleResult();
+		User user= (User) em.createQuery("select user from User user where (email=:Custname or mobilenumber =:Custname) ").setParameter("Custname", userName).getSingleResult();
 		System.out.println(user);
 		return user;
 	}
@@ -292,7 +300,7 @@ public class UserDao {
 	{
 		//List<String> list= em.createNativeQuery("SELECT d.name FROM  kpusers u,kpdesignation d,kpmultiroles m  where u.designation=d.id  and k.username=:Custname").setParameter("Custname", Username).getResultList();
 		//List<String> list= em.createNativeQuery("select m.desigrole from kpusers u,kpdesignation d,kpmultiroles m  where u.designation=d.id and m.designationid=u.designation and u.username =:Custname").setParameter("Custname", Username).getResultList();
-		List<String> list= em.createNativeQuery("select m.desigrole from abheeusers u,kpmultiroles m  where  m.designationid=u.designation and u.email =:Custname").setParameter("Custname", Username).getResultList();
+		List<String> list= em.createNativeQuery("select m.desigrole from abheeusers u,kpmultiroles m  where  m.designationid=u.designation and (u.email =:Custname or u.mobilenumber =:Custname)").setParameter("Custname", Username).getResultList();
 
 
 		System.out.println(list);
@@ -374,6 +382,18 @@ public class UserDao {
 		return usersList.get(0);
 		
 		
+	}
+
+	public User checkCustomerExistOrNotByEmail(String email) {
+
+		String hql ="from User where email ='"+email+"'";
+		Query query =em.createQuery(hql);
+
+		List<User>usersList =query.getResultList();
+		if(usersList.isEmpty())
+               return null;
+               else
+		return usersList.get(0);
 	}
 
 

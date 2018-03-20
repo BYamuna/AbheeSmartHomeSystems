@@ -450,6 +450,46 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 				});
 			});
 	
+	
+	
+	$('#cemail').blur(function() {
+		var cmobile=$(this).val();
+		
+		/* alert("hi");
+		alert(cmobile);
+	 */
+		$.ajax({
+					type : "POST",
+					url : "checkEmailExst",
+					data :"cmobile="+cmobile,
+					dataType : "text",
+					beforeSend : function() {
+			             $.blockUI({ message: 'Please wait' });
+			          }, 
+					success : function(data) {
+						if(data ==='true')
+							{
+							//alert("username already exists")
+		 					$('#cemail').css('border-color', 'red');
+		 					 $('#submitModel').prop('disabled', true);
+							}
+						else
+							{
+							$('#cemail').css('border-color', 'none');
+							 $('#submitModel').prop('disabled', false);
+							}
+						
+					},
+					complete: function () {
+			            
+			            $.unblockUI();
+			       },
+					error :  function(e){$.unblockUI();console.log(e);}
+					
+				});
+
+			}); 
+	
 
 		
 

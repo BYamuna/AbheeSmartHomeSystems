@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeCustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
@@ -38,6 +39,8 @@ public class AbheeCustRegistrationController
 	OTPDetailsDao oTPDetailsDao;
 	@Autowired
 	UserService userService;
+	@Autowired
+	KptsUtil kptsUtil;
 	
 	String otpnumber ="";
 	
@@ -141,7 +144,11 @@ public class AbheeCustRegistrationController
 		
 		User customer =new User();
 		
-		String str=custMobile;
+		
+		String usernumber =kptsUtil.randNum();
+		  
+		
+		
 		
 		
 		customer.setMobilenumber(custMobile);
@@ -190,6 +197,25 @@ public class AbheeCustRegistrationController
 		
 		
 		return true;
+		
+	}
+	
+	@RequestMapping(value = "/checkEmailExst", method = RequestMethod.POST)
+	public @ResponseBody  Boolean checkemailExistence(@Validated @ModelAttribute  AbheeCustRegistration abheecustregistration,Model model,HttpServletRequest request) throws IOException 
+	{
+		System.out.println("enter to checkCustExst");
+		
+		String custMobile=request.getParameter("cmobile");
+		
+		User custbean =userService.checkCustomerExistOrNotbyEmail(custMobile);
+		
+		if(custbean != null)
+		{
+			return true;
+		}
+		else
+		
+		return false;
 		
 	}
 }

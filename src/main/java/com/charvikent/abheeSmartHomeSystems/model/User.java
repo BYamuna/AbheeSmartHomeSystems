@@ -68,6 +68,8 @@ public class User {
 	private String status;
 	@Transient
 	private String branchName;
+	
+	private String userId;
 
 	public String getReportName() {
 		return reportName;
@@ -153,6 +155,16 @@ public class User {
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
 	}
+	
+	
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
 	public User() {
 	}
@@ -181,6 +193,7 @@ public class User {
 		this.lastname = user.lastname;
 		this.reportName=user.reportName;
 		this.BranchId=user.BranchId;
+		this.userId=user.userId;
 
 	}
 
