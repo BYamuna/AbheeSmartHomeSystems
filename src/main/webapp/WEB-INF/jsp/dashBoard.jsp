@@ -51,7 +51,7 @@
 		<div class="page-content container" style="background-color: #fff;">
 			<div class="col-md-12"
 				style="background-color: white !important; padding-top: 15PX;">
-				<div class="panel panel-warning">
+				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h4>Dashboard</h4>
 						<div class="options">
@@ -65,9 +65,9 @@
 
 							<div class="table-responsive">
 								<table class="table table-bordered priority prioritybg"
-									style="border: 1px solid #006699; width:;">
+									style="border: 1px solid #0460a4; width:;">
 									<tr
-										style="background-color: #ffb902; color: #fff; text-align: center;">
+										style="background-color: #0460a4; color: #fff; text-align: center;">
 
 										<th>Unclosed Tasks /Severity</th>
 										<th>Critical</th>
@@ -75,200 +75,29 @@
 										<th>Minor</th>
 
 									</tr>
-
-									<tr class="prioritybg">
-										<td>
-											<div class="col-md-12" style="margin-left: 5px"!important">
-
-												<span
-													style="font-size: 18px; lettee-spacin: 1px; color: #006699;">Assigned
-													To Me <c:forEach var="issue" items="${severityCount}">
-														<c:set var="String" value="${issue.key}" />
-														<c:if test="${fn:contains(String, 'Total')}">
-															<a href="severity?id=${issue.key}">( ${issue.value} )</a>
-														</c:if>
-
-
-													</c:forEach>
-												</span>
-											</div>
-										</td>
-										<td><c:forEach var="issue" items="${severityCount}">
-												<c:set var="String" value="${issue.key}" />
-
-												<c:if test="${fn:contains(String, 'Critical')}">
-													<div class="col-md-12">
-
-														<a href="severity?id=${issue.key}"
-															class="btn btn-danger assigned "> <span
-															id="unseentasks">${issue.value} </span> <br>${issue.key} </a>
-														<!-- <a href="severity?id=Critical"
-													class="btn btn-danger assigned " style=""><span
-													id="unseentasks"> 0 </span> </a> -->
-													</div>
-												</c:if>
-											</c:forEach></td>
-										<td><c:forEach var="issue" items="${severityCount}">
-												<c:set var="String" value="${issue.key}" />
-												<c:if test="${fn:contains(String, 'Major')}">
-													<div class="col-md-12">
-														<!-- <a href="severity?id=Major" class="btn btn-warning assigned"><span
-													id="unseentasks"> 0 </span> </a> -->
-														<a href="severity?id=${issue.key}"
-															class="btn btn-warning assigned "> <span
-															id="unseentasks">${issue.value} </span> <br>${issue.key}
-														</a>
-													</div>
-												</c:if>
-											</c:forEach></td>
-										<td><c:forEach var="issue" items="${severityCount}">
-												<c:set var="String" value="${issue.key}" />
-												<c:if test="${fn:contains(String, 'Minor')}">
-													<div class="col-md-12">
-														<!-- <a href="severity?id=Minor" class="btn btn-primary assigned"><span
-													id="unseentasks"> 1 </span></a> -->
-
-														<a href="severity?id=${issue.key}"
-															class="btn btn-primary assigned"> <span
-															id="unseentasks">${issue.value} </span> <br>${issue.key} </a>
-													</div>
-												</c:if>
-											</c:forEach></td>
-									</tr>
+									
 									<tr>
-										<td>
-											<div class="col-md-12" style="margin-left: 5px"!important">
-
-
-												<span
-													style="font-size: 18px; lettee-spacin: 1px; color: #006699;">Assigned
-													By Me<c:forEach var="issue" items="${severityCountsBY}">
-														<c:set var="String" value="${issue.key}" />
-														<c:if test="${fn:contains(String, 'Total')}">
-															<a href="severityby?id=${issue.key}">( ${issue.value}
-																)</a>
-														</c:if>
-
-
-													</c:forEach>
-
-												</span>
-											</div>
-										</td>
-										<td><c:forEach var="issue" items="${severityCountsBY}">
-												<c:set var="String" value="${issue.key}" />
-												<c:if test="${fn:contains(String, 'Critical')}">
-													<div class="col-md-12">
-
-
-														<a href="severityby?id=${issue.key}"
-															class="btn btn-danger assigned "> <span
-															id="unseentasks"> ${issue.value} </span>
-														<br>${issue.key}
-														</a>
-														<!-- <a href="severity?id=Critical"
-													class="btn btn-danger assigned"><span id="unseentasks">
-														0 </span> </a> -->
-													</div>
-												</c:if>
-											</c:forEach></td>
-										<td><c:forEach var="issue" items="${severityCountsBY}">
-												<c:set var="String" value="${issue.key}" />
-												<c:if test="${fn:contains(String, 'Major')}">
-													<div class="col-md-12">
-														<!-- <a href="severity?id=Major" class="btn btn-warning assigned"><span
-													id="unseentasks"> 0 </span> </a> -->
-
-														<a href="severityby?id=${issue.key}"
-															class="btn btn-warning assigned "> <span
-															id="unseentasks">${issue.value} </span>
-														<br>${issue.key} </a>
-													</div>
-												</c:if>
-											</c:forEach></td>
-										<td><c:forEach var="issue" items="${severityCountsBY}">
-												<c:set var="String" value="${issue.key}" />
-												<c:if test="${fn:contains(String, 'Minor')}">
-													<div class="col-md-12">
-														<!-- <a href="severity?id=Minor" class="btn btn-primary assigned"><span
-													id="unseentasks"> 1 </span> </a> -->
-
-														<a href="severityby?id=${issue.key}"
-															class="btn btn-primary assigned"
-															style="border-radius: 15px;"> <span id="unseentasks">${issue.value}
-														</span>
-														<br>${issue.key}
-														</a>
-													</div>
-												</c:if>
-											</c:forEach></td>
+									<td>Assigned By Me</td>
+									<td>5</td>
+									<td>4</td>
+									<td>9</td>
 									</tr>
+									
 									<tr>
-										<td>
-
-
-											<div class="col-md-12" style="margin-left: 5px"!important">
-												<span
-													style="font-size: 18px; lettee-spacin: 1px; color: #006699;">Monitored
-													BY Me<c:forEach var="issue" items="${SevMonitoredCounts}">
-														<c:set var="String" value="${issue.key}" />
-														<c:if test="${fn:contains(String, 'Total')}">
-															<a href="severityReportTo?id=${issue.key}">(
-																${issue.value} )</a>
-														</c:if>
-
-
-													</c:forEach>
-												</span>
-											</div>
-
-										</td>
-
-										<td><c:forEach var="issue" items="${SevMonitoredCounts}">
-												<c:set var="String" value="${issue.key}" />
-												<c:if test="${fn:contains(String, 'Critical')}">
-													<div class="col-md-12">
-														<a href="severityReportTo?id=${issue.key}"
-															class="btn btn-danger assigned"> <span
-															id="unseentasks"> ${issue.value} </span>
-														<br>${issue.key}
-														</a>
-													</div>
-												</c:if>
-											</c:forEach></td>
-										<td><c:forEach var="issue" items="${SevMonitoredCounts}">
-												<c:set var="String" value="${issue.key}" />
-
-												<c:if test="${fn:contains(String, 'Major')}">
-													<div class="col-md-12">
-														<!-- <a href="severity?id=Critical"
-													class="btn btn-danger assigned"><span id="unseentasks">
-														0 </span></a> -->
-
-														<a href="severityReportTo?id=${issue.key}"
-															class="btn btn-warning assigned"><span
-															id="unseentasks"> ${issue.value} </span>
-														<br>${issue.key} </a>
-													</div>
-												</c:if>
-											</c:forEach></td>
-
-										<td><c:forEach var="issue" items="${SevMonitoredCounts}">
-												<c:set var="String" value="${issue.key}" />
-												<c:if test="${fn:contains(String, 'Minor')}">
-													<div class="col-md-12">
-														<!-- <a href="severity?id=Minor" class="btn btn-primary assigned"><span
-													id="unseentasks"> 1 </span></a> -->
-
-														<a href="severityReportTo?id=${issue.key}"
-															class="btn btn-primary assigned"> <span
-															id="unseentasks"> ${issue.value} </span>
-														<br>${issue.key} </a>
-													</div>
-												</c:if>
-											</c:forEach></td>
+									<td>Assigned To Me</td>
+									<td>2</td>
+									<td>6</td>
+									<td>5</td>
 									</tr>
-								</table>
+									
+									<tr>
+									<td>Monitered By Me</td>
+									<td>1</td>
+									<td>4</td>
+									<td>6</td>
+									</tr>
+
+																	</table>
 							</div>
 							<!-- *********************************** By Severity End *****************-->
 
@@ -277,16 +106,18 @@
 							<br>
 							<div class="table-responsive">
 								<table class="table table-bordered priority prioritybg"
-									style="border: 1px solid #ffb902;" id="statusTable">
+									style="border: 1px solid #0460a4;" id="statusTable">
 									<thead>
 										<tr
-											style="background-color: #ffb902; color: #fff; text-align: center;">
+											style="background-color: #0460a4; color: #fff; text-align: center;">
 											<th>By Status</th>
 											<th>Open</th>
 											<th>Resolved</th>
 											<th>Closed</th>
 											<th>Total</th>
 										</tr>
+										
+									
 									</thead>
 									<tbody>
 
@@ -302,17 +133,42 @@
 							<br>
 							<div class="table-responsive">
 								<table class="table table-bordered priority prioritybg"
-									style="border: 1px solid #ffb902;" id="categoryTable">
+									style="border: 1px solid #0460a4;" id="categoryTable">
 									<thead>
 										<tr
-											style="background-color: #ffb902; color: #fff; text-align: center;">
+											style="background-color: #0460a4; color: #fff; text-align: center;">
 
 											<th>By Category</th>
 											<th>Open</th>
 											<th>Resolved</th>
 											<th>Closed</th>
-											<th>Total</th>
+											
 
+										</tr>
+										
+										<tr>
+										<td>Home Theaters</td>
+										<td>5</td>
+										<td>2</td>
+										<td>3</td>
+										</tr>
+										
+										
+										<tr>
+										<td>PA Audios</td>
+										<td>9</td>
+										<td>4</td>
+										<td>5</td>
+										
+										</tr>
+										
+										
+										<tr>
+										<td>Projectors</td>
+										<td>8</td>
+										<td>7</td>
+										<td>1</td>
+									
 										</tr>
 									</thead>
 
@@ -336,17 +192,39 @@
 							 <security:authorize access="hasRole('ROLE_ADMIN')">
 							<div class="table-responsive">
 								<table class="table table-bordered priority prioritybg"
-									style="border: 1px solid #ffb902;" id="deptTable">
+									style="border: 1px solid #0460a4;" id="deptTable">
 									<thead>
 										<tr
-											style="background-color: #ffb902; color: #fff; text-align: center;">
+											style="background-color: #0460a4; color: #fff; text-align: center;">
 
-											<th>Department Name</th>
+											<th>Branch Name</th>
 											<th>Open</th>
 											<th>Closed</th>
 											<th>Balanced</th>
 
 										</tr>
+										
+										<tr>
+										<td>Branch1</td>
+										<td>3</td>
+										<td>1</td>
+										<td>2</td>
+										</tr>
+										
+										<tr>
+										<td>Branch2</td>
+										<td>23</td>
+										<td>19</td>
+										<td>4</td>
+										</tr>
+										
+										<tr>
+										<td>Branch3</td>
+										<td>55</td>
+										<td>29</td>
+										<td>26</td>
+										</tr>
+										
 									</thead>
 
 									<tbody>
@@ -392,6 +270,78 @@
 														<th>Balanced</th>
 
 													</tr>
+													<tr>
+														<td>0-1</td>
+														<td>1</td>
+														<td>0</td>
+														<td>1</td>
+
+													</tr>
+													
+													<tr>
+														<td>1-2</td>
+														<td>1</td>
+														<td>0</td>
+														<td>1</td>
+
+													</tr>
+													
+													<tr>
+														<td>2-3</td>
+														<td>1</td>
+														<td>0</td>
+														<td>1</td>
+
+													</tr>
+													
+													<tr>
+														<td>3-7</td>
+														<td>1</td>
+														<td>0</td>
+														<td>1</td>
+
+													</tr>
+													
+													<tr>
+														<td>7-30</td>
+														<td>1</td>
+														<td>0</td>
+														<td>1</td>
+
+													</tr>
+													
+													<tr>
+														<td>30-60</td>
+														<td>1</td>
+														<td>0</td>
+														<td>1</td>
+
+													</tr>
+													
+													<tr>
+														<td>60-90</td>
+														<td>1</td>
+														<td>0</td>
+														<td>1</td>
+
+													</tr>
+													
+													<tr>
+														<td>90-180</td>
+														<td>1</td>
+														<td>0</td>
+														<td>1</td>
+
+													</tr>
+													
+													<tr>
+														<td>180-365</td>
+														<td>1</td>
+														<td>0</td>
+														<td>1</td>
+
+													</tr>
+													
 													<c:forEach var="issue" items="${gapAndCount}">
 
 														<tr class="my-buglist-bug ">
@@ -917,4 +867,4 @@
 		
 	
 
-</script> --%>
+</script> 

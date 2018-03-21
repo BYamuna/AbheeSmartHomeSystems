@@ -6,6 +6,7 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.velocity.runtime.directive.Break;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,9 +57,11 @@ public class AbheeCustomerRestController {
 	public HashMap<String, String>  SaveAbheeCustomer( @RequestBody User user) {
 		
 		String code =null;
+		String regSuccessMsg =user.getFirstname()+" "+user.getLastname()+",  Successfully registered with ABhee Smart Homes. \n You can login using  \n UserId:  "+user.getMobilenumber()+" or "+user.getEmail()+"\n password: "+user.getPassword();
 
 		try {
 			userService.saveUser(user);
+			sendSMS.sendSMS(regSuccessMsg,user.getMobilenumber());
 			code = "OK";
 		} catch (IOException e) {
 			code="NOT_FOUND";
@@ -107,21 +110,47 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	public HashMap<String, String>  testing2( @RequestBody User user) {
 		
 		String custMobile=user.getMobilenumber();
+		
+		String custemail=user.getEmail();
 		Random random = new Random();
 		String  otpnumber = String.format("%04d", random.nextInt(10000));
 		
 		
 		String code =null;
+		
+         User custbean =userService.checkCustomerExistOrNotbyMobile(custMobile);
+         User custbeanemail =userService.checkCustomerExistOrNotbyEmail(custemail);
+		
+		if(custbean != null)
+		{
+			code ="already exists Mobile";
+		}
+		else if(custbeanemail !=null)
+		{
+			
+				code  ="already exists Email";
+		}
+		else
+		{
 		try {
 			String status = sendSMS.sendSMS(otpnumber,custMobile);
 			if(status.equals("OK")){
 				code = "OK";
+				OTPDetails oTPDetails =new OTPDetails();  
+				
+				oTPDetails.setMobileno(custMobile);
+				oTPDetails.setOTPnumber(otpnumber);
+				
+				oTPDetailsDao.saveOTPdetails(oTPDetails);
+				
+				
 			}else{
 				code="NOT_FOUND";
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
 		}
 		
 		HashMap<String,String> hm =new HashMap<String,String>();

@@ -249,6 +249,13 @@ color: inherit !important;
 	.task {
 	color:  #1218e4 !important;
 	}
+	.register {
+	color: #d21010 !important;
+	}
+	.cloud {
+	color: #85c744 !important;
+	}
+
 </style>
 <script type="text/javascript">
 	var isClick = 'No';
@@ -486,7 +493,8 @@ function getHeadersCounts(){
               --%>	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users emp"></i> <span>Employees</span></a></li>
               </security:authorize>
               <li class="task"><a href="${baseurl }/task"><i class="fa fa-tasks task"></i> <span>Task</span></a></li>
-               <li class="abheecust"><a href="${baseurl }/custRegistration"><i class="fa fa-tasks task"></i> <span>Customer Registration</span></a></li>
+               <li class="abheecust"><a href="${baseurl }/custRegistration"><i class="fa fa-registered register"></i> <span>Customer Registration</span></a></li>
+               <li class=""><a href=""><i class="fa fa-cloud cloud cld"></i><span>Customer Dash board</span></a></li>
 			</ul>
 		</div>
     </nav>
@@ -499,8 +507,8 @@ function getHeadersCounts(){
 					<h1 id="pageName">Branch Master</h1>
 				</div>
 				<div class="btn-toolbar pull-right">
-		                    <a href="#" class="btn btn-danger "><span id="unseentasks"> </span><br>Unread Tasks</a>
-		                    <a href="#" class="btn btn-warning"><span id="reopentaskscount"></span><br>Reopen Tasks</a>
+		                    <a href="#" class="btn btn-danger "><span id="unseentasks">5</span><br>Today Requests</a>
+		                    <a href="#" class="btn btn-warning"><span id="reopentaskscount">10</span><br>Balance Tasks</a>
 		                    <!-- <a href="#" class="btn btn-info"><span id="totalGas1">27956</span><br>Gas in Kgs</a> -->
 		                </div>
 	        </div>
