@@ -396,6 +396,19 @@ public class UserDao {
 		return usersList.get(0);
 	}
 
+	public User checkuserExistOrNot(User user) {
+		
+		String hql =" from User  where (email='"+user.getUsername()+"' or mobilenumber ='"+user.getUsername()+"') and password='"+user.getPassword()+"'";
+		Query query =em.createQuery(hql);
+		
+		List<User>usersList =query.getResultList();
+		if(usersList.isEmpty())
+               return null;
+               else
+		return usersList.get(0);
+		
+	}
+
 
 
 

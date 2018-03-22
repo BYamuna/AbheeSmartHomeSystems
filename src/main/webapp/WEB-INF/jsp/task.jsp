@@ -1,6 +1,4 @@
-to be implemented
-
-<%-- <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
@@ -15,7 +13,7 @@ to be implemented
 		<li><a href="dashBoard">Home</a></li>
 		<li>Task Master</li>
 	</ol>
-	<security:authorize access="hasRole('ROLE_MASTERADMIN')">
+	<%-- <security:authorize access="hasRole('ROLE_MASTERADMIN')">
 	                       <div class="clearfix"></div><br>
 	                       <form>
 	                        <div class="row">
@@ -41,7 +39,7 @@ to be implemented
                     		</div>
                     		</div>
                     		</form>
-                    		</security:authorize>
+                    		</security:authorize> --%>
                     		<br>
 	<div class="clearfix"></div>
 	<div class="container">
@@ -926,4 +924,4 @@ $(".cancel2").click(function()
 
 $("#pageName").text("Task Master");
 $(".task").addClass("active"); 
-</script> --%>
+</script>

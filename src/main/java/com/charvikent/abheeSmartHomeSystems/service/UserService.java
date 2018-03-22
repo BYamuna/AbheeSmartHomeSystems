@@ -292,5 +292,10 @@ public class UserService {
 		return userDao.checkCustomerExistOrNotByEmail(custMobile);
 	}
 
+	public User checkuserExistOrNot(User user) {
+		return userDao.checkuserExistOrNot(user);
+		
+	}
+
 
 }

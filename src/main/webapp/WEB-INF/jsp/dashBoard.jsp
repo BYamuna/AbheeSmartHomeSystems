@@ -25,6 +25,9 @@
 .btn-toolbar {
 	margin-top:5px;
 }
+.panel-heading {
+	background:#cccccc;
+}
 </style>
 
 
@@ -51,7 +54,7 @@
 		<div class="page-content container" style="background-color: #fff;">
 			<div class="col-md-12"
 				style="background-color: white !important; padding-top: 15PX;">
-				<div class="panel panel-primary">
+				<div class="panel">
 					<div class="panel-heading">
 						<h4>Dashboard</h4>
 						<div class="options">

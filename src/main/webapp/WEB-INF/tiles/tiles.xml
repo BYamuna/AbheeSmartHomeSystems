@@ -118,6 +118,10 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/custRegistration.jsp" />
 	</definition>
 	
+	<definition name="customerDashBoard" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/customerDashBoard.jsp" />
+	</definition>
+	
 	
 	
 		

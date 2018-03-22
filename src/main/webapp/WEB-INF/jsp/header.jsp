@@ -349,7 +349,7 @@ function getHeadersCounts(){
 		</div>
 
 
-    <header class="navbar navbar-inverse navbar-fixed-top" role="banner" style="background:#ffb902;">
+    <header class="navbar navbar-inverse navbar-fixed-top" role="banner" style="background:#cccccc;">
         <div class="navbar-header pull-left">
             <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/klogo.png"  style ="width:auto;height:68px;" class="img-responsive"></a>
             <div class="clearfix"></div>
@@ -358,7 +358,7 @@ function getHeadersCounts(){
 	        <ul class="nav navbar-nav pull-right toolbar"><li style="float:left;">
             <div style="box-shadow:none;" class="navbar">
   <div style="border-left:none; margin-right:10px;" class="dropdown">
-    <diV style="color:#ffffff; background:#ffb902; font-size:25px; margin-top:10px; margin-right:10px;" class="dropbtn"">    
+    <diV style="color:#ffffff; background:#cccccc; font-size:25px; margin-top:10px; margin-right:10px;" class="dropbtn"">    
 
 
     <i class="fa fa-list-alt"></i><!-- <span class="badge">5</span> -->
@@ -399,7 +399,7 @@ function getHeadersCounts(){
             <li style="float:left;">
             <div style="box-shadow:none; margin-right:10px;" class="navbar">
   <div style="border-left:none;" class="dropdown">
-    <diV style="color:#ffffff; background:#ffb902; font-size:25px; margin-top:10px;" class="dropbtn"">
+    <diV style="color:#ffffff; background:#cccccc; font-size:25px; margin-top:10px;" class="dropbtn"">
 
 
       <i class="fa fa-bell-o"></i><!-- <span class="badge">5</span> -->
@@ -494,7 +494,7 @@ function getHeadersCounts(){
               </security:authorize>
               <li class="task"><a href="${baseurl }/task"><i class="fa fa-tasks task"></i> <span>Task</span></a></li>
                <li class="abheecust"><a href="${baseurl }/custRegistration"><i class="fa fa-registered register"></i> <span>Customer Registration</span></a></li>
-               <li class=""><a href=""><i class="fa fa-cloud cloud cld"></i><span>Customer Dash board</span></a></li>
+               <li class="custDash"><a href="${baseurl }/customerDashBoard"><i class="fa fa-cloud cloud cld"></i><span>MyView</span></a></li>
 			</ul>
 		</div>
     </nav>

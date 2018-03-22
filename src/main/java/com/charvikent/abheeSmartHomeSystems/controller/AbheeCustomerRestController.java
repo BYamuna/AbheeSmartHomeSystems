@@ -109,7 +109,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	
 	
 	@RequestMapping(value="/requestsms2", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
-	public HashMap<String, String>  testing2( @RequestBody User user) {
+	public HashMap<String, String> VerifyingAndSendOTP( @RequestBody User user) {
 		
 		String custMobile=user.getMobilenumber();
 		
@@ -166,6 +166,32 @@ HashMap<String,String> hm =new HashMap<String,String>();
 		
 
 		
+	}
+	
+	
+	@RequestMapping(value="/logincredentials", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public HashMap<String, String>  checkingLogincredentials( @RequestBody User user) {
+		
+		String code =null;
+		String regSuccessMsg =user.getFirstname()+" "+user.getLastname()+",  Successfully registered with ABhee Smart Homes. \n You can login using  \n UserId:  "+user.getMobilenumber()+" or "+user.getEmail()+"\n password: "+user.getPassword();
+
+		
+			User userBean =userService.checkuserExistOrNot(user);
+			
+			
+			if(null != userBean)
+			{
+				code = "OK";
+			}
+			else
+				code="NOT_FOUND";
+		
+			System.out.println("rest call user status:  "+code);
+		
+HashMap<String,String> hm =new HashMap<String,String>();
+		
+		hm.put("status", code);
+		return hm;
 	}
 	
 	

@@ -112,10 +112,18 @@ public class AbheeCustRegistrationController
 		
 	}
 	
-	@RequestMapping(value = "/task", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/task", method = RequestMethod.GET)
 	public String showtaskPage(@Validated @ModelAttribute Model model,HttpServletRequest request) throws IOException 
 	{
 		return "task";
+		
+	}*/
+	
+	
+	@RequestMapping(value = "/customerDashBoard", method = RequestMethod.GET)
+	public String showCustomerdashBoard(Model model) throws IOException 
+	{
+		return "customerDashBoard";
 		
 	}
 	

@@ -2,7 +2,9 @@ package com.charvikent.abheeSmartHomeSystems.dao;
 
 
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -72,5 +74,24 @@ public class CategoryDao {
 	public List<Category> getAllInActiveList() {
 		// TODO Auto-generated method stub
 		return entityManager.createQuery("  from Category where status='0'").getResultList();
+	}
+	
+	
+	public Map<Integer, String> getCategorymap()
+	{
+		Map<Integer, String> rolesMap = new LinkedHashMap<Integer, String>();
+		try
+		{
+		List<Category> rolesList= getCategoryNames();
+		for(Category bean: rolesList){
+			rolesMap.put(bean.getId(), bean.getCategory());
+		}
+				
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+		return rolesMap;
+				
+		
 	}
 }
