@@ -302,7 +302,7 @@ public class UserDao {
 	{
 		//List<String> list= em.createNativeQuery("SELECT d.name FROM  kpusers u,kpdesignation d,kpmultiroles m  where u.designation=d.id  and k.username=:Custname").setParameter("Custname", Username).getResultList();
 		//List<String> list= em.createNativeQuery("select m.desigrole from kpusers u,kpdesignation d,kpmultiroles m  where u.designation=d.id and m.designationid=u.designation and u.username =:Custname").setParameter("Custname", Username).getResultList();
-		List<String> list= em.createNativeQuery("select m.desigrole from abheeusers u,kpmultiroles m  where  m.designationid=u.designation and (u.email =:Custname or u.mobilenumber =:Custname)").setParameter("Custname", Username).getResultList();
+		List<String> list= em.createNativeQuery("select m.desigrole from abheeusers u,abheemultiroles m  where  m.designationid=u.designation and (u.email =:Custname or u.mobilenumber =:Custname)").setParameter("Custname", Username).getResultList();
 
 
 		System.out.println(list);
