@@ -34,7 +34,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 userService.setLoginRecord(objuserBean.getId(),"login");
 		
-
+            if(objuserBean.getDesignation().equals("9"))
+            	response.sendRedirect("customerDashBoard");
+            else
 		response.sendRedirect("dashBoard");
 	}
 

@@ -122,7 +122,12 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/customerDashBoard.jsp" />
 	</definition>
 	
-	
+	<definition name="company" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/company.jsp" />
+	</definition>
+	<definition name="product" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/product.jsp" />
+	</definition>
 	
 		
 

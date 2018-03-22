@@ -154,8 +154,8 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Task DeadLine <span class="impColor">*</span></label>
 									<div class="col-md-6">
-								    	<form:input type="datetime-local" path="taskdeadline"  class="form-control validate"   />
-								    <form:input  path="taskdeadline"  class="form-control validate"    />
+								    	<form:input type="text" path="taskdeadline"  class="form-control validate"   />
+								  
 								    </div>
                     			</div>
                     		</div>

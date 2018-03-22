@@ -255,7 +255,18 @@ color: inherit !important;
 	.cloud {
 	color: #85c744 !important;
 	}
-
+	.tag {
+	color: #e28b0a !important;
+	}
+	.brch {
+	color: #85c744 !important;
+	}
+	.company {
+	color: #0f9fea !important;
+	}
+    .prdct {
+    color: #dab729 !important;
+    }
 </style>
 <script type="text/javascript">
 	var isClick = 'No';
@@ -440,8 +451,9 @@ function getHeadersCounts(){
 </div>
                 </li>
 	             <%-- <li style="float:left;margin-right:35px"><a href="${baseurl}/task" style="color:#f3f1f1;">Create Task</a></li> --%>
+	             <security:authorize access="hasRole('ROLE_ADMIN')">
 	            <li style="float:left; margin-right:5px; margin-top:5px;"><a href="${baseurl}/severity?id=Critical" style="color:#ffffff;">Create Task</a></li>
-	   
+	           </security:authorize>
 	            <li style=" margin-top:5px;" class="dropdown">
 	                <a href="#" class="dropdown-toggle username" data-toggle="dropdown" style="color: #ffffff;"><span class="hidden-xs">Master Admin <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
 	                <ul class="dropdown-menu userinfo arrow">
@@ -481,20 +493,26 @@ function getHeadersCounts(){
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="horizontal-navbar">
             <ul class="nav navbar-nav">
             
-            <li class="dashBoard"><a href="${baseurl }/dashBoard"><i class="fa fa-dashboard dash"></i> <span>Home</span></a></li>
-             <security:authorize access="hasRole('ROLE_MASTERADMIN')">
-              <li class="branch"><a href="${baseurl }/abBranch"><i class="fa fa-building org"></i><span>Branch</span></a></li>
-            </security:authorize>
+             
             <security:authorize access="hasRole('ROLE_ADMIN')">
-              <li class="cate"><a href="${baseurl }/cate"><i class="fa fa-black-tie cate"></i> <span>Category</span></a></li>
+            <li class="dashBoard"><a href="${baseurl }/dashBoard"><i class="fa fa-dashboard dash"></i> <span>Home</span></a></li>
+              <li class="cate"><a href="${baseurl }/cate"><i class="fa fa-tags tag"></i> <span>Category</span></a></li>
+              <security:authorize access="hasRole('ROLE_MASTERADMIN')">
+              <li class="branch"><a href="${baseurl }/abBranch"><i class="fa fa-asterisk brch"></i><span>Branch</span></a></li>
+            </security:authorize>
             <%-- <li class="dept"><a href="${baseurl }/dept"><i class="fa fa-american-sign-language-interpreting depart"></i> <span>Department</span></a></li>
               <li class="desig"><a href="${baseurl }/desig"><i class="fa fa-plane"></i> <span>Designation</span></a></li>
              <li class="orgDept"><a href="${baseurl }/orgDept"><i class="fa fa-sitemap heir"></i> <span>Hierarchical</span></a></li>
-              --%>	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users emp"></i> <span>Employees</span></a></li>
-              </security:authorize>
+             --%><li class="company"><a href="${baseurl }/company"><i class="fa  fa-building company"></i> <span>Company</span></a></li>
+                 <li class="product"><a href="${baseurl }/product"><i class="fa fa-product-hunt prdct"></i> <span>Product</span></a></li>
               <li class="task"><a href="${baseurl }/task"><i class="fa fa-tasks task"></i> <span>Task</span></a></li>
-               <li class="abheecust"><a href="${baseurl }/custRegistration"><i class="fa fa-registered register"></i> <span>Customer Registration</span></a></li>
+               <li class="abheecust"><a href="${baseurl }/custRegistration"><i class="fa fa-registered register"></i> <span>Customers</span></a></li>
+              	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users emp"></i> <span>Employees</span></a></li>
+                </security:authorize><i class=""></i>
+              
+               <security:authorize access="hasRole('ROLE_CUSTOMER')">
                <li class="custDash"><a href="${baseurl }/customerDashBoard"><i class="fa fa-cloud cloud cld"></i><span>MyView</span></a></li>
+			</security:authorize>
 			</ul>
 		</div>
     </nav>
@@ -506,10 +524,13 @@ function getHeadersCounts(){
 	        	<div class="col-md-6">
 					<h1 id="pageName">Branch Master</h1>
 				</div>
+				
+				 <security:authorize access="hasRole('ROLE_ADMIN')">
 				<div class="btn-toolbar pull-right">
-		                    <a href="#" class="btn btn-danger "><span id="unseentasks">5</span><br>Today Requests</a>
-		                    <a href="#" class="btn btn-warning"><span id="reopentaskscount">10</span><br>Balance Tasks</a>
+		                    <a href="#" class="btn btn-danger "><span id="unseentasks">5</span><br>Resolved Tasks</a>
+		                    <a href="#" class="btn btn-warning"><span id="reopentaskscount">10</span><br>UnClosed Tasks</a>
 		                    <!-- <a href="#" class="btn btn-info"><span id="totalGas1">27956</span><br>Gas in Kgs</a> -->
 		                </div>
+		                </security:authorize>
 	        </div>
 	        </div>

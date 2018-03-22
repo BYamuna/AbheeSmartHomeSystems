@@ -86,12 +86,7 @@
 									<td>9</td>
 									</tr>
 									
-									<tr>
-									<td>Assigned To Me</td>
-									<td>2</td>
-									<td>6</td>
-									<td>5</td>
-									</tr>
+									
 									
 									<tr>
 									<td>Monitered By Me</td>
@@ -208,21 +203,21 @@
 										</tr>
 										
 										<tr>
-										<td>Branch1</td>
+										<td>Guntur</td>
 										<td>3</td>
 										<td>1</td>
 										<td>2</td>
 										</tr>
 										
 										<tr>
-										<td>Branch2</td>
+										<td>Vijayawada</td>
 										<td>23</td>
 										<td>19</td>
 										<td>4</td>
 										</tr>
 										
 										<tr>
-										<td>Branch3</td>
+										<td>Vizag</td>
 										<td>55</td>
 										<td>29</td>
 										<td>26</td>

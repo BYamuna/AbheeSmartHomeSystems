@@ -119,7 +119,7 @@
 		</form>
 	</div>
 	
-	<p class="anchor"><a href="#" data-toggle="modal" data-target="#register-info" class="tag">Click here</a> for registering your self</p>
+	<p class="anchor"> New Customer Registration <a href="#" data-toggle="modal" data-target="#register-info" class="tag">Click here</a></p>
 </div>
  <div  class="modal fade" id="register-info" role="dialog">
     <div class="modal-dialog">
@@ -198,7 +198,7 @@
 							
 							<div class="form-group">
 								<label for="user_name">Enter OTP :</label> 
-								<input	type="password" name="cotp" id="cotp" onkeydown="removeBorder(this.id)" class="form-control" placeholder="Enter Email"/>
+								<input	type="password" name="cotp" id="cotp" onkeydown="removeBorder(this.id)" class="form-control" placeholder="Enter OTP"/>
 								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
 							</div>
 							
@@ -392,8 +392,8 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		 cotp=$('#cotp').val();
 		 cpassword =$('#cpassword').val();
 		
-	alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
-	alert(cotp+"-->"+cpassword);
+	//alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
+	//alert(cotp+"-->"+cpassword);
 	
 		
 		$.ajax({
@@ -405,7 +405,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 	             $.blockUI({ message: 'Please wait' });
 	          }, 
 			success : function(data) {
-				alert(data);
+				//alert(data);
 				
 				if(data ==='true')
 				{

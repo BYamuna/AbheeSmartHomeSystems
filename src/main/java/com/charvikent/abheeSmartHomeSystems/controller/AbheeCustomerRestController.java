@@ -60,6 +60,7 @@ public class AbheeCustomerRestController {
 		String regSuccessMsg =user.getFirstname()+" "+user.getLastname()+",  Successfully registered with ABhee Smart Homes. \n You can login using  \n UserId:  "+user.getMobilenumber()+" or "+user.getEmail()+"\n password: "+user.getPassword();
 
 		try {
+			user.setDesignation("9");
 			userService.saveUser(user);
 			sendSMS.sendSMS(regSuccessMsg,user.getMobilenumber());
 			code = "OK";
@@ -181,7 +182,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 			
 			if(null != userBean)
 			{
-				code = "OK";
+				code = userBean.getFirstname()+" "+userBean.getLastname();
 			}
 			else
 				code="NOT_FOUND";

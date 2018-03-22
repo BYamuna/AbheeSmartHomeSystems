@@ -186,7 +186,7 @@ public class UserService {
 		Map<Integer, String>userMapForMaster = new LinkedHashMap<Integer, String>();
 		
 		List<User> rolesList= userDao.getUserNames();
-			if(authorities.contains(new SimpleGrantedAuthority("ROLE_MASTERADMIN")))
+			if(authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")))
 			{
 		for(User bean: rolesList){
 			if(bean.getId()!=(objuserBean.getId()))
@@ -196,23 +196,9 @@ public class UserService {
 		
 
 	} 
-		return userMapForMaster;
 		}
-		else
-		{
-			for(User bean: rolesList){
-				if(bean.getBranchId().equals(objuserBean.getBranchId()))
-				{
-				if(bean.getId()!=(objuserBean.getId()))
-				{
-					userMapForMaster.put(bean.getId(), bean.getUsername());
-				}
-				}
-			}
-			
-		
 			return userMapForMaster;
-		}
+		
 
 	}
 	

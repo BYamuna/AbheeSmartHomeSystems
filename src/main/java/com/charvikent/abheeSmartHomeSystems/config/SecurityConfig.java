@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	  .antMatchers("/dashBoard").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 	  .antMatchers("/task").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 	  .antMatchers("/viewTicket").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')").antMatchers("/task").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+	  .antMatchers("/customerDashBoard").access("hasRole('ROLE_CUSTOMER')")
 	  .anyRequest().permitAll()  //dashboard,task
   .and()
     .formLogin().loginPage("/login")

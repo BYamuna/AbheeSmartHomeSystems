@@ -226,8 +226,10 @@ public class UserDao {
 	@SuppressWarnings("unchecked")
 	public List<User> getUserNames()
 	{
+		
+		String hql ="from User where designation <>'9'";
 
-		return em.createQuery("SELECT user FROM User user").getResultList();
+		return em.createQuery(hql).getResultList();
 
 	}
 
@@ -398,7 +400,7 @@ public class UserDao {
 
 	public User checkuserExistOrNot(User user) {
 		
-		String hql =" from User  where (email='"+user.getUsername()+"' or mobilenumber ='"+user.getUsername()+"') and password='"+user.getPassword()+"'";
+		String hql =" from User  where (email='"+user.getUsername()+"' or mobilenumber ='"+user.getUsername()+"') and password='"+user.getPassword()+"' and designation='9'";
 		Query query =em.createQuery(hql);
 		
 		List<User>usersList =query.getResultList();
