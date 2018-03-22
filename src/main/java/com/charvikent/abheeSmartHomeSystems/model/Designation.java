@@ -9,8 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
-@Entity
-@Table(name="abheedesignation")
+//@Entity
+//@Table(name="abheedesignation")
 public class Designation {
 	
 	@Id

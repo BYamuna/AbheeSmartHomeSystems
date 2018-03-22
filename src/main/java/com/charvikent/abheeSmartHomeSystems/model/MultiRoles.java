@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="kpmultiroles")
+@Table(name="abheemultiroles")
 public class MultiRoles {
 
 	
