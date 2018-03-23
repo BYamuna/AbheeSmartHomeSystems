@@ -47,8 +47,8 @@ public class AbheeCustRegistrationController
 	@RequestMapping("/custRegistration")	
 	public String AbheeCustRegistrationPage(Model model,HttpServletRequest request)
 	{
-	  model.addAttribute("custReg",new AbheeCustRegistration());
-	  List<AbheeCustRegistration> listOrderBeans = null;
+	  model.addAttribute("custReg",new User());
+	  List<User> listOrderBeans = null;
 	  ObjectMapper objectMapper = null;
 	  String sJson = null;
 	  try 

@@ -48,7 +48,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="name" class="form-control validate" placeholder="Enter name"/>
+										<form:input path="firstname" class="form-control validate" placeholder="Enter name"/>
 									</div>
 								</div>
 								
@@ -57,7 +57,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Surname<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="surname" class="form-control validate" placeholder="Enter Surname"/>
+										<form:input path="lastname" class="form-control validate" placeholder="Enter Surname"/>
 									</div>
 								</div>
 								
@@ -73,7 +73,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobileno<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:input path="mobileno" class="form-control validate onlyNumbers" placeholder="Enter Mobileno"/>
+										<form:input path="mobilenumber" class="form-control validate onlyNumbers" placeholder="Enter Mobileno"/>
 									</div>
 								</div>
 								</div>
@@ -213,7 +213,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th> Cust ID</th><th> Name</th><th>Surname</th><th>Email</th><th>MobileNo</th><th>OTPstatus</th><th style="text-align: center;">Options</th><th></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th> Cust ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>MobileNo</th><th style="text-align: center;">Options</th><th></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -227,15 +227,11 @@ function displayTable(listOrders) {
 		var edit = "<a class='edit editIt' onclick='editEmployee("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr class='"+ cls +"'>"
-			 + "<td title='"+orderObj.custID+"'>"+ orderObj.custID + "</td>" 
-			+ "<td title='"+orderObj.name+"'>"+ orderObj.name + "</td>"
-			+ "<td title='"+orderObj.surname+"'>"+ orderObj.surname + "</td>"
+			 + "<td title='"+orderObj.userId+"'>"+ orderObj.userId + "</td>" 
+			+ "<td title='"+orderObj.firstname+"'>"+ orderObj.firstname + "</td>"
+			+ "<td title='"+orderObj.lastname+"'>"+ orderObj.lastname + "</td>"
 			+ "<td title='"+orderObj.email+"'>"+ orderObj.email + "</td>"
-			+ "<td title='"+orderObj.mobileno+"'>"+ orderObj.mobileno + "</td>"
-			+ "<td title='"+orderObj.OTPstatus+"'>"+ orderObj.OTPstatus + "</td>"
-			/* + "<td title='"+orderObj.departmentName+"'>"+ orderObj.departmentName + "</td>"
-			+ "<td title='"+orderObj.designationName+"'>"+ orderObj.designationName + "</td>"
-			+ "<td title='"+orderObj.mobilenumber+"'>"+ orderObj.mobilenumber + "</td>" */
+			+ "<td title='"+orderObj.mobilenumber+"'>"+ orderObj.mobilenumber + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "<td ><a style='cursor:pointer' onclick='getPasswordModal("+ orderObj.id +")'>Change Password</a></td>" 
 			+ "</tr>";
@@ -427,5 +423,5 @@ function inactiveData() {
 }
    */
  $("#pageName").text("Customer Registration");
-$(".Customer Registration").addClass("active"); 
+$(".abheecust").addClass("active"); 
 </script>
