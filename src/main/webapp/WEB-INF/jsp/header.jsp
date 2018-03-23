@@ -362,7 +362,7 @@ function getHeadersCounts(){
 
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner" style="background:#cccccc;">
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/klogo.png"  style ="width:auto;height:68px;" class="img-responsive"></a>
+            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/klogo.png"  style ="width:310px; height:68px;" class="img-responsive"></a>
             <div class="clearfix"></div>
         </div>
 		<div class="masters">

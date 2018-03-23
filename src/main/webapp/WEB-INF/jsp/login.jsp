@@ -76,7 +76,7 @@
 
 <body class="focusedform">
 <div class="verticalcenter">
-<div><img src="assets/img/klogo.png" style="width:350px;" class="img-responsive"></div>
+<div><img src="assets/img/Klogo2.png" style="width:350px;" class="img-responsive"></div>
 <!-- 	<h1 align="center">KHAIBAR GAS</h1> -->
 	<div class="panel panel-primary">
 		<form  action=login class="form-horizontal" method="POST"  style="margin-bottom: 0px !important;">
@@ -215,7 +215,7 @@
   </div> 
 
 <script type='text/javascript' src='js/customValidation.js'></script> 
-<script type='text/javascript' src="/js/jquery.blockUI.min.js" ></script>
+<script type='text/javascript' src="js/jquery.blockUI.min.js" ></script>
 </body>
 <script type="text/javascript">
 $('#cmobile').blur(function() {

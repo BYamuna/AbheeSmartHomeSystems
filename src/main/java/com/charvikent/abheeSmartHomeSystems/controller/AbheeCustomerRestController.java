@@ -6,7 +6,6 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.velocity.runtime.directive.Break;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,7 +62,7 @@ public class AbheeCustomerRestController {
 			user.setDesignation("9");
 			userService.saveUser(user);
 			sendSMS.sendSMS(regSuccessMsg,user.getMobilenumber());
-			code = "OK";
+			code = user.getFirstname()+" "+user.getLastname();
 		} catch (IOException e) {
 			code="NOT_FOUND";
 			e.printStackTrace();
