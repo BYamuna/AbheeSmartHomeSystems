@@ -340,8 +340,8 @@ public class UserDao {
 
 
 		try {
-			List<Object[]> rows = em.createQuery("select  u.id,u.username,u.mobilenumber,u.email,u.reportto,u2.username,dep.name,d.name,"
-					+ "u.firstname,u.lastname,u.reportto,u.designation ,u.department , u.enabled as status from User u,User u2,Designation d,Department dep where u.enabled='0' and u.department=dep.id and u.designation= d.id and  u.reportto=u2.id").getResultList();
+			List<Object[]> rows = em.createQuery("select  u.id,u.username,u.mobilenumber,u.email,u.reportto,u2.username,d.name,"
+					+ "u.firstname,u.lastname,u.reportto,u.designation ,u.department , u.enabled as status from User u,User u2,Designation d where u.enabled='0'  and u.designation= d.id and  u.reportto=u2.id").getResultList();
 			for (Object[] row : rows) {
 				User users =new User();
 
@@ -353,14 +353,14 @@ public class UserDao {
 				users.setReportto((String) row[4]);
 				users.setReportName((String) row[5]);
 				//users.setEnabled((String) row[6]);
-				users.setDepartmentName((String) row[6]);
-				users.setDesignationName((String) row[7]);
-				users.setFirstname((String) row[8]);
-				users.setLastname((String) row[9]);
-				users.setReportId((String) row[10]);
-				users.setDesignation((String) row[11]);
-				users.setDepartment((String) row[12]);
-				users.setStatus((String) row[13]);
+				//users.setDepartmentName((String) row[6]);
+				users.setDesignationName((String) row[6]);
+				users.setFirstname((String) row[7]);
+				users.setLastname((String) row[8]);
+				users.setReportId((String) row[9]);
+				users.setDesignation((String) row[10]);
+				users.setDepartment((String) row[11]);
+				users.setStatus((String) row[12]);
 				listusers.add(users);
 
 			}

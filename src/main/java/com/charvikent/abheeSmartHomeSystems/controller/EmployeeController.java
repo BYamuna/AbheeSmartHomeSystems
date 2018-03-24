@@ -281,7 +281,7 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/inActiveEmp")
-	public @ResponseBody String getAllActiveOrInactiveOrgnizations(Department  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+	public @ResponseBody String getAllActiveOrInactiveOrgnizations(User  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		List<User> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
