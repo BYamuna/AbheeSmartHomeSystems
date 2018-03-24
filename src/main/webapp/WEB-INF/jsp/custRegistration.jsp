@@ -46,7 +46,7 @@
 	                  <form:hidden path="id"/>
 					<div class="col-md-6"><br>
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Name<span class="impColor">*</span></label>
+									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:input path="firstname" class="form-control validate" placeholder="Enter name"/>
 									</div>
@@ -55,7 +55,7 @@
 								</div>
 								<div class="col-md-6"><br>
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Surname<span class="impColor">*</span></label>
+									<label class="col-md-3 control-label no-padding-right">Last name<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:input path="lastname" class="form-control validate" placeholder="Enter Surname"/>
 									</div>
@@ -71,69 +71,12 @@
 								</div></div>
 								<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Mobileno<span class="impColor">*</span></label>
+									<label class="col-md-3 control-label no-padding-right">Mobile Number<span class="impColor">*</span></label>
 								<div class="col-md-6">
 										<form:input path="mobilenumber" class="form-control validate onlyNumbers" placeholder="Enter Mobileno"/>
 									</div>
 								</div>
 								</div>
-								
-								<%-- <div class="col-md-6">
-								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
-									<div class="col-md-6">
-										<form:input path="mobilenumber" class="form-control validate numericOnly" placeholder="Enter Mobile Number"/>
-									</div>
-								</div></div>
-								<div class="col-md-6">
-								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Email</label>
-									<div class="col-md-6">
-										<form:input path="email" class="form-control" placeholder="Enter Email"/>
-									</div>
-								</div></div>
-								<div class="col-md-6">
-								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Designation</label>
-									<div class="col-md-6">
-										<form:select path="designation" class="form-control " >
-											<form:option value="">-- Select Designation --</form:option>
-											<form:options items="${roles}"/>
-										</form:select>
-									</div>
-								</div></div>
-								<div class="col-md-6">
-								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Department<span class="impColor">*</span></label>
-									<div class="col-md-6">
-										<form:select path ="department" class="form-control validate" selected="selected" onfocus="removeBorder(this.id)">
-											<form:option value="">-- Select Department --</form:option>
-								     		<form:options  items="${departments}"/>
-										</form:select>
-									</div>
-								</div></div>
-								<div class="col-md-6">
-								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">ReportTo</label>
-									<div class="col-md-6">
-										<form:select path ="reportto" class="form-control" onfocus="removeBorder(this.id)">
-											<form:option value="">-- Select Report to --</form:option>
-								     		<form:options items="${reportto}"/>
-										</form:select>
-									</div>
-								</div></div>
-								 <security:authorize access="hasRole('ROLE_MASTERADMIN')">
-								<div class="col-md-6">
-								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Organization</label>
-									<div class="col-md-6">
-										<form:select path ="kpOrgId" class="form-control" onfocus="removeBorder(this.id)">
-											<form:option value="">-- Select Organization --</form:option>
-								     		<form:options items="${orgNames}"/>
-										</form:select>
-									</div>
-								</div></div>
-								</security:authorize> --%>
 						<div class="panel-footer">
 				      	<div class="row">
 				      		<div class="col-sm-12">
