@@ -1,5 +1,6 @@
 package com.charvikent.abheeSmartHomeSystems.dao;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -52,6 +53,7 @@ public class AbheeBranchDao {
 	public void updateDept1(AbheeBranch abheeBranch) {
 		AbheeBranch uo= entityManager.find(AbheeBranch.class,abheeBranch.getId());
 		uo.setName(abheeBranch.getName());
+		uo.setBranchhead(abheeBranch.getBranchhead());
 		entityManager.merge(uo);
 		
 	}
@@ -59,13 +61,14 @@ public class AbheeBranchDao {
 	
 	
 	public void updateAbheeBranch(AbheeBranch abheeBranch) {
-		String hql="update AbheeBranch set  description =:d, name =:n   where  id =:i";
+		String hql="update AbheeBranch set  description =:d, name =:n, branchhead =:bh   where  id =:i";
 		
 		Query query =entityManager.createQuery(hql); 
 		
 		query.setParameter("d", abheeBranch.getDescription());
 		query.setParameter("n", abheeBranch.getName());
 		query.setParameter("i", abheeBranch.getId());
+		query.setParameter("bh", abheeBranch.getBranchhead());
 		query.executeUpdate(); 
 		
 	}
@@ -144,9 +147,50 @@ public class AbheeBranchDao {
 				
 		
 	}
-	
-	
-	
-	
 
+	@SuppressWarnings("unchecked")
+	public Map<Integer, String> getBranchHeads() 
+	{
+		
+		String hql =" from User where designation='2'";
+		Query query =entityManager.createQuery(hql);  
+		 List<User> list= query.getResultList();
+		 
+		Map<Integer, String> abheeBranchHeadMap = new LinkedHashMap<Integer, String>();
+		for(User user:list)
+		 {
+			abheeBranchHeadMap .put(user.getId(), user.getUsername());
+			 
+			 
+		 } 
+		return abheeBranchHeadMap;
+	}
+	@SuppressWarnings("unchecked")
+	public List<AbheeBranch> getAllBranches() 
+	{
+		List<AbheeBranch> bheadlist =new ArrayList<AbheeBranch>();
+
+
+		try {
+			List<Object[]> rows = entityManager.createNativeQuery("select ab.id,ab.name,ab.description,ab.branchhead,u.username,ab.status from abheeusers u,  abhee_branch ab where   ab.branchhead=u.id and ab.status='1'").getResultList();
+			for (Object[] row : rows) {
+				AbheeBranch abheebranch=new AbheeBranch();
+
+				abheebranch.setId(Integer.parseInt(String.valueOf(row[0])));
+				abheebranch.setName((String) row[1]);
+				abheebranch.setDescription((String) row[2]);
+				abheebranch.setBranchhead((String) row[3]);
+				abheebranch.setBranchheadname((String) row[4]);
+				abheebranch.setStatus((String) row[5]);
+				
+				bheadlist.add(abheebranch);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return bheadlist ;
+		
+	}
 }

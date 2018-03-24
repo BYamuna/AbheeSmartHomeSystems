@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -25,6 +26,11 @@ public class AbheeBranch {
 	
 	private String status;
 	
+	private String branchhead;
+	
+	@Transient
+	private String branchheadname;
+	
 	@CreationTimestamp
 	protected Date createdTime ;
 
@@ -33,62 +39,90 @@ public class AbheeBranch {
 	
 	
 
-	public Date getCreatedTime() {
+	public Date getCreatedTime() 
+	{
 		return createdTime;
 	}
 
-	public void setCreatedTime(Date createdTime) {
+	public void setCreatedTime(Date createdTime) 
+	{
 		this.createdTime = createdTime;
 	}
 
-	public Date getUpdatedTime() {
+	public Date getUpdatedTime() 
+	{
 		return updatedTime;
 	}
 
-	public void setUpdatedTime(Date updatedTime) {
+	public void setUpdatedTime(Date updatedTime) 
+	{
 		this.updatedTime = updatedTime;
 	}
 
-	public Integer getId() {
+	public Integer getId() 
+	{
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Integer id) 
+	{
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getName() 
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name) 
+	{
 		this.name = name;
 	}
 
-	public String getDescription() {
+	public String getDescription() 
+	{
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(String description) 
+	{
 		this.description = description;
 	}
 
-	public String getStatus() {
+	public String getStatus() 
+	{
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(String status) 
+	{
 		this.status = status;
 	}
 	
-	
+	public String getBranchhead() 
+	{
+		return branchhead;
+	}
 
-	@Override
-	public String toString() {
-		return "Orgnization [id=" + id + ", name=" + name + ", description=" + description + ", status=" + status
-				+ ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
+	public void setBranchhead(String branchhead) 
+	{
+		this.branchhead = branchhead;
 	}
 
 	
 	
+	public String getBranchheadname() {
+		return branchheadname;
+	}
+
+	public void setBranchheadname(String branchheadname) {
+		this.branchheadname = branchheadname;
+	}
+
+	@Override
+	public String toString() 
+	{
+		return "AbheeBranch [id=" + id + ", name=" + name + ", description=" + description + ", status=" + status
+				+ ", branchhead=" + branchhead + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
+	}
 }

@@ -54,6 +54,17 @@
                     			</div>
                     		</div>
                     		<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Branch Head</label>
+									<div class="col-md-6">
+										<form:select path="branchhead" class="form-control " >
+											<form:option value="">-- Select BranchHead --</form:option>
+											<form:options items="${branchheads}"/>
+										</form:select>
+									</div>
+								</div>
+							</div>
+                    		<div class="col-md-6">
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Description <span class="impColor">*</span></label>
 									<div class="col-md-5">
@@ -98,7 +109,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Name</th><th>Description</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Name</th><th>Description</th><th>Branchhead</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -112,6 +123,7 @@ function displayTable(listOrders) {
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.name+"'>"+ orderObj.name + "</td>"
 			+ "<td title='"+orderObj.description+"'>"+ orderObj.description + "</td>"
+			+ "<td title='"+orderObj.branchheadname+"'>"+ orderObj.branchheadname + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
@@ -125,6 +137,7 @@ function editOrganization(id) {
 	$("#id").val(serviceUnitArray[id].id);
 	$("#name").val(serviceUnitArray[id].name);
 	$("#description").val(serviceUnitArray[id].description);
+	$("#branchhead").val(serviceUnitArray[id].branchhead);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 }

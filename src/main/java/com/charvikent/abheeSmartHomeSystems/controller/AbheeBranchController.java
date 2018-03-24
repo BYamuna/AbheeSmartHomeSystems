@@ -41,8 +41,10 @@ public class AbheeBranchController {
 		List<AbheeBranch> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
+		
+		model.addAttribute("branchheads",abheeBranchDao.getBranchHeads());
 		try {
-			listOrderBeans = abheeBranchDao.getAbheeBranchNames();
+			listOrderBeans = abheeBranchDao.getAllBranches();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -150,7 +152,7 @@ public class AbheeBranchController {
  				}
  			}
  				
-			listOrderBeans = abheeBranchDao.getAbheeBranchNames();
+			listOrderBeans = abheeBranchDao.getAllBranches();
 			 objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				
@@ -185,7 +187,7 @@ public class AbheeBranchController {
 			if(abheeBranch.getStatus().equals("0"))
 				listOrderBeans = abheeBranchDao.getInActiveList();
 				else
-					listOrderBeans = abheeBranchDao.getAbheeBranchNames();
+					listOrderBeans = abheeBranchDao.getAllBranches();
 					
 					
  				
