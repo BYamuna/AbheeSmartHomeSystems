@@ -362,7 +362,7 @@ function getHeadersCounts(){
 
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner" style="background:#cccccc;">
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/klogo.png"  style ="width:310px; height:68px;" class="img-responsive"></a>
+            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/klogo.png"  style ="width:280px; height:68px;" class="img-responsive"></a>
             <div class="clearfix"></div>
         </div>
 		<div class="masters">
@@ -494,21 +494,24 @@ function getHeadersCounts(){
             <ul class="nav navbar-nav">
             
              
-            <security:authorize access="hasRole('ROLE_ADMIN')">
+           
+              <security:authorize access="hasRole('ROLE_BRANCHHEAD')">
             <li class="dashBoard"><a href="${baseurl }/dashBoard"><i class="fa fa-dashboard dash"></i> <span>Home</span></a></li>
-              <li class="cate"><a href="${baseurl }/cate"><i class="fa fa-tags tag"></i> <span>Category</span></a></li>
+             </security:authorize>
+              <security:authorize access="hasRole('ROLE_ADMIN')">
+              <li class="cate"><a href="${baseurl }/cate"><i class="fa fa-tags tag"></i> <span>Product Category</span></a></li>
               <security:authorize access="hasRole('ROLE_MASTERADMIN')">
               <li class="branch"><a href="${baseurl }/abBranch"><i class="fa fa-asterisk brch"></i><span>Branch</span></a></li>
             </security:authorize>
-            <%-- <li class="dept"><a href="${baseurl }/dept"><i class="fa fa-american-sign-language-interpreting depart"></i> <span>Department</span></a></li>
-              <li class="desig"><a href="${baseurl }/desig"><i class="fa fa-plane"></i> <span>Designation</span></a></li>
-             <li class="orgDept"><a href="${baseurl }/orgDept"><i class="fa fa-sitemap heir"></i> <span>Hierarchical</span></a></li>
-             --%><li class="company"><a href="${baseurl }/company"><i class="fa  fa-building company"></i> <span>Company</span></a></li>
+             <li class="company"><a href="${baseurl }/company"><i class="fa  fa-building company"></i> <span>Product Company</span></a></li>
                  <li class="product"><a href="${baseurl }/product"><i class="fa fa-product-hunt prdct"></i> <span>Product</span></a></li>
+                 <li class="abheecust"><a href="${baseurl }/custRegistration"><i class="fa fa-registered register"></i> <span>Customers</span></a></li>
+                </security:authorize>
+               <security:authorize access="hasRole('ROLE_BRANCHHEAD')">
               <li class="task"><a href="${baseurl }/task"><i class="fa fa-tasks task"></i> <span>Task</span></a></li>
-               <li class="abheecust"><a href="${baseurl }/custRegistration"><i class="fa fa-registered register"></i> <span>Customers</span></a></li>
               	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users emp"></i> <span>Employees</span></a></li>
-                </security:authorize><i class=""></i>
+                </security:authorize>
+                
               
                <security:authorize access="hasRole('ROLE_CUSTOMER')">
                <li class="custDash"><a href="${baseurl }/customerDashBoard"><i class="fa fa-cloud cloud cld"></i><span>MyView</span></a></li>

@@ -59,11 +59,23 @@ public class UserService {
 		
 		Collection<? extends GrantedAuthority> authorities =authentication.getAuthorities();
 		
-		List<User> usersListForAdmin =new ArrayList<>();
+		List<User> usersList =new ArrayList<>();
 		List<User> usersListForMaster= userDao.getAllUsers();
 		
-		if(authorities.contains(new SimpleGrantedAuthority("ROLE_MASTERADMIN")))
-			   return usersListForMaster;
+		if(authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")))
+		{
+			for(User entry :usersListForMaster)
+			 {  
+				 
+					 if(entry.getId()!=(objuserBean.getId()))
+					 usersList.add(entry);
+				 
+			 }
+			
+			return usersList;
+			
+		}
+			   
 		 else 
 		 {
 			 
@@ -72,10 +84,10 @@ public class UserService {
 				 if(entry.getBranchId().equals(objuserBean.getBranchId()))
 				 {
 					 if(entry.getId()!=(objuserBean.getId()))
-					 usersListForAdmin.add(entry);
+					 usersList.add(entry);
 				 }
 			 }
-			 return usersListForAdmin;
+			 return usersList;
 		 }
 
 	}
@@ -213,7 +225,7 @@ public class UserService {
 		Map<Integer, String>userMapForMaster = new LinkedHashMap<Integer, String>();
 		
 		List<User> rolesList= userDao.getUserNames();
-			if(authorities.contains(new SimpleGrantedAuthority("ROLE_MASTERADMIN")))
+			if(authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")))
 			{
 		for(User bean: rolesList){
 				userMapForMaster.put(bean.getId(), bean.getUsername());

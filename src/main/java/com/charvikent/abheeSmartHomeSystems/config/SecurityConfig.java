@@ -36,15 +36,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
  @Override
  protected void configure(HttpSecurity http) throws Exception {
 	 http.authorizeRequests()
-	  .antMatchers("/dept").access("hasRole('ROLE_ADMIN')")
-	  .antMatchers("/kporg").access("hasRole('ROLE_MASTERADMIN')")
-	  .antMatchers("/desig").access("hasRole('ROLE_ADMIN')")
-	  .antMatchers("/orgDept").access("hasRole('ROLE_ADMIN')")
 	  .antMatchers("/cate").access("hasRole('ROLE_ADMIN')")
-	  .antMatchers("/employee").access("hasRole('ROLE_ADMIN')")
-	  .antMatchers("/dashBoard").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
-	  .antMatchers("/task").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
-	  .antMatchers("/viewTicket").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')").antMatchers("/task").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+	  .antMatchers("/employee").access("hasRole('ROLE_BRANCHHEAD')")
+	  .antMatchers("/dashBoard").access("hasRole('ROLE_USER') or  hasRole('ROLE_BRANCHHEAD') ")
+	  .antMatchers("/task").access("hasRole('ROLE_USER') or hasRole('ROLE_BRANCHHEAD')")
 	  .antMatchers("/customerDashBoard").access("hasRole('ROLE_CUSTOMER')")
 	  .anyRequest().permitAll()  //dashboard,task
   .and()
