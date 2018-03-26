@@ -96,17 +96,18 @@
                     				<form:hidden path="id"/>
 									<label for="focusedinput" class="col-md-6 control-label">Images <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<input type="file" name="file1" id="file1" class="col-sm-9 col-md-push-5" multiple="multiple" style="margin: 7px 0px 0px 0px;">
+										<input type="file" name="file1" id="file1" class="" multiple="multiple" style="margin: 7px 0px 0px 0px;">
 									</div>
                     			</div>
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Videos Links<span class="impColor">*</span></label>
-									<div class="col-md-5">
-										<form:textarea path="productmodelvideoslinks" class="form-control validate" placeholder="Enter Videos links"/>	
+								    <div class="col-md-3" id ="dtext">
+										<input type="text" id="name1" name='vlink' class="form-control validate" placeholder="Enter Videos links"/>	
 										<span class="hasError" id="stationnameError"></span>
-								    </div>
+								    </div> 
+								    <div><input type="button" value="Add Another Link" onclick="addNewTextBox()"></div>
                     			</div>
                     		</div>
                     		
@@ -158,10 +159,21 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="product" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Name</th><th>Description</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Name</th><th>Product Category</th><th>Product Company</th><th>Description</th><th>Model Pictures</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
+		if(orderObj.productmodelpics==undefined) orderObj.productmodelpics='';
+		else
+			{
+				var list=orderObj.productmodelpics.split('*');
+				var productmodelpics='';
+				for(var i=0;i<list.length;i++)
+				{
+					productmodelpics=productmodelpics+'<a href="reportDocuments/'+list[i]+'" target="_blank" title="'+list[i]+'"><i class="fa fa-paperclip fa-lg grey"></i></a>';
+				}
+				orderObj.productmodelpics=productmodelpics;
+			}
 		if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate' onclick='deleteProduct("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
@@ -171,7 +183,10 @@ function displayTable(listOrders) {
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.name+"'>"+ orderObj.name + "</td>"
+			+ "<td title='"+orderObj.categoryname+"'>"+ orderObj.categoryname + "</td>"
+			+ "<td title='"+orderObj.companyname+"'>"+ orderObj.companyname + "</td>"
 			+ "<td title='"+orderObj.description+"'>"+ orderObj.description + "</td>"
+			+ "<td title='"+orderObj.productmodelpics+"'>"+ orderObj.productmodelpics + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
@@ -186,6 +201,9 @@ function editProduct(id) {
 	$("#name").val(serviceUnitArray[id].name);
 	$("#description").val(serviceUnitArray[id].description);
 	$("#status").val(serviceUnitArray[id].status);
+	$("#categoryid").val(serviceUnitArray[id].categoryid);
+	$("#companyid").val(serviceUnitArray[id].companyid);
+	$("#productmodelvideoslinks").val(serviceUnitArray[id].productmodelvideoslinks);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 }
@@ -252,6 +270,26 @@ function inactiveData()
 				});
 		
 }
+
+var i =1;
+function addNewTextBox()
+{
+	 var  dvalue =  $("#name"+i).val().trim();
+	 if((dvalue == undefined) || (dvalue==''))
+	 {
+		 return false;
+		 
+	 }
+	 else
+		 {
+			i=i+1;
+	var row ="<div><input type='text' name='vlink' id='name"+i+"' class='form-control validate' placeholder='Enter Videos links'/></div>";
+	$("#dtext").append(row);
+	
+		 }
+	
+	
+	}
 
 
 $("#pageName").text("Product Master");

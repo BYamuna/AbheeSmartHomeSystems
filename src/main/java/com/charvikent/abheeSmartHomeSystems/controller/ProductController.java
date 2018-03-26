@@ -53,7 +53,7 @@ public class ProductController
 		model.addAttribute("companiesMap",companyDao.getCompanymap());
 		
 		try {
-			listOrderBeans = productDao.getProductNames();
+			listOrderBeans = productDao. getProductDetails();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -74,14 +74,27 @@ public class ProductController
 	}
 	
 	@RequestMapping(value = "/product", method = RequestMethod.POST)
-	public String saveProduct(@Valid @ModelAttribute  Product pro, BindingResult bindingresults, @RequestParam("file1") MultipartFile[] productpics,
+	public String saveProduct(@Valid @ModelAttribute  Product pro, BindingResult bindingresults, @RequestParam("file1") MultipartFile[] productpics,@RequestParam("vlink") String vlink[]  ,
 			RedirectAttributes redir) throws IOException 
 	{
+		
+		System.out.println(vlink.length);
 		
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
 			return "redirect:/";
 		}
+		
+		String sfn ="";
+		
+		
+		 for(String files: vlink)
+	        {
+	        	sfn=sfn+files+"*"; 
+	        }
+	        String sfn2=sfn.substring(0,sfn.length()-1);
+	        
+	        pro.setProductmodelvideoslinks(sfn2);
 		
 		int id = 0;
 		try
@@ -195,7 +208,7 @@ public class ProductController
  				}
  			}
  				
-			listOrderBeans = productDao.getProductNames();
+			listOrderBeans = productDao.getProductDetails();
 			 objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				
@@ -229,7 +242,7 @@ public class ProductController
 			if(objdept.getStatus().equals("0"))
 				listOrderBeans = productDao.getAllInActiveList();
 				else
-					listOrderBeans = productDao.getProductNames();
+					listOrderBeans = productDao.getProductDetails();
 					
 					
  				

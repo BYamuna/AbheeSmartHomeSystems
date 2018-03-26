@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -25,6 +26,11 @@ public class Product
 	private String companyid;
 	private String productmodelpics;
 	private String productmodelvideoslinks;
+	
+	@Transient
+	private String categoryname;
+	@Transient
+	private String companyname;
 	
 	
 	
@@ -138,6 +144,25 @@ public class Product
 
 	public void setCompanyid(String companyid) {
 		this.companyid = companyid;
+	}
+	
+	
+	
+
+	public String getCategoryname() {
+		return categoryname;
+	}
+
+	public void setCategoryname(String categoryname) {
+		this.categoryname = categoryname;
+	}
+
+	public String getCompanyname() {
+		return companyname;
+	}
+
+	public void setCompanyname(String companyname) {
+		this.companyname = companyname;
 	}
 
 	@Override
