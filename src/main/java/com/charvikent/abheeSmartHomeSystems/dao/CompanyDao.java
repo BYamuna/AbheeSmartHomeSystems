@@ -1,6 +1,8 @@
 package com.charvikent.abheeSmartHomeSystems.dao;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -71,5 +73,24 @@ public class CompanyDao
 	{
 		
 		return entityManager.createQuery("from Company where status='0'").getResultList();
+	}
+	
+	
+	public Map<Integer, String> getCompanymap()
+	{
+		Map<Integer, String> rolesMap = new LinkedHashMap<Integer, String>();
+		try
+		{
+		List<Company> rolesList= getCompanyNames();
+		for(Company bean: rolesList){
+			rolesMap.put(bean.getId(), bean.getName());
+		}
+				
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+		return rolesMap;
+				
+		
 	}
 }

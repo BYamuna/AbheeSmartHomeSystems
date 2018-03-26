@@ -21,6 +21,15 @@ public class Product
 	private Integer  id;
 	private String name;
 	private String description;
+	private String categoryid;
+	private String companyid;
+	private String productmodelpics;
+	private String productmodelvideoslinks;
+	
+	
+	
+	
+	
 	@Column
 	private String status;
 	
@@ -93,10 +102,52 @@ public class Product
 	public void setUpdatedTime(Date updatedTime) {
 		this.updatedTime = updatedTime;
 	}
+	
+	
+	
+
+	public String getCategoryid() {
+		return categoryid;
+	}
+
+	public void setCategoryid(String categoryid) {
+		this.categoryid = categoryid;
+	}
+
+	
+
+	public String getProductmodelpics() {
+		return productmodelpics;
+	}
+
+	public void setProductmodelpics(String productmodelpics) {
+		this.productmodelpics = productmodelpics;
+	}
+
+	public String getProductmodelvideoslinks() {
+		return productmodelvideoslinks;
+	}
+
+	public void setProductmodelvideoslinks(String productmodelvideoslinks) {
+		this.productmodelvideoslinks = productmodelvideoslinks;
+	}
+
+	public String getCompanyid() {
+		return companyid;
+	}
+
+	public void setCompanyid(String companyid) {
+		this.companyid = companyid;
+	}
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", status=" + status
-				+ ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
+		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", categoryid=" + categoryid
+				+ ", companyid=" + companyid + ", productmodelpics=" + productmodelpics + ", productmodelvideoslinks="
+				+ productmodelvideoslinks + ", status=" + status + ", createdTime=" + createdTime + ", updatedTime="
+				+ updatedTime + "]";
 	}
+
+	
+	
 }

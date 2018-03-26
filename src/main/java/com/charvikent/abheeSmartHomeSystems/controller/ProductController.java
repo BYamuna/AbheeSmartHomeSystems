@@ -16,9 +16,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
+import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
+import com.charvikent.abheeSmartHomeSystems.dao.CompanyDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ProductDao;
 import com.charvikent.abheeSmartHomeSystems.model.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,6 +33,13 @@ public class ProductController
 {
 	@Autowired
 	ProductDao productDao;
+	@Autowired
+	CategoryDao categoryDao;
+	@Autowired
+	CompanyDao companyDao;
+	
+	@Autowired
+	FilesStuff fileTemplate;
 	
 	@RequestMapping("/product")
 	public String  ProductList( @ModelAttribute("productf")  Product prof,Model model ,HttpServletRequest request) 
@@ -36,6 +48,9 @@ public class ProductController
 		ObjectMapper objectMapper = null;
 		String sJson = null;
 		model.addAttribute("product", new Product());
+		
+		model.addAttribute("CategoriesMap",categoryDao.getCategorymap());
+		model.addAttribute("companiesMap",companyDao.getCompanymap());
 		
 		try {
 			listOrderBeans = productDao.getProductNames();
@@ -59,7 +74,7 @@ public class ProductController
 	}
 	
 	@RequestMapping(value = "/product", method = RequestMethod.POST)
-	public String saveProduct(@Valid @ModelAttribute  Product pro, BindingResult bindingresults,
+	public String saveProduct(@Valid @ModelAttribute  Product pro, BindingResult bindingresults, @RequestParam("file1") MultipartFile[] productpics,
 			RedirectAttributes redir) throws IOException 
 	{
 		
@@ -82,6 +97,24 @@ public class ProductController
 			{
 				if(dummyId ==0)
 				{
+					
+					int filecount =0;
+			    	 
+			    	 for(MultipartFile multipartFile : productpics) {
+							String fileName = multipartFile.getOriginalFilename();
+							if(!multipartFile.isEmpty())
+							{
+								filecount++;
+							 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+							}
+						}
+			    	 
+			    	 if(filecount>0)
+			    	 {
+			    		 pro.setProductmodelpics(fileTemplate.concurrentFileNames());
+			    		 fileTemplate.clearFiles();
+			    		 
+			    	 }
 					pro.setStatus("1");
 					productDao.saveProduct(pro);
 
@@ -103,6 +136,24 @@ public class ProductController
 				id=pro.getId();
 				if(id == dummyId || orgBean == null)
 				{
+					
+					int filecount =0;
+		        	 
+		        	 for(MultipartFile multipartFile : productpics) {
+		    				String fileName = multipartFile.getOriginalFilename();
+		    				if(!multipartFile.isEmpty())
+		    				{
+		    					filecount++;
+		    				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+		    				}
+		    			}
+		        	 
+		        	 if(filecount>0)
+		        	 {
+		        		 pro.setProductmodelpics(fileTemplate.concurrentFileNames());
+		        		 fileTemplate.clearFiles();
+		        		 
+		        	 }
 					productDao.UpdateProduct(pro);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");

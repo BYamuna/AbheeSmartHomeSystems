@@ -39,13 +39,39 @@
 					<div class="panel-heading">
 						<h4>Add Product</h4>
 					</div>
-					<form:form class="form-horizontal" commandName="productf" role="form" id="fillingstation-form" action="product" method="post">
+					<form:form class="form-horizontal" commandName="productf" role="form" id="fillingstation-form" action="product" method="post" enctype="multipart/form-data">
 					<div class="panel-body">
-						<div class="row">
+						
+                    	<div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<form:hidden path="id"/>
-									<label for="focusedinput" class="col-md-6 control-label">Product ID <span class="impColor">*</span></label>
+									<label for="focusedinput" class="col-md-6 control-label">Product Category <span class="impColor">*</span></label>
+									<div class="col-md-5">
+									<form:select path="categoryid" class="form-control " >
+											<form:option value="">-- Select Product Category --</form:option>
+											<form:options items="${CategoriesMap}"/>
+										</form:select>
+										</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">Product Company <span class="impColor">*</span></label>
+									<div class="col-md-5">
+									<form:select path="companyid" class="form-control " >
+											<form:option value="">-- Select Product Company --</form:option>
+											<form:options items="${companiesMap}"/>
+										</form:select>
+										</div>
+                    			</div>
+                    		</div>
+                    		
+                    		
+                    	</div>
+                    	<div class="row">
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">Product Model<span class="impColor">*</span></label>
 									<div class="col-md-5">
 										<form:input path="name" class="form-control validate" placeholder="Enter ProuctId"/>	
 										<span class="hasError" id="stationnameError"></span>
@@ -57,6 +83,28 @@
 									<label for="focusedinput" class="col-md-6 control-label">Description <span class="impColor">*</span></label>
 									<div class="col-md-5">
 										<form:textarea path="description" class="form-control validate" placeholder="Enter Description"/>	
+										<span class="hasError" id="stationnameError"></span>
+								    </div>
+                    			</div>
+                    		</div>
+                    		
+                    		
+                    	</div>
+                    	<div class="row">
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<form:hidden path="id"/>
+									<label for="focusedinput" class="col-md-6 control-label">Images <span class="impColor">*</span></label>
+									<div class="col-md-5">
+										<input type="file" name="file1" id="file1" class="col-sm-9 col-md-push-5" multiple="multiple" style="margin: 7px 0px 0px 0px;">
+									</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">Videos Links<span class="impColor">*</span></label>
+									<div class="col-md-5">
+										<form:textarea path="productmodelvideoslinks" class="form-control validate" placeholder="Enter Videos links"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
