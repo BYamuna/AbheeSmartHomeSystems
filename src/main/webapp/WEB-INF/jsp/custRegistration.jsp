@@ -77,6 +77,14 @@
 									</div>
 								</div>
 								</div>
+								<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">password<span class="impColor">*</span></label>
+								<div class="col-md-6">
+										<form:password path="password" class="form-control validate onlyNumbers" placeholder="Enter Mobileno"/>
+									</div>
+								</div>
+								</div>
 						<div class="panel-footer">
 				      	<div class="row">
 				      		<div class="col-sm-12">
@@ -156,7 +164,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th> Cust ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>MobileNo</th><th style="text-align: center;">Options</th><th></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th> Cust ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>MobileNo</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -176,13 +184,31 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.email+"'>"+ orderObj.email + "</td>"
 			+ "<td title='"+orderObj.mobilenumber+"'>"+ orderObj.mobilenumber + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
-			+ "<td ><a style='cursor:pointer' onclick='getPasswordModal("+ orderObj.id +")'>Change Password</a></td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
 	if(isClick=='Yes') $('.datatables').dataTable();
 	
 } 
+
+
+function editEmployee(id) {
+	
+	$("#id").val(serviceUnitArray[id].id);
+	$("#firstname").val(serviceUnitArray[id].firstname);
+	$("#lastname").val(serviceUnitArray[id].lastname); 
+	$("#mobilenumber").val(serviceUnitArray[id].mobilenumber);
+	$("#email").val(serviceUnitArray[id].email);
+	$("#submit1").val("Update");
+	$(window).scrollTop($('#moveTo').offset().top);
+	document.getElementById("username").readOnly  = true;
+	//document.querySelector("password").required = false;
+    $("#passwordDiv").hide();
+    var idArray = $.makeArray($('.validate').map(function() {
+    	return this.id;
+    }));
+}
+
 /* function changePasswordModal(){
 
 	
@@ -237,28 +263,6 @@ function getPasswordModal(id)
 }
 
 
-function editEmployee(id) {
-	
-	$("#id").val(serviceUnitArray[id].id);
-	$("#username").val(serviceUnitArray[id].username);
-	$("#password").val(serviceUnitArray[id].password);
-	$("#firstname").val(serviceUnitArray[id].firstname);
-	$("#lastname").val(serviceUnitArray[id].lastname); 
-	$("#mobilenumber").val(serviceUnitArray[id].mobilenumber);
-	$("#designation").val(serviceUnitArray[id].designation);
-	$("#department").val(serviceUnitArray[id].department);
-	$("#reportto").val(serviceUnitArray[id].reportto);
-	$("#email").val(serviceUnitArray[id].email);
-	$("#submit1").val("Update");
-	$(window).scrollTop($('#moveTo').offset().top);
-	document.getElementById("username").readOnly  = true;
-	//document.querySelector("password").required = false;
-    $("#passwordDiv").hide();
-    var idArray = $.makeArray($('.validate').map(function() {
-    	return this.id;
-    }));
-    console.log(idArray);
-}
 
 
 

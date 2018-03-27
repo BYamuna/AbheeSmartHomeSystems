@@ -6,9 +6,11 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
@@ -79,11 +82,11 @@ public class AbheeCustRegistrationController
 	  return "custRegistration";
 	  
 	}
-	@RequestMapping(value = "/custreg", method = RequestMethod.POST)
-	public String saveAbheeCustRegistration(@Validated @ModelAttribute  AbheeCustRegistration abheecustregistration,Model model) throws IOException 
+	/*@RequestMapping(value = "/custreg", method = RequestMethod.POST)
+	public String saveAbheeCustRegistration(@Validated @ModelAttribute  User abheecustregistration,Model model) throws IOException 
 	{
 		
-		AbheeCustRegistration custbean =adao.checkCustomerExistOrNot(abheecustregistration);
+		User custbean =adao.checkCustomerExistOrNot(abheecustregistration);
 		
 		if(custbean == null)
 		{
@@ -95,7 +98,7 @@ public class AbheeCustRegistrationController
 		}
 		return "redirect:custRegistration";
 		
-	}
+	}*/
 	
 	@RequestMapping(value = "/checkCustExst", method = RequestMethod.POST)
 	public @ResponseBody  Boolean checkCustomerExistence(@Validated @ModelAttribute  AbheeCustRegistration abheecustregistration,Model model,HttpServletRequest request) throws IOException 
@@ -308,5 +311,88 @@ public class AbheeCustRegistrationController
 		}
 		return String.valueOf(jsonObj);
 	}
+	
+	@RequestMapping(value = "/custreg" ,method = RequestMethod.POST)
+	public String saveAdmin(@Valid @ModelAttribute  User user, BindingResult bindingresults,
+			RedirectAttributes redir) throws IOException {
+		
+		
+		if(user.getBranchId()==null)
+		{
+			User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			user.setBranchId(objuserBean.getBranchId());
+			
+		}
+
+		if (bindingresults.hasErrors()) {
+			System.out.println("has some errors");
+			return "redirect:/";
+		}
+
+		int id = 0;
+		try
+		{
+			User userBean=null;
+			if(user.getId()!=null)
+			{
+			  userBean= userService.getUserByObject(user);
+
+			}
+			int dummyId =0;
+
+			if(userBean != null){
+				dummyId = userBean.getId();
+			}
+
+			if(user.getId()==null)
+			{
+				if(dummyId ==0)
+				{
+
+
+					user.setEnabled("1");
+					user.setDesignation("9");
+
+					userService.saveUser(user);
+
+					redir.addFlashAttribute("msg", "Record Inserted Successfully");
+					redir.addFlashAttribute("cssMsg", "success");
+
+				} else
+				{
+					redir.addFlashAttribute("msg", "Already Record Exist");
+					redir.addFlashAttribute("cssMsg", "danger");
+
+				}
+
+
+			}
+
+			else
+			{
+				id=user.getId();
+				if(id == dummyId || userBean == null)
+				{
+					user.setDesignation("9");
+					userService.updateUser(user);
+					redir.addFlashAttribute("msg", "Record Updated Successfully");
+					redir.addFlashAttribute("cssMsg", "warning");
+
+				} else
+				{
+					redir.addFlashAttribute("msg", "Already Record Exist");
+					redir.addFlashAttribute("cssMsg", "danger");
+				}
+
+			}
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return "redirect:custRegistration";
+	}
+
+
 
 }
