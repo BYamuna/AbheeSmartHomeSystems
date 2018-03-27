@@ -212,7 +212,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>User Name</th><th>Report To</th><th>First Name</th><th>Last Name</th><th>Designation</th><th>Mobile Number</th><th>Branch name</th><th style="text-align: center;">Options</th><th></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>User Id</th><th>User Name</th><th>Report To</th><th>First Name</th><th>Last Name</th><th>Designation</th><th>Mobile Number</th><th>Branch name</th><th style="text-align: center;">Options</th><th></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -227,6 +227,7 @@ function displayTable(listOrders) {
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr class='"+ cls +"'>"
 			/* + "<td title='"+orderObj.id+"'>"+ orderObj.id + "</td>" */
+			+ "<td title='"+orderObj.userId+"'>"+ orderObj.userId + "</td>"
 			+ "<td title='"+orderObj.username+"'>"+ orderObj.username + "</td>"
 			+ "<td title='"+orderObj.reportto+"'>"+ orderObj.reportName + "</td>"
 			+ "<td title='"+orderObj.firstname+"'>"+ orderObj.firstname + "</td>"
@@ -307,6 +308,7 @@ function editEmployee(id) {
 	$("#designation").val(serviceUnitArray[id].designation);
 	$("#reportto").val(serviceUnitArray[id].reportto);
 	$("#email").val(serviceUnitArray[id].email);
+	$("#BranchId").val(serviceUnitArray[id].branchId);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 	document.getElementById("username").readOnly  = true;

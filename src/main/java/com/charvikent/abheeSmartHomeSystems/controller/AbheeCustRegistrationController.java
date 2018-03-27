@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
+import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeCustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeCustRegistration;
@@ -48,6 +49,8 @@ public class AbheeCustRegistrationController
 	UserService userService;
 	@Autowired
 	KptsUtil kptsUtil;
+	@Autowired
+	SendingMail sendingMail;
 	
 	String otpnumber ="";
 	
@@ -354,6 +357,8 @@ public class AbheeCustRegistrationController
 					user.setDesignation("9");
 
 					userService.saveUser(user);
+					
+					sendingMail.sendConfirmationEmail(user);
 
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");
 					redir.addFlashAttribute("cssMsg", "success");
@@ -374,7 +379,8 @@ public class AbheeCustRegistrationController
 				if(id == dummyId || userBean == null)
 				{
 					user.setDesignation("9");
-					userService.updateUser(user);
+					//userService.updateUser(user);
+					sendingMail.sendConfirmationEmail(user);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
 
