@@ -47,7 +47,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Product Category <span class="impColor">*</span></label>
 									<div class="col-md-5">
-									<form:select path="categoryid" class="form-control " >
+									<form:select path="categoryid" class="form-control validate" onkeydown="removeBorder(this.id)">
 											<form:option value="">-- Select Product Category --</form:option>
 											<form:options items="${CategoriesMap}"/>
 										</form:select>
@@ -58,7 +58,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Product Company <span class="impColor">*</span></label>
 									<div class="col-md-5">
-									<form:select path="companyid" class="form-control " >
+									<form:select path="companyid" class="form-control validate" onkeydown="removeBorder(this.id)">
 											<form:option value="">-- Select Product Company --</form:option>
 											<form:options items="${companiesMap}"/>
 										</form:select>
@@ -93,7 +93,6 @@
                     	<div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<form:hidden path="id"/>
 									<label for="focusedinput" class="col-md-6 control-label">Images <span class="impColor">*</span></label>
 									<div class="col-md-5">
 										<input type="file" name="file1" id="file1" class="" multiple="multiple" style="margin: 7px 0px 0px 0px;">

@@ -39,7 +39,7 @@
 					<div class="panel-heading">
 						<h4>Add Category</h4>
 					</div>
-					<form:form class="form-horizontal" commandName="catef" role="form" id="fillingstation-form" action="cate" method="post">
+					<form:form class="form-horizontal" commandName="catef" role="form" id="fillingstation-form" action="cate" method="post" enctype="multipart/form-data">
 					<div class="panel-body">
 						<div class="row">
                     		<div class="col-md-6">
@@ -52,15 +52,14 @@
 								    </div>
                     			</div>
                     		</div>
-                    		<%-- <div class="col-md-6">
+                    		<div class="col-md-6">
                     			<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Description <span class="impColor">*</span></label>
+									<label for="focusedinput" class="col-md-6 control-label">Images <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:textarea path="description" class="form-control validate" placeholder="Enter Description"/>	
-										<span class="hasError" id="stationnameError"></span>
-								    </div>
+										<input type="file" name="file1" id="file1" class=""  style="margin: 7px 0px 0px 0px;">
+									</div>
                     			</div>
-                    		</div> --%>
+                    		</div>
                     		
                     		
                     	</div>
@@ -110,10 +109,24 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Name</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Name</th><th>Category Img </th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
+		
+		if(orderObj.categoryimg==undefined) orderObj.categoryimg='';
+		else
+			{
+				var list=orderObj.categoryimg.split('*');
+				var categoryimg='';
+				for(var i=0;i<list.length;i++)
+				{
+					categoryimg=categoryimg+'<a href="reportDocuments/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="reportDocuments/'+list[i]+'" style="height:42px; width:42px"></a>';
+				}
+				orderObj.categoryimg=categoryimg;
+			}
+		
+		
 		if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate' onclick='deletecate("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
@@ -123,6 +136,7 @@ function displayTable(listOrders) {
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.category+"'>"+ orderObj.category + "</td>"
+			+ "<td title='"+orderObj.categoryimg+"'>"+ orderObj.categoryimg + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");

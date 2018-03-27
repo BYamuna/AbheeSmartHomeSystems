@@ -17,9 +17,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,6 +33,9 @@ public class CategoryController {
 	
 	@Autowired
 	CategoryDao categoryDao;
+	
+	@Autowired
+	FilesStuff fileTemplate;
 	
 	@RequestMapping("/cate")
 	public String  department( @ModelAttribute("catef")  Category catef,Model model ,HttpServletRequest request) {
@@ -64,7 +70,7 @@ public class CategoryController {
 	
 	@RequestMapping(value = "/cate", method = RequestMethod.POST)
 	public String saveAdmin(@Valid @ModelAttribute  Category cate, BindingResult bindingresults,
-			RedirectAttributes redir) throws IOException {
+			RedirectAttributes redir, @RequestParam("file1") MultipartFile[] categorypic) throws IOException {
 		
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
@@ -86,6 +92,24 @@ public class CategoryController {
 			{
 				if(dummyId ==0)
 				{
+					
+					int filecount =0;
+			    	 
+			    	 for(MultipartFile multipartFile : categorypic) {
+							String fileName = multipartFile.getOriginalFilename();
+							if(!multipartFile.isEmpty())
+							{
+								filecount++;
+							 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+							}
+						}
+			    	 
+			    	 if(filecount>0)
+			    	 {
+			    		 cate.setCategoryimg(fileTemplate.concurrentFileNames());
+			    		 fileTemplate.clearFiles();
+			    		 
+			    	 }
 					cate.setStatus("1");
 					categoryDao.saveCategory(cate);
 
@@ -107,6 +131,23 @@ public class CategoryController {
 				id=cate.getId();
 				if(id == dummyId || orgBean == null)
 				{
+					int filecount =0;
+		        	 
+		        	 for(MultipartFile multipartFile : categorypic) {
+		    				String fileName = multipartFile.getOriginalFilename();
+		    				if(!multipartFile.isEmpty())
+		    				{
+		    					filecount++;
+		    				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+		    				}
+		    			}
+		        	 
+		        	 if(filecount>0)
+		        	 {
+		        		 cate.setCategoryimg(fileTemplate.concurrentFileNames());
+		        		 fileTemplate.clearFiles();
+		        		 
+		        	 }
 					categoryDao.UpdateCategory(cate);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");

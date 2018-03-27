@@ -78,7 +78,30 @@ public class ProductDao
 	public List<Product> getAllInActiveList() 
 	{
 		
-		return entityManager.createQuery("from Product where status='0'").getResultList();
+List<Product> listProducts =new ArrayList<Product>();
+		
+		String hql ="select p.id,p.categoryid,cat.category,p.companyid,com.name,p.description,p.name,p.productmodelpics,p.productmodelvideoslinks,p.status from Product  p , Category cat , Company com where p.categoryid=cat.id and p.companyid=com.id and p.status='0'";
+
+		List<Object[]> rows = entityManager.createQuery(hql).getResultList();
+		
+		for (Object[] row : rows) {
+			
+			Product product =new Product();
+			product.setId(Integer.parseInt(String.valueOf(row[0])));
+			product.setCategoryid((String) row[1]);
+			product.setCategoryname((String) row[2]);
+			product.setCompanyid((String) row[3]);
+			product.setCompanyname((String) row[4]);
+			product.setDescription((String) row[5]);
+			product.setName((String) row[6]);
+			product.setProductmodelpics((String) row[7]);
+			product.setProductmodelvideoslinks((String) row[8]);
+			product.setStatus((String) row[9]);
+			
+			listProducts.add(product);
+
+	}
+		 return listProducts;
 	}
 	
 	public List<Product> getProductDetails()
