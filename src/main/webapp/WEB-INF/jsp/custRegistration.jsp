@@ -160,11 +160,11 @@ function displayTable(listOrders) {
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
-		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deleteEmployee("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>";
+		if(orderObj.enabled == "1"){
+			var deleterow = "<a class='deactivate' onclick='deleteCustomer("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>";
 			var cls="activecss";
 		}else{  
-			var deleterow = "<a class='activate' onclick='deleteEmployee("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>";
+			var deleterow = "<a class='activate' onclick='deleteCustomer("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>";
 			var cls="inactivecss";
 		}
 		var edit = "<a class='edit editIt' onclick='editEmployee("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
@@ -260,26 +260,7 @@ function editEmployee(id) {
     console.log(idArray);
 }
 
-function deleteEmployee(id,status){
-	var checkstr=null;
-	if(status == 0){
-		 checkstr = confirm('Are you sure you want to Deactivate?');
-	}else{
-		 checkstr = confirm('Are you sure you want to Activate?');
-	}
-	if(checkstr == true){
-		var formData = new FormData();
-	    formData.append('id', id);
-	    formData.append('status', status);
-		$.fn.makeMultipartRequest('POST', 'deleteUser', false, formData, false, 'text', function(data){
-			var jsonobj = $.parseJSON(data);
-			var alldata = jsonobj.allOrders1;
-			displayTable(alldata);
-			toolTips(); //calling tool tips defined at header
-			$('#inActive').prop('checked', false);
-		});
-	}
-}
+
 
 
 
@@ -344,6 +325,27 @@ function validate(id, errorMessage)
 	}
 	
 }
+*/
+function deleteCustomer(id,status){
+	var checkstr=null;
+	if(status == 0){
+		 checkstr = confirm('Are you sure you want to Deactivate?');
+	}else{
+		 checkstr = confirm('Are you sure you want to Activate?');
+	}
+	if(checkstr == true){
+		var formData = new FormData();
+	    formData.append('id', id);
+	    formData.append('status', status);
+		$.fn.makeMultipartRequest('POST', 'deleteCustomer', false, formData, false, 'text', function(data){
+			var jsonobj = $.parseJSON(data);
+			var alldata = jsonobj.allOrders1;
+			displayTable(alldata);
+			toolTips(); //calling tool tips defined at header
+			$('#inActive').prop('checked', false);
+		});
+	}
+}
 
 function inactiveData() {
 	var status="0";
@@ -355,7 +357,7 @@ function inactiveData() {
 		var formData = new FormData();
 		formData.append('status', status);
 		
-		$.fn.makeMultipartRequest('POST', 'inActiveEmp', false,
+		$.fn.makeMultipartRequest('POST', 'inActiveCust', false,
 				formData, false, 'text', function(data) {
 			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;
@@ -364,7 +366,7 @@ function inactiveData() {
 				});
 		
 }
-   */
+   
  $("#pageName").text("Customer Registration");
 $(".abheecust").addClass("active"); 
 </script>

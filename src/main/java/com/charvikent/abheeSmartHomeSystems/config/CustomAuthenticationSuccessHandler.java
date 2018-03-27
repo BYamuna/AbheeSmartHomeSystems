@@ -2,9 +2,11 @@ package com.charvikent.abheeSmartHomeSystems.config;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +24,8 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired UserService userService;
-
+	@Autowired
+	HttpSession session;
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
@@ -34,6 +37,14 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 userService.setLoginRecord(objuserBean.getId(),"login");
 		
+			
+			User userDesignation= userService.getUserDesignationById(objuserBean.getId());
+				
+				 session.setAttribute("userDesignationSession", userDesignation);
+				 if (userDesignation == null) {
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/");
+						dispatcher.forward(request, response);
+				 }
             if(objuserBean.getDesignation().equals("9"))
             	response.sendRedirect("customerDashBoard");
             else
