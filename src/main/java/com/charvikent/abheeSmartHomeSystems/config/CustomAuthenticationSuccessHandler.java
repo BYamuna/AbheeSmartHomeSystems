@@ -2,6 +2,7 @@ package com.charvikent.abheeSmartHomeSystems.config;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +46,14 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 userService.setLoginRecord(objuserBean.getId(),"login");
 		
+			
+			User userDesignation= userService.getUserDesignationById(objuserBean.getId());
+				
+				 session.setAttribute("userDesignationSession", userDesignation);
+				/* if (userDesignation == null) {
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/");
+						dispatcher.forward(request, response);
+				 }*/
             if(objuserBean.getDesignation().equals("9"))
             	response.sendRedirect("customerDashBoard");
             else

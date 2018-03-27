@@ -130,7 +130,7 @@ public class AbheeCustomerDao {
 	public List<User> getAbheeCustomerNames()
 	 {
 		  
-		return (List<User>)entityManager.createQuery("from User where   designation='9'").getResultList();
+		return (List<User>)entityManager.createQuery("from User where   designation='9' and enabled='1'").getResultList();
 		 
 	 }
 	
@@ -145,6 +145,23 @@ public class AbheeCustomerDao {
 	
 	return otpStr;
 		
+	}
+	
+	public boolean deleteCustomer(Integer id, String status) {
+		Boolean delete=false;
+		try{
+
+			User design= entityManager.find(User.class ,id);
+			   design.setEnabled(status);
+			   entityManager.merge(design);
+			if(!status.equals(design.getEnabled()))
+			{
+				delete=true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return delete;
 	}
 	
 }
