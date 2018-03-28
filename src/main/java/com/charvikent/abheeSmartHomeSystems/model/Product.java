@@ -27,6 +27,12 @@ public class Product
 	private String productmodelpics;
 	private String productmodelvideoslinks;
 	
+	private String ProductModelSpecifications;
+	
+	private String ProductPrice;
+	
+	private String maxAllowedDiscount;
+	
 	@Transient
 	private String categoryname;
 	@Transient
@@ -163,6 +169,37 @@ public class Product
 
 	public void setCompanyname(String companyname) {
 		this.companyname = companyname;
+	}
+
+	
+	
+	
+	public String getProductModelSpecifications() {
+		return ProductModelSpecifications;
+	}
+
+	public void setProductModelSpecifications(String productModelSpecifications) {
+		ProductModelSpecifications = productModelSpecifications;
+	}
+
+	public String getProductPrice() {
+		return ProductPrice;
+	}
+
+	public void setProductPrice(String productPrice) {
+		ProductPrice = productPrice;
+	}
+	
+	
+	
+	
+
+	public String getMaxAllowedDiscount() {
+		return maxAllowedDiscount;
+	}
+
+	public void setMaxAllowedDiscount(String maxAllowedDiscount) {
+		this.maxAllowedDiscount = maxAllowedDiscount;
 	}
 
 	@Override

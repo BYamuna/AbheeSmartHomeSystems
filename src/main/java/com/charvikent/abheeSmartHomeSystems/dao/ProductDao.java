@@ -108,7 +108,7 @@ List<Product> listProducts =new ArrayList<Product>();
 	 {
 		List<Product> listProducts =new ArrayList<Product>();
 		
-		String hql ="select p.id,p.categoryid,cat.category,p.companyid,com.name,p.description,p.name,p.productmodelpics,p.productmodelvideoslinks,p.status from Product  p , Category cat , Company com where p.categoryid=cat.id and p.companyid=com.id and p.status='1'";
+		String hql ="select p.id,p.categoryid,cat.category,p.companyid,com.name,p.description,p.name,p.productmodelpics,p.productmodelvideoslinks,p.status,p.ProductModelSpecifications,p.ProductPrice,p.maxAllowedDiscount from Product  p , Category cat , Company com where p.categoryid=cat.id and p.companyid=com.id and p.status='1'";
 
 		List<Object[]> rows = entityManager.createQuery(hql).getResultList();
 		
@@ -125,6 +125,9 @@ List<Product> listProducts =new ArrayList<Product>();
 			product.setProductmodelpics((String) row[7]);
 			product.setProductmodelvideoslinks((String) row[8]);
 			product.setStatus((String) row[9]);
+			product.setProductModelSpecifications((String) row[10]);
+			product.setProductPrice((String) row[11]);
+			product.setMaxAllowedDiscount((String) row[12]);
 			
 			listProducts.add(product);
 
