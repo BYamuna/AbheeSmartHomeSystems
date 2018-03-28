@@ -42,7 +42,7 @@ public class AbheeBranchController {
 		ObjectMapper objectMapper = null;
 		String sJson = null;
 		
-		model.addAttribute("branchheads",abheeBranchDao.getBranchHeads());
+		//model.addAttribute("branchheads",abheeBranchDao.getBranchHeads());
 		try {
 			listOrderBeans = abheeBranchDao.getAllBranches();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
