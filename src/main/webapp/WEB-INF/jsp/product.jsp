@@ -73,7 +73,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Product Model<span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="name" class="form-control validate" placeholder="Enter ProuctId"/>	
+										<form:input path="name" class="form-control validate" placeholder="Enter Product Model"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -82,7 +82,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Description <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:textarea path="description" class="form-control validate" placeholder="Enter Description"/>	
+										<form:textarea path="description" class="form-control validate" placeholder="Enter product Model Description"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -93,7 +93,7 @@
                     	<div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Images <span class="impColor">*</span></label>
+									<label for="focusedinput" class="col-md-6 control-label">Product Images <span class="impColor">*</span></label>
 									<div class="col-md-5">
 										<input type="file" name="file1" id="file1" class="" multiple="multiple" style="margin: 7px 0px 0px 0px;">
 									</div>
@@ -158,7 +158,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="product" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Name</th><th>Product Category</th><th>Product Company</th><th>Description</th><th>Model Pictures</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Product Category</th><th>Product Company</th><th>Product Model</th><th>Description</th><th>Product Model Images</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -181,9 +181,10 @@ function displayTable(listOrders) {
 		var edit = "<a class='edit editIt' onclick='editProduct("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr>"
-			+ "<td title='"+orderObj.name+"'>"+ orderObj.name + "</td>"
+			
 			+ "<td title='"+orderObj.categoryname+"'>"+ orderObj.categoryname + "</td>"
 			+ "<td title='"+orderObj.companyname+"'>"+ orderObj.companyname + "</td>"
+			+ "<td title='"+orderObj.name+"'>"+ orderObj.name + "</td>"
 			+ "<td title='"+orderObj.description+"'>"+ orderObj.description + "</td>"
 			+ "<td title='"+orderObj.productmodelpics+"'>"+ orderObj.productmodelpics + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 

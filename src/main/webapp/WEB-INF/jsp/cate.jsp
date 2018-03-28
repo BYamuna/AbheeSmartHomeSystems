@@ -45,16 +45,16 @@
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<form:hidden path="id"/>
-									<label for="focusedinput" class="col-md-6 control-label">Name <span class="impColor">*</span></label>
+									<label for="focusedinput" class="col-md-6 control-label">Category Name <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="category" class="form-control validate" placeholder="Enter Name"/>	
+										<form:input path="category" class="form-control validate" placeholder="Enter Category  Name"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Images <span class="impColor">*</span></label>
+									<label for="focusedinput" class="col-md-6 control-label">Category Images <span class="impColor">*</span></label>
 									<div class="col-md-5">
 										<input type="file" name="file1" id="file1" class=""  style="margin: 7px 0px 0px 0px;">
 									</div>
@@ -109,7 +109,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Name</th><th>Category Img </th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Category Name</th><th>Category Images </th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {

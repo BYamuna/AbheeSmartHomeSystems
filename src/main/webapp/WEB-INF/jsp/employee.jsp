@@ -122,7 +122,7 @@
 										</form:select>
 									</div>
 								</div></div>
-								 <security:authorize access="hasRole('ROLE_MASTERADMIN')">
+								 <security:authorize access="hasRole('ROLE_ADMIN')">
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Branch</label>

@@ -34,6 +34,11 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler im
 
 		//String refererUrl = request.getHeader("Referer");
 		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		
+		System.out.println(auth);
+		
 		User objuserBean = (User)authentication.getPrincipal();
 		userService.setLoginRecord(objuserBean.getId(),"logout");
 

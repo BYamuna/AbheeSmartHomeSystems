@@ -95,7 +95,7 @@
 				<div class="col-sm-12">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<input type="text"  name= "username" class="form-control validate"  placeholder="Email or Mobilenumber"/>
+						<input type="text"  name= "username" class="form-control validate"  placeholder=" Mobile Number"/>
 					</div>
 				</div>
 			</div>
@@ -147,23 +147,23 @@
 							</div>
 							<div class="form-group">
 								<label for="user_name">Enter MobileNumber :</label> 
-								<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Mobile Number"/>
+								<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" maxlength="10" class="form-control validate1 numericOnly" placeholder="Enter Mobile Number"/>
 								<span class="hasError" id="cmobileError" style="font-size: 13px;"></span>
 							</div>
 
 							<div class="form-group">
 								<label for="user_name">Enter Your Email-Id :</label> 
-								<input	type="email" name="cemail" id="cemail" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Email"/>
+								<input	type="email" name="cemail" id="cemail" onkeydown="removeBorder(this.id)" class="form-control validate1 emailOnly" placeholder="Enter Email"/>
 								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
-								<label for="user_name">Enter  password :</label> 
-								<input	type="password" name="cpassword" id="cpassword" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter password"/>
+								<label for="user_name">Enter  password (Max 4 Digits) :</label> 
+								<input	type="password" name="cpassword" id="cpassword" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control validate1 numericOnly" placeholder="Enter password" />
 								<span class="hasError" id="cpasswordError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
 								<label for="user_name">Retype password :</label> 
-								<input	type="password" name="crtpassword" id="crtpassword" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Retype Password"/>
+								<input	type="password" name="crtpassword"  id="crtpassword" onkeydown="removeBorder(this.id)"  maxlength="4" class="form-control validate1 numericOnly" placeholder="Enter Retype Password"/>
 								<span class="hasError" id="crtpasswordError" style="font-size: 13px;"></span>
 							</div>
 							
@@ -218,12 +218,32 @@
 <script type='text/javascript' src="js/jquery.blockUI.min.js" ></script>
 </body>
 <script type="text/javascript">
+
+var validation = true;
+
+
+var subValidation =true;
+
 $('#cmobile').blur(function() {
 	var cmobile=$(this).val();
 	
-	/* alert("hi");
-	alert(cmobile);
- */
+	
+	 
+	 if(cmobile.length != 10 )
+		 {
+		 alert("Password Length Must Be 10 Digits")
+		 $('#cmobile').css('border-color', 'red');
+		// $('#submitModel').prop('disabled', true);
+		 
+		 subValidation =false;
+		 
+		 }
+	 
+	
+	 else
+		 {
+	
+	
 	$.ajax({
 				type : "POST",
 				url : "checkCustExst",
@@ -235,15 +255,17 @@ $('#cmobile').blur(function() {
 				success : function(data) {
 					if(data ==='true')
 						{
-						//alert("username already exists")
+						alert("Mobile Number already exists")
 	 					$('#cmobile').css('border-color', 'red');
 	 					 $('#submitModel').prop('disabled', true);
+	 					subValidation =false;
 						}
-					else
+					 else
 						{
 						$('#cmobile').css('border-color', 'none');
 						 $('#submitModel').prop('disabled', false);
-						}
+						 subValidation =true;
+						} 
 					
 				},
 				complete: function () {
@@ -253,6 +275,8 @@ $('#cmobile').blur(function() {
 				error :  function(e){$.unblockUI();console.log(e);}
 				
 			});
+	
+		 }
 
 		}); 
 		
@@ -292,18 +316,18 @@ var idArrayCmt1 = null;
 
 
 
-var validation = true;
+//var validation = true;
 
 	idArrayCmt1 = $.makeArray($('.validate1').map(function() {
 		return this.id ;
 	}));
 		
-	validation = true;
+	
 	$('#submitModel').click(function(event) {
 	$.each(idArrayCmt1, function(i, val) {
 		var value = $("#" + idArrayCmt1[i]).val();
 		var placeholder = $("#" + idArrayCmt1[i]).attr('placeholder');
-		if (value == null || value == "" || value == "undefined") {
+		if (value == null || value == "" || value == "undefined" ) {
 			$('style').append(styleBlock);
 			$("#" + idArrayCmt1[i] ).attr("placeholder", placeholder);
 			$("#" + idArrayCmt1[i] ).css('border-color','#e73d4a');
@@ -320,6 +344,7 @@ var validation = true;
 			validation = true;
 		}
 	});
+	validation =subValidation;
 	if(validation) {
 	/* 	$("#submit1").attr("disabled",true);
 		$("#submit1").val("Please wait...");
@@ -490,7 +515,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 
 			}); 
 	
-
+	
 		
 
 
