@@ -119,7 +119,7 @@ function displayTable(listOrders) {
 		}else{  
 			var deleterow = "<a class='activate' onclick='deletecate("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
-		var edit = "<a class='edit editIt' onclick='editCylinder("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
+		var edit = "<a class='edit editIt' onclick='editCate("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.category+"'>"+ orderObj.category + "</td>"
@@ -132,7 +132,7 @@ function displayTable(listOrders) {
 }
 
 
-function editCylinder(id) {
+function editCate(id) {
 	$("#id").val(serviceUnitArray[id].id);
 	$("#category").val(serviceUnitArray[id].category);
 	$("#status").val(serviceUnitArray[id].status);

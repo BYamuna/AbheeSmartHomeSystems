@@ -40,10 +40,10 @@ public class AbheeBranchDao {
 		 
 	 }
 
+	@SuppressWarnings("unchecked")
 	public AbheeBranch getAbheeBranchById(AbheeBranch abheeBranch) {
-		@SuppressWarnings("unchecked")
 		
-		String hql ="";
+		//String hql ="";
 		List<AbheeBranch> abheeBranchList =(List<AbheeBranch>) entityManager.createQuery(" FROM  AbheeBranch where name =:custName ").setParameter("custName",abheeBranch.getName()).getResultList();
 		if(abheeBranchList.size() > 0)
 			return abheeBranchList.get(0);

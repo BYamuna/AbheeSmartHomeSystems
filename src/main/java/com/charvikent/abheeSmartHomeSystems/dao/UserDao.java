@@ -316,6 +316,7 @@ public class UserDao {
 	    return s != null && s.matches("[-+]?\\d*\\.?\\d+");  
 	} 
 
+	@SuppressWarnings("unchecked")
 	public User getUserByObject(User user) {
 
 		String hql ="from User where username =:n";
@@ -372,6 +373,7 @@ public class UserDao {
 		return  listusers;
 		 	}
 
+	@SuppressWarnings("unchecked")
 	public User checkCustomerExistOrNotbyMobile(String custMobile) {
 		
 		String hql ="from User where mobilenumber ='"+custMobile+"'";
@@ -386,6 +388,7 @@ public class UserDao {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	public User checkCustomerExistOrNotByEmail(String email) {
 
 		String hql ="from User where email ='"+email+"'";
@@ -398,6 +401,7 @@ public class UserDao {
 		return usersList.get(0);
 	}
 
+	@SuppressWarnings("unchecked")
 	public User checkuserExistOrNot(User user) {
 		
 		String hql =" from User  where (email='"+user.getUsername()+"' or mobilenumber ='"+user.getUsername()+"') and password='"+user.getPassword()+"' and designation='9'";

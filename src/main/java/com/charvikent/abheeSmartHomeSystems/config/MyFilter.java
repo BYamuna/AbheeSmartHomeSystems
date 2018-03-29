@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
+/*mport org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;*/
 
 /*@Component
 @Order(1)
@@ -25,6 +25,7 @@ import org.springframework.stereotype.Component;
 		
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	  public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 		      throws IOException, ServletException {

@@ -71,8 +71,8 @@ public class CategoryDao {
 		return delete;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Category> getAllInActiveList() {
-		// TODO Auto-generated method stub
 		return entityManager.createQuery("  from Category where status='0'").getResultList();
 	}
 	

@@ -147,13 +147,13 @@
 							</div>
 							<div class="form-group">
 								<label for="user_name">Enter MobileNumber :</label> 
-								<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Mobile Number"/>
+								<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" class="form-control validate1 numericOnly" placeholder="Enter Mobile Number"/>
 								<span class="hasError" id="cmobileError" style="font-size: 13px;"></span>
 							</div>
 
 							<div class="form-group">
 								<label for="user_name">Enter Your Email-Id :</label> 
-								<input	type="email" name="cemail" id="cemail" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Email"/>
+								<input	type="email" name="cemail" id="cemail" onkeydown="removeBorder(this.id)" class="form-control validate1 emailOnly" placeholder="Enter Email"/>
 								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
@@ -257,7 +257,7 @@ $('#cmobile').blur(function() {
 		}); 
 		
 		
-$('#crtpassword').blur(function() {
+/* $('#crtpassword').blur(function() {
 	
 	 cpassword =$('#cpassword').val();
 	 
@@ -280,7 +280,7 @@ $('#crtpassword').blur(function() {
 	
 	
 }); 
-		
+		 */
 		
 var cmobile =0
 var cemail =0
@@ -454,7 +454,19 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 	
 	$('#cemail').blur(function() {
 		var cmobile=$(this).val();
-		
+		/* var emailPolicy=/^(([^<>()[\]\\.,;:\s@\]+(\.[^<>()[\]\\.,;:\s@\]+)*)|(\.+\))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		alert(emailPolicy.test(ccpassword));
+		if (emailPolicy.test(ccpassword)) 
+		{
+            alert('Valid email address');
+            $('#submitModel').prop('disabled', false);
+        }
+		else
+			{
+			alert("Enter valid email address");	
+			$('#cemail').css('border-color', 'red');
+			$('#submitModel').prop('disabled', true);
+			}  */ 
 		/* alert("hi");
 		alert(cmobile);
 	 */
@@ -491,8 +503,25 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 			}); 
 	
 
+	$('#cpassword').blur(function() {
+		ccpassword =$('#cpassword').val();
+		//alert(ccpassword);
 		
-
-
+		var  passwordPolicy= /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@#$!%*?&.])[A-Za-z\d$@#$!%*?&.]{6,15}$/;
+		alert(passwordPolicy.test(ccpassword));
+		if (passwordPolicy.test(ccpassword)) 
+		{
+            alert('Valid password');
+            $('#submitModel').prop('disabled', false);
+        }
+		else
+			{
+			alert("Password should contain minimum 6 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character");	
+			$('#cpassword').css('border-color', 'red');
+			$('#submitModel').prop('disabled', true);
+			}  
+			
+		
+	}); 
 </script>
 </html>

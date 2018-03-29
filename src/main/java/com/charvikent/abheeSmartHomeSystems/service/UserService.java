@@ -21,8 +21,8 @@ import org.springframework.stereotype.Service;
 
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
-import com.charvikent.abheeSmartHomeSystems.model.Category;
-import com.charvikent.abheeSmartHomeSystems.model.Department;
+/*import com.charvikent.abheeSmartHomeSystems.model.Category;
+import com.charvikent.abheeSmartHomeSystems.model.Department;*/
 import com.charvikent.abheeSmartHomeSystems.model.Designation;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
@@ -35,12 +35,14 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 
+	@SuppressWarnings("unused")
 	@Autowired
 	private SendSMS smsTemplate;
 
 
     SendSMS smstemplate =new SendSMS();
 
+	@SuppressWarnings("unused")
 	public void saveUser(User user) throws IOException
 	{
 		

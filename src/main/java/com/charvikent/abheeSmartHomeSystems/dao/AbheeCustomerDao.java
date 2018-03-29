@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
-import com.charvikent.abheeSmartHomeSystems.model.AbheeBranch;
+//import com.charvikent.abheeSmartHomeSystems.model.AbheeBranch;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeCustRegistration;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeCustomer;
 import com.charvikent.abheeSmartHomeSystems.model.User;
@@ -65,6 +65,7 @@ public class AbheeCustomerDao {
 	
 	
 	
+	@SuppressWarnings("unchecked")
 	public AbheeCustRegistration findCustomerByCustId(String custId)
 	{
 		
@@ -82,6 +83,7 @@ public class AbheeCustomerDao {
 	
 	
 	
+	@SuppressWarnings("unchecked")
 	public AbheeCustRegistration checkCustomerExistOrNot(AbheeCustRegistration custreg)
 	{
 		
@@ -97,6 +99,7 @@ public class AbheeCustomerDao {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public AbheeCustRegistration checkCustomerExistOrNotbyMobile(String Mobile)
 	{
 		
@@ -112,6 +115,7 @@ public class AbheeCustomerDao {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public AbheeCustRegistration otpVeri(AbheeCustRegistration cust)
 	{
 		

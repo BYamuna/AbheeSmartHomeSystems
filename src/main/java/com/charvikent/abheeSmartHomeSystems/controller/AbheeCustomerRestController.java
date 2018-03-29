@@ -169,6 +169,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	}
 	
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value="/logincredentials", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public HashMap<String, String>  checkingLogincredentials( @RequestBody User user) {
 		

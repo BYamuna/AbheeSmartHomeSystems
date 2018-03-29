@@ -24,6 +24,7 @@ public class MailTemplate {
 	private JavaMailSender javaMailSender; 
 
 	
+	@SuppressWarnings("unused")
 	private void sendEmail(final User user) {  
 		try {
 			MimeMessagePreparator preparator = new MimeMessagePreparator() {  

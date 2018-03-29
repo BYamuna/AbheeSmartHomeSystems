@@ -33,7 +33,8 @@ public class SeverityDao {
 
 	 }
 
-	public Severity getSeverityNameById(Integer id) {
+	public Severity getSeverityNameById(Integer id) 
+	{
 
 		return entityManager.find(Severity.class, id);
 	}

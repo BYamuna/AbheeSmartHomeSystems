@@ -118,7 +118,7 @@ public List<ReportIssue> getAllReportIssues()
 	}
 
 
-	public Set getIssuesAssignTo(String id) {
+	public Set<ReportIssue> getIssuesAssignTo(String id) {
 		Set<ReportIssue> listissue=new TreeSet<ReportIssue>();
 
 		try {
@@ -157,7 +157,7 @@ public List<ReportIssue> getAllReportIssues()
 	}
 
 
-	public Set getIssuesAssignToResolved(String id) {
+	public Set <ReportIssue>getIssuesAssignToResolved(String id) {
 		//List<ReportIssue> listissue=new ArrayList<>();
 		
 		Set<ReportIssue> listissue=new TreeSet<ReportIssue>();
@@ -339,6 +339,7 @@ public List<ReportIssue> getAllReportIssues()
 	}
 	
 
+	@SuppressWarnings("unused")
 	public void updateIssue(ReportIssue issue) {
 		
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -485,6 +486,7 @@ public List<ReportIssue> getAllReportIssues()
 
 	
 
+	@SuppressWarnings("unchecked")
 	public Set<ReportIssue> getissuesByselectionAssignTo(String id) {
 		Set<ReportIssue> listissue=new LinkedHashSet<ReportIssue>();
 		//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -527,6 +529,7 @@ public List<ReportIssue> getAllReportIssues()
 	
 	
 	
+	@SuppressWarnings("unchecked")
 	public Set<ReportIssue> getissuesByselectionAssignBy(String id) {
 		Set<ReportIssue> listissue=new LinkedHashSet<ReportIssue>();
 		try {
@@ -577,6 +580,7 @@ public List<ReportIssue> getAllReportIssues()
 	
 	
 	
+	@SuppressWarnings("unchecked")
 	public Set<ReportIssue> getDepartmentWise(String deptid) {
 		Set<ReportIssue> listissue=new LinkedHashSet<ReportIssue>();
 		
@@ -657,6 +661,7 @@ public List<ReportIssue> getAllReportIssues()
 		return delete;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Set<ReportIssue> getOpenTasks(String id) {
 		Set<ReportIssue> listissue=new LinkedHashSet<ReportIssue>();
 		//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();

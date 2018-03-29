@@ -255,6 +255,7 @@ public class AdminController {
 	
 	*/
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value="/adminChangePassword", method= RequestMethod.POST )
 	public  @ResponseBody String adminChangePassword(User user,RedirectAttributes redir,HttpServletRequest request) throws JSONException{
 		boolean result=false;

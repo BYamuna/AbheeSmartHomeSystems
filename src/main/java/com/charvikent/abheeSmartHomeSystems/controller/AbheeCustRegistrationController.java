@@ -127,6 +127,7 @@ public class AbheeCustRegistrationController
 		
 	}
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/modelSubmit", method = RequestMethod.POST)
 	public @ResponseBody  boolean modelSubmit(Model model,HttpServletRequest request) throws IOException 
 	{
