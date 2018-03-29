@@ -129,6 +129,10 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/product.jsp" />
 	</definition>
 	
+	<!-- <definition name="salesrequest1" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/salesrequest.jsp" />
+	</definition> -->
+	
 		
 
 </tiles-definitions>
