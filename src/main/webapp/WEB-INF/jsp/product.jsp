@@ -116,7 +116,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Maximum  Allowed Discount(%) <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="maxAllowedDiscount" class="form-control validate numericOnly" placeholder="Enter Maximum  Allowed Discount"/>	
+										<form:input path="maxAllowedDiscount" class="form-control validate numericOnly" maxlength="2" placeholder="Enter Maximum  Allowed Discount"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -140,7 +140,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Product Images <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<input type="file" name="file1" id="file1" class="" multiple="multiple" style="margin: 7px 0px 0px 0px;">
+										<input type="file" name="file1" id="file1" class="validate"  accept="image/*"  multiple="multiple" style="margin: 7px 0px 0px 0px;">
 									</div>
                     			</div>
                     		</div>
@@ -220,8 +220,8 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.companyname+"'>"+ orderObj.companyname + "</td>"
 			+ "<td title='"+orderObj.name+"'>"+ orderObj.name + "</td>"
 			+ "<td title='"+orderObj.description+"'>"+ orderObj.description + "</td>"
-			+ "<td title='"+orderObj.ProductModelSpecifications+"'>"+ orderObj.ProductModelSpecifications + "</td>"
-			+ "<td title='"+orderObj.ProductPrice+"'>"+ orderObj.ProductPrice + "</td>"
+			+ "<td title='"+orderObj.productModelSpecifications+"'>"+ orderObj.productModelSpecifications + "</td>"
+			+ "<td title='"+orderObj.productPrice+"'>"+ orderObj.productPrice + "</td>"
 			+ "<td title='"+orderObj.maxAllowedDiscount+"'>"+ orderObj.maxAllowedDiscount + "</td>"
 			+ "<td title='"+orderObj.productmodelvideoslinks+"'>"+ orderObj.productmodelvideoslinks + "</td>"
 			+ "<td title='"+orderObj.productmodelpics+"'>"+ orderObj.productmodelpics + "</td>"
@@ -242,6 +242,9 @@ function editProduct(id) {
 	$("#categoryid").val(serviceUnitArray[id].categoryid);
 	$("#companyid").val(serviceUnitArray[id].companyid);
 	$("#productmodelvideoslinks").val(serviceUnitArray[id].productmodelvideoslinks);
+	$("#maxAllowedDiscount").val(serviceUnitArray[id].maxAllowedDiscount);
+	$("#ProductPrice").val(serviceUnitArray[id].productPrice);
+	$("#ProductModelSpecifications").val(serviceUnitArray[id].productModelSpecifications);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 }
@@ -328,6 +331,41 @@ function addNewTextBox()
 	
 	
 	}
+	
+	
+
+document.getElementById("file1").onchange = function () {
+    var reader = new FileReader();
+    
+    for(var i=0; i<=this.files.length; i++)
+    {
+    
+    if(this.files[i].size>500){
+        alert("Image Size should not be greater than 500Kb");
+        $("#file1").attr("src","blank");
+       // $("#file1").hide();  
+        $('#file1').wrap('<form>').closest('form').get(0).reset();
+        $('#file1').unwrap();     
+        return false;
+    }
+    if(this.files[i].type.indexOf("image")==-1){
+        alert("Invalid Type");
+        $("#file1").attr("src","blank");
+        //$("#file1").hide();  
+       $('#file1').wrap('<form>').closest('form').get(0).reset();
+      //  $('#file1').unwrap();         
+        return false;
+    }   
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("menu_image").src = e.target.result;
+        $("#file1").show(); 
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+    }
+};
 
 
 $("#pageName").text("Product Master");

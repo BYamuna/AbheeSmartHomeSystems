@@ -137,12 +137,12 @@
 						
 						<div class="form-group">
 								<label for="user_name"> First Name :</label> 
-								<input	type="text" name="csname" id="csname" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter First Name"/>
+								<input	type="text" name="csname" id="csname" onkeydown="removeBorder(this.id)" class="form-control validate1 onlyCharacters" placeholder="Enter First Name"/>
 								<span class="hasError" id="csnamelError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
 								<label for="user_name">Last Name :</label> 
-								<input	type="text" name="cname" id="cname" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Last Name"/>
+								<input	type="text" name="cname" id="cname" onkeydown="removeBorder(this.id)" class="form-control validate1 onlyCharacters" placeholder="Enter Last Name"/>
 								<span class="hasError" id="cnameError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
@@ -478,15 +478,18 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 	
 	
 	$('#cemail').blur(function() {
-		var cmobile=$(this).val();
+		var cemail=$(this).val();
 		
-		/* alert("hi");
-		alert(cmobile);
-	 */
+		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		  if( regex.test(cemail))
+			  {
+			  subValidation =true;
+		
+		
 		$.ajax({
 					type : "POST",
 					url : "checkEmailExst",
-					data :"cmobile="+cmobile,
+					data :"cmobile="+cemail,
 					dataType : "text",
 					beforeSend : function() {
 			             $.blockUI({ message: 'Please wait' });
@@ -512,6 +515,14 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 					error :  function(e){$.unblockUI();console.log(e);}
 					
 				});
+			  }
+		  else
+			  
+		{
+			  $('#cemail').css('border-color', 'red');
+			  subValidation =false;
+			  
+		}
 
 			}); 
 	

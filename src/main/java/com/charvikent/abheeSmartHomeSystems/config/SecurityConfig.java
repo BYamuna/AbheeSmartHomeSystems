@@ -61,6 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	  .invalidSessionUrl("/");
  }
  
+ 
+ 
  @Bean(name="passwordEncoder")
     public PasswordEncoder passwordencoder(){
      return new BCryptPasswordEncoder();
