@@ -81,24 +81,7 @@
         </div>
 		</form:form>
 			</div>
-<!-- <script type="text/javascript">
-$('#imgfile').blur(function() {
-	ifile =$('#imgfile').val();
-	var fileSize=/^(\d*\.?\d+)(?(?=[KMGT])([KMGT])(?:i?B)?|B?)$/;
-	alert(fileSize.test(ifile));
-	if(fileSize.test(ifile))
-	{
-	alert("Maximum file size should be 2MB");
-	$('#submitModel').prop('disabled', false);
-	}
-	else
-	{
-		alert("file size should not exceed more than 2MB");
-		$('#imgfile').css('border-color', 'red');
-		$('#submitModel').prop('disabled', true);
-	}
-	});
-</script> -->		
+	
       	</div> 
    	</div>
 </div> 			

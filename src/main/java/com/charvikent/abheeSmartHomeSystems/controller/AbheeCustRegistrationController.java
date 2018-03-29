@@ -317,16 +317,16 @@ public class AbheeCustRegistrationController
 	}
 	
 	@RequestMapping(value = "/custreg" ,method = RequestMethod.POST)
-	public String saveAdmin(@Valid @ModelAttribute  User user, BindingResult bindingresults,
+	public String saveCustomer(@Valid @ModelAttribute  User user, BindingResult bindingresults,
 			RedirectAttributes redir) throws IOException {
 		
 		
-		if(user.getBranchId()==null)
+		/*if(user.getBranchId()==null)
 		{
 			User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			user.setBranchId(objuserBean.getBranchId());
 			
-		}
+		}*/
 
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
@@ -339,7 +339,7 @@ public class AbheeCustRegistrationController
 			User userBean=null;
 			if(user.getId()!=null)
 			{
-			  userBean= userService.getUserByObject(user);
+			  userBean= userService.geCustomerByObject(user);
 
 			}
 			int dummyId =0;
@@ -380,7 +380,7 @@ public class AbheeCustRegistrationController
 				if(id == dummyId || userBean == null)
 				{
 					user.setDesignation("9");
-					//userService.updateUser(user);
+					userService.updateUser(user);
 					sendingMail.sendConfirmationEmail(user);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");

@@ -284,7 +284,7 @@ color: inherit !important;
 			
 			 toolTips();
 			 
-			 getHeadersCounts();
+			// getHeadersCounts();
 			
 			  /* var formData = new FormData();
 		    
@@ -464,7 +464,7 @@ function getHeadersCounts(){
 	                    <li class="username">
 	                        <a href="#">
 	                            <div class="pull-left"><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt=""/></div>
-	                            <div class="pull-right"><h5> hi ${pageContext.request.userPrincipal.name} !</h5><!-- <small>Logged in as <span>${userDesignationSession.designationName }</span></small> --></div> 
+	                            <div class="pull-right"><h5> hi <span id="sfirstname"></span>${sessionUser} ! </h5><!-- <small>Logged in as <span>${userDesignationSession.designationName }</span></small> --></div> 
 	                        </a>
 	                    </li>
 	                    <li class="userlinks">

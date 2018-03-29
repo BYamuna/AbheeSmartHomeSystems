@@ -48,7 +48,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="firstname" class="form-control validate" placeholder="Enter name"/>
+										<form:input path="firstname" class="form-control validate onlyCharacters" placeholder="Enter First Name"/>
 									</div>
 								</div>
 								
@@ -57,7 +57,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Last name<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="lastname" class="form-control validate" placeholder="Enter Surname"/>
+										<form:input path="lastname" class="form-control validate onlyCharacters" placeholder="Enter last Name"/>
 									</div>
 								</div>
 								
@@ -66,22 +66,31 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="email" class="form-control" placeholder="Enter Emailid"/>
+										<form:input path="email" class="form-control validate emailOnly" placeholder="Enter Emailid"/>
 									</div>
 								</div></div>
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile Number<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:input path="mobilenumber" class="form-control validate onlyNumbers" placeholder="Enter Mobileno"/>
+										<form:input path="mobilenumber" class="form-control validate numericOnly"  maxlength="10" placeholder="Enter Mobileno"/>
 									</div>
 								</div>
 								</div>
 								<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">password<span class="impColor">*</span></label>
+									<label class="col-md-3 control-label no-padding-right">Password<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:password path="password" class="form-control validate onlyNumbers" placeholder="Enter Mobileno"/>
+										<form:password path="password" class="form-control validate onlyNumbers" maxlength="4" placeholder="Enter Password"/>
+									</div>
+								</div>
+								</div>
+								
+								<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Address<span class="impColor">*</span></label>
+								<div class="col-md-6">
+										<form:textarea path="address" class="form-control validate " placeholder="Enter Address"/>
 									</div>
 								</div>
 								</div>
@@ -164,7 +173,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th> Cust ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>MobileNo</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th> Cust ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>MobileNo</th><th>Address</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -183,6 +192,7 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.lastname+"'>"+ orderObj.lastname + "</td>"
 			+ "<td title='"+orderObj.email+"'>"+ orderObj.email + "</td>"
 			+ "<td title='"+orderObj.mobilenumber+"'>"+ orderObj.mobilenumber + "</td>"
+			+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
@@ -199,6 +209,7 @@ function editEmployee(id) {
 	$("#lastname").val(serviceUnitArray[id].lastname); 
 	$("#mobilenumber").val(serviceUnitArray[id].mobilenumber);
 	$("#email").val(serviceUnitArray[id].email);
+	$("#address").val(serviceUnitArray[id].address);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 	document.getElementById("username").readOnly  = true;
@@ -370,6 +381,115 @@ function inactiveData() {
 				});
 		
 }
+
+$('#mobilenumber').blur(function() {
+	var cmobile=$(this).val();
+	
+	
+	 
+	 if(cmobile.length != 10 )
+		 {
+		 alert("Password Length Must Be 10 Digits")
+		 $('#cmobile').css('border-color', 'red');
+		// $('#submitModel').prop('disabled', true);
+		 
+		 subValidation =false;
+		 
+		 }
+	 
+	
+	 else
+		 {
+	
+	
+	$.ajax({
+				type : "POST",
+				url : "checkCustExst",
+				data :"cmobile="+cmobile,
+				dataType : "text",
+				beforeSend : function() {
+		             $.blockUI({ message: 'Please wait' });
+		          }, 
+				success : function(data) {
+					if(data ==='true')
+						{
+						alert("Mobile Number already exists")
+	 					$('#mobilenumber').css('border-color', 'red');
+	 					 $('#submit1').prop('disabled', true);
+	 					subValidation =false;
+						}
+					 else
+						{
+						$('#mobilenumber').css('border-color', 'none');
+						 $('#submit1').prop('disabled', false);
+						 subValidation =true;
+						} 
+					
+				},
+				complete: function () {
+		            
+		            $.unblockUI();
+		       },
+				error :  function(e){$.unblockUI();console.log(e);}
+				
+			});
+	
+		 }
+
+		}); 
+		
+		
+$('#email').blur(function() {
+
+	var cemail=$(this).val();
+	
+	var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	  if( regex.test(cemail))
+		  {
+		  subValidation =true;
+	
+	
+	$.ajax({
+				type : "POST",
+				url : "checkEmailExst",
+				data :"cmobile="+cemail,
+				dataType : "text",
+				beforeSend : function() {
+		             $.blockUI({ message: 'Please wait' });
+		          }, 
+				success : function(data) {
+					if(data ==='true')
+						{
+						//alert("username already exists")
+	 					$('#email').css('border-color', 'red');
+	 					 $('#submit1').prop('disabled', true);
+						}
+					else
+						{
+						$('#email').css('border-color', 'none');
+						 $('#submit1').prop('disabled', false);
+						}
+					
+				},
+				complete: function () {
+		            
+		            $.unblockUI();
+		       },
+				error :  function(e){$.unblockUI();console.log(e);}
+				
+			});
+		  }
+	  else
+		  
+	{
+		  $('#email').css('border-color', 'red');
+		  subValidation =false;
+		  
+	}
+
+		}); 
+
+	
    
  $("#pageName").text("Customer Registration");
 $(".abheecust").addClass("active"); 

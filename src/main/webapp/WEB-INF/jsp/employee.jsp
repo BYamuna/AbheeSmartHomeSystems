@@ -82,21 +82,21 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="mobilenumber" class="form-control validate numericOnly" placeholder="Enter Mobile Number"/>
+										<form:input path="mobilenumber" class="form-control validate numericOnly" maxlength="10"  placeholder="Enter Mobile Number"/>
 									</div>
 								</div></div>
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Email</label>
 									<div class="col-md-6">
-										<form:input path="email" class="form-control" placeholder="Enter Email"/>
+										<form:input path="email" class="form-control validate emailOnly" placeholder="Enter Email"/>
 									</div>
 								</div></div>
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Designation</label>
 									<div class="col-md-6">
-										<form:select path="designation" class="form-control " >
+										<form:select path="designation" class="form-control validate " >
 											<form:option value="">-- Select Designation --</form:option>
 											<form:options items="${roles}"/>
 										</form:select>
@@ -116,7 +116,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">ReportTo</label>
 									<div class="col-md-6">
-										<form:select path ="reportto" class="form-control" onfocus="removeBorder(this.id)">
+										<form:select path ="reportto" class="form-control validate" onfocus="removeBorder(this.id)">
 											<form:option value="">-- Select Report to --</form:option>
 								     		<form:options items="${reportto}"/>
 										</form:select>
@@ -127,7 +127,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Branch</label>
 									<div class="col-md-6">
-										<form:select path ="BranchId" class="form-control" onfocus="removeBorder(this.id)">
+										<form:select path ="BranchId" class="form-control validate" onfocus="removeBorder(this.id)">
 											<form:option value="">-- Select Branch--</form:option>
 								     		<form:options items="${orgNames}"/>
 										</form:select>
@@ -379,9 +379,114 @@ $('#username').blur(function() {
 		}); 
 		
 
+$('#email').blur(function() {
+
+	var cemail=$(this).val();
+	
+	var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	  if( regex.test(cemail))
+		  {
+		  $('#submit1').prop('disabled', false);
+	
+	
+	$.ajax({
+				type : "POST",
+				url : "checkEmpExstbyemail",
+				data :"cemail="+cemail,
+				dataType : "text",
+				beforeSend : function() {
+		             $.blockUI({ message: 'Please wait' });
+		          }, 
+				success : function(data) {
+					if(data ==='true')
+						{
+						//alert("username already exists")
+	 					$('#email').css('border-color', 'red');
+	 					 $('#submit1').prop('disabled', true);
+						}
+					else
+						{
+						$('#email').css('border-color', 'none');
+						 $('#submit1').prop('disabled', false);
+						}
+					
+				},
+				complete: function () {
+		            
+		            $.unblockUI();
+		       },
+				error :  function(e){$.unblockUI();console.log(e);}
+				
+			});
+		  }
+	  else
+		  
+	{
+		  $('#email').css('border-color', 'red');
+		  $('#submit1').prop('disabled', true);
+		  
+	}
+
+		}); 
 
 
 
+
+$('#mobilenumber').blur(function() {
+	var cmobile=$(this).val();
+	
+	
+	 
+	 if(cmobile.length != 10 )
+		 {
+		 alert("Password Length Must Be 10 Digits")
+		 $('#mobilenumber').css('border-color', 'red');
+		 
+			 $('#submit1').prop('disabled', true);
+		 
+		 }
+	 
+	
+	 else
+		 {
+	
+	
+	$.ajax({
+				type : "POST",
+				url : "checkEmpExst",
+				data :"cmobile="+cmobile,
+				dataType : "text",
+				beforeSend : function() {
+		             $.blockUI({ message: 'Please wait' });
+		          }, 
+				success : function(data) {
+					if(data ==='true')
+						{
+						alert("Mobile Number already exists")
+	 					$('#mobilenumber').css('border-color', 'red');
+	 					 $('#submit1').prop('disabled', true);
+	 					subValidation =false;
+						}
+					 else
+						{
+						$('#mobilenumber').css('border-color', 'none');
+						 $('#submit1').prop('disabled', false);
+						 subValidation =true;
+						} 
+					
+				},
+				complete: function () {
+		            
+		            $.unblockUI();
+		       },
+				error :  function(e){$.unblockUI();console.log(e);}
+				
+			});
+	
+		 }
+
+		}); 
+		
 
 
 

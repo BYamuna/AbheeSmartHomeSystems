@@ -1,6 +1,7 @@
 package com.charvikent.abheeSmartHomeSystems.config;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,6 +19,9 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
+import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
+import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
+import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 
@@ -30,6 +34,12 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 	@Autowired
 	HttpSession session;
 	
+	@Autowired
+	CategoryDao categoryDao;
+	
+	@Autowired
+	UserDao userDao;
+	
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -39,9 +49,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		response.setStatus(HttpServletResponse.SC_OK);
 		// Add save record here
 		
-		session.setAttribute("test", "test");
+		List<Category> listOrderBeans = categoryDao.getCategoryNames();
 		
-		session.setAttribute("test2","test2");
+		session.setAttribute("lastLoginTime", userDao.getLastloginTime());
+		
+		
 		
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 userService.setLoginRecord(objuserBean.getId(),"login");
@@ -50,12 +62,17 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 			User userDesignation= userService.getUserDesignationById(objuserBean.getId());
 				
 				 session.setAttribute("userDesignationSession", userDesignation);
+				 
+				 session.setAttribute("sessionUser", objuserBean.getFirstname());
 				/* if (userDesignation == null) {
 						RequestDispatcher dispatcher = request.getRequestDispatcher("/");
 						dispatcher.forward(request, response);
 				 }*/
             if(objuserBean.getDesignation().equals("9"))
+            {
             	response.sendRedirect("customerDashBoard");
+            	session.setAttribute("sCategorylist",listOrderBeans);
+            }
             else
 		response.sendRedirect("dashBoard");
 	}

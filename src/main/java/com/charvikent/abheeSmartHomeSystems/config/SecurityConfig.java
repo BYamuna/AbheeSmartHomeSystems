@@ -18,14 +18,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
- @Autowired 
- private UserDetailsService userDetailsService;
  
- @Autowired
- CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
  
- @Autowired
- CustomLogoutSuccessHandler customLogoutSuccessHandler;
+ 
+	 
+	 @Autowired 
+	 private UserDetailsService userDetailsService;
+	 
+	 @Autowired
+	 CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+	 
+	 @Autowired
+	 CustomLogoutSuccessHandler customLogoutSuccessHandler;
+
  
  @Override
  public void configure(AuthenticationManagerBuilder auth) throws Exception {    
@@ -41,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	  .antMatchers("/dashBoard").access("hasRole('ROLE_USER') or  hasRole('ROLE_BRANCHHEAD') ")
 	  .antMatchers("/task").access("hasRole('ROLE_USER') or hasRole('ROLE_BRANCHHEAD')")
 	  .antMatchers("/customerDashBoard").access("hasRole('ROLE_CUSTOMER')")
+	  .antMatchers("/salesRequest").access("hasRole('ROLE_CUSTOMER')")
 	  .anyRequest().permitAll()  //dashboard,task
   .and()
     .formLogin().loginPage("/login")
@@ -57,8 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   .and()
     .csrf().disable();
 
-	 http.sessionManagement()
-	  .invalidSessionUrl("/");
+	
  }
  
  
@@ -67,4 +72,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordencoder(){
      return new BCryptPasswordEncoder();
     }
+
+ 
 }
