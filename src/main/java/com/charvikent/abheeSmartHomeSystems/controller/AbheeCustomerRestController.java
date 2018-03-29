@@ -1,11 +1,15 @@
 package com.charvikent.abheeSmartHomeSystems.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeCustomerDao;
+import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
+import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.OTPDetails;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class AbheeCustomerRestController {
@@ -39,6 +46,9 @@ public class AbheeCustomerRestController {
 	
 	@Autowired
 	OTPDetailsDao oTPDetailsDao;
+	
+	@Autowired
+	CategoryDao categoryDao;
 
 	
 	@RequestMapping("/AbheeCustomer")
@@ -171,28 +181,41 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	
 	@SuppressWarnings("unused")
 	@RequestMapping(value="/logincredentials", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
-	public HashMap<String, String>  checkingLogincredentials( @RequestBody User user) {
+	public String  checkingLogincredentials( @RequestBody User user) throws JsonProcessingException, JSONException {
 		
 		String code =null;
-		String regSuccessMsg =user.getFirstname()+" "+user.getLastname()+",  Successfully registered with ABhee Smart Homes. \n You can login using  \n UserId:  "+user.getMobilenumber()+" or "+user.getEmail()+"\n password: "+user.getPassword();
-
+		HashMap<String,String> hm =new HashMap<String,String>();
+		List<Category> listOrderBeans = categoryDao.getCategoryNames();
+		
+		JSONObject json =new JSONObject();
+		
+		
+		//List<User> users =new ArrayList<user>()
+		
 		
 			User userBean =userService.checkuserExistOrNot(user);
 			
+			ObjectMapper objectMapper = new ObjectMapper();
+			String userjson = objectMapper.writeValueAsString(userBean);
+			String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
 			
 			if(null != userBean)
 			{
-				code = userBean.getFirstname()+" "+userBean.getLastname();
+				json.put("categorieslist", listOrderBeans);
+				code =userBean.getFirstname()+" "+userBean.getLastname();
+				json.put("username", code);
+				
 			}
 			else
-				code="NOT_FOUND";
+				//code="NOT_FOUND";
+				
+				json.put("status", "NOT_FOUND");
 		
 			System.out.println("rest call user status:  "+code);
 		
-HashMap<String,String> hm =new HashMap<String,String>();
+
 		
-		hm.put("status", code);
-		return hm;
+		return String.valueOf(json);
 	}
 	
 	

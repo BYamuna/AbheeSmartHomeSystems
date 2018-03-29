@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -21,6 +22,26 @@ public class Product
 	private Integer  id;
 	private String name;
 	private String description;
+	private String categoryid;
+	private String companyid;
+	private String productmodelpics;
+	private String productmodelvideoslinks;
+	
+	private String ProductModelSpecifications;
+	
+	private String ProductPrice;
+	
+	private String maxAllowedDiscount;
+	
+	@Transient
+	private String categoryname;
+	@Transient
+	private String companyname;
+	
+	
+	
+	
+	
 	@Column
 	private String status;
 	
@@ -93,10 +114,102 @@ public class Product
 	public void setUpdatedTime(Date updatedTime) {
 		this.updatedTime = updatedTime;
 	}
+	
+	
+	
+
+	public String getCategoryid() {
+		return categoryid;
+	}
+
+	public void setCategoryid(String categoryid) {
+		this.categoryid = categoryid;
+	}
+
+	
+
+	public String getProductmodelpics() {
+		return productmodelpics;
+	}
+
+	public void setProductmodelpics(String productmodelpics) {
+		this.productmodelpics = productmodelpics;
+	}
+
+	public String getProductmodelvideoslinks() {
+		return productmodelvideoslinks;
+	}
+
+	public void setProductmodelvideoslinks(String productmodelvideoslinks) {
+		this.productmodelvideoslinks = productmodelvideoslinks;
+	}
+
+	public String getCompanyid() {
+		return companyid;
+	}
+
+	public void setCompanyid(String companyid) {
+		this.companyid = companyid;
+	}
+	
+	
+	
+
+	public String getCategoryname() {
+		return categoryname;
+	}
+
+	public void setCategoryname(String categoryname) {
+		this.categoryname = categoryname;
+	}
+
+	public String getCompanyname() {
+		return companyname;
+	}
+
+	public void setCompanyname(String companyname) {
+		this.companyname = companyname;
+	}
+
+	
+	
+	
+	public String getProductModelSpecifications() {
+		return ProductModelSpecifications;
+	}
+
+	public void setProductModelSpecifications(String productModelSpecifications) {
+		ProductModelSpecifications = productModelSpecifications;
+	}
+
+	public String getProductPrice() {
+		return ProductPrice;
+	}
+
+	public void setProductPrice(String productPrice) {
+		ProductPrice = productPrice;
+	}
+	
+	
+	
+	
+
+	public String getMaxAllowedDiscount() {
+		return maxAllowedDiscount;
+	}
+
+	public void setMaxAllowedDiscount(String maxAllowedDiscount) {
+		this.maxAllowedDiscount = maxAllowedDiscount;
+	}
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", status=" + status
-				+ ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
+		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", categoryid=" + categoryid
+				+ ", companyid=" + companyid + ", productmodelpics=" + productmodelpics + ", productmodelvideoslinks="
+				+ productmodelvideoslinks + ", status=" + status + ", createdTime=" + createdTime + ", updatedTime="
+				+ updatedTime + "]";
 	}
+
+	
+	
 }

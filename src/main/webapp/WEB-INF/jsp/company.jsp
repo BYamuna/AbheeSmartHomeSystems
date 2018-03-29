@@ -24,7 +24,7 @@
 					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
 						<div class="table-responsive" id="tableId">
 							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
-								<thead><tr><th>Company ID</th><th>Name</th><th>Description</th><th>Status</th><th></th></tr></thead>
+								<thead><tr><th>Name</th><th>Description</th><th>Status</th><th></th></tr></thead>
 								<tbody></tbody>
 							</table>
 						</div>
@@ -45,18 +45,18 @@
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<form:hidden path="id"/>
-									<label for="focusedinput" class="col-md-6 control-label">Name <span class="impColor">*</span></label>
+									<label for="focusedinput" class="col-md-6 control-label">Company Name <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="name" class="form-control validate" placeholder="Enter Name"/>	
+										<form:input path="name" class="form-control validate" placeholder="Enter Company Name"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Description <span class="impColor">*</span></label>
+									<label for="focusedinput" class="col-md-6 control-label">Company Description <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:textarea path="description" class="form-control validate" placeholder="Enter Description"/>	
+										<form:textarea path="description" class="form-control validate" placeholder="Enter Company Description"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -110,7 +110,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="company" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Name</th><th>Description</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Company Name</th><th>Company Description</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {

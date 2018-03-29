@@ -270,7 +270,7 @@
                     		<div class="form-group" style=" width: 154%;">
 									<label class="ace-file-input ace-file-multiple col-sm-3 control-label no-padding-right" >Attach File(s)</label>
 									<div class="col-md-9">
-										<input type="file" name="fileupload[]" id="fileupload" multiple style="margin: 8px 0px 0px 0px;">
+										<input type="file" name="fileupload[]" id="productpics" multiple style="margin: 8px 0px 0px 0px;">
 									</div>
 							</div>
 							</div>

@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     .logout()
     //.logoutUrl("/logout1")
    // .logoutSuccessUrl("/") 
-    .invalidateHttpSession(true)
+   // .invalidateHttpSession(true)
    .logoutSuccessHandler(customLogoutSuccessHandler)
    .and()
    .exceptionHandling().accessDeniedPage("/403")
@@ -60,6 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 http.sessionManagement()
 	  .invalidSessionUrl("/");
  }
+ 
+ 
  
  @Bean(name="passwordEncoder")
     public PasswordEncoder passwordencoder(){

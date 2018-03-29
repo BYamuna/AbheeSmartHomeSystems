@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeBranchDao;
 import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
 import com.charvikent.abheeSmartHomeSystems.model.Department;
@@ -43,6 +44,9 @@ public class EmployeeController {
 	
 	@Autowired
 	AbheeBranchDao abheeBranchDao;
+	
+	@Autowired
+	SendingMail sendingMail;
 
 
 
@@ -60,7 +64,7 @@ public class EmployeeController {
 		model.addAttribute("allUsers", userService.getAllUsers());
 		model.addAttribute("orgNames", abheeBranchDao.getAbheeBranchNamesMap());
 
-
+		
 		try {
 			listOrderBeans = userService.getAllUsers();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
@@ -125,6 +129,7 @@ public class EmployeeController {
 					user.setEnabled("1");
 
 					userService.saveUser(user);
+					sendingMail.sendConfirmationEmail(user);
 
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");
 					redir.addFlashAttribute("cssMsg", "success");
@@ -145,6 +150,7 @@ public class EmployeeController {
 				if(id == dummyId || userBean == null)
 				{
 					userService.updateUser(user);
+					//sendingMail.sendConfirmationEmail(user);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
 
@@ -281,7 +287,7 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/inActiveEmp")
-	public @ResponseBody String getAllActiveOrInactiveOrgnizations(Department  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+	public @ResponseBody String getAllActiveOrInactiveOrgnizations(User  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		List<User> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
@@ -317,6 +323,7 @@ public class EmployeeController {
 		return String.valueOf(jsonObj);
 	}
 
+	
 
 
 

@@ -77,6 +77,14 @@
 									</div>
 								</div>
 								</div>
+								<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">password<span class="impColor">*</span></label>
+								<div class="col-md-6">
+										<form:password path="password" class="form-control validate onlyNumbers" placeholder="Enter Mobileno"/>
+									</div>
+								</div>
+								</div>
 						<div class="panel-footer">
 				      	<div class="row">
 				      		<div class="col-sm-12">
@@ -156,15 +164,15 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th> Cust ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>MobileNo</th><th style="text-align: center;">Options</th><th></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th> Cust ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>MobileNo</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
-		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deleteEmployee("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>";
+		if(orderObj.enabled == "1"){
+			var deleterow = "<a class='deactivate' onclick='deleteCustomer("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>";
 			var cls="activecss";
 		}else{  
-			var deleterow = "<a class='activate' onclick='deleteEmployee("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>";
+			var deleterow = "<a class='activate' onclick='deleteCustomer("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>";
 			var cls="inactivecss";
 		}
 		var edit = "<a class='edit editIt' onclick='editEmployee("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
@@ -176,13 +184,31 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.email+"'>"+ orderObj.email + "</td>"
 			+ "<td title='"+orderObj.mobilenumber+"'>"+ orderObj.mobilenumber + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
-			+ "<td ><a style='cursor:pointer' onclick='getPasswordModal("+ orderObj.id +")'>Change Password</a></td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
 	if(isClick=='Yes') $('.datatables').dataTable();
 	
 } 
+
+
+function editEmployee(id) {
+	
+	$("#id").val(serviceUnitArray[id].id);
+	$("#firstname").val(serviceUnitArray[id].firstname);
+	$("#lastname").val(serviceUnitArray[id].lastname); 
+	$("#mobilenumber").val(serviceUnitArray[id].mobilenumber);
+	$("#email").val(serviceUnitArray[id].email);
+	$("#submit1").val("Update");
+	$(window).scrollTop($('#moveTo').offset().top);
+	document.getElementById("username").readOnly  = true;
+	//document.querySelector("password").required = false;
+    $("#passwordDiv").hide();
+    var idArray = $.makeArray($('.validate').map(function() {
+    	return this.id;
+    }));
+}
+
 /* function changePasswordModal(){
 
 	
@@ -237,49 +263,8 @@ function getPasswordModal(id)
 }
 
 
-function editEmployee(id) {
-	
-	$("#id").val(serviceUnitArray[id].id);
-	$("#username").val(serviceUnitArray[id].username);
-	$("#password").val(serviceUnitArray[id].password);
-	$("#firstname").val(serviceUnitArray[id].firstname);
-	$("#lastname").val(serviceUnitArray[id].lastname); 
-	$("#mobilenumber").val(serviceUnitArray[id].mobilenumber);
-	$("#designation").val(serviceUnitArray[id].designation);
-	$("#department").val(serviceUnitArray[id].department);
-	$("#reportto").val(serviceUnitArray[id].reportto);
-	$("#email").val(serviceUnitArray[id].email);
-	$("#submit1").val("Update");
-	$(window).scrollTop($('#moveTo').offset().top);
-	document.getElementById("username").readOnly  = true;
-	//document.querySelector("password").required = false;
-    $("#passwordDiv").hide();
-    var idArray = $.makeArray($('.validate').map(function() {
-    	return this.id;
-    }));
-    console.log(idArray);
-}
 
-function deleteEmployee(id,status){
-	var checkstr=null;
-	if(status == 0){
-		 checkstr = confirm('Are you sure you want to Deactivate?');
-	}else{
-		 checkstr = confirm('Are you sure you want to Activate?');
-	}
-	if(checkstr == true){
-		var formData = new FormData();
-	    formData.append('id', id);
-	    formData.append('status', status);
-		$.fn.makeMultipartRequest('POST', 'deleteUser', false, formData, false, 'text', function(data){
-			var jsonobj = $.parseJSON(data);
-			var alldata = jsonobj.allOrders1;
-			displayTable(alldata);
-			toolTips(); //calling tool tips defined at header
-			$('#inActive').prop('checked', false);
-		});
-	}
-}
+
 
 
 
@@ -344,6 +329,27 @@ function validate(id, errorMessage)
 	}
 	
 }
+*/
+function deleteCustomer(id,status){
+	var checkstr=null;
+	if(status == 0){
+		 checkstr = confirm('Are you sure you want to Deactivate?');
+	}else{
+		 checkstr = confirm('Are you sure you want to Activate?');
+	}
+	if(checkstr == true){
+		var formData = new FormData();
+	    formData.append('id', id);
+	    formData.append('status', status);
+		$.fn.makeMultipartRequest('POST', 'deleteCustomer', false, formData, false, 'text', function(data){
+			var jsonobj = $.parseJSON(data);
+			var alldata = jsonobj.allOrders1;
+			displayTable(alldata);
+			toolTips(); //calling tool tips defined at header
+			$('#inActive').prop('checked', false);
+		});
+	}
+}
 
 function inactiveData() {
 	var status="0";
@@ -355,7 +361,7 @@ function inactiveData() {
 		var formData = new FormData();
 		formData.append('status', status);
 		
-		$.fn.makeMultipartRequest('POST', 'inActiveEmp', false,
+		$.fn.makeMultipartRequest('POST', 'inActiveCust', false,
 				formData, false, 'text', function(data) {
 			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;
@@ -364,7 +370,7 @@ function inactiveData() {
 				});
 		
 }
-   */
+   
  $("#pageName").text("Customer Registration");
 $(".abheecust").addClass("active"); 
 </script>

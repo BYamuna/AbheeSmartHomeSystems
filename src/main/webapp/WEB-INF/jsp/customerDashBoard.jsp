@@ -77,7 +77,7 @@
                 	<img width="200px" height="200px" src="${baseurl }/assets/images/1.png"/>
                 </a>
             </div>
-            <h1>Home Theaters</h1>
+            <h1>Home Theaters${test2}</h1>
         </div>
         <div class="col-md-3">
         	<div align="center" class="tab">

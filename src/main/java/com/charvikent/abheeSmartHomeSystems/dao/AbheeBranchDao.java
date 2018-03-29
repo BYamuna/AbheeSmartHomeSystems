@@ -61,14 +61,13 @@ public class AbheeBranchDao {
 	
 	
 	public void updateAbheeBranch(AbheeBranch abheeBranch) {
-		String hql="update AbheeBranch set  description =:d, name =:n, branchhead =:bh   where  id =:i";
+		String hql="update AbheeBranch set  description =:d, name =:n  where  id =:i";
 		
 		Query query =entityManager.createQuery(hql); 
 		
 		query.setParameter("d", abheeBranch.getDescription());
 		query.setParameter("n", abheeBranch.getName());
 		query.setParameter("i", abheeBranch.getId());
-		query.setParameter("bh", abheeBranch.getBranchhead());
 		query.executeUpdate(); 
 		
 	}
@@ -172,16 +171,14 @@ public class AbheeBranchDao {
 
 
 		try {
-			List<Object[]> rows = entityManager.createNativeQuery("select ab.id,ab.name,ab.description,ab.branchhead,u.username,ab.status from abheeusers u,  abhee_branch ab where   ab.branchhead=u.id and ab.status='1'").getResultList();
+			List<Object[]> rows = entityManager.createNativeQuery("select ab.id,ab.name,ab.description,ab.status from abhee_branch ab where    ab.status='1'").getResultList();
 			for (Object[] row : rows) {
 				AbheeBranch abheebranch=new AbheeBranch();
 
 				abheebranch.setId(Integer.parseInt(String.valueOf(row[0])));
 				abheebranch.setName((String) row[1]);
 				abheebranch.setDescription((String) row[2]);
-				abheebranch.setBranchhead((String) row[3]);
-				abheebranch.setBranchheadname((String) row[4]);
-				abheebranch.setStatus((String) row[5]);
+				abheebranch.setStatus((String) row[3]);
 				
 				bheadlist.add(abheebranch);
 

@@ -95,7 +95,7 @@
 				<div class="col-sm-12">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<input type="text"  name= "username" class="form-control validate"  placeholder="Email or Mobilenumber"/>
+						<input type="text"  name= "username" class="form-control validate"  placeholder=" Mobile Number"/>
 					</div>
 				</div>
 			</div>
@@ -137,17 +137,17 @@
 						
 						<div class="form-group">
 								<label for="user_name"> First Name :</label> 
-								<input	type="text" name="csname" id="csname" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter First Name"/>
+								<input	type="text" name="csname" id="csname" onkeydown="removeBorder(this.id)" class="form-control validate1 onlyCharacters" placeholder="Enter First Name"/>
 								<span class="hasError" id="csnamelError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
 								<label for="user_name">Last Name :</label> 
-								<input	type="text" name="cname" id="cname" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Last Name"/>
+								<input	type="text" name="cname" id="cname" onkeydown="removeBorder(this.id)" class="form-control validate1 onlyCharacters" placeholder="Enter Last Name"/>
 								<span class="hasError" id="cnameError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
 								<label for="user_name">Enter MobileNumber :</label> 
-								<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" class="form-control validate1 numericOnly" placeholder="Enter Mobile Number"/>
+								<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" maxlength="10" class="form-control validate1 numericOnly" placeholder="Enter Mobile Number"/>
 								<span class="hasError" id="cmobileError" style="font-size: 13px;"></span>
 							</div>
 
@@ -157,13 +157,13 @@
 								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
-								<label for="user_name">Enter  password :</label> 
-								<input	type="password" name="cpassword" id="cpassword" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter password"/>
+								<label for="user_name">Enter  password (Max 4 Digits) :</label> 
+								<input	type="password" name="cpassword" id="cpassword" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control validate1 numericOnly" placeholder="Enter password" />
 								<span class="hasError" id="cpasswordError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
 								<label for="user_name">Retype password :</label> 
-								<input	type="password" name="crtpassword" id="crtpassword" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Enter Retype Password"/>
+								<input	type="password" name="crtpassword"  id="crtpassword" onkeydown="removeBorder(this.id)"  maxlength="4" class="form-control validate1 numericOnly" placeholder="Enter Retype Password"/>
 								<span class="hasError" id="crtpasswordError" style="font-size: 13px;"></span>
 							</div>
 							
@@ -218,12 +218,32 @@
 <script type='text/javascript' src="js/jquery.blockUI.min.js" ></script>
 </body>
 <script type="text/javascript">
+
+var validation = true;
+
+
+var subValidation =true;
+
 $('#cmobile').blur(function() {
 	var cmobile=$(this).val();
 	
-	/* alert("hi");
-	alert(cmobile);
- */
+	
+	 
+	 if(cmobile.length != 10 )
+		 {
+		 alert("Password Length Must Be 10 Digits")
+		 $('#cmobile').css('border-color', 'red');
+		// $('#submitModel').prop('disabled', true);
+		 
+		 subValidation =false;
+		 
+		 }
+	 
+	
+	 else
+		 {
+	
+	
 	$.ajax({
 				type : "POST",
 				url : "checkCustExst",
@@ -235,15 +255,17 @@ $('#cmobile').blur(function() {
 				success : function(data) {
 					if(data ==='true')
 						{
-						//alert("username already exists")
+						alert("Mobile Number already exists")
 	 					$('#cmobile').css('border-color', 'red');
 	 					 $('#submitModel').prop('disabled', true);
+	 					subValidation =false;
 						}
-					else
+					 else
 						{
 						$('#cmobile').css('border-color', 'none');
 						 $('#submitModel').prop('disabled', false);
-						}
+						 subValidation =true;
+						} 
 					
 				},
 				complete: function () {
@@ -253,6 +275,8 @@ $('#cmobile').blur(function() {
 				error :  function(e){$.unblockUI();console.log(e);}
 				
 			});
+	
+		 }
 
 		}); 
 		
@@ -292,18 +316,18 @@ var idArrayCmt1 = null;
 
 
 
-var validation = true;
+//var validation = true;
 
 	idArrayCmt1 = $.makeArray($('.validate1').map(function() {
 		return this.id ;
 	}));
 		
-	validation = true;
+	
 	$('#submitModel').click(function(event) {
 	$.each(idArrayCmt1, function(i, val) {
 		var value = $("#" + idArrayCmt1[i]).val();
 		var placeholder = $("#" + idArrayCmt1[i]).attr('placeholder');
-		if (value == null || value == "" || value == "undefined") {
+		if (value == null || value == "" || value == "undefined" ) {
 			$('style').append(styleBlock);
 			$("#" + idArrayCmt1[i] ).attr("placeholder", placeholder);
 			$("#" + idArrayCmt1[i] ).css('border-color','#e73d4a');
@@ -320,6 +344,7 @@ var validation = true;
 			validation = true;
 		}
 	});
+	validation =subValidation;
 	if(validation) {
 	/* 	$("#submit1").attr("disabled",true);
 		$("#submit1").val("Please wait...");
@@ -453,27 +478,19 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 	
 	
 	$('#cemail').blur(function() {
-		var cmobile=$(this).val();
-		/* var emailPolicy=/^(([^<>()[\]\\.,;:\s@\]+(\.[^<>()[\]\\.,;:\s@\]+)*)|(\.+\))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		alert(emailPolicy.test(ccpassword));
-		if (emailPolicy.test(ccpassword)) 
-		{
-            alert('Valid email address');
-            $('#submitModel').prop('disabled', false);
-        }
-		else
-			{
-			alert("Enter valid email address");	
-			$('#cemail').css('border-color', 'red');
-			$('#submitModel').prop('disabled', true);
-			}  */ 
-		/* alert("hi");
-		alert(cmobile);
-	 */
+
+		var cemail=$(this).val();
+		
+		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		  if( regex.test(cemail))
+			  {
+			  subValidation =true;
+		
+		
 		$.ajax({
 					type : "POST",
 					url : "checkEmailExst",
-					data :"cmobile="+cmobile,
+					data :"cmobile="+cemail,
 					dataType : "text",
 					beforeSend : function() {
 			             $.blockUI({ message: 'Please wait' });
@@ -499,14 +516,22 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 					error :  function(e){$.unblockUI();console.log(e);}
 					
 				});
+			  }
+		  else
+			  
+		{
+			  $('#cemail').css('border-color', 'red');
+			  subValidation =false;
+			  
+		}
 
 			}); 
+	
 	
 
 	$('#cpassword').blur(function() {
 		ccpassword =$('#cpassword').val();
 		//alert(ccpassword);
-		
 		var  passwordPolicy= /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@#$!%*?&.])[A-Za-z\d$@#$!%*?&.]{6,15}$/;
 		alert(passwordPolicy.test(ccpassword));
 		if (passwordPolicy.test(ccpassword)) 

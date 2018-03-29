@@ -1,3 +1,4 @@
+
 package com.charvikent.abheeSmartHomeSystems.config;
 
 import java.io.IOException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 //import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
@@ -33,6 +35,11 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler im
 			throws IOException, ServletException {
 
 		//String refererUrl = request.getHeader("Referer");
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		
+		System.out.println(auth);
 		
 		User objuserBean = (User)authentication.getPrincipal();
 		userService.setLoginRecord(objuserBean.getId(),"logout");

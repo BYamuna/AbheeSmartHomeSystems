@@ -28,6 +28,8 @@ public class Category {
 	
 	private String status;
 	
+	private String categoryimg;
+	
 	@CreationTimestamp
 	private Date createdTime;
 
@@ -90,6 +92,16 @@ public class Category {
 
 	public void setKpOrgId(String kpOrgId) {
 		this.kpOrgId = kpOrgId;
+	}
+	
+	
+
+	public String getCategoryimg() {
+		return categoryimg;
+	}
+
+	public void setCategoryimg(String categoryimg) {
+		this.categoryimg = categoryimg;
 	}
 
 	@Override

@@ -39,29 +39,111 @@
 					<div class="panel-heading">
 						<h4>Add Product</h4>
 					</div>
-					<form:form class="form-horizontal" commandName="productf" role="form" id="fillingstation-form" action="product" method="post">
+					<form:form class="form-horizontal" commandName="productf" role="form" id="fillingstation-form" action="product" method="post" enctype="multipart/form-data">
 					<div class="panel-body">
-						<div class="row">
+						
+                    	<div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<form:hidden path="id"/>
-									<label for="focusedinput" class="col-md-6 control-label">Product ID <span class="impColor">*</span></label>
+									<label for="focusedinput" class="col-md-6 control-label">Product Category <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="name" class="form-control validate" placeholder="Enter ProuctId"/>	
-										<span class="hasError" id="stationnameError"></span>
-								    </div>
+									<form:select path="categoryid" class="form-control validate" onkeydown="removeBorder(this.id)">
+											<form:option value="">-- Select Product Category --</form:option>
+											<form:options items="${CategoriesMap}"/>
+										</form:select>
+										</div>
                     			</div>
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Description <span class="impColor">*</span></label>
+									<label for="focusedinput" class="col-md-6 control-label">Product Company <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:textarea path="description" class="form-control validate" placeholder="Enter Description"/>	
+									<form:select path="companyid" class="form-control validate" onkeydown="removeBorder(this.id)">
+											<form:option value="">-- Select Product Company --</form:option>
+											<form:options items="${companiesMap}"/>
+										</form:select>
+										</div>
+                    			</div>
+                    		</div>
+                    		
+                    		
+                    	</div>
+                    	<div class="row">
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">Product Model<span class="impColor">*</span></label>
+									<div class="col-md-5">
+										<form:input path="name" class="form-control validate" placeholder="Enter Product Model"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
                     		</div>
                     		
+                    		
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">Description <span class="impColor">*</span></label>
+									<div class="col-md-5">
+										<form:textarea path="description" class="form-control validate" placeholder="Enter product Model Description"/>	
+										<span class="hasError" id="stationnameError"></span>
+								    </div>
+                    			</div>
+                    		</div>
+                    		</div>
+                    		<div class="row">
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">Specifications <span class="impColor">*</span></label>
+									<div class="col-md-5">
+										<form:textarea path="ProductModelSpecifications" class="form-control validate" placeholder="Enter product Model Specifications"/>	
+										<span class="hasError" id="stationnameError"></span>
+								    </div>
+                    			</div>
+                    		</div>
+                    		
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">Product Price<span class="impColor">*</span></label>
+									<div class="col-md-5">
+										<form:input path="ProductPrice" class="form-control validate numericOnly" placeholder="Enter Product Price"/>	
+										<span class="hasError" id="stationnameError"></span>
+								    </div>
+                    			</div>
+                    		</div>
+                    		</div>
+                    		<div class="row">
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">Maximum  Allowed Discount(%) <span class="impColor">*</span></label>
+									<div class="col-md-5">
+										<form:input path="maxAllowedDiscount" class="form-control validate numericOnly" maxlength="2" placeholder="Enter Maximum  Allowed Discount"/>	
+										<span class="hasError" id="stationnameError"></span>
+								    </div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">Videos Links<span class="impColor">*</span></label>
+								    <div class="col-md-3" id ="dtext">
+										<input type="text" id="name1" name='vlink' class="form-control validate" placeholder="Enter Product model Video links"/>	
+										<span class="hasError" id="stationnameError"></span>
+								    </div> 
+								    <div><input type="button" value="Add Another Link" onclick="addNewTextBox()"></div>
+                    			</div>
+                    		</div>
+                    		</div>
+                    		
+                    		
+                    	
+                    	<div class="row">
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">Product Images <span class="impColor">*</span></label>
+									<div class="col-md-5">
+										<input type="file" name="file1" id="file1" class="validate"  accept="image/*"  multiple="multiple" style="margin: 7px 0px 0px 0px;">
+									</div>
+                    			</div>
+                    		</div>
                     		
                     	</div>
                     		
@@ -110,10 +192,21 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="product" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Name</th><th>Description</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Product Category</th><th>Product Company</th><th>Product Model</th><th>Description</th><th>Specifications</th><th>Product Price</th><th>Maximum Allowed Discount</th><th>Product Model Videos Links</th><th>Product  Images</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
+		if(orderObj.productmodelpics==undefined) orderObj.productmodelpics='';
+		else
+			{
+				var list=orderObj.productmodelpics.split('*');
+				var productmodelpics='';
+				for(var i=0;i<list.length;i++)
+				{
+					productmodelpics=productmodelpics+'<a href="reportDocuments/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="reportDocuments/'+list[i]+'" style="height:42px; width:42px"></a>';
+				}
+				orderObj.productmodelpics=productmodelpics;
+			}
 		if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate' onclick='deleteProduct("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
@@ -122,8 +215,16 @@ function displayTable(listOrders) {
 		var edit = "<a class='edit editIt' onclick='editProduct("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr>"
+			
+			+ "<td title='"+orderObj.categoryname+"'>"+ orderObj.categoryname + "</td>"
+			+ "<td title='"+orderObj.companyname+"'>"+ orderObj.companyname + "</td>"
 			+ "<td title='"+orderObj.name+"'>"+ orderObj.name + "</td>"
 			+ "<td title='"+orderObj.description+"'>"+ orderObj.description + "</td>"
+			+ "<td title='"+orderObj.productModelSpecifications+"'>"+ orderObj.productModelSpecifications + "</td>"
+			+ "<td title='"+orderObj.productPrice+"'>"+ orderObj.productPrice + "</td>"
+			+ "<td title='"+orderObj.maxAllowedDiscount+"'>"+ orderObj.maxAllowedDiscount + "</td>"
+			+ "<td title='"+orderObj.productmodelvideoslinks+"'>"+ orderObj.productmodelvideoslinks + "</td>"
+			+ "<td title='"+orderObj.productmodelpics+"'>"+ orderObj.productmodelpics + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
@@ -138,6 +239,12 @@ function editProduct(id) {
 	$("#name").val(serviceUnitArray[id].name);
 	$("#description").val(serviceUnitArray[id].description);
 	$("#status").val(serviceUnitArray[id].status);
+	$("#categoryid").val(serviceUnitArray[id].categoryid);
+	$("#companyid").val(serviceUnitArray[id].companyid);
+	$("#productmodelvideoslinks").val(serviceUnitArray[id].productmodelvideoslinks);
+	$("#maxAllowedDiscount").val(serviceUnitArray[id].maxAllowedDiscount);
+	$("#ProductPrice").val(serviceUnitArray[id].productPrice);
+	$("#ProductModelSpecifications").val(serviceUnitArray[id].productModelSpecifications);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 }
@@ -204,6 +311,61 @@ function inactiveData()
 				});
 		
 }
+
+var i =1;
+function addNewTextBox()
+{
+	 var  dvalue =  $("#name"+i).val().trim();
+	 if((dvalue == undefined) || (dvalue==''))
+	 {
+		 return false;
+		 
+	 }
+	 else
+		 {
+			i=i+1;
+	var row ="<div><input type='text' name='vlink' id='name"+i+"' class='form-control validate' placeholder='Enter Videos links'/></div>";
+	$("#dtext").append(row);
+	
+		 }
+	
+	
+	}
+	
+	
+
+document.getElementById("file1").onchange = function () {
+    var reader = new FileReader();
+    
+    for(var i=0; i<=this.files.length; i++)
+    {
+    
+    if(this.files[i].size>500){
+        alert("Image Size should not be greater than 500Kb");
+        $("#file1").attr("src","blank");
+       // $("#file1").hide();  
+        $('#file1').wrap('<form>').closest('form').get(0).reset();
+        $('#file1').unwrap();     
+        return false;
+    }
+    if(this.files[i].type.indexOf("image")==-1){
+        alert("Invalid Type");
+        $("#file1").attr("src","blank");
+        //$("#file1").hide();  
+       $('#file1').wrap('<form>').closest('form').get(0).reset();
+      //  $('#file1').unwrap();         
+        return false;
+    }   
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("menu_image").src = e.target.result;
+        $("#file1").show(); 
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+    }
+};
 
 
 $("#pageName").text("Product Master");

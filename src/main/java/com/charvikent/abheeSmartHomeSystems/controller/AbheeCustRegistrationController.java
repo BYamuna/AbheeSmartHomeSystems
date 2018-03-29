@@ -5,18 +5,26 @@ import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
+import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeCustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeCustRegistration;
@@ -41,6 +49,8 @@ public class AbheeCustRegistrationController
 	UserService userService;
 	@Autowired
 	KptsUtil kptsUtil;
+	@Autowired
+	SendingMail sendingMail;
 	
 	String otpnumber ="";
 	
@@ -75,11 +85,11 @@ public class AbheeCustRegistrationController
 	  return "custRegistration";
 	  
 	}
-	@RequestMapping(value = "/custreg", method = RequestMethod.POST)
-	public String saveAbheeCustRegistration(@Validated @ModelAttribute  AbheeCustRegistration abheecustregistration,Model model) throws IOException 
+	/*@RequestMapping(value = "/custreg", method = RequestMethod.POST)
+	public String saveAbheeCustRegistration(@Validated @ModelAttribute  User abheecustregistration,Model model) throws IOException 
 	{
 		
-		AbheeCustRegistration custbean =adao.checkCustomerExistOrNot(abheecustregistration);
+		User custbean =adao.checkCustomerExistOrNot(abheecustregistration);
 		
 		if(custbean == null)
 		{
@@ -91,7 +101,7 @@ public class AbheeCustRegistrationController
 		}
 		return "redirect:custRegistration";
 		
-	}
+	}*/
 	
 	@RequestMapping(value = "/checkCustExst", method = RequestMethod.POST)
 	public @ResponseBody  Boolean checkCustomerExistence(@Validated @ModelAttribute  AbheeCustRegistration abheecustregistration,Model model,HttpServletRequest request) throws IOException 
@@ -226,4 +236,170 @@ public class AbheeCustRegistrationController
 		return false;
 		
 	}
+	
+	
+	@RequestMapping(value = "/inActiveCust")
+	public @ResponseBody String getAllActiveOrInactiveOrgnizations(User  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		List<User> listOrderBeans  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		try{
+			if(objdept.getStatus().equals("0"))
+				listOrderBeans = userService.getCustomerInActiveList();
+				else
+					listOrderBeans =  adao.getAbheeCustomerNames();
+
+
+
+			 objectMapper = new ObjectMapper();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+	System.out.println(e);
+			return String.valueOf(jsonObj);
+
+		}
+		return String.valueOf(jsonObj);
+	}
+	
+	@RequestMapping(value = "/deleteCustomer")
+	public @ResponseBody String deleteEmployee(User  objUser,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		List<User> listOrderBeans  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		boolean delete = false;
+		try{
+			if(objUser.getId() != 0){
+ 				delete = userService.deleteUser(objUser.getId(),objUser.getStatus());
+ 				if(delete){
+ 					jsonObj.put("message", "deleted");
+ 				}else{
+ 					jsonObj.put("message", "delete fail");
+ 				}
+ 			}
+
+			listOrderBeans =  adao.getAbheeCustomerNames();
+			 objectMapper = new ObjectMapper();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+	System.out.println(e);
+			return String.valueOf(jsonObj);
+
+		}
+		return String.valueOf(jsonObj);
+	}
+	
+	@RequestMapping(value = "/custreg" ,method = RequestMethod.POST)
+	public String saveAdmin(@Valid @ModelAttribute  User user, BindingResult bindingresults,
+			RedirectAttributes redir) throws IOException {
+		
+		
+		if(user.getBranchId()==null)
+		{
+			User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			user.setBranchId(objuserBean.getBranchId());
+			
+		}
+
+		if (bindingresults.hasErrors()) {
+			System.out.println("has some errors");
+			return "redirect:/";
+		}
+
+		int id = 0;
+		try
+		{
+			User userBean=null;
+			if(user.getId()!=null)
+			{
+			  userBean= userService.getUserByObject(user);
+
+			}
+			int dummyId =0;
+
+			if(userBean != null){
+				dummyId = userBean.getId();
+			}
+
+			if(user.getId()==null)
+			{
+				if(dummyId ==0)
+				{
+
+
+					user.setEnabled("1");
+					user.setDesignation("9");
+
+					userService.saveUser(user);
+					
+					sendingMail.sendConfirmationEmail(user);
+
+					redir.addFlashAttribute("msg", "Record Inserted Successfully");
+					redir.addFlashAttribute("cssMsg", "success");
+
+				} else
+				{
+					redir.addFlashAttribute("msg", "Already Record Exist");
+					redir.addFlashAttribute("cssMsg", "danger");
+
+				}
+
+
+			}
+
+			else
+			{
+				id=user.getId();
+				if(id == dummyId || userBean == null)
+				{
+					user.setDesignation("9");
+					//userService.updateUser(user);
+					sendingMail.sendConfirmationEmail(user);
+					redir.addFlashAttribute("msg", "Record Updated Successfully");
+					redir.addFlashAttribute("cssMsg", "warning");
+
+				} else
+				{
+					redir.addFlashAttribute("msg", "Already Record Exist");
+					redir.addFlashAttribute("cssMsg", "danger");
+				}
+
+			}
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return "redirect:custRegistration";
+	}
+
+
+
 }

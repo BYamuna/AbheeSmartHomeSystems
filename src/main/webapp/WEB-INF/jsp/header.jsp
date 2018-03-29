@@ -4,16 +4,20 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%> 
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@page import="com.charvikent.abheeSmartHomeSystems.model.User"%>
+
 <%
 	String baseurl =  request.getScheme() + "://" + request.getServerName() +      ":" +   request.getServerPort() +  request.getContextPath();
 	session.setAttribute("baseurl", baseurl);
 	
-	/* HttpSession sess = request.getSession(false);
-	 
-	if (sess.getAttribute("cacheUserBean") == null) {
+	/*  session = request.getSession(false);
+	User userDesignation = (User)session.getAttribute("userDesignationSession"); 
+	   if (userDesignation == null) {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/");
 		dispatcher.forward(request, response);
-	} */
+	}   */
+ 
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -452,15 +456,15 @@ function getHeadersCounts(){
                 </li>
 	             <%-- <li style="float:left;margin-right:35px"><a href="${baseurl}/task" style="color:#f3f1f1;">Create Task</a></li> --%>
 	             <security:authorize access="hasRole('ROLE_ADMIN')">
-	            <li style="float:left; margin-right:5px; margin-top:5px;"><a href="${baseurl}/severity?id=Critical" style="color:#ffffff;">Create Task</a></li>
+	           <%--  <li style="float:left; margin-right:5px; margin-top:5px;"><a href="${baseurl}/severity?id=Critical" style="color:#ffffff;">Create Task</a></li> --%>
 	           </security:authorize>
 	            <li style=" margin-top:5px;" class="dropdown">
-	                <a href="#" class="dropdown-toggle username" data-toggle="dropdown" style="color: #ffffff;"><span class="hidden-xs">Master Admin <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
+	                <a href="#" class="dropdown-toggle username" data-toggle="dropdown" style="color: #ffffff;"><span class="hidden-xs"> ${userDesignationSession.designationName } <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
 	                <ul class="dropdown-menu userinfo arrow">
 	                    <li class="username">
 	                        <a href="#">
 	                            <div class="pull-left"><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt=""/></div>
-	                            <div class="pull-right"><h5> hi ${pageContext.request.userPrincipal.name} !</h5><small>Logged in as <span>Master</span></small></div> 
+	                            <div class="pull-right"><h5> hi ${pageContext.request.userPrincipal.name} !</h5><!-- <small>Logged in as <span>${userDesignationSession.designationName }</span></small> --></div> 
 	                        </a>
 	                    </li>
 	                    <li class="userlinks">
@@ -498,18 +502,19 @@ function getHeadersCounts(){
               <security:authorize access="hasRole('ROLE_BRANCHHEAD')">
             <li class="dashBoard"><a href="${baseurl }/dashBoard"><i class="fa fa-dashboard dash"></i> <span>Home</span></a></li>
              </security:authorize>
-              <security:authorize access="hasRole('ROLE_ADMIN')">
-              <li class="cate"><a href="${baseurl }/cate"><i class="fa fa-tags tag"></i> <span>Product Category</span></a></li>
-              <security:authorize access="hasRole('ROLE_MASTERADMIN')">
+             <security:authorize access="hasRole('ROLE_MASTERADMIN')">
               <li class="branch"><a href="${baseurl }/abBranch"><i class="fa fa-asterisk brch"></i><span>Branch</span></a></li>
             </security:authorize>
-             <li class="company"><a href="${baseurl }/company"><i class="fa  fa-building company"></i> <span>Product Company</span></a></li>
-                 <li class="product"><a href="${baseurl }/product"><i class="fa fa-product-hunt prdct"></i> <span>Product</span></a></li>
+              <security:authorize access="hasRole('ROLE_ADMIN')">
+              <li class="cate"><a href="${baseurl }/cate"><i class="fa fa-tags tag"></i> <span>Category</span></a></li>
+              
+             <li class="company"><a href="${baseurl }/company"><i class="fa  fa-building company"></i> <span> Company</span></a></li>
+                 <li class="product"><a href="${baseurl }/product"><i class="fa fa-product-hunt prdct"></i> <span>Product Model</span></a></li>
                  <li class="abheecust"><a href="${baseurl }/custRegistration"><i class="fa fa-registered register"></i> <span>Customers</span></a></li>
                 </security:authorize>
                <security:authorize access="hasRole('ROLE_BRANCHHEAD')">
-              <li class="task"><a href="${baseurl }/task"><i class="fa fa-tasks task"></i> <span>Task</span></a></li>
               	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users emp"></i> <span>Employees</span></a></li>
+              <%--   <li class="task"><a href="${baseurl }/task"><i class="fa fa-tasks task"></i> <span>Task</span></a></li> --%>
                 </security:authorize>
                 
               
@@ -531,8 +536,8 @@ function getHeadersCounts(){
 				
 				 <security:authorize access="hasRole('ROLE_ADMIN')">
 				<div class="btn-toolbar pull-right">
-		                    <a href="#" class="btn btn-danger "><span id="unseentasks">5</span><br>Resolved Tasks</a>
-		                    <a href="#" class="btn btn-warning"><span id="reopentaskscount">10</span><br>UnClosed Tasks</a>
+		                    <a href="#" class="btn btn-danger "><span id="unseentasks">5</span><br>Sales Requests</a>
+		                    <a href="#" class="btn btn-warning"><span id="reopentaskscount">10</span><br>Services Requests</a>
 		                    <!-- <a href="#" class="btn btn-info"><span id="totalGas1">27956</span><br>Gas in Kgs</a> -->
 		                </div>
 		                </security:authorize>

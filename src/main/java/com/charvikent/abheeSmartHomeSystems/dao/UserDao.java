@@ -48,7 +48,7 @@ public class UserDao {
 
 		try {
 			List<Object[]> rows = em.createQuery("select  u.id,u.username,u.mobilenumber,u.email,u.reportto,u2.username,CASE WHEN u.enabled IN ('0') THEN 'Deactive' WHEN u.enabled IN ('1') THEN 'Active' ELSE '-----' END AS enabled,d.name,"
-					+ "u.firstname,u.lastname,u.reportto,u.designation  , u.enabled as status,u.password,u.BranchId,ab.name from User u,User u2,Designation d,AbheeBranch ab where u.enabled='1'  and u.designation= d.id and ab.id=u.BranchId and u.reportto=u2.id ").getResultList();
+					+ "u.firstname,u.lastname,u.reportto,u.designation  , u.enabled as status,u.password,u.BranchId,ab.name,u.userId from User u,User u2,Designation d,AbheeBranch ab where u.enabled='1'  and u.designation= d.id and ab.id=u.BranchId and u.reportto=u2.id ").getResultList();
 			for (Object[] row : rows) {
 				User users =new User();
 
@@ -71,6 +71,7 @@ public class UserDao {
 				users.setPassword((String) row[13]);
 				users.setBranchId((String) row[14]);
 				users.setBranchName((String) row[15]);
+				users.setUserId((String) row[16]);
 				
 				
 				listusers.add(users);
@@ -341,8 +342,8 @@ public class UserDao {
 
 
 		try {
-			List<Object[]> rows = em.createQuery("select  u.id,u.username,u.mobilenumber,u.email,u.reportto,u2.username,dep.name,d.name,"
-					+ "u.firstname,u.lastname,u.reportto,u.designation ,u.department , u.enabled as status from User u,User u2,Designation d,Department dep where u.enabled='0' and u.department=dep.id and u.designation= d.id and  u.reportto=u2.id").getResultList();
+			List<Object[]> rows = em.createQuery("select  u.id,u.username,u.mobilenumber,u.email,u.reportto,u2.username,d.name,"
+					+ "u.firstname,u.lastname,u.reportto,u.designation ,u.department , u.enabled as status,u.userId  from User u,User u2,Designation d where u.enabled='0'  and u.designation= d.id and  u.reportto=u2.id and u.designation !='9'").getResultList();
 			for (Object[] row : rows) {
 				User users =new User();
 
@@ -354,14 +355,56 @@ public class UserDao {
 				users.setReportto((String) row[4]);
 				users.setReportName((String) row[5]);
 				//users.setEnabled((String) row[6]);
-				users.setDepartmentName((String) row[6]);
-				users.setDesignationName((String) row[7]);
-				users.setFirstname((String) row[8]);
-				users.setLastname((String) row[9]);
-				users.setReportId((String) row[10]);
-				users.setDesignation((String) row[11]);
-				users.setDepartment((String) row[12]);
-				users.setStatus((String) row[13]);
+				//users.setDepartmentName((String) row[6]);
+				users.setDesignationName((String) row[6]);
+				users.setFirstname((String) row[7]);
+				users.setLastname((String) row[8]);
+				users.setReportId((String) row[9]);
+				users.setDesignation((String) row[10]);
+				users.setDepartment((String) row[11]);
+				users.setStatus((String) row[12]);
+				users.setUserId((String) row[13]);
+				listusers.add(users);
+
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return  listusers;
+		 	}
+	@SuppressWarnings("unchecked")
+	public List<User> getCustomerInActiveList() {
+		// TODO Auto-generated method stub
+		//return em.createQuery(" from User where enabled='0'").getResultList();
+
+		List<User> listusers =new ArrayList<User>();
+
+
+		try {
+			List<Object[]> rows = em.createQuery("select  u.id,u.username,u.mobilenumber,u.email,u.reportto,u2.username,d.name,"
+					+ "u.firstname,u.lastname,u.reportto,u.designation ,u.department , u.enabled as status,u.userId  from User u,User u2,Designation d where u.enabled='0'  and u.designation= d.id and  u.reportto=u2.id ").getResultList();
+			for (Object[] row : rows) {
+				User users =new User();
+
+				users.setId(Integer.parseInt(String.valueOf(row[0])));
+
+				users.setUsername((String) row[1]);
+				users.setMobilenumber((String) row[2]);
+				users.setEmail((String) row[3]);
+				users.setReportto((String) row[4]);
+				users.setReportName((String) row[5]);
+				//users.setEnabled((String) row[6]);
+				//users.setDepartmentName((String) row[6]);
+				users.setDesignationName((String) row[6]);
+				users.setFirstname((String) row[7]);
+				users.setLastname((String) row[8]);
+				users.setReportId((String) row[9]);
+				users.setDesignation((String) row[10]);
+				users.setDepartment((String) row[11]);
+				users.setStatus((String) row[12]);
+				users.setUserId((String) row[13]);
 				listusers.add(users);
 
 			}
@@ -415,6 +458,27 @@ public class UserDao {
 		
 	}
 
+	public User getUserDesignationById(Integer id) {
+		String hql ="select  ku.username, kd.name from abheedesignation kd,abheeusers ku where ku.designation=kd.id and ku.id=:id ";
+		User users =new User();
+		try{
+			
+			@SuppressWarnings("unchecked")
+			List<Object[]> rows = em.createNativeQuery(hql).setParameter("id", id).getResultList();
+			
+		for (Object[] row : rows) {
+			
+			users.setUsername((String) row[0]);
+			users.setDesignationName((String) row[1]);
+					
+		}
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+	return  users;
+	}
 
 
 
