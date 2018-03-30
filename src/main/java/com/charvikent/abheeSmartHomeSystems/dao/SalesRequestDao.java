@@ -29,4 +29,34 @@ public class SalesRequestDao
 		else
 			return false;	
 	}
+	/*@SuppressWarnings("unchecked")
+	public List<SalesRequest> getModelNumbers()
+	 {
+
+		return entityManager.createQuery("  from SalesRequest where  ").getResultList();
+
+	 }
+	public SalesRequest getModelNumberById() 
+	{
+			
+			@SuppressWarnings("unchecked")
+			List<SalesRequest> reqList =(List<SalesRequest>) entityManager.createQuery("  FROM SalesRequest where ").setParameter("",).getResultList();
+			if(reqList.size() > 0)
+				return reqList.get(0);
+			return null;
+			
+	}*/
+	 @SuppressWarnings("unchecked")
+		public List<SalesRequest> getSalesRequestList()
+		 {
+			 String hql ="from SalesRequest";
+			 
+			
+			 List<SalesRequest> reqlist= entityManager.createQuery(hql).getResultList();
+			 for(SalesRequest sr:reqlist)
+			 {
+			 System.out.println(sr.getModelnumber()+" "+sr.getEmail());
+			 }
+			return reqlist;		 
+		 }
 }

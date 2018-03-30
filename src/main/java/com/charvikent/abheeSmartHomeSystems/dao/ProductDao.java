@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.model.Product;
-import com.charvikent.abheeSmartHomeSystems.model.User;
+/*import com.charvikent.abheeSmartHomeSystems.model.User;*/
 
 
 @Repository
@@ -78,7 +78,7 @@ public class ProductDao
 	public List<Product> getAllInActiveList() 
 	{
 		
-List<Product> listProducts =new ArrayList<Product>();
+		List<Product> listProducts =new ArrayList<Product>();
 		
 		String hql ="select p.id,p.categoryid,cat.category,p.companyid,com.name,p.description,p.name,p.productmodelpics,p.productmodelvideoslinks,p.status from Product  p , Category cat , Company com where p.categoryid=cat.id and p.companyid=com.id and p.status='0'";
 
@@ -104,6 +104,7 @@ List<Product> listProducts =new ArrayList<Product>();
 		 return listProducts;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Product> getProductDetails()
 	 {
 		List<Product> listProducts =new ArrayList<Product>();

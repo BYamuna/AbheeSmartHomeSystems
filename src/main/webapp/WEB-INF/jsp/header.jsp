@@ -507,7 +507,7 @@ function getHeadersCounts(){
             </security:authorize>
               <security:authorize access="hasRole('ROLE_ADMIN')">
               <li class="cate"><a href="${baseurl }/cate"><i class="fa fa-tags tag"></i> <span>Category</span></a></li>
-              
+              <li class="allsalesrequest"><a href="${baseurl }/allsalesrequest"><i class="fa fa-totalallsalesrequest-hunt sreq"></i> <span>AllSalesRequest</span></a></li>
              <li class="company"><a href="${baseurl }/company"><i class="fa  fa-building company"></i> <span> Company</span></a></li>
                  <li class="product"><a href="${baseurl }/product"><i class="fa fa-product-hunt prdct"></i> <span>Product Model</span></a></li>
                  <li class="abheecust"><a href="${baseurl }/custRegistration"><i class="fa fa-registered register"></i> <span>Customers</span></a></li>
