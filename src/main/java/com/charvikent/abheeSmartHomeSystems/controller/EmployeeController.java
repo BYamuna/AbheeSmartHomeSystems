@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeBranchDao;
 import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
+import com.charvikent.abheeSmartHomeSystems.model.AbheeCustRegistration;
 import com.charvikent.abheeSmartHomeSystems.model.Department;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
@@ -322,6 +324,46 @@ public class EmployeeController {
 		}
 		return String.valueOf(jsonObj);
 	}
+	
+	
+	@RequestMapping(value = "/checkEmpExst", method = RequestMethod.POST)
+	public @ResponseBody  Boolean checkCustomerExistence(@Validated @ModelAttribute  AbheeCustRegistration abheecustregistration,Model model,HttpServletRequest request) throws IOException 
+	{
+		System.out.println("enter to checkCustExst");
+		
+		String custMobile=request.getParameter("cmobile");
+		
+		User custbean =userService.checkEmployeeExistOrNotbyMobile(custMobile);
+		
+		if(custbean != null)
+		{
+			return true;
+		}
+		else
+		
+		return false;
+		
+	}
+	
+	@RequestMapping(value = "/checkEmpExstbyemail", method = RequestMethod.POST)
+	public @ResponseBody  Boolean checkEmployeeExistence(@Validated @ModelAttribute  AbheeCustRegistration abheecustregistration,Model model,HttpServletRequest request) throws IOException 
+	{
+		System.out.println("enter to checkCustExst");
+		
+		String empcemail=request.getParameter("cemail");
+		
+		User custbean =userService.checkEmployeeExistOrNotbyEmail(empcemail);
+		
+		if(custbean != null)
+		{
+			return true;
+		}
+		else
+		
+		return false;
+		
+	}
+
 
 	
 

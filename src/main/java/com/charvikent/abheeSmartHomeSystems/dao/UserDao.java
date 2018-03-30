@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
@@ -207,7 +208,10 @@ public class UserDao {
 		users.setMobilenumber(user.getMobilenumber());
 		users.setUsername(user.getUsername());
 		users.setReportto(user.getReportto());
-
+		if(user.getDesignation().equals("9"))
+		{
+		users.setAddress(user.getAddress());
+		}
 		em.merge(users);
 
 		em.flush();
@@ -419,7 +423,7 @@ public class UserDao {
 	@SuppressWarnings("unchecked")
 	public User checkCustomerExistOrNotbyMobile(String custMobile) {
 		
-		String hql ="from User where mobilenumber ='"+custMobile+"'";
+		String hql ="from User where  mobilenumber ='"+custMobile+"'";
 		Query query =em.createQuery(hql);
 
 		List<User>usersList =query.getResultList();
@@ -434,7 +438,7 @@ public class UserDao {
 	@SuppressWarnings("unchecked")
 	public User checkCustomerExistOrNotByEmail(String email) {
 
-		String hql ="from User where email ='"+email+"'";
+		String hql ="from User where  email ='"+email+"'";
 		Query query =em.createQuery(hql);
 
 		List<User>usersList =query.getResultList();
@@ -480,6 +484,57 @@ public class UserDao {
 	return  users;
 	}
 
+
+	public Object getLastloginTime() {
+		
+		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String id=String.valueOf(objuserBean.getId());
+		
+		String hql ="select logintime from abheeuserslogs where sessionname='login' and userid=:uid order by logintime desc limit 1,1 ";
+		@SuppressWarnings("unchecked")
+		List<UserLogs> rows = (List<UserLogs>) em.createNativeQuery(hql).setParameter("uid",id).getResultList();
+		 if(rows.size()>0)
+		 {
+			 return rows.get(0);
+		 }
+		
+		 else
+			 
+		return "";
+	}
+
+	public User getCustomerByObject(User user) {
+		String hql ="from User where  (email ='"+user.getEmail()+"' or mobilenumber='"+user.getMobilenumber()+"')";
+		Query query =em.createQuery(hql);
+
+		List<User>usersList =query.getResultList();
+		if(usersList.isEmpty())
+               return null;
+               else
+		return usersList.get(0);
+	}
+
+	public User heckEmployeeExistOrNotbyMobile(String custMobile) {
+		String hql ="from User where   mobilenumber ='"+custMobile+"'";
+		Query query =em.createQuery(hql);
+
+		List<User>usersList =query.getResultList();
+		if(usersList.isEmpty())
+               return null;
+               else
+		return usersList.get(0);
+	}
+
+	public User ceckEmployeeExistOrNotbyEmail(String empcemail) {
+		String hql ="from User where   email ='"+empcemail+"'";
+		Query query =em.createQuery(hql);
+
+		List<User>usersList =query.getResultList();
+		if(usersList.isEmpty())
+               return null;
+               else
+		return usersList.get(0);
+	}
 
 
 

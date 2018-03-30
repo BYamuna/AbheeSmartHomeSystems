@@ -70,6 +70,8 @@ public class User {
 	private String branchName;
 	
 	private String userId;
+	
+	private String address;
 
 	public String getReportName() {
 		return reportName;
@@ -168,8 +170,19 @@ public class User {
 
 	public User() {
 	}
+	
+	
+	
 
 
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public User(User user) {
 		this.id = user.id;
@@ -194,6 +207,7 @@ public class User {
 		this.reportName=user.reportName;
 		this.BranchId=user.BranchId;
 		this.userId=user.userId;
+		this.address=user.address;
 
 	}
 
@@ -306,9 +320,11 @@ public class User {
 				+ username + ", password=" + password + ", npassword=" + npassword + ", cpassword=" + cpassword
 				+ ", departmentName=" + departmentName + ", designationName=" + designationName + ", reportId="
 				+ reportId + ", reportName=" + reportName + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", status=" + status + "]";
+				+ ", status=" + status + ", branchName=" + branchName + ", userId=" + userId + ", address=" + address
+				+ "]";
 	}
 
+	
 	
 
 

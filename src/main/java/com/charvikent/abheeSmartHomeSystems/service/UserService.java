@@ -305,5 +305,20 @@ public class UserService {
 		return obj;
 	}
 
+	public User geCustomerByObject(User user) {
+		// TODO Auto-generated method stub
+		return userDao.getCustomerByObject(user);
+	}
+
+	public User checkEmployeeExistOrNotbyMobile(String custMobile) {
+		// TODO Auto-generated method stub
+		return userDao.heckEmployeeExistOrNotbyMobile(custMobile);
+	}
+
+	public User checkEmployeeExistOrNotbyEmail(String empcemail) {
+		// TODO Auto-generated method stub
+		return userDao.ceckEmployeeExistOrNotbyEmail(empcemail);
+	}
+
 
 }
