@@ -423,7 +423,7 @@ public class UserDao {
 	@SuppressWarnings("unchecked")
 	public User checkCustomerExistOrNotbyMobile(String custMobile) {
 		
-		String hql ="from User where designation='9' and mobilenumber ='"+custMobile+"'";
+		String hql ="from User where  mobilenumber ='"+custMobile+"'";
 		Query query =em.createQuery(hql);
 
 		List<User>usersList =query.getResultList();
@@ -438,7 +438,7 @@ public class UserDao {
 	@SuppressWarnings("unchecked")
 	public User checkCustomerExistOrNotByEmail(String email) {
 
-		String hql ="from User where designation='9' and email ='"+email+"'";
+		String hql ="from User where  email ='"+email+"'";
 		Query query =em.createQuery(hql);
 
 		List<User>usersList =query.getResultList();
@@ -504,7 +504,7 @@ public class UserDao {
 	}
 
 	public User getCustomerByObject(User user) {
-		String hql ="from User where designation='9' and (email ='"+user.getEmail()+"' or mobilenumber='"+user.getMobilenumber()+"')";
+		String hql ="from User where  (email ='"+user.getEmail()+"' or mobilenumber='"+user.getMobilenumber()+"')";
 		Query query =em.createQuery(hql);
 
 		List<User>usersList =query.getResultList();
@@ -515,7 +515,7 @@ public class UserDao {
 	}
 
 	public User heckEmployeeExistOrNotbyMobile(String custMobile) {
-		String hql ="from User where  designation <>'9' and mobilenumber ='"+custMobile+"'";
+		String hql ="from User where   mobilenumber ='"+custMobile+"'";
 		Query query =em.createQuery(hql);
 
 		List<User>usersList =query.getResultList();
@@ -526,7 +526,7 @@ public class UserDao {
 	}
 
 	public User ceckEmployeeExistOrNotbyEmail(String empcemail) {
-		String hql ="from User where  designation <>'9' and email ='"+empcemail+"'";
+		String hql ="from User where   email ='"+empcemail+"'";
 		Query query =em.createQuery(hql);
 
 		List<User>usersList =query.getResultList();
