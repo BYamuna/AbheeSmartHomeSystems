@@ -534,29 +534,7 @@
 	</div>
 </div>
 <script type="text/javascript">
-	$(window).load(
-			function() {
-				var formData = new FormData();
-				formData.append('ttypeid', "1");
-				$.fn.makeMultipartRequest('POST', 'setNotifyData', false,
-						formData, false, 'text', function(data) {
-							var jsonobj = $.parseJSON(data);
-							var alldata = jsonobj.allOrders1;
-							//console.log(alldata)
-							if (alldata != "") {
-								displayTable(alldata)
-								$('#notifyModal').modal('show');
-							}
-
-						});
-			});
 	
-	/* $(document).ready(function(){
-	    if(!window.location.hash) {
-	        window.location = window.location + '#loaded';
-	        window.location.reload();
-	    }
-	}); */
 	$("#pageName").text("Dashboard");
 	$(".dashBoard").addClass("active");
 	$(document).ready(function() {

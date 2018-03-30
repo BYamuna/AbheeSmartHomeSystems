@@ -40,10 +40,10 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler im
 		
 		
 		System.out.println(auth);
-		
+		/*
 		User objuserBean = (User)authentication.getPrincipal();
 		userService.setLoginRecord(objuserBean.getId(),"logout");
-
+*/
 		String URL = request.getContextPath() + "/";
 		response.setStatus(HttpStatus.OK.value());
 		response.sendRedirect(URL);
