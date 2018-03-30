@@ -128,7 +128,9 @@
 	<definition name="product" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/jsp/product.jsp" />
 	</definition>
-	
+	<definition name="allsalesrequest" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/allsalesrequest.jsp" />
+	</definition>
 		
 
 </tiles-definitions>
