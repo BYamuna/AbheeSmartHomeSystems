@@ -1,7 +1,7 @@
 
 <%
-	String baseurl =  request.getScheme() + "://" + request.getServerName() +      ":" +   request.getServerPort() +  request.getContextPath();
-	session.setAttribute("baseurl", baseurl);
+	String baseurl2 =  request.getScheme() + "://" + request.getServerName() +      ":" +   request.getServerPort() +  request.getContextPath();
+	session.setAttribute("baseurl", baseurl2);
 %>
 
 <!-- Footer Starts Here -->

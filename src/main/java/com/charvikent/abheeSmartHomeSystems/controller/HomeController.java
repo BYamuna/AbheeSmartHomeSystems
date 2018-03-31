@@ -33,6 +33,18 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String customlogin(Model model) {
+		
+		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		 
+		 if (null != auth){    
+		        return "redirect:dashboard";
+		    }
+		 else
+		return "login";
+	}
+	
+	@RequestMapping("*")
+	public String erro404r(Model model) {
 	//	System.out.println("login called at /");
 		return "login";
 	}

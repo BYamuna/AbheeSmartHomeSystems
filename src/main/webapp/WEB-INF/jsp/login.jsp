@@ -198,7 +198,7 @@
 							
 							<div class="form-group">
 								<label for="user_name">Enter OTP :</label> 
-								<input	type="password" name="cotp" id="cotp" onkeydown="removeBorder(this.id)" class="form-control" placeholder="Enter OTP"/>
+								<input	type="password" name="cotp" id="cotp" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control numericOnly" placeholder="Enter OTP"/>
 								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
 							</div>
 							
@@ -206,7 +206,7 @@
 					</form>	
         </div>
         <div class="modal-footer">
-          <button type="button" id="submit2" onclick="modelsubmit()" class="btn btn-primary" data-dismiss="modal">Submit</button>
+          <button type="button" id="submit2" onclick="modelsubmit()" class="btn btn-primary" >Submit</button>
          
         </div>
       </div>
@@ -434,10 +434,11 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 				
 				if(data ==='true')
 				{
-					alert(" Customer registered successfully");
+					alert(" Registration Completed Successfully ");
+					$('#OTPModel').modal('toggle');					
 				}
 				else
-					alert("Customer doesnot registered ")
+					alert("Enter valid OTP")
 				
 			},
 			complete: function () {
@@ -498,7 +499,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 					success : function(data) {
 						if(data ==='true')
 							{
-							//alert("username already exists")
+							alert("Email already exists")
 		 					$('#cemail').css('border-color', 'red');
 		 					 $('#submitModel').prop('disabled', true);
 							}
@@ -529,7 +530,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 	
 	
 
-	$('#cpassword').blur(function() {
+	/* $('#cpassword').blur(function() {
 		ccpassword =$('#cpassword').val();
 		//alert(ccpassword);
 		var  passwordPolicy= /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@#$!%*?&.])[A-Za-z\d$@#$!%*?&.]{6,15}$/;
@@ -547,6 +548,6 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 			}  
 			
 		
-	}); 
+	});  */
 </script>
 </html>
