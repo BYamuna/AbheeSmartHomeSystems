@@ -121,7 +121,7 @@
 		</form>
 	</div>
 	
-	<p class="anchor"> New Customer Registration <a href="#" data-toggle="modal" data-target="#register-info" class="tag">Click here</a></p>
+	<!-- <p class="anchor"> New Customer Registration <a href="#" data-toggle="modal" data-target="#register-info" class="tag">Click here</a></p> -->
 </div>
  <div  class="modal fade" id="register-info" role="dialog">
     <div class="modal-dialog">
