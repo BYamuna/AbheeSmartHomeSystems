@@ -514,8 +514,8 @@ public class UserDao {
 		return usersList.get(0);
 	}
 
-	public User heckEmployeeExistOrNotbyMobile(String custMobile) {
-		String hql ="from User where   mobilenumber ='"+custMobile+"'";
+	public User heckEmployeeExistOrNotbyMobile(String empMobile) {
+		String hql ="from User where   mobilenumber ='"+empMobile+"'";
 		Query query =em.createQuery(hql);
 
 		List<User>usersList =query.getResultList();
@@ -541,8 +541,6 @@ public class UserDao {
 		System.out.println(user);
 		return user;
 	}
-
-
 
 
 

@@ -3,6 +3,8 @@ package com.charvikent.abheeSmartHomeSystems.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +18,10 @@ public class CustomerDao {
 	@PersistenceContext
     private EntityManager entityManager;
 	
+	/*@Autowired
+    private JdbcTemplate jdbcTemplate;
+*/
+	
 	public void savecustomer(Customer customer)
 	{
 		entityManager.persist(customer);
@@ -24,6 +30,8 @@ public class CustomerDao {
 	public Customer findByUserName(String username) {
 		
 		String hql ="from Customer where mobilenumber='"+username+"'";
+		
+		
 		
 		Customer customer= (Customer) entityManager.createQuery(hql).getSingleResult();
 		return customer;

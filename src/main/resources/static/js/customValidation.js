@@ -313,7 +313,7 @@ $(".cancel").click(function()
 		}
 //		$("form")[0].reset();
 		$("#"+idArray[i]).val('');
-		$("#"+idArray[i]).prop('readonly',false);
+		$("#"+idArray[i]).prop('disabled',false);
 		$("#"+idArray[i]).css('border-color','');
 		$("#"+idArray[i]).css('color','black');
 		$("#"+idArray[i]).removeClass('placeholder-style your-class default-class');

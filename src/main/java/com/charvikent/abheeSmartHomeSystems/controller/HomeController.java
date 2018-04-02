@@ -20,16 +20,7 @@ public class HomeController {
 	
 	@Autowired UserService userService;
 	
-	@RequestMapping("/welcome")
-	public String customwelcome(Model model) {
-		return "welcome";
-	}
 	
-	@RequestMapping("/homesc")
-	public String scHome(Model model)
-	{
-		return "homesc";
-	}
 	
 	@RequestMapping("/")
 	public String customlogin(Model model) {

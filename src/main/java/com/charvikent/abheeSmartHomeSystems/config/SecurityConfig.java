@@ -43,7 +43,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
  protected void configure(HttpSecurity http) throws Exception {
 	 http.authorizeRequests()
 	  .antMatchers("/cate").access("hasRole('ROLE_ADMIN')")
+	  .antMatchers("/allsalesrequest").access("hasRole('ROLE_ADMIN')")
+	  .antMatchers("/custRegistration").access("hasRole('ROLE_ADMIN')")
 	  .antMatchers("/employee").access("hasRole('ROLE_BRANCHHEAD')")
+	  .antMatchers("/company").access("hasRole('ROLE_ADMIN')")
+	  .antMatchers("/product").access("hasRole('ROLE_ADMIN')")
+	  .antMatchers("/employee").access("hasRole('ROLE_ADMIN')")
+	  .antMatchers("/abBranch").access("hasRole('ROLE_MASTERADMIN')")
 	  .antMatchers("/dashBoard").access("hasRole('ROLE_USER') or  hasRole('ROLE_BRANCHHEAD') ")
 	  .antMatchers("/task").access("hasRole('ROLE_USER') or hasRole('ROLE_BRANCHHEAD')")
 	  .antMatchers("/customerDashBoard").access("hasRole('ROLE_CUSTOMER')")
