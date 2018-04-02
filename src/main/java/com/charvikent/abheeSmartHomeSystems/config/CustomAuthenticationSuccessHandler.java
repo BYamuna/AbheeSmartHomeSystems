@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
+import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 
@@ -51,11 +52,18 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		
 		List<Category> listOrderBeans = categoryDao.getCategoryNames();
 		
-		session.setAttribute("lastLoginTime", userDao.getLastloginTime());
 		
 		
 		
-		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		Object objUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		if(objUser instanceof User)
+		{
+			
+			User objuserBean = (User)objUser;
+		
+			session.setAttribute("lastLoginTime", userDao.getLastloginTime());
 		 userService.setLoginRecord(objuserBean.getId(),"login");
 		
 			
@@ -64,17 +72,23 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 				 session.setAttribute("userDesignationSession", userDesignation);
 				 
 				 session.setAttribute("sessionUser", objuserBean.getFirstname());
-				/* if (userDesignation == null) {
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/");
-						dispatcher.forward(request, response);
-				 }*/
-            if(objuserBean.getDesignation().equals("9"))
-            {
-            	response.sendRedirect("customerDashBoard");
-            	session.setAttribute("sCategorylist",listOrderBeans);
-            }
-            else
-		response.sendRedirect("dashBoard");
+				 response.sendRedirect("dashBoard");
+				 
+		}
+		else
+			if(objUser instanceof Customer)
+			{
+				
+				Customer objuserBean = (Customer)objUser;
+					
+				session.setAttribute("sCategorylist",listOrderBeans);
+					 session.setAttribute("sessionUser", objuserBean.getFirstname());
+					 response.sendRedirect("customerDashBoard");
+		            	
+			}
+		
+            
+		
 	}
 
 }

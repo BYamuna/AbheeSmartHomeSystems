@@ -50,7 +50,7 @@ public class AbheeCustomerRestController {
 	CategoryDao categoryDao;
 
 	
-	@RequestMapping("/AbheeCustomer")
+	@RequestMapping("/Customer")
 	public String showCustomerRegistrationForm(Model model,HttpServletRequest request) throws JsonProcessingException
 	{
 		return null;

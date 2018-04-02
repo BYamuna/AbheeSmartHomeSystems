@@ -62,9 +62,9 @@
 								<div class="clearfix"></div>
 								<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Requirements Description</label>
+									<label class="col-md-3 control-label no-padding-right">Comments</label>
 									<div class="col-md-6">
-										<form:textarea path="reqdesc" class="form-control validate emailOnly" placeholder="Enter Address"/>
+										<form:textarea path="reqdesc" class="form-control validate emailOnly" placeholder="Comments"/>
 									</div>
 								</div></div>
 								<div class="clearfix"></div>
@@ -87,12 +87,37 @@
 					
 					<div id="googleMap" style="width:100%;height:400px;"></div>
 					
-					
+					<button onclick="getLocation()">Try It</button>
 					<script>
+					
+					
+					var lat;
+					var lan;
+						
+						
+					var x = document.getElementById("demo");
+						function getLocation() {
+						    if (navigator.geolocation) {
+						        navigator.geolocation.getCurrentPosition(showPosition);
+						    } else {
+						        x.innerHTML = "Geolocation is not supported by this browser.";
+						    }
+						}
+						function showPosition(position) {
+							lat=position.coords.latitude;
+							lan=position.coords.longitude;
+							
+							console.log(position.coords.latitude)
+							console.log(lan);
+						    x.innerHTML = "Latitude: " + position.coords.latitude + 
+						    "<br>Longitude: " + position.coords.longitude; 
+						}
+
 					
 function myMap() {
 var mapProp= {
-    center:new google.maps.LatLng(13.576848329332353,78.41736346531445),
+   /*  center:new google.maps.LatLng(13.576848329332353,78.41736346531445), */
+    center:new google.maps.LatLng(lat,lan),
     zoom:8,
 };
 var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
@@ -103,6 +128,14 @@ alert(event.latLng.lat() + ", " + event.latLng.lng());
 });
 
 }
+
+
+
+
+
+
+
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVOdAfKTzdJilketdMBkTBClJezNk07Ws&callback=myMap"></script>
 <<script type="text/javascript">

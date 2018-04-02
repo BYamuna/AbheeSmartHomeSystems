@@ -536,6 +536,12 @@ public class UserDao {
 		return usersList.get(0);
 	}
 
+	public User findByUserNameByDesignation(String username) {
+		User user= (User) em.createQuery("select user from User user where (email=:Custname or mobilenumber =:Custname) and designatin='9' ").setParameter("Custname", username).getSingleResult();
+		System.out.println(user);
+		return user;
+	}
+
 
 
 

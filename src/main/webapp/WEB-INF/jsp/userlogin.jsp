@@ -92,7 +92,7 @@
 				</div>
 			</c:if>
 			
-			  <input type="hidden" name="userType" id="userType" value="adminUser"/>
+			  <input type="hidden" name="userType" id="userType" value="customerUser"/>
 			<div class="form-group">
 				<div class="col-sm-12">
 					<div class="input-group">

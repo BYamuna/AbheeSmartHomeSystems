@@ -43,6 +43,14 @@ public class HomeController {
 		return "login";
 	}
 	
+	@RequestMapping("/userlogin")
+	public String userLogin(Model model) {
+		
+		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		 
+		return "userlogin";
+	}
+	
 	@RequestMapping("*")
 	public String erro404r(Model model) {
 	//	System.out.println("login called at /");
