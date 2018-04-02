@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeCustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
+import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
+import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.OTPDetails;
-import com.charvikent.abheeSmartHomeSystems.model.User;
+import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,7 +36,7 @@ public class AbheeCustomerRestController {
 	
 	@Autowired
 	AbheeCustomerDao abheeCustomerDao;
-	
+	@Autowired CustomerDao customerDao;
 	
 	@Autowired
 	UserService userService;
@@ -61,17 +63,18 @@ public class AbheeCustomerRestController {
 	
 	//@RequestMapping(value = "/api", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	
+	@SuppressWarnings("static-access")
 	@RequestMapping(value="/saveRestCustomer", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
-	public HashMap<String, String>  SaveAbheeCustomer( @RequestBody User user) {
+	public HashMap<String, String>  SaveAbheeCustomer( @RequestBody Customer customer) {
 		
 		String code =null;
-		String regSuccessMsg =user.getFirstname()+" "+user.getLastname()+",  Successfully registered with ABhee Smart Homes. \n You can login using  \n UserId:  "+user.getMobilenumber()+" or "+user.getEmail()+"\n password: "+user.getPassword();
+		String regSuccessMsg =customer.getFirstname()+" "+customer.getLastname()+",  Successfully registered with ABhee Smart Homes. \n You can login using  \n UserId:  "+customer.getMobilenumber()+" or "+customer.getEmail()+"\n password: "+customer.getPassword();
 
 		try {
-			user.setDesignation("9");
-			userService.saveUser(user);
-			sendSMS.sendSMS(regSuccessMsg,user.getMobilenumber());
-			code = user.getFirstname()+" "+user.getLastname();
+			customer.setDesignation("9");
+			customerDao.savecustomer(customer);
+			sendSMS.sendSMS(regSuccessMsg,customer.getMobilenumber());
+			code = customer.getFirstname()+" "+customer.getLastname();
 		} catch (IOException e) {
 			code="NOT_FOUND";
 			e.printStackTrace();
@@ -84,7 +87,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	}
 	
 	@RequestMapping(value="/requestsms", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
-	public ResponseEntity<String>  getOTP( @RequestBody User user) {
+	public ResponseEntity<String>  getOTP( @RequestBody Customer user) {
 		
 		user.setDesignation("9");
 		String custMobile=user.getMobilenumber();
@@ -118,25 +121,26 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	
 	
 	@RequestMapping(value="/requestsms2", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
-	public HashMap<String, String> VerifyingAndSendOTP( @RequestBody User user) {
+	public HashMap<String, String> VerifyingAndSendOTP( @RequestBody Customer custBean) {
 		
-		String custMobile=user.getMobilenumber();
+		String custMobile=custBean.getMobilenumber();
 		
-		String custemail=user.getEmail();
+		String custemail=custBean.getEmail();
 		Random random = new Random();
 		String  otpnumber = String.format("%04d", random.nextInt(10000));
 		
 		
 		String code =null;
 		
-         User custbean =userService.checkCustomerExistOrNotbyMobile(custMobile);
-         User custbeanemail =userService.checkCustomerExistOrNotbyEmail(custemail);
+         Customer custbean1 =customerDao.checkCustomerExistOrNotbyMobile(custMobile);
+         
+         Customer customer =customerDao.checkCustomerExistOrNotByEmail(custemail);
 		
-		if(custbean != null)
+		if(custbean1 != null)
 		{
 			code ="already exists Mobile";
 		}
-		else if(custbeanemail !=null)
+		else if(customer !=null)
 		{
 			
 				code  ="already exists Email";
@@ -180,7 +184,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	
 	@SuppressWarnings("unused")
 	@RequestMapping(value="/logincredentials", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
-	public String  checkingLogincredentials( @RequestBody User user) throws JsonProcessingException, JSONException {
+	public String  checkingLogincredentials( @RequestBody Customer customer) throws JsonProcessingException, JSONException {
 		
 		String code =null;
 		HashMap<String,String> hm =new HashMap<String,String>();
@@ -192,7 +196,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 		//List<User> users =new ArrayList<user>()
 		
 		
-			User userBean =userService.checkuserExistOrNot(user);
+			Customer userBean =customerDao.checkuserExistOrNot(customer);
 			
 			ObjectMapper objectMapper = new ObjectMapper();
 			String userjson = objectMapper.writeValueAsString(userBean);
