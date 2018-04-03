@@ -23,19 +23,19 @@
 					<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Product Model<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="modelnumber" class="form-control validate" placeholder="Enter Username"/>
+										<form:input path="modelnumber" class="form-control validate" placeholder="Enter product model"/>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="email" class="form-control validate" placeholder="Enter Username"/>
+										<form:input path="email" class="form-control validate" placeholder="Enter emailid"/>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="modelnumber" class="form-control validate" placeholder="Enter Username"/>
+										<form:input path="mobileno" class="form-control validate" placeholder="Enter mobilenumber"/>
 									</div>
 								</div>
 								
@@ -45,7 +45,7 @@
 								<div class="form-group" id="passwordDiv">
 									<label class="col-md-3 control-label no-padding-right">location<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="location" class="form-control" placeholder="Enter Password"/>
+										<form:input path="location" class="form-control" placeholder="Enter Location"/>
 									</div>
 								</div>
 								
@@ -70,7 +70,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Requirements Description</label>
 									<div class="col-md-6">
-										<form:textarea path="reqdesc" class="form-control validate emailOnly" placeholder="Enter Address"/>
+										<form:textarea path="reqdesc" class="form-control validate emailOnly" placeholder="Enter Reqirements decsription"/>
 									</div>
 								</div></div>
 								<div class="clearfix"></div>

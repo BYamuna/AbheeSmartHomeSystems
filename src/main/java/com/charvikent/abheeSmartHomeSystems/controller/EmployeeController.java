@@ -25,7 +25,7 @@ import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeBranchDao;
 import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeCustRegistration;
-import com.charvikent.abheeSmartHomeSystems.model.Department;
+/*import com.charvikent.abheeSmartHomeSystems.model.Department;*/
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;

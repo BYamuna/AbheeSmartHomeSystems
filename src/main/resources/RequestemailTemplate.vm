@@ -1,0 +1,10 @@
+<html>  
+  <body>  
+  <h3>Hi ${name}, </h3> 
+  <div>Your Request Submitted Successfully </div>
+  <body>  If you did not send any request, ignore this message and nothing will happen.</body>
+  <div>Thanks&Regards</div>
+  <div><img src=${img}></div>
+  
+  <div><img src="https://www.google.co.in/search?q=http://www.apache.org%22&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjFtOnIgZbaAhVBRo8KHXnKC0kQ_AUIDSgE&biw=1093&bih=530#imgrc=bzTPKVRxHpnr9M:"></div>
+  </html> 

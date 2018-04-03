@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
+import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 
@@ -27,6 +29,8 @@ public class SalesRequestController
 	SalesRequestDao srequestDao;
 	@Autowired
 	FilesStuff fileTemplate;
+	@Autowired
+	SendingMail sendingMail;
 	@RequestMapping(value = "/salesRequest" ,method = RequestMethod.GET)
 	public String saveRequest(Model model)
 	{
@@ -35,7 +39,7 @@ public class SalesRequestController
 		
 	}
 	@RequestMapping(value = "/salesRequest", method = RequestMethod.POST)
-	public String saveRequestDetails(@Valid @ModelAttribute SalesRequest salesrequest,@RequestParam("imgfile") MultipartFile[] uploadedFiles) throws IllegalStateException, IOException
+	public String saveRequestDetails(@Valid @ModelAttribute SalesRequest salesrequest,@RequestParam("imgfile") MultipartFile[] uploadedFiles) throws IllegalStateException, IOException, MessagingException
 	{
 	
 		int filecount =0;
@@ -57,7 +61,11 @@ public class SalesRequestController
    	 }
 	   	Boolean result =srequestDao.checkSalesrequestExistsorNotByEmailAndModelNo(salesrequest);
 	   	if(result==false)
+	   	{
 			srequestDao.saveRequest(salesrequest);
+	   		sendingMail.SendingSalesRequestByEmail(salesrequest.getEmail());
+	   		//sendingMail.sendSalesRequestEmailWithattachment(salesrequest.getEmail(), salesrequest.getImgfiles());
+	   	}
 	   	else
 	   		System.out.println("Record Already exists");
 		return "redirect:salesRequest";
