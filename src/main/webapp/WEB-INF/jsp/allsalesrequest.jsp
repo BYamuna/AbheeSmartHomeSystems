@@ -116,13 +116,13 @@ function displayTable(listOrders) {
 				}
 				orderObj.productmodelpics=productmodelpics;
 			}
-		if(orderObj.status == "1"){
+		/* if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate' onclick='deleteTotalSales("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
 			var deleterow = "<a class='activate' onclick='deleteTotalSales("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
-		var edit = "<a class='edit editIt' onclick='editTotalSales("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
-		var comment = "<a class='comment commentIt' onclick='addComment("	+ orderObj.id+ ")'>   <i class='fa fa-comments'></i></a>"
+		var edit = "<a class='edit editIt' onclick='editTotalSales("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"*/		
+ 		var comment = "<a class='comment commentIt' onclick='addComment("	+ orderObj.id+ ")'>   <i class='fa fa-comments'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		/* var checkbox="<input type='checkbox' class='form-check-input' id='salesrequest'>" */
 		var tblRow = "<tr>"
@@ -134,8 +134,7 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.location+"'>"+ orderObj.location + "</td>"
 			+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>"
 			+ "<td title='"+orderObj.reqdesc+"'>"+ orderObj.reqdesc + "</td>"
-			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow +"&nbsp;&nbsp;" +comment+"</td>" 
-			/* + "<td title='"+orderObj.comment+"'>"+ orderObj.comment + "</td>" */
+			+ "<td style='text-align: center;white-space: nowrap;'>" +comment+"</td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -230,7 +229,8 @@ if(validation) {
 }
 	
 
-function editTotalSales(id) {
+/* function editTotalSales(id) 
+{
 	$("#id").val(serviceUnitArray[id].id);
 	$("#modelnumber").val(serviceUnitArray[id].modelnumber);
 	$("#email").val(serviceUnitArray[id].email);
@@ -264,7 +264,7 @@ function deleteTotalSales(id,status)
 		});
 	}
 }
-
+ */
 function validate(id, errorMessage)
 {
 	var styleBlock = '.placeholder-style.placeholder-style::-moz-placeholder {color: #cc0000;} .placeholder-style::-webkit-input-placeholder {color: #cc0000;}';
@@ -285,7 +285,7 @@ function validate(id, errorMessage)
 	
 }
 
-function inactiveData() 
+/* function inactiveData() 
 {
 	var status="0";
 	if($('#inActive').is(":checked") == true){
@@ -326,7 +326,7 @@ function addNewTextBox()
 	
 	}
 	
-	
+ */	
 
 /* document.getElementById("file1").onchange = function () {
     var reader = new FileReader();

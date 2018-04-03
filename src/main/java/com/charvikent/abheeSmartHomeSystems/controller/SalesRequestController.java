@@ -69,7 +69,7 @@ public class SalesRequestController
 	   	{
 			srequestDao.saveRequest(salesrequest);
 	   		sendingMail.SendingSalesRequestByEmail(salesrequest.getEmail());
-	   		//sendingMail.sendSalesRequestEmailWithattachment(salesrequest.getEmail(), salesrequest.getImgfiles());
+	   		sendingMail.sendSalesRequestEmailWithattachment(salesrequest.getEmail(), salesrequest.getImgfiles());
 	   	}
 	   	else
 	   		System.out.println("Record Already exists");
