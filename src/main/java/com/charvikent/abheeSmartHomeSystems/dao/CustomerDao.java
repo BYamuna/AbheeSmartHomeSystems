@@ -55,7 +55,7 @@ public class CustomerDao {
 	}
 public Customer checkCustomerExistOrNotbyMobile(String custMobile) {
 		
-		String hql ="from User where  mobilenumber ='"+custMobile+"'";
+		String hql ="from Customer where  mobilenumber ='"+custMobile+"'";
 		Query query =entityManager.createQuery(hql);
 
 		@SuppressWarnings("unchecked")
@@ -70,7 +70,7 @@ public Customer checkCustomerExistOrNotbyMobile(String custMobile) {
 
 public Customer checkuserExistOrNot(Customer customer) {
 	
-	String hql =" from User  where (mobilenumber ='"+customer.getMobilenumber()+"') and password='"+customer.getPassword()+"'";
+	String hql =" from Customer  where (mobilenumber ='"+customer.getMobilenumber()+"') and password='"+customer.getPassword()+"'";
 	Query query =entityManager.createQuery(hql);
 	
 	List<Customer>usersList =query.getResultList();

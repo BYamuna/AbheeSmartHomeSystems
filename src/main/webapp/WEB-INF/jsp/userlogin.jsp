@@ -495,7 +495,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		$.ajax({
 					type : "POST",
 					url : "checkEmailExst",
-					data :"cmobile="+cemail,
+					data :"cemail="+cemail,
 					dataType : "text",
 					beforeSend : function() {
 			             $.blockUI({ message: 'Please wait' });
