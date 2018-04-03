@@ -4,20 +4,19 @@ import java.io.File;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-
 /*import com.charvikent.abheeSmartHomeSystems.dao.UserDao;*/
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
@@ -33,6 +32,9 @@ public class SendingMail {
 	private JavaMailSender javaMailSender; 
 	/*@Autowired  
 	private UserDao userDao;*/
+	@Autowired
+	HttpServletRequest request;
+	
 	
 	public void sendConfirmationEmail(User user) throws MessagingException {  
 		try {
@@ -106,19 +108,22 @@ public class SendingMail {
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
 			
-			URL url = new URL("https://www.google.co.in/search?q=http://www.apache.org%22&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjFtOnIgZbaAhVBRo8KHXnKC0kQ_AUIDSgE&biw=1093&bih=530#imgrc=bzTPKVRxHpnr9M:");
+			/*URL url = new URL("https://www.google.co.in/search?q=http://www.apache.org%22&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjFtOnIgZbaAhVBRo8KHXnKC0kQ_AUIDSgE&biw=1093&bih=530#imgrc=bzTPKVRxHpnr9M:");*/
 			VelocityContext velocityContext = new VelocityContext();
 			velocityContext.put("name",objuserBean.getFirstname());
-			velocityContext.put("img",url);
+			/*velocityContext.put("img",url);*/
 			/*velocityContext.put("mobilenumber",user.getMobilenumber());
 			velocityContext.put("email",user.getEmail());
 			velocityContext.put("password",user.getPassword());*/
 			
 			StringWriter stringWriter = new StringWriter();
-			velocityEngine.mergeTemplate("RequestEmailTemplate.vm", "UTF-8", velocityContext, stringWriter);
+			velocityEngine.mergeTemplate("RequestemailTemplate.vm", "UTF-8", velocityContext, stringWriter);
 			helper.setText(stringWriter.toString(), true);
 			helper.setTo( email);
-			helper.setSubject("Request submitted Successfully");  
+			helper.setSubject("Request submitted Successfully"); 
+			 String path = request.getServletContext().getRealPath("/");
+			File  moveFile = new File(path +"reportDocuments","hand.jpg");
+			helper.addInline("id101",moveFile );
 			javaMailSender.send(message);
 				
 			
@@ -128,7 +133,7 @@ public class SendingMail {
 		}  
 	}
 	
-	public void sendSalesRequestEmailWithattachment(String emailId,File serverFile ) throws MessagingException {  
+	public void sendSalesRequestEmailWithattachment(String emailId,String serverFile ) throws MessagingException {  
 		try {
 			
 			
@@ -141,14 +146,17 @@ public class SendingMail {
 			
 			
 			VelocityContext velocityContext = new VelocityContext();
-			velocityContext.put("name",objuserBean.getUsername());
+			velocityContext.put("name",objuserBean.getFirstname());
 			
 			StringWriter stringWriter = new StringWriter();
-			velocityEngine.mergeTemplate("RequestEmailTemplate.vm", "UTF-8", velocityContext, stringWriter);
+			velocityEngine.mergeTemplate("RequestemailTemplate.vm", "UTF-8", velocityContext, stringWriter);
 			helper.setText(stringWriter.toString(), true);
 			helper.setTo( email);
-		    helper.setSubject("Hi");
-			helper.addAttachment("file",serverFile);
+		    helper.setSubject("Request submitted successfully");
+		    String path = request.getServletContext().getRealPath("/");
+		   // File dir = new File (path +"reportDocuments");
+		    File  moveFile = new File(path +"reportDocuments","pineapple.jpg");
+			helper.addAttachment("pineapple.jpg",moveFile);
 			javaMailSender.send(message);
 				
 			
@@ -158,4 +166,4 @@ public class SendingMail {
 		}  
 	}
 
-}
+		}
