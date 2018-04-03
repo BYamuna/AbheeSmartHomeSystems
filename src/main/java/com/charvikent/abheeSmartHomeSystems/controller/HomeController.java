@@ -80,6 +80,10 @@ public class HomeController {
 	public String failureLogin(Model model) {
 		return "403";
 	}
+	@RequestMapping("/summary")
+	public String summary(Model model) {
+		return "summary";
+	}
 	
 	
 
