@@ -25,6 +25,10 @@ public class SalesRequest
 	
 	private String salesrequestnumber;
 	
+	private String lat;
+	
+	private String longitude;
+	
 	public SalesRequest() 
 	{
 		super();
@@ -114,6 +118,20 @@ public class SalesRequest
 	}
 	public void setSalesrequestnumber(String salesrequestnumber) {
 		this.salesrequestnumber = salesrequestnumber;
+	}
+	
+	
+	public String getLat() {
+		return lat;
+	}
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+	public String getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
 	@Override
 	public String toString() 

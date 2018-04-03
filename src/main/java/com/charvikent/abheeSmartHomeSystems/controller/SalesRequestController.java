@@ -40,7 +40,7 @@ public class SalesRequestController
 		
 	}
 	@RequestMapping(value = "/salesRequest", method = RequestMethod.POST)
-	public String saveRequestDetails(@Valid @ModelAttribute SalesRequest salesrequest,@RequestParam("imgfile") MultipartFile[] uploadedFiles) throws IllegalStateException, IOException, MessagingException
+	public String saveRequestDetails(@Valid @ModelAttribute SalesRequest salesrequest,@RequestParam("imgfile") MultipartFile[] uploadedFiles,@RequestParam("locationData") String latlong) throws IllegalStateException, IOException, MessagingException
 	{
 	
 		int filecount =0;
