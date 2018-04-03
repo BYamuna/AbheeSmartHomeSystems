@@ -26,8 +26,10 @@ import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeCustomerDao;
+import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeCustRegistration;
+import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.OTPDetails;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
@@ -51,6 +53,8 @@ public class AbheeCustRegistrationController
 	KptsUtil kptsUtil;
 	@Autowired
 	SendingMail sendingMail;
+	
+	@Autowired CustomerDao customerDao;
 	
 	String otpnumber ="";
 	
@@ -110,9 +114,9 @@ public class AbheeCustRegistrationController
 		
 		String custMobile=request.getParameter("cmobile");
 		
-		User custbean =userService.checkCustomerExistOrNotbyMobile(custMobile);
+		Customer custbean1 =customerDao.checkCustomerExistOrNotbyMobile(custMobile);
 		
-		if(custbean != null)
+		if(custbean1 != null)
 		{
 			return true;
 		}
@@ -161,7 +165,7 @@ public class AbheeCustRegistrationController
 		adao.saveabheecustregistration(abcust);
 		*/
 		
-		User customer =new User();
+		Customer customer =new Customer();
 		
 		
 		String usernumber =kptsUtil.randNum();
@@ -182,7 +186,7 @@ public class AbheeCustRegistrationController
 		String returnmsg ="";
 		if(otpnumber.equals(cotp))
 		{
-		userService.saveUser(customer);
+			customerDao.savecustomer(customer);
 		sendSMS.sendSMS(regSuccessMsg,custMobile);
 		return true;
 		
@@ -223,11 +227,11 @@ public class AbheeCustRegistrationController
 	{
 		System.out.println("enter to checkCustExst");
 		
-		String custMobile=request.getParameter("cmobile");
+		String custEmail=request.getParameter("cemail");
 		
-		User custbean =userService.checkCustomerExistOrNotbyEmail(custMobile);
+		 Customer customer =customerDao.checkCustomerExistOrNotByEmail(custEmail);
 		
-		if(custbean != null)
+		if(customer != null)
 		{
 			return true;
 		}

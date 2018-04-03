@@ -452,7 +452,7 @@ $('#email').blur(function() {
 	$.ajax({
 				type : "POST",
 				url : "checkEmailExst",
-				data :"cmobile="+cemail,
+				data :"cemail="+cemail,
 				dataType : "text",
 				beforeSend : function() {
 		             $.blockUI({ message: 'Please wait' });
@@ -460,7 +460,7 @@ $('#email').blur(function() {
 				success : function(data) {
 					if(data ==='true')
 						{
-						//alert("username already exists")
+						alert("Email already exists")
 	 					$('#email').css('border-color', 'red');
 	 					 $('#submit1').prop('disabled', true);
 						}

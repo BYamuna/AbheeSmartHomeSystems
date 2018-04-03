@@ -47,7 +47,7 @@
                     				<form:hidden path="id"/>
 									<label for="focusedinput" class="col-md-6 control-label">Category Name <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="category" class="form-control validate" placeholder="Enter Category  Name"/>	
+										<form:input path="category" class="form-control validate onlyCharacters" placeholder="Enter Category  Name"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -56,7 +56,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Category Images <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<input type="file" name="file1" id="file1" class="validate"  accept="image/*" style="margin: 7px 0px 0px 0px;">
+										<input type="file" name="file1" id="file1" class="validate "  accept="image/*" style="margin: 7px 0px 0px 0px;">
 									</div>
                     			</div>
                     		</div>

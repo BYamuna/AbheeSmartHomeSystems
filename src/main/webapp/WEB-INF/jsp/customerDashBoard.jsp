@@ -204,12 +204,12 @@
 						});
 			});
 	
-	$(document).ready(function(){
+	/* $(document).ready(function(){
 	    if(!window.location.hash) {
 	        window.location = window.location + '#loaded';
 	        window.location.reload();
 	    }
-	});
+	}); */
 	$("#pageName").text("Dashboard");
 	$(".custDash").addClass("active");
 	$(document).ready(function() {

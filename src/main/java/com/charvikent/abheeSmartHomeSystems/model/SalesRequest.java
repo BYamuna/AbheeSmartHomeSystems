@@ -22,6 +22,9 @@ public class SalesRequest
 	private String address;
 	private String reqdesc;
 	private String imgfiles;
+	
+	private String salesrequestnumber;
+	
 	public SalesRequest() 
 	{
 		super();
@@ -102,6 +105,15 @@ public class SalesRequest
 	public void setImgfiles(String imgfiles) 
 	{
 		this.imgfiles = imgfiles;
+	}
+	
+	
+	
+	public String getSalesrequestnumber() {
+		return salesrequestnumber;
+	}
+	public void setSalesrequestnumber(String salesrequestnumber) {
+		this.salesrequestnumber = salesrequestnumber;
 	}
 	@Override
 	public String toString() 

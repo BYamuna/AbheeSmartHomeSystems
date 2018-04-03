@@ -20,16 +20,7 @@ public class HomeController {
 	
 	@Autowired UserService userService;
 	
-	@RequestMapping("/welcome")
-	public String customwelcome(Model model) {
-		return "welcome";
-	}
 	
-	@RequestMapping("/homesc")
-	public String scHome(Model model)
-	{
-		return "homesc";
-	}
 	
 	@RequestMapping("/")
 	public String customlogin(Model model) {
@@ -41,6 +32,14 @@ public class HomeController {
 		    }
 		 else
 		return "login";
+	}
+	
+	@RequestMapping("/userlogin")
+	public String userLogin(Model model) {
+		
+		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		 
+		return "userlogin";
 	}
 	
 	@RequestMapping("*")

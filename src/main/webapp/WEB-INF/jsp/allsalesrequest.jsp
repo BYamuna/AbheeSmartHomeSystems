@@ -99,8 +99,9 @@ if (listOrders1 != "") {
 }
 function displayTable(listOrders) {
 	$('#tableId').html('');
-	var tableHead = '<table id="salesrequest" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Model Number</th><th>EmailId</th><th>Mobileno</th><th>Files</th><th>Location</th><th>Address</th><th>Reqirements Description</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+
+	var tableHead = '<table id="product" class="table table-striped table-bordered datatables">'
+			+ '<thead><tr><th>Request Number</th><th>Model Number</th><th>EmailId</th><th>Mobileno</th><th>Files</th><th>Location</th><th>Address</th><th>Reqirements Description</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -125,6 +126,7 @@ function displayTable(listOrders) {
 		serviceUnitArray[orderObj.id] = orderObj;
 		/* var checkbox="<input type='checkbox' class='form-check-input' id='salesrequest'>" */
 		var tblRow = "<tr>"
+			+ "<td title='"+orderObj.salesrequestnumber+"'>"+ orderObj.salesrequestnumber + "</td>"
 			+ "<td title='"+orderObj.modelnumber+"'>"+ orderObj.modelnumber + "</td>"
 			+ "<td title='"+orderObj.email+"'>"+ orderObj.email + "</td>"
 			+ "<td title='"+orderObj.mobileno+"'>"+ orderObj.mobileno + "</td>"

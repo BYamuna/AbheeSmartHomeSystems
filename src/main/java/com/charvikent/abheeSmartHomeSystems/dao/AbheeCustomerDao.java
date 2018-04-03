@@ -16,7 +16,7 @@ import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 //import com.charvikent.abheeSmartHomeSystems.model.AbheeBranch;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeCustRegistration;
-import com.charvikent.abheeSmartHomeSystems.model.AbheeCustomer;
+import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
 @Repository
@@ -33,8 +33,8 @@ public class AbheeCustomerDao {
 	@Autowired
 	SendSMS sendSMS;
 
-	public void saveAbheeCustomer(AbheeCustomer cabheeCustomer ) {
-		logger.info("Registering AbheeCustomer");
+	public void saveAbheeCustomer(Customer cabheeCustomer ) {
+		logger.info("Registering Customer");
 		//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String randomNum = utilities.randNum();
 		cabheeCustomer.setCustomerId(randomNum);

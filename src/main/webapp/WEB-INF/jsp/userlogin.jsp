@@ -92,7 +92,7 @@
 				</div>
 			</c:if>
 			
-			  <input type="hidden" name="userType" id="userType" value="adminUser"/>
+			  <input type="hidden" name="userType" id="userType" value="customerUser"/>
 			<div class="form-group">
 				<div class="col-sm-12">
 					<div class="input-group">
@@ -121,7 +121,7 @@
 		</form>
 	</div>
 	
-	<!-- <p class="anchor"> New Customer Registration <a href="#" data-toggle="modal" data-target="#register-info" class="tag">Click here</a></p> -->
+	<p class="anchor"> New Customer Registration <a href="#" data-toggle="modal" data-target="#register-info" class="tag">Click here</a></p>
 </div>
  <div  class="modal fade" id="register-info" role="dialog">
     <div class="modal-dialog">
@@ -495,7 +495,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		$.ajax({
 					type : "POST",
 					url : "checkEmailExst",
-					data :"cmobile="+cemail,
+					data :"cemail="+cemail,
 					dataType : "text",
 					beforeSend : function() {
 			             $.blockUI({ message: 'Please wait' });

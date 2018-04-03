@@ -514,8 +514,8 @@ public class UserDao {
 		return usersList.get(0);
 	}
 
-	public User heckEmployeeExistOrNotbyMobile(String custMobile) {
-		String hql ="from User where   mobilenumber ='"+custMobile+"'";
+	public User heckEmployeeExistOrNotbyMobile(String empMobile) {
+		String hql ="from User where   mobilenumber ='"+empMobile+"'";
 		Query query =em.createQuery(hql);
 
 		List<User>usersList =query.getResultList();
@@ -536,7 +536,11 @@ public class UserDao {
 		return usersList.get(0);
 	}
 
-
+	public User findByUserNameByDesignation(String username) {
+		User user= (User) em.createQuery("select user from User user where (email=:Custname or mobilenumber =:Custname) and designatin='9' ").setParameter("Custname", username).getSingleResult();
+		System.out.println(user);
+		return user;
+	}
 
 
 
