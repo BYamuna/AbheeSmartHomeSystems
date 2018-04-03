@@ -101,7 +101,7 @@ function displayTable(listOrders) {
 	$('#tableId').html('');
 
 	var tableHead = '<table id="product" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Request Number</th><th>Model Number</th><th>EmailId</th><th>Mobileno</th><th>Files</th><th>Location</th><th>Address</th><th>Reqirements Description</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Request Number</th><th>Product Model</th><th>EmailId</th><th>Mobile</th><th>Files</th><th>Location</th><th>Address</th><th>Comments</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
