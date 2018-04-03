@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -39,6 +40,10 @@ public class SalesRequestController
 	{
 	
 		int filecount =0;
+		
+		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
+		
+		salesrequest.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
    	 
    	 for(MultipartFile multipartFile : uploadedFiles) {
 				String fileName = multipartFile.getOriginalFilename();
