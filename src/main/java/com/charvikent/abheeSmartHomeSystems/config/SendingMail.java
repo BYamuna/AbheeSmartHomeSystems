@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-
 
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 /*import com.charvikent.abheeSmartHomeSystems.dao.UserDao;*/
@@ -223,7 +223,7 @@ VelocityContext velocityContext = new VelocityContext();
 			velocityEngine.mergeTemplate("RequestemailTemplate.vm", "UTF-8", velocityContext, stringWriter);
 			helper.setText(stringWriter.toString(), true);
 			helper.setTo( email);
-		    helper.setSubject("Request submitted successfully");
+		    helper.setSubject("Quotation");
 		    String path = request.getServletContext().getRealPath("/");
 		   File dir = new File (path +"QuotationDocuments");
 		   // File  moveFile = new File();
@@ -233,7 +233,9 @@ VelocityContext velocityContext = new VelocityContext();
 				String fileName = multipartFile.getOriginalFilename();
 				if(!multipartFile.isEmpty())
 				{
-					helper.addAttachment(fileName,multipartFile);
+					//File serverFile = new File(dir.getAbsolutePath() + File.separator + fileName);
+					FileSystemResource file = new FileSystemResource(dir.getAbsolutePath() + File.separator + fileName);
+					helper.addAttachment(file.getFilename(), file);
 				}
 				
 			}
