@@ -135,7 +135,9 @@
 	 <definition name="salesrequest" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/jsp/salesrequest.jsp" />
 	</definition> 
-	 
+	 <definition name="dummypage" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/dummypage.jsp" />
+	</definition> 
 		
 
 </tiles-definitions>

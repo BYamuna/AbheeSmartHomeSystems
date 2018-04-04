@@ -43,11 +43,11 @@ public class HomeController {
 		return "userlogin";
 	}
 	
-	@RequestMapping("*")
+	/*@RequestMapping("*")
 	public String erro404r(Model model) {
 	//	System.out.println("login called at /");
 		return "login";
-	}
+	}*/
 	@RequestMapping("/login")
 	public String loginView(Model model) {
 		System.out.println("login called at /login page");
@@ -85,7 +85,10 @@ public class HomeController {
 	public String summary(Model model) {
 		return "summary";
 	}
-	
+	@RequestMapping("/dummypage")
+	public String dummy(Model model) {
+		return "dummypage";
+	}
 	
 
 }
