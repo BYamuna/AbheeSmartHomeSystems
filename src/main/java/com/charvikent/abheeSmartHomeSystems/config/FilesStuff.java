@@ -43,7 +43,7 @@ public class FilesStuff {
 	public  File   makeDirectory()
 	{
 		 String path = request.getServletContext().getRealPath("/");
-    	 File dir = new File (path +"reportDocuments");
+    	 File dir = new File (path +"QuotationDocuments");
     	 if (!dir.exists()) {
 				dir.mkdirs();
 			}

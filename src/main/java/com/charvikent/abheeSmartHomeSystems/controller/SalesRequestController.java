@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import ch.qos.logback.core.net.SyslogOutputStream;
+
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
@@ -103,6 +106,47 @@ public class SalesRequestController
 
 		}
 		return "allsalesrequest";
+	}
+	
+	@RequestMapping(value = "/sendingQuotation", method = RequestMethod.POST)
+	public String sendingQuotation(@RequestParam("id")  String id,@RequestParam("file") MultipartFile[] uploadedFiles) throws IllegalStateException, IOException, MessagingException
+	{
+		
+		//SalesRequest salesrequest = null;
+		int filecount=0;
+		String email = srequestDao.getSalesRequestEmailById(id); // for get the email address 
+		SalesRequest salesrequest = srequestDao.getSalesRequestById(id);
+		
+	System.out.println("(((((((((((((((((((((((((((((((((((("+salesrequest);
+   	 
+		   	 for(MultipartFile multipartFile : uploadedFiles) {
+						String fileName = multipartFile.getOriginalFilename();
+						if(!multipartFile.isEmpty())
+						{
+							filecount++;
+						 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+						}
+					}
+   	 
+   	 if(filecount>0)
+   	 {
+   		// salesrequest.setId(Integer.parseInt(id));
+   		 salesrequest.setQuotationDocuments(fileTemplate.concurrentFileNames());
+   		  salesrequest.setEnablel("0");
+   		 fileTemplate.clearFiles();
+   		 
+   	 }
+	   	//Boolean result =srequestDao.checkSalesrequestExistsorNotByEmailAndModelNo(salesrequest);
+	   	//if(result==false)
+	   	//{
+			srequestDao.saveRequest(salesrequest);
+	   		//sendingMail.SendingSalesRequestByEmail(salesrequest.getEmail());
+	   		sendingMail.sendSalesRequestEmailWithMultipleAttachment(email.toString(), uploadedFiles);
+	   	//}
+	   	/*else
+	   		System.out.println("Record Already exists");*/
+		return "redirect:salesRequest";
+		
 	}
 	
 	

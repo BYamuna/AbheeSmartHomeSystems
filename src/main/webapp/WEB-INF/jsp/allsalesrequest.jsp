@@ -45,17 +45,18 @@
 		<div class="modal-content">
 			<div class="modal-header" style="background: #2973cf;">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" style="color: white;"> Add Comment </h4>
+				<h4 class="modal-title" style="color: white;"> Send Quotation </h4>
         	</div>
         	<div class="modal-body">
 					<form class="form-horizontal">
 					<div class="panel-body">
+					<input type="hidden" id="salesRequestid" />
 						<div class="row">
 							<div class="col-md-6">
                     		<div class="form-group" style=" width: 154%;">
 									<label class="ace-file-input ace-file-multiple col-sm-3 control-label no-padding-right" >Attach File(s)</label>
 									<div class="col-md-9">
-										<input type="file" name="fileupload[]" id="fileupload" multiple style="margin: 8px 0px 0px 0px;">
+										<input type="file" name="fileupload" id="fileupload" multiple style="margin: 8px 0px 0px 0px;">
 									</div>
 							</div>
 							</div>
@@ -79,8 +80,7 @@
 	</div>					
 </body>
 <%-- <script type='text/javascript' src='${baseurl }/js/custemValidation.js'></script>  --%>
-<script>
-</script>
+
 <script type="text/javascript">
 
 /* $(document).ready(function() {
@@ -134,7 +134,7 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.location+"'>"+ orderObj.location + "</td>"
 			+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>"
 			+ "<td title='"+orderObj.reqdesc+"'>"+ orderObj.reqdesc + "</td>"
-			+ "<td style='text-align: center;white-space: nowrap;'>" +comment+"</td>" 
+			+ "<td style='text-align: center;white-space: nowrap;' title='Send Quotation'>" +comment+"</td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -144,7 +144,7 @@ function displayTable(listOrders) {
 /* var cissueid =0; */
 function addComment(id)
 {
-	
+	var salesRequestid=$('#salesRequestid').val(id);
 	/* cissueid=id;
 	$("#issueid").val(id); */
 	$("#formModal").modal();	
@@ -180,33 +180,38 @@ if(validation) {
 }else {
 	return false;
 }
-		
-	    var commet=$('#commet').val();
+		/* 
+	     var commet=$('#commet').val();
 	   
 	    var id=$('#id').val();
 		   
 		   var formData = new FormData();
 		   
-		   formData.append('commet', commet);
+		   formData.append('commet', commet); 
 		   
-		   formData.append('id',id);
-		   
-		   
+		   formData.append('id',id);*/
+		    
+		  var id= $('#salesRequestid').val();
 		   
     	var ins = document.getElementById('fileupload').files.length;
-    	
-    	for(var i=0; i< ins; i++)
+      var data = new FormData();
+     data.append('id',id); 
+    	  for(var i=0; i< ins; i++)
     	{	
-    	var portfolio_values = document.getElementById('fileupload').files[i];
-		formData.append('file[]', portfolio_values);
-		}
+    	var quotation = document.getElementById('fileupload').files[i];
     	
-    	
+		data.append('file', quotation);
+		} 
+    	 
+		/* jQuery.each(jQuery('#fileupload')[0].files, function(i, file) {
+			data.append('file-'+i, file);
+		}); */
+    	console.log(data);
  		$.ajax({
 			type:"post",
 			enctype: 'multipart/form-data',
-		  	url: "subTask", 
-		  	data:formData,
+		  	url: "sendingQuotation", 
+		  	data:data,
 		  	processData: false,  // tell jQuery not to process the data
 			contentType: false,  // tell jQuery not to set contentType
 		  	

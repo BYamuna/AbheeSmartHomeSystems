@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "abheeSalesRequest")
@@ -22,9 +23,24 @@ public class SalesRequest
 	private String address;
 	private String reqdesc;
 	private String imgfiles;
-	
 	private String salesrequestnumber;
+	private String quotationDocuments;
+	private String enablel;
 	
+	
+	
+	public String getEnablel() {
+		return enablel;
+	}
+	public void setEnablel(String enablel) {
+		this.enablel = enablel;
+	}
+	public String getQuotationDocuments() {
+		return quotationDocuments;
+	}
+	public void setQuotationDocuments(String quotationDocuments) {
+		this.quotationDocuments = quotationDocuments;
+	}
 	public SalesRequest() 
 	{
 		super();
@@ -116,10 +132,11 @@ public class SalesRequest
 		this.salesrequestnumber = salesrequestnumber;
 	}
 	@Override
-	public String toString() 
-	{
+	public String toString() {
 		return "SalesRequest [id=" + id + ", modelnumber=" + modelnumber + ", email=" + email + ", mobileno=" + mobileno
 				+ ", location=" + location + ", address=" + address + ", reqdesc=" + reqdesc + ", imgfiles=" + imgfiles
-				+ "]";
+				+ ", salesrequestnumber=" + salesrequestnumber + ", quotationDocuments=" + quotationDocuments
+				+ ", enablel=" + enablel + "]";
 	}
+	
 }
