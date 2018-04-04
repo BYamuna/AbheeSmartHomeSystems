@@ -9,7 +9,21 @@
 <title>Admin</title>
 </head>
 <body>
-<form:form action="/summary" method="POST" modelAttribute="adminForm">
+
+hi leela
+
+<a href="userlogin">userlogin</a>
+
+ <form action="/test" method="POST">
+ loginid  <input type="text" name="lname" id="lanme">
+ password <input type="password" name="lpassword" id="lpassword">
+      <input type="submit" name="submit" >
+ 
+ </form>
+
+
+
+<%-- <form:form action="/summary" method="POST" modelAttribute="adminForm">
 <div class="row">
  <div>name</div> 
   <div><form:input path ="name" /> </div>
@@ -23,6 +37,6 @@
 </div>
 <input type="submit" value="Submit"/>
 </form:form>
-
+ --%>
 </body>
 </html>

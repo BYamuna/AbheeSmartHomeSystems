@@ -1,0 +1,40 @@
+body {
+	font:300 14px/21px 'Roboto', 'sans-serif';
+	background:url(../images/bg.jpg);
+}
+#carousel {
+	margin-top:-20px;
+}
+.data {
+}
+.col-md-4 {
+	margin-top:20px;
+	float:left;
+	margin-bottom:20px;
+}
+.footer {
+	background:#333333;
+}
+.footer .col-md-4 h4, p {
+	color:#FFFFFF;
+}
+.footer a {
+	color:#FFFFFF;
+	float:left;
+	text-decoration:none;
+}
+.footer a:hover {
+	color:#FF6600;
+	text-decoration:none;
+}
+.footer ul li {
+	margin-left:-38px;
+}
+.copy {
+	background-color:#333333;
+}
+.copy p {
+	color:#CCCCCC;
+	text-align:center;
+	font-size:16px;
+}
