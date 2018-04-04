@@ -16,6 +16,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
@@ -27,7 +28,7 @@ import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 
 @Component
-public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired UserService userService;
@@ -40,7 +41,12 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 	
 	@Autowired
 	UserDao userDao;
-	
+	/*public CustomAuthenticationSuccessHandler()
+	{
+		super();
+        setUseReferer(true);
+        System.out.println("system called");
+	}*/
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,

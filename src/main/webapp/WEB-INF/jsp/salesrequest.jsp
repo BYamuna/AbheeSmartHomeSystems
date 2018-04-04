@@ -34,7 +34,7 @@
 									<label class="col-md-3 control-label no-padding-right">location<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<input type="text" id="us2-address" class="form-control validate"/>
-									<!-- 	<input type="text" id="locationData" class="form-control"/> -->
+										<input type="text" name="locationData" id="locationData" class="form-control"/> 
 									</div>
 								</div><div class="clearfix"></div>
 								<%-- <div class="form-group">
@@ -88,8 +88,40 @@ Long.: <input type="text" id="us2-lon"/>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAi3pzKXd0y6FTkbdOOMFuhmp1E4DFicxo&libraries=places&sensor=false"></script>  
 <script src='//static.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script><script src='https://maps.google.com/maps/api/js?sensor=false&libraries=places'></script><script src='https://cdn.rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.min.js'></script>
 <script >//Plugin used: https://github.com/Logicify/jquery-locationpicker-plugin
+var lat;
+var lan;
+
+$('document').ready(function(){
+	
+	
+});
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        alert("Geolocation is not supported by this browser");
+    }
+}
+
+function showPosition(position) {
+	lat=position.coords.latitude;
+	lan=position.coords.longitude;
+	
+	alert(position.coords.latitude)
+	alert(lan);
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
+}
+
+
+
 
 $('#us2').locationpicker({
+	location: {
+        latitude: 13.576848329332353,
+        longitude: 78.41736346531445
+    },
 enableAutocomplete: true,
     enableReverseGeocode: true,
   radius: 0,

@@ -1,17 +1,24 @@
 package com.charvikent.abheeSmartHomeSystems.controller;
 
 
+import java.net.URI;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
+import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 
@@ -20,17 +27,22 @@ public class HomeController {
 	
 	@Autowired UserService userService;
 	
+	@Autowired CustomerDao customerDao;
 	
 	
-	@RequestMapping("/")
+	
+	
+	
+	@RequestMapping("/admin")
 	public String customlogin(Model model) {
 		
-		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		 /*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		 
 		 if (null != auth){    
 		        return "redirect:dashboard";
 		    }
-		 else
+		 else*/
+		
 		return "login";
 	}
 	
@@ -80,10 +92,61 @@ public class HomeController {
 	public String failureLogin(Model model) {
 		return "403";
 	}
-	@RequestMapping("/summary")
-	public String summary(Model model) {
-		return "summary";
+	@RequestMapping("/customerlogin")
+	public String ShowCustomerLoginPage(Model model,HttpServletRequest request) {
+		
+		return "customerlogin";
 	}
+	
+	@PostMapping("/customerlogin")
+	public String validateCustomerLogin(Model model,HttpServletRequest request,HttpSession session) {
+		
+		String loginid=request.getParameter("username");
+		String password=request.getParameter("password");
+		
+		Customer customer =customerDao.validateCustomer(loginid,password);
+		
+		if(null ==customer)
+		{
+			System.out.println("Customer does not exists");
+		}
+		
+		session.setAttribute("customer", customer);
+		
+		String referalUrl=request.getHeader("referer");
+		StringBuffer strings=request.getRequestURL();
+		
+		if(request.getRequestURL().equals(request.getHeader("referer")))
+			return "redirect:/";
+		else
+			return "redirect:/";
+		
+		
+	}
+	
+	@PostMapping("/test")
+	public String test(Model model,HttpServletRequest request) {
+		//URI str= hrequest.getURI();
+		
+		System.out.println(request.getContextPath());
+		
+		System.out.println(request.getRequestURL());
+		
+		System.out.println(request.getHeader("referer"));
+		
+		//System.out.println(hrequest.getHeaders());
+		
+		return "admin";
+	}
+	
+	
+	@RequestMapping("/")
+	public String ShowAbhee(Model model) {
+		
+		 
+		return "abheeindex";
+	}
+	
 	
 	
 

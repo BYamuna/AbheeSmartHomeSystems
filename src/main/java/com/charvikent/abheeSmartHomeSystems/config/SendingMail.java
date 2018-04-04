@@ -18,6 +18,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+
+import com.charvikent.abheeSmartHomeSystems.model.Customer;
 /*import com.charvikent.abheeSmartHomeSystems.dao.UserDao;*/
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
@@ -101,8 +103,24 @@ public class SendingMail {
 	public void SendingSalesRequestByEmail(String emailId) throws MessagingException, MalformedURLException {  
 		try {
 			
+			VelocityContext velocityContext = new VelocityContext();
 			
-			User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			Object objBean = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if(objBean instanceof User)
+			{
+				
+				User objuserBean = (User)objBean;
+				velocityContext.put("name",objuserBean.getFirstname());
+			}
+			else
+			
+				if(objBean instanceof Customer)
+				{
+					
+					Customer objuserBean = (Customer)objBean;
+					velocityContext.put("name",objuserBean.getFirstname());
+					
+				}
 			
 			String email =emailId;
 			MimeMessage message = javaMailSender.createMimeMessage();
@@ -110,8 +128,8 @@ public class SendingMail {
 
 			
 			/*URL url = new URL("https://www.google.co.in/search?q=http://www.apache.org%22&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjFtOnIgZbaAhVBRo8KHXnKC0kQ_AUIDSgE&biw=1093&bih=530#imgrc=bzTPKVRxHpnr9M:");*/
-			VelocityContext velocityContext = new VelocityContext();
-			velocityContext.put("name",objuserBean.getFirstname());
+			//VelocityContext velocityContext = new VelocityContext();
+			//velocityContext.put("name",objuserBean.getFirstname());
 			/*velocityContext.put("img",url);*/
 			/*velocityContext.put("mobilenumber",user.getMobilenumber());
 			velocityContext.put("email",user.getEmail());
@@ -137,8 +155,24 @@ public class SendingMail {
 	public void sendSalesRequestEmailWithattachment(String emailId,String serverFile ) throws MessagingException {  
 		try {
 			
+VelocityContext velocityContext = new VelocityContext();
 			
-			User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			Object objBean = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if(objBean instanceof User)
+			{
+				
+				User objuserBean = (User)objBean;
+				velocityContext.put("name",objuserBean.getFirstname());
+			}
+			else
+			
+				if(objBean instanceof Customer)
+				{
+					
+					Customer objuserBean = (Customer)objBean;
+					velocityContext.put("name",objuserBean.getFirstname());
+					
+				}
 			
 			String email =  emailId;
 			MimeMessage message = javaMailSender.createMimeMessage();
@@ -146,8 +180,8 @@ public class SendingMail {
 
 			
 			
-			VelocityContext velocityContext = new VelocityContext();
-			velocityContext.put("name",objuserBean.getFirstname());
+			//VelocityContext velocityContext = new VelocityContext();
+			//velocityContext.put("name",objuserBean.getFirstname());
 			
 			StringWriter stringWriter = new StringWriter();
 			velocityEngine.mergeTemplate("RequestemailTemplate.vm", "UTF-8", velocityContext, stringWriter);
