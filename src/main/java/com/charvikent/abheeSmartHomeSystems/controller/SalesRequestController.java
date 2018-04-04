@@ -45,9 +45,14 @@ public class SalesRequestController
 	
 		int filecount =0;
 		
+		String str[] = latlong.split("&");
+		
 		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
 		
 		salesrequest.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
+		salesrequest.setLat(str[0]);
+		salesrequest.setLongitude(str[1]);
+	
    	 
    	 for(MultipartFile multipartFile : uploadedFiles) {
 				String fileName = multipartFile.getOriginalFilename();
@@ -68,7 +73,7 @@ public class SalesRequestController
 	   	if(result==false)
 	   	{
 			srequestDao.saveRequest(salesrequest);
-	   		sendingMail.SendingSalesRequestByEmail(salesrequest.getEmail());
+	   		//sendingMail.SendingSalesRequestByEmail(salesrequest.getEmail());
 	   		sendingMail.sendSalesRequestEmailWithattachment(salesrequest.getEmail(), salesrequest.getImgfiles());
 	   	}
 	   	else

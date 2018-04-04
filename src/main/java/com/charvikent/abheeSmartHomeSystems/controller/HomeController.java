@@ -25,12 +25,13 @@ public class HomeController {
 	@RequestMapping("/")
 	public String customlogin(Model model) {
 		
-		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		 /*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		 
 		 if (null != auth){    
 		        return "redirect:dashboard";
 		    }
-		 else
+		 else*/
+		
 		return "login";
 	}
 	
