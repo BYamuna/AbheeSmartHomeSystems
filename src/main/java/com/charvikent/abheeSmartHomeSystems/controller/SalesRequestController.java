@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
@@ -113,7 +114,7 @@ public class SalesRequestController
 	}
 	
 	@RequestMapping(value = "/sendingQuotation", method = RequestMethod.POST)
-	public String sendingQuotation(@RequestParam("id")  String id,@RequestParam("file") MultipartFile[] uploadedFiles,HttpServletRequest request) throws IllegalStateException, IOException, MessagingException
+	public @ResponseBody String sendingQuotation(@RequestParam("id")  String id,@RequestParam("file") MultipartFile[] uploadedFiles,HttpServletRequest request) throws IllegalStateException, IOException, MessagingException
 	{
 		
 		int filecount=0;
@@ -146,13 +147,15 @@ public class SalesRequestController
    	 if(filecount>0)
    	 {
    		 salesrequest.setQuotationDocuments(fileTemplate.concurrentFileNames());
-   		  salesrequest.setEnablel("0");
+   		  salesrequest.setEnable("0");
    		 fileTemplate.clearFiles();
    		 
    	 }
 			srequestDao.saveRequest(salesrequest);
 	   		sendingMail.sendSalesRequestEmailWithMultipleAttachment(email.toString(), uploadedFiles,salesrequest);
-		return "redirect:salesRequest";
+	   		String str ="true";
+	   		
+		return str;
 		
 	}
 	

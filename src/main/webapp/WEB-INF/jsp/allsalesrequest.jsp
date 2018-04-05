@@ -39,7 +39,7 @@
 			
 	<!-- add comment Modal Starts here-->
 	
-<div class="modal fade" id="formModal" data-backdrop="static" data-keyboard="false" role="dialog">
+<div class="modal fade" id="formModal" data-backdrop="static" data-keyboard="false"  role="dialog">
 	<div class="modal-dialog">
 		<!-- Modal content-->
 		<div class="modal-content">
@@ -56,7 +56,7 @@
                     		<div class="form-group" style=" width: 154%;">
 									<label class="ace-file-input ace-file-multiple col-sm-3 control-label no-padding-right" >Attach File(s)</label>
 									<div class="col-md-9">
-										<input type="file" name="fileupload" id="fileupload" multiple style="margin: 8px 0px 0px 0px;">
+										<input type="file" name="fileupload" id="fileupload"  class="validate "  multiple style="margin: 8px 0px 0px 0px;">
 									</div>
 							</div>
 							</div>
@@ -66,7 +66,7 @@
 				      	<div class="row">
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar text-center">
-					      			<input type="button" id="modelSubmit" value="Submit"  onclick="submitCommet()" class="btn-primary btn"/>
+					      			<input type="button" id="modelSubmit" value="Submit"  onclick="submitCommet()"  class="btn-primary btn"/>
 					      			<input type="reset" value="Reset" class="btn-danger btn cancel1"/>
 				      			</div>
 				      		</div>
@@ -216,13 +216,19 @@ if(validation) {
 			contentType: false,  // tell jQuery not to set contentType
 		  	
 		  	success: function(result){
-		  		if(result !="" && result != null){
-		  			
-		  		alert(result)
-		  		}
-		  		$('#commet').val("");
+		  		
+		  		if(result =="true"){
+		  			$('#formModal').modal('hide');
+		  		
+		  		/* $('#commet').val("");
 		  		$('#fileupload').val("");
-		  		 $('#formModal').modal('toggle');
+		  		
+		  		 $('#formModal').modal('toggle'); */
+		  		}
+		  		else
+		  			{
+		  			console.log("Backend error");
+		  			}
 		  	
 		    },
 		    error: function (e) {
