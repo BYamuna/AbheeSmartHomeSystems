@@ -3,7 +3,7 @@ package com.charvikent.abheeSmartHomeSystems.config;
 import java.io.File;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
-import java.net.URL;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -11,14 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
+import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 /*import com.charvikent.abheeSmartHomeSystems.dao.UserDao;*/
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
@@ -199,5 +201,53 @@ VelocityContext velocityContext = new VelocityContext();
 			System.out.println(e);
 		}  
 	}
+	
+	public void sendSalesRequestEmailWithMultipleAttachment(String emailId,MultipartFile[] files,SalesRequest salesrequest ) throws MessagingException {  
+		try {
+			
+			
+			
+			String email =  emailId;
+			MimeMessage message = javaMailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			
+			
+
+
+			
+			
+			VelocityContext velocityContext = new VelocityContext();
+			velocityContext.put("name",email);
+			
+			StringWriter stringWriter = new StringWriter();
+			velocityEngine.mergeTemplate("RequestemailTemplate.vm", "UTF-8", velocityContext, stringWriter);
+			helper.setText(stringWriter.toString(), true);
+			helper.setTo( email);
+		    helper.setSubject("Quotation");
+		    String path = request.getServletContext().getRealPath("/");
+		   File dir = new File (path +"QuotationDocuments");
+		   // File  moveFile = new File();
+			//helper.addAttachment("",moveFile);
+		   
+		   for(MultipartFile multipartFile : files) {
+				String fileName = multipartFile.getOriginalFilename();
+				if(!multipartFile.isEmpty())
+				{
+					//File serverFile = new File(dir.getAbsolutePath() + File.separator + fileName);
+					FileSystemResource file = new FileSystemResource(dir.getAbsolutePath() + File.separator + fileName);
+					helper.addAttachment(file.getFilename(), file);
+				}
+				
+			}
+			javaMailSender.send(message);
+				
+			
+		} catch (MailException e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}  
+	}
+	
+	
 
 		}

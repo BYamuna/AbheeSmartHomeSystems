@@ -1,1 +1,3 @@
 /target/
+/application.properties
+src/main/webapp/QuotationDocuments/*

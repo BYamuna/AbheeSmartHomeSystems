@@ -1,7 +1,6 @@
 package com.charvikent.abheeSmartHomeSystems.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -10,6 +9,8 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,11 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class SalesRequestController 
@@ -108,6 +110,50 @@ public class SalesRequestController
 
 		}
 		return "allsalesrequest";
+	}
+	
+	@RequestMapping(value = "/sendingQuotation", method = RequestMethod.POST)
+	public String sendingQuotation(@RequestParam("id")  String id,@RequestParam("file") MultipartFile[] uploadedFiles,HttpServletRequest request) throws IllegalStateException, IOException, MessagingException
+	{
+		
+		int filecount=0;
+		String email = srequestDao.getSalesRequestEmailById(id); // for get the email address 
+		SalesRequest salesrequest = srequestDao.getSalesRequestById(id);
+		
+		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		
+		File dir = new File(rootPath + File.separator + "QuotationDocuments");
+							
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+   	 
+		   	 for(MultipartFile multipartFile : uploadedFiles) {
+		   		 
+						String fileName = multipartFile.getOriginalFilename();
+						
+						if(!multipartFile.isEmpty())
+						{
+							filecount++;
+						 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+						}
+						
+						
+						//File serverFile = new File(dir.getAbsolutePath() + File.separator + fileName);
+						FileSystemResource file = new FileSystemResource(dir.getAbsolutePath() + File.separator + fileName);
+					}
+   	 
+   	 if(filecount>0)
+   	 {
+   		 salesrequest.setQuotationDocuments(fileTemplate.concurrentFileNames());
+   		  salesrequest.setEnablel("0");
+   		 fileTemplate.clearFiles();
+   		 
+   	 }
+			srequestDao.saveRequest(salesrequest);
+	   		sendingMail.sendSalesRequestEmailWithMultipleAttachment(email.toString(), uploadedFiles,salesrequest);
+		return "redirect:salesRequest";
+		
 	}
 	
 	
