@@ -60,16 +60,28 @@ public class SalesRequestDao
 			 }
 			return reqlist;		 
 		 }
+	@SuppressWarnings("unchecked")
 	public String getSalesRequestEmailById(String id) {
 		
 		String hql ="select email from SalesRequest where id=:id";
 		
 		return (String) entityManager.createQuery(hql).setParameter("id", Integer.parseInt(id)).getSingleResult();
 	}
+	@SuppressWarnings("unchecked")
 	public SalesRequest getSalesRequestById(String id) {
 		
+		SalesRequest salesRequest =new SalesRequest();
 		String hql ="from SalesRequest where id=:id";
+		 
+			
 		
+		/*Iterator itr = salesrequestlist.listIterator();
+		if(itr.hasNext()) {
+			
+			salesRequest.setAddress(salesrequestlist.g);
+			salesRequest.setEmail((String)email);
+		}
+		*/
 		return (SalesRequest) entityManager.createQuery(hql).setParameter("id", Integer.parseInt(id)).getSingleResult();
 	}
 }
