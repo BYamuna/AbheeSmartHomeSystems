@@ -2,10 +2,14 @@ package com.charvikent.abheeSmartHomeSystems.controller;
 
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,10 +19,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
+import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class HomeController {
@@ -26,6 +34,9 @@ public class HomeController {
 	@Autowired UserService userService;
 	
 	@Autowired CustomerDao customerDao;
+	
+	@Autowired
+	CategoryDao categoryDao;
 	
 	
 	
@@ -139,11 +150,25 @@ public class HomeController {
 	
 	
 	@RequestMapping("/")
-	public String ShowAbhee(Model model) {
+	public String ShowAbhee(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
+		List<Category> listOrderBeans = categoryDao.getCategoryNames();
+		//model.addAttribute("categories", listOrderBeans);
+		ObjectMapper objectMapper = new ObjectMapper();
+		String sJson = objectMapper.writeValueAsString(listOrderBeans);	
+		request.setAttribute("allOrders1", sJson);
 		
 		 
 		return "abheeindex";
 	}
+	
+	
+	@RequestMapping("/signout")
+	public String SignOut(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
+		session.invalidate();
+		 
+		return "redirect:/";
+	}
+	
 	
 	
 	
