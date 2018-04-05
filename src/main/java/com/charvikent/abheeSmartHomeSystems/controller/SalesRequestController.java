@@ -116,7 +116,6 @@ public class SalesRequestController
 	public String sendingQuotation(@RequestParam("id")  String id,@RequestParam("file") MultipartFile[] uploadedFiles,HttpServletRequest request) throws IllegalStateException, IOException, MessagingException
 	{
 		
-		//SalesRequest salesrequest = null;
 		int filecount=0;
 		String email = srequestDao.getSalesRequestEmailById(id); // for get the email address 
 		SalesRequest salesrequest = srequestDao.getSalesRequestById(id);
@@ -146,21 +145,13 @@ public class SalesRequestController
    	 
    	 if(filecount>0)
    	 {
-   		// salesrequest.setId(Integer.parseInt(id));
    		 salesrequest.setQuotationDocuments(fileTemplate.concurrentFileNames());
    		  salesrequest.setEnablel("0");
    		 fileTemplate.clearFiles();
    		 
    	 }
-	   	//Boolean result =srequestDao.checkSalesrequestExistsorNotByEmailAndModelNo(salesrequest);
-	   	//if(result==false)
-	   	//{
 			srequestDao.saveRequest(salesrequest);
-	   		//sendingMail.SendingSalesRequestByEmail(salesrequest.getEmail());
-	   		sendingMail.sendSalesRequestEmailWithMultipleAttachment(email.toString(), uploadedFiles);
-	   	//}
-	   	/*else
-	   		System.out.println("Record Already exists");*/
+	   		sendingMail.sendSalesRequestEmailWithMultipleAttachment(email.toString(), uploadedFiles,salesrequest);
 		return "redirect:salesRequest";
 		
 	}

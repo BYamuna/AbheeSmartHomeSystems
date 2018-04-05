@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
+import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 /*import com.charvikent.abheeSmartHomeSystems.dao.UserDao;*/
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
@@ -201,11 +202,10 @@ VelocityContext velocityContext = new VelocityContext();
 		}  
 	}
 	
-	public void sendSalesRequestEmailWithMultipleAttachment(String emailId,MultipartFile[] files ) throws MessagingException {  
+	public void sendSalesRequestEmailWithMultipleAttachment(String emailId,MultipartFile[] files,SalesRequest salesrequest ) throws MessagingException {  
 		try {
 			
 			
-			User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			
 			String email =  emailId;
 			MimeMessage message = javaMailSender.createMimeMessage();
@@ -217,7 +217,7 @@ VelocityContext velocityContext = new VelocityContext();
 			
 			
 			VelocityContext velocityContext = new VelocityContext();
-			velocityContext.put("name",objuserBean.getFirstname());
+			velocityContext.put("name",email);
 			
 			StringWriter stringWriter = new StringWriter();
 			velocityEngine.mergeTemplate("RequestemailTemplate.vm", "UTF-8", velocityContext, stringWriter);
