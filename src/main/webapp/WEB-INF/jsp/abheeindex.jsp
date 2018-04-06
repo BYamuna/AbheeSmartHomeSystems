@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Abhee Smart Homes</title>
 </head>
 <body>
 	<div class="container">
@@ -41,31 +41,31 @@
         
         <!-- Content starts here -->
         <div class="data">
-        	<div class="col-md-4">
+        	<div class="col-md-4 imgl">
             	<a href="#"><img src="${baseurl }/abhee/images/hmt.png" class="img-responsive" alt="Home Theater" title="Home Theater"/></a>
             </div>
-        	<div class="col-md-4">
+        	<div class="col-md-4 imgm">
             	<a href="#"><img src="${baseurl }/abhee/images/paa.png" class="img-responsive" alt="PA Audio" title="PA Audio"/></a>
             </div>
-        	<div class="col-md-4">
+        	<div class="col-md-4 imgr">
             	<a href="#"><img src="${baseurl }/abhee/images/flooring.png" class="img-responsive" alt="Wooden" title="Wooden Flooring"/></a>
             </div><div class="clearfix"></div>
-        	<div class="col-md-4">
+        	<div class="col-md-4 imgl">
             	<a href="#"><img src="${baseurl }/abhee/images/security.png" class="img-responsive" alt="Security" title="Security Cameras"/></a>
             </div>
-        	<div class="col-md-4">
+        	<div class="col-md-4 imgm">
             	<a href="#"><img src="${baseurl }/abhee/images/remote.png" class="img-responsive" alt="Remote" title="Remote"/></a>
             </div>
-        	<div class="col-md-4">
+        	<div class="col-md-4 imgr">
             	<a href="#"><img src="${baseurl }/abhee/images/proj.jpg" class="img-responsive" alt="Projector" title="Projectors"/></a>
             </div><div class="clearfix"></div>
-        	<div class="col-md-4">
+        	<div class="col-md-4 imgl">
             	<a href="#"><img src="${baseurl }/abhee/images/solar.png" class="img-responsive" alt="Solar" title="Solar Fencing"/></a>
             </div>
-        	<div class="col-md-4">
+        	<div class="col-md-4 imgm">
             	<a href="#"><img src="${baseurl }/abhee/images/car.png" class="img-responsive" alt="Car" title="Car Accessories"/></a>
             </div>
-        	<div class="col-md-4">
+        	<div class="col-md-4 imgr">
             	<a href="#"><img src="${baseurl }/abhee/images/grass.png" class="img-responsive" alt="Grass" title="Artificial Grass"/></a>
             </div><div class="clearfix"></div>
         </div>

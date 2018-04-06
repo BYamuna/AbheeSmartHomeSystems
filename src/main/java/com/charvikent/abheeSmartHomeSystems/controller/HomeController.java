@@ -97,10 +97,10 @@ public class HomeController {
 	    return "redirect:/login";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
 	}
 	
-	@RequestMapping("/403")
+	/*@RequestMapping("/403")
 	public String failureLogin(Model model) {
 		return "403";
-	}
+	}*/
 	@RequestMapping("/customerlogin")
 	public String ShowCustomerLoginPage(Model model,HttpServletRequest request) {
 		

@@ -339,15 +339,18 @@ document.getElementById("file1").onchange = function () {
     
     for(var i=0; i<=this.files.length; i++)
     {
+    	alert(this.files[i].size);
+    	
+    	
     
-    if(this.files[i].size>500){
-        alert("Image Size should not be greater than 500Kb");
+     if(this.files[i].size>1253){
+        alert("Image Size should not be greater than 1253Kb");
         $("#file1").attr("src","blank");
        // $("#file1").hide();  
         $('#file1').wrap('<form>').closest('form').get(0).reset();
         $('#file1').unwrap();     
         return false;
-    }
+    } 
     if(this.files[i].type.indexOf("image")==-1){
         alert("Invalid Type");
         $("#file1").attr("src","blank");
