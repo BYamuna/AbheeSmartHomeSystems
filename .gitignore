@@ -1,4 +1,4 @@
 /target/
-/application.properties
+src/main/resources/application.properties
 src/main/webapp/QuotationDocuments/*
 src/main/webapp/reportDocuments/*
