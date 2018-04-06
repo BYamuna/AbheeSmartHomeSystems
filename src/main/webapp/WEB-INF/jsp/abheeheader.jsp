@@ -68,9 +68,12 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
           <ul class="dropdown-menu">
           <li id="cmlist"></li>
-            <li><a href="cutomerlogin">Sign in</a></li>
-            <li><a href="#">My Profile</a></li>
-            <li><a href="signout">Sign out</a></li>
+            <li><a href="customerlogin">Sign in</a></li>
+           
+          <c:if test="${not empty loggedstatus}">
+           <li><a href="#">My Profile</a></li>
+            <li><a href="${baseurl}/signout">Sign out</a></li>
+            </c:if>
           </ul>
         </li>
       </ul>

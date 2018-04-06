@@ -118,18 +118,19 @@ public class HomeController {
 		if(null ==customer)
 		{
 			System.out.println("Customer does not exists");
+			return "redirect:/";
 		}
-		
+		else
+		{
 		session.setAttribute("customer", customer);
+		session.setAttribute("loggedstatus", "login");
 		
 		String referalUrl=request.getHeader("referer");
 		StringBuffer strings=request.getRequestURL();
 		
-		if(request.getRequestURL().equals(request.getHeader("referer")))
+			
 			return "redirect:/";
-		else
-			return "redirect:/";
-		
+		}
 		
 	}
 	

@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.model.Product;
 
-import autovalue.shaded.org.apache.commons.lang.StringUtils;
 /*import com.charvikent.abheeSmartHomeSystems.model.User;*/
 
 
@@ -189,6 +188,7 @@ List<Object[]> rows = entityManager.createQuery(hql).getResultList();
 		
 		System.out.println(sql);
 		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
+		
 		return retlist ;
 		
 	}
