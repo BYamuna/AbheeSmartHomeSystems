@@ -51,7 +51,8 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Home Theater</a></li>
+          <span id="cmlist"></span>
+            <li><a href="#">Home Theatter </a></li>
             <li><a href="#">PA Audio</a></li>
             <li><a href="#">Projectors</a></li>
             <li><a href="#">Security Cameras</a></li>
@@ -80,4 +81,15 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
   	</body>
+  	<script type="text/javascript">
+  	var categorieslist =${allOrders1};
+  	var rowdata;
+  	
+  	$.each(categorieslist, function(k,v){
+  		
+  		rowdata ='<li><a href="#">'+v.category+'</a> </li>';
+  		$("#cmlist").append(rowdata);
+  	});
+  	
+  	</script>
   	</html>

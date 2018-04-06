@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
+import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 /*import com.charvikent.abheeSmartHomeSystems.dao.UserDao;*/
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
@@ -37,7 +38,7 @@ public class SendingMail {
 	private UserDao userDao;*/
 	@Autowired
 	HttpServletRequest request;
-	
+	@Autowired	FilesStuff filePath;
 	
 	public void sendConfirmationEmail(User user) throws MessagingException {  
 		try {
@@ -152,7 +153,7 @@ public class SendingMail {
 		}  
 	}
 	
-	public void sendSalesRequestEmailWithattachment(String emailId,MultipartFile[] serverFile ) throws MessagingException {  
+	public void sendSalesRequestEmailWithattachment(String emailId,MultipartFile[] files ) throws MessagingException {  
 		try {
 			
 			VelocityContext velocityContext = new VelocityContext();
@@ -188,16 +189,17 @@ public class SendingMail {
 			helper.setText(stringWriter.toString(), true);
 			helper.setTo( email);
 		    helper.setSubject("Request submitted successfully");
-		    String path = request.getServletContext().getRealPath("/");
-		   // File dir = new File (path +"reportDocuments");
-		   /* String[] attachments=serverFile.split("&");*/
-		    for(MultipartFile entry:serverFile) {
-		    //File  moveFile = new File(path +"reportDocuments",entry);
-		    String fileName = entry.getOriginalFilename();
-		    FileSystemResource file = new FileSystemResource(path + File.separator + fileName);
-			helper.addAttachment("fileName",file);
-		    }
 		    
+		    for(MultipartFile multipartFile : files) {
+				String fileName = multipartFile.getOriginalFilename();
+				if(!multipartFile.isEmpty())
+				{
+					FileSystemResource file = new FileSystemResource(filePath.makeDirectory() + File.separator + fileName);
+					helper.addAttachment(file.getFilename(), file);
+				}
+				
+			}
+			
 			javaMailSender.send(message);
 				
 			
@@ -207,40 +209,29 @@ public class SendingMail {
 		}  
 	}
 	
-	public void sendSalesRequestEmailWithMultipleAttachment(String emailId,MultipartFile[] files ) throws MessagingException {  
+	public void sendSalesRequestEmailWithMultipleAttachment(String emailId,MultipartFile[] files,SalesRequest salesrequest ) throws MessagingException {  
 		try {
 			
-			
-			//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			
 			String email =  emailId;
 			MimeMessage message = javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 			
 			
-
-
-			
-			
 			VelocityContext velocityContext = new VelocityContext();
-			//velocityContext.put("name",objuserBean.getFirstname());
+			velocityContext.put("name",email);
 			
 			StringWriter stringWriter = new StringWriter();
 			velocityEngine.mergeTemplate("RequestemailTemplate.vm", "UTF-8", velocityContext, stringWriter);
 			helper.setText(stringWriter.toString(), true);
 			helper.setTo( email);
 		    helper.setSubject("Quotation");
-		    String path = request.getServletContext().getRealPath("/");
-		   File dir = new File (path +"QuotationDocuments");
-		   // File  moveFile = new File();
-			//helper.addAttachment("",moveFile);
-		   
+		  		   
 		   for(MultipartFile multipartFile : files) {
 				String fileName = multipartFile.getOriginalFilename();
 				if(!multipartFile.isEmpty())
 				{
-					//File serverFile = new File(dir.getAbsolutePath() + File.separator + fileName);
-					FileSystemResource file = new FileSystemResource(dir.getAbsolutePath() + File.separator + fileName);
+					FileSystemResource file = new FileSystemResource(filePath.makeDirectory() + File.separator + fileName);
 					helper.addAttachment(file.getFilename(), file);
 				}
 				

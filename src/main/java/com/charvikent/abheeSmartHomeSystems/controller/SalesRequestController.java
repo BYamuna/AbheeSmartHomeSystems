@@ -81,8 +81,7 @@ public class SalesRequestController
 	   	{
 			srequestDao.saveRequest(salesrequest);
 	   		//sendingMail.SendingSalesRequestByEmail(salesrequest.getEmail());
-			String email=salesrequest.getEmail();
-	   		sendingMail.sendSalesRequestEmailWithattachment(email, uploadedFiles);
+	   		sendingMail.sendSalesRequestEmailWithattachment(salesrequest.getEmail(), uploadedFiles);
 	   	}
 	   	else
 	   		System.out.println("Record Already exists");
@@ -119,55 +118,38 @@ public class SalesRequestController
 	}
 	
 	@RequestMapping(value = "/sendingQuotation", method = RequestMethod.POST)
-	public String sendingQuotation(@RequestParam("id")  String id,@RequestParam("file") MultipartFile[] uploadedFiles,HttpServletRequest request) throws IllegalStateException, IOException, MessagingException
+	public @ResponseBody String sendingQuotation(@RequestParam("id")  String id,@RequestParam("file") MultipartFile[] uploadedFiles,HttpServletRequest request) throws IllegalStateException, IOException, MessagingException
 	{
 		
-		//SalesRequest salesrequest = null;
 		int filecount=0;
 		String email = srequestDao.getSalesRequestEmailById(id); // for get the email address 
 		SalesRequest salesrequest = srequestDao.getSalesRequestById(id);
 		
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
-		
-		File dir = new File(rootPath + File.separator + "QuotationDocuments");
-							
-				if (!dir.exists()) {
-					dir.mkdirs();
-				}
-   	 
-		   	 for(MultipartFile multipartFile : uploadedFiles) {
+		   	 for(MultipartFile multipartFile : uploadedFiles) 
+		   	 {
 		   		 
-						String fileName = multipartFile.getOriginalFilename();
-						
-						if(!multipartFile.isEmpty())
-						{
-							filecount++;
-						 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
-						}
-						
-						
-						//File serverFile = new File(dir.getAbsolutePath() + File.separator + fileName);
-						FileSystemResource file = new FileSystemResource(dir.getAbsolutePath() + File.separator + fileName);
-					}
-   	 
+				String fileName = multipartFile.getOriginalFilename();
+				
+				if(!multipartFile.isEmpty())
+				{
+					filecount++;
+				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+				}
+
+			}
+ 
    	 if(filecount>0)
    	 {
-   		// salesrequest.setId(Integer.parseInt(id));
    		 salesrequest.setQuotationDocuments(fileTemplate.concurrentFileNames());
-   		  salesrequest.setEnablel("0");
+   		  salesrequest.setEnable("0");
    		 fileTemplate.clearFiles();
    		 
    	 }
-	   	//Boolean result =srequestDao.checkSalesrequestExistsorNotByEmailAndModelNo(salesrequest);
-	   	//if(result==false)
-	   	//{
 			srequestDao.saveRequest(salesrequest);
-	   		//sendingMail.SendingSalesRequestByEmail(salesrequest.getEmail());
-	   		sendingMail.sendSalesRequestEmailWithMultipleAttachment(email.toString(), uploadedFiles);
-	   	//}
-	   	/*else
-	   		System.out.println("Record Already exists");*/
-		return "redirect:salesRequest";
+	   		sendingMail.sendSalesRequestEmailWithMultipleAttachment(email.toString(), uploadedFiles,salesrequest);
+	   		String str ="true";
+	   		
+		return str;
 		
 	}
 	

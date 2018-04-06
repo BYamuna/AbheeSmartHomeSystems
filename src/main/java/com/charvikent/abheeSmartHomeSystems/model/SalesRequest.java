@@ -25,15 +25,16 @@ public class SalesRequest
 	private String imgfiles;
 	private String salesrequestnumber;
 	private String quotationDocuments;
-	private String enablel;
+	private String enable;
 	
 	
 	
-	public String getEnablel() {
-		return enablel;
+	
+	public String getEnable() {
+		return enable;
 	}
-	public void setEnablel(String enablel) {
-		this.enablel = enablel;
+	public void setEnable(String enable) {
+		this.enable = enable;
 	}
 	public String getQuotationDocuments() {
 		return quotationDocuments;
@@ -154,7 +155,8 @@ public class SalesRequest
 		return "SalesRequest [id=" + id + ", modelnumber=" + modelnumber + ", email=" + email + ", mobileno=" + mobileno
 				+ ", location=" + location + ", address=" + address + ", reqdesc=" + reqdesc + ", imgfiles=" + imgfiles
 				+ ", salesrequestnumber=" + salesrequestnumber + ", quotationDocuments=" + quotationDocuments
-				+ ", enablel=" + enablel + "]";
+				+ ", enable=" + enable + ", lat=" + lat + ", longitude=" + longitude + "]";
 	}
+	
 	
 }

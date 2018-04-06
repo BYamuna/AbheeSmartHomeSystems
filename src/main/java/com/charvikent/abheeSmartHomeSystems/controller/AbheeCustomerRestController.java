@@ -1,6 +1,7 @@
 package com.charvikent.abheeSmartHomeSystems.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -188,31 +189,66 @@ HashMap<String,String> hm =new HashMap<String,String>();
 		
 		String code =null;
 		HashMap<String,String> hm =new HashMap<String,String>();
-		List<Category> listOrderBeans = categoryDao.getCategoryNames();
 		
 		JSONObject json =new JSONObject();
 		
 		
-		//List<User> users =new ArrayList<user>()
 		
 		
 			Customer userBean =customerDao.checkuserExistOrNot(customer);
 			
+			//users.add(userBean);
+			
 			ObjectMapper objectMapper = new ObjectMapper();
 			String userjson = objectMapper.writeValueAsString(userBean);
-			String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
+			//String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
 			
 			if(null != userBean)
 			{
-				json.put("categorieslist", listOrderBeans);
+				//json.put("categorieslist", listOrderBeans);
 				code =userBean.getFirstname()+" "+userBean.getLastname();
-				json.put("username", code);
+				json.put("customerBean", userBean);
 				
 			}
 			else
 				//code="NOT_FOUND";
 				
 				json.put("status", "NOT_FOUND");
+		
+			System.out.println("rest call user status:  "+code);
+		
+
+		
+		return userjson;
+	}
+	
+	
+	@RequestMapping(value="/getcategories", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getCategoriesList() throws JsonProcessingException, JSONException {
+		
+		String code =null;
+		HashMap<String,String> hm =new HashMap<String,String>();
+		List<Category> listOrderBeans = categoryDao.getCategoryNames();
+		
+		JSONObject json =new JSONObject();
+		
+		
+		
+		
+			
+			//ObjectMapper objectMapper = new ObjectMapper();
+			//String userjson = objectMapper.writeValueAsString(userBean);
+			//String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
+			
+			if(null != listOrderBeans)
+			{
+				json.put("categorieslist", listOrderBeans);
+				
+			}
+			else
+				//code="NOT_FOUND";
+				
+				json.put("categorieslist", "NOT_FOUND");
 		
 			System.out.println("rest call user status:  "+code);
 		
