@@ -192,16 +192,16 @@ if(validation) {
 			var productmodel=$('#productmodel').val();
 			var email=$('#email').val();
 			var mobileno=$('#mobileno').val();
-	    	var locationData=$('#locationData').val();
+	    	//var locationData=$('#locationData').val();
 	    	var address=$('#address').val();
 	    	var reqdesc=$('#reqdesc').val();
 		   
 		   var formData = new FormData();
 		   
-		   formData.append('productmodel',productmodel);
+		   formData.append('modelnumber',productmodel);
 		   formData.append('email',email);
 		   formData.append('mobileno',mobileno);
-		   formData.append('locationData',locationData);
+		 //  formData.append('locationData',locationData);
 		   formData.append('address',address);
 		   formData.append('reqdesc',reqdesc);
 		   
@@ -213,12 +213,12 @@ if(validation) {
     	for(var i=0; i< ins; i++)
     	{	
     	var portfolio_values = document.getElementById('imgfile').files[i];
-		formData.append('imgfile[]', portfolio_values);
+		formData.append('imgfile', portfolio_values);
 		}
     	
-    	
+    	console.log(formData);
  		$.ajax({
-			type:"post",
+			type:"POST",
 			enctype: 'multipart/form-data',
 		  	url: "salesRequest", 
 		  	data:formData,

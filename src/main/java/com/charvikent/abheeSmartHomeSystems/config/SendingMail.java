@@ -152,12 +152,12 @@ public class SendingMail {
 		}  
 	}
 	
-	public void sendSalesRequestEmailWithattachment(String emailId,String serverFile ) throws MessagingException {  
+	public void sendSalesRequestEmailWithattachment(String emailId,MultipartFile[] serverFile ) throws MessagingException {  
 		try {
 			
-VelocityContext velocityContext = new VelocityContext();
+			VelocityContext velocityContext = new VelocityContext();
 			
-			Object objBean = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			/*Object objBean = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if(objBean instanceof User)
 			{
 				
@@ -172,7 +172,7 @@ VelocityContext velocityContext = new VelocityContext();
 					Customer objuserBean = (Customer)objBean;
 					velocityContext.put("name",objuserBean.getFirstname());
 					
-				}
+				}*/
 			
 			String email =  emailId;
 			MimeMessage message = javaMailSender.createMimeMessage();
@@ -190,8 +190,14 @@ VelocityContext velocityContext = new VelocityContext();
 		    helper.setSubject("Request submitted successfully");
 		    String path = request.getServletContext().getRealPath("/");
 		   // File dir = new File (path +"reportDocuments");
-		    File  moveFile = new File(path +"reportDocuments","pineapple.jpg");
-			helper.addAttachment("pineapple.jpg",moveFile);
+		   /* String[] attachments=serverFile.split("&");*/
+		    for(MultipartFile entry:serverFile) {
+		    //File  moveFile = new File(path +"reportDocuments",entry);
+		    String fileName = entry.getOriginalFilename();
+		    FileSystemResource file = new FileSystemResource(path + File.separator + fileName);
+			helper.addAttachment("fileName",file);
+		    }
+		    
 			javaMailSender.send(message);
 				
 			
@@ -205,7 +211,7 @@ VelocityContext velocityContext = new VelocityContext();
 		try {
 			
 			
-			User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			
 			String email =  emailId;
 			MimeMessage message = javaMailSender.createMimeMessage();
@@ -217,7 +223,7 @@ VelocityContext velocityContext = new VelocityContext();
 			
 			
 			VelocityContext velocityContext = new VelocityContext();
-			velocityContext.put("name",objuserBean.getFirstname());
+			//velocityContext.put("name",objuserBean.getFirstname());
 			
 			StringWriter stringWriter = new StringWriter();
 			velocityEngine.mergeTemplate("RequestemailTemplate.vm", "UTF-8", velocityContext, stringWriter);

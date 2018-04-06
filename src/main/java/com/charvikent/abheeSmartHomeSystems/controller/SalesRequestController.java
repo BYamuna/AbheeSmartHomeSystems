@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
@@ -42,9 +43,9 @@ public class SalesRequestController
 		
 	}
 	@RequestMapping(value = "/salesRequest", method = RequestMethod.POST)
-	public String saveRequestDetails(@Valid @ModelAttribute SalesRequest salesrequest,@RequestParam("imgfile[]") MultipartFile[] uploadedFiles,@RequestParam("locationData") String latlong) throws IllegalStateException, IOException, MessagingException
+	public @ResponseBody String saveRequestDetails(@Valid @ModelAttribute SalesRequest salesrequest,@RequestParam("imgfile") MultipartFile[] uploadedFiles,@RequestParam("locationData") String latlong,HttpServletRequest request) throws IllegalStateException, IOException, MessagingException
 	{
-	
+	System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2");
 		int filecount =0;
 		
 		String str[] = latlong.split("&");
@@ -54,14 +55,18 @@ public class SalesRequestController
 		salesrequest.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
 		salesrequest.setLat(str[0]);
 		salesrequest.setLongitude(str[1]);
-	
-   	 
+		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		File dir = new File(rootPath + File.separator + "reportDocuments");
+		
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
    	 for(MultipartFile multipartFile : uploadedFiles) {
 				String fileName = multipartFile.getOriginalFilename();
 				if(!multipartFile.isEmpty())
 				{
 					filecount++;
-				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName,dir));
 				}
 			}
    	 
@@ -76,7 +81,8 @@ public class SalesRequestController
 	   	{
 			srequestDao.saveRequest(salesrequest);
 	   		//sendingMail.SendingSalesRequestByEmail(salesrequest.getEmail());
-	   		sendingMail.sendSalesRequestEmailWithattachment(salesrequest.getEmail(), salesrequest.getImgfiles());
+			String email=salesrequest.getEmail();
+	   		sendingMail.sendSalesRequestEmailWithattachment(email, uploadedFiles);
 	   	}
 	   	else
 	   		System.out.println("Record Already exists");

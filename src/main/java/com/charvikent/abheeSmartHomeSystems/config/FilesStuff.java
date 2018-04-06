@@ -50,7 +50,16 @@ public class FilesStuff {
     	 
     	 return dir;
 	}
-	
+	public  File   makeDirectory(File file)
+	{
+		 //String path = request.getServletContext().getRealPath("/");
+    	 //File dir = new File (path +"QuotationDocuments");
+    	 if (!file.exists()) {
+				file.mkdirs();
+			}
+    	 
+    	 return file;
+	}
 	
 	
 	/** here checking file exists or not.
@@ -76,6 +85,25 @@ public class FilesStuff {
 		 return moveFile;
 		  }
 	}
+	
+	public File moveFileTodir(String fileName,File file)
+	{
+		File dir=makeDirectory(file);
+		File  moveFile = new File(dir,fileName);
+		if(moveFile.exists()){
+			  System.out.println("file exists already");
+			 String reNamedFile=renameFile(fileName);
+			 fileNames.add(reNamedFile);
+			  moveFile = new File(dir,reNamedFile);
+			  return moveFile;
+		  }
+		  else
+		  {
+			 fileNames.add(fileName);
+		 return moveFile;
+		  }
+	}
+	
 	
 	
  /*  
