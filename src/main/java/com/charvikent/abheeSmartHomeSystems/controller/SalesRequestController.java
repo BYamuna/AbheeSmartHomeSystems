@@ -76,7 +76,7 @@ public class SalesRequestController
 	   	{
 			srequestDao.saveRequest(salesrequest);
 	   		//sendingMail.SendingSalesRequestByEmail(salesrequest.getEmail());
-	   		sendingMail.sendSalesRequestEmailWithattachment(salesrequest.getEmail(), salesrequest.getImgfiles());
+	   		sendingMail.sendSalesRequestEmailWithattachment(salesrequest.getEmail(), uploadedFiles);
 	   	}
 	   	else
 	   		System.out.println("Record Already exists");
@@ -120,29 +120,19 @@ public class SalesRequestController
 		String email = srequestDao.getSalesRequestEmailById(id); // for get the email address 
 		SalesRequest salesrequest = srequestDao.getSalesRequestById(id);
 		
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
-		
-		File dir = new File(rootPath + File.separator + "QuotationDocuments");
-							
-				if (!dir.exists()) {
-					dir.mkdirs();
-				}
-   	 
-		   	 for(MultipartFile multipartFile : uploadedFiles) {
+		   	 for(MultipartFile multipartFile : uploadedFiles) 
+		   	 {
 		   		 
-						String fileName = multipartFile.getOriginalFilename();
-						
-						if(!multipartFile.isEmpty())
-						{
-							filecount++;
-						 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
-						}
-						
-						
-						//File serverFile = new File(dir.getAbsolutePath() + File.separator + fileName);
-						FileSystemResource file = new FileSystemResource(dir.getAbsolutePath() + File.separator + fileName);
-					}
-   	 
+				String fileName = multipartFile.getOriginalFilename();
+				
+				if(!multipartFile.isEmpty())
+				{
+					filecount++;
+				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+				}
+
+			}
+ 
    	 if(filecount>0)
    	 {
    		 salesrequest.setQuotationDocuments(fileTemplate.concurrentFileNames());
