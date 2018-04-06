@@ -63,11 +63,11 @@ public class HomeController {
 		return "userlogin";
 	}
 	
-	@RequestMapping("*")
+	/*@RequestMapping("*")
 	public String erro404r(Model model) {
 	//	System.out.println("login called at /");
 		return "login";
-	}
+	}*/
 	@RequestMapping("/login")
 	public String loginView(Model model) {
 		System.out.println("login called at /login page");
@@ -147,7 +147,10 @@ public class HomeController {
 		
 		return "admin";
 	}
-	
+	@RequestMapping("/dummypage")
+	public String dummy(Model model) {
+		return "dummypage";
+	}
 	
 	@RequestMapping("/")
 	public String ShowAbhee(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {

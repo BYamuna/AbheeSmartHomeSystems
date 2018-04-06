@@ -38,7 +38,7 @@ public class SendingMail {
 	private UserDao userDao;*/
 	@Autowired
 	HttpServletRequest request;
-	
+	@Autowired	FilesStuff filePath;
 	
 	public void sendConfirmationEmail(User user) throws MessagingException {  
 		try {
@@ -153,12 +153,12 @@ public class SendingMail {
 		}  
 	}
 	
-	public void sendSalesRequestEmailWithattachment(String emailId,String serverFile ) throws MessagingException {  
+	public void sendSalesRequestEmailWithattachment(String emailId,MultipartFile[] files ) throws MessagingException {  
 		try {
 			
-VelocityContext velocityContext = new VelocityContext();
+			VelocityContext velocityContext = new VelocityContext();
 			
-			Object objBean = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			/*Object objBean = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if(objBean instanceof User)
 			{
 				
@@ -173,7 +173,7 @@ VelocityContext velocityContext = new VelocityContext();
 					Customer objuserBean = (Customer)objBean;
 					velocityContext.put("name",objuserBean.getFirstname());
 					
-				}
+				}*/
 			
 			String email =  emailId;
 			MimeMessage message = javaMailSender.createMimeMessage();
@@ -189,10 +189,17 @@ VelocityContext velocityContext = new VelocityContext();
 			helper.setText(stringWriter.toString(), true);
 			helper.setTo( email);
 		    helper.setSubject("Request submitted successfully");
-		    String path = request.getServletContext().getRealPath("/");
-		   // File dir = new File (path +"reportDocuments");
-		    File  moveFile = new File(path +"reportDocuments","pineapple.jpg");
-			helper.addAttachment("pineapple.jpg",moveFile);
+		    
+		    for(MultipartFile multipartFile : files) {
+				String fileName = multipartFile.getOriginalFilename();
+				if(!multipartFile.isEmpty())
+				{
+					FileSystemResource file = new FileSystemResource(filePath.makeDirectory() + File.separator + fileName);
+					helper.addAttachment(file.getFilename(), file);
+				}
+				
+			}
+			
 			javaMailSender.send(message);
 				
 			
@@ -206,14 +213,9 @@ VelocityContext velocityContext = new VelocityContext();
 		try {
 			
 			
-			
 			String email =  emailId;
 			MimeMessage message = javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
-			
-			
-
-
 			
 			
 			VelocityContext velocityContext = new VelocityContext();
@@ -224,17 +226,12 @@ VelocityContext velocityContext = new VelocityContext();
 			helper.setText(stringWriter.toString(), true);
 			helper.setTo( email);
 		    helper.setSubject("Quotation");
-		    String path = request.getServletContext().getRealPath("/");
-		   File dir = new File (path +"QuotationDocuments");
-		   // File  moveFile = new File();
-			//helper.addAttachment("",moveFile);
-		   
+		  		   
 		   for(MultipartFile multipartFile : files) {
 				String fileName = multipartFile.getOriginalFilename();
 				if(!multipartFile.isEmpty())
 				{
-					//File serverFile = new File(dir.getAbsolutePath() + File.separator + fileName);
-					FileSystemResource file = new FileSystemResource(dir.getAbsolutePath() + File.separator + fileName);
+					FileSystemResource file = new FileSystemResource(filePath.makeDirectory() + File.separator + fileName);
 					helper.addAttachment(file.getFilename(), file);
 				}
 				

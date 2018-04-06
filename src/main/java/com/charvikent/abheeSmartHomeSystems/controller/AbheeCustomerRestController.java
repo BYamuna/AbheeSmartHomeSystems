@@ -200,6 +200,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 		System.out.println("rest call user called at end");
 		
 		
+		
 			Customer userBean =customerDao.checkuserExistOrNot(customer);
 			
 			System.out.println("rest call user called at staring"+userBean);
@@ -226,9 +227,56 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	}
 	
 	
+	/*@RequestMapping(value="/getcategories", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getCategoriesList() throws JsonProcessingException, JSONException {
+		
+		List<Category> listOrderBeans = categoryDao.getCategoryNames();
+		
+		JSONObject json =new JSONObject();
+		
+		
+		
+		
+			
+			//ObjectMapper objectMapper = new ObjectMapper();
+			//String userjson = objectMapper.writeValueAsString(userBean);
+			//String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
+			
+			if(null != listOrderBeans)
+			{
+				json.put("categorieslist", listOrderBeans);
+=======
+			//users.add(userBean);
+			
+			ObjectMapper objectMapper = new ObjectMapper();
+			String userjson = objectMapper.writeValueAsString(userBean);
+			//String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
+			
+			if(null != userBean)
+			{
+				//json.put("categorieslist", listOrderBeans);
+				code =userBean.getFirstname()+" "+userBean.getLastname();
+				json.put("customerBean", userBean);
+>>>>>>> c121eda3b50a1306a9dfe9b02688b9062934b16f
+				
+			}
+			else
+				//code="NOT_FOUND";
+				
+				json.put("categorieslist", "NOT_FOUND");
+		
+		
+
+		
+		return userjson;
+	}
+	*/
+	
 	@RequestMapping(value="/getcategories", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public String  getCategoriesList() throws JsonProcessingException, JSONException {
 		
+		String code =null;
+		HashMap<String,String> hm =new HashMap<String,String>();
 		List<Category> listOrderBeans = categoryDao.getCategoryNames();
 		
 		JSONObject json =new JSONObject();
@@ -251,6 +299,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 				
 				json.put("categorieslist", "NOT_FOUND");
 		
+			System.out.println("rest call user status:  "+code);
 		
 
 		

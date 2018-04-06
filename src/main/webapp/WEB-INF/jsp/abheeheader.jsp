@@ -89,8 +89,9 @@
   	
   	$.each(categorieslist, function(k,v){
   		
-  		//rowdata ='<li><a href="abheecategory?id=" >'+v.category+'</a> </li>';
+  		/* //rowdata ='<li><a href="abheecategory?id=" >'+v.category+'</a> </li>'; */
   		rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
+  	/* 	rowdata ='<li><a href="#">'+v.category+'</a> </li>'; */
   		$("#cmlist").append(rowdata);
   	});
   	
