@@ -17,7 +17,7 @@
           <h4 class="modal-title">Sales Request</h4>
         </div>
         <div class="modal-body">
-        <form class="form-horizontal">
+      <%--   <form class="form-horizontal" id="completeData">
 
 					<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Product Model<span class="impColor">*</span></label>
@@ -68,8 +68,7 @@
 									</div>
 								</div>
 								<div id="us2" style="width: 500px; height: 400px;"></div>	
-				</form>
-		</div>	
+				
 							<div class="modal-footer">
 								<div class="clearfix"></div>
 									<div align="center" class="but">							
@@ -77,6 +76,78 @@
 					      				<input type="reset" value="Reset" class="btn-danger btn cancel"/>
 					      			</div>
 							</div>
+							</form> --%>
+							
+							
+							<form:form modelAttribute="dummypage" action="salesRequest" class="form-horizontal " method="Post" enctype="multipart/form-data">
+	                  <form:hidden path="id"/>
+					<div class="col-md-6"><br>
+					<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Product Model<span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<form:input path="modelnumber" class="form-control validate" placeholder="Enter Product Model"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<form:input path="email" class="form-control validate" placeholder="Enter Email"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<form:input path="modelnumber" class="form-control validate" placeholder="Enter Username"/>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+								<div class="form-group" id="passwordDiv">
+									<label class="col-md-3 control-label no-padding-right">location<span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<input type="text" id="us2-address" class="form-control validate"/>
+										<input type="text" name="locationData" id="locationData" class="form-control"/> 
+									</div>
+								</div><div class="clearfix"></div>
+								<%-- <div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<form:input path="modelnumber" class="form-control validate numericOnly" maxlength="10"  placeholder="Enter Mobile Number"/>
+									</div>
+								</div> --%>
+								<div class="clearfix"></div>
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Address</label>
+									<div class="col-md-6">
+										<form:textarea path="address" class="form-control validate emailOnly" placeholder="Enter Address"/>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Requirements Description</label>
+									<div class="col-md-6">
+										<form:textarea path="reqdesc" class="form-control validate emailOnly" placeholder="Enter Address"/>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+								<div class="form-group">
+								<label class="col-md-3 control-label no-padding-right"><span class="impColor">Choose images*</span></label>
+									<div class="col-md-6">
+										<input type="file" name="imgfile" id="imgfile" multiple/>
+									</div>
+								</div>
+								
+								<div class="clearfix"></div>
+									<div align="center" class="but">							
+					      				<input type="submit" id="submit1" value="Submit" class="btn-primary btn" onclick="submitRequest()"/>
+					      				<input type="reset" value="Reset" class="btn-danger btn cancel"/>
+					      			</div>
+								</div>
+								
+								<div class="col-md-6">
+								<div id="us2" style="width: 500px; height: 400px;"></div>	
+								</div>
+					</form:form>
+		</div>	
 						</div>
 					</div>
 				</div>			
@@ -96,7 +167,10 @@ Lat.: <input type="text" id="us2-lat"/>
 Long.: <input type="text" id="us2-lon"/>
 <!-- AIzaSyBof-nUbLfnD7fyKZ2DvfLXwWX-RPgdU8c -->
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAi3pzKXd0y6FTkbdOOMFuhmp1E4DFicxo&libraries=places&sensor=false"></script>  
-<script src='//static.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script><script src='https://maps.google.com/maps/api/js?sensor=false&libraries=places'></script><script src='https://cdn.rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.min.js'></script>
+<script src='//static.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+ <script src='https://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
+<script src='https://cdn.rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.min.js'></script>
 <script >//Plugin used: https://github.com/Logicify/jquery-locationpicker-plugin
 var lat;
 var lan;
@@ -189,22 +263,33 @@ if(validation) {
 }
 
 
+/* var form = $('#completeData')[0];
+
+var data = new FormData(form);
+ */
+
 			var productmodel=$('#productmodel').val();
 			var email=$('#email').val();
 			var mobileno=$('#mobileno').val();
 	    	//var locationData=$('#locationData').val();
 	    	var address=$('#address').val();
 	    	var reqdesc=$('#reqdesc').val();
+	    	
+	    	 //Serializing all For Input Values (not files!) in an Array Collection so that we can iterate this collection later.
+	    	//var params = form.serializeArray();
+	    	
+	    	
+	    	var salesrequest = {	"modelnumber":productmodel,	"email":email,"mobileno":mobileno,"address":address,"reqdesc":reqdesc	};
+	    	var salesreq= JSON.stringify(salesrequest);
 		   
 		   var formData = new FormData();
 		   
-		   formData.append('modelnumber',productmodel);
+		  /*  formData.append('modelnumber',productmodel);
 		   formData.append('email',email);
 		   formData.append('mobileno',mobileno);
-		 //  formData.append('locationData',locationData);
+		 //formData.append('locationData',locationData);
 		   formData.append('address',address);
-		   formData.append('reqdesc',reqdesc);
-		   
+		   formData.append('reqdesc',reqdesc);  */
 		   
 		   
 		   
@@ -214,20 +299,23 @@ if(validation) {
     	{	
     	var portfolio_values = document.getElementById('imgfile').files[i];
 		formData.append('imgfile', portfolio_values);
-		}
+		} 
     	
+    	
+    	/* //Now Looping the parameters for all form input fields and assigning them as Name Value pairs. 
+        $(params).each(function (index, element) {
+            formData.append(element.name, element.value);
+        }); */
     	console.log(formData);
  		$.ajax({
 			type:"POST",
-			enctype: 'multipart/form-data',
+			//enctype: 'multipart/form-data',
 		  	url: "salesRequest", 
-		  	data:formData,
-		  	processData: false,  // tell jQuery not to process the data
-			contentType: false,  // tell jQuery not to set contentType
+		  	data:{ "formData": formData, "salesrequest": salesreq },
+			//contentType: false,  // tell jQuery not to set contentType
 		  	
 		  	success: function(result){
 		  		if(result !="" && result != null){
-		  			
 		  		alert(result)
 		  		}
 		  		$('#salesrequest').val("");
