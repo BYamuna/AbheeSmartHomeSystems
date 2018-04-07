@@ -341,15 +341,15 @@ document.getElementById("file1").onchange = function () {
     {
     	
     	alert(this.files[i].size);
-    
-    /* if(this.files[i].size>500){
+    /* 
+     if(this.files[i].size>50000){
         alert("Image Size should not be greater than 500Kb");
         $("#file1").attr("src","blank");
        // $("#file1").hide();  
         $('#file1').wrap('<form>').closest('form').get(0).reset();
         $('#file1').unwrap();     
-        return false;
-    } */
+        return false; */
+    } 
     if(this.files[i].type.indexOf("image")==-1){
         alert("Invalid Type");
         $("#file1").attr("src","blank");
