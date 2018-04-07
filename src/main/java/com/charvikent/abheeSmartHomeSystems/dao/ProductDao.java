@@ -171,7 +171,7 @@ List<Object[]> rows = entityManager.createQuery(hql).getResultList();
 }
 	
 	public List<Map<String,Object>> getProductModels(String categoryid,String companyId,String modelid){
-		StringBuffer buffer = new StringBuffer("select p.id,p.name,c.name as companyname,p.productmodelvideoslinks,p.productmodelpics,p.companyid,categoryid,p.description,p.product_model_specifications,product_price,max_allowed_discount from abhee_product p,abhee_company c where p.companyid=c.id ");
+		StringBuffer buffer = new StringBuffer("select abc.category as categoryname,p.id,p.name,c.name as companyname,p.productmodelvideoslinks,p.productmodelpics,p.companyid,categoryid,p.description,p.product_model_specifications,product_price,max_allowed_discount from abhee_product p,abhee_company c,abheecategory abc where p.companyid=c.id and p.categoryid =abc.id ");
 		
 		if(categoryid  !=null && categoryid !="" )
 		{

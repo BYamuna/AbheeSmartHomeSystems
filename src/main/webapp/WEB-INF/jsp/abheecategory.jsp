@@ -21,7 +21,17 @@
   			<ol class="breadcrumb">
     			<li class="breadcrumb-item"><a href="index.html">Home</a></li>
     			<li class="breadcrumb-item"><a href="#">Catagories</a></li>
-    			<li class="breadcrumb-item active" aria-current="page">Yamaha</li>
+    			<li class="breadcrumb-item active" aria-current="page" id="breadcrumbname"></li>
+    			 <c:choose>
+    			<c:when test="${not empty param.company}">
+    			<li class="breadcrumb-item active" aria-current="page" id="breadcrumbcompanyname"></li>
+    			</c:when>
+    			</c:choose>
+    			<c:choose>
+    			<c:when test="${not empty param.model}">
+    			<li class="breadcrumb-item active" aria-current="page" id="breadcrumbmodelname">hi</li>
+    			</c:when>
+    			</c:choose>
   			</ol>
 		</nav>
         <!-- Breadcrumb Ends here -->
@@ -56,7 +66,8 @@
             		
                 	
                 <div id="productDetails">	
-            	<div class="dimg" >
+                
+            	<!-- <div class="dimg" >
             		<div class="col-sm-6" >
                     	<img width="100%" src="reportDocuments/1.jpg" class="img-responsive" alt="196" title="YHT-196"/>
                     	<div class="col-xs-6">
@@ -92,7 +103,7 @@
                 	<div class="col-sm-4">
                     	<iframe width="270" height="200" src="https://www.youtube.com/embed/N8of5Ees_dU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     </div><div class="clearfix"></div>
-                </div>
+                </div> -->
                 </div>
             <div class="clearfix"></div>
                 	
