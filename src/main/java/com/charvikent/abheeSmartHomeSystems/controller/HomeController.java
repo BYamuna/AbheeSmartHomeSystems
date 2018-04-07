@@ -168,6 +168,9 @@ public class HomeController {
 	
 	@RequestMapping("/signout")
 	public String SignOut(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
+		String referalUrl=request.getHeader("referer");
+		System.out.println(referalUrl);
+		
 		session.invalidate();
 		 
 		return "redirect:/";

@@ -272,7 +272,7 @@ public class CategoryController {
 		String productJson = objectMapper.writeValueAsString(productdetails);	
 		request.setAttribute("productdetails", productJson);
 		
-		String modelJson = objectMapper.writeValueAsString(productDao.getProductModels(companyid,modelid));	
+		String modelJson = objectMapper.writeValueAsString(productDao.getProductModels(categoryid,companyid,modelid));	
 		request.setAttribute("productmodels", modelJson);
 		
 		
