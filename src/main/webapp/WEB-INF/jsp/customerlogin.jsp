@@ -110,7 +110,11 @@
 				</div>
 			</div>
 		</div>
+		
 		<div class="panel-footer">
+		<div class="pull-left">
+			<p class="anchor"> Forget Password <a href="#" data-toggle="modal" data-target="#passwordModel" class="tag">Click here</a></p>
+		</div>
 			<div class="pull-right">
 				<input type="reset" value="Reset" class="btn btn-default cancel"/>
 				<input type="submit" value="Sign-in"  class="btn btn-primary">
@@ -217,11 +221,52 @@
       
     </div>
   </div> 
+  
+ 
+	<div class="modal fade" id="passwordModel" data-backdrop="static" data-keyboard="false" role="dialog">
+    <div class="modal-dialog">
+    
+     
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+          <h4 class="modal-title">Password Verification</h4>
+        </div>
+    
+    
+        
+	<div class="modal-body">
+          <form  action="#"  id="resendotp"  method="post" class="login-form">
+
+						<div id="firstForm2">
+
+							<div class="form-group">
+								<label for="mobile number">Enter MobileNumber :</label> 
+								<input	type="text" name="resetmobile" id="resetmobile" onkeydown="removeBorder(this.id)" maxlength="10" class="form-control validate1 numericOnly" placeholder="Enter Mobile Number"/>
+								<span class="hasError" id="cmobileError" style="font-size: 13px;"></span>
+							</div>				
+						</div>
+					</form>	
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="resetpassword" onclick="resetpassword()" class="btn btn-primary" >Submit</button>
+         
+        </div>
+      </div>
+      
+    </div>
+  </div> 
+  
 
 <script type='text/javascript' src='js/customValidation.js'></script> 
 <script type='text/javascript' src="js/jquery.blockUI.min.js" ></script>
+		
+
 </body>
 <script type="text/javascript">
+
+
+
 
 var validation = true;
 
@@ -532,6 +577,76 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 
 			}); 
 	
+	
+	
+	function resetpassword()
+	{
+	 idArrayCmt11 = $.makeArray($('.validate2').map(function() {
+		return this.id;
+		}));
+	validation = true;
+	$.each(idArrayCmt11, function(i, val) {
+		var value = $("#" + idArrayCmt11[i]).val();
+		var placeholder = $("#" + idArrayCmt11[i]).attr('placeholder');
+		if (value == null || value == "" || value == "undefined") {
+			$('style').append(styleBlock);
+			$("#" + idArrayCmt11[i] ).attr("placeholder", placeholder);
+			$("#" + idArrayCmt11[i] ).css('border-color','#e73d4a');
+			$("#" + idArrayCmt11[i] ).css('color','#e73d4a');
+			$("#" + idArrayCmt11[i] ).addClass('placeholder-style your-class');
+			 var id11 = $("#" + idArrayCmt11[i]+"_chosen").length;
+			if ($("#" + idArrayCmt11[i]+"_chosen").length)
+			{
+				$("#" + idArrayCmt11[i]+"_chosen").children('a').css('border-color','#e73d4a');
+			}
+//			$("#" + idArray[i] + "Error").text("Please " + placeholder);
+			validation = false;
+		} 
+	});
+	if(validation) {
+		
+	}else {
+		return false;
+	}
+				var mobileno=$('#resetmobile').val();
+		    	
+			   
+			   var formData = new FormData();
+			   
+			   
+			   formData.append('resetmobile',mobileno);
+	    	console.log(formData);
+	 		$.ajax({
+				type:"POST",
+				
+			  	url: "getresetcustomerpassword", 
+			  	data:formData,
+			  	processData: false,  // tell jQuery not to process the data
+				contentType: false,  // tell jQuery not to set contentType
+			  	
+			  	success: function(result){
+			  		//alert(result);
+			  		if(result==true)
+			  		{
+			  			alert("Your Password sent to registered email and mobile number ");	
+			  		}	
+			  		else
+			  			{
+			  				alert("Enter registered mobile number");
+			  				$('#passwordModel').modal('toggle');
+			  			}
+			  		
+			  		
+			  		 
+			  	
+			    },
+			    error: function (e) {
+		            console.log(e.responseText);
+		        }
+					    
+			});
+		
+	}
 	
 
 	/* $('#cpassword').blur(function() {

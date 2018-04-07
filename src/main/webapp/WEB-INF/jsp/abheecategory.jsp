@@ -16,7 +16,7 @@
 <body>
 
       <div class="container">
-        <!-- Breadcrumb Starts here --
+        <!-- Breadcrumb Starts here -->
         <nav aria-label="breadcrumb">
   			<ol class="breadcrumb">
     			<li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -46,46 +46,56 @@
         	</div>
         	<div class="col-md-9">
             	<div class="listdata">
-            		<div align="center" class="col-sm-4" id="productModels">
+            		<span id="cathead"></span>
+            		<!-- <h2>YAMAHA Home Theaters</h2> -->
+            		<div align="center" class="col-md-12 col-sm-4" id="productModels">
                     	
                 	</div>
-            		<%-- <div align="center" class="col-sm-4">
-                    	<div class="img">
-                        	<a href="abheeproductinfo">
-                				<img src="${baseurl }/abhee/images/yht-299.jpg" class="img-responsive" alt="299" title="YHT-299">
-                        		<h4>YAMAHA</h4>
-                        		<p>YHT-299</p>
-                           	</a>
-                        </div>
+                	
                 	</div>
-            		<div align="center" class="col-sm-4">
-                    	<div class="img1">
-                        	<a href="abheeproductinfo">
-                				<img src="${baseurl }/abhee/images/yht-1810.jpg" class="img-responsive" alt="1810" title="YHT-1810" id=companyImage>
-                        		<h4 id="companyName">YAMAHA</h4>
-                        		<p id="productModel">YHT-1810</p>
-                            </a>
+            		
+                	
+                <div id="productDetails">	
+            	<div class="dimg" >
+            		<div class="col-sm-6" >
+                    	<img width="100%" src="reportDocuments/1.jpg" class="img-responsive" alt="196" title="YHT-196"/>
+                    	<div class="col-xs-6">
+                        	<button style="width:95%;" class="btn btn-primary" type="button">Get Quotation</button>
+                    	</div>
+                    	<div class="col-xs-6">
+                        	<button style="width:95%; margin-left:10px;" class="btn btn-warning" type="button">Get Service</button>
                         </div>
-                	</div><div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="dtxt">
+           		  <div class="col-sm-6">
+                    	<p>
+                        	5.1-channel powerful surround sound (100W × 5 channel + 100W subwoofer)<br>
+							CINEMA DSP with 17 DSP programmes<br>
+							HD Audio compatibility and good sound from stylish speakers<br>
+							1080p-compatible HDMI (3 in/1 out)<br>
+							HDMI with 3D and Audio Return Channel<br>
+							SCENE buttons with direct power on<br>
+							HDMI CEC for easy operation<br>
+							Stylish, curvy speaker design looks fresh in any interior<br>
+							Auto power down function with variable time setting.
+                        </p>
+                    </div>
                 </div><div class="clearfix"></div>
-            	<div class="listdata">
-            		<div align="center" class="col-sm-4">
-                    	<div class="img">
-                        	<a href="abheeproductinfo">
-                				<img src="${baseurl }/abhee/images/yht-2910.jpg" class="img-responsive" alt="2910" title="YHT-2910">
-                        		<h4>YAMAHA</h4>
-                        		<p>YHT-2910</p>
-                            </a>
-                        </div> --%>
-                	</div>
-            		<div align="center" class="col-sm-4">
-                    	<!--<div class="img">
-                        </div>-->
-                	</div>
-            		<div align="center" class="col-sm-4">
-                    	<!--<div class="img1">
-                        </div>-->
-                	</div><div class="clearfix"></div>
+                <div class="vid">
+                	<div class="col-sm-4">
+                    	<iframe width="270" height="200" src="https://www.youtube.com/embed/z2lM0G2opEM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                	<div class="col-sm-4">
+                    	<iframe width="270" height="200" src="https://www.youtube.com/embed/SFGPK2w4SXw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                	<div class="col-sm-4">
+                    	<iframe width="270" height="200" src="https://www.youtube.com/embed/N8of5Ees_dU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div><div class="clearfix"></div>
+                </div>
+                </div>
+            <div class="clearfix"></div>
+                	
                 </div><div class="clearfix"></div>
         	</div><div class="clearfix"></div>
         </div>
@@ -114,7 +124,7 @@
 <%@include file="abheefooter.jsp" %>
 
 <script type="text/javascript">
-var productdetailslist =${productdetails};
+/* var productdetailslist =${productdetails};
 
 	var rowdata;
 	
@@ -140,17 +150,16 @@ $.each(productmodelslist, function(k,v){
 		
 		$("#productModels").append(divData);
 	});
+	
 	function getCompanys(id){
-		alert(id);
 		var url      = '${baseurl }/abheecategory?id='+catid; 
 		url.replace("#", "");
 		window.location.href=url+"&company="+id;
 	}
 	function getModels(id){
-		alert(id);
 		var url      = '${baseurl }/abheecategory?id='+catid; 
 		url.replace("#", "");
 		window.location.href=url+"&company="+company+"&model="+id;
-	}
+	} */
 </script>
 </html>

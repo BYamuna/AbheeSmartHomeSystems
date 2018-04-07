@@ -87,14 +87,14 @@
 								</div></div>
 								<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Email</label>
+									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:input path="email" class="form-control validate emailOnly" placeholder="Enter Email"/>
 									</div>
 								</div></div>
 								<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Designation</label>
+									<label class="col-md-3 control-label no-padding-right">Designation<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:select path="designation" class="form-control validate " >
 											<form:option value="">-- Select Designation --</form:option>
@@ -114,7 +114,7 @@
 								</div></div> --%>
 								<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">ReportTo</label>
+									<label class="col-md-3 control-label no-padding-right">ReportTo<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:select path ="reportto" class="form-control validate" onfocus="removeBorder(this.id)">
 											<form:option value="">-- Select Report to --</form:option>
@@ -125,7 +125,7 @@
 								 <security:authorize access="hasRole('ROLE_ADMIN')">
 								<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Branch</label>
+									<label class="col-md-3 control-label no-padding-right">Branch<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:select path ="BranchId" class="form-control validate" onfocus="removeBorder(this.id)">
 											<form:option value="">-- Select Branch--</form:option>
