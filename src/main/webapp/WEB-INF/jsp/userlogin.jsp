@@ -218,10 +218,16 @@
     </div>
   </div> 
 
+
+
+
 <script type='text/javascript' src='js/customValidation.js'></script> 
 <script type='text/javascript' src="js/jquery.blockUI.min.js" ></script>
 </body>
 <script type="text/javascript">
+
+
+
 
 var validation = true;
 

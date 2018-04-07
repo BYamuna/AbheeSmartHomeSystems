@@ -245,6 +245,35 @@ public class SendingMail {
 		}  
 	}
 	
-	
+	public  void  resetPassword(Customer custbean2) throws MessagingException
+	{
+		try {
+			
+			
+			String email =  custbean2.getEmail();
+			String password=custbean2.getPassword();
+			MimeMessage message = javaMailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			
+			
+			VelocityContext velocityContext = new VelocityContext();
+			velocityContext.put("name",custbean2.getFirstname());
+			velocityContext.put("password", password);
+			
+			StringWriter stringWriter = new StringWriter();
+			velocityEngine.mergeTemplate("PasswordResetEmail.vm", "UTF-8", velocityContext, stringWriter);
+			helper.setText(stringWriter.toString(), true);
+			helper.setTo( email);
+		    helper.setSubject("Your password reset successfully");
+		  		   
+		   
+			javaMailSender.send(message);
+				
+			
+		} catch (MailException e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}  
+	}
 
 		}

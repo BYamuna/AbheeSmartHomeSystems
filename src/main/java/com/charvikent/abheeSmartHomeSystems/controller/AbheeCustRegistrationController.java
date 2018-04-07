@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -404,6 +405,26 @@ public class AbheeCustRegistrationController
 		return "redirect:custRegistration";
 	}
 
-
+	@SuppressWarnings("unused")
+	@RequestMapping(value = "/getresetcustomerpassword", method = RequestMethod.POST)
+	public @ResponseBody  Boolean getResetCustomerPassword(Model model,HttpServletRequest request) throws IOException, MessagingException 
+	{
+		System.out.println("enter to getresetcustomerpassword");
+		
+		String custMobile=request.getParameter("resetmobile");
+		Customer custbean2 =customerDao.checkCustomerExistOrNotbyMobile(custMobile);
+		 
+		
+		if(custbean2 != null)
+		{
+			sendSMS.sendSMS(custbean2.getPassword(),custMobile);
+			sendingMail.resetPassword(custbean2);
+			return true;
+			
+		}
+		else
+			return false;
+		
+	}
 
 }
