@@ -24,9 +24,11 @@ import com.charvikent.abheeSmartHomeSystems.dao.AbheeCustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
+import com.charvikent.abheeSmartHomeSystems.dao.ProductDao;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.OTPDetails;
+import com.charvikent.abheeSmartHomeSystems.model.Product;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -51,6 +53,9 @@ public class AbheeCustomerRestController {
 	
 	@Autowired
 	CategoryDao categoryDao;
+	
+	@Autowired
+	ProductDao productDao;
 
 	
 	@RequestMapping("/Customer")
@@ -192,11 +197,55 @@ HashMap<String,String> hm =new HashMap<String,String>();
 		
 		JSONObject json =new JSONObject();
 		
+		System.out.println("rest call user called at end");
 		
 		
 		
 			Customer userBean =customerDao.checkuserExistOrNot(customer);
 			
+			System.out.println("rest call user called at staring"+userBean);
+			
+			
+			ObjectMapper objectMapper = new ObjectMapper();
+			String userjson = objectMapper.writeValueAsString(userBean);
+			
+			if(null != userBean)
+			{
+				code =userBean.getFirstname()+" "+userBean.getLastname();
+				json.put("status", userBean);
+				
+			}
+			else
+			{
+				json.put("status", "NOT_FOUND");
+		
+			System.out.println("rest call user called at end");
+			}
+
+		
+		return userjson;
+	}
+	
+	
+	/*@RequestMapping(value="/getcategories", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getCategoriesList() throws JsonProcessingException, JSONException {
+		
+		List<Category> listOrderBeans = categoryDao.getCategoryNames();
+		
+		JSONObject json =new JSONObject();
+		
+		
+		
+		
+			
+			//ObjectMapper objectMapper = new ObjectMapper();
+			//String userjson = objectMapper.writeValueAsString(userBean);
+			//String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
+			
+			if(null != listOrderBeans)
+			{
+				json.put("categorieslist", listOrderBeans);
+=======
 			//users.add(userBean);
 			
 			ObjectMapper objectMapper = new ObjectMapper();
@@ -208,20 +257,20 @@ HashMap<String,String> hm =new HashMap<String,String>();
 				//json.put("categorieslist", listOrderBeans);
 				code =userBean.getFirstname()+" "+userBean.getLastname();
 				json.put("customerBean", userBean);
+>>>>>>> c121eda3b50a1306a9dfe9b02688b9062934b16f
 				
 			}
 			else
 				//code="NOT_FOUND";
 				
-				json.put("status", "NOT_FOUND");
+				json.put("categorieslist", "NOT_FOUND");
 		
-			System.out.println("rest call user status:  "+code);
 		
 
 		
 		return userjson;
 	}
-	
+	*/
 	
 	@RequestMapping(value="/getcategories", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public String  getCategoriesList() throws JsonProcessingException, JSONException {
@@ -257,6 +306,38 @@ HashMap<String,String> hm =new HashMap<String,String>();
 		return String.valueOf(json);
 	}
 	
+	
+
+	@RequestMapping(value="/getproducts", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getProductslist() throws JsonProcessingException, JSONException {
+		
+		List<Product> listOrderBeans =  productDao.getProductDetails();
+		
+		JSONObject json =new JSONObject();
+		
+		
+		
+		
+			
+			//ObjectMapper objectMapper = new ObjectMapper();
+			//String userjson = objectMapper.writeValueAsString(userBean);
+			//String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
+			
+			if(null != listOrderBeans)
+			{
+				json.put("productDetails", listOrderBeans);
+				
+			}
+			else
+				//code="NOT_FOUND";
+				
+				json.put("productDetails", "NOT_FOUND");
+		
+		
+
+		
+		return String.valueOf(json);
+	}
 	
 
 }

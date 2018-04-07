@@ -23,13 +23,15 @@
     <link href="${baseurl }/abhee/css/bootstrap.min.css" rel="stylesheet">
     <link href="${baseurl }/abhee/css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+    <!-- Google Fonts -->
 </head>
 <body>
   	<div class="container">
     	<div class="top">
         	<img width="300px" src="${baseurl }/abhee/images/logo.png" class="img-resposive" alt="logo" title="Logo"/>
         	<a style="float:right; margin-top:20px; margin-left:20px;" type="admin" class="btn btn-primary" href="admin">Admin Login</a>
-            <h3 style="float:right; margin-top:25px;"><a style="text-decoration:none;" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i style="color:#FFCC33;" class="fa fa-user-o"></i> My Account <span class="caret"></span></a></h3>
         </div>
         <!-- Menu Starts here -->
         <div class="menu">
@@ -47,19 +49,11 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
+        <li class="active"><a href="/">Home</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
           <ul class="dropdown-menu">
-          <span id="cmlist"></span>
-            <li><a href="#">Home Theatter </a></li>
-            <li><a href="#">PA Audio</a></li>
-            <li><a href="#">Projectors</a></li>
-            <li><a href="#">Security Cameras</a></li>
-            <li><a href="#">Solar Fencing</a></li>
-            <li><a href="#">Remote Gates</a></li>
-            <li><a href="#">Wooden Flooring</a></li>
-            <li><a href="#">Artificial Grass</a></li>
+          <li id="cmlist"></li>
           </ul>
         </li>
         <li><a href="#">About Us</a></li>
@@ -70,7 +64,18 @@
         <li><a href="#">Contact Us</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      	<button class="btn btn-dark" type="login"><a href="customerlogin">Login/Register</a></button>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          <li id="cmlist"></li>
+            <li><a href="customerlogin">Sign in</a></li>
+           
+          <c:if test="${not empty loggedstatus}">
+           <li><a href="#">My Profile</a></li>
+            <li><a href="${baseurl}/signout">Sign out</a></li>
+            </c:if>
+          </ul>
+        </li>
       </ul>
     </div><!-- /.navbar-collapse -->
 </nav>
@@ -87,7 +92,9 @@
   	
   	$.each(categorieslist, function(k,v){
   		
-  		rowdata ='<li><a href="#">'+v.category+'</a> </li>';
+  		/* //rowdata ='<li><a href="abheecategory?id=" >'+v.category+'</a> </li>'; */
+  		rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
+  	/* 	rowdata ='<li><a href="#">'+v.category+'</a> </li>'; */
   		$("#cmlist").append(rowdata);
   	});
   	

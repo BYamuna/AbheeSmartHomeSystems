@@ -340,16 +340,17 @@ document.getElementById("file1").onchange = function () {
     for(var i=0; i<=this.files.length; i++)
     {
     	
-    	alert(this.files[i].size);
-    /* 
-     if(this.files[i].size>50000){
+    	 /*
+     if(this.files[i].size>1253){
+        alert("Image Size should not be greater than 1253Kb");
+    if(this.files[i].size>500){
         alert("Image Size should not be greater than 500Kb");
         $("#file1").attr("src","blank");
        // $("#file1").hide();  
         $('#file1').wrap('<form>').closest('form').get(0).reset();
         $('#file1').unwrap();     
-        return false; */
-    } 
+        return false; 
+    } */
     if(this.files[i].type.indexOf("image")==-1){
         alert("Invalid Type");
         $("#file1").attr("src","blank");
@@ -366,10 +367,10 @@ document.getElementById("file1").onchange = function () {
 
     // read the image file as a data URL.
     reader.readAsDataURL(this.files[0]);
-    }
-};
-
+    
+}
+}
 
 $("#pageName").text("Product Master");
-$(".product").addClass("active"); 
+$(".product").addClass("active");
 </script>

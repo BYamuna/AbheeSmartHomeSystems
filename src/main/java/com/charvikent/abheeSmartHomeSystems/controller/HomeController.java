@@ -97,10 +97,10 @@ public class HomeController {
 	    return "redirect:/login";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
 	}
 	
-	@RequestMapping("/403")
+	/*@RequestMapping("/403")
 	public String failureLogin(Model model) {
 		return "403";
-	}
+	}*/
 	@RequestMapping("/customerlogin")
 	public String ShowCustomerLoginPage(Model model,HttpServletRequest request) {
 		
@@ -118,18 +118,19 @@ public class HomeController {
 		if(null ==customer)
 		{
 			System.out.println("Customer does not exists");
+			return "redirect:/";
 		}
-		
+		else
+		{
 		session.setAttribute("customer", customer);
+		session.setAttribute("loggedstatus", "login");
 		
 		String referalUrl=request.getHeader("referer");
 		StringBuffer strings=request.getRequestURL();
 		
-		if(request.getRequestURL().equals(request.getHeader("referer")))
+			
 			return "redirect:/";
-		else
-			return "redirect:/";
-		
+		}
 		
 	}
 	

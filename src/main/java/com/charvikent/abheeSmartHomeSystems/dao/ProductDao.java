@@ -2,14 +2,18 @@ package com.charvikent.abheeSmartHomeSystems.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.model.Product;
+
 /*import com.charvikent.abheeSmartHomeSystems.model.User;*/
 
 
@@ -19,11 +23,15 @@ public class ProductDao
 {
 	@PersistenceContext
     private EntityManager entityManager;
+	
+	@Autowired
+    private JdbcTemplate jdbcTemplate;
 
 
 	public void saveProduct(Product product) 
 	{
 		entityManager.persist(product);
+		
 
 	}
 	@SuppressWarnings("unchecked")
@@ -136,4 +144,52 @@ public class ProductDao
 	 }
 		return listProducts;
 	 }
+	public List<Product> getProductCompaniesByCategoryId(String categoryid) {
+		
+		
+		List<Product> listProducts =new ArrayList<Product>();
+		
+		String hql ="select p.id,p.name,c.name as companyname,p.productmodelvideoslinks,p.productmodelpics,p.companyid from Product p,Company c where p.categoryid='"+categoryid+"' and p.companyid=c.id group by c.name";
+
+List<Object[]> rows = entityManager.createQuery(hql).getResultList();
+		
+		for (Object[] row : rows) {
+			
+			Product product =new Product();
+			product.setId(Integer.parseInt(String.valueOf(row[0])));
+			product.setName((String) row[1]);
+			product.setCompanyname((String) row[2]);
+			product.setProductmodelvideoslinks((String) row[3]);
+			product.setProductmodelpics((String) row[4]);
+			product.setCompanyid((String) row[5]);
+			
+			
+			listProducts.add(product);
+
+	}
+		return listProducts;
+}
+	
+	public List<Map<String,Object>> getProductModels(String companyId,String modelid){
+		StringBuffer buffer = new StringBuffer("select p.id,p.name,c.name as companyname,p.productmodelvideoslinks,p.productmodelpics,p.companyid,categoryid,p.description,p.product_model_specifications,product_price,max_allowed_discount from abhee_product p,abhee_company c where p.categoryid='3' and p.companyid=c.id ");
+		
+		if(companyId  !=null && companyId !="" )
+		{
+			
+			buffer.append(" and  p.companyid='"+companyId+"'");
+		}
+		if(modelid  !=null && modelid !="" )
+		{
+			
+			buffer.append(" and  p.id='"+modelid+"'");
+		}
+		buffer.append(" order by p.companyid ");
+		String sql = buffer.toString();
+		
+		System.out.println(sql);
+		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
+		
+		return retlist ;
+		
+	}
 }

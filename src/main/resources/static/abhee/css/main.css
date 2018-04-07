@@ -1,11 +1,21 @@
 body {
-	font:300 14px/21px 'Roboto', 'sans-serif';
 	background:url(../images/bg.jpg);
 }
 #carousel {
 	margin-top:-20px;
 }
-.data {
+.data .imgm img {
+	padding-left:10px;
+	padding-right:10px;
+	height:206px;
+}
+.cont .col-sm-4 .img {
+	margin-left:10px;
+	margin-right:10px;
+}
+.cont .col-sm-4 .img1 {
+	margin-left:10px;
+	margin-right:10px;
 }
 .col-md-4 {
 	margin-top:20px;
@@ -37,4 +47,75 @@ body {
 	color:#CCCCCC;
 	text-align:center;
 	font-size:16px;
+}
+#cmlist li a {
+	color:#ffffff;
+}
+#cmlist li a:hover {
+	color:#166eaf;
+	text-decoration:none;
+}
+.breadcrumb {
+	margin-top:-20px;
+	background:#CCCCCC;
+}
+.cont {
+	margin-top:-10px;
+}
+.lcat {
+	background:#CCCCCC;
+	margin-top:-20px;
+}
+.smen a {
+	margin-top:20px;
+	color:#FFFFFF;
+}
+.smen a:hover {
+	text-decoration:none;
+	color:#000000;
+}
+.listdata {
+	margin-bottom:20px;
+}
+.listdata .col-sm-4 .img, .img1 {
+	background:#FFFFFF;
+	border-radius:5px;
+	height:350px;
+}
+.listdata .col-sm-4 h4 {
+	color:#FF0000;
+	text-decoration:none;
+}
+.listdata .col-sm-4 h4:hover {
+	color:#000;
+}
+.listdata .col-sm-4 p {
+	color:#000;
+	text-decoration:none;
+}
+.listdata .col-sm-4 p:hover {
+	color:#FF0000;
+}
+.panel-body {
+	font-size:30px;
+}
+.listdata .col-sm-4 .img a:hover {
+	text-decoration:none;
+}
+.dtxt p {
+	color:#000000;
+	font-size:16px;
+}
+.vid {
+	margin-top:20px;
+	margin-bottom:20px;
+}
+.cont .col-sm-6 {
+	padding-left:10px;
+}
+.cont .col-sm-4 {
+	margin-left:10px;
+}
+.cont .col-sm-4, .vid1 {
+	margin-right:-10px;
 }

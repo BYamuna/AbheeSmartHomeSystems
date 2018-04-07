@@ -24,7 +24,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
+import com.charvikent.abheeSmartHomeSystems.dao.ProductDao;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
+import com.charvikent.abheeSmartHomeSystems.model.Product;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -36,6 +39,8 @@ public class CategoryController {
 	
 	@Autowired
 	FilesStuff fileTemplate;
+	@Autowired	
+	ProductDao productDao;
 	
 	@RequestMapping("/cate")
 	public String  department( @ModelAttribute("catef")  Category catef,Model model ,HttpServletRequest request) {
@@ -249,5 +254,37 @@ public class CategoryController {
 		}
 		return String.valueOf(jsonObj);
 	}
+	
+	
+	@RequestMapping("/abheecategory")
+	public String abheeCategories(@RequestParam(value="id", required=false) String categoryid,@RequestParam(value="company", required=false) String companyid,
+			@RequestParam(value="model", required=false) String modelid,
+			Model model,HttpServletRequest request) throws JsonProcessingException {
+		ObjectMapper objectMapper = new ObjectMapper();
+		List<Category> listOrderBeans = categoryDao.getCategoryNames();
+		//model.addAttribute("categories", listOrderBeans);
+		
+		String sJson = objectMapper.writeValueAsString(listOrderBeans);	
+		request.setAttribute("allOrders1", sJson);
+		
+		List<Product> productdetails = productDao.getProductCompaniesByCategoryId(categoryid);
+		
+		String productJson = objectMapper.writeValueAsString(productdetails);	
+		request.setAttribute("productdetails", productJson);
+		
+		String modelJson = objectMapper.writeValueAsString(productDao.getProductModels(companyid,modelid));	
+		request.setAttribute("productmodels", modelJson);
+		
+		
+		return "abheecategory";
+	}
+	
+	@RequestMapping("/abheeproductinfo")
+	public String abheeProductInfo(Model model) {
+		
+		
+		return "abheeproductinfo";
+	}
+	
 
 }
