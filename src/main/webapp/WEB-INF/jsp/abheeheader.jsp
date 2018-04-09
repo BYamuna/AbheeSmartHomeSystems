@@ -106,6 +106,8 @@
   	$.each(categorieslist, function(k,v){
   		$("#cathead").text("hi");
   		
+  		
+  		
   		rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
   		$("#cmlist").append(rowdata);
   	}); 

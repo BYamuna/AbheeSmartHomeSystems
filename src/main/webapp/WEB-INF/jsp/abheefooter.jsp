@@ -82,7 +82,6 @@ width="250" height="200" frameborder="0" ></iframe>
 	});
 	var productmodelslist =${productmodels};
 	
-	
 $.each(productmodelslist, function(k,v){
 	
 		var divData= "<div class='img'>"
@@ -94,8 +93,49 @@ $.each(productmodelslist, function(k,v){
         +"</div>";
 		
 		$("#productModels").append(divData);
+		$("#breadcrumbname").text(v.categoryname);
+		$("#breadcrumbcompanyname").text(v.companyname);
+		$("#breadcrumbmodelname").text(v.name);
+	
 	});
 	
+	console.log(productmodelslist);
+$.each(productmodelslist, function(k,v){
+	
+	
+	var pdivdata ="<div class='dimg' >"
+	               +"<div class='col-sm-6' >"
+	               +"<img width='100%' src='${baseurl }/reportDocuments/"+v.productmodelpics+"' class='img-responsive' alt='196' title='YHT-196'/>"
+	               +"<div class='col-xs-6'>"
+    	           +"<button style='width:95%'; class='btn btn-primary' type='button'>Get Quotation</button>"
+	               +"</div>"
+	               +"<div class='col-xs-6'>"
+    	           +"<button style='width:95%; margin-left:10px;' class='btn btn-warning' type='button'>Get Service</button>"
+                   +"</div>"
+                   +"</div>"
+                   +"</div>"
+                   +"<div class='dtxt'>"
+                   +"<div class='col-sm-6'>"
+	                +"<p>"+v.description +"</p>"
+	                +"<p>"+v.product_model_specifications +"</p>"
+	                
+    	           
+                   +"</div>"
+                   +"</div><div class='clearfix'></div>"
+                    +"<div class='vid'>"
+                    +"<div class='col-sm-4'>"
+	                 +"<iframe width='270' height='200' src='https://www.youtube.com/embed/z2lM0G2opEM' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>"
+                    +"</div>"
+                     +"<div class='col-sm-4'>"
+	                 +"<iframe width='270' height='200' src='https://www.youtube.com/embed/SFGPK2w4SXw' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>"
+                     +"</div>"
+                    +"<div class='col-sm-4'>"
+                    +"<iframe width='270' height='200' src='https://www.youtube.com/embed/N8of5Ees_dU' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>"
+                     +"</div><div class='clearfix'></div>"
+                      +"</div>";
+	
+	$("#productDetails").append(pdivdata);
+});
 	
 	
 	function getCompanys(id){
