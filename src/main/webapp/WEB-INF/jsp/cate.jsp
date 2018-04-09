@@ -121,7 +121,7 @@ function displayTable(listOrders) {
 				var categoryimg='';
 				for(var i=0;i<list.length;i++)
 				{
-					categoryimg=categoryimg+'<a href="reportDocuments/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="reportDocuments/'+list[i]+'" style="height:42px; width:42px"></a>';
+					categoryimg=categoryimg+'<a href="ReportDocuments/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="ReportDocuments/'+list[i]+'" style="height:42px; width:42px"></a>';
 				}
 				orderObj.categoryimg=categoryimg;
 			}
