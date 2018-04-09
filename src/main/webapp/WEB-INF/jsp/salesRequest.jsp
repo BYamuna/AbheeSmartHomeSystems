@@ -17,7 +17,7 @@
           <h4 class="modal-title">Sales Request</h4>
         </div>
         <div class="modal-body">
-      <%--   <form class="form-horizontal" id="completeData">
+        <%-- <form class="form-horizontal" id="completeData">
 
 					<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Product Model<span class="impColor">*</span></label>
@@ -79,7 +79,7 @@
 							</form> --%>
 							
 							
-							<form:form modelAttribute="dummypage" action="salesRequest" class="form-horizontal " method="Post" enctype="multipart/form-data">
+							<form:form modelAttribute="salesRequest" action="salesRequest" class="form-horizontal " method="Post" enctype="multipart/form-data">
 	                  <form:hidden path="id"/>
 					<div class="col-md-6"><br>
 					<div class="form-group">
@@ -94,12 +94,12 @@
 										<form:input path="email" class="form-control validate" placeholder="Enter Email"/>
 									</div>
 								</div>
-								<div class="form-group">
+								<%-- <div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:input path="modelnumber" class="form-control validate" placeholder="Enter Username"/>
 									</div>
-								</div>
+								</div> --%>
 								<div class="clearfix"></div>
 								<div class="form-group" id="passwordDiv">
 									<label class="col-md-3 control-label no-padding-right">location<span class="impColor">*</span></label>
@@ -108,12 +108,12 @@
 										<input type="text" name="locationData" id="locationData" class="form-control"/> 
 									</div>
 								</div><div class="clearfix"></div>
-								<%-- <div class="form-group">
+								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:input path="modelnumber" class="form-control validate numericOnly" maxlength="10"  placeholder="Enter Mobile Number"/>
 									</div>
-								</div> --%>
+								</div>
 								<div class="clearfix"></div>
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Address</label>
@@ -125,7 +125,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Requirements Description</label>
 									<div class="col-md-6">
-										<form:textarea path="reqdesc" class="form-control validate emailOnly" placeholder="Enter Address"/>
+										<form:textarea path="reqdesc" class="form-control validate emailOnly" placeholder="Enter Description"/>
 									</div>
 								</div>
 								<div class="clearfix"></div>
@@ -279,8 +279,8 @@ var data = new FormData(form);
 	    	//var params = form.serializeArray();
 	    	
 	    	
-	    	var salesrequest = {	"modelnumber":productmodel,	"email":email,"mobileno":mobileno,"address":address,"reqdesc":reqdesc	};
-	    	var salesreq= JSON.stringify(salesrequest);
+	    	var salesRequest = {	"modelnumber":productmodel,	"email":email,"mobileno":mobileno,"address":address,"reqdesc":reqdesc	};
+	    	var salesreq= JSON.stringify(salesRequest);
 		   
 		   var formData = new FormData();
 		   
@@ -311,7 +311,7 @@ var data = new FormData(form);
 			type:"POST",
 			//enctype: 'multipart/form-data',
 		  	url: "salesRequest", 
-		  	data:{ "formData": formData, "salesrequest": salesreq },
+		  	data:{ "formData": formData, "salesRequest": salesreq },
 			//contentType: false,  // tell jQuery not to set contentType
 		  	
 		  	success: function(result){
