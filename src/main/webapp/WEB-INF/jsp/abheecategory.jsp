@@ -22,16 +22,8 @@
     			<li class="breadcrumb-item"><a href="index.html">Home</a></li>
     			<li class="breadcrumb-item"><a href="#">Catagories</a></li>
     			<li class="breadcrumb-item active" aria-current="page" id="breadcrumbname"></li>
-    			 <c:choose>
-    			<c:when test="${not empty param.company}">
     			<li class="breadcrumb-item active" aria-current="page" id="breadcrumbcompanyname"></li>
-    			</c:when>
-    			</c:choose>
-    			<c:choose>
-    			<c:when test="${not empty param.model}">
-    			<li class="breadcrumb-item active" aria-current="page" id="breadcrumbmodelname">hi</li>
-    			</c:when>
-    			</c:choose>
+    			<li class="breadcrumb-item active" aria-current="page" id="breadcrumbmodelname"></li>
   			</ol>
 		</nav>
         <!-- Breadcrumb Ends here -->
@@ -117,19 +109,33 @@
 </body>
 <c:choose>
     <c:when test="${empty param.id}">
-       <script>var catid="";</script>
+       <script>var catid="";
+       var bradcrmcategory=false;</script>
     </c:when>
     <c:otherwise>
-        <script>var catid=${param.id};</script>
+        <script>var catid=${param.id};
+        var bradcrmcategory=true;</script>
     </c:otherwise>
 </c:choose>
 
 <c:choose>
     <c:when test="${empty param.company}">
-       <script>var company="";</script>
+       <script>var company="";
+       var bradcrmcompany=false;</script>
     </c:when>
     <c:otherwise>
-        <script>var company=${param.company};</script>
+        <script>var company=${param.company};
+        var bradcrmcompany=true;</script>
+    </c:otherwise>
+</c:choose>
+<c:choose>
+    <c:when test="${empty param.model}">
+       <script>
+       var bradcrmmodel=false;</script>
+    </c:when>
+    <c:otherwise>
+        <script>
+        var bradcrmmodel=true;</script>
     </c:otherwise>
 </c:choose>
 <%@include file="abheefooter.jsp" %>

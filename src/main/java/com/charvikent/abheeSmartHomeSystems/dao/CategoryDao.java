@@ -49,6 +49,7 @@ public class CategoryDao {
 	{
 		Category uc= (Category)entityManager.find(Category.class ,cate.getId());
 		uc.setCategory(cate.getCategory());
+		uc.setCategoryimg(cate.getCategoryimg());
 		entityManager.flush();
 	}
 
