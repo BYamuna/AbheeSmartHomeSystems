@@ -14,6 +14,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,16 +36,25 @@ public class SalesRequestController
 	FilesStuff fileTemplate;
 	@Autowired
 	SendingMail sendingMail;
-	@RequestMapping(value = "/salesRequest" ,method = RequestMethod.GET)
+	@RequestMapping(value = "/dummypage" ,method = RequestMethod.GET)
 	public String saveRequest(Model model)
 	{
-		model.addAttribute("srequestf", new SalesRequest());
-		return "salesrequest";
+		model.addAttribute("dummypage", new SalesRequest());
+		return "dummypage";
 		
 	}
 	@RequestMapping(value = "/salesRequest", method = RequestMethod.POST)
-	public @ResponseBody String saveRequestDetails(@Valid @ModelAttribute SalesRequest salesrequest,@RequestParam("imgfile") MultipartFile[] uploadedFiles,@RequestParam("locationData") String latlong,HttpServletRequest request) throws IllegalStateException, IOException, MessagingException
+	public String saveRequestDetails(
+			/*@RequestParam(value = "modelnumber") String modelnumber,
+			@RequestParam(value = "email")String email,
+			@RequestParam(value = "mobileno")String mobileno,
+			@RequestParam(value = "address")String address,
+			@RequestParam(value = "reqdesc")String reqdesc,*/
+			@ModelAttribute("salesrequest")SalesRequest salesrequest,
+			@RequestParam("imgfile") MultipartFile[] uploadedFiles,
+			@RequestParam(value = "locationData") String latlong,HttpServletRequest request) throws IllegalStateException, IOException, MessagingException
 	{
+		//SalesRequest salesrequest = new SalesRequest();
 	System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2");
 		int filecount =0;
 		
@@ -55,18 +65,22 @@ public class SalesRequestController
 		salesrequest.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
 		salesrequest.setLat(str[0]);
 		salesrequest.setLongitude(str[1]);
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		/*salesrequest.setAddress(address);
+		salesrequest.setReqdesc(reqdesc);
+		salesrequest.setMobileno(mobileno);
+		salesrequest.setEmail(email);*/
+		/*String rootPath = request.getSession().getServletContext().getRealPath("/");
 		File dir = new File(rootPath + File.separator + "reportDocuments");
 		
 		if (!dir.exists()) {
 			dir.mkdirs();
-		}
+		}*/
    	 for(MultipartFile multipartFile : uploadedFiles) {
 				String fileName = multipartFile.getOriginalFilename();
 				if(!multipartFile.isEmpty())
 				{
 					filecount++;
-				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName,dir));
+				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 				}
 			}
    	 

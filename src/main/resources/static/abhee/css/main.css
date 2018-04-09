@@ -1,5 +1,5 @@
 body {
-	background:url(../images/bg.jpg);
+	background:url(../images/bg.jpg) fixed;
 }
 #carousel {
 	margin-top:-20px;
@@ -12,6 +12,9 @@ body {
 .cont .col-sm-4 .img {
 	margin-left:10px;
 	margin-right:10px;
+	float:left;
+	width:260px;
+	margin-top:20px;
 }
 .cont .col-sm-4 .img1 {
 	margin-left:10px;
@@ -24,9 +27,19 @@ body {
 }
 .footer {
 	background:#333333;
+	margin-top:20px;
 }
-.footer .col-md-4 h4, p {
+.footer .col-md-3  h4, p {
 	color:#FFFFFF;
+}
+.footer .col-md-3 p {
+	font-size:12px;
+}
+.footer .col-md-6  h4, p {
+	color:#FFFFFF;
+}
+.footer .col-md-6 p {
+	font-size:12px;
 }
 .footer a {
 	color:#FFFFFF;
@@ -46,33 +59,33 @@ body {
 .copy p {
 	color:#CCCCCC;
 	text-align:center;
-	font-size:16px;
+	font-size:11px;
+	padding-bottom:15px;
 }
-#cmlist li a {
-	color:#ffffff;
-}
-#cmlist li a:hover {
-	color:#166eaf;
-	text-decoration:none;
+.map {
+	margin-top:40px;
 }
 .breadcrumb {
 	margin-top:-20px;
-	background:#CCCCCC;
 }
 .cont {
 	margin-top:-10px;
+	min-height:300px;
 }
 .lcat {
-	background:#CCCCCC;
+	background:#0b86b9;
 	margin-top:-20px;
 }
 .smen a {
-	margin-top:20px;
 	color:#FFFFFF;
+	text-decoration:none;
+}
+.smen a p {
+	margin-left:30px;
 }
 .smen a:hover {
 	text-decoration:none;
-	color:#000000;
+	color:#FF6600;
 }
 .listdata {
 	margin-bottom:20px;
@@ -96,8 +109,14 @@ body {
 .listdata .col-sm-4 p:hover {
 	color:#FF0000;
 }
-.panel-body {
-	font-size:30px;
+.panel-body a {
+	font-size:15px;
+	color:#000000;
+}
+.panel-body a:hover {
+	font-size:18px;
+	color:#CCCCCC;
+	text-decoration:none;
 }
 .listdata .col-sm-4 .img a:hover {
 	text-decoration:none;
@@ -118,4 +137,21 @@ body {
 }
 .cont .col-sm-4, .vid1 {
 	margin-right:-10px;
+}
+.navbar-right, .dropdown ul li a {
+	margin-right:1px;
+}
+.left {
+	margin-left:13px;
+}
+#cmlist a {
+	color:#ffffff;
+	margin-left:18px;
+}
+#cmlist a:hover {
+	color:#26a5de;
+	text-decoration:none;
+}
+.listdata h2 {
+	margin-left:20px;
 }

@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<spring:url var="loginAction" value="/loginAction"></spring:url>
+    
     
     <%
 	String baseurl =  request.getScheme() + "://" + request.getServerName() +      ":" +   request.getServerPort() +  request.getContextPath();
@@ -22,6 +28,8 @@
 <title>Abhee Snart Homes Systems</title>
     <link href="${baseurl }/abhee/css/bootstrap.min.css" rel="stylesheet">
     <link href="${baseurl }/abhee/css/main.css" rel="stylesheet">
+    <link href="${baseurl }/abhee/css/animate.min.css" rel="stylesheet">
+    <link href="${baseurl }/abhee/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
@@ -51,7 +59,7 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Categories</a>
           <ul class="dropdown-menu">
           <li id="cmlist"></li>
           </ul>
@@ -65,15 +73,20 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">My Account</a>
           <ul class="dropdown-menu">
           <li id="cmlist"></li>
-            <li><a href="customerlogin">Sign in</a></li>
-           
-          <c:if test="${not empty loggedstatus}">
-           <li><a href="#">My Profile</a></li>
+         
+          
+            <c:choose>
+    <c:when test="${not empty loggedstatus}">
+     <li><a href="#">My Profile</a></li>
             <li><a href="${baseurl}/signout">Sign out</a></li>
-            </c:if>
+    </c:when>
+    <c:otherwise>
+        <li><a href="customerlogin">Sign in</a></li>
+    </c:otherwise>
+</c:choose>
           </ul>
         </li>
       </ul>
@@ -84,19 +97,19 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-  	</body>
+    <script src="${baseurl }/abhee/js/bootstrap.min.js"></script>
+    <script src="${baseurl }/abhee/js/bootstrap-dropdownhover.min.js"></script>
   	<script type="text/javascript">
   	var categorieslist =${allOrders1};
   	var rowdata;
   	
   	$.each(categorieslist, function(k,v){
+  		$("#cathead").text("hi");
   		
-  		/* //rowdata ='<li><a href="abheecategory?id=" >'+v.category+'</a> </li>'; */
+  		
+  		
   		rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
-  	/* 	rowdata ='<li><a href="#">'+v.category+'</a> </li>'; */
   		$("#cmlist").append(rowdata);
-  	});
-  	
+  	}); 
+  	 
   	</script>
-  	</html>

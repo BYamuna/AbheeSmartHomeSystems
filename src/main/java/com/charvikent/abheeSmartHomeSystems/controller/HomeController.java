@@ -39,7 +39,7 @@ public class HomeController {
 	CategoryDao categoryDao;
 	
 	
-	
+ static 	String loginurl=""; 
 	
 	
 	@RequestMapping("/admin")
@@ -104,6 +104,8 @@ public class HomeController {
 	@RequestMapping("/customerlogin")
 	public String ShowCustomerLoginPage(Model model,HttpServletRequest request) {
 		
+		loginurl =request.getHeader("referer");
+		
 		return "customerlogin";
 	}
 	
@@ -114,22 +116,19 @@ public class HomeController {
 		String password=request.getParameter("password");
 		
 		Customer customer =customerDao.validateCustomer(loginid,password);
+		String referalUrl=request.getHeader("referer");
 		
 		if(null ==customer)
 		{
 			System.out.println("Customer does not exists");
-			return "redirect:/";
+			return "redirect:customerlogin";
 		}
 		else
 		{
 		session.setAttribute("customer", customer);
 		session.setAttribute("loggedstatus", "login");
-		
-		String referalUrl=request.getHeader("referer");
-		StringBuffer strings=request.getRequestURL();
-		
 			
-			return "redirect:/";
+			return "redirect:"+ loginurl;
 		}
 		
 	}
@@ -161,6 +160,9 @@ public class HomeController {
 		String sJson = objectMapper.writeValueAsString(listOrderBeans);	
 		request.setAttribute("allOrders1", sJson);
 		
+		String referalUrl=request.getHeader("referer");
+		System.out.println(referalUrl);
+		
 		 
 		return "abheeindex";
 	}
@@ -168,9 +170,12 @@ public class HomeController {
 	
 	@RequestMapping("/signout")
 	public String SignOut(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
+		String referalUrl=request.getHeader("referer");
+		System.out.println(referalUrl);
+		
 		session.invalidate();
 		 
-		return "redirect:/";
+		return "redirect:"+ referalUrl;
 	}
 	
 	

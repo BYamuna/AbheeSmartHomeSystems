@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-    
+   
     <%@include file="abheeheader.jsp" %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -44,7 +40,7 @@
         <!-- Carousel Ends here -->
         
         <!-- Content starts here -->
-        <div class="data">
+        <div class="cont data">
         	<div class="col-md-4 imgl">
             	<a href="#"><img src="${baseurl }/abhee/images/hmt.png" class="img-responsive" alt="Home Theater" title="Home Theater"/></a>
             </div>
@@ -78,6 +74,5 @@
 
 <%@include file="abheefooter.jsp" %>
 <script type="text/javascript">
-var status= ${loggedstatus};
 </script>
 </html>

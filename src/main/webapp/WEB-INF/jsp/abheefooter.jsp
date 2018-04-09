@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,7 +28,7 @@
         	<div style="padding-left:15px;padding-right:15px;" class="col-md-6">
             	<h4 style="color:#ffffff">Contact</h4>
             	<div class="col-sm-6">
-                	<p><i style="color:#0066FF;" class="fa fa-map-marker f_left"></i> Nightingale Hospital <br>Complex, Opp SBI ,<br>Lakshmipuram Main Road.<br>Guntur,522006</p>
+                	<p><i style="color:#0066FF;" class="fa fa-map-marker f_left"></i> Nightingale Hospital <br><span style="margin-left:10px;">Complex, Opp SBI ,</span><br><span style="margin-left:10px;">Lakshmipuram Main Road.</span><br><span style="margin-left:10px;">Guntur,522006</span></p>
                 	<p><i style="color:#009933;" class="fa fa-phone f_left"></i> +91 92464 83744</p>
                 	<p><i style="color:#FF0000;" class="fa fa-envelope-o f_left"></i> rajv238@gmail.com</p>
             	</div>
@@ -42,7 +43,111 @@ width="250" height="200" frameborder="0" ></iframe>
         </div>
 	</div>
 </body>
+<c:choose>
+    <c:when test="${empty param.model}">
+       <script>
+        $("#productDetails").hide();
+       </script>
+    </c:when>
+    <c:otherwise>
+     <script>
+	         $("#productModels").hide();
+	         </script>
+    </c:otherwise>
+</c:choose>
 <script type="text/javascript">
 
+
+ /* var categorieslist =${allOrders1};
+	var rowdata;
+	
+	 $.each(categorieslist, function(k,v){
+		 $("#cathead").text(v.category); 
+		
+		rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
+		$("#cmlist").append(rowdata);
+	});  */
+	
+	var productdetailslist =${productdetails};
+
+	var rowdata;
+	
+	
+	$.each(productdetailslist, function(k,v){
+		
+		//rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
+		
+		rowdata= "<a href='#' onclick='getCompanys("+v.companyid+") '>"+v.companyname+"</a><br>";
+		$("#catcom").append(rowdata);
+	});
+	var productmodelslist =${productmodels};
+	
+$.each(productmodelslist, function(k,v){
+	
+		var divData= "<div class='img'>"
+		+"<a href='#'onclick='getModels("+v.id+")' >"
+		+"<img src='${baseurl }/reportDocuments/"+v.productmodelpics+"' class='img-responsive' alt='1810' title='YHT-1810'>"
+		+"<h4>"+v.companyname+"</h4>"
+		+"<p>"+v.name+"</p>"
+        +"</a>"
+        +"</div>";
+		
+		$("#productModels").append(divData);
+		$("#breadcrumbname").text(v.categoryname);
+		$("#breadcrumbcompanyname").text(v.companyname);
+		$("#breadcrumbmodelname").text(v.name);
+	
+	});
+	
+	console.log(productmodelslist);
+$.each(productmodelslist, function(k,v){
+	
+	
+	var pdivdata ="<div class='dimg' >"
+	               +"<div class='col-sm-6' >"
+	               +"<img width='100%' src='${baseurl }/reportDocuments/"+v.productmodelpics+"' class='img-responsive' alt='196' title='YHT-196'/>"
+	               +"<div class='col-xs-6'>"
+    	           +"<button style='width:95%'; class='btn btn-primary' type='button'>Get Quotation</button>"
+	               +"</div>"
+	               +"<div class='col-xs-6'>"
+    	           +"<button style='width:95%; margin-left:10px;' class='btn btn-warning' type='button'>Get Service</button>"
+                   +"</div>"
+                   +"</div>"
+                   +"</div>"
+                   +"<div class='dtxt'>"
+                   +"<div class='col-sm-6'>"
+	                +"<p>"+v.description +"</p>"
+	                +"<p>"+v.product_model_specifications +"</p>"
+	                
+    	           
+                   +"</div>"
+                   +"</div><div class='clearfix'></div>"
+                    +"<div class='vid'>"
+                    +"<div class='col-sm-4'>"
+	                 +"<iframe width='270' height='200' src='https://www.youtube.com/embed/z2lM0G2opEM' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>"
+                    +"</div>"
+                     +"<div class='col-sm-4'>"
+	                 +"<iframe width='270' height='200' src='https://www.youtube.com/embed/SFGPK2w4SXw' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>"
+                     +"</div>"
+                    +"<div class='col-sm-4'>"
+                    +"<iframe width='270' height='200' src='https://www.youtube.com/embed/N8of5Ees_dU' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>"
+                     +"</div><div class='clearfix'></div>"
+                      +"</div>";
+	
+	$("#productDetails").append(pdivdata);
+});
+	
+	
+	function getCompanys(id){
+		var url      = '${baseurl }/abheecategory?id='+catid; 
+		url.replace("#", "");
+		window.location.href=url+"&company="+id;
+		
+	}
+	function getModels(id){
+		var url      = '${baseurl }/abheecategory?id='+catid; 
+		url.replace("#", "");
+		window.location.href=url+"&company="+company+"&model="+id;
+	}
 </script>
 </html>
