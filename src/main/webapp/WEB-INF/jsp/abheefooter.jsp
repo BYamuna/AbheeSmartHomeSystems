@@ -110,10 +110,8 @@ $.each(productmodelslist, function(k,v){
         +"</div>";
 		
 		$("#productModels").append(divData);
-		$("#breadcrumbname").text(v.categoryname);
-		$("#breadcrumbcompanyname").text(v.companyname);
-		$("#breadcrumbmodelname").text(v.name);
-	
+		 $("#breadcrumbname").text(v.categoryname);
+	 
 	});
 	
 	console.log(productmodelslist);
@@ -152,6 +150,9 @@ $.each(productmodelslist, function(k,v){
                       +"</div>";
 	
 	$("#productDetails").append(pdivdata);
+	 $("#breadcrumbname").text(v.categoryname);
+	$("#breadcrumbcompanyname").text(v.companyname);
+	$("#breadcrumbmodelname").text(v.name); 
 });
 	
 	
@@ -175,5 +176,24 @@ $.each(productmodelslist, function(k,v){
 			window.location.href='${baseurl }/customerlogin';
 		}
 	}
+	
+	if(bradcrmcategory){
+		$("#breadcrumbname").show();
+		$("#breadcrumbcompanyname").hide();
+		$("#breadcrumbmodelname").hide();
+	}
+	
+	if(bradcrmcompany)
+		{
+		$("#breadcrumbname").show();
+		$("#breadcrumbcompanyname").show();
+		}
+	if(bradcrmmodel)
+	{
+		$("#breadcrumbname").show();
+		$("#breadcrumbcompanyname").show();
+		$("#breadcrumbmodelname").show();
+	}
+	
 </script>
 </html>
