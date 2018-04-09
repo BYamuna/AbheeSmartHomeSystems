@@ -6,6 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<style>
+.btn1 {
+background-color:#337ab7 !important;
+color: #fff !imoportant;
+}
+</style>
 </head>
 <body>
 	<div class="container">
@@ -53,6 +59,17 @@ width="250" height="200" frameborder="0" ></iframe>
      <script>
 	         $("#productModels").hide();
 	         </script>
+    </c:otherwise>
+</c:choose>
+
+
+
+ <c:choose>
+    <c:when test="${not empty loggedstatus}">
+     <script> var login=true;</script>
+    </c:when>
+    <c:otherwise>
+        <script> var login=false;</script>
     </c:otherwise>
 </c:choose>
 <script type="text/javascript">
@@ -107,8 +124,8 @@ $.each(productmodelslist, function(k,v){
 	               +"<div class='col-sm-6' >"
 	               +"<img width='100%' src='${baseurl }/reportDocuments/"+v.productmodelpics+"' class='img-responsive' alt='196' title='YHT-196'/>"
 	               +"<div class='col-xs-6'>"
-    	           +"<button style='width:95%'; class='btn btn-primary' type='button'>Get Quotation</button>"
-	               +"</div>"
+    	           +"<a href='#' onclick='checkLogin()' style='width:95%;margin-top:9px !important;' class='btn btn-primary' >Get Quotation</a>"
+    	           +"</div>"
 	               +"<div class='col-xs-6'>"
     	           +"<button style='width:95%; margin-left:10px;' class='btn btn-warning' type='button'>Get Service</button>"
                    +"</div>"
@@ -148,6 +165,15 @@ $.each(productmodelslist, function(k,v){
 		var url      = '${baseurl }/abheecategory?id='+catid; 
 		url.replace("#", "");
 		window.location.href=url+"&company="+company+"&model="+id;
+	}
+	
+	function checkLogin(){
+		if(login){
+			
+		alert("true");
+		}else{
+			window.location.href='${baseurl }/customerlogin';
+		}
 	}
 </script>
 </html>
