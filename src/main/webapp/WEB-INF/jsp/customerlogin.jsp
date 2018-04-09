@@ -97,7 +97,7 @@
 				<div class="col-sm-12">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<input type="text"  name= "username" class="form-control validate"  placeholder=" Mobile Number"/>
+						<input type="text"  name= "username" autofocus="autofocus" class="form-control validate"  placeholder=" Mobile Number"/>
 					</div>
 				</div>
 			</div>
