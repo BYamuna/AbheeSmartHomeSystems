@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
-import com.charvikent.abheeSmartHomeSystems.dao.AbheeCustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
@@ -29,7 +28,7 @@ import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.OTPDetails;
 import com.charvikent.abheeSmartHomeSystems.model.Product;
-import com.charvikent.abheeSmartHomeSystems.model.Customer;
+
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,8 +36,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RestController
 public class AbheeCustomerRestController {
 	
-	@Autowired
-	AbheeCustomerDao abheeCustomerDao;
+	
 	@Autowired CustomerDao customerDao;
 	
 	@Autowired
@@ -78,7 +76,7 @@ public class AbheeCustomerRestController {
 
 		try {
 			customer.setDesignation("9");
-			customerDao.savecustomer(customer);
+			customerDao.saveAbheeCustomer(customer);
 			sendSMS.sendSMS(regSuccessMsg,customer.getMobilenumber());
 			code = customer.getFirstname()+" "+customer.getLastname();
 		} catch (IOException e) {
