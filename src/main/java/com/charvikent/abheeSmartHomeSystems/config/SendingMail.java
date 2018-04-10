@@ -209,7 +209,7 @@ public class SendingMail {
 		}  
 	}
 	
-	public void sendSalesRequestEmailWithMultipleAttachment(String emailId,MultipartFile[] files,SalesRequest salesrequest ) throws MessagingException {  
+	public void sendSalesRequestEmailWithMultipleAttachment(String emailId,MultipartFile[] files,String description ) throws MessagingException {  
 		try {
 			
 			
@@ -219,7 +219,7 @@ public class SendingMail {
 			
 			
 			VelocityContext velocityContext = new VelocityContext();
-			velocityContext.put("name",email);
+			velocityContext.put("name",description);
 			
 			StringWriter stringWriter = new StringWriter();
 			velocityEngine.mergeTemplate("RequestemailTemplate.vm", "UTF-8", velocityContext, stringWriter);

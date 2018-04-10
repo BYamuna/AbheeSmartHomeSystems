@@ -1,25 +1,22 @@
 package com.charvikent.abheeSmartHomeSystems.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
@@ -36,26 +33,18 @@ public class SalesRequestController
 	FilesStuff fileTemplate;
 	@Autowired
 	SendingMail sendingMail;
-	@RequestMapping(value = "/dummypage" ,method = RequestMethod.GET)
-	public String saveRequest(Model model)
+	/*@RequestMapping(value = "/salesRequest" ,method = RequestMethod.GET)
+	public String saveRequest(@ModelAttribute("salesRequest")SalesRequest salesrequest,Model model)
 	{
-		model.addAttribute("dummypage", new SalesRequest());
-		return "dummypage";
+		model.addAttribute("salesRequest", new SalesRequest());
+		return "a";
 		
-	}
+	}*/
 	@RequestMapping(value = "/salesRequest", method = RequestMethod.POST)
-	public String saveRequestDetails(
-			/*@RequestParam(value = "modelnumber") String modelnumber,
-			@RequestParam(value = "email")String email,
-			@RequestParam(value = "mobileno")String mobileno,
-			@RequestParam(value = "address")String address,
-			@RequestParam(value = "reqdesc")String reqdesc,*/
-			@ModelAttribute("salesrequest")SalesRequest salesrequest,
-			@RequestParam("imgfile") MultipartFile[] uploadedFiles,
-			@RequestParam(value = "locationData") String latlong,HttpServletRequest request) throws IllegalStateException, IOException, MessagingException
+	public String saveRequestDetails(@ModelAttribute("salesrequest")SalesRequest salesrequest,
+									@RequestParam("imgfile") MultipartFile[] uploadedFiles,
+									@RequestParam(value = "locationData") String latlong,HttpServletRequest request,RedirectAttributes redir) throws IllegalStateException, IOException, MessagingException
 	{
-		//SalesRequest salesrequest = new SalesRequest();
-	System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2");
 		int filecount =0;
 		
 		String str[] = latlong.split("&");
@@ -65,16 +54,6 @@ public class SalesRequestController
 		salesrequest.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
 		salesrequest.setLat(str[0]);
 		salesrequest.setLongitude(str[1]);
-		/*salesrequest.setAddress(address);
-		salesrequest.setReqdesc(reqdesc);
-		salesrequest.setMobileno(mobileno);
-		salesrequest.setEmail(email);*/
-		/*String rootPath = request.getSession().getServletContext().getRealPath("/");
-		File dir = new File(rootPath + File.separator + "reportDocuments");
-		
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}*/
    	 for(MultipartFile multipartFile : uploadedFiles) {
 				String fileName = multipartFile.getOriginalFilename();
 				if(!multipartFile.isEmpty())
@@ -97,9 +76,12 @@ public class SalesRequestController
 	   		//sendingMail.SendingSalesRequestByEmail(salesrequest.getEmail());
 	   		sendingMail.sendSalesRequestEmailWithattachment(salesrequest.getEmail(), uploadedFiles);
 	   	}
-	   	else
-	   		System.out.println("Record Already exists");
-		return "redirect:salesRequest";
+	   	else {
+	   		redir.addFlashAttribute("msg","Record Already exists");
+		return "redirect:abheefooter";
+		}
+	   	redir.addFlashAttribute("msg","We Received The Request and will send you the Quotation soon. Thanking you.. ");
+	   	return "redirect:abheefooter";
 		
 	}
 	@RequestMapping("/allsalesrequest")
@@ -132,7 +114,8 @@ public class SalesRequestController
 	}
 	
 	@RequestMapping(value = "/sendingQuotation", method = RequestMethod.POST)
-	public @ResponseBody String sendingQuotation(@RequestParam("id")  String id,@RequestParam("file") MultipartFile[] uploadedFiles,HttpServletRequest request) throws IllegalStateException, IOException, MessagingException
+	public @ResponseBody String sendingQuotation(@RequestParam("id")  String id,@RequestParam("description")  String description,
+			@RequestParam("file") MultipartFile[] uploadedFiles,HttpServletRequest request,RedirectAttributes redir) throws IllegalStateException, IOException, MessagingException
 	{
 		
 		int filecount=0;
@@ -160,7 +143,7 @@ public class SalesRequestController
    		 
    	 }
 			srequestDao.saveRequest(salesrequest);
-	   		sendingMail.sendSalesRequestEmailWithMultipleAttachment(email.toString(), uploadedFiles,salesrequest);
+	   		sendingMail.sendSalesRequestEmailWithMultipleAttachment(email.toString(), uploadedFiles,description);
 	   		String str ="true";
 	   		
 		return str;
