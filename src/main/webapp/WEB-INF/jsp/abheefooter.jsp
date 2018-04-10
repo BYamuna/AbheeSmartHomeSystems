@@ -111,12 +111,12 @@ $.each(productmodelslist, function(k,v){
 		
 		$("#productModels").append(divData);
 		 $("#breadcrumbname").text(v.categoryname);
+		 $("#panelheading").text(v.categoryname);
 	 
 	});
 	
 	console.log(productmodelslist);
 $.each(productmodelslist, function(k,v){
-	
 	
 	var pdivdata ="<div class='dimg' >"
 	               +"<div class='col-sm-6' >"
@@ -152,7 +152,8 @@ $.each(productmodelslist, function(k,v){
 	$("#productDetails").append(pdivdata);
 	 $("#breadcrumbname").text(v.categoryname);
 	$("#breadcrumbcompanyname").text(v.companyname);
-	$("#breadcrumbmodelname").text(v.name); 
+	$("#breadcrumbmodelname").text(v.name);
+	$("#panelheading").text(v.categoryname);
 });
 	
 	
