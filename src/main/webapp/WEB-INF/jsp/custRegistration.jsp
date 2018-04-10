@@ -184,10 +184,10 @@ function displayTable(listOrders) {
 			var deleterow = "<a class='activate' onclick='deleteCustomer("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>";
 			var cls="inactivecss";
 		}
-		var edit = "<a class='edit editIt' onclick='editEmployee("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
+		var edit = "<a class='edit editIt' onclick='editCustomer("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr class='"+ cls +"'>"
-			 + "<td title='"+orderObj.userId+"'>"+ orderObj.userId + "</td>" 
+			 + "<td title='"+orderObj.customerId+"'>"+ orderObj.customerId + "</td>" 
 			+ "<td title='"+orderObj.firstname+"'>"+ orderObj.firstname + "</td>"
 			+ "<td title='"+orderObj.lastname+"'>"+ orderObj.lastname + "</td>"
 			+ "<td title='"+orderObj.email+"'>"+ orderObj.email + "</td>"
@@ -202,7 +202,7 @@ function displayTable(listOrders) {
 } 
 
 
-function editEmployee(id) {
+function editCustomer(id) {
 	
 	$("#id").val(serviceUnitArray[id].id);
 	$("#firstname").val(serviceUnitArray[id].firstname);
@@ -351,7 +351,7 @@ function deleteCustomer(id,status){
 	if(checkstr == true){
 		var formData = new FormData();
 	    formData.append('id', id);
-	    formData.append('status', status);
+	    formData.append('enabled', status);
 		$.fn.makeMultipartRequest('POST', 'deleteCustomer', false, formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;

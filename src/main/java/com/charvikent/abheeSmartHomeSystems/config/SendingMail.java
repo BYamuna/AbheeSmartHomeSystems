@@ -40,7 +40,7 @@ public class SendingMail {
 	HttpServletRequest request;
 	@Autowired	FilesStuff filePath;
 	
-	public void sendConfirmationEmail(User user) throws MessagingException {  
+	public void sendConfirmationEmail(Customer user) throws MessagingException {  
 		try {
 			
 			
@@ -275,5 +275,39 @@ public class SendingMail {
 			System.out.println(e);
 		}  
 	}
+
+	
+	public void sendUserConfirmationEmail(User user) throws MessagingException {  
+		try {
+			
+			
+
+			
+			String email = user.getEmail();
+			MimeMessage message = javaMailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+			
+			
+			VelocityContext velocityContext = new VelocityContext();
+			velocityContext.put("name",user.getFirstname());
+			velocityContext.put("mobilenumber",user.getMobilenumber());
+			velocityContext.put("email",user.getEmail());
+			velocityContext.put("password",user.getPassword());
+			
+			StringWriter stringWriter = new StringWriter();
+			velocityEngine.mergeTemplate("emailtemplate.vm", "UTF-8", velocityContext, stringWriter);
+			helper.setText(stringWriter.toString(), true);
+			helper.setTo( email);
+			helper.setSubject("Registration Successfully");  
+			javaMailSender.send(message);
+				
+			
+		} catch (MailException e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}  
+	}
+	
 
 		}

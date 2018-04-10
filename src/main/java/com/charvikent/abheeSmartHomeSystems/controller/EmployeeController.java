@@ -24,8 +24,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeBranchDao;
 import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
-import com.charvikent.abheeSmartHomeSystems.model.AbheeCustRegistration;
-/*import com.charvikent.abheeSmartHomeSystems.model.Department;*/
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -131,7 +129,7 @@ public class EmployeeController {
 					user.setEnabled("1");
 
 					userService.saveUser(user);
-					sendingMail.sendConfirmationEmail(user);
+					sendingMail.sendUserConfirmationEmail(user);
 
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");
 					redir.addFlashAttribute("cssMsg", "success");
@@ -326,43 +324,7 @@ public class EmployeeController {
 	}
 	
 	
-	@RequestMapping(value = "/checkEmpExst", method = RequestMethod.POST)
-	public @ResponseBody  Boolean checkCustomerExistence(@Validated @ModelAttribute  AbheeCustRegistration abheecustregistration,Model model,HttpServletRequest request) throws IOException 
-	{
-		System.out.println("enter to checkCustExst");
-		
-		String custMobile=request.getParameter("cmobile");
-		
-		User custbean =userService.checkEmployeeExistOrNotbyMobile(custMobile);
-		
-		if(custbean != null)
-		{
-			return true;
-		}
-		else
-		
-		return false;
-		
-	}
 	
-	@RequestMapping(value = "/checkEmpExstbyemail", method = RequestMethod.POST)
-	public @ResponseBody  Boolean checkEmployeeExistence(@Validated @ModelAttribute  AbheeCustRegistration abheecustregistration,Model model,HttpServletRequest request) throws IOException 
-	{
-		System.out.println("enter to checkCustExst");
-		
-		String empcemail=request.getParameter("cemail");
-		
-		User custbean =userService.checkEmployeeExistOrNotbyEmail(empcemail);
-		
-		if(custbean != null)
-		{
-			return true;
-		}
-		else
-		
-		return false;
-		
-	}
 
 
 	

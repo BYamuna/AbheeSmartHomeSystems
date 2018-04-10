@@ -511,6 +511,7 @@ function getHeadersCounts(){
              <li class="company"><a href="${baseurl }/company"><i class="fa  fa-building company"></i> <span> Company</span></a></li>
                  <li class="product"><a href="${baseurl }/product"><i class="fa fa-product-hunt prdct"></i> <span>Product Model</span></a></li>
                  <li class="abheecust"><a href="${baseurl }/custRegistration"><i class="fa fa-registered register"></i> <span>Customers</span></a></li>
+                 <li class="allservicerequests"><a href="${baseurl }/serviceRequest"><i class="fa fa-allservicerequests-hunt serreq"></i> <span>All Service Requests</span></a></li>
                 </security:authorize>
                <security:authorize access="hasRole('ROLE_BRANCHHEAD')">
               	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users emp"></i> <span>Employees</span></a></li>
