@@ -515,7 +515,7 @@ function getHeadersCounts(){
                 </security:authorize>
                <security:authorize access="hasRole('ROLE_BRANCHHEAD')">
               	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users emp"></i> <span>Employees</span></a></li>
-              <%--   <li class="task"><a href="${baseurl }/task"><i class="fa fa-tasks task"></i> <span>Task</span></a></li> --%>
+                <li class="task"><a href="${baseurl }/task"><i class="fa fa-tasks task"></i> <span>Task</span></a></li>
                 </security:authorize>
                 
               

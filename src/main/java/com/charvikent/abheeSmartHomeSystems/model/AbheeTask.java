@@ -13,7 +13,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 
 @Entity
-public class ReportIssue  {
+public class AbheeTask  {
 
 
 	
@@ -309,7 +309,7 @@ public class ReportIssue  {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ReportIssue other = (ReportIssue) obj;
+		AbheeTask other = (AbheeTask) obj;
 		if (additionalinfo == null) {
 			if (other.additionalinfo != null)
 				return false;

@@ -56,7 +56,7 @@
 					<!--  <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>-->
 						<div class="table-responsive" id="tableId">
 							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
-								<thead><tr><th>Dept ID</th><th>Name</th><th>Description</th><th>Status</th><th></th></tr></thead>
+								<thead><tr><th>Task No</th><th>ServiceType</th><th>Severity</th><th>Priority</th><th>Assigned To</th><th>Subject</th><th>Task Deadline</th><th>Task Status</th><th>CreateTime</th><th style="text-align: center;">Options</th></tr></thead>
 								<tbody></tbody>
 							</table>
 						</div>
@@ -76,7 +76,7 @@
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<form:hidden path="id"/>
-									<label for="focusedinput" class="col-md-6 control-label">Category  <span class="impColor">*</span></label>
+									<label for="focusedinput" class="col-md-6 control-label">Service Type  <span class="impColor">*</span></label>
 									<form:select path="category" class="col-xs-10 col-sm-5 validate1" onfocus="removeBorder(this.id)" >
 											<form:option value="" label="--- Select ---" />
 											<form:options items="${category}"/>
@@ -377,8 +377,8 @@ $(document).ready(function () {
 // $("#taskdeadline").prop("readonly", true);
 
 
-var loginUserDId =${objuserBean.designation};
-var cuserid =${objuserBean.id};
+var loginUserDId ="1";
+var cuserid ="1";
 var listOrders1 = ${allOrders1};
 if (listOrders1 != "") {
 	displayTable(listOrders1)
@@ -387,7 +387,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Task No</th><th>Summary</th><th>Category</th><th>priority</th><th>Severity<th>Assigned By</th><th>Assigned To</th><th>Task Status</th><th>Created Time</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Task No</th><th>ServiceType</th><th>Severity</th><th>Priority</th><th>Assigned To</th><th>Subject</th><th>Task Deadline</th><th>Task Status</th><th>CreateTime</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	
@@ -426,14 +426,15 @@ function displayTable(listOrders) {
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.taskno+"'>"+ view2 + "</td>"
-			+ "<td title='"+orderObj.subject+"'>"+ orderObj.subject + "</td>"
-			+ "<td title='"+orderObj.category+"'>"+ orderObj.category + "</td>"
-			+ "<td title='"+orderObj.priority+"'>"+ orderObj.priority + "</td>"
+			
+			+ "<td title='"+orderObj.servicetypename+"'>"+ orderObj.servicetypename + "</td>"
 			+ "<td title='"+orderObj.severity+"'>"+ orderObj.severity + "</td>"
-			+ "<td title='"+orderObj.assignby+"'>"+ orderObj.assignby + "</td>"
-			+ "<td title='"+orderObj.assignto+"'>"+ orderObj.assignto + "</td>"
-			+ "<td title='"+orderObj.kstatus+"'>"+ orderObj.kstatus + "</td>"
-			+ "<td title='"+orderObj.createdTime+"'>"+ new Date(orderObj.createdTime).toDateString() + "</td>"
+			+ "<td title='"+orderObj.priority+"'>"+ orderObj.priority + "</td>"
+			+ "<td title='"+orderObj.username+"'>"+ orderObj.username + "</td>"
+			+ "<td title='"+orderObj.subject+"'>"+ orderObj.subject + "</td>"
+			+ "<td title='"+orderObj.taskdeadline+"'>"+ orderObj.taskdeadline + "</td>"
+			+ "<td title='"+orderObj.statusname+"'>"+ orderObj.statusname + "</td>"
+			+ "<td title='"+orderObj.created_time+"'>"+ orderObj.created_time + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "&nbsp;&nbsp;" + comment + "&nbsp;&nbsp;" + time +  "&nbsp;&nbsp;"+history2+"</td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
@@ -443,7 +444,7 @@ function displayTable(listOrders) {
 }
 
 
-function editTask(id) {
+/* function editTask(id) {
 	$("#id").val(serviceUnitArray[id].id);
 	$("#subject").val(serviceUnitArray[id].subject);
 	$("#category").val(serviceUnitArray[id].categoryid);
@@ -759,7 +760,7 @@ $('#ttype').on('change', function() {
 	
 	
 
-
+/* 
 
 function deletetask(id,status){
 	var checkstr=null;
@@ -811,10 +812,10 @@ $('#kpstatus').on('change',function() {
 		
 });
 
+ */
 
 
-
- 
+  
 
 /* function inactiveData() {
 	var status="0";
@@ -837,7 +838,7 @@ $('#kpstatus').on('change',function() {
 } */
 
 // main form validation
-
+/* 
 var idArrayCmt1 = $.makeArray($('.validate1').map(function() {
 	return this.id;
 }));
@@ -920,7 +921,7 @@ $(".cancel2").click(function()
 				}
 			});
 		});
-
+ */
 
 $("#pageName").text("Task Master");
 $(".task").addClass("active"); 
