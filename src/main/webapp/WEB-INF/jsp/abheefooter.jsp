@@ -117,7 +117,6 @@ $.each(productmodelslist, function(k,v){
 	console.log(productmodelslist);
 $.each(productmodelslist, function(k,v){
 	
-	
 	var pdivdata ="<div class='dimg' >"
 	               +"<div class='col-sm-6' >"
 	               +"<img width='100%' src='${baseurl }/reportDocuments/"+v.productmodelpics+"' class='img-responsive' alt='196' title='YHT-196'/>"
@@ -152,7 +151,8 @@ $.each(productmodelslist, function(k,v){
 	$("#productDetails").append(pdivdata);
 	 $("#breadcrumbname").text(v.categoryname);
 	$("#breadcrumbcompanyname").text(v.companyname);
-	$("#breadcrumbmodelname").text(v.name); 
+	$("#breadcrumbmodelname").text(v.name);
+	$("#panelheading").text(v.categoryname);
 });
 	
 	

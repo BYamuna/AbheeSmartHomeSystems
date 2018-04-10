@@ -32,7 +32,7 @@
         <div class="cont">
         	<div class="col-md-3">
   				<div class="panel panel-default">
-    				<div class="panel-body">Home Theater</div>
+    				<div class="panel-body" id="panelheading"></div>
   				</div>
                 <div class="lcat">
         			<div class="smen">
