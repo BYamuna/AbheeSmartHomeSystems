@@ -25,10 +25,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
-import com.charvikent.abheeSmartHomeSystems.dao.AbheeCustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
-import com.charvikent.abheeSmartHomeSystems.model.AbheeCustRegistration;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.OTPDetails;
 import com.charvikent.abheeSmartHomeSystems.model.User;
@@ -39,8 +37,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class AbheeCustRegistrationController 
 {
-	@Autowired
-	AbheeCustomerDao adao;
+	
 	
 	@Autowired
 	SendSMS sendSMS;
@@ -61,13 +58,13 @@ public class AbheeCustRegistrationController
 	@RequestMapping("/custRegistration")	
 	public String AbheeCustRegistrationPage(Model model,HttpServletRequest request)
 	{
-	  model.addAttribute("custReg",new User());
-	  List<User> listOrderBeans = null;
+	  model.addAttribute("custReg",new Customer());
+	  List<Customer> listOrderBeans = null;
 	  ObjectMapper objectMapper = null;
 	  String sJson = null;
 	  try 
 	  {
-			listOrderBeans = adao.getAbheeCustomerNames();
+			listOrderBeans = customerDao.getAbheeCustomerNames();
 			System.out.println(listOrderBeans);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
@@ -108,7 +105,7 @@ public class AbheeCustRegistrationController
 	}*/
 	
 	@RequestMapping(value = "/checkCustExst", method = RequestMethod.POST)
-	public @ResponseBody  Boolean checkCustomerExistence(@Validated @ModelAttribute  AbheeCustRegistration abheecustregistration,Model model,HttpServletRequest request) throws IOException 
+	public @ResponseBody  Boolean checkCustomerExistence(@Validated @ModelAttribute  Customer abheecustregistration,Model model,HttpServletRequest request) throws IOException 
 	{
 		System.out.println("enter to checkCustExst");
 		
@@ -186,7 +183,7 @@ public class AbheeCustRegistrationController
 		String returnmsg ="";
 		if(otpnumber.equals(cotp))
 		{
-			customerDao.savecustomer(customer);
+			customerDao.saveAbheeCustomer(customer);
 		sendSMS.sendSMS(regSuccessMsg,custMobile);
 		return true;
 		
@@ -223,7 +220,7 @@ public class AbheeCustRegistrationController
 	}
 	
 	@RequestMapping(value = "/checkEmailExst", method = RequestMethod.POST)
-	public @ResponseBody  Boolean checkemailExistence(@Validated @ModelAttribute  AbheeCustRegistration abheecustregistration,Model model,HttpServletRequest request) throws IOException 
+	public @ResponseBody  Boolean checkemailExistence(@Validated @ModelAttribute  Customer abheecustregistration,Model model,HttpServletRequest request) throws IOException 
 	{
 		System.out.println("enter to checkCustExst");
 		
@@ -243,16 +240,16 @@ public class AbheeCustRegistrationController
 	
 	
 	@RequestMapping(value = "/inActiveCust")
-	public @ResponseBody String getAllActiveOrInactiveOrgnizations(User  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
-		List<User> listOrderBeans  = null;
+	public @ResponseBody String getAllActiveOrInactiveOrgnizations(Customer  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		List<Customer> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
 		String sJson=null;
 		try{
 			if(objdept.getStatus().equals("0"))
-				listOrderBeans = userService.getCustomerInActiveList();
+				listOrderBeans = customerDao.getCustomerInActiveList();
 				else
-					listOrderBeans =  adao.getAbheeCustomerNames();
+					listOrderBeans =  customerDao.getAbheeCustomerNames();
 
 
 
@@ -280,15 +277,15 @@ public class AbheeCustRegistrationController
 	}
 	
 	@RequestMapping(value = "/deleteCustomer")
-	public @ResponseBody String deleteEmployee(User  objUser,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
-		List<User> listOrderBeans  = null;
+	public @ResponseBody String deleteEmployee(Customer  objUser,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		List<Customer> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
 		String sJson=null;
 		boolean delete = false;
 		try{
 			if(objUser.getId() != 0){
- 				delete = userService.deleteUser(objUser.getId(),objUser.getStatus());
+ 				delete = customerDao.deleteCustomer(objUser.getId(),objUser.getEnabled());
  				if(delete){
  					jsonObj.put("message", "deleted");
  				}else{
@@ -296,7 +293,7 @@ public class AbheeCustRegistrationController
  				}
  			}
 
-			listOrderBeans =  adao.getAbheeCustomerNames();
+			listOrderBeans =  customerDao.getAbheeCustomerNames();
 			 objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 
@@ -321,16 +318,11 @@ public class AbheeCustRegistrationController
 	}
 	
 	@RequestMapping(value = "/custreg" ,method = RequestMethod.POST)
-	public String saveCustomer(@Valid @ModelAttribute  User user, BindingResult bindingresults,
+	public String saveCustomer(@Valid @ModelAttribute  Customer user, BindingResult bindingresults,
 			RedirectAttributes redir) throws IOException {
 		
 		
-		/*if(user.getBranchId()==null)
-		{
-			User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			user.setBranchId(objuserBean.getBranchId());
-			
-		}*/
+		
 
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
@@ -340,10 +332,10 @@ public class AbheeCustRegistrationController
 		int id = 0;
 		try
 		{
-			User userBean=null;
+			Customer userBean=null;
 			if(user.getId()!=null)
 			{
-			  userBean= userService.geCustomerByObject(user);
+			  userBean= customerDao.getCustomerByObject(user);
 
 			}
 			int dummyId =0;
@@ -359,9 +351,8 @@ public class AbheeCustRegistrationController
 
 
 					user.setEnabled("1");
-					user.setDesignation("9");
 
-					userService.saveUser(user);
+					customerDao.saveAbheeCustomer(user);
 					
 					sendingMail.sendConfirmationEmail(user);
 
@@ -383,9 +374,8 @@ public class AbheeCustRegistrationController
 				id=user.getId();
 				if(id == dummyId || userBean == null)
 				{
-					user.setDesignation("9");
-					userService.updateUser(user);
-					sendingMail.sendConfirmationEmail(user);
+					customerDao.updateCustomer(user);
+					//sendingMail.sendConfirmationEmail(user);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
 
@@ -423,6 +413,43 @@ public class AbheeCustRegistrationController
 		}
 		else
 			return false;
+		
+	}
+	@RequestMapping(value = "/checkEmpExst", method = RequestMethod.POST)
+	public @ResponseBody  Boolean checkCustomerExistence1(@Validated @ModelAttribute Customer abheecustregistration,Model model,HttpServletRequest request) throws IOException 
+	{
+		System.out.println("enter to checkCustExst");
+		
+		String custMobile=request.getParameter("cmobile");
+		
+		User custbean =userService.checkEmployeeExistOrNotbyMobile(custMobile);
+		
+		if(custbean != null)
+		{
+			return true;
+		}
+		else
+		
+		return false;
+		
+	}
+	
+	@RequestMapping(value = "/checkEmpExstbyemail", method = RequestMethod.POST)
+	public @ResponseBody  Boolean checkEmployeeExistence(@Validated @ModelAttribute  Customer abheecustregistration,Model model,HttpServletRequest request) throws IOException 
+	{
+		System.out.println("enter to checkCustExst");
+		
+		String empcemail=request.getParameter("cemail");
+		
+		User custbean =userService.checkEmployeeExistOrNotbyEmail(empcemail);
+		
+		if(custbean != null)
+		{
+			return true;
+		}
+		else
+		
+		return false;
 		
 	}
 
