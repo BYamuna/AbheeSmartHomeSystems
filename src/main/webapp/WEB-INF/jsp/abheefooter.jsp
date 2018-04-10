@@ -111,6 +111,7 @@ $.each(productmodelslist, function(k,v){
 		
 		$("#productModels").append(divData);
 		 $("#breadcrumbname").text(v.categoryname);
+		 $("#panelheading").text(v.categoryname);
 	 
 	});
 	
