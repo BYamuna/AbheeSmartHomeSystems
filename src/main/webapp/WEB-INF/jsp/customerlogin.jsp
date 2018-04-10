@@ -14,8 +14,6 @@
 <link rel='stylesheet' type='text/css' href='assets/plugins/datatables/dataTables.css' />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</header>
-<head>
     <meta charset="utf-8">
     <title>Abhee Smart Homes</title>
     <link rel="shortcut icon" href="/assets/img/logoicon.jpg"/>
@@ -23,7 +21,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   
-</body>
     <link rel="stylesheet" href="assets/css/styles.css">
 <!--     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'> -->
     
@@ -72,8 +69,9 @@
 }, 5000); */
 </script>
 
-</head>
 
+
+</header>
 <body class="focusedform">
 <div class="verticalcenter">
 <div><img src="assets/img/Klogo2.png" style="width:350px;" class="img-responsive"></div>

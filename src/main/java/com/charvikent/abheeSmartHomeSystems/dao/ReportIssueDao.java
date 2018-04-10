@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
-import com.charvikent.abheeSmartHomeSystems.model.ReportIssue;
+import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
 
@@ -40,7 +40,7 @@ public class ReportIssueDao {
 	@Autowired
 	KptsUtil utilities;
 
-	public void saveReportIssue(ReportIssue reportIssue) {
+	public void saveReportIssue(AbheeTask reportIssue) {
 		String randomNum = utilities.randNum();
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String id=String.valueOf(objuserBean.getId());
@@ -81,15 +81,15 @@ public List<ReportIssue> getAllReportIssues()
 	 */
  
 
-	public Set<ReportIssue> getIssuesAssignBy(String id) {
-		Set<ReportIssue> listissue=new TreeSet<ReportIssue>();
+	public Set<AbheeTask> getIssuesAssignBy(String id) {
+		Set<AbheeTask> listissue=new TreeSet<AbheeTask>();
 
 		try {
 			@SuppressWarnings("unchecked")
 			List <Object[]> rows=em.createQuery("select r.id , u.username, s.colour, p.priority,r.uploadfile,r.subject ,c.category,r.createdTime,ks.scolour,ks.name ,r.status, r.taskno from ReportIssue r, Category c, Priority p, User u, Severity s, KpStatus ks where r.assignto=u.id and r.kstatus=ks.id and p.id=r.priority and s.id=r.severity and c.id=r.category and r.kstatus<>'1'  and  r.assignby =:custName").setParameter("custName", id).getResultList();
 			for(Object[] row: rows)
 			{
-				ReportIssue issue =new ReportIssue();
+				AbheeTask issue =new AbheeTask();
 				int j = Integer.parseInt(String.valueOf(row[0]));
 				Integer intobj=new Integer(j);
 				issue.setId(intobj);
@@ -118,15 +118,15 @@ public List<ReportIssue> getAllReportIssues()
 	}
 
 
-	public Set<ReportIssue> getIssuesAssignTo(String id) {
-		Set<ReportIssue> listissue=new TreeSet<ReportIssue>();
+	public Set<AbheeTask> getIssuesAssignTo(String id) {
+		Set<AbheeTask> listissue=new TreeSet<AbheeTask>();
 
 		try {
 			@SuppressWarnings("unchecked")
 			List <Object[]> rows=em.createNativeQuery("select r.id, r.taskno,r.subject,c.category as cname,r.category cid,p.priority as pname,r.priority as pid,u.username, r.assignto,r.created_time from report_issue r, kpcategory c, kppriority p, kpusers u, kpseverity s, kpstatus ks    where  r.kstatus=ks.id and r.assignto=u.id and p.id=r.priority and s.id=r.severity and c.id=r.category and r.assignto=:custid").setParameter("custid", id).getResultList();
 			for(Object[] row: rows)
 			{
-				ReportIssue issue =new ReportIssue();
+				AbheeTask issue =new AbheeTask();
 				int j = Integer.parseInt(String.valueOf(row[0]));
 				Integer intobj=new Integer(j);
 				issue.setId(intobj);
@@ -157,17 +157,17 @@ public List<ReportIssue> getAllReportIssues()
 	}
 
 
-	public Set <ReportIssue>getIssuesAssignToResolved(String id) {
+	public Set <AbheeTask>getIssuesAssignToResolved(String id) {
 		//List<ReportIssue> listissue=new ArrayList<>();
 		
-		Set<ReportIssue> listissue=new TreeSet<ReportIssue>();
+		Set<AbheeTask> listissue=new TreeSet<AbheeTask>();
 
 		try {
 			@SuppressWarnings("unchecked")
 			List <Object[]> rows=em.createQuery("select r.id , u.username, s.colour, p.priority,r.uploadfile,r.subject ,r.createdTime,c.category,ks.scolour,ks.name, t.status ,r.taskno  from ReportIssue r, Category c, Priority p, User u, Severity s, KpStatus ks   where  r.kstatus=ks.id and r.assignto=u.id and p.id=r.priority and s.id=r.severity and c.id=r.category  and r.kstatus='4' and  r.assignto =:custName").setParameter("custName", id).getResultList();
 			for(Object[] row: rows)
 			{
-				ReportIssue issue =new ReportIssue();
+				AbheeTask issue =new AbheeTask();
 				int j = Integer.parseInt(String.valueOf(row[0]));
 				Integer intobj=new Integer(j);
 				issue.setId(intobj);
@@ -203,8 +203,8 @@ public List<ReportIssue> getAllReportIssues()
 
 
 
-	public Set<ReportIssue> getAllReportIssues() {
-		Set<ReportIssue> listissue=new LinkedHashSet<ReportIssue>();
+	public Set<AbheeTask> getAllReportIssues() {
+		Set<AbheeTask> listissue=new LinkedHashSet<AbheeTask>();
 
 		try {
 			@SuppressWarnings("unchecked")
@@ -213,7 +213,7 @@ public List<ReportIssue> getAllReportIssues()
 					+ "DATE(r.createdTime), Date(r.updatedTime),r.status,r.description,r.assignto,r.category,r.priority,r.severity,r.status from ReportIssue r, Category c ,Severity s,Priority p,User u  where r.category=c.id and r.severity=s.id and r.priority=p.id and r.assignto=u.id")
 			.getResultList();
 			for (Object[] row : rows) {
-				ReportIssue issue = new ReportIssue();
+				AbheeTask issue = new AbheeTask();
 
 				issue.setId(Integer.parseInt(String.valueOf(row[0])));
 
@@ -248,15 +248,15 @@ public List<ReportIssue> getAllReportIssues()
 	@SuppressWarnings("unchecked")
 	public Map<Integer, Integer>  getGapAndCount() {
 
-		List<ReportIssue> listissuegap=new ArrayList<>();
-		ReportIssue issuegap =null;
+		List<AbheeTask> listissuegap=new ArrayList<>();
+		AbheeTask issuegap =null;
 
 		List<Object[]> rows = 	em.createNativeQuery("SELECT DATEDIFF(CURDATE(),created_time ) as gap ,count(id)  from report_issue group by gap ").getResultList();
 
 		Map<Integer, Integer> issueTimelines = new HashMap<Integer, Integer>();
 
 		for (Object[] row : rows) {
-			issuegap = new ReportIssue();
+			issuegap = new AbheeTask();
 			issuegap.setGapdays(Integer.parseInt(String.valueOf(row[0])));
 			issuegap.setGapcount(Integer.parseInt(String.valueOf(row[1])));
 			listissuegap.add(issuegap);
@@ -272,8 +272,8 @@ public List<ReportIssue> getAllReportIssues()
 	@SuppressWarnings("unchecked")
 	public Map<Integer, Integer>  getGapAndCountForClosed() {
 
-		List<ReportIssue> listissuegap=new ArrayList<>();
-		ReportIssue issuegap =null;
+		List<AbheeTask> listissuegap=new ArrayList<>();
+		AbheeTask issuegap =null;
 
 		//String custName=null;
 
@@ -282,7 +282,7 @@ public List<ReportIssue> getAllReportIssues()
 		Map<Integer, Integer> issueTimelines = new HashMap<Integer, Integer>();
 
 		for (Object[] row : rows) {
-			issuegap = new ReportIssue();
+			issuegap = new AbheeTask();
 			issuegap.setGapdays(Integer.parseInt(String.valueOf(row[0])));
 			issuegap.setGapcount(Integer.parseInt(String.valueOf(row[1])));
 			listissuegap.add(issuegap);
@@ -294,16 +294,16 @@ public List<ReportIssue> getAllReportIssues()
 	}
 
 	@SuppressWarnings("unchecked")
-	public  Set<ReportIssue> getRecentlyModified(String id) {
+	public  Set<AbheeTask> getRecentlyModified(String id) {
 
-		Set<ReportIssue> listissue=new TreeSet<ReportIssue>();
+		Set<AbheeTask> listissue=new TreeSet<AbheeTask>();
 
 		try {
 			List<Object[]> rows = em
 			.createNativeQuery(" select   r.id , u.username, s.colour, p.priority,r.uploadfile,r.subject ,c.category,r.created_time,ks.name,ks.scolour,r.status ,r.taskno from report_issue r, kpcategory c, kppriority p, kpusers u, kpseverity s,kpstatus ks  where r.kstatus=ks.id and r.assignto=u.id and p.id=r.priority and s.id=r.severity and c.id=r.category and r.kstatus='1'  and DATEDIFF (CURDATE(),r.updated_time )<=30 and  r.assignby =:custName union (select   r.id , u.username, s.colour, p.priority,r.uploadfile,r.subject ,c.category,r.created_time,ks.name,ks.scolour from report_issue r, category c, priority p, kpusers u, severity s,kpstatus ks  where r.kstatus=ks.id and r.assignto=u.id and p.id=r.priority and s.id=r.severity and c.id=r.category and r.kstatus='1'  and DATEDIFF (CURDATE(),r.updated_time )<=30 and  r.assignto =:custName )").setParameter("custName", id)
 			.getResultList();
 			for (Object[] row : rows) {
-				ReportIssue issue = new ReportIssue();
+				AbheeTask issue = new AbheeTask();
 				issue.setId(Integer.parseInt(String.valueOf(row[0])));
 				issue.setAssignto((String) row[1]);
 				issue.setSeverity((String) row[2]);
@@ -333,18 +333,18 @@ public List<ReportIssue> getAllReportIssues()
 	 * @param 
 	 * @return
 	 */
-	public ReportIssue getReportIssueById(Integer id) {
+	public AbheeTask getReportIssueById(Integer id) {
 
-		return em.find(ReportIssue.class, id);
+		return em.find(AbheeTask.class, id);
 	}
 	
 
 	@SuppressWarnings("unused")
-	public void updateIssue(ReportIssue issue) {
+	public void updateIssue(AbheeTask issue) {
 		
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String id=String.valueOf(objuserBean.getId());
-     ReportIssue editissue=getReportIssueById(issue.getId());
+     AbheeTask editissue=getReportIssueById(issue.getId());
      editissue.setAssignto(issue.getAssignto());
      //editissue.setAssignby(issue.getAssignby());
      editissue.setCategory(issue.getCategory());
@@ -457,7 +457,7 @@ public List<ReportIssue> getAllReportIssues()
 		Boolean delete=false;
 		try{
 			
-			ReportIssue task= (ReportIssue)em.find(ReportIssue.class ,id);
+			AbheeTask task= (AbheeTask)em.find(AbheeTask.class ,id);
 			   task.setStatus(status);
 			   em.merge(task);
 
@@ -487,13 +487,13 @@ public List<ReportIssue> getAllReportIssues()
 	
 
 	@SuppressWarnings("unchecked")
-	public Set<ReportIssue> getissuesByselectionAssignTo(String id) {
-		Set<ReportIssue> listissue=new LinkedHashSet<ReportIssue>();
+	public Set<AbheeTask> getissuesByselectionAssignTo(String id) {
+		Set<AbheeTask> listissue=new LinkedHashSet<AbheeTask>();
 		//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		try {
 			List<Object[]> rows = em.createNativeQuery("select r.id, r.taskno,r.subject,c.category as cname,r.category cid,p.priority as pname,r.priority as pid,u.username, r.assignto,r.created_time,s.severity as sname ,r.severity  as sid,r.status,r.description ,r.taskdeadline ,u1.username as asby,r.assignby,r.kstatus from report_issue r, kpcategory c, kppriority p, kpusers u, kpusers u1, kpseverity s, kpstatus ks , kpstatuslogs kpl  where  r.kstatus=ks.id and r.assignto=u.id and r.assignby=u1.id and p.id=r.priority and s.id=r.severity and c.id=r.category and kpl.issueid=r.id and r.assignto =:id  order by kpl.statustime desc").setParameter("id",id).getResultList();
 			for (Object[] row : rows) {
-				ReportIssue issue = new ReportIssue();
+				AbheeTask issue = new AbheeTask();
 				issue.setId(Integer.parseInt(String.valueOf(row[0])));
 				issue.setTaskno((String) row[1]);
 				issue.setSubject((String) row[2]);
@@ -530,12 +530,12 @@ public List<ReportIssue> getAllReportIssues()
 	
 	
 	@SuppressWarnings("unchecked")
-	public Set<ReportIssue> getissuesByselectionAssignBy(String id) {
-		Set<ReportIssue> listissue=new LinkedHashSet<ReportIssue>();
+	public Set<AbheeTask> getissuesByselectionAssignBy(String id) {
+		Set<AbheeTask> listissue=new LinkedHashSet<AbheeTask>();
 		try {
 			List<Object[]> rows = em.createNativeQuery(" select r.id, r.taskno,r.subject,c.category as cname,r.category cid,p.priority as pname,r.priority as pid,u.username, r.assignto,r.created_time,s.severity as sname ,r.severity  as sid ,r.status,r.description ,r.taskdeadline,r.assignby,u1.username as asby,r.kstatus from report_issue r, kpcategory c, kppriority p, kpusers u, kpusers u1, kpseverity s, kpstatus ks ,kpstatuslogs kpl   where  r.kstatus=ks.id and r.assignto=u.id and  r.assignby=u1.id and p.id=r.priority and s.id=r.severity and c.id=r.category  and kpl.issueid=r.id and  r.assignby=:id  order by kpl.statustime desc").setParameter("id",id).getResultList();
 			for (Object[] row : rows) {
-				ReportIssue issue = new ReportIssue();
+				AbheeTask issue = new AbheeTask();
 				issue.setId(Integer.parseInt(String.valueOf(row[0])));
 				issue.setTaskno((String) row[1]);
 				issue.setSubject((String) row[2]);
@@ -581,14 +581,14 @@ public List<ReportIssue> getAllReportIssues()
 	
 	
 	@SuppressWarnings("unchecked")
-	public Set<ReportIssue> getDepartmentWise(String deptid) {
-		Set<ReportIssue> listissue=new LinkedHashSet<ReportIssue>();
+	public Set<AbheeTask> getDepartmentWise(String deptid) {
+		Set<AbheeTask> listissue=new LinkedHashSet<AbheeTask>();
 		
 		
 		try {
 			List<Object[]> rows = em.createNativeQuery("select  r.id , u.username, s.severity as sev, p.priority as pp,r.uploadfile,r.subject ,r.created_time,c.category as cc,ks.name,r.status ,r.taskno ,r.severity as sid, r.priority as pid,r.assignto , r.category as rcid,r.description ,r.taskdeadline,r.assignby,u1.username as asby ,r.kstatus from report_issue r, kpcategory c, kppriority p, kpusers u, kpusers u1, kpseverity s, kpstatus ks, kpstatuslogs kpl    where  r.kstatus=ks.id and r.assignto=u.id and r.assignby=u1.id and p.id=r.priority and s.id=r.severity and c.id=r.category   and  kpl.issueid=r.id and u.department =:custName order by kpl.statustime desc").setParameter("custName", deptid).getResultList();
 			for (Object[] row : rows) {
-				ReportIssue issue = new ReportIssue();
+				AbheeTask issue = new AbheeTask();
 				issue.setId(Integer.parseInt(String.valueOf(row[0])));
 				issue.setAssignto((String) row[1]);
 				issue.setSeverity((String) row[2]);
@@ -631,7 +631,7 @@ public List<ReportIssue> getAllReportIssues()
 		Boolean delete=false;
 		try{
 			
-			ReportIssue task= (ReportIssue)em.find(ReportIssue.class ,id);
+			AbheeTask task= (AbheeTask)em.find(AbheeTask.class ,id);
 			   task.setAdditionalinfo(status);
 			   task.setKstatus("3");
 			   em.merge(task);
@@ -662,13 +662,13 @@ public List<ReportIssue> getAllReportIssues()
 	}
 
 	@SuppressWarnings("unchecked")
-	public Set<ReportIssue> getOpenTasks(String id) {
-		Set<ReportIssue> listissue=new LinkedHashSet<ReportIssue>();
+	public Set<AbheeTask> getOpenTasks(String id) {
+		Set<AbheeTask> listissue=new LinkedHashSet<AbheeTask>();
 		//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		try {
 			List<Object[]> rows = em.createNativeQuery("select r.id, r.taskno,r.subject,c.category as cname,r.category cid,p.priority as pname,r.priority as pid,u.username, r.assignto,r.created_time,s.severity as sname ,r.severity  as sid,r.status,r.description ,r.taskdeadline ,r.additionalinfo,u1.username as asby,r.assignby from report_issue r, kpcategory c, kppriority p, kpusers u, kpseverity s, kpstatus ks , kpstatuslogs kpl ,kpusers u1 where  r.kstatus=ks.id and r.assignto=u.id and r.assignby =u1.id  and p.id=r.priority and s.id=r.severity and c.id=r.category and kpl.issueid=r.id and r.assignto =:id  and r.additionalinfo ='0' order by kpl.statustime desc").setParameter("id",id).getResultList();
 			for (Object[] row : rows) {
-				ReportIssue issue = new ReportIssue();
+				AbheeTask issue = new AbheeTask();
 				issue.setId(Integer.parseInt(String.valueOf(row[0])));
 				issue.setTaskno((String) row[1]);
 				issue.setSubject((String) row[2]);
