@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%-- <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
@@ -37,12 +37,12 @@
 										<input type="text" name="locationData" id="locationData" class="form-control"/> 
 									</div>
 								</div><div class="clearfix"></div>
-								<%-- <div class="form-group">
+								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:input path="modelnumber" class="form-control validate numericOnly" maxlength="10"  placeholder="Enter Mobile Number"/>
 									</div>
-								</div> --%>
+								</div>
 								<div class="clearfix"></div>
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Address</label>
@@ -143,4 +143,4 @@ function updateControls(addressComponents) {
 }
 //# sourceURL=pen.js
 </script>
- 
+  --%>

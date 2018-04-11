@@ -2,6 +2,8 @@ package com.charvikent.abheeSmartHomeSystems.controller;
 
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,12 +26,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
+import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.PriorityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
+import com.charvikent.abheeSmartHomeSystems.dao.ServiceDao;
 import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
 //import com.charvikent.abheeSmartHomeSystems.model.KpStatusLogs;
-import com.charvikent.abheeSmartHomeSystems.model.ReportIssue;
+import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 //import com.fasterxml.jackson.core.JsonProcessingException;
@@ -50,11 +54,13 @@ public class TaskController {
 	
 	@Autowired
 	private CategoryDao categoryDao;
-	
+	@Autowired
+	private ServiceDao  serviceDao ;
 	
 	@Autowired
 	FilesStuff fileTemplate;
-	
+	@Autowired
+	AbheeTaskDao abheeTaskDao;
 	
 	
 	/*@Autowired
@@ -63,15 +69,15 @@ public class TaskController {
 	
 	
 	@RequestMapping("/task")
-	public String  department( @ModelAttribute("taskf")  ReportIssue taskf, Model model , HttpServletRequest request,HttpSession session) {
-		Set<ReportIssue> listOrderBeans = null;
+	public String  department( @ModelAttribute("taskf")  AbheeTask taskf, Model model , HttpServletRequest request,HttpSession session) {
+		List<Map<String, Object>> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
 		
 		model.addAttribute("severity", severityDao.getSeverityMap());
 		model.addAttribute("priority", priorityDao.getPriorityMap());
 		model.addAttribute("userNames", userService.getUserName());
-		model.addAttribute("category", categoryDao.getCategorymap());
+		model.addAttribute("category", serviceDao.getServicemap());
 		
 		
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -80,7 +86,7 @@ public class TaskController {
 		model.addAttribute("objuserBean", objuserBean);
 		
 		try {
-			listOrderBeans = reportIssueDao.getissuesByselectionAssignTo(id);
+			listOrderBeans = abheeTaskDao.getTasksList();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -104,7 +110,7 @@ public class TaskController {
 	}
 	
 	@RequestMapping(value = "/savetask" ,method = RequestMethod.POST)
-	public String saveAdmin(@Valid @ModelAttribute("taskf")  ReportIssue task, BindingResult bindingresults, @RequestParam("file1") MultipartFile[] uploadedFiles,
+	public String saveAdmin(@Valid @ModelAttribute("taskf")  AbheeTask task, BindingResult bindingresults, @RequestParam("file1") MultipartFile[] uploadedFiles,
 			RedirectAttributes redir) throws IOException {
 		
 		if (bindingresults.hasErrors()) {
@@ -115,7 +121,7 @@ public class TaskController {
 		int id = 0;
 		try
 		{
-			ReportIssue orgBean=null;
+			AbheeTask orgBean=null;
 			if(task.getId()!=null)
 			{
 			  orgBean= reportIssueDao.getReportIssueById(task.getId());
@@ -204,9 +210,9 @@ public class TaskController {
 	
 	
 	@RequestMapping(value = "/deleteTask")
-	public @ResponseBody String deleteDept(ReportIssue  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+	public @ResponseBody String deleteDept(AbheeTask  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		System.out.println("deleteEducation page...");
-		Set<ReportIssue> listOrderBeans  = null;
+		Set<AbheeTask> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
 		String sJson=null;
