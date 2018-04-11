@@ -121,7 +121,7 @@ public class AbheeBranchDao {
 		Map<Integer, String> abheeBranchListMap = new LinkedHashMap<Integer, String>();
 		
 		List<AbheeBranch> abheeBranchList= getAbheeBranchNames();
-		if(authorities.contains(new SimpleGrantedAuthority("ROLE_MASTERADMIN")))
+		if(authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")))
 		{
 		for(AbheeBranch bean: abheeBranchList){
 			abheeBranchListMap.put(bean.getId(), bean.getName());

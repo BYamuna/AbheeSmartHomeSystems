@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	  .antMatchers("/employee").access("hasRole('ROLE_BRANCHHEAD')")
 	  .antMatchers("/company").access("hasRole('ROLE_ADMIN')")
 	  .antMatchers("/product").access("hasRole('ROLE_ADMIN')")
-	  .antMatchers("/employee").access("hasRole('ROLE_ADMIN')")
+	  .antMatchers("/employee").access("hasRole('ROLE_BRANCHHEAD')")
 	  .antMatchers("/abBranch").access("hasRole('ROLE_MASTERADMIN')")
 	  .antMatchers("/dashBoard").access("hasRole('ROLE_USER') or  hasRole('ROLE_BRANCHHEAD') ")
 	  .antMatchers("/task").access("hasRole('ROLE_USER') or hasRole('ROLE_BRANCHHEAD')")

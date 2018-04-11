@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -93,12 +92,14 @@ public class EmployeeController {
 			RedirectAttributes redir) throws IOException {
 		
 		
-		if(user.getBranchId()==null)
+		if(user.getBranchId()==null || user.getReportto()==null)
 		{
 			User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			user.setBranchId(objuserBean.getBranchId());
+			user.setReportto(String.valueOf(objuserBean.getId()));
 			
 		}
+		
 
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
@@ -110,7 +110,7 @@ public class HomeController {
 	}
 	
 	@PostMapping("/customerlogin")
-	public String validateCustomerLogin(Model model,HttpServletRequest request,HttpSession session) {
+	public String validateCustomerLogin(Model model,HttpServletRequest request,HttpSession session,RedirectAttributes redir) {
 		
 		String loginid=request.getParameter("username");
 		String password=request.getParameter("password");
@@ -121,6 +121,8 @@ public class HomeController {
 		if(null ==customer)
 		{
 			System.out.println("Customer does not exists");
+			redir.addFlashAttribute("msg", "Already Record Exist");
+			redir.addFlashAttribute("cssMsg", "danger");
 			return "redirect:customerlogin";
 		}
 		else

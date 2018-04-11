@@ -8,20 +8,7 @@
 <html lang="en">
 
 <header>
-<link rel='stylesheet' type='text/css' href='assets/plugins/charts-morrisjs/morris.css' /> 
-<link rel='stylesheet' type='text/css' href='assets/plugins/codeprettifier/prettify.css' /> 
-<link rel='stylesheet' type='text/css' href='assets/plugins/form-toggle/toggles.css' /> 
-<link rel='stylesheet' type='text/css' href='assets/plugins/datatables/dataTables.css' />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <meta charset="utf-8">
-    <title>Abhee Smart Homes</title>
-    <link rel="shortcut icon" href="/assets/img/logoicon.jpg"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   
-    <link rel="stylesheet" href="assets/css/styles.css">
 <!--     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'> -->
     
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries. Placeholdr.js enables the placeholder attribute -->
@@ -60,71 +47,70 @@
 }
 </style>
 
-<!-- <script type='text/javascript' src='assets/js/jquery-1.10.2.min.js'></script> -->
 <script type="text/javascript">
-/* window.setTimeout(function() {
-    $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
-        $(this).remove(); 
-    });
-}, 5000); */
+	var isClick = 'No';
+		window.setTimeout(function() {
+		    $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
+		        $(this).remove(); 
+		    });
+		}, 5000);
+		
+		 $(document).ready(function(){
+			
+			
+		}); 
+		
 </script>
 
 
 
 </header>
-<body class="focusedform">
-<div class="verticalcenter">
-<div><img src="assets/img/Klogo2.png" style="width:350px;" class="img-responsive"></div>
-<!-- 	<h1 align="center">KHAIBAR GAS</h1> -->
-	<div class="panel panel-primary">
-		<form  action=customerlogin class="form-horizontal" method="POST"  style="margin-bottom: 0px !important;">
-		<div class="panel-body">
-			<h4 class="text-center" style="margin-bottom: 25px;">Login to get started</h4>
-			<c:if test="${param.error ne null}">
-				<div class="alert-danger">Invalid username and password.</div>
-			
-				<div class="col-sm-12" style="margin-bottom: -1.3em;">
-					<div class="form-group">
-						<div class="msgcss fadeIn animated alert alert-danger" style="text-align: center;">${msg}</div>
+    <%@include file="abheeheader.jsp" %>
+<body>
+
+
+
+	<div style="margin-bottom:45px;" class="main">
+		<div class="main-row">
+			<c:if test="${not empty msg}">
+				<div class="msgcss row">
+					<div align="center" class="form-group">
+						<div style="width:80%" class="alert alert-${cssMsg} fadeIn animated">${msg}</div>
 					</div>
 				</div>
 			</c:if>
-			
-			  <input type="hidden" name="userType" id="userType" value="customerUser"/>
-			<div class="form-group">
-				<div class="col-sm-12">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<input type="text"  name= "username" autofocus="autofocus" class="form-control validate"  placeholder=" Mobile Number"/>
+			<!-- login form -->
+			<div class="login-form login-form-left"> 
+				<div class="row">
+					<div class="head">
+						<h2>Login to your site</h2>
+					</div>					
+					<div class="clearfix"></div>
+					<div class="login-top"> 	
+						<form action=customerlogin method="post"> 
+						  <input type="hidden" name="userType" id="userType" value="customerUser"/>
+							<input type="text" class="name" name="username"  id="username" autofocus="autofocus" Placeholder="Username" required=""/>
+							<input type="password" class="password" name="password" Placeholder="Password" required=""/>
+							<input type="reset" value="Reset"> 
+							<input type="submit" value="Login">
+						</form> 	
+					</div> 
+					<div class="login-bottom"> 
+						<h6><a href="#" data-toggle="modal" data-target="#passwordModel" class="tag">Forgot password</a></h6>
 					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-12">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-						<input type="password" name="password" class="form-control validate"  placeholder="Password"/>
-					</div>
-				</div>
-			</div>
+					<div class="login-bottom"> 
+						<h6 style="margin-top:40px;">Click here to <a href="#" data-toggle="modal" data-target="#register-info" class="tag">register</a></h6>
+					</div> 
+
+				</div>  
+			</div>  
 		</div>
+		<!-- //login form -->
 		
-		<div class="panel-footer">
-		<div class="pull-left">
-			<p class="anchor"> Forget Password <a href="#" data-toggle="modal" data-target="#passwordModel" class="tag">Click here</a></p>
-		</div>
-			<div class="pull-right">
-				<input type="reset" value="Reset" class="btn btn-default cancel"/>
-				<input type="submit" value="Sign-in"  class="btn btn-primary">
-			</div>
-		</div>
-		<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" />
-		</form>
-	</div>
-	
-	<p class="anchor"> New Customer Registration <a href="#" data-toggle="modal" data-target="#register-info" class="tag">Click here</a></p>
-</div>
+		
+	</div>	
+
+
  <div  class="modal fade" id="register-info" role="dialog">
     <div class="modal-dialog">
     
@@ -261,6 +247,7 @@
 		
 
 </body>
+<%@include file="abheefooter.jsp" %>
 <script type="text/javascript">
 
 

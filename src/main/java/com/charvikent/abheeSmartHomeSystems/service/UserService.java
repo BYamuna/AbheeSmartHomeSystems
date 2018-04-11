@@ -82,7 +82,8 @@ public class UserService {
 		 {
 			 
 			 for(User entry :usersListForMaster)
-			 {  
+			 { 
+				 
 				 if(entry.getBranchId().equals(objuserBean.getBranchId()))
 				 {
 					 if(entry.getId()!=(objuserBean.getId()))
@@ -133,19 +134,31 @@ public class UserService {
 
 	public Map<Integer, String> getRoles()
 	{
+		
+     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		Collection<? extends GrantedAuthority> authorities =authentication.getAuthorities();
+		
 		Map<Integer, String> rolesMap = new LinkedHashMap<Integer, String>();
-		try
-		{
 		List<Designation> rolesList= userDao.getRoles();
+		if(authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")))
+		{
 		for(Designation bean: rolesList){
 			rolesMap.put(bean.getId(), bean.getName());
 		}
 
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
 		return rolesMap;
-
+		}
+		else
+		{
+			
+			for(Designation bean: rolesList){
+				if(bean.getId()!=1 && bean.getId()!=2 && bean.getId()!=3)
+				rolesMap.put(bean.getId(), bean.getName());
+			}
+			return rolesMap;
+			
+		}
 
 	}
 
@@ -234,9 +247,10 @@ public class UserService {
 		
 
 	} 
-		return userMapForMaster;
 		}
-		else
+			return userMapForMaster;
+	}
+		/*else
 		{
 			for(User bean: rolesList){
 				if(bean.getBranchId().equals(objuserBean.getBranchId()))
@@ -248,9 +262,9 @@ public class UserService {
 			
 		
 			return userMapForMaster;
-		}
+		}*/
 
-	}
+	
 
 
 	public void setLoginRecord(Integer id,String str) {

@@ -11,7 +11,11 @@
 background-color:#337ab7 !important;
 color: #fff !imoportant;
 }
+label, .form-control {
+	margin-top:10px;
+}
 </style>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -48,6 +52,70 @@ width="250" height="200" frameborder="0" ></iframe>
         	<p>&copy; 2018. All Rights Reserved.</p>
         </div>
 	</div>
+	
+	<!--service Model start here to   -->
+	 
+<div class="modal fade" id="formModal" data-backdrop="static" data-keyboard="false" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header" style="background: #166eaf;">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" style="color: white;">Service Request Form </h4>
+        	</div>
+        	<div class="modal-body">
+				<div class="panel-body">
+					<form>
+						<div class="col-sm-4">
+							<label>Service Type</label>
+						</div>
+						<div class="col-sm-8">
+							<select class="form-control" type="text" placeholder="Service type">
+								<option>---select one---</option>
+								<option>Repair</option>
+								<option>Installation</option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<label>Comment</label>
+						</div>
+						<div class="col-sm-8">
+							<textarea class="form-control" type="comment" placeholder="Comment"></textarea>
+						</div>
+						<div class="col-sm-4">
+							<label>Attach File(s)</label>
+						</div>
+						<div class="col-sm-8">
+							<input type="file" name="file1" id="file1" class="form-control" multiple="multiple"/>
+						</div>
+						
+						
+					</form>
+				</div>
+            </div>
+                    		
+                    		
+                    		<div class="panel-footer">
+				      	<div class="row">
+				      		<div class="col-sm-12">
+				      			<div style="float:right; margin-right:20px;" class="btn-toolbar text-center">
+					      			<input type="button" id="modelSubmit" value="Submit"  onclick="submitCommet()" class="btn-primary btn"/>
+					      			<input type="reset" value="Reset" class="btn-danger btn cancel1"/>
+				      			</div>
+				      		</div>
+				      	</div>
+			      	</div>
+                    		</div>
+                    		</form>
+                    		
+				</div> 
+					
+				</div> 
+				
+			</div>  
+      	</div> 
+	
+	
 </body>
 <c:choose>
     <c:when test="${empty param.model}">
@@ -118,6 +186,23 @@ $.each(productmodelslist, function(k,v){
 	console.log(productmodelslist);
 $.each(productmodelslist, function(k,v){
 	
+	 var list=v.productmodelvideoslinks.split('*');
+	var productmodelvideoslinks='';
+	var vlinks="";
+	for(var i=0;i<list.length;i++)
+	{
+		 console.log(list[i].slice(-11));
+		
+		vlinks=vlinks 
+		+"<div class='col-sm-4'>"
+		
+		+"<iframe width='270' height='200' src='https://www.youtube.com/embed/"+list[i].slice(-11)+" ' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>"
+		+"</div>";
+	}
+	 console.log(vlinks);
+	
+	
+	
 	var pdivdata ="<div class='dimg' >"
 	               +"<div class='col-sm-6' >"
 	               +"<img width='100%' src='${baseurl }/reportDocuments/"+v.productmodelpics+"' class='img-responsive' alt='196' title='YHT-196'/>"
@@ -125,7 +210,7 @@ $.each(productmodelslist, function(k,v){
     	           +"<a href='#' onclick='checkLogin()' style='width:95%;margin-top:9px !important;' class='btn btn-primary' >Get Quotation</a>"
     	           +"</div>"
 	               +"<div class='col-xs-6'>"
-    	           +"<button style='width:95%; margin-left:10px;' class='btn btn-warning' type='button'>Get Service</button>"
+	               +"<a href='#' onclick='checkService()' style='width:95%;margin-top:9px !important; float:right;' class='btn btn-warning' >Get service</a>"
                    +"</div>"
                    +"</div>"
                    +"</div>"
@@ -196,5 +281,14 @@ $.each(productmodelslist, function(k,v){
 		$("#breadcrumbmodelname").show();
 	}
 	
+	function checkService(){
+		alert("Enter to service");
+		$("#formModal").modal();
+		
+			//window.location.href='${baseurl }/customerlogin';
+		
+	}
+ 
+ 
 </script>
 </html>
