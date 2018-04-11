@@ -141,7 +141,7 @@
 <%@include file="abheefooter.jsp" %>
 
 <script type="text/javascript">
-/* var productdetailslist =${productdetails};
+ /* var productdetailslist =${productdetails};
 
 	var rowdata;
 	
@@ -152,7 +152,9 @@
 		
 		rowdata= "<a href='#' onclick='getCompanys("+v.companyid+") '>"+v.companyname+"</a><br>";
 		$("#catcom").append(rowdata);
-	});
+	}); */
+	
+	
 	var productmodelslist =${productmodels};
 	
 $.each(productmodelslist, function(k,v){
@@ -177,6 +179,6 @@ $.each(productmodelslist, function(k,v){
 		var url      = '${baseurl }/abheecategory?id='+catid; 
 		url.replace("#", "");
 		window.location.href=url+"&company="+company+"&model="+id;
-	} */
+	} 
 </script>
 </html>

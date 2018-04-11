@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,14 +18,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
+import com.charvikent.abheeSmartHomeSystems.dao.CompanyDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ProductDao;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
+import com.charvikent.abheeSmartHomeSystems.model.Company;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.OTPDetails;
 import com.charvikent.abheeSmartHomeSystems.model.Product;
@@ -54,6 +58,9 @@ public class AbheeCustomerRestController {
 	
 	@Autowired
 	ProductDao productDao;
+	
+	@Autowired
+	CompanyDao companyDao;
 
 	
 	@RequestMapping("/Customer")
@@ -328,6 +335,52 @@ HashMap<String,String> hm =new HashMap<String,String>();
 			}
 			else
 				//code="NOT_FOUND";
+				
+				json.put("productDetails", "NOT_FOUND");
+		
+		
+
+		
+		return String.valueOf(json);
+	}
+	
+	
+	@RequestMapping(value="/getcompanies", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getCompaniesBycategoryId(@RequestParam(value="id", required=false) String categoryid) throws JsonProcessingException, JSONException {
+		
+		List<Map<String, Object>>  listOrderBeans =  companyDao.getCompaniesByCategoryId(categoryid);
+		
+		JSONObject json =new JSONObject();
+		
+			if(null != listOrderBeans)
+			{
+				json.put("companyDetails", listOrderBeans);
+				
+			}
+			else
+				
+				json.put("companyDetails", "NOT_FOUND");
+		
+		
+
+		
+		return String.valueOf(json);
+	}
+	
+	@RequestMapping(value="/getproductsby", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getProductsByCompantId(@RequestParam(value="id", required=false) String companyid) throws JsonProcessingException, JSONException {
+		
+		System.out.println(companyid);
+		List<Map<String, Object>>  listOrderBeans =  productDao.getProductsByCompanyId(companyid);
+		
+		JSONObject json =new JSONObject();
+		
+			if(null != listOrderBeans)
+			{
+				json.put("productDetails", listOrderBeans);
+				
+			}
+			else
 				
 				json.put("productDetails", "NOT_FOUND");
 		

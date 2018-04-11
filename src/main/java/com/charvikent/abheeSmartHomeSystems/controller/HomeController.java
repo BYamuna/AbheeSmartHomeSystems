@@ -125,7 +125,15 @@ public class HomeController {
 			redir.addFlashAttribute("cssMsg", "danger");
 			return "redirect:customerlogin";
 		}
+		/*else if(loginurl.contains("customerlogin"))
+				{
+			session.setAttribute("customer", customer);
+			session.setAttribute("loggedstatus", "login");
+			return "redirect:/";
+			
+				}*/
 		else
+			
 		{
 		session.setAttribute("customer", customer);
 		session.setAttribute("loggedstatus", "login");
@@ -155,7 +163,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/")
-	public String ShowAbhee(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
+	public String ShowAbhee(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException 
+	{
 		List<Category> listOrderBeans = categoryDao.getCategoryNames();
 		//model.addAttribute("categories", listOrderBeans);
 		ObjectMapper objectMapper = new ObjectMapper();

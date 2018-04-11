@@ -198,4 +198,12 @@ List<Object[]> rows = entityManager.createQuery(hql).getResultList();
 		return retlist ;
 		
 	}
+	
+	public List<Map<String, Object>> getProductsByCompanyId(String companyid) {
+String sql ="select p.id,p.categoryid,p.companyid,p.created_time,p.description,p.name,p.productmodelpics,productmodelvideoslinks,p.updated_time,p.product_model_specifications ,p.product_price,p.max_allowed_discount "
+             +" from abhee_product p where p.companyid=? ";	
+		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{companyid});
+		
+		return retlist;
+	}
 }

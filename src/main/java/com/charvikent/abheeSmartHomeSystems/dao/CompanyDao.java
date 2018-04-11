@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,9 @@ public class CompanyDao
 {
 	@PersistenceContext
     private EntityManager entityManager;
+	
+	@Autowired
+    private JdbcTemplate jdbcTemplate;
 
 
 	public void saveCompany(Company company) 
@@ -92,5 +97,13 @@ public class CompanyDao
 		return rolesMap;
 				
 		
+	}
+	public List<Map<String, Object>> getCompaniesByCategoryId(String categoryid) {
+		
+		String sql ="select com.id,com.name from abhee_product p,abhee_company com where  com.id=p.companyid  and p.categoryid=? group by p.companyid";
+		
+		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{categoryid});
+		
+		return retlist;
 	}
 }

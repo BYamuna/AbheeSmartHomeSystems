@@ -29,7 +29,7 @@
     <link href="${baseurl }/abhee/css/bootstrap.min.css" rel="stylesheet">
     <link href="${baseurl }/abhee/css/main.css" rel="stylesheet">
     <link href="${baseurl }/assets/css/animate.min.css" rel="stylesheet">
-<%--     <link href="${baseurl }/abhee/css/bootstrap-dropdownhover.min.css" rel="stylesheet"> --%>
+     <link href="${baseurl }/abhee/css/bootstrap-dropdownhover.min.css" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
@@ -98,7 +98,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="${baseurl }/abhee/js/bootstrap.min.js"></script>
-<%--     <script src="${baseurl }/abhee/js/bootstrap-dropdownhover.min.js"></script> --%>
+         <script src="${baseurl }/abhee/js/bootstrap-dropdownhover.min.js"></script> 
   	<script type="text/javascript">
   	var categorieslist =${allOrders1};
   	var rowdata;
