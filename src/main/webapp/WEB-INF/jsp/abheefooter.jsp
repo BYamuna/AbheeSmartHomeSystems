@@ -14,6 +14,11 @@ color: #fff !imoportant;
 label, .form-control {
 	margin-top:10px;
 }
+.tabactive
+{
+background-color: green;
+color: white;
+}
 </style>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -143,7 +148,7 @@ width="250" height="200" frameborder="0" ></iframe>
 <script type="text/javascript">
 
 
- /* var categorieslist =${allOrders1};
+  /* var categorieslist =${allOrders2};
 	var rowdata;
 	
 	 $.each(categorieslist, function(k,v){
@@ -151,20 +156,11 @@ width="250" height="200" frameborder="0" ></iframe>
 		
 		rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
 		$("#cmlist").append(rowdata);
-	});  */
+	});   */
 	
 	var productdetailslist =${productdetails};
 
 	var rowdata;
-	
-	
-	$.each(productdetailslist, function(k,v){
-		
-		//rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
-		
-		rowdata= "<a href='#' onclick='getCompanys("+v.companyid+") '>"+v.companyname+"</a><br>";
-		$("#catcom").append(rowdata);
-	});
 	
 	var productmodelslist =${productmodels};
 	
@@ -184,7 +180,6 @@ $.each(productmodelslist, function(k,v){
 	 
 	});
 	
-	console.log(productmodelslist);
 $.each(productmodelslist, function(k,v){
 	
 	 var list=v.productmodelvideoslinks.split('*');
@@ -192,17 +187,13 @@ $.each(productmodelslist, function(k,v){
 	var vlinks="";
 	for(var i=0;i<list.length;i++)
 	{
-		 console.log(list[i].slice(-11));
 		
-		vlinks=vlinks+ 
+		vlinks=vlinks 
 		+"<div class='col-sm-4'>"
 		
-		+"<iframe width='270' height='200' src='https://www.youtube.com/embed/"+list[i].slice(-11)+" ' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>"
+		+"<iframe width='270' height='200' src='https://www.youtube.com/embed/"+list[i]+" ' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>"
 		+"</div>";
 	}
-	 console.log(vlinks);
-	
-	
 	
 	var pdivdata ="<div class='dimg' >"
 	               +"<div class='col-sm-6' >"
@@ -219,20 +210,11 @@ $.each(productmodelslist, function(k,v){
                    +"<div class='col-sm-6'>"
 	                +"<p>"+v.description +"</p>"
 	                +"<p>"+v.product_model_specifications +"</p>"
-	                
-    	           
                    +"</div>"
                    +"</div><div class='clearfix'></div>"
                     +"<div class='vid'>"
-                    +"<div class='col-sm-4'>"
-	                 +"<iframe width='270' height='200' src='https://www.youtube.com/embed/z2lM0G2opEM' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>"
-                    +"</div>"
-                     +"<div class='col-sm-4'>"
-	                 +"<iframe width='270' height='200' src='https://www.youtube.com/embed/SFGPK2w4SXw' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>"
-                     +"</div>"
-                    +"<div class='col-sm-4'>"
-                    +"<iframe width='270' height='200' src='https://www.youtube.com/embed/N8of5Ees_dU' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>"
-                     +"</div><div class='clearfix'></div>"
+                    + vlinks 
+                     +"<div class='clearfix'></div>"
                       +"</div>";
 	
 	$("#productDetails").append(pdivdata);
@@ -240,8 +222,21 @@ $.each(productmodelslist, function(k,v){
 	$("#breadcrumbcompanyname").text(v.companyname);
 	$("#breadcrumbmodelname").text(v.name);
 	$("#panelheading").text(v.categoryname);
+	if(bradcrmmodel) $('#cathead').text(v.companyname+' '+v.name); else $('#cathead').text(v.companyname+' '+v.categoryname);
 });
+
+
+
+$.each(productdetailslist, function(k,v){
 	
+	//rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
+	//if(v.companyid==)
+	if($("#breadcrumbcompanyname").text()==v.companyname) var cls='tabactive'; else var cls='';
+	rowdata= "<a href='#' class='"+cls+"' onclick='getCompanys("+v.companyid+") '>"+v.companyname+"</a><br>";
+	$("#catcom").append(rowdata);
+	
+});
+
 	
 	function getCompanys(id){
 		var url      = '${baseurl }/abheecategory?id='+catid; 

@@ -118,6 +118,15 @@ body {
 	color:#CCCCCC;
 	text-decoration:none;
 }
+.panel-body {
+	min-height:150px;
+}
+.panel-body .active {
+	color:#ff0000;
+}
+.panel-heading {
+	min-height:48px;
+}
 .listdata .col-sm-4 .img a:hover {
 	text-decoration:none;
 }

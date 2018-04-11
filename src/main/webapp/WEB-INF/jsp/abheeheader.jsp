@@ -100,7 +100,7 @@
     <script src="${baseurl }/abhee/js/bootstrap.min.js"></script>
          <script src="${baseurl }/abhee/js/bootstrap-dropdownhover.min.js"></script> 
   	<script type="text/javascript">
-  	var categorieslist =${allOrders1};
+  	 var categorieslist =${allOrders1};
   	var rowdata;
   	
   	$.each(categorieslist, function(k,v){
@@ -110,5 +110,5 @@
   		rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
   		$("#cmlist").append(rowdata);
   	}); 
-  	 
+  	  
   	</script>
