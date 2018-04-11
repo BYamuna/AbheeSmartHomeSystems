@@ -13,33 +13,7 @@
 		<li><a href="dashBoard">Home</a></li>
 		<li>Task Master</li>
 	</ol>
-	<%-- <security:authorize access="hasRole('ROLE_MASTERADMIN')">
-	                       <div class="clearfix"></div><br>
-	                       <form>
-	                        <div class="row">
-                    		<div class="col-md-4">
-                    			<div class="form-horizontal">
-									<label for="focusedinput" class="col-md-6 control-label" style="padding-top:2px;">Tasks Types <span class="impColor">*</span></label>
-									<select id="ttype"  class="col-xs-10 col-sm-5 " >
-											<c:forEach var="list" items="${tasksSelection}">
-											<option value=${list.key}>${list.value} </option>
-											</c:forEach>
-										</select>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-4">
-                    			<div class="form-horizontal">
-									<label for="focusedinput" class="col-md-6 control-label" style="padding-top:2px;">Department  <span class="impColor">*</span></label>
-									<select id="deptid"  class="col-xs-10 col-sm-5 " >
-											<c:forEach var="list" items="${departmentNames}">
-											<option value=${list.key}>${list.value} </option>
-											</c:forEach>
-										</select>
-                    			</div>
-                    		</div>
-                    		</div>
-                    		</form>
-                    		</security:authorize> --%>
+	
                     		<br>
 	<div class="clearfix"></div>
 	<div class="container">

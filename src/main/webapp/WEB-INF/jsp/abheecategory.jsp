@@ -31,20 +31,12 @@
         <!-- Content Starts here -->
         <div class="cont">
         	<div class="col-md-3">
-  				<div class="panel panel-default">
-    				<div class="panel-body" id="panelheading"></div>
+            	<div class="panel panel-primary">
+    				<div style="font-size:18px;" class="panel-heading" id="panelheading"></div>
+    				<div class="panel-body">
+                    	<a id="catcom" class="catcom"></a><br>
+                    </div>
   				</div>
-                <div class="lcat">
-        			<div class="smen">
-        				<span id="catcom"></span>
-            			<!-- <a href="home.html">Yamaha</a><br>
-            			<a href="#">Denon</a><br>
-            			<a href="#">Polk Audio</a><br>
-            			<a href="#">KEF</a><br>
-            			<a href="#">ELAC</a><br>
-            			<a href="#">JBL</a><br> -->
-            		</div>
-                </div>
         	</div>
         	<div class="col-md-9">
             	<div class="listdata">

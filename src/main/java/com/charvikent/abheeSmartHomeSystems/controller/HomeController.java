@@ -110,7 +110,7 @@ public class HomeController {
 	}
 	
 	@PostMapping("/customerlogin")
-	public String validateCustomerLogin(Model model,HttpServletRequest request,HttpSession session,RedirectAttributes redir) {
+	public String validateCustomerLogin(Model model,HttpServletRequest request,HttpSession session,RedirectAttributes redir) throws JsonProcessingException {
 		
 		String loginid=request.getParameter("username");
 		String password=request.getParameter("password");
@@ -121,17 +121,17 @@ public class HomeController {
 		if(null ==customer)
 		{
 			System.out.println("Customer does not exists");
-			redir.addFlashAttribute("msg", "Already Record Exist");
+			redir.addFlashAttribute("msg", "Invalid Details");
 			redir.addFlashAttribute("cssMsg", "danger");
 			return "redirect:customerlogin";
 		}
-		/*else if(loginurl.contains("customerlogin"))
+		else if(null==loginurl)
 				{
 			session.setAttribute("customer", customer);
 			session.setAttribute("loggedstatus", "login");
 			return "redirect:/";
 			
-				}*/
+				}
 		else
 			
 		{
