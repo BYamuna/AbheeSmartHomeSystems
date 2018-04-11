@@ -279,7 +279,7 @@ var data = new FormData(form);
 			var productmodel=$('#productmodel').val();
 			var email=$('#email').val();
 			var mobileno=$('#mobileno').val();
-	    	//var locationData=$('#locationData').val();
+	    	var locationData=$('#locationData').val();
 	    	var address=$('#address').val();
 	    	var reqdesc=$('#reqdesc').val();
 	    	
@@ -287,7 +287,7 @@ var data = new FormData(form);
 	    	//var params = form.serializeArray();
 	    	
 	    	
-	    	var salesRequest = {	"modelnumber":productmodel,	"email":email,"mobileno":mobileno,"address":address,"reqdesc":reqdesc	};
+	    	var salesRequest = {	"modelnumber":productmodel,	"email":email,"mobileno":mobileno,"address":address,"reqdesc":reqdesc, "locationData":	locationData};
 	    	var salesreq= JSON.stringify(salesRequest);
 		   
 		   var formData = new FormData();
