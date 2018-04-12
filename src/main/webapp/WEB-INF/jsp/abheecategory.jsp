@@ -172,5 +172,146 @@ $.each(productmodelslist, function(k,v){
 		url.replace("#", "");
 		window.location.href=url+"&company="+company+"&model="+id;
 	} 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	var productdetailslist =${productdetails};
+
+	var rowdata;
+	
+	var productmodelslist =${productmodels};
+	
+$.each(productmodelslist, function(k,v){
+	
+		var divData= "<div class='img'>"
+		+"<a href='#'onclick='getModels("+v.id+")' >"
+		+"<img src='${baseurl }/reportDocuments/"+v.productmodelpics+"' class='img-responsive' alt='1810' title='YHT-1810'>"
+		+"<h4>"+v.companyname+"</h4>"
+		+"<p>"+v.name+"</p>"
+        +"</a>"
+        +"</div>";
+		
+		$("#productModels").append(divData);
+		 $("#breadcrumbname").text(v.categoryname);
+		 $("#panelheading").text(v.categoryname);
+	 
+	});
+	
+$.each(productmodelslist, function(k,v){
+	
+	 var list=v.productmodelvideoslinks.split('*');
+	var productmodelvideoslinks='';
+	var vlinks="";
+	for(var i=0;i<list.length;i++)
+	{
+		
+		vlinks=vlinks 
+		+"<div class='col-sm-4'>"
+		
+		+"<iframe width='270' height='200' src='https://www.youtube.com/embed/"+list[i]+" ' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>"
+		+"</div>";
+	}
+	
+	var pdivdata ="<div class='dimg' >"
+	               +"<div class='col-sm-6' >"
+	               +"<img width='100%' src='${baseurl }/reportDocuments/"+v.productmodelpics+"' class='img-responsive' alt='196' title='YHT-196'/>"
+	               +"<div class='col-xs-6'>"
+    	           +"<a href='#' onclick='checkLogin()' style='width:95%;margin-top:9px !important;' class='btn btn-primary' >Get Quotation</a>"
+    	           +"</div>"
+	               +"<div class='col-xs-6'>"
+	               +"<a href='#' onclick='checkService()' style='width:95%;margin-top:9px !important; float:right;' class='btn btn-warning' >Get service</a>"
+                   +"</div>"
+                   +"</div>"
+                   +"</div>"
+                   +"<div class='dtxt'>"
+                   +"<div class='col-sm-6'>"
+	                +"<p>"+v.description +"</p>"
+	                +"<p>"+v.product_model_specifications +"</p>"
+                   +"</div>"
+                   +"</div><div class='clearfix'></div>"
+                    +"<div class='vid'>"
+                    + vlinks 
+                     +"<div class='clearfix'></div>"
+                      +"</div>";
+	
+	$("#productDetails").append(pdivdata);
+	 $("#breadcrumbname").text(v.categoryname);
+	$("#breadcrumbcompanyname").text(v.companyname);
+	$("#breadcrumbmodelname").text(v.name);
+	$("#panelheading").text(v.categoryname);
+	if(bradcrmmodel) $('#cathead').text(v.companyname+' '+v.name); else $('#cathead').text(v.companyname+' '+v.categoryname);
+});
+
+
+
+$.each(productdetailslist, function(k,v){
+	
+	//rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
+	//if(v.companyid==)
+	if($("#breadcrumbcompanyname").text()==v.companyname) var cls='tabactive'; else var cls='';
+	rowdata= "<a href='#' class='"+cls+"' onclick='getCompanys("+v.companyid+") '>"+v.companyname+"</a><br>";
+	$("#catcom").append(rowdata);
+	
+});
+
+	
+	function getCompanys(id){
+		var url      = '${baseurl }/abheecategory?id='+catid; 
+		url.replace("#", "");
+		window.location.href=url+"&company="+id;
+		
+	}
+	function getModels(id){
+		var url      = '${baseurl }/abheecategory?id='+catid; 
+		url.replace("#", "");
+		window.location.href=url+"&company="+company+"&model="+id;
+	}
+	
+	function checkLogin(){
+		if(login){
+			
+		alert("true");
+		}else{
+			window.location.href='${baseurl }/customerlogin';
+		}
+	}
+	
+	if(bradcrmcategory){
+		$("#breadcrumbname").show();
+		$("#breadcrumbcompanyname").hide();
+		$("#breadcrumbmodelname").hide();
+	}
+	
+	if(bradcrmcompany)
+		{
+		$("#breadcrumbname").show();
+		$("#breadcrumbcompanyname").show();
+		}
+	if(bradcrmmodel)
+	{
+		$("#breadcrumbname").show();
+		$("#breadcrumbcompanyname").show();
+		$("#breadcrumbmodelname").show();
+	}
+	
+	function checkService(){
+		alert("Enter to service");
+		$("#formModal").modal();
+		
+			//window.location.href='${baseurl }/customerlogin';
+		
+	}
+ 
 </script>
 </html>

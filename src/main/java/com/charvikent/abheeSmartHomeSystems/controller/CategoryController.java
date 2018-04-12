@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ProductDao;
+import com.charvikent.abheeSmartHomeSystems.dao.ServiceTypeDao;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Product;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -41,6 +42,8 @@ public class CategoryController {
 	FilesStuff fileTemplate;
 	@Autowired	
 	ProductDao productDao;
+	@Autowired	
+	ServiceTypeDao serviceTypeDao;
 	
 	@RequestMapping("/cate")
 	public String  department( @ModelAttribute("catef")  Category catef,Model model ,HttpServletRequest request) {
@@ -274,6 +277,8 @@ public class CategoryController {
 		
 		String modelJson = objectMapper.writeValueAsString(productDao.getProductModels(categoryid,companyid,modelid));	
 		request.setAttribute("productmodels", modelJson);
+		
+		request.setAttribute("servicetypes", serviceTypeDao.getServiceRequestTypes());
 		
 		
 		return "abheecategory";

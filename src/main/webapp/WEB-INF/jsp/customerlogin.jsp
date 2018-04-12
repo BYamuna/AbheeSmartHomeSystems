@@ -10,6 +10,8 @@
 <header>
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!--     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'> -->
     
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries. Placeholdr.js enables the placeholder attribute -->
@@ -244,8 +246,8 @@
   
 
 <script type='text/javascript' src='js/customValidation.js'></script> 
-<script type='text/javascript' src="js/jquery.blockUI.min.js" ></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		
 
 </body>
@@ -258,7 +260,7 @@
 var validation = true;
 
 
-var subValidation =true;
+var subValidation =false;
 
 $('#cmobile').blur(function() {
 	var cmobile=$(this).val();
@@ -360,6 +362,7 @@ var idArrayCmt1 = null;
 		
 	
 	$('#submitModel').click(function(event) {
+		
 	$.each(idArrayCmt1, function(i, val) {
 		var value = $("#" + idArrayCmt1[i]).val();
 		var placeholder = $("#" + idArrayCmt1[i]).attr('placeholder');
@@ -376,11 +379,28 @@ var idArrayCmt1 = null;
 			}
 //			$("#" + idArray[i] + "Error").text("Please " + placeholder);
 			validation = false;
+			 event.preventDefault(); 
 		}else{
 			validation = true;
 		}
 	});
 	validation =subValidation;
+	// retype password validation
+	
+	 var cpassword1 =$('#cpassword').val();
+	 
+	var crtpassword1=$('#crtpassword').val();
+	
+	if(cpassword1 != "" && crtpassword1 != "" && cpassword1==crtpassword1){
+		validation = true;
+	}else{
+		if(cpassword1 != "" && crtpassword1 != ""){
+		alert(" password and reenter password missmatch")
+		}
+		validation = false;
+	} 
+	
+	
 	if(validation) {
 	/* 	$("#submit1").attr("disabled",true);
 		$("#submit1").val("Please wait...");
@@ -445,7 +465,6 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 }
 	function modelsubmit()
 	{
-		
 		 cmobile =$('#cmobile').val();
 		 cemail =$('#cemail').val();
 		 csname =$('#csname').val();
@@ -515,6 +534,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 	
 	
 	$('#cemail').blur(function() {
+		
 
 		var cemail=$(this).val();
 		

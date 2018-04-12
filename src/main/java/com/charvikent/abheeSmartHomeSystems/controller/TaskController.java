@@ -186,6 +186,7 @@ public class TaskController {
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
 					}
+					task.setKstatus("2");
 					reportIssueDao.updateIssue(task);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
@@ -494,8 +495,34 @@ public class TaskController {
 	}*/
 	
 	
-	
-	
+	@RequestMapping(value = "/saveServiceRequest", method = RequestMethod.POST)
+	public @ResponseBody  boolean modelSubmit(Model model,HttpServletRequest request) throws IOException 
+	{
+		System.out.println("enter to task controller Submit");
 		
+		String message=request.getParameter("message");
+		String servicetypeid=request.getParameter("servicetypeid");
+		AbheeTask task =new AbheeTask();
+		task.setAdditionalinfo("0");
+		task.setAssignby("1");
+		task.setAssignto("1");
+		task.setAssignto("1");
+		task.setDescription(message);
+		task.setKstatus("5");
+		task.setPriority("1");
+		task.setSeverity("1");
+		task.setStatus("1");
+		task.setSubject("Task creadted By Customer");
+		task.setServiceType(servicetypeid);
+		
+		
+		
+		reportIssueDao.saveReportIssue(task);
+
+		
+		System.out.println(message+"  "+servicetypeid);
+		return false;
+		
+	}
 
 }

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.model.AbheeServiceType;
-import com.charvikent.abheeSmartHomeSystems.model.Category;
 
 @Repository
 @Transactional
@@ -26,6 +25,7 @@ public class ServiceDao
 		try
 		{
 		List<AbheeServiceType> serviceList= getServiceNames();
+		System.out.println(serviceList);
 		for(AbheeServiceType bean: serviceList){
 			servicesMap.put(bean.getId(), bean.getServicetypename());
 		}

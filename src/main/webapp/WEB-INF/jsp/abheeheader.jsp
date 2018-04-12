@@ -25,7 +25,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <link rel="shortcut icon" href="${baseurl }/abhee/images/icon.png">
-<title>Abhee Snart Homes Systems</title>
+<title>Abhee Smart Homes Systems</title>
     <link href="${baseurl }/abhee/css/bootstrap.min.css" rel="stylesheet">
     <link href="${baseurl }/abhee/css/main.css" rel="stylesheet">
     <link href="${baseurl }/assets/css/animate.min.css" rel="stylesheet">
@@ -34,6 +34,8 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
     <!-- Google Fonts -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
   	<div class="container">
@@ -94,13 +96,16 @@
 </nav>
         </div>
   	</div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="${baseurl }/abhee/js/bootstrap.min.js"></script>
-         <script src="${baseurl }/abhee/js/bootstrap-dropdownhover.min.js"></script> 
+    <script src="${baseurl }/abhee/js/bootstrap-dropdownhover.min.js"></script> 
+    
+<%-- 
+<script type='text/javascript' src="${baseurl }js/jquery.blockUI.min.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ --%>    
   	<script type="text/javascript">
-  	 var categorieslist =${allOrders1};
+  	/*  var categorieslist =${allOrders1};
   	var rowdata;
   	
   	$.each(categorieslist, function(k,v){
@@ -109,6 +114,6 @@
   		
   		rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
   		$("#cmlist").append(rowdata);
-  	}); 
+  	});  */
   	  
   	</script>

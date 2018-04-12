@@ -49,6 +49,8 @@ public class AbheeTask  {
 	@Transient
 	private String taskdeadlineid;
 	
+	private String ServiceType;
+	
 	
 	
 	@Transient
@@ -260,6 +262,14 @@ public class AbheeTask  {
 	}
 	public void setDepartmentid(String departmentid) {
 		this.departmentid = departmentid;
+	}
+	
+	
+	public String getServiceType() {
+		return ServiceType;
+	}
+	public void setServiceType(String serviceType) {
+		ServiceType = serviceType;
 	}
 	@Override
 	public String toString() {

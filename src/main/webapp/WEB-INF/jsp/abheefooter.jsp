@@ -75,25 +75,25 @@ width="250" height="200" frameborder="0" ></iframe>
 							<label>Service Type</label>
 						</div>
 						<div class="col-sm-8">
-							<select class="form-control" type="text" placeholder="Service type">
-								<option>---select one---</option>
-								<option>Repair</option>
-								<option>Installation</option>
-							</select>
+						<select  id="servicetypeid"  class="form-control" >
+											<c:forEach var="list" items="${servicetypes}">
+											<option value=${list.key}>${list.value} </option>
+											</c:forEach>
+										</select>
 						</div>
 						<div class="col-sm-4">
-							<label>Comment</label>
+							<label>Message</label>
 						</div>
 						<div class="col-sm-8">
-							<textarea class="form-control" type="comment" placeholder="Comment"></textarea>
+							<textarea class="form-control" id="message" name="message" placeholder="Message"></textarea>
 						</div>
-						<div class="col-sm-4">
+							<!--<div class="col-sm-4">
 							<label>Attach File(s)</label>
 						</div>
-						<div class="col-sm-8">
+					 <div class="col-sm-8">
 							<input type="file" name="file1" id="file1" class="form-control" multiple="multiple"/>
 						</div>
-						
+						 -->
 						
 					</form>
 				</div>
@@ -104,7 +104,7 @@ width="250" height="200" frameborder="0" ></iframe>
 				      	<div class="row">
 				      		<div class="col-sm-12">
 				      			<div style="float:right; margin-right:20px;" class="btn-toolbar text-center">
-					      			<input type="button" id="modelSubmit" value="Submit"  onclick="submitCommet()" class="btn-primary btn"/>
+					      			<input type="button" id="modelSubmit" value="Submit"  onclick="serviceSubmit()" class="btn-primary btn"/>
 					      			<input type="reset" value="Reset" class="btn-danger btn cancel1"/>
 				      			</div>
 				      		</div>
@@ -134,9 +134,6 @@ width="250" height="200" frameborder="0" ></iframe>
 	         </script>
     </c:otherwise>
 </c:choose>
-
-
-
  <c:choose>
     <c:when test="${not empty loggedstatus}">
      <script> var login=true;</script>
@@ -145,146 +142,82 @@ width="250" height="200" frameborder="0" ></iframe>
         <script> var login=false;</script>
     </c:otherwise>
 </c:choose>
+<script type='text/javascript' src="${baseurl }/js/jquery.blockUI.min.js" ></script>
+<script type='text/javascript' src='${baseurl }js/customValidation.js'></script> 
 <script type="text/javascript">
 
 
-  /* var categorieslist =${allOrders2};
-	var rowdata;
+// var categorieslist =${allOrders1};
+$( document ).ready(function() {
+	getlist();
+});
 	
-	 $.each(categorieslist, function(k,v){
-		 $("#cathead").text(v.category); 
+	function getlist(){
+			var rowdata =null;
+	$.ajax({
+		type : "POST",
+		url : "getCategoryList",
+		data :"message="+message+"&servicetypeid="+servicetypeid,
+		dataType : "text",
 		
-		rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
-		$("#cmlist").append(rowdata);
-	});   */
-	
-	var productdetailslist =${productdetails};
-
-	var rowdata;
-	
-	var productmodelslist =${productmodels};
-	
-$.each(productmodelslist, function(k,v){
-	
-		var divData= "<div class='img'>"
-		+"<a href='#'onclick='getModels("+v.id+")' >"
-		+"<img src='${baseurl }/reportDocuments/"+v.productmodelpics+"' class='img-responsive' alt='1810' title='YHT-1810'>"
-		+"<h4>"+v.companyname+"</h4>"
-		+"<p>"+v.name+"</p>"
-        +"</a>"
-        +"</div>";
-		
-		$("#productModels").append(divData);
-		 $("#breadcrumbname").text(v.categoryname);
-		 $("#panelheading").text(v.categoryname);
-	 
+		success : function(data) {
+			var jsonobj = $.parseJSON(data);
+			var alldata = jsonobj.list;
+			$.each(alldata,function(i, orderObj) {
+			rowdata ="<li><a href='abheecategory?id="+orderObj.id+" ' >"+orderObj.category+"</a> </li>";
+			$("#cmlist").append(rowdata);
+			});
+		}
 	});
 	
-$.each(productmodelslist, function(k,v){
+	}
 	
-	 var list=v.productmodelvideoslinks.split('*');
-	var productmodelvideoslinks='';
-	var vlinks="";
-	for(var i=0;i<list.length;i++)
+	
+	
+	
+	
+	
+	
+	
+	function serviceSubmit()
 	{
 		
-		vlinks=vlinks 
-		+"<div class='col-sm-4'>"
 		
-		+"<iframe width='270' height='200' src='https://www.youtube.com/embed/"+list[i]+" ' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>"
-		+"</div>";
-	}
-	
-	var pdivdata ="<div class='dimg' >"
-	               +"<div class='col-sm-6' >"
-	               +"<img width='100%' src='${baseurl }/reportDocuments/"+v.productmodelpics+"' class='img-responsive' alt='196' title='YHT-196'/>"
-	               +"<div class='col-xs-6'>"
-    	           +"<a href='#' onclick='checkLogin()' style='width:95%;margin-top:9px !important;' class='btn btn-primary' >Get Quotation</a>"
-    	           +"</div>"
-	               +"<div class='col-xs-6'>"
-	               +"<a href='#' onclick='checkService()' style='width:95%;margin-top:9px !important; float:right;' class='btn btn-warning' >Get service</a>"
-                   +"</div>"
-                   +"</div>"
-                   +"</div>"
-                   +"<div class='dtxt'>"
-                   +"<div class='col-sm-6'>"
-	                +"<p>"+v.description +"</p>"
-	                +"<p>"+v.product_model_specifications +"</p>"
-                   +"</div>"
-                   +"</div><div class='clearfix'></div>"
-                    +"<div class='vid'>"
-                    + vlinks 
-                     +"<div class='clearfix'></div>"
-                      +"</div>";
-	
-	$("#productDetails").append(pdivdata);
-	 $("#breadcrumbname").text(v.categoryname);
-	$("#breadcrumbcompanyname").text(v.companyname);
-	$("#breadcrumbmodelname").text(v.name);
-	$("#panelheading").text(v.categoryname);
-	if(bradcrmmodel) $('#cathead').text(v.companyname+' '+v.name); else $('#cathead').text(v.companyname+' '+v.categoryname);
-});
-
-
-
-$.each(productdetailslist, function(k,v){
-	
-	//rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
-	//if(v.companyid==)
-	if($("#breadcrumbcompanyname").text()==v.companyname) var cls='tabactive'; else var cls='';
-	rowdata= "<a href='#' class='"+cls+"' onclick='getCompanys("+v.companyid+") '>"+v.companyname+"</a><br>";
-	$("#catcom").append(rowdata);
-	
-});
-
-	
-	function getCompanys(id){
-		var url      = '${baseurl }/abheecategory?id='+catid; 
-		url.replace("#", "");
-		window.location.href=url+"&company="+id;
+		 message =$('#message').val();
+		 servicetypeid =$('#servicetypeid').val();
 		
-	}
-	function getModels(id){
-		var url      = '${baseurl }/abheecategory?id='+catid; 
-		url.replace("#", "");
-		window.location.href=url+"&company="+company+"&model="+id;
-	}
+	alert(message+"-->"+servicetypeid);
 	
-	function checkLogin(){
-		if(login){
+		
+		$.ajax({
+			type : "POST",
+			url : "saveServiceRequest",
+			data :"message="+message+"&servicetypeid="+servicetypeid,
+			dataType : "text",
+			beforeSend : function() {
+	             $.blockUI({ message: 'Please wait' });
+	          }, 
+			success : function(data) {
+				//alert(data);
+				
+				if(data ==='true')
+				{
+					alert(" Registration Completed Successfully ");
+					$('#OTPModel').modal('toggle');					
+				}
+				else
+					alert("Enter valid OTP")
+				
+			},
+			complete: function () {
+	            
+	            $.unblockUI();
+	       },
+			error :  function(e){$.unblockUI();console.log(e);}
 			
-		alert("true");
-		}else{
-			window.location.href='${baseurl }/customerlogin';
-		}
+		});
+
 	}
-	
-	if(bradcrmcategory){
-		$("#breadcrumbname").show();
-		$("#breadcrumbcompanyname").hide();
-		$("#breadcrumbmodelname").hide();
-	}
-	
-	if(bradcrmcompany)
-		{
-		$("#breadcrumbname").show();
-		$("#breadcrumbcompanyname").show();
-		}
-	if(bradcrmmodel)
-	{
-		$("#breadcrumbname").show();
-		$("#breadcrumbcompanyname").show();
-		$("#breadcrumbmodelname").show();
-	}
-	
-	function checkService(){
-		alert("Enter to service");
-		$("#formModal").modal();
-		
-			//window.location.href='${baseurl }/customerlogin';
-		
-	}
- 
  
 </script>
 </html>

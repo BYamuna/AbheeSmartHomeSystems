@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+import com.charvikent.abheeSmartHomeSystems.model.TaskHistory;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
 
@@ -39,34 +40,30 @@ public class ReportIssueDao {
 	
 	@Autowired
 	KptsUtil utilities;
+	
+	@Autowired
+	TaskHistoryDao taskHistoryDao;
 
 	public void saveReportIssue(AbheeTask reportIssue) {
 		String randomNum = utilities.randNum();
-		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String id=String.valueOf(objuserBean.getId());
 		
-		reportIssue.setAssignby(id);
 		reportIssue.setTaskno(randomNum);
-		reportIssue.setKstatus("2");
+		
 		if(reportIssue.getUploadfile()!=null)
 	     {
 			reportIssue.setUploadfile(fileTemplate.concurrentFileNames());
 			
 	     } 
 		em.persist(reportIssue);
-		/*KpStatusLogs slogs=new KpStatusLogs();
-
-		slogs.setIssueid(String.valueOf(reportIssue.getId()));
-		slogs.setIassignto(reportIssue.getAssignto());
-		slogs.setComment(reportIssue.getDescription());
-		slogs.setKpstatus(reportIssue.getKstatus());
-		if(reportIssue.getUploadfile()!=null)
-	     {
-		slogs.setUploadfiles(fileTemplate.concurrentFileNames());
-		fileTemplate.clearFiles();
-	     }
-
-		em.persist(slogs);*/
+		
+		TaskHistory taskHistory =new TaskHistory();
+		
+		taskHistory.setTaskid(String.valueOf(reportIssue.getId()));
+		taskHistory.setTaskno(reportIssue.getTaskno());
+		taskHistory.setTaskstatus(reportIssue.getKstatus());
+		taskHistory.setMessage(reportIssue.getDescription());
+		
+		em.persist(taskHistory);
 		
 		
 		

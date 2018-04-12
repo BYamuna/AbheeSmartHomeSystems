@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "abheeSalesRequest")
@@ -26,10 +25,13 @@ public class SalesRequest
 	private String salesrequestnumber;
 	private String quotationDocuments;
 	private String enable;
-	
-	
-	
-	
+	private String lat;
+	private String longitude;
+	private String customerid;
+
+
+
+
 	public String getEnable() {
 		return enable;
 	}
@@ -42,14 +44,12 @@ public class SalesRequest
 	public void setQuotationDocuments(String quotationDocuments) {
 		this.quotationDocuments = quotationDocuments;
 	}
-	private String lat;
-	
-	private String longitude;
-	
+
+
 	public SalesRequest() 
 	{
 		super();
-		
+
 	}
 	public SalesRequest(Integer id, String modelnumber, String email, String mobileno, String location, String address,
 			String reqdesc, String imgfiles) 
@@ -127,17 +127,17 @@ public class SalesRequest
 	{
 		this.imgfiles = imgfiles;
 	}
-	
-	
-	
+
+
+
 	public String getSalesrequestnumber() {
 		return salesrequestnumber;
 	}
 	public void setSalesrequestnumber(String salesrequestnumber) {
 		this.salesrequestnumber = salesrequestnumber;
 	}
-	
-	
+
+
 	public String getLat() {
 		return lat;
 	}
@@ -150,6 +150,15 @@ public class SalesRequest
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
+	
+	
+	public String getCustomerid() {
+		return customerid;
+	}
+	public void setCustomerid(String customerid) {
+		this.customerid = customerid;
+	}
+	
 	@Override
 	public String toString() {
 		return "SalesRequest [id=" + id + ", modelnumber=" + modelnumber + ", email=" + email + ", mobileno=" + mobileno
@@ -157,6 +166,6 @@ public class SalesRequest
 				+ ", salesrequestnumber=" + salesrequestnumber + ", quotationDocuments=" + quotationDocuments
 				+ ", enable=" + enable + ", lat=" + lat + ", longitude=" + longitude + "]";
 	}
-	
-	
+
+
 }

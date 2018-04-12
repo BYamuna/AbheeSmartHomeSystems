@@ -46,6 +46,8 @@ public class Customer {
 	private String customerId;
 	
 	private String address;
+	
+	private String registedredFromAndroid;
 
 
 
@@ -207,6 +209,16 @@ public class Customer {
 
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
+	}
+	
+	
+
+	public String getRegistedredFromAndroid() {
+		return registedredFromAndroid;
+	}
+
+	public void setRegistedredFromAndroid(String registedredFromAndroid) {
+		this.registedredFromAndroid = registedredFromAndroid;
 	}
 
 	@Override

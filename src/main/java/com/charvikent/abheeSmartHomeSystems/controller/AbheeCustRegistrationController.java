@@ -183,6 +183,7 @@ public class AbheeCustRegistrationController
 		String returnmsg ="";
 		if(otpnumber.equals(cotp))
 		{
+			customer.setRegistedredFromAndroid("0");
 			customerDao.saveAbheeCustomer(customer);
 		sendSMS.sendSMS(regSuccessMsg,custMobile);
 		return true;

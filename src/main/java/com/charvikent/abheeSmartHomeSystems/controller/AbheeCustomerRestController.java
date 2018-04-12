@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,19 +21,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CompanyDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ProductDao;
+import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Company;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.OTPDetails;
 import com.charvikent.abheeSmartHomeSystems.model.Product;
-
+import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -61,6 +65,11 @@ public class AbheeCustomerRestController {
 	
 	@Autowired
 	CompanyDao companyDao;
+	
+	@Autowired
+	SalesRequestDao srequestDao;
+	@Autowired
+	FilesStuff fileTemplate;
 
 	
 	@RequestMapping("/Customer")
@@ -82,7 +91,9 @@ public class AbheeCustomerRestController {
 		String regSuccessMsg =customer.getFirstname()+" "+customer.getLastname()+",  Successfully registered with ABhee Smart Homes. \n You can login using  \n UserId:  "+customer.getMobilenumber()+" or "+customer.getEmail()+"\n password: "+customer.getPassword();
 
 		try {
-			customer.setDesignation("9");
+
+
+			
 			customerDao.saveAbheeCustomer(customer);
 			sendSMS.sendSMS(regSuccessMsg,customer.getMobilenumber());
 			code = customer.getFirstname()+" "+customer.getLastname();
@@ -388,6 +399,48 @@ HashMap<String,String> hm =new HashMap<String,String>();
 
 		
 		return String.valueOf(json);
+	}
+	
+	
+	@RequestMapping(value="/savequationrequest", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public HashMap<String, String>  saveQuationRequest( @RequestBody SalesRequest salesrequest,@RequestParam("imgfile") MultipartFile[] uploadedFiles) {
+		
+		String code =null;
+		int filecount =0;
+
+		try {
+
+			int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
+			salesrequest.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
+			
+			
+			 for(MultipartFile multipartFile : uploadedFiles) {
+					String fileName = multipartFile.getOriginalFilename();
+					if(!multipartFile.isEmpty())
+					{
+						filecount++;
+					 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+					}
+				}
+	   	 
+	   	 if(filecount>0)
+	   	 {
+	   		 salesrequest.setImgfiles(fileTemplate.concurrentFileNames());
+	   		 fileTemplate.clearFiles();
+	   		 
+	   	 }
+			
+	   	srequestDao.saveRequest(salesrequest);
+			code = "requestSubmittedSuccessfully";
+		} catch (IOException e) {
+			code="NOT_FOUND";
+			e.printStackTrace();
+		}
+		
+HashMap<String,String> hm =new HashMap<String,String>();
+		
+		hm.put("status", code);
+		return hm;
 	}
 	
 
