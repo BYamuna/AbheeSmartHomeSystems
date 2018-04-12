@@ -43,11 +43,11 @@ public class SalesRequestController
 	@RequestMapping(value = "/salesRequest", method = RequestMethod.POST)
 	public String saveRequestDetails(@ModelAttribute("salesrequest")SalesRequest salesrequest,
 									@RequestParam("imgfile") MultipartFile[] uploadedFiles,
-									@RequestParam(value = "locationData") String latlong,HttpServletRequest request,RedirectAttributes redir) throws IllegalStateException, IOException, MessagingException
+									/*@RequestParam(value = "locationData") String latlong,*/HttpServletRequest request,RedirectAttributes redir) throws IllegalStateException, IOException, MessagingException
 	{
 		int filecount =0;
 		
-		String str[] = latlong.split("&");
+		String str[] = salesrequest.getLocation().split("&");
 		
 		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
 		
@@ -80,7 +80,7 @@ public class SalesRequestController
 	   		redir.addFlashAttribute("msg","Record Already exists");
 		return "redirect:abheefooter";
 		}
-	   	redir.addFlashAttribute("msg","We Received The Request and will send you the Quotation soon. Thanking you.. ");
+	   	redir.addFlashAttribute("msg","We Received The Request and will send you the Quotation soon. Thanking you.");
 	   	return "redirect:abheefooter";
 		
 	}
