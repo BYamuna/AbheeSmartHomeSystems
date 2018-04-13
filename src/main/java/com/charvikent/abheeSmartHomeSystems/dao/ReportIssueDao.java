@@ -336,22 +336,19 @@ public List<ReportIssue> getAllReportIssues()
 	}
 	
 
-	@SuppressWarnings("unused")
 	public void updateIssue(AbheeTask issue) {
 		
-		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String id=String.valueOf(objuserBean.getId());
      AbheeTask editissue=getReportIssueById(issue.getId());
      editissue.setAssignto(issue.getAssignto());
-     //editissue.setAssignby(issue.getAssignby());
      editissue.setCategory(issue.getCategory());
      editissue.setDescription(issue.getDescription());
      editissue.setPriority(issue.getPriority());
      editissue.setSeverity(issue.getSeverity());
      editissue.setSubject(issue.getSubject());
      editissue.setTaskdeadline(issue.getTaskdeadline());
-    // editissue.setKstatus(issue.getKstatus());
-     //editissue.setAdditionalinfo(issue.getAdditionalinfo());
+     editissue.setKstatus(issue.getKstatus());
+     editissue.setKstatus("1");
+     
      if(issue.getUploadfile()!=null)
      {
      editissue.setUploadfile(fileTemplate.concurrentFileNames());

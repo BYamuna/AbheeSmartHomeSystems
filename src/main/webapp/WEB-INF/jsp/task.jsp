@@ -381,14 +381,9 @@ function displayTable(listOrders) {
 			deleterow =" ";
 		}
 		
-		if(orderObj.assignbyid == cuserid)
-		{
 		var edit = "<a class='edit editIt' onclick='editTask("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
-		}
-		else
-			{
-		var	edit =" ";
-			}
+		
+		
 		var view = "<a class='view viewIt' onclick='viewTask("	+ orderObj.id+ ")'>"+ orderObj.taskno+ "</a>"
 		var history2 = "<a class='history historyit' onclick='viewTask2("	+ orderObj.id+ ")'> <i class='fa fa-history'></i></a>"
 		var view2 = "<a class='view viewIt' href='viewTicket?id="	+ orderObj.id+ "&pgn=0'>"+ orderObj.taskno+ "</a>"
@@ -419,20 +414,24 @@ function displayTable(listOrders) {
 }
 
 
-/* function editTask(id) {
+ function editTask(id) {
+	 
+	 alert("Hello");
+	 
 	$("#id").val(serviceUnitArray[id].id);
 	$("#subject").val(serviceUnitArray[id].subject);
 	$("#category").val(serviceUnitArray[id].categoryid);
 	$("#severity").val(serviceUnitArray[id].severityid);
 	$("#priority").val(serviceUnitArray[id].priorityid);
 	$("#assignby").val(serviceUnitArray[id].assignbyid);
-	$("#assignto").val(serviceUnitArray[id].assigntoid);
+	$("#assignto").val(serviceUnitArray[id].assignto);
 	$("#uploadfile").val(serviceUnitArray[id].uploadfile);
 	$("#description").val(serviceUnitArray[id].description);
 	$("#taskdeadline").val(serviceUnitArray[id].taskdeadline);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 }
+ 
 
 /* view task history */
 
