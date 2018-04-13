@@ -11,6 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>Abhee Smart Homes</title>
 </head>
 <body>
@@ -96,7 +97,62 @@
         </div>
         <!-- Content Ends here --> 
       </div>  
-        
+        <div class="modal fade" id="formModal" data-backdrop="static" data-keyboard="false" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header" style="background: #166eaf;">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" style="color: white;">Service Request Form </h4>
+        	</div>
+        	<div class="modal-body">
+				<div class="panel-body">
+					<form>
+						<div class="col-sm-4">
+							<label>Service Type</label>
+						</div>
+						<div class="col-sm-8">
+						<select  id="servicetypeid"  class="form-control" >
+											<c:forEach var="list" items="${servicetypes}">
+											<option value=${list.key}>${list.value} </option>
+											</c:forEach>
+										</select>
+						</div>
+						<div class="col-sm-4">
+							<label>Message</label>
+						</div>
+						<div class="col-sm-8">
+							<textarea class="form-control" id="message" name="message" placeholder="Message"></textarea>
+						</div>
+							<!--<div class="col-sm-4">
+							<label>Attach File(s)</label>
+						</div>
+					 <div class="col-sm-8">
+							<input type="file" name="file1" id="file1" class="form-control" multiple="multiple"/>
+						</div>
+						 -->
+						
+					</form>
+				</div>
+            </div>
+                    		
+                    		
+                    		<div class="panel-footer">
+				      	<div class="row">
+				      		<div class="col-sm-12">
+				      			<div style="float:right; margin-right:20px;" class="btn-toolbar text-center">
+					      			<input type="button" id="modelSubmit" value="Submit"  onclick="serviceSubmit()" class="btn-primary btn"/>
+					      			<input type="reset" value="Reset" class="btn-danger btn cancel1"/>
+				      			</div>
+				      		</div>
+				      	</div>
+			      	</div>
+                    		</div>
+                    		</form>
+                    		
+				</div> 
+					
+				</div> 
 
 </body>
 <c:choose>
