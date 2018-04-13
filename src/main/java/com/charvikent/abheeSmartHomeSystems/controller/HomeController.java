@@ -4,7 +4,6 @@ package com.charvikent.abheeSmartHomeSystems.controller;
 
 import java.util.List;
 
-import javax.json.JsonObject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
