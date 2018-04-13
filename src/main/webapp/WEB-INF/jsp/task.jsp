@@ -135,6 +135,17 @@
                     		</div>
                     		</div>
                     		
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<form:hidden path="id"/>
+									<label for="focusedinput" class="col-md-6 control-label">Service Type  <span class="impColor">*</span></label>
+									<form:select path="kstatus" class="col-xs-10 col-sm-5 validate1" onfocus="removeBorder(this.id)" >
+											<form:option value="" label="--- Select ---" />
+											<form:options items="${taskstatus}"/>
+										</form:select>
+                    			</div>
+                    		</div>
+                    		
                     		<div id="getting-started"></div>
                     		
 
@@ -361,7 +372,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Task No</th><th>Category</th><th>ServiceType</th><th>Severity</th><th>Priority</th><th>Assigned To</th><th>Subject</th><th>Task Deadline</th><th>Task Status</th><th>CreateTime</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Task No</th><th>Category</th><th>Model Name</th><th>ServiceType</th><th>Severity</th><th>Priority</th><th>Assigned To</th><th>Subject</th><th>Task Deadline</th><th>Task Status</th><th>CreateTime</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	
@@ -381,14 +392,9 @@ function displayTable(listOrders) {
 			deleterow =" ";
 		}
 		
-		if(orderObj.assignbyid == cuserid)
-		{
 		var edit = "<a class='edit editIt' onclick='editTask("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
-		}
-		else
-			{
-		var	edit =" ";
-			}
+		
+		
 		var view = "<a class='view viewIt' onclick='viewTask("	+ orderObj.id+ ")'>"+ orderObj.taskno+ "</a>"
 		var history2 = "<a class='history historyit' onclick='viewTask2("	+ orderObj.id+ ")'> <i class='fa fa-history'></i></a>"
 		var view2 = "<a class='view viewIt' href='viewTicket?id="	+ orderObj.id+ "&pgn=0'>"+ orderObj.taskno+ "</a>"
@@ -401,6 +407,7 @@ function displayTable(listOrders) {
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.taskno+"'>"+ view2 + "</td>"
 			+ "<td title='"+orderObj.category+"'>"+ orderObj.category + "</td>"
+			+ "<td title='"+orderObj.modelname+"'>"+ orderObj.modelname + "</td>"
 			+ "<td title='"+orderObj.servicetypename+"'>"+ orderObj.servicetypename + "</td>"
 			+ "<td title='"+orderObj.severity+"'>"+ orderObj.severity + "</td>"
 			+ "<td title='"+orderObj.priority+"'>"+ orderObj.priority + "</td>"
@@ -418,20 +425,25 @@ function displayTable(listOrders) {
 }
 
 
-/* function editTask(id) {
+ function editTask(id) {
+	 
+	 alert("Hello");
+	 
 	$("#id").val(serviceUnitArray[id].id);
 	$("#subject").val(serviceUnitArray[id].subject);
 	$("#category").val(serviceUnitArray[id].categoryid);
 	$("#severity").val(serviceUnitArray[id].severityid);
 	$("#priority").val(serviceUnitArray[id].priorityid);
 	$("#assignby").val(serviceUnitArray[id].assignbyid);
-	$("#assignto").val(serviceUnitArray[id].assigntoid);
+	$("#assignto").val(serviceUnitArray[id].assignto);
 	$("#uploadfile").val(serviceUnitArray[id].uploadfile);
 	$("#description").val(serviceUnitArray[id].description);
 	$("#taskdeadline").val(serviceUnitArray[id].taskdeadline);
+	$("#kstatus").val(serviceUnitArray[id].kstatus);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 }
+ 
 
 /* view task history */
 

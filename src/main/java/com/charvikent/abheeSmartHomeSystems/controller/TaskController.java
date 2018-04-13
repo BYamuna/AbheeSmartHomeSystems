@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
+import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskStatusDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.PriorityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
@@ -62,6 +63,9 @@ public class TaskController {
 	@Autowired
 	AbheeTaskDao abheeTaskDao;
 	
+	@Autowired
+	AbheeTaskStatusDao abheeTaskStatusDao;
+	
 	
 	/*@Autowired
 	DashBoardService dashBoardService;*/
@@ -78,6 +82,7 @@ public class TaskController {
 		model.addAttribute("priority", priorityDao.getPriorityMap());
 		model.addAttribute("userNames", userService.getUserName());
 		model.addAttribute("category", serviceDao.getServicemap());
+		model.addAttribute("taskstatus", abheeTaskStatusDao.getTaskStatusMap());
 		
 		
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -502,6 +507,8 @@ public class TaskController {
 		
 		String message=request.getParameter("message");
 		String servicetypeid=request.getParameter("servicetypeid");
+		String catid=request.getParameter("catid");
+		String modelid=request.getParameter("modelid");
 		AbheeTask task =new AbheeTask();
 		task.setAdditionalinfo("0");
 		task.setAssignby("1");
@@ -514,6 +521,8 @@ public class TaskController {
 		task.setStatus("1");
 		task.setSubject("Task creadted By Customer");
 		task.setServiceType(servicetypeid);
+		task.setCategory(catid);
+		task.setModelid(modelid);
 		
 		
 		
