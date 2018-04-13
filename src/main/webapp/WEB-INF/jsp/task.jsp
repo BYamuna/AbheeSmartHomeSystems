@@ -135,6 +135,17 @@
                     		</div>
                     		</div>
                     		
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<form:hidden path="id"/>
+									<label for="focusedinput" class="col-md-6 control-label">Service Type  <span class="impColor">*</span></label>
+									<form:select path="kstatus" class="col-xs-10 col-sm-5 validate1" onfocus="removeBorder(this.id)" >
+											<form:option value="" label="--- Select ---" />
+											<form:options items="${taskstatus}"/>
+										</form:select>
+                    			</div>
+                    		</div>
+                    		
                     		<div id="getting-started"></div>
                     		
 
@@ -428,6 +439,7 @@ function displayTable(listOrders) {
 	$("#uploadfile").val(serviceUnitArray[id].uploadfile);
 	$("#description").val(serviceUnitArray[id].description);
 	$("#taskdeadline").val(serviceUnitArray[id].taskdeadline);
+	$("#kstatus").val(serviceUnitArray[id].kstatus);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 }

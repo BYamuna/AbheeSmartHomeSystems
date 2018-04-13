@@ -499,7 +499,7 @@ function getHeadersCounts(){
             
              
            
-              <security:authorize access="hasRole('ROLE_BRANCHHEAD')">
+              <security:authorize access="hasRole('ROLE_USER') or hasRole('ROLE_BRANCHHEAD')">
             <li class="dashBoard"><a href="${baseurl }/dashBoard"><i class="fa fa-dashboard dash"></i> <span>Home</span></a></li>
              </security:authorize>
              <security:authorize access="hasRole('ROLE_MASTERADMIN')">
@@ -515,10 +515,10 @@ function getHeadersCounts(){
                 </security:authorize>
                <security:authorize access="hasRole('ROLE_BRANCHHEAD')">
               	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users emp"></i> <span>Employees</span></a></li>
-                <li class="task"><a href="${baseurl }/task"><i class="fa fa-tasks task"></i> <span>Task</span></a></li>
                 </security:authorize>
-                
-              
+                 <security:authorize access="hasRole('ROLE_USER') or hasRole('ROLE_BRANCHHEAD')">
+                <li class="task"><a href="${baseurl }/task"><i class="fa fa-tasks task"></i> <span>Task</span></a></li>
+              </security:authorize>
                <security:authorize access="hasRole('ROLE_CUSTOMER')">
                <li class="custDash"><a href="${baseurl }/customerDashBoard"><i class="fa fa-cloud cloud cld"></i><span>MyView</span></a></li>
                <li class="salesrequest"><a href="${baseurl }/salesRequest"><i class="fa fa-cloud cloud cld"></i><span>SalesRequest</span></a></li>

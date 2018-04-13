@@ -347,28 +347,23 @@ public List<ReportIssue> getAllReportIssues()
      editissue.setSubject(issue.getSubject());
      editissue.setTaskdeadline(issue.getTaskdeadline());
      editissue.setKstatus(issue.getKstatus());
-     editissue.setKstatus("1");
-     
      if(issue.getUploadfile()!=null)
      {
      editissue.setUploadfile(fileTemplate.concurrentFileNames());
      }
 		em.flush();
 
-		/*KpStatusLogs slogs=new KpStatusLogs();
-
-		slogs.setIssueid(issue.getId().toString());
-		slogs.setIassignto(id);
-		slogs.setComment(issue.getDescription());
-		slogs.setKpstatus(editissue.getKstatus());
+         TaskHistory taskHistory =new TaskHistory();
 		
-		if(issue.getUploadfile()!=null)
-	     {
-		slogs.setUploadfiles(fileTemplate.concurrentFileNames());
-		fileTemplate.clearFiles();
-	     }
-		em.merge(slogs);
-		em.flush();*/
+		taskHistory.setTaskid(String.valueOf(editissue.getId()));
+		taskHistory.setTaskno(editissue.getTaskno());
+		taskHistory.setTaskstatus(editissue.getKstatus());
+		taskHistory.setMessage(editissue.getDescription());
+		
+		taskHistory.setTaskdeadline(editissue.getTaskdeadline());
+		
+		em.persist(taskHistory);
+		
 
 
 	}

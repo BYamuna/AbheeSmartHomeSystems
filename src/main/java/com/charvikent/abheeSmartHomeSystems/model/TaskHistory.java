@@ -24,6 +24,9 @@ public class TaskHistory {
 	private String message;
 	@CreationTimestamp
 	protected Date createdTime ;
+	
+	private String taskdeadline;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -59,6 +62,12 @@ public class TaskHistory {
 	}
 	public void setCreatedTime(Date createdTime) {
 		this.createdTime = createdTime;
+	}
+	public String getTaskdeadline() {
+		return taskdeadline;
+	}
+	public void setTaskdeadline(String taskdeadline) {
+		this.taskdeadline = taskdeadline;
 	}
 	
 	

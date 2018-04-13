@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
+import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskStatusDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.PriorityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
@@ -62,6 +63,9 @@ public class TaskController {
 	@Autowired
 	AbheeTaskDao abheeTaskDao;
 	
+	@Autowired
+	AbheeTaskStatusDao abheeTaskStatusDao;
+	
 	
 	/*@Autowired
 	DashBoardService dashBoardService;*/
@@ -78,6 +82,7 @@ public class TaskController {
 		model.addAttribute("priority", priorityDao.getPriorityMap());
 		model.addAttribute("userNames", userService.getUserName());
 		model.addAttribute("category", serviceDao.getServicemap());
+		model.addAttribute("taskstatus", abheeTaskStatusDao.getTaskStatusMap());
 		
 		
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
