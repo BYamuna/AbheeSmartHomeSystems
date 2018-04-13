@@ -69,6 +69,8 @@ public class AbheeTask  {
 	
 	private  String departmentid;
 	
+	private  String modelid;
+	
 	
 	
 	
@@ -270,6 +272,16 @@ public class AbheeTask  {
 	}
 	public void setServiceType(String serviceType) {
 		ServiceType = serviceType;
+	}
+	
+	
+	
+	
+	public String getModelid() {
+		return modelid;
+	}
+	public void setModelid(String modelid) {
+		this.modelid = modelid;
 	}
 	@Override
 	public String toString() {

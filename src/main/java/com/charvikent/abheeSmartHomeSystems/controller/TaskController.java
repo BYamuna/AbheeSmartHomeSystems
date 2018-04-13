@@ -502,6 +502,8 @@ public class TaskController {
 		
 		String message=request.getParameter("message");
 		String servicetypeid=request.getParameter("servicetypeid");
+		String catid=request.getParameter("catid");
+		String modelid=request.getParameter("modelid");
 		AbheeTask task =new AbheeTask();
 		task.setAdditionalinfo("0");
 		task.setAssignby("1");
@@ -514,6 +516,8 @@ public class TaskController {
 		task.setStatus("1");
 		task.setSubject("Task creadted By Customer");
 		task.setServiceType(servicetypeid);
+		task.setCategory(catid);
+		task.setModelid(modelid);
 		
 		
 		

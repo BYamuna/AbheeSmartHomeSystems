@@ -20,7 +20,7 @@
         <!-- Breadcrumb Starts here -->
         <nav aria-label="breadcrumb">
   			<ol class="breadcrumb">
-    			<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    			<li class="breadcrumb-item"><a href="/">Home</a></li>
     			<li class="breadcrumb-item"><a href="#">Catagories</a></li>
     			<li class="breadcrumb-item active" aria-current="page" id="breadcrumbname"></li>
     			<li class="breadcrumb-item active" aria-current="page" id="breadcrumbcompanyname"></li>
@@ -41,7 +41,7 @@
         	</div>
         	<div class="col-md-9">
             	<div class="listdata">
-            		<span id="cathead"></span>
+            		<strong><span id="cathead"></span></strong>
             		<!-- <h2>YAMAHA Home Theaters</h2> -->
             		<div align="center" class="col-md-12 col-sm-4" id="productModels">
                     	
@@ -183,6 +183,7 @@
     </c:when>
     <c:otherwise>
         <script>
+         var modelid=${param.model};
         var bradcrmmodel=true;</script>
     </c:otherwise>
 </c:choose>
@@ -338,6 +339,7 @@ $.each(productdetailslist, function(k,v){
 		if(login){
 			
 		alert("true");
+		window.location.href='${baseurl }/allsalesrequest';
 		}else{
 			window.location.href='${baseurl }/customerlogin';
 		}
@@ -367,6 +369,48 @@ $.each(productdetailslist, function(k,v){
 		
 			//window.location.href='${baseurl }/customerlogin';
 		
+	}
+	
+	function serviceSubmit()
+	{
+		alert(catid+"  "+modelid);
+		
+		 message =$('#message').val();
+		 servicetypeid =$('#servicetypeid').val();
+		 
+		 
+		
+	alert(message+"-->"+servicetypeid);
+	
+		
+		$.ajax({
+			type : "POST",
+			url : "saveServiceRequest",
+			data :"message="+message+"&servicetypeid="+servicetypeid+"&catid="+catid+"&modelid="+modelid,
+			dataType : "text",
+			beforeSend : function() {
+	             $.blockUI({ message: 'Please wait' });
+	          }, 
+			success : function(data) {
+				//alert(data);
+				
+				if(data ==='true')
+				{
+					alert(" Registration Completed Successfully ");
+					$('#OTPModel').modal('toggle');					
+				}
+				else
+					alert("Enter valid OTP")
+				
+			},
+			complete: function () {
+	            
+	            $.unblockUI();
+	       },
+			error :  function(e){$.unblockUI();console.log(e);}
+			
+		});
+
 	}
  
 </script>

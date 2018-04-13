@@ -14,11 +14,6 @@ color: #fff !imoportant;
 label, .form-control {
 	margin-top:10px;
 }
-.tabactive
-{
-background-color: green;
-color: white;
-}
 </style>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -179,45 +174,7 @@ $( document ).ready(function() {
 	
 	
 	
-	function serviceSubmit()
-	{
-		
-		
-		 message =$('#message').val();
-		 servicetypeid =$('#servicetypeid').val();
-		
-	alert(message+"-->"+servicetypeid);
 	
-		
-		$.ajax({
-			type : "POST",
-			url : "saveServiceRequest",
-			data :"message="+message+"&servicetypeid="+servicetypeid,
-			dataType : "text",
-			beforeSend : function() {
-	             $.blockUI({ message: 'Please wait' });
-	          }, 
-			success : function(data) {
-				//alert(data);
-				
-				if(data ==='true')
-				{
-					alert(" Registration Completed Successfully ");
-					$('#OTPModel').modal('toggle');					
-				}
-				else
-					alert("Enter valid OTP")
-				
-			},
-			complete: function () {
-	            
-	            $.unblockUI();
-	       },
-			error :  function(e){$.unblockUI();console.log(e);}
-			
-		});
-
-	}
  
 </script>
 </html>

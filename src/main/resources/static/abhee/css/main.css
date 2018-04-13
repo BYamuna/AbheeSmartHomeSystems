@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 body {
 	background:url(../images/bg.jpg) fixed;
 }
@@ -156,8 +155,13 @@ body {
 .listdata h2 {
 	margin-left:20px;
 }
-
-
+.navbar-collapse ul li a:hover {
+	background:#013950;
+}
+strong {
+	font-size:18px !important;
+	margin-left:20px;
+}
 
 /* Login styles */
 
@@ -1009,5 +1013,11 @@ span.fa.fa-lock {
 /*-- //responsive-design --*/
 
 
->>>>>>> branch 'master' of https://github.com/pleelakrishna/AbheeSmartHomes.git
 /* Login styles */
+
+
+.tabactive
+{
+color:red !important;
+font-size:18px !important;
+}
