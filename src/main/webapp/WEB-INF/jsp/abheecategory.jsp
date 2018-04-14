@@ -33,13 +33,7 @@
 			</div>
 		</div>
 	</c:if>
-	<!-- <div class="msgcss row" style="visibility: hidden" >
-			<div class="col-sm-4 col-sm-offset-4">
-				<div class="form-group">
-					<div class="alert alert-success fadeIn animated" id="msg"></div>
-				</div>
-			</div>
-		</div> -->
+	
 
       <div class="container">
         <!-- Breadcrumb Starts here -->
@@ -157,7 +151,7 @@
 						</div>
 						 -->
 						
-					</form>
+				
 				</div>
             </div>
                     		
@@ -237,7 +231,7 @@ $.each(productmodelslist, function(k,v){
 		+"<a href='#'onclick='getModels("+v.id+")' >"
 		+"<img src='${baseurl }/reportDocuments/"+v.productmodelpics+"' class='img-responsive' alt='1810' title='YHT-1810'>"
 		+"<h4>"+v.companyname+"</h4>"
-		+"<p>"+v.name+"</p>"
+		+"<p id ='modelName'>"+v.name+"</p>"
         +"</a>"
         +"</div>";
 		
@@ -353,6 +347,9 @@ $.each(productdetailslist, function(k,v){
 		if(login){
 			
 			window.location.href='${baseurl }/salesRequest'
+			
+				localStorage.setItem("modelName",document.getElementById('modelName').innerHTML);
+			console.log(document.getElementById('modelName').innerHTML);
 		}else{
 			window.location.href='${baseurl }/customerlogin';
 		}
