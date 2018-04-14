@@ -395,7 +395,7 @@ public class AbheeCustRegistrationController
 		return "redirect:custRegistration";
 	}
 
-	@SuppressWarnings("unused")
+	
 	@RequestMapping(value = "/getresetcustomerpassword", method = RequestMethod.POST)
 	public @ResponseBody  Boolean getResetCustomerPassword(Model model,HttpServletRequest request) throws IOException, MessagingException 
 	{
@@ -407,7 +407,7 @@ public class AbheeCustRegistrationController
 		
 		if(custbean2 != null)
 		{
-			sendSMS.sendSMS(custbean2.getPassword(),custMobile);
+			/*sendSMS.sendSMS(custbean2.getPassword(),custMobile);*/
 			sendingMail.resetPassword(custbean2);
 			return true;
 			

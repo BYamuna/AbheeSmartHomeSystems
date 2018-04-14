@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistory;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
@@ -692,6 +693,8 @@ public List<ReportIssue> getAllReportIssues()
 		
 		return listissue;
 	}
+
+	
 	
 	
 

@@ -496,11 +496,11 @@
 
 				<div class="panel-heading">
 					<h4>Unread Tasks List</h4>
-					<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="panel-body collapse in">
 					<!-- <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label> -->
-					<div class="table" id="tableId">
+					<div style="overflow:auto;" class="table" id="tableId">
 						<table cellpadding="0" cellspacing="0" border="0"	class="table table-striped table-bordered datatables"	id="notification">
 							<thead>
 								<tr>
@@ -549,296 +549,82 @@
 	$("#severityTable").append(rowdata);
 		
 		
+	
+	$(window).load(
+			function() {
+				var formData = new FormData();
+				formData.append('ttypeid', "1");
+				$.fn.makeMultipartRequest('POST', 'setNotifyData', false,
+						formData, false, 'text', function(data) {
+							var jsonobj = $.parseJSON(data);
+							var alldata = jsonobj.allOrders1;
+							//console.log(alldata)
+							if (alldata != "") {
+								displayTable(alldata)
+								$('#notifyModal').modal('show');
+							}
+						});
+			});
+	
+	var loginUserDId ="1";
+	
 	function displayTable(listOrders) {
 		$('#tableId').html('');
-		var tableHead = '<table id="notification" class="table table-striped table-bordered datatables">'
-				+ '<thead><tr><th>Task No</th><th>Summary</th><th>Category</th><th>priority</th><th>Severity</th><th>Assigned By</th><th>Created Time</th><th>Description</th></tr></thead><tbody></tbody></table>';
+		var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
+				+ '<thead><tr><th>Task No</th><th>Category</th><th>Model Name</th><th>ServiceType</th><th>Severity</th><th>Priority</th><th>Assigned To</th><th>Subject</th><th>Task Deadline</th><th>Task Status</th><th>CreateTime</th></tr></thead><tbody></tbody></table>';
 		$('#tableId').html(tableHead);
 		serviceUnitArray = {};
-
-		$.each(listOrders, function(i, orderObj) {
-			if (orderObj.additionalinfo == "0") {
-				var deleterow = "<a class='deactivate' onclick='opentasks("
-						+ orderObj.id
-						+ ",0)'><i class='fa fa-folder-open-o'></i></a>"
-			} else {
-				var deleterow = "<a class='activate' onclick='opentasks("
-						+ orderObj.id
-						+ ",1)'><i class='fa fa-eye-slash'></i></a>"
+		
+		$.each(listOrders,function(i, orderObj) {
+			if(loginUserDId == "1")
+				{
+			if(orderObj.status == "1"){
+				var deleterow = "<a class='deactivate' onclick='deletetask("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
+			}else{  
+				var deleterow = "<a class='activate' onclick='deletetask("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 			}
-
-			var edit = "<a class='edit editIt' onclick='editTask("
-					+ orderObj.id + ")'><i class='fa fa-edit'></i></a>"
-
-			var view = "<a class='view viewIt' onclick='viewTask("
-					+ orderObj.id + ")'>" + orderObj.taskno + "</a>"
-			var view2 = "<a class='view viewIt' href='viewTicket?id="
-					+ orderObj.id + "&pgn=1'>" + orderObj.taskno + "</a>"
-			var comment = "<a class='comment commentIt' onclick='addComment("
-					+ orderObj.id + ")'>   <i class='fa fa-comments'></i></a>"
-			var time = "<a class='time timeIt' onclick='showdeadline("
-					+ orderObj.id
-					+ ")'> <i class='fa fa-hourglass-half'></i> </a>"
+			
+			
+				}
+			else
+			{
+				deleterow =" ";
+			}
+			
+			var edit = "<a class='edit editIt' onclick='editTask("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
+			
+			
+			var view = "<a class='view viewIt' onclick='viewTask("	+ orderObj.id+ ")'>"+ orderObj.taskno+ "</a>"
+			var history2 = "<a class='history historyit' onclick='viewTask2("	+ orderObj.id+ ")'> <i class='fa fa-history'></i></a>"
+			var view2 = "<a class='view viewIt' href='viewTicket?id="	+ orderObj.id+ "&pgn=0'>"+ orderObj.taskno+ "</a>"
+			var comment = "<a class='comment commentIt' onclick='addComment("	+ orderObj.id+ ")'>   <i class='fa fa-comments'></i></a>"
+			var time = "<a class='time timeIt' onclick='showdeadline("	+ orderObj.id+ ")'> <i class='fa fa-hourglass-half'></i> </a>"
+			var history = "<a class='history historyit' onclick='viewTask("	+ orderObj.id+ ")'> <i class='fa fa-history'></i></a>"
+			
+			
 			serviceUnitArray[orderObj.id] = orderObj;
-			var tblRow = "<tr>" + "<td title='"+orderObj.taskno+"'>" + view2
-					+ "</td>" + "<td title='"+orderObj.subject+"'>"
-					+ orderObj.subject + "</td>"
-					+ "<td title='"+orderObj.category+"'>" + orderObj.category
-					+ "</td>" + "<td title='"+orderObj.priority+"'>"
-					+ orderObj.priority + "</td>" + "</td>"
-					+ "<td title='"+orderObj.severity+"'>" + orderObj.severity
-					+ "</td>" + "<td title='"+orderObj.assignby+"'>"
-					+ orderObj.assignby + "</td>"
-					+ "<td title='"+orderObj.createdTime+"'>"
-					+ new Date(orderObj.createdTime).toDateString() + "</td>"
-					+ "<td title='"+orderObj.description+"'>"
-					+ orderObj.description + "</td>"
-					/* + "<td style='text-align: center;white-space: nowrap;'>"
-					 "</td>" */+ "</tr>";
+			var tblRow = "<tr>"
+				+ "<td title='"+orderObj.taskno+"'>"+ view2 + "</td>"
+				+ "<td title='"+orderObj.category+"'>"+ orderObj.category + "</td>"
+				+ "<td title='"+orderObj.modelname+"'>"+ orderObj.modelname + "</td>"
+				+ "<td title='"+orderObj.servicetypename+"'>"+ orderObj.servicetypename + "</td>"
+				+ "<td title='"+orderObj.severity+"'>"+ orderObj.severity + "</td>"
+				+ "<td title='"+orderObj.priority+"'>"+ orderObj.priority + "</td>"
+				+ "<td title='"+orderObj.username+"'>"+ orderObj.username + "</td>"
+				+ "<td title='"+orderObj.subject+"'>"+ orderObj.subject + "</td>"
+				+ "<td title='"+orderObj.taskdeadline+"'>"+ orderObj.taskdeadline + "</td>"
+				+ "<td title='"+orderObj.statusname+"'>"+ orderObj.statusname + "</td>"
+				+ "<td title='"+orderObj.created_time+"'>"+ orderObj.created_time + "</td>"
+				+ "</tr>";
 			$(tblRow).appendTo("#tableId table tbody");
 		});
-		if (isClick == 'Yes')
-			$('#notification').dataTable();
-
-	}
-
-	function opentasks(id, status) {
-		var checkstr = null;
-		if (status == 0) {
-			status = 1;
-			alert('Task Marked as Read');
-		}
-		var formData = new FormData();
-		formData.append('id', id);
-		formData.append('additionalinfo', status);
-		$.fn.makeMultipartRequest('POST', 'openTask', false, formData, false,
-				'text', function(data) {
-					var jsonobj = $.parseJSON(data);
-					var alldata = jsonobj.allOrders1;
-					var result = $.parseJSON(alldata);
-					if (result.length > 0) {
-						displayTable(result)
-						getHeadersCounts()
-
-					} else
-						getHeadersCounts()
-						//location.reload()
-
-				});
-
-	}
-
-	function goToTaskListBySelection(selection) {
-
-		alert("hi");
-		alert(selection);
-		var ttype = selection;
-		var formData = new FormData();
-		formData.append('ttypeid', ttype);
-		$.fn.makeMultipartRequest('POST', 'setdata', false, formData, false,
-				'text', function(data) {
-					var jsonobj = $.parseJSON(data);
-					var alldata = jsonobj.list;
-					displayTable(alldata);
-					toolTips()
-					makeEmpty()
-
-				});
-	}
-
-	//var listOrders1 = ${list};
-	if (listOrders1 != "") {
-		$('#categoryTable body').html('');
-		/* var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Company Code</th><th>Company Name</th><th>Contact Person Name</th><th>Contact Person Mobile</th><th>Email Id</th><th>Type of Comapany</th><th>Company Address</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
-		$('#tableId').html(tableHead); */
-		serviceUnitArray = {};
-		var categoryarray = null;
-		var assigned = 0;
-		var closed1 = 0;
-		var resolved = 0;
-		$
-				.each(
-						listOrders1,
-						function(i, orderObj) {
-							var totalcategory = 0;
-							if (orderObj.kStatusNameWithId != "") {
-
-								categoryarray = orderObj.kStatusNameWithId
-										.split(",");
-							}
-							var occurrences = {};
-							for (var i = 0, j = categoryarray.length; i < j; i++) {
-								occurrences[categoryarray[i]] = (occurrences[categoryarray[i]] || 0) + 1;
-							}
-							if (occurrences['Assigned'] != undefined) {
-								assigned = occurrences['Assigned'];
-								totalcategory = totalcategory + assigned;
-							} else {
-								assigned = 0;
-								totalcategory = totalcategory + assigned;
-							}
-							if (occurrences['Closed'] != undefined) {
-								closed1 = occurrences['Closed'];
-								totalcategory = totalcategory + closed1;
-							} else {
-								closed1 = 0;
-								totalcategory = totalcategory + closed1;
-
-							}
-							if (occurrences['Resolved'] != undefined) {
-								resolved = occurrences['Resolved'];
-								totalcategory = totalcategory + resolved;
-							} else {
-								resolved = 0;
-								totalcategory = totalcategory + resolved;
-							}
-							//<a href="severity?id=${issue.key}"
-							console.log(occurrences['Assigned']);
-							var tblRow = "<tr'>"
-									+ "<td  title='"+orderObj.categoryName+"'>"
-									+ orderObj.categoryName
-									+ "</td>"
-									+ "<td title='"+assigned+"' ><a href='categoryDashBord?status=2&categoryId="
-									+ orderObj.categoryId
-									+ "'  class='btn btn-danger assigned'>"
-									+ assigned
-									+ "</a></td>"
-									+ "<td title='"+resolved+"'><a href='categoryDashBord?status=4&categoryId="
-									+ orderObj.categoryId
-									+ "'  class='btn btn-warning assigned'>"
-									+ resolved
-									+ "</td>"
-									+ "<td title='"+closed1+"'><a href='categoryDashBord?status=1&categoryId="
-									+ orderObj.categoryId
-									+ "'  class='btn btn-primary assigned'>"
-									+ closed1 + "</td>"
-									+ "<td title='"+totalcategory+"'>"
-									+ totalcategory + "</td>" + "</tr >";
-							$(tblRow).appendTo("#categoryTable tbody");
-						});
-	}
-
-	//var byStatusList = ${byStatusList};
-	if (byStatusList != "") {
-		$('#statusTable body').html('');
-		/* var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Company Code</th><th>Company Name</th><th>Contact Person Name</th><th>Contact Person Mobile</th><th>Email Id</th><th>Type of Comapany</th><th>Company Address</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
-		$('#tableId').html(tableHead); */
-		serviceUnitArray = {};
-		var categoryarray = null;
-		var assigned = 0;
-		var closed2 = 0;
-		var resolved = 0;
-
-		$
-				.each(
-						byStatusList,
-						function(i, orderObj) {
-							var totalStatus = 0;
-							if (orderObj.kStatusNameWithId != "") {
-
-								categoryarray = orderObj.statusConcatination
-										.split(",");
-							}
-							var occurrences = {};
-							for (var i = 0, j = categoryarray.length; i < j; i++) {
-								occurrences[categoryarray[i]] = (occurrences[categoryarray[i]] || 0) + 1;
-							}
-							if (occurrences['Assigned'] != undefined) {
-								assigned = occurrences['Assigned'];
-								totalStatus = totalStatus + assigned;
-							} else {
-								assigned = 0;
-								totalStatus = totalStatus + assigned;
-							}
-							if (occurrences['Closed'] != undefined) {
-								closed2 = occurrences['Closed'];
-								totalStatus = totalStatus + closed2;
-							} else {
-								closed2 = 0;
-								totalStatus = totalStatus + closed2;
-
-							}
-							if (occurrences['Resolved'] != undefined) {
-								resolved = occurrences['Resolved'];
-								totalStatus = totalStatus + resolved;
-							} else {
-								resolved = 0;
-								totalStatus = totalStatus + resolved;
-							}
-							//<a href="severity?id=${issue.key}"
-							console.log(occurrences['Assigned']);
-							var tblRow = "<tr'>"
-									+ "<td  title='"+orderObj.statusName+"'>"
-									+ orderObj.statusName
-									+ "</td>"
-									+ "<td title='"+assigned+"' ><a href='statusDashBord?status="
-									+ orderObj.statusId
-									+ "'  class='btn btn-danger assigned'>"
-									+ assigned
-									+ "</a></td>"
-									+ "<td title='"+resolved+"'><a href='statusDashBord?status="
-									+ orderObj.statusId
-									+ "'  class='btn btn-warning assigned'>"
-									+ resolved
-									+ "</td>"
-									+ "<td title='"+closed1+"'><a href='statusDashBord?status="
-									+ orderObj.statusId
-									+ "'  class='btn btn-primary assigned'>"
-									+ closed2 + "</td>"
-									+ "<td title='"+totalStatus+"'>"
-									+ totalStatus + "</td>" + "</tr >";
-							$(tblRow).appendTo("#statusTable tbody");
-						});
-	}
-	
-	
-	
-/* 	$("#ack").mouseover(function(){
-		
-		alert("hello mousehour");
-	}); */
-	//var deptcountjson = ${deptcountjson};
-	//var deptcountclosedjson = ${deptcountclosedjson};
-	
-	
-	
-	
-	if (deptcountjson != "") {
-		$('#deptTable body').html('');
-		displayDeptTask(deptcountjson,deptcountclosedjson);
+		if(isClick=='Yes') $('#example').dataTable();
 		
 	}
 	
-	function displayDeptTask(deptcountjson,deptcountclosedjson){
-		
-		$.each(deptcountjson, function(i,item) {
-			
-			console.log(deptcountjson[i]+"------"+deptcountclosedjson[i]);
-			
-			var diff=parseInt(item)-parseInt(deptcountclosedjson[i])
-			console.log(item);
-			 var tblRow = "<tr'>"
-					+ "<td> "
-					+ i
-					+ "</a></td>"
-					+ "<td ><a href='deptAll?id="+i+"'>"
-					+ item
-					+ "</a></td>"
-					+ "<td ><a href='deptClosed?id="+i+"'>"
-					+ deptcountclosedjson[i]
-					+ "</a></td>"
-					+ "<td ><a href='deptBalanced?id="+i+"'>"
-					+ diff
-					+ "</a></td>"
-					+ "</tr >";
-			$(tblRow).appendTo("#deptTable tbody"); 
-		});
-		
-	}
+	
+	
 
-		
 	
 
 </script> 
