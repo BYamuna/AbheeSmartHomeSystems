@@ -132,12 +132,7 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/allsalesrequest.jsp" />
 	</definition>
 	
-	<definition name="salesRequest" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/jsp/salesRequest.jsp" />
-    </definition> 
-		<!--  <definition name="dummypage" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/jsp/dummypage.jsp" />
-	</definition>  -->
+	
 	<definition name="allservicerequests" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/jsp/allservicerequests.jsp" />
 	</definition>  
