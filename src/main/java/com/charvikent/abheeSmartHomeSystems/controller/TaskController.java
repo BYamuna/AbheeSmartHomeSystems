@@ -218,7 +218,7 @@ public class TaskController {
 	@RequestMapping(value = "/deleteTask")
 	public @ResponseBody String deleteDept(AbheeTask  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		System.out.println("deleteEducation page...");
-		Set<AbheeTask> listOrderBeans  = null;
+		List<Map<String, Object>> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
 		String sJson=null;
@@ -237,7 +237,7 @@ public class TaskController {
  				}
  			}
  				
-			listOrderBeans = reportIssueDao.getissuesByselectionAssignBy(id);
+			listOrderBeans = abheeTaskDao.getTasksListAssignToMe();
 			 objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				
@@ -532,6 +532,42 @@ public class TaskController {
 		System.out.println(message+"  "+servicetypeid);
 		return false;
 		
+	}
+	@RequestMapping(value = "/inActiveTasks")
+	public @ResponseBody String getAllActiveOrInactiveOrgnizations(AbheeTask  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		List<Map<String, Object>>listOrderBeans  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		try{
+			if(objorg.getStatus().equals("0"))
+				listOrderBeans =abheeTaskDao.getInActiveList();
+				else
+					listOrderBeans = abheeTaskDao.getTasksList();
+
+
+
+			 objectMapper = new ObjectMapper();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+	System.out.println(e);
+			return String.valueOf(jsonObj);
+
+		}
+		return String.valueOf(jsonObj);
 	}
 
 }

@@ -248,7 +248,7 @@ public class SendingMail {
 			velocityEngine.mergeTemplate("PasswordResetEmail.vm", "UTF-8", velocityContext, stringWriter);
 			helper.setText(stringWriter.toString(), true);
 			helper.setTo( email);
-		    helper.setSubject("Your password reset successfully");
+		    helper.setSubject("Your password sent successfully");
 		  		   
 		   
 			javaMailSender.send(message);
