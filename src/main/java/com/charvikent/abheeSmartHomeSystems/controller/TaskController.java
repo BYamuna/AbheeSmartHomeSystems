@@ -543,7 +543,7 @@ public class TaskController {
 			if(objorg.getStatus().equals("0"))
 				listOrderBeans =abheeTaskDao.getInActiveList();
 				else
-					listOrderBeans = abheeTaskDao.getTasksList();
+					listOrderBeans = abheeTaskDao.getTasksListAssignToMe();
 
 
 

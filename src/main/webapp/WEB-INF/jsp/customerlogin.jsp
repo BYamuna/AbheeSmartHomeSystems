@@ -102,7 +102,7 @@
 						<h6><a href="#" data-toggle="modal" data-target="#passwordModel" class="tag">Forgot password</a></h6>
 					</div>
 					<div class="login-bottom"> 
-						<h6 style="margin-top:40px;">Click here to <a href="#" data-toggle="modal" data-target="#register-info" class="tag">register</a></h6>
+						<h6 style="margin-top:40px;">Click here to <a href="#" data-toggle="modal" onclick="openRegistrationModel()"  class="tag">register</a></h6>
 					</div> 
 
 				</div>  
@@ -124,7 +124,7 @@
           <h4 class="modal-title">Customer Registration</h4>
         </div>
         <div class="modal-body">
-          <form  action="#"  id="registration"  method="post" class="login-form">
+          <form    id="registration"  method="post" class="login-form">
           
  
 
@@ -654,7 +654,23 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 			});
 		
 	}
+	function makeEmptyRegistration()
+	{
+		$('#csname').val("");
+		$('#cname').val("");
+		$('#csmobile').val("");
+		$('#cemail').val("");
+		$('#csname').val("");
+		$('#cpassword').val("");
+		$('#crtpassword').val("");
+	}
 	
+	function openRegistrationModel()
+	{
+		makeEmptyRegistration();
+		$('#register-info').modal();
+		
+	}
 
 	/* $('#cpassword').blur(function() {
 		ccpassword =$('#cpassword').val();
