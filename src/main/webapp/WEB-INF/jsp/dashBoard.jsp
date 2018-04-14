@@ -68,7 +68,8 @@
 
 							<div class="table-responsive">
 								<table class="table table-bordered priority prioritybg"
-									style="border: 1px solid #0460a4; width:;">
+									style="border: 1px solid #0460a4; width:;" id="severityTable">
+									<thead>
 									<tr
 										style="background-color: #0460a4; color: #fff; text-align: center;">
 
@@ -78,22 +79,7 @@
 										<th>Minor</th>
 
 									</tr>
-									
-									<tr>
-									<td>Assigned By Me ${test}</td>
-									<td>5</td>
-									<td>4</td>
-									<td>9</td>
-									</tr>
-									
-									
-									
-									<tr>
-									<td>Monitered By Me</td>
-									<td>1</td>
-									<td>4</td>
-									<td>6</td>
-									</tr>
+									</thead>
 
 																	</table>
 							</div>
@@ -549,8 +535,20 @@
 	 $('#notifyModal').modal('show');
 	 });  */
 
-	var loginUserId = "1"
-
+	var loginUserId = "1";
+	var 	severityCounts  = ${severityCounts};
+	
+	
+	var rowdata;
+		rowdata='<tr>'
+				+'<td> Assigned To Me</td>'
+				+'<td><a href="severityBy?id=3">'+ severityCounts.CRITICAL +'</a></td>'
+				+'<td><a href="severityBy?id=2">'+ severityCounts.MAJOR +'</a></td>'
+				+'<td><a href="severityBy?id=1">'+ severityCounts.MINOR +'</a></td>'
+					+'</tr>';
+	$("#severityTable").append(rowdata);
+		
+		
 	function displayTable(listOrders) {
 		$('#tableId').html('');
 		var tableHead = '<table id="notification" class="table table-striped table-bordered datatables">'
@@ -648,7 +646,7 @@
 				});
 	}
 
-	var listOrders1 = ${list};
+	//var listOrders1 = ${list};
 	if (listOrders1 != "") {
 		$('#categoryTable body').html('');
 		/* var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
@@ -721,7 +719,7 @@
 						});
 	}
 
-	var byStatusList = ${byStatusList};
+	//var byStatusList = ${byStatusList};
 	if (byStatusList != "") {
 		$('#statusTable body').html('');
 		/* var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
@@ -801,8 +799,8 @@
 		
 		alert("hello mousehour");
 	}); */
-	var deptcountjson = ${deptcountjson};
-	var deptcountclosedjson = ${deptcountclosedjson};
+	//var deptcountjson = ${deptcountjson};
+	//var deptcountclosedjson = ${deptcountclosedjson};
 	
 	
 	

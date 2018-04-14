@@ -1,6 +1,7 @@
 package com.charvikent.abheeSmartHomeSystems.config;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -21,17 +22,20 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
+import com.charvikent.abheeSmartHomeSystems.dao.DashBoardDao;
 import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired UserService userService;
+	@Autowired DashBoardDao dashBoardDao;
 	
 	@Autowired
 	HttpSession session;
@@ -70,6 +74,7 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 			User objuserBean = (User)objUser;
 		
 			session.setAttribute("lastLoginTime", userDao.getLastloginTime());
+			
 		 userService.setLoginRecord(objuserBean.getId(),"login");
 		
 			
@@ -78,6 +83,28 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 				 session.setAttribute("userDesignationSession", userDesignation);
 				 
 				 session.setAttribute("sessionUser", objuserBean.getFirstname());
+				 try {
+						HashMap<String, String> countsOrderBeans = dashBoardDao.getTasksCountBySeverity();
+						ObjectMapper objectMapper;
+						String sJson;
+						
+						if (listOrderBeans != null && countsOrderBeans.size() > 0) {
+							objectMapper = new ObjectMapper();
+							sJson = objectMapper.writeValueAsString(countsOrderBeans);
+							session.setAttribute("severityCounts", sJson);
+							// System.out.println(sJson);
+						} else {
+							objectMapper = new ObjectMapper();
+							sJson = objectMapper.writeValueAsString(countsOrderBeans);
+							session.setAttribute("severityCounts", "''");
+						}
+
+					} catch (Exception e) {
+						e.printStackTrace();
+						System.out.println(e);
+
+					}
+				 
 				 response.sendRedirect("dashBoard");
 				 
 		}
