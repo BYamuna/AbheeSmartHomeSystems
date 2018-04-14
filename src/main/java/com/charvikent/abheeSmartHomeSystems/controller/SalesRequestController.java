@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,27 +34,30 @@ public class SalesRequestController
 	FilesStuff fileTemplate;
 	@Autowired
 	SendingMail sendingMail;
-	/*@RequestMapping(value = "/salesRequest" ,method = RequestMethod.GET)
+	@RequestMapping(value = "/salesRequest" ,method = RequestMethod.GET)
 	public String saveRequest(@ModelAttribute("salesRequest")SalesRequest salesrequest,Model model)
 	{
 		model.addAttribute("salesRequest", new SalesRequest());
-		return "a";
+		return "salesRequest";
 		
-	}*/
+	}
 	@RequestMapping(value = "/salesRequest", method = RequestMethod.POST)
-	public String saveRequestDetails(@ModelAttribute("salesrequest")SalesRequest salesrequest,
+	public String saveRequestDetails(@ModelAttribute("salesRequest")SalesRequest salesrequest,
 									@RequestParam("imgfile") MultipartFile[] uploadedFiles,
-									/*@RequestParam(value = "locationData") String latlong,*/HttpServletRequest request,RedirectAttributes redir) throws IllegalStateException, IOException, MessagingException
+									@RequestParam(value = "locationData") String latlong,HttpServletRequest request,RedirectAttributes redir) throws IllegalStateException, IOException, MessagingException
 	{
+		
+		String referalUrl=request.getHeader("referer");
 		int filecount =0;
 		
-		String str[] = salesrequest.getLocation().split("&");
+		String str[] = latlong.split("&");
 		
 		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
 		
 		salesrequest.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
 		salesrequest.setLat(str[0]);
 		salesrequest.setLongitude(str[1]);
+		salesrequest.setEnable("1");
    	 for(MultipartFile multipartFile : uploadedFiles) {
 				String fileName = multipartFile.getOriginalFilename();
 				if(!multipartFile.isEmpty())
@@ -77,11 +81,13 @@ public class SalesRequestController
 	   		sendingMail.sendSalesRequestEmailWithattachment(salesrequest.getEmail(), uploadedFiles);
 	   	}
 	   	else {
-	   		redir.addFlashAttribute("msg","Record Already exists");
-		return "redirect:abheefooter";
+	   		redir.addFlashAttribute("msg","Record Already Exists");
+	   		System.out.println("record Already Exists");
+		return "redirect:abheecategory";
 		}
 	   	redir.addFlashAttribute("msg","We Received The Request and will send you the Quotation soon. Thanking you.");
-	   	return "redirect:abheefooter";
+	   	System.out.println("&&&&&&&&&&&&&&&&&&&&& Mail Sent");
+	   	return "redirect:abheecategory";
 		
 	}
 	@RequestMapping("/allsalesrequest")

@@ -91,7 +91,7 @@ public class TaskController {
 		model.addAttribute("objuserBean", objuserBean);
 		
 		try {
-			listOrderBeans = abheeTaskDao.getTasksList();
+			listOrderBeans = abheeTaskDao.getTasksListAssignToMe();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);

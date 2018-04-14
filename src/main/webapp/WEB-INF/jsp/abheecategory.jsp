@@ -13,8 +13,33 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>Abhee Smart Homes</title>
+
+<script type="text/javascript">
+	var isClick = 'No';
+		window.setTimeout(function() {
+		    $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
+		        $(this).remove(); 
+		    });
+		}, 5000);
+		</script>
 </head>
 <body>
+	<c:if test="${not empty msg}">
+		<div class="msgcss row">
+			<div class="col-sm-4 col-sm-offset-4">
+				<div class="form-group">
+					<div class="alert alert-success fadeIn animated">${msg}</div>
+				</div>
+			</div>
+		</div>
+	</c:if>
+	<!-- <div class="msgcss row" style="visibility: hidden" >
+			<div class="col-sm-4 col-sm-offset-4">
+				<div class="form-group">
+					<div class="alert alert-success fadeIn animated" id="msg"></div>
+				</div>
+			</div>
+		</div> -->
 
       <div class="container">
         <!-- Breadcrumb Starts here -->
@@ -231,17 +256,6 @@ $.each(productmodelslist, function(k,v){
 	} 
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	var productdetailslist =${productdetails};
 
@@ -338,8 +352,7 @@ $.each(productdetailslist, function(k,v){
 	function checkLogin(){
 		if(login){
 			
-		alert("true");
-		window.location.href='${baseurl }/allsalesrequest';
+			window.location.href='${baseurl }/salesRequest'
 		}else{
 			window.location.href='${baseurl }/customerlogin';
 		}

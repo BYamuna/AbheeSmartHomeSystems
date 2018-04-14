@@ -11,17 +11,21 @@
 <link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
 <link rel="canonical" href="https://codepen.io/jonvadillo/pen/NNZzwB" />
 <div class="clearfix"></div>
-<div align="center">							
+<!-- <div align="center">							
 	<input type="button" id="salesrequest" value="Salesrequest" onclick="Salesrequest()" class="btn-primary btn">
-</div>
-<div  class="modal fade" id="salesrequest-info" role="dialog">
-    <div class="modal-dialog">
+</div> -->
+<!--<div  class="modal fade" id="salesrequest-info" role="dialog">
+     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Sales Request</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body"> -->
+        
+        
+        
+        
         <%-- <form class="form-horizontal" id="completeData">
 
 					<div class="form-group">
@@ -83,7 +87,6 @@
 							</div>
 							</form> --%>
 							
-							
 							<form:form modelAttribute="salesRequest" action="salesRequest" class="form-horizontal " method="Post" enctype="multipart/form-data">
 	                  <form:hidden path="id"/>
 					<div class="col-md-6"><br>
@@ -109,14 +112,14 @@
 								<div class="form-group" id="passwordDiv">
 									<label class="col-md-3 control-label no-padding-right">location<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<input type="text" id="us2-address" class="form-control validate"/>
+<!-- 										<input type="text" id="us2-address" class="form-control validate"/> -->
 										<input type="text" name="locationData" id="locationData" class="form-control"/> 
 									</div>
 								</div><div class="clearfix"></div>
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="modelnumber" class="form-control validate numericOnly" maxlength="10"  placeholder="Enter Mobile Number"/>
+										<form:input path="mobileno" class="form-control validate numericOnly" maxlength="10"  placeholder="Enter Mobile Number"/>
 									</div>
 								</div>
 								<div class="clearfix"></div>
@@ -135,7 +138,7 @@
 								</div>
 								<div class="clearfix"></div>
 								<div class="form-group">
-								<label class="col-md-3 control-label no-padding-right"><span class="impColor">Choose images*</span></label>
+								<label class="col-md-3 control-label no-padding-right">Choose File<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<input type="file" name="imgfile" id="imgfile" multiple/>
 									</div>
@@ -152,21 +155,15 @@
 								<div id="us2" style="width: 500px; height: 400px;"></div>	
 								</div>
 					</form:form>
-		</div>	
-						</div>
-					</div>
-				</div>			
 								
-								<div class="col-md-6">
-								<div id="us2" style="width: 500px; height: 400px;"></div>	
-								</div>
+								
 					
 					
 
 <style class="cp-pen-styles"></style></head><body>
 			
-Lat.: <input type="text" id="us2-lat"/>
-Long.: <input type="text" id="us2-lon"/>
+<!-- Lat.: <hidden type="text" id="us2-lat"/>
+Long.: <hidden  type="text" id="us2-lon"/> -->
 </body>
 <script src='//static.codepen.io/assets/editor/live/console_runner-ce3034e6bde3912cc25f83cccb7caa2b0f976196f2f2d52303a462c826d54a73.js'></script>
 <script src='//static.codepen.io/assets/editor/live/css_live_reload_init-890dc39bb89183d4642d58b1ae5376a0193342f9aed88ea04330dc14c8d52f55.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/jonvadillo/pen/NNZzwB" />
@@ -185,14 +182,14 @@ var lan;
 
 
 
-function Salesrequest()
+/* function Salesrequest()
 {
 	
 	/* cissueid=id;
 	$("#issueid").val(id); */
-	$("#salesrequest-info").modal();	
-}
-
+	//$("#salesrequest-info").modal();	
+//} 
+//*/
 /* function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -276,7 +273,7 @@ if(validation) {
 var data = new FormData(form);
  */
 
-			var productmodel=$('#productmodel').val();
+			var modelnumber=$('#modelnumber').val();
 			var email=$('#email').val();
 			var mobileno=$('#mobileno').val();
 	    	var locationData=$('#locationData').val();
@@ -287,7 +284,7 @@ var data = new FormData(form);
 	    	//var params = form.serializeArray();
 	    	
 	    	
-	    	var salesRequest = {	"modelnumber":productmodel,	"email":email,"mobileno":mobileno,"address":address,"reqdesc":reqdesc, "locationData":	locationData};
+	    	var salesRequest = {	"modelnumber":modelnumber,	"email":email,"mobileno":mobileno,"address":address,"reqdesc":reqdesc};
 	    	var salesreq= JSON.stringify(salesRequest);
 		   
 		   var formData = new FormData();
