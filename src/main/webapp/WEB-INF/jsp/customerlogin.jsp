@@ -86,7 +86,7 @@
 			<div class="login-form login-form-left"> 
 				<div class="row">
 					<div class="head">
-						<h2>Login to your site</h2>
+						<h2>Login</h2>
 					</div>					
 					<div class="clearfix"></div>
 					<div class="login-top"> 	

@@ -49,9 +49,10 @@
 	letter-spacing: 1px;
 	line-height: 1.6;
 }
-th {
- background:#006699;color: #fff;
- }
+.tr {
+	background:#166eaf;
+	color:#ffffff;
+}
 </style>
 
 <!-- Body starts here -->
@@ -90,14 +91,49 @@ View Issue Details</h4>
 								<table class="table table-bordered priority prioritybg"
 									style="border: 1px solid #0460a4; width:;" id="viewTaskTable">
 									<thead>
-									<tr
-										style="background-color: #0460a4; color: #fff; text-align: center;">
-
-										<th>Unclosed Tasks /Severity</th>
-										<th>Critical</th>
-										<th>Major</th>
-										<th>Minor</th>
-
+									<tr class="tr">
+										<th>Task No</th>
+										<td>ujgsakjhdfjsfhkjsd,hfbjksdhfjks,dhfbkj,sdhfkj,sdfhsadfhsakjdfhkl</td>
+									</tr>
+									<tr>
+										<th>Category</th>
+										<td></td>
+									</tr>
+									<tr class="tr">
+										<th>Model Name</th>
+										<td></td>
+									</tr>
+									<tr>
+										<th>Service Type</th>
+										<td></td>
+									</tr>
+									<tr class="tr">
+										<th>Serverity</th>
+										<td></td>
+									</tr>
+									<tr>
+										<th>Priority</th>
+										<td></td>
+									</tr>
+									<tr class="tr">
+										<th>Assigned to</th>
+										<td></td>
+									</tr>
+									<tr>
+										<th>Subject</th>
+										<td></td>
+									</tr>
+									<tr class="tr">
+										<th>Task Deadline</th>
+										<td></td>
+									</tr>
+									<tr>
+										<th>Task Status</th>
+										<td></td>
+									</tr>
+									<tr class="tr">
+										<th>Create Time</th>
+										<td></td>
 									</tr>
 									</thead>
 
