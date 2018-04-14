@@ -71,11 +71,11 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<form:hidden path="id" />
-									<label for="focusedinput" class="col-md-6 control-label">Service
+									<label for="focusedinput" class="col-md-6 control-label ">Service
 										Type <span class="impColor">*</span>
 									</label>
 									<form:select path="category"
-										class="col-xs-10 col-sm-5 validate1"
+										class="col-xs-10 col-sm-5 validate"
 										onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${category}" />
@@ -84,12 +84,12 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Severity
+									<label for="focusedinput" class="col-md-6 control-label ">Severity
 										<span class="impColor">*</span>
 									</label>
 
 									<form:select path="severity"
-										class="col-xs-10 col-sm-5 validate1"
+										class="col-xs-10 col-sm-5 validate"
 										onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${severity}" />
@@ -104,11 +104,11 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Priority
+									<label for="focusedinput" class="col-md-6 control-label ">Priority
 										<span class="impColor">*</span>
 									</label>
 									<form:select path="priority"
-										class="col-xs-10 col-sm-5 validate1">
+										class="col-xs-10 col-sm-5 validate">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${priority}"></form:options>
 									</form:select>
@@ -116,12 +116,12 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Assigned
+									<label for="focusedinput" class="col-md-6 control-label ">Assigned
 										to <span class="impColor">*</span>
 									</label>
 
 									<form:select path="assignto"
-										class="col-xs-10 col-sm-5 validate1"
+										class="col-xs-10 col-sm-5 validate"
 										onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${userNames}" />
@@ -136,11 +136,11 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Summary
+									<label for="focusedinput" class="col-md-6 control-label ">Summary
 										<span class="impColor">*</span>
 									</label>
 									<form:input path="subject" placeholder="Summary"
-										class="col-xs-10 col-sm-5 validate1" />
+										class="col-xs-10 col-sm-5 validate" />
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -150,7 +150,7 @@
 									</label>
 									<div class="col-md-5">
 										<form:textarea path="description"
-											class="form-control validate1"
+											class="form-control validate"
 											placeholder="Enter Description" />
 										<span class="hasError" id="stationnameError"></span>
 									</div>
@@ -166,7 +166,7 @@
 										Status <span class="impColor">*</span>
 									</label>
 									<form:select path="kstatus"
-										class="col-xs-10 col-sm-5 validate1"
+										class="col-xs-10 col-sm-5 validate"
 										onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${taskstatus}" />
@@ -194,7 +194,7 @@
 									File(s)</label>
 								<div class="col-md-8">
 									<input type="file" name="file1" id="file1"
-										class="col-sm-9 col-md-push-5" multiple="multiple"
+										class="col-sm-9 col-md-push-5 validate1" multiple="multiple"
 										style="margin: 7px 0px 0px 0px;">
 								</div>
 							</div>
@@ -209,9 +209,9 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="btn-toolbar text-center">
-									<input type="submit" id="submitMainForm" value="Submit"
+									<input type="submit" id="submit1" value="Submit"
 										class="btn-primary btn" /> <input type="reset" value="Reset"
-										class="btn-danger btn cancel2" />
+										class="btn-danger btn cancel" />
 								</div>
 							</div>
 						</div>

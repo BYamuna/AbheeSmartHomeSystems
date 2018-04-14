@@ -237,7 +237,7 @@ public class TaskController {
  				}
  			}
  				
-			listOrderBeans = abheeTaskDao.getTasksList();
+			listOrderBeans = abheeTaskDao.getTasksListAssignToMe();
 			 objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				

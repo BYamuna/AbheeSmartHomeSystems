@@ -217,7 +217,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-          <h4 class="modal-title">Password Verification</h4>
+          <h4 class="modal-title">Password Assistance</h4>
         </div>
     
     
@@ -228,8 +228,8 @@
 						<div id="firstForm2">
 
 							<div class="form-group">
-								<label for="mobile number">Enter MobileNumber :</label> 
-								<input	type="text" name="resetmobile" id="resetmobile" onkeydown="removeBorder(this.id)" maxlength="10" class="form-control validate1 numericOnly" placeholder="Enter Mobile Number"/>
+								<label for="mobile number">Enter Registered MobileNumber :</label> 
+								<input	type="text" name="resetmobile" id="resetmobile" onkeydown="removeBorder(this.id)" maxlength="10" class="form-control validate2 numericOnly" placeholder="Enter Mobile Number"/>
 								<span class="hasError" id="cmobileError" style="font-size: 13px;"></span>
 							</div>				
 						</div>
@@ -269,7 +269,7 @@ $('#cmobile').blur(function() {
 	 
 	 if(cmobile.length != 10 )
 		 {
-		 alert("Password Length Must Be 10 Digits")
+		 alert("Mobile Number Length Must Be 10 Digits")
 		 $('#cmobile').css('border-color', 'red');
 		// $('#submitModel').prop('disabled', true);
 		 
