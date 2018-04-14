@@ -521,9 +521,8 @@ function getHeadersCounts(){
               </security:authorize>
                <security:authorize access="hasRole('ROLE_CUSTOMER')">
                <li class="custDash"><a href="${baseurl }/customerDashBoard"><i class="fa fa-cloud cloud cld"></i><span>MyView</span></a></li>
-               <li class="salesrequest"><a href="${baseurl }/salesRequest"><i class="fa fa-cloud cloud cld"></i><span>SalesRequest</span></a></li>
-               <li class="dummypage"><a href="${baseurl }/dummypage"><i class="fa fa-cloud cloud cld"></i><span>Dummy page</span></a></li>
 			</security:authorize>
+               <li class="salesrequest"><a href="${baseurl }/salesRequest"><i class="fa fa-cloud cloud cld"></i><span>SalesRequest</span></a></li>
 			</ul>
 		</div>
     </nav>
