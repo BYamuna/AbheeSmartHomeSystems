@@ -1,10 +1,11 @@
 <html>  
   <body>  
-  <h3>Hi ${name}, </h3> 
-  <div>Your Request Submitted Successfully </div>
-  <body>  If you did not send any request, ignore this message and nothing will happen.</body>
-  <div>Thanks&Regards</div>
-  <div><img src=${id101}></div>
+  <h3>Hello, </h3> 
   
-  <div><img src="id101"></div>
+  <div>Your Request Submitted Successfully </div>
+  <body>We Received The Request and will send you the Quotation soon.</body>
+  <div>Thanks&Regards</div>
+  <!-- <div><img src=${id101}></div>
+  
+  <div><img src="id101"></div> -->
   </html> 

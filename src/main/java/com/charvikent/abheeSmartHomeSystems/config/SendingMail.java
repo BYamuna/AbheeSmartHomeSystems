@@ -158,23 +158,7 @@ public class SendingMail {
 			
 			VelocityContext velocityContext = new VelocityContext();
 			
-			/*Object objBean = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			if(objBean instanceof User)
-			{
-				
-				User objuserBean = (User)objBean;
-				velocityContext.put("name",objuserBean.getFirstname());
-			}
-			else
-			
-				if(objBean instanceof Customer)
-				{
-					
-					Customer objuserBean = (Customer)objBean;
-					velocityContext.put("name",objuserBean.getFirstname());
-					
-				}*/
-			
+						
 			String email =  emailId;
 			MimeMessage message = javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
