@@ -375,7 +375,13 @@ $.each(productdetailslist, function(k,v){
 	
 	function checkService(){
 		alert("Enter to service");
+           if(login){
 		$("#formModal").modal();
+           }
+           else
+           {
+        	   window.location.href='${baseurl }/customerlogin';
+           }
 		
 			//window.location.href='${baseurl }/customerlogin';
 		
@@ -383,15 +389,9 @@ $.each(productdetailslist, function(k,v){
 	
 	function serviceSubmit()
 	{
-		alert(catid+"  "+modelid);
 		
 		 message =$('#message').val();
 		 servicetypeid =$('#servicetypeid').val();
-		 
-		 
-		
-	alert(message+"-->"+servicetypeid);
-	
 		
 		$.ajax({
 			type : "POST",
@@ -406,8 +406,8 @@ $.each(productdetailslist, function(k,v){
 				
 				if(data ==='true')
 				{
-					alert(" Registration Completed Successfully ");
-					$('#OTPModel').modal('toggle');					
+					alert(" Sevice request Submitted Successfully ");
+					$('#formModal').modal('toggle');					
 				}
 				else
 					alert("Enter valid OTP")

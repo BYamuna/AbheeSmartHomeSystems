@@ -4,7 +4,6 @@ package com.charvikent.abheeSmartHomeSystems.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,7 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -72,11 +73,12 @@ public class TaskController {
 	
 	
 	
-	@RequestMapping("/task")
-	public String  department( @ModelAttribute("taskf")  AbheeTask taskf, Model model , HttpServletRequest request,HttpSession session) {
+	@GetMapping("/task")
+	public String  department(Model model , HttpServletRequest request,HttpSession session) {
 		List<Map<String, Object>> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
+		model.addAttribute("taskf", new AbheeTask());
 		
 		model.addAttribute("severity", severityDao.getSeverityMap());
 		model.addAttribute("priority", priorityDao.getPriorityMap());
@@ -114,7 +116,7 @@ public class TaskController {
 	
 	}
 	
-	@RequestMapping(value = "/savetask" ,method = RequestMethod.POST)
+	@PostMapping(value = "/savetask1" )
 	public String saveAdmin(@Valid @ModelAttribute("taskf")  AbheeTask task, BindingResult bindingresults, @RequestParam("file1") MultipartFile[] uploadedFiles,
 			RedirectAttributes redir) throws IOException {
 		
@@ -530,7 +532,7 @@ public class TaskController {
 
 		
 		System.out.println(message+"  "+servicetypeid);
-		return false;
+		return true;
 		
 	}
 	@RequestMapping(value = "/inActiveTasks")
@@ -543,7 +545,7 @@ public class TaskController {
 			if(objorg.getStatus().equals("0"))
 				listOrderBeans =abheeTaskDao.getInActiveList();
 				else
-					listOrderBeans = abheeTaskDao.getTasksList();
+					listOrderBeans = abheeTaskDao.getTasksListAssignToMe();
 
 
 
