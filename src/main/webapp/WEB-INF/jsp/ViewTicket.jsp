@@ -73,8 +73,7 @@
 				<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div style="margin:0 auto;" class="panel-heading">
-						<h4><i class="ace-icon fa fa-bars"></i></i>
-View Issue Details</h4>
+						<h4><i class="ace-icon fa fa-bars"></i>View Issue Details</h4>
 						<div class="options">
 							<a href="" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
 						</div>
@@ -93,6 +92,51 @@ View Issue Details</h4>
 									<thead>
 									<tr class="tr">
 
+										<th>Task No</th>
+										<td></td>
+									</tr>
+									<tr>
+										<th>Category</th>
+										<td></td>
+									</tr>
+									<tr class="tr">
+										<th>Model Name</th>
+										<td></td>
+									</tr>
+									<tr>
+										<th>Service Type</th>
+										<td></td>
+									</tr>
+									<tr class="tr">
+										<th>Serverity</th>
+										<td></td>
+									</tr>
+									<tr>
+										<th>Priority</th>
+										<td></td>
+									</tr>
+									<tr class="tr">
+										<th>Assigned to</th>
+										<td></td>
+									</tr>
+									<tr>
+										<th>Subject</th>
+										<td></td>
+									</tr>
+									<tr class="tr">
+										<th>Task Deadline</th>
+										<td></td>
+									</tr>
+									<tr>
+										<th>Task Status</th>
+										<td></td>
+									</tr>
+									<tr class="tr">
+										<th>Create Time</th>
+										<td></td>
+									</tr>
+=======
+
 <c:forEach var="listOuter" items="${test2}">
        
               <c:forEach var="listInner" items="${listOuter}">
@@ -108,6 +152,7 @@ View Issue Details</h4>
          
       </c:forEach>
 									
+
 									</thead>
 
 																	</table>
@@ -197,4 +242,4 @@ $(".task").addClass("active");
 $("#pageName").text("View Task");
 
 
-</script> --%>
+</script> 
