@@ -91,6 +91,7 @@
 									style="border: 1px solid #0460a4; width:;" id="viewTaskTable">
 									<thead>
 									<tr class="tr">
+
 										<th>Task No</th>
 										<td></td>
 									</tr>
@@ -134,6 +135,24 @@
 										<th>Create Time</th>
 										<td></td>
 									</tr>
+=======
+
+<c:forEach var="listOuter" items="${test2}">
+       
+              <c:forEach var="listInner" items="${listOuter}">
+                 <tr>
+                  <td>
+                      ${listInner.key}
+                  </td>
+                  <td>
+                      ${listInner.value}
+                  </td>
+                   </tr>
+              </c:forEach>
+         
+      </c:forEach>
+									
+
 									</thead>
 
 																	</table>
@@ -219,10 +238,8 @@ var rowdata;
 $("#severityTable").append(rowdata);
 	
 	
-$(".createTicketIssues").addClass("active");
-$(".task").hide();
-/* $(function(){
-	 Dropzone.autoDiscover = false;
-}); */
+$(".task").addClass("active");
+$("#pageName").text("View Task");
+
 
 </script> 

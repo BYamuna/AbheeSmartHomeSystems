@@ -406,8 +406,8 @@ $.each(productdetailslist, function(k,v){
 				
 				if(data ==='true')
 				{
-					alert(" Registration Completed Successfully ");
-					$('#OTPModel').modal('toggle');					
+					alert(" Sevice request Submitted Successfully ");
+					$('#formModal').modal('toggle');					
 				}
 				else
 					alert("Enter valid OTP")

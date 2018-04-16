@@ -492,7 +492,7 @@
 									+ orderObj.id
 									+ ")'> <i class='fa fa-history'></i></a>"
 							var view2 = "<a class='view viewIt' href='viewTicket?id="
-									+ orderObj.id
+									+ orderObj.taskno
 									+ "&pgn=0'>"
 									+ orderObj.taskno + "</a>"
 							var comment = "<a class='comment commentIt' onclick='addComment("
