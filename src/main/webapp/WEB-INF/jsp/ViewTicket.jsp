@@ -92,49 +92,22 @@ View Issue Details</h4>
 									style="border: 1px solid #0460a4; width:;" id="viewTaskTable">
 									<thead>
 									<tr class="tr">
-										<th>Task No</th>
-										<td>ujgsakjhdfjsfhkjsd,hfbjksdhfjks,dhfbkj,sdhfkj,sdfhsadfhsakjdfhkl</td>
-									</tr>
-									<tr>
-										<th>Category</th>
-										<td></td>
-									</tr>
-									<tr class="tr">
-										<th>Model Name</th>
-										<td></td>
-									</tr>
-									<tr>
-										<th>Service Type</th>
-										<td></td>
-									</tr>
-									<tr class="tr">
-										<th>Serverity</th>
-										<td></td>
-									</tr>
-									<tr>
-										<th>Priority</th>
-										<td></td>
-									</tr>
-									<tr class="tr">
-										<th>Assigned to</th>
-										<td></td>
-									</tr>
-									<tr>
-										<th>Subject</th>
-										<td></td>
-									</tr>
-									<tr class="tr">
-										<th>Task Deadline</th>
-										<td></td>
-									</tr>
-									<tr>
-										<th>Task Status</th>
-										<td></td>
-									</tr>
-									<tr class="tr">
-										<th>Create Time</th>
-										<td></td>
-									</tr>
+
+<c:forEach var="listOuter" items="${test2}">
+       
+              <c:forEach var="listInner" items="${listOuter}">
+                 <tr>
+                  <td>
+                      ${listInner.key}
+                  </td>
+                  <td>
+                      ${listInner.value}
+                  </td>
+                   </tr>
+              </c:forEach>
+         
+      </c:forEach>
+									
 									</thead>
 
 																	</table>
@@ -220,10 +193,8 @@ var rowdata;
 $("#severityTable").append(rowdata);
 	
 	
-$(".createTicketIssues").addClass("active");
-$(".task").hide();
-/* $(function(){
-	 Dropzone.autoDiscover = false;
-}); */
+$(".task").addClass("active");
+$("#pageName").text("View Task");
+
 
 </script> --%>
