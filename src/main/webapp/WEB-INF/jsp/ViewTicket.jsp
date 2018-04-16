@@ -73,8 +73,7 @@
 				<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div style="margin:0 auto;" class="panel-heading">
-						<h4><i class="ace-icon fa fa-bars"></i></i>
-View Issue Details</h4>
+						<h4><i class="ace-icon fa fa-bars"></i>View Issue Details</h4>
 						<div class="options">
 							<a href="" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
 						</div>
@@ -93,7 +92,7 @@ View Issue Details</h4>
 									<thead>
 									<tr class="tr">
 										<th>Task No</th>
-										<td>ujgsakjhdfjsfhkjsd,hfbjksdhfjks,dhfbkj,sdhfkj,sdfhsadfhsakjdfhkl</td>
+										<td></td>
 									</tr>
 									<tr>
 										<th>Category</th>
@@ -226,4 +225,4 @@ $(".task").hide();
 	 Dropzone.autoDiscover = false;
 }); */
 
-</script> --%>
+</script> 
