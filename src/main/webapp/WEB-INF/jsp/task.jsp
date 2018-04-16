@@ -32,7 +32,9 @@
 					</div>
 				</div>
 				<div class="panel-body collapse in">
-					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
+					<input type="checkbox" class="form-check-input"
+						onclick="inactiveData();" id="inActive"> <label
+						class="form-check-label">Show Inactive List</label>
 					<div class="table-responsive" id="tableId">
 						<table cellpadding="0" cellspacing="0" border="0"
 							class="table table-striped table-bordered datatables"
@@ -65,7 +67,7 @@
 					<h4>Add Task</h4>
 				</div>
 				<form:form class="form-horizontal" modelAttribute="taskf"
-					action="savetask" method="post" enctype="multipart/form-data">
+					action="savetask1" method="post" enctype="multipart/form-data">
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-md-6">
@@ -108,7 +110,8 @@
 										<span class="impColor">*</span>
 									</label>
 									<form:select path="priority"
-										class="col-xs-10 col-sm-5 validate">
+										class="col-xs-10 col-sm-5 validate"
+										onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${priority}"></form:options>
 									</form:select>
@@ -150,8 +153,7 @@
 									</label>
 									<div class="col-md-5">
 										<form:textarea path="description"
-											class="form-control validate"
-											placeholder="Enter Description" />
+											class="form-control validate" placeholder="Enter Description" />
 										<span class="hasError" id="stationnameError"></span>
 									</div>
 								</div>
@@ -165,8 +167,7 @@
 									<label for="focusedinput" class="col-md-6 control-label">
 										Status <span class="impColor">*</span>
 									</label>
-									<form:select path="kstatus"
-										class="col-xs-10 col-sm-5 validate"
+									<form:select path="kstatus" class="col-xs-10 col-sm-5 validate"
 										onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${taskstatus}" />
@@ -201,9 +202,6 @@
 						</div>
 
 						<div id="getting-started"></div>
-
-
-
 					</div>
 					<div class="panel-footer">
 						<div class="row">
@@ -309,7 +307,7 @@
 				<h4 class="modal-title" style="color: white;">Add Comment</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal">
+				<%-- <form class="form-horizontal" method="post">
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-md-5">
@@ -373,7 +371,7 @@
 							</div>
 						</div>
 					</div>
-				</form>
+				</form> --%>
 
 			</div>
 
@@ -404,14 +402,25 @@
 </div>
 <!-- deadline Model ends here -->
 
+<!--  set security authorization true or false to isRoleExtero-->
+<security:authorize access="hasRole('ROLE_USER')">
+	<input id="isRole" type="text" class="hide" value="false" />
+</security:authorize>
 
-
+<security:authorize access="hasRole('ROLE_ADMIN')">
+	<input id="isRole" type="text" class="hide" value="true" />
+</security:authorize>
 
 
 <script type="text/javascript">
 	$("#taskdeadline").keypress(function() {
 		return false;
 	})
+
+	/* active or deactive task button will appear only to isRoleExterno true  */
+	var isRole = $('#isRole').val();
+
+	console.log(isRole);
 
 	function makeEmpty() {
 
@@ -449,6 +458,9 @@
 	var cuserid = "1";
 	var listOrders1 = ${allOrders1};
 	
+
+	/*  */
+
 	if (listOrders1 != "") {
 		displayTable(listOrders1)
 	}
@@ -464,7 +476,7 @@
 				.each(
 						listOrders,
 						function(i, orderObj) {
-							if (loginUserDId == "1") {
+							if (isRole == 'true') {
 								if (orderObj.status == "1") {
 									var deleterow = "<a class='deactivate' onclick='deletetask("
 											+ orderObj.id
@@ -475,7 +487,7 @@
 											+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 								}
 
-							} else {
+							} else if (isRole == 'false') {
 								deleterow = " ";
 							}
 
@@ -545,11 +557,8 @@
 									+ "&nbsp;&nbsp;"
 									+ deleterow
 									+ "&nbsp;&nbsp;"
-									+ comment
-									+ "&nbsp;&nbsp;"
 									+ time
 									+ "&nbsp;&nbsp;"
-									+ history2
 									+ "</td>" + "</tr>";
 							$(tblRow).appendTo("#tableId table tbody");
 						});
@@ -953,26 +962,25 @@
 
 	 */
 
-	
-	 function inactiveData() {
-	 var status="0";
-	 if($('#inActive').is(":checked") == true){
-	 status="0";
-	 }else{
-	 status="1";
-	 }
-	 var formData = new FormData();
-	 formData.append('status', status);
-	
-	 $.fn.makeMultipartRequest('POST', 'inActiveTasks', false,
-	 formData, false, 'text', function(data) {
-	 var jsonobj = $.parseJSON(data);
-	 var alldata = jsonobj.allOrders1;
-	 displayTable(alldata);
-	 console.log(jsonobj.allOrders1);
-	 });
-	
-	 }  
+	function inactiveData() {
+		var status = "0";
+		if ($('#inActive').is(":checked") == true) {
+			status = "0";
+		} else {
+			status = "1";
+		}
+		var formData = new FormData();
+		formData.append('status', status);
+
+		$.fn.makeMultipartRequest('POST', 'inActiveTasks', false, formData,
+				false, 'text', function(data) {
+					var jsonobj = $.parseJSON(data);
+					var alldata = jsonobj.allOrders1;
+					displayTable(alldata);
+					console.log(jsonobj.allOrders1);
+				});
+
+	}
 
 	// main form validation
 	/* 

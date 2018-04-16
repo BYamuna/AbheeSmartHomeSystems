@@ -140,36 +140,18 @@ public class AbheeDashBoardController {
 	
 	@RequestMapping(value = "/viewTicket")
 	public String viewIssue(@RequestParam(value = "id", required = true) String taskId,
-			@RequestParam(value = "pgn", required = true) String pgn,Model model,HttpSession session) {
+			@RequestParam(value = "pgn", required = true) String pgn,Model model,HttpSession session) 
+	{
 		 
 		if(pgn.equals("1"))
 		{
 			abheeTaskDao.openTask(taskId);
 		}
 		
-		
-		try {
 			List<Map<String, Object>> viewtaskBean = abheeTaskDao.getAbheeTaskById(taskId);
-			ObjectMapper objectMapper;
 			model.addAttribute("test2",viewtaskBean);
-			String sJson;
 			
-			if (viewtaskBean != null) {
-				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(viewtaskBean);
-				session.setAttribute("viewTask", sJson);
-				// System.out.println(sJson);
-			} else {
-				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(viewtaskBean);
-				session.setAttribute("viewTask", "''");
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e);
-
-		}
+			
 		
 		return "ViewTicket";
 
