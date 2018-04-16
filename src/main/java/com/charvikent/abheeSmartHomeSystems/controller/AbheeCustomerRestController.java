@@ -1,13 +1,13 @@
 package com.charvikent.abheeSmartHomeSystems.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONException;
@@ -16,15 +16,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
+import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CompanyDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
@@ -32,7 +36,6 @@ import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ProductDao;
 import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
-import com.charvikent.abheeSmartHomeSystems.model.Company;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.OTPDetails;
 import com.charvikent.abheeSmartHomeSystems.model.Product;
@@ -71,7 +74,8 @@ public class AbheeCustomerRestController {
 	@Autowired
 	FilesStuff fileTemplate;
 
-	
+	@Autowired
+	SendingMail sendingMail;
 	@RequestMapping("/Customer")
 	public String showCustomerRegistrationForm(Model model,HttpServletRequest request) throws JsonProcessingException
 	{
@@ -261,7 +265,6 @@ HashMap<String,String> hm =new HashMap<String,String>();
 			if(null != listOrderBeans)
 			{
 				json.put("categorieslist", listOrderBeans);
-=======
 			//users.add(userBean);
 			
 			ObjectMapper objectMapper = new ObjectMapper();
@@ -273,7 +276,6 @@ HashMap<String,String> hm =new HashMap<String,String>();
 				//json.put("categorieslist", listOrderBeans);
 				code =userBean.getFirstname()+" "+userBean.getLastname();
 				json.put("customerBean", userBean);
->>>>>>> c121eda3b50a1306a9dfe9b02688b9062934b16f
 				
 			}
 			else
@@ -402,7 +404,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	}
 	
 	
-	@RequestMapping(value="/savequationrequest", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	@PostMapping(value="/savequationrequest", consumes = "application/json", produces = "application/json")  
 	public HashMap<String, String>  saveQuationRequest( @RequestBody SalesRequest salesrequest,@RequestParam("imgfile") MultipartFile[] uploadedFiles) {
 		
 		String code =null;
@@ -437,10 +439,62 @@ HashMap<String,String> hm =new HashMap<String,String>();
 			e.printStackTrace();
 		}
 		
-HashMap<String,String> hm =new HashMap<String,String>();
+				HashMap<String,String> hm =new HashMap<String,String>();
 		
 		hm.put("status", code);
 		return hm;
+	}
+	
+	
+	
+	@PostMapping(value="/restSalesRequest", consumes = "application/json", produces = "application/json")
+	public String saveRequestDetails(@ModelAttribute("salesrequest") SalesRequest salesrequest,
+									@RequestParam("imgfile") MultipartFile[] uploadedFiles,
+									/*@RequestParam(value = "locationData") String latlong,*/HttpServletRequest request,RedirectAttributes redir) throws IllegalStateException, IOException, MessagingException
+	{
+		
+		String referalUrl=request.getHeader("referer");
+		int filecount =0;
+		
+		String str[] = salesrequest.getLocation().split("&");
+		
+		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
+		
+		salesrequest.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
+		salesrequest.setLat(str[0]);
+		salesrequest.setLongitude(str[1]);
+		salesrequest.setEnable("1");
+		/* for(MultipartFile multipartFile : uploadedFiles) {
+				String fileName = multipartFile.getOriginalFilename();
+				if(!multipartFile.isEmpty())
+				{
+					filecount++;
+				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+				}
+			}*/
+   	 
+   	 if(filecount>0)
+   	 {
+   		 salesrequest.setImgfiles(fileTemplate.concurrentFileNames());
+   		 fileTemplate.clearFiles();
+   		 
+   	 }
+	   	Boolean result =srequestDao.checkSalesrequestExistsorNotByEmailAndModelNo(salesrequest);
+	   	if(result==false)
+	   	{
+			srequestDao.saveRequest(salesrequest);
+	   		//sendingMail.SendingSalesRequestByEmail(salesrequest.getEmail());
+	   		//sendingMail.sendSalesRequestEmailWithattachment(salesrequest.getEmail(), uploadedFiles);
+	   	}
+	   	else {
+	   		redir.addFlashAttribute("msg","Record Already Exists");
+	   		System.out.println("record Already Exists");
+		return "redirect:abheecategory";
+		}
+	   	redir.addFlashAttribute("msg","We Received The Request and will send you the Quotation soon. Thanking you.");
+	   	System.out.println("&&&&&&&&&&&&&&&&&&&&& Mail Sent");
+	   	return "redirect:abheecategory";
+		
 	}
 	
 
