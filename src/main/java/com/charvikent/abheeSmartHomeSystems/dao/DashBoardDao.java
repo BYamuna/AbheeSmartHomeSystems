@@ -31,7 +31,7 @@ public class DashBoardDao {
 		HashMap<String,String> tasksSeverityCounts =new LinkedHashMap<String,String>();
 		
 		String hql ="select abheeseverity.severity ,COUNT(abhee_task.severity)as number  FROM abhee_task RIGHT  JOIN abheeseverity "
-                +"ON (abheeseverity.id=abhee_task.severity)   ";
+                +"ON (abheeseverity.id=abhee_task.severity)  and abhee_task.kstatus <> '4' ";
 		
 		 User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			

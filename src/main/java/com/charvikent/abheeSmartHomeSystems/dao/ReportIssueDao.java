@@ -25,6 +25,7 @@ import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistory;
+import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
 
@@ -56,6 +57,7 @@ public class ReportIssueDao {
 			
 	     } 
 		em.persist(reportIssue);
+		
 		
 		TaskHistory taskHistory =new TaskHistory();
 		

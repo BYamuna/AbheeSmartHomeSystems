@@ -13,7 +13,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 
 @Entity
-public class AbheeTask  {
+public class TaskHistoryLogs  {
 
 
 	

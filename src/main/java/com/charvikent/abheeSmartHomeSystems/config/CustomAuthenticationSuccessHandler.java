@@ -72,6 +72,8 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 		{
 			
 			User objuserBean = (User)objUser;
+			
+			session.setAttribute("objuserBean", objuserBean);
 		
 			session.setAttribute("lastLoginTime", userDao.getLastloginTime());
 			
