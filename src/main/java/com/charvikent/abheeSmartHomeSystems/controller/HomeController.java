@@ -159,10 +159,10 @@ public class HomeController {
 		
 		return "admin";
 	}
-	@RequestMapping("/dummypage")
+	/*@RequestMapping("/dummypage")
 	public String dummy(Model model) {
 		return "dummypage";
-	}
+	}*/
 	
 	@RequestMapping("/")
 	public String ShowAbhee(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException 

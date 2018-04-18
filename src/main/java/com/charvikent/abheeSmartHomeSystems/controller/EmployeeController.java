@@ -238,7 +238,7 @@ public class EmployeeController {
 		}else {
 			request.setAttribute("msg", "You Entered Wrong Password");
 			request.setAttribute("cssMsg", "warning");
-			return "changePassword";
+			return "redirect:changePassword";
 		}
 
 
