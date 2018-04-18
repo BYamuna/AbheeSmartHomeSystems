@@ -76,7 +76,7 @@ public Customer checkuserExistOrNot(Customer customer) {
 
 public Customer validateCustomer(String loginid, String password) {
 	
-	String hql =" from Customer  where mobilenumber ='"+loginid+"' and password='"+password+"'";
+	String hql =" from Customer  where enabled='1'and mobilenumber ='"+loginid+"' and password='"+password +"'";
 	Query query =entityManager.createQuery(hql);
 	List<Customer>usersList =query.getResultList();
 	if(usersList.isEmpty())
