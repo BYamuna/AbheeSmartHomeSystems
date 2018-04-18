@@ -1,6 +1,9 @@
 package com.charvikent.abheeSmartHomeSystems.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +47,7 @@ import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mysql.jdbc.util.Base64Decoder;
 
 @RestController
 public class AbheeCustomerRestController {
@@ -448,21 +453,22 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	
 	
 	@PostMapping(value="/restSalesRequest", consumes = "application/json", produces = "application/json")
-	public String saveRequestDetails(@ModelAttribute("salesrequest") SalesRequest salesrequest,
-									@RequestParam("imgfile") MultipartFile[] uploadedFiles,
-									/*@RequestParam(value = "locationData") String latlong,*/HttpServletRequest request,RedirectAttributes redir) throws IllegalStateException, IOException, MessagingException
+	public String saveRequestDetails(@ModelAttribute SalesRequest salesrequest,
+									/*@RequestParam("imgfile") MultipartFile[] uploadedFiles*/
+			                           
+									@RequestParam(value = "imgfile") String[] file,HttpServletRequest request,RedirectAttributes redir) throws IllegalStateException, IOException, MessagingException
 	{
 		
 		String referalUrl=request.getHeader("referer");
 		int filecount =0;
 		
-		String str[] = salesrequest.getLocation().split("&");
+		//String str[] = salesrequest.getLocation().split("&");
 		
 		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
 		
 		salesrequest.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
-		salesrequest.setLat(str[0]);
-		salesrequest.setLongitude(str[1]);
+		/*salesrequest.setLat(str[0]);
+		salesrequest.setLongitude(str[1]);*/
 		salesrequest.setEnable("1");
 		/* for(MultipartFile multipartFile : uploadedFiles) {
 				String fileName = multipartFile.getOriginalFilename();
@@ -472,7 +478,19 @@ HashMap<String,String> hm =new HashMap<String,String>();
 				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 				}
 			}*/
-   	 
+		
+		for(String multipartFile : file) {
+		//String imgData = request.getParameter("imgfile");
+		if (StringUtils.isNotBlank(multipartFile)) {
+			Base64Decoder decoder = new Base64Decoder(); 
+			
+			File pathFile=fileTemplate.makeDirectory();
+			try (FileOutputStream imageOutFile = new FileOutputStream(pathFile)) {
+			 byte[] imgBytes = Base64.getDecoder().decode(multipartFile.split(",")[1]);
+			 imageOutFile.write(imgBytes);
+		}
+		}
+		}
    	 if(filecount>0)
    	 {
    		 salesrequest.setImgfiles(fileTemplate.concurrentFileNames());

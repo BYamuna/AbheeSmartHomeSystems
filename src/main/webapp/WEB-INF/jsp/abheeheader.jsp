@@ -37,6 +37,8 @@
     <!-- Google Fonts -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4TkibnxHHIJtDj1Dp59VAOSHp_sdA1KQ&sensor=false&libraries=places"></script>  
+<!--      <script src='https://maps.google.com/maps/api/js?sensor=false&libraries=places'></script> -->
 </head>
 <body>
   	<div class="container">
@@ -98,7 +100,7 @@
         </div>
   	</div>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="${baseurl }/abhee/js/bootstrap.min.js"></script>
+<%--     <script src="${baseurl }/abhee/js/bootstrap.min.js"></script> --%>
     <script src="${baseurl }/abhee/js/bootstrap-dropdownhover.min.js"></script> 
     
 <%-- 
