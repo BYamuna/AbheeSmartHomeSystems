@@ -34,8 +34,10 @@ import com.charvikent.abheeSmartHomeSystems.dao.PriorityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ServiceDao;
 import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
+import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
 //import com.charvikent.abheeSmartHomeSystems.model.KpStatusLogs;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 //import com.fasterxml.jackson.core.JsonProcessingException;
@@ -66,6 +68,9 @@ public class TaskController {
 	
 	@Autowired
 	AbheeTaskStatusDao abheeTaskStatusDao;
+	
+	@Autowired
+	TaskHistoryLogsDao taskHistoryLogsDao;
 	
 	
 	/*@Autowired
@@ -117,7 +122,7 @@ public class TaskController {
 	}
 	
 	@PostMapping(value = "/savetask1" )
-	public String saveAdmin(@Valid @ModelAttribute("taskf")  AbheeTask task, BindingResult bindingresults, @RequestParam("file1") MultipartFile[] uploadedFiles,
+	public String saveAdmin(@Valid @ModelAttribute("taskf")  AbheeTask task, TaskHistoryLogs taskHistoryLogs,BindingResult bindingresults, @RequestParam("file1") MultipartFile[] uploadedFiles,
 			RedirectAttributes redir) throws IOException {
 		
 		if (bindingresults.hasErrors()) {
@@ -160,8 +165,9 @@ public class TaskController {
 					
 					task.setStatus("1");
 					task.setAdditionalinfo("0");
+					/*taskHistoryLogsDao.savetaskhistorylogs(taskHistoryLogs);*/
 					reportIssueDao.saveReportIssue(task);
-
+					
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");
 					redir.addFlashAttribute("cssMsg", "success");
 					
@@ -194,6 +200,7 @@ public class TaskController {
 						e.printStackTrace();
 					}
 					task.setKstatus("2");
+					/*taskHistoryLogsDao.savetaskhistorylogs(taskHistoryLogs);*/
 					reportIssueDao.updateIssue(task);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
@@ -529,7 +536,7 @@ public class TaskController {
 		
 		
 		reportIssueDao.saveReportIssue(task);
-
+		taskHistoryLogsDao.historyLog(task);
 		
 		System.out.println(message+"  "+servicetypeid);
 		return true;

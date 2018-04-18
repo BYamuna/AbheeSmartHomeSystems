@@ -45,6 +45,8 @@ public class ReportIssueDao {
 	
 	@Autowired
 	TaskHistoryDao taskHistoryDao;
+	@Autowired
+	TaskHistoryLogsDao taskHistoryLogsDao;
 
 	public void saveReportIssue(AbheeTask reportIssue) {
 		String randomNum = utilities.randNum();
@@ -59,18 +61,35 @@ public class ReportIssueDao {
 		em.persist(reportIssue);
 		
 		
-		TaskHistory taskHistory =new TaskHistory();
+		/*TaskHistory taskHistory =new TaskHistory();
 		
 		taskHistory.setTaskid(String.valueOf(reportIssue.getId()));
 		taskHistory.setTaskno(reportIssue.getTaskno());
 		taskHistory.setTaskstatus(reportIssue.getKstatus());
 		taskHistory.setMessage(reportIssue.getDescription());
 		
-		em.persist(taskHistory);
+		em.persist(taskHistory);*/
 		
+		taskHistoryLogsDao.historyLog(reportIssue);
 		
-		
-
+		/*TaskHistoryLogs taskHistoryLogs=new TaskHistoryLogs();
+		taskHistoryLogs.setTaskid(reportIssue.getId());
+		taskHistoryLogs.setServiceType(reportIssue.getServiceType());
+		taskHistoryLogs.setAdditionalinfo(reportIssue.getAdditionalinfo());
+		taskHistoryLogs.setAssignby(reportIssue.getAssignby());
+		taskHistoryLogs.setAssignto(reportIssue.getAdditionalinfo());
+		taskHistoryLogs.setCategory(reportIssue.getCategory());
+		taskHistoryLogs.setDescription(reportIssue.getDescription());
+		taskHistoryLogs.setKstatus(reportIssue.getKstatus());
+		taskHistoryLogs.setModelid(reportIssue.getModelid());
+		taskHistoryLogs.setPriority(reportIssue.getPriority());
+		taskHistoryLogs.setSeverity(reportIssue.getSeverity());
+		taskHistoryLogs.setStatus(reportIssue.getStatus());
+		taskHistoryLogs.setSubject(reportIssue.getSubject());
+		taskHistoryLogs.setTaskdeadline(reportIssue.getTaskdeadline());
+		taskHistoryLogs.setTaskno(reportIssue.getTaskno());
+		taskHistoryLogs.setUploadfile(reportIssue.getUploadfile());
+		em.persist(taskHistoryLogs);*/
 	}
 
 	/* @SuppressWarnings("unchecked")
@@ -356,7 +375,7 @@ public List<ReportIssue> getAllReportIssues()
      }
 		em.flush();
 
-         TaskHistory taskHistory =new TaskHistory();
+         /*TaskHistory taskHistory =new TaskHistory();
 		
 		taskHistory.setTaskid(String.valueOf(editissue.getId()));
 		taskHistory.setTaskno(editissue.getTaskno());
@@ -365,10 +384,27 @@ public List<ReportIssue> getAllReportIssues()
 		
 		taskHistory.setTaskdeadline(editissue.getTaskdeadline());
 		
-		em.persist(taskHistory);
+		em.persist(taskHistory);*/
 		
-
-
+		/*TaskHistoryLogs taskHistoryLogs=new TaskHistoryLogs();
+		taskHistoryLogs.setTaskid( editissue.getId());
+		taskHistoryLogs.setServiceType( editissue.getServiceType());
+		taskHistoryLogs.setAdditionalinfo( editissue.getAdditionalinfo());
+		taskHistoryLogs.setAssignby( editissue.getAssignby());
+		taskHistoryLogs.setAssignto( editissue.getAdditionalinfo());
+		taskHistoryLogs.setCategory( editissue.getCategory());
+		taskHistoryLogs.setDescription( editissue.getDescription());
+		taskHistoryLogs.setKstatus( editissue.getKstatus());
+		taskHistoryLogs.setModelid( editissue.getModelid());
+		taskHistoryLogs.setPriority( editissue.getPriority());
+		taskHistoryLogs.setSeverity( editissue.getSeverity());
+		taskHistoryLogs.setStatus( editissue.getStatus());
+		taskHistoryLogs.setSubject( editissue.getSubject());
+		taskHistoryLogs.setTaskdeadline( editissue.getTaskdeadline());
+		taskHistoryLogs.setTaskno( editissue.getTaskno());
+		taskHistoryLogs.setUploadfile( editissue.getUploadfile());
+		em.persist(taskHistoryLogs);*/
+		taskHistoryLogsDao.historyLog(editissue);
 	}
 
 
@@ -452,6 +488,7 @@ public List<ReportIssue> getAllReportIssues()
 			AbheeTask task= (AbheeTask)em.find(AbheeTask.class ,id);
 			   task.setStatus(status);
 			   em.merge(task);
+			   taskHistoryLogsDao.historyLog(task);
 
 		}catch(Exception e){
 			e.printStackTrace();
