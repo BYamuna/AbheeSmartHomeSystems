@@ -84,6 +84,8 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 				
 				 session.setAttribute("userDesignationSession", userDesignation);
 				 
+				 System.out.println(dashBoardDao.getSeverityCountsUnderReportTo());
+				 
 				 session.setAttribute("sessionUser", objuserBean.getFirstname());
 				 try {
 						HashMap<String, String> countsOrderBeans = dashBoardDao.getTasksCountBySeverity();
@@ -93,7 +95,9 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 						if (listOrderBeans != null && countsOrderBeans.size() > 0) {
 							objectMapper = new ObjectMapper();
 							sJson = objectMapper.writeValueAsString(countsOrderBeans);
+							String sJson2 = objectMapper.writeValueAsString(dashBoardDao.getSeverityCountsUnderReportTo());
 							session.setAttribute("severityCounts", sJson);
+							session.setAttribute("severityCounts2", sJson2);
 							// System.out.println(sJson);
 						} else {
 							objectMapper = new ObjectMapper();

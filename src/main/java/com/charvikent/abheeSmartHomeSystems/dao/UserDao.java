@@ -257,7 +257,7 @@ public class UserDao {
 	{
 		List<String> list1=new ArrayList<String>();
 		@SuppressWarnings("unchecked")
-		List<Object []> rowsf =   em.createNativeQuery("select  id,reportto from(select * from kpusers order by reportto, id) kpusers_sorted,(select @pv \\:=:custName ) initialisation where   find_in_set(reportto, @pv) > 0 and     @pv \\:= concat(@pv, ',', id)").setParameter("custName",rto).getResultList();
+		List<Object []> rowsf =   em.createNativeQuery("select  id,reportto from(select * from abheeusers order by reportto, id) abheeusers_sorted,(select @pv \\:=:custName ) initialisation where   find_in_set(reportto, @pv) > 0 and     @pv \\:= concat(@pv, ',', id)").setParameter("custName",rto).getResultList();
 		for(Object[] row:rowsf)
 		{
 			list1.add(String.valueOf(row[0]));
@@ -541,6 +541,10 @@ public class UserDao {
 		System.out.println(user);
 		return user;
 	}
+	
+	
+	
+	
 
 
 

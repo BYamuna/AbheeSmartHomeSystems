@@ -2,6 +2,7 @@ package com.charvikent.abheeSmartHomeSystems.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskStatusDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
+import com.charvikent.abheeSmartHomeSystems.dao.DashBoardDao;
 import com.charvikent.abheeSmartHomeSystems.dao.PriorityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ServiceDao;
@@ -57,6 +59,8 @@ public class AbheeDashBoardController {
 	
 	@Autowired
 	AbheeTaskStatusDao abheeTaskStatusDao;
+	@Autowired
+	DashBoardDao dashBoardDao;
 	
 	
 	@RequestMapping(value = "/severityBy")
@@ -155,6 +159,48 @@ public class AbheeDashBoardController {
 		
 		return "ViewTicket";
 
+	}
+	
+	@RequestMapping(value = "/severityByReportTo")
+	public String  tasksFilterByseverityOnReportTo(@RequestParam(value="id", required=true) String sev,Model model,HttpServletRequest request,HttpSession session,@ModelAttribute("taskf")  AbheeTask taskf){
+		Set<Map<String, Object>> listOrderBeans = null;
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		
+		model.addAttribute("severity", severityDao.getSeverityMap());
+		model.addAttribute("priority", priorityDao.getPriorityMap());
+		model.addAttribute("userNames", userService.getUserName());
+		model.addAttribute("category", serviceDao.getServicemap());
+		model.addAttribute("taskstatus", abheeTaskStatusDao.getTaskStatusMap());
+		
+		
+		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id=String.valueOf(objuserBean.getId());
+		
+		model.addAttribute("objuserBean", objuserBean);
+		
+		try {
+			listOrderBeans = dashBoardDao.GetTaskBySeverityUnderReportTo(sev);
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		
+		
+		return "task";
+	
 	}
 	
 

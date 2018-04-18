@@ -339,8 +339,11 @@ document.getElementById("file1").onchange = function () {
     
     for(var i=0; i<=this.files.length; i++)
     {
+    	var fileSize = this.files[i].size
+    	fileSize = fileSize / 1048576;
     	
-    	 /*
+    	alert(fileSize);
+    	 
      if(this.files[i].size>1253){
         alert("Image Size should not be greater than 1253Kb");
     if(this.files[i].size>500){
@@ -350,7 +353,7 @@ document.getElementById("file1").onchange = function () {
         $('#file1').wrap('<form>').closest('form').get(0).reset();
         $('#file1').unwrap();     
         return false; 
-    } */
+    } 
     if(this.files[i].type.indexOf("image")==-1){
         alert("Invalid Type");
         $("#file1").attr("src","blank");

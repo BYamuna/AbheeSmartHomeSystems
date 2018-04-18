@@ -92,8 +92,8 @@
 					<div class="login-top"> 	
 						<form action=customerlogin method="post"> 
 						  <input type="hidden" name="userType" id="userType" value="customerUser"/>
-							<input type="text" class="name" name="username"  id="username" autofocus="autofocus" Placeholder="Username" required=""/>
-							<input type="password" class="password" name="password" Placeholder="Password" required=""/>
+							<input type="text"  name="username"  id="username"  placeholder="Mobilenumber" />
+							<input type="password"  name="password" placeholder="Password" />
 							<input type="reset" value="Reset"> 
 							<input type="submit" value="Login">
 						</form> 	

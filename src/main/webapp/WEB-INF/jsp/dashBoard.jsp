@@ -538,6 +538,8 @@
 	var loginUserId = "1";
 	var 	severityCounts  = ${severityCounts};
 	
+	var 	severityCounts2  = ${severityCounts2};
+	
 	
 	var rowdata;
 		rowdata='<tr>'
@@ -547,6 +549,15 @@
 				+'<td><a href="severityBy?id=1">'+ severityCounts.MINOR +'</a></td>'
 					+'</tr>';
 	$("#severityTable").append(rowdata);
+	
+	var rowdata2;
+	rowdata2='<tr>'
+			+'<td> Monitored By Me</td>'
+			+'<td><a href="severityByReportTo?id=3">'+ severityCounts2.Critical +'</a></td>'
+			+'<td><a href="severityByReportTo?id=2">'+ severityCounts2.Major +'</a></td>'
+			+'<td><a href="severityByReportTo?id=1">'+ severityCounts2.Minor +'</a></td>'
+				+'</tr>';
+$("#severityTable").append(rowdata2);
 		
 		
 	
