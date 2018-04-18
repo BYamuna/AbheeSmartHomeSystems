@@ -22,7 +22,7 @@ public class TaskHistoryLogs  {
 	private Integer  id;
 	
 	private String taskno;
-
+	private Integer taskid;
 	@CreationTimestamp
 	private Date createdTime;
 
@@ -75,6 +75,12 @@ public class TaskHistoryLogs  {
 	
 	
 	
+	public Integer getTaskid() {
+		return taskid;
+	}
+	public void setTaskid(Integer taskid) {
+		this.taskid = taskid;
+	}
 	public String getAssignbyid() {
 		return assignbyid;
 	}
@@ -274,18 +280,19 @@ public class TaskHistoryLogs  {
 	public void setModelid(String modelid) {
 		this.modelid = modelid;
 	}
-	
 	@Override
 	public String toString() {
-		return "AbheeTask [id=" + id + ", taskno=" + taskno + ", createdTime=" + createdTime + ", updatedTime="
-				+ updatedTime + ", category=" + category + ", severity=" + severity + ", priority=" + priority
-				+ ", assignto=" + assignto + ", subject=" + subject + ", description=" + description + ", uploadfile="
-				+ uploadfile + ", gapdays=" + gapdays + ", gapcount=" + gapcount + ", kstatus=" + kstatus + ", status="
-				+ status + ", additionalinfo=" + additionalinfo + ", taskdeadline=" + taskdeadline + ", taskdeadlineid="
-				+ taskdeadlineid + ", ServiceType=" + ServiceType + ", assigntoid=" + assigntoid + ", categoryid="
-				+ categoryid + ", priorityid=" + priorityid + ", severityid=" + severityid + ", assignbyid="
-				+ assignbyid + ", kstatusid=" + kstatusid + ", modelid=" + modelid + ", assignby=" + assignby + "]";
+		return "TaskHistoryLogs [id=" + id + ", taskno=" + taskno + ", taskid=" + taskid + ", createdTime="
+				+ createdTime + ", updatedTime=" + updatedTime + ", category=" + category + ", severity=" + severity
+				+ ", priority=" + priority + ", assignto=" + assignto + ", subject=" + subject + ", description="
+				+ description + ", uploadfile=" + uploadfile + ", gapdays=" + gapdays + ", gapcount=" + gapcount
+				+ ", kstatus=" + kstatus + ", status=" + status + ", additionalinfo=" + additionalinfo
+				+ ", taskdeadline=" + taskdeadline + ", taskdeadlineid=" + taskdeadlineid + ", ServiceType="
+				+ ServiceType + ", assigntoid=" + assigntoid + ", categoryid=" + categoryid + ", priorityid="
+				+ priorityid + ", severityid=" + severityid + ", assignbyid=" + assignbyid + ", kstatusid=" + kstatusid
+				+ ", modelid=" + modelid + ", assignby=" + assignby + "]";
 	}
+	
 	
 	
 	

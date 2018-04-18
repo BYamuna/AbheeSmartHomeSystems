@@ -69,10 +69,4 @@ public class TaskHistory {
 	public void setTaskdeadline(String taskdeadline) {
 		this.taskdeadline = taskdeadline;
 	}
-	
-	
-	
-	
-	
-
 }

@@ -22,6 +22,8 @@ public class AbheeTask  {
 	private Integer  id;
 	
 	private String taskno;
+	
+	
 
 	@CreationTimestamp
 	private Date createdTime;
@@ -274,7 +276,6 @@ public class AbheeTask  {
 	public void setModelid(String modelid) {
 		this.modelid = modelid;
 	}
-	
 	@Override
 	public String toString() {
 		return "AbheeTask [id=" + id + ", taskno=" + taskno + ", createdTime=" + createdTime + ", updatedTime="
@@ -286,6 +287,9 @@ public class AbheeTask  {
 				+ categoryid + ", priorityid=" + priorityid + ", severityid=" + severityid + ", assignbyid="
 				+ assignbyid + ", kstatusid=" + kstatusid + ", modelid=" + modelid + ", assignby=" + assignby + "]";
 	}
+	
+	
+	
 	
 	
 	
