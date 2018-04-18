@@ -92,6 +92,50 @@
 									<thead>
 									<tr class="tr">
 
+										<th>Task No</th>
+										<td></td>
+									</tr>
+									<tr>
+										<th>Category</th>
+										<td></td>
+									</tr>
+									<tr class="tr">
+										<th>Model Name</th>
+										<td></td>
+									</tr>
+									<tr>
+										<th>Service Type</th>
+										<td></td>
+									</tr>
+									<tr class="tr">
+										<th>Serverity</th>
+										<td></td>
+									</tr>
+									<tr>
+										<th>Priority</th>
+										<td></td>
+									</tr>
+									<tr class="tr">
+										<th>Assigned to</th>
+										<td></td>
+									</tr>
+									<tr>
+										<th>Subject</th>
+										<td></td>
+									</tr>
+									<tr class="tr">
+										<th>Task Deadline</th>
+										<td></td>
+									</tr>
+									<tr>
+										<th>Task Status</th>
+										<td></td>
+									</tr>
+									<tr class="tr">
+										<th>Create Time</th>
+										<td></td>
+									</tr>
+
 									
 <c:forEach var="listOuter" items="${test2}">
        
