@@ -588,6 +588,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 	
 	function resetpassword()
 	{
+		$('#resetpassword').prop('disabled', true);
 	 idArrayCmt11 = $.makeArray($('.validate2').map(function() {
 		return this.id;
 		}));
@@ -636,11 +637,13 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 			  		if(result==true)
 			  		{
 			  			alert("Your Password sent to registered email and mobile number ");	
+			  			$('#passwordModel').modal('toggle');
+			  			 window.location.reload();
 			  		}	
 			  		else
 			  			{
 			  				alert("Enter registered mobile number");
-			  				$('#passwordModel').modal('toggle');
+			  				
 			  			}
 			  		
 			  		

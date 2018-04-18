@@ -376,7 +376,7 @@ public class AbheeCustRegistrationController
 				if(id == dummyId || userBean == null)
 				{
 					customerDao.updateCustomer(user);
-					//sendingMail.sendConfirmationEmail(user);
+					sendingMail.sendConfirmationEmail(user);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
 
@@ -407,7 +407,7 @@ public class AbheeCustRegistrationController
 		
 		if(custbean2 != null)
 		{
-			/*sendSMS.sendSMS(custbean2.getPassword(),custMobile);*/
+			//sendSMS.sendSMS(custbean2.getPassword(),custMobile);
 			sendingMail.resetPassword(custbean2);
 			return true;
 			

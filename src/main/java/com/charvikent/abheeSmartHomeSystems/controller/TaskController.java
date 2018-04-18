@@ -536,7 +536,7 @@ public class TaskController {
 		
 		
 		reportIssueDao.saveReportIssue(task);
-
+		taskHistoryLogsDao.historyLog(task);
 		
 		System.out.println(message+"  "+servicetypeid);
 		return true;
