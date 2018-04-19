@@ -125,6 +125,7 @@ width="250" height="200" frameborder="0" ></iframe>
  <c:choose>
     <c:when test="${not empty loggedstatus}">
      <script> var login=true;</script>
+     
     </c:when>
     <c:otherwise>
         <script> var login=false;</script>
