@@ -525,7 +525,7 @@
 									+ "&pgn=0'>"
 									+ orderObj.taskno + "</a>"
 									
-						 var view3 = "<a class='view viewIt' href='viewTicket?id="
+						 var view3 = "<a class='view viewIt' href='viewCustomerDetails?id="
 										+ orderObj.customer_id
 										+ "&pgn=0'>"
 										+ orderObj.customer_id + "</a>"

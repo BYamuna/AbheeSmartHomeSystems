@@ -220,6 +220,18 @@ public List<Map<String, Object>> getAbheeTaskById(String id) {
 	return retlist;
 	
 }
+public List<Map<String, Object>> getCustomerDetailsById(String id) {
+	//return null;
+	
+	String sql="select c.customer_id,c.firstname,c.lastname,c.address,c.email,c.mobilenumber,CASE WHEN c.registedred_from_android IN ('0') THEN 'No' WHEN c.registedred_from_android IN ('1') THEN 'Yes' ELSE '-----' END AS enabled" + 
+			" FROM abhee_customer c where c.customer_id='"+id+"'";
+	System.out.println(sql);
+	
+	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
+	System.out.println(retlist);
+	return retlist;
+	
+}
 
 public List<Map<String,Object>> getTasksListAssignToMeById(String id)
 {
