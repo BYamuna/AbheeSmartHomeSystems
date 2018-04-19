@@ -92,14 +92,18 @@
 					<div class="login-top"> 	
 						<form action=customerlogin method="post"> 
 						  <input type="hidden" name="userType" id="userType" value="customerUser"/>
-							<input type="text"  name="username"  id="username"  placeholder="Mobilenumber" />
-							<input type="password"  name="password" placeholder="Password" />
-							<input type="reset" value="Reset"> 
-							<input type="submit" value="Login">
+							<input type="text" class="form name" name="username" id="username" onfocus="this.placeholder=''" onblur="this.placeholder='Mobile Number'" placeholder="Mobile Number" required=""/>
+							<input type="password" class="form password" name="password" onfocus="this.placeholder=''" onblur="this.placeholder='Password'" placeholder="Password" required=""/>
 						</form> 	
 					</div> 
 					<div class="login-bottom"> 
-						<h6><a href="#" data-toggle="modal" data-target="#passwordModel" class="tag">Forgot password</a></h6>
+						<div class="col-sm-6">
+							<h6><a href="#" data-toggle="modal" data-target="#passwordModel" class="tag">Forgot password</a></h6>
+						</div>
+						<div class="col-sm-6">
+							<button class="btn btn-primary" type="submit" value="Login">Login</button>
+							<button class="btn btn-danger" type="reset" value="Reset">Reset</button>
+						</div><div class="clearfix"></div>
 					</div>
 					<div class="login-bottom"> 
 						<h6 style="margin-top:40px;">Click here to <a href="#" data-toggle="modal" onclick="openRegistrationModel()"  class="tag">register</a></h6>

@@ -109,6 +109,14 @@ body {
 .listdata .col-sm-4 p:hover {
 	color:#FF0000;
 }
+strong {
+	margin-left:20px !important;
+	font-size:20px;
+}
+.form:focus {
+  	border-color: #01c4ff;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(126, 239, 104, 0.6);
+}
 .panel-body a {
 	font-size:15px;
 	color:#000000;
@@ -133,6 +141,8 @@ body {
 .dtxt p {
 	color:#000000;
 	font-size:16px;
+	text-align:justify;
+	padding-left:10px;
 }
 .vid {
 	margin-top:20px;
