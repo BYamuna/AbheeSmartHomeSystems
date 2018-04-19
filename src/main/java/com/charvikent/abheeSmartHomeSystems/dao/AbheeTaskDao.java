@@ -220,6 +220,17 @@ public List<Map<String, Object>> getAbheeTaskById(String id) {
 	return retlist;
 	
 }
+public List<Map<String, Object>> getCustomerDetailsById(String id) {
+	return null;
+	
+	/*String sql=;
+	System.out.println(sql);
+	
+	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
+	System.out.println(retlist);
+	return retlist;*/
+	
+}
 
 public List<Map<String,Object>> getTasksListAssignToMeById(String id)
 {

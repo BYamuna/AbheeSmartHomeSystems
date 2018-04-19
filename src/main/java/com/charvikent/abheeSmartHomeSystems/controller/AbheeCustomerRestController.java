@@ -120,7 +120,6 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	@RequestMapping(value="/requestsms", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public ResponseEntity<String>  getOTP( @RequestBody Customer user) {
 		
-		user.setDesignation("9");
 		String custMobile=user.getMobilenumber();
 		Random random = new Random();
 		String  otpnumber = String.format("%04d", random.nextInt(10000));

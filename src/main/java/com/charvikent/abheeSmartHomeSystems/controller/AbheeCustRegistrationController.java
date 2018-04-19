@@ -178,7 +178,6 @@ public class AbheeCustRegistrationController
 		customer.setEmail(cemail);
 		customer.setPassword(cpassword);
 		customer.setEnabled("1");
-		customer.setDesignation("9");
 		//customer.setUsername(str);
 		String returnmsg ="";
 		if(otpnumber.equals(cotp))
