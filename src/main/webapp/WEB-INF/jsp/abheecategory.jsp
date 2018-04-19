@@ -209,6 +209,11 @@
 <%@include file="abheefooter.jsp" %>
 
 <script type="text/javascript">
+
+
+ var customerId=${customerId}
+ 
+ console.log(customerId);
  /* var productdetailslist =${productdetails};
 
 	var rowdata;
@@ -392,11 +397,13 @@ $.each(productdetailslist, function(k,v){
 		
 		 message =$('#message').val();
 		 servicetypeid =$('#servicetypeid').val();
+		 
+		 alert(customerId);
 		
 		$.ajax({
 			type : "POST",
 			url : "saveServiceRequest",
-			data :"message="+message+"&servicetypeid="+servicetypeid+"&catid="+catid+"&modelid="+modelid,
+			data :"message="+message+"&servicetypeid="+servicetypeid+"&catid="+catid+"&modelid="+modelid+"&customerId="+customerId,
 			dataType : "text",
 			beforeSend : function() {
 	             $.blockUI({ message: 'Please wait' });

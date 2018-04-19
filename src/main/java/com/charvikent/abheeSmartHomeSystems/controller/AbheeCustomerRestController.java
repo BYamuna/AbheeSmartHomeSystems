@@ -3,7 +3,7 @@ package com.charvikent.abheeSmartHomeSystems.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Base64;
+//import org.apache.commons.codec.binary.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -486,8 +486,8 @@ HashMap<String,String> hm =new HashMap<String,String>();
 			
 			File pathFile=fileTemplate.makeDirectory();
 			try (FileOutputStream imageOutFile = new FileOutputStream(pathFile)) {
-			 byte[] imgBytes = Base64.getDecoder().decode(multipartFile.split(",")[1]);
-			 imageOutFile.write(imgBytes);
+			 //byte[] imgBytes = Base64.getDecoder().decode(multipartFile.split(",")[1]);
+			 //imageOutFile.write(imgBytes);
 		}
 		}
 		}
