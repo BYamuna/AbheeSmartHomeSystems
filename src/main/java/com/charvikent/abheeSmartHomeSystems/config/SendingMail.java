@@ -19,6 +19,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
+import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 /*import com.charvikent.abheeSmartHomeSystems.dao.UserDao;*/
@@ -39,6 +41,8 @@ public class SendingMail {
 	@Autowired
 	HttpServletRequest request;
 	@Autowired	FilesStuff filePath;
+	@Autowired
+	 CustomerDao  customerDao;
 	
 	public void sendConfirmationEmail(Customer user) throws MessagingException {  
 		try {
@@ -293,5 +297,37 @@ public class SendingMail {
 		}  
 	}
 	
+	public  void  sendingMailWithTaskStatus(AbheeTask abheetask) throws MessagingException
+	{
+		try {
+			
+			
+			String customerid =  abheetask.getCustomerId();
+			//String password=custbean2.getPassword();
+			Customer customer= customerDao.findCustomerByCustId(customerid);
+			String emailid=customer.getEmail();
+			MimeMessage message = javaMailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			
+			
+			VelocityContext velocityContext = new VelocityContext();
+			velocityContext.put("name",customer.getFirstname());
+			
+			StringWriter stringWriter = new StringWriter();
+			velocityEngine.mergeTemplate(".vm", "UTF-8", velocityContext, stringWriter);
+			helper.setText(stringWriter.toString(), true);
+			helper.setTo( emailid);
+		    helper.setSubject("Task status sent successfully");
+		  		   
+		   
+			javaMailSender.send(message);
+				
+			
+		} catch (MailException e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}  
+	}
+
 
 		}
