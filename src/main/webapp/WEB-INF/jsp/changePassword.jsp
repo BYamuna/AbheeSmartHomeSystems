@@ -120,36 +120,29 @@
 							
 										<div class="col-md-6">
 											<div class="form-group" id="passwordDiv">
-												<label class="col-md-3 control-label no-padding-right">Current
-													Password<span class="impColor">*</span></label>
+												<label class="col-md-3 control-label no-padding-right">Current	Password<span class="impColor">*</span></label>
 												<div class="col-md-6">
-													<form:password path="password"
-														class="form-control validate" placeholder="Enter Password" />
+													<form:password path="password"	class="form-control validate" placeholder="Enter Password" />
 												</div>
 											</div>
 
 										</div>
 										<div class="col-md-6">
 											<div class="form-group" id="passwordDiv">
-												<label class="col-md-3 control-label no-padding-right">New
-													Password<span class="impColor">*</span></label>
+												<label class="col-md-3 control-label no-padding-right">New Password<span class="impColor">*</span></label>
 												<div class="col-md-6">
-													<form:password path="npassword"
-														class="form-control validate"
-														placeholder="Enter  New Password" />
+													<form:password path="npassword"	class="form-control validate"	placeholder="Enter  New Password" />
 												</div>
 											</div>
 
 										</div>
 										<div class="col-md-6">
 											<div class="form-group" id="passwordDiv">
-												<label class="col-md-3 control-label no-padding-right">Confirm
-													New Password<span class="impColor">*</span></label>
+												<label class="col-md-3 control-label no-padding-right">Confirm Password<span class="impColor">*</span></label>
 												<div class="col-md-6">
-													<form:password path="cpassword"
-														class="form-control validate"
-														placeholder="Re-Enter New Password" />
+													<form:password path="cpassword"	class="form-control validate"	placeholder="Re-Enter New Password" />
 												</div>
+								           <span id="errorMsg" style="color:red;"></span>
 											</div>
 
 										</div>
@@ -158,7 +151,7 @@
 								<div class="col-md-12" style="text-align:right;">
 								<div class="form-group">
 									<div class="col-md-offset-3 col-md-6">
-										<input type="submit" id="submit3"  class="btn btn-success" value="Submit"/>
+										<input type="submit" id="submit3"  class="btn btn-success"  value="Submit"/>
 										<input class="btn-danger btn cancel"  type="reset"  value="Reset" />
 									</div>
 								</div></div>
@@ -180,16 +173,10 @@
 <!-- Body ends here -->
 <script type="text/javascript">
 $("#submit3").click(function(e){
-var npassword =$("#npassword").val();
-var cpassword =$("#cpassword").val();
-	if(npassword != cpassword){
-		
-		
-		alert("Password Miss Matched");
-		return false;
-		 e.preventDefault();	
-		 
-	}
+
+	idArrayCmt11 = $.makeArray($('.validate').map(function() {
+		return this.id;
+	}));
 	validation = true;
 	$.each(idArray, function(i, val) {
 		var value = $("#" + idArray[i]).val();
@@ -210,13 +197,31 @@ var cpassword =$("#cpassword").val();
 		} 
 	});
 	if(validation) {
-		$("#submit1").attr("disabled",true);
-		$("#submit1").val("Please wait...");
-		$("form").submit();											
-		event.preventDefault();
-	}else {
-		return false;
-		event.preventDefault();
+		var npassword =$("#npassword").val();
+		var cpassword =$("#cpassword").val();
+		
+			if(npassword == cpassword){
+				
+				$("#submit3").attr("disabled",true);
+				$("#submit3").val("Please wait...");
+				$("form").submit();	
+				
+			}else {
+		
+				$('#errorMsg').text( "* Password Not Matched") ;
+				setTimeout(function() { $("#errorMsg").hide(); }, 3000);
+				
+				e.preventDefault();
+				return false;
+	
+	              }
+			
+			
+			
+	}else{
+		
+	e.preventDefault();
+	return false;
 	}
 	
 });
