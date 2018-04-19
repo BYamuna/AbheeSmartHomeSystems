@@ -61,7 +61,7 @@
 		<div class="main-content-inner">
 			<div class="breadcrumbs ace-save-state" id="breadcrumbs">
 				<ul class="breadcrumb">
-					<li class="">View Ticket</li>
+					<li class="">View Customer Details</li>
 				</ul><!-- /.breadcrumb -->
 			</div>
 			
@@ -88,7 +88,7 @@
 						
 						<div class="table-responsive">
 								<table class="table table-bordered priority prioritybg"
-									style="border: 1px solid #0460a4; width:;" id="viewTaskTable">
+									style="border: 1px solid #0460a4; width:;" id="viewCustomerTable">
 										
 
 									
@@ -120,8 +120,8 @@
 							</div>
 						
 				
-               <%--  
-                <div class="col-md-12" id="history">
+                
+<%--                 <div class="col-md-12" id="history">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h4><i class="ace-icon fa fa-history"></i>
@@ -151,7 +151,7 @@
 
 </td><td>${logs.kpfield}</td>
 </td><td>${logs.kpchange}</td>
- --%>
+--%>
 
 </tr>
 
@@ -194,7 +194,7 @@ $("#severityTable").append(rowdata);
 	
 	
 $(".task").addClass("active");
-$("#pageName").text("View Task");
+$("#pageName").text("View Customer Details");
 
 
 </script> 

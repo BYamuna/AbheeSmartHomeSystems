@@ -135,7 +135,10 @@
 	
 	<definition name="allservicerequests" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/jsp/allservicerequests.jsp" />
-	</definition>  
+	</definition> 
+	<definition name="viewcustomerdetails" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/viewcustomerdetails.jsp" />
+	</definition>   
 		
 
 </tiles-definitions>

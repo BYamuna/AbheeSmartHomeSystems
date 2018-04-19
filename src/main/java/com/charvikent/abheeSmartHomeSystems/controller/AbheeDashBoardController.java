@@ -160,6 +160,24 @@ public class AbheeDashBoardController {
 		return "ViewTicket";
 
 	}
+	@RequestMapping(value = "/viewCustomerDetails")
+	public String viewDetails(@RequestParam(value = "id", required = true) String customerId,
+			@RequestParam(value = "pgn", required = true) String pgn,Model model,HttpSession session) 
+	{
+		 
+		/*if(pgn.equals("1"))
+		{
+			abheeTaskDao.openTask(taskId);
+		}
+		*/
+			List<Map<String, Object>> viewcustomerBean = abheeTaskDao.getCustomerDetailsById(customerId);
+			model.addAttribute("test2",viewcustomerBean);
+			
+			
+		
+		return "viewcustomerdetails";
+
+	}
 	
 	@RequestMapping(value = "/severityByReportTo")
 	public String  tasksFilterByseverityOnReportTo(@RequestParam(value="id", required=true) String sev,Model model,HttpServletRequest request,HttpSession session,@ModelAttribute("taskf")  AbheeTask taskf){

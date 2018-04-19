@@ -34,7 +34,7 @@ public class Customer {
 	private String BranchId;
 
 	private String enabled;
-	private String designation;
+	
 
 	private String password;
 	
@@ -52,13 +52,7 @@ public class Customer {
 
 
 
-	public String getDesignation() {
-		return designation;
-	}
-
-	public void setDesignation(String designation) {
-		this.designation = designation;
-	}
+	
 
 	public String getStatus() {
 		return status;
@@ -115,7 +109,7 @@ public class Customer {
 		this.mobilenumber = customer.mobilenumber;
 		this.email = customer.email;
 		this.enabled = customer.enabled;
-		this.designation = customer.designation;
+		
 		this.password = customer.password;
 		this.status = customer.status;
 		this.firstname = customer.firstname;
@@ -225,7 +219,7 @@ public class Customer {
 	public String toString() {
 		return "Customer [id=" + id + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
 				+ ", mobilenumber=" + mobilenumber + ", email=" + email + ", BranchId=" + BranchId + ", enabled="
-				+ enabled + ", designation=" + designation + ", password=" + password + ", firstname=" + firstname
+				+ enabled + ",  password=" + password + ", firstname=" + firstname
 				+ ", lastname=" + lastname + ", status=" + status + ", branchName=" + branchName + ", customerId="
 				+ customerId + ", address=" + address + "]";
 	}
