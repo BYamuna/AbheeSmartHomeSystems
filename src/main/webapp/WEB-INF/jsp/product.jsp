@@ -339,14 +339,8 @@ document.getElementById("file1").onchange = function () {
     
     for(var i=0; i<=this.files.length; i++)
     {
-    	var fileSize = this.files[i].size
-    	fileSize = fileSize / 1048576;
-    	
-    	alert(fileSize);
-    	 
-     if(this.files[i].size>1253){
-        alert("Image Size should not be greater than 1253Kb");
-    if(this.files[i].size>500){
+     
+    if(this.files[i].size>500000){
         alert("Image Size should not be greater than 500Kb");
         $("#file1").attr("src","blank");
        // $("#file1").hide();  
@@ -371,7 +365,8 @@ document.getElementById("file1").onchange = function () {
     // read the image file as a data URL.
     reader.readAsDataURL(this.files[0]);
     
-}
+
+    }
 }
 
 $("#pageName").text("Product Master");

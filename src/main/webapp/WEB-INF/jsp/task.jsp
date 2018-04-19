@@ -68,6 +68,7 @@
 				<form:form class="form-horizontal" modelAttribute="taskf"
 					action="savetask1" method="post" enctype="multipart/form-data">
 					<div class="panel-body">
+					  <security:authorize access="hasRole('ROLE_ADMIN')">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -135,6 +136,7 @@
 
 
 						</div>
+						  
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -147,17 +149,19 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Description
-										<span class="impColor">*</span>
+									<label for="focusedinput" class="col-md-6 control-label">Task
+										DeadLine <span class="impColor">*</span>
 									</label>
-									<div class="col-md-5">
-										<form:textarea path="description"
-											class="form-control validate" placeholder="Enter Description" />
-										<span class="hasError" id="stationnameError"></span>
+									<div class="col-md-6">
+										<form:input type="text" path="taskdeadline"
+											class="form-control validate" />
+
 									</div>
 								</div>
 							</div>
+							
 						</div>
+						 </security:authorize>
 
 						<div class="row">
 							<div class="col-md-6">
@@ -175,16 +179,17 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Task
-										DeadLine <span class="impColor">*</span>
+									<label for="focusedinput" class="col-md-6 control-label">Description
+										<span class="impColor">*</span>
 									</label>
-									<div class="col-md-6">
-										<form:input type="text" path="taskdeadline"
-											class="form-control validate" />
-
+									<div class="col-md-5">
+										<form:textarea path="description"
+											class="form-control validate" placeholder="Enter Description" />
+										<span class="hasError" id="stationnameError"></span>
 									</div>
 								</div>
 							</div>
+							
 						</div>
 
 						<div class="col-md-6">
@@ -199,6 +204,7 @@
 								</div>
 							</div>
 						</div>
+						
 
 						<div id="getting-started"></div>
 					</div>
