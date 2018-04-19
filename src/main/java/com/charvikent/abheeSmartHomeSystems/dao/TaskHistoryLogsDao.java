@@ -41,7 +41,10 @@ public class TaskHistoryLogsDao {
 		taskHistoryLogs.setSubject(reportIssue.getSubject());
 		taskHistoryLogs.setTaskdeadline(reportIssue.getTaskdeadline());
 		taskHistoryLogs.setTaskno(reportIssue.getTaskno());
+		taskHistoryLogs.setAddComment(reportIssue.getAddComment());
+		
 		taskHistoryLogs.setUploadfile(reportIssue.getUploadfile());
+		
 		entityManager.persist(taskHistoryLogs);
 	}
 }
