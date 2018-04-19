@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -27,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
+import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskStatusDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
@@ -71,8 +73,8 @@ public class TaskController {
 	
 	@Autowired
 	TaskHistoryLogsDao taskHistoryLogsDao;
-	
-	
+	@Autowired
+	SendingMail sendingMail; 
 	/*@Autowired
 	DashBoardService dashBoardService;*/
 	
@@ -166,6 +168,7 @@ public class TaskController {
 					task.setStatus("1");
 					task.setAdditionalinfo("0");
 					/*taskHistoryLogsDao.savetaskhistorylogs(taskHistoryLogs);*/
+					
 					reportIssueDao.saveReportIssue(task);
 					
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");
@@ -201,6 +204,7 @@ public class TaskController {
 					}
 					task.setKstatus("2");
 					/*taskHistoryLogsDao.savetaskhistorylogs(taskHistoryLogs);*/
+					//sendingMail.sendingMailWithTaskStatus(task);
 					reportIssueDao.updateIssue(task);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
@@ -510,7 +514,7 @@ public class TaskController {
 	
 	
 	@RequestMapping(value = "/saveServiceRequest", method = RequestMethod.POST)
-	public @ResponseBody  boolean modelSubmit(Model model,HttpServletRequest request) throws IOException 
+	public @ResponseBody  boolean modelSubmit(Model model,HttpServletRequest request) throws IOException, MessagingException 
 	{
 		System.out.println("enter to task controller Submit");
 		
@@ -541,7 +545,7 @@ public class TaskController {
 		
 		reportIssueDao.saveReportIssue(task);
 		taskHistoryLogsDao.historyLog(task);
-		
+		sendingMail.sendingMailWithTaskStatus(task);
 		System.out.println(message+"  "+servicetypeid);
 		return true;
 		
