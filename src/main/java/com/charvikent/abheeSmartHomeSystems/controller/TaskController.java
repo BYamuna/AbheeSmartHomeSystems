@@ -534,7 +534,7 @@ public class TaskController {
 		task.setCategory(catid);
 		task.setModelid(modelid);
 
-		task.setAssignby(customerId);
+		task.setCustomerId(customerId);
 	
 		
 		
