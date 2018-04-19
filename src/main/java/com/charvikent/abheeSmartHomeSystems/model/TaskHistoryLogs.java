@@ -70,6 +70,8 @@ public class TaskHistoryLogs  {
 	
 	private  String modelid;
 	
+	private  String addComment;
+	
 	
 	
 	
@@ -280,6 +282,17 @@ public class TaskHistoryLogs  {
 	public void setModelid(String modelid) {
 		this.modelid = modelid;
 	}
+	
+	
+	
+	public String getAddComment() {
+		return addComment;
+	}
+	public void setAddComment(String addComment) {
+		this.addComment = addComment;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "TaskHistoryLogs [id=" + id + ", taskno=" + taskno + ", taskid=" + taskid + ", createdTime="
