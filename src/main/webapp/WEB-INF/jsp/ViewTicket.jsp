@@ -89,52 +89,7 @@
 						<div class="table-responsive">
 								<table class="table table-bordered priority prioritybg"
 									style="border: 1px solid #0460a4; width:;" id="viewTaskTable">
-									<thead>
-									<tr class="tr">
-
-										<th>Task No</th>
-										<td></td>
-									</tr>
-									<tr>
-										<th>Category</th>
-										<td></td>
-									</tr>
-									<tr class="tr">
-										<th>Model Name</th>
-										<td></td>
-									</tr>
-									<tr>
-										<th>Service Type</th>
-										<td></td>
-									</tr>
-									<tr class="tr">
-										<th>Serverity</th>
-										<td></td>
-									</tr>
-									<tr>
-										<th>Priority</th>
-										<td></td>
-									</tr>
-									<tr class="tr">
-										<th>Assigned to</th>
-										<td></td>
-									</tr>
-									<tr>
-										<th>Subject</th>
-										<td></td>
-									</tr>
-									<tr class="tr">
-										<th>Task Deadline</th>
-										<td></td>
-									</tr>
-									<tr>
-										<th>Task Status</th>
-										<td></td>
-									</tr>
-									<tr class="tr">
-										<th>Create Time</th>
-										<td></td>
-									</tr>
+									
 
 									
 <c:forEach var="listOuter" items="${test2}">
@@ -165,38 +120,7 @@
 							</div>
 						
 				
-               <%--  
-                <div class="col-md-12" id="history">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h4><i class="ace-icon fa fa-history"></i>
- Issue History</h4>
-						<div class="options">
-							<a href="" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
-						</div>
-					</div>
-					<div class="panel panel-body collapse in">
-												<div class="table-responsive">
-							<table class="table table-bordered table-condensed  table-striped table-hover" style=" ">
-								<tr style="background:#006699;color: #fff;">
-<th>Last Updated</th><th>User Name</th><th>Attachment</th><th>field</th><th>Change</th>
-								</tr>
-								
-<c:forEach var="logs" items="${repeatLogs1}">								
-								<tr>
-<td> ${logs.createdTime}</td><td>${logs.changedby}</td>
-<td>${logs.kpstatus}</td>
-<td>
-
-
-<c:forTokens items="${logs.uploadfiles}" delims="*" var="mySplit">
-     	<a class="attachments" download href="reportDocuments/${mySplit}"><i class="fa fa-download" title="${mySplit}"></i></a>
-     	</c:forTokens>
-  
-
-</td><td>${logs.kpfield}</td>
-</td><td>${logs.kpchange}</td>
- --%>
+              
 
 </tr>
 
