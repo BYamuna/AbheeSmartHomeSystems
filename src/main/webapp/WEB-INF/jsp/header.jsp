@@ -355,13 +355,13 @@ function getHeadersCounts(){
 			</div>
 		</div>
 	</c:if>
-	<div class="msgcss1 row" style="visibility: hidden" >
+	<!-- <div class="msgcss1 row" style="visibility: hidden" >
 			<div class="col-sm-4 col-sm-offset-4">
 				<div class="form-group">
 					<div class="alert alert-success fadeIn animated" id="msg1"></div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner" style="background:#cccccc;">

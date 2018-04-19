@@ -151,7 +151,7 @@
 								<div class="col-md-12" style="text-align:right;">
 								<div class="form-group">
 									<div class="col-md-offset-3 col-md-6">
-										<input type="submit" id="submit3"  class="btn btn-success"  value="Submit"/>
+										<input type="submit" id="submit4"  class="btn btn-success"  value="Submit"/>
 										<input class="btn-danger btn cancel"  type="reset"  value="Reset" />
 									</div>
 								</div></div>
@@ -172,11 +172,13 @@
 
 <!-- Body ends here -->
 <script type="text/javascript">
-$("#submit3").click(function(e){
 
-	idArrayCmt11 = $.makeArray($('.validate').map(function() {
-		return this.id;
-	}));
+var idArray = $.makeArray($('.validate').map(function() {
+	return this.id;
+}));
+
+
+$('#submit4').click(function(event) {
 	validation = true;
 	$.each(idArray, function(i, val) {
 		var value = $("#" + idArray[i]).val();
@@ -197,32 +199,36 @@ $("#submit3").click(function(e){
 		} 
 	});
 	if(validation) {
+		
+		
 		var npassword =$("#npassword").val();
 		var cpassword =$("#cpassword").val();
 		
 			if(npassword == cpassword){
 				
-				$("#submit3").attr("disabled",true);
-				$("#submit3").val("Please wait...");
-				$("form").submit();	
-				
+				$("#submit4").attr("disabled",true);
+				$("#submit4").val("Please wait...");
+				$("form").submit();											
+				event.preventDefault();
 			}else {
 		
 				$('#errorMsg').text( "* Password Not Matched") ;
 				setTimeout(function() { $("#errorMsg").hide(); }, 3000);
 				
-				e.preventDefault();
+				event.preventDefault();
 				return false;
 	
 	              }
-			
-			
-			
-	}else{
 		
-	e.preventDefault();
-	return false;
-	}
 	
+	}else {
+		return false;
+		event.preventDefault();
+	}
 });
+
+		
+			
+			
+	
 </script>

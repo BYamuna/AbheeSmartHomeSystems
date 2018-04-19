@@ -228,18 +228,27 @@ public class EmployeeController {
 		//User objuserBean = (User) session.getAttribute("cacheUserBean");
 
 		User users = userService.getUserById(objuserBean.getId());
-		if(users.getPassword().equals(user.getPassword())) {
-
-			users.setPassword(user.getCpassword());
-			userService.updatePassword(users);
-			redir.addFlashAttribute("msg", "Password Updated Successfully");
-			redir.addFlashAttribute("cssMsg", "warning");
-			return "redirect:/";
+		if(!(users.getPassword().equals(user.getCpassword()))) {
+			
+		
+				if(users.getPassword().equals(user.getPassword())) {
+		
+					users.setPassword(user.getCpassword());
+					userService.updatePassword(users);
+					redir.addFlashAttribute("msg", "Password Updated Successfully");
+					redir.addFlashAttribute("cssMsg", "warning");
+					return "redirect:/";
+				}else {
+					redir.addFlashAttribute("msg", "You Entered Wrong Password");
+					redir.addFlashAttribute("cssMsg", "warning");
+					return "redirect:changePassword";
+				}
 		}else {
-			request.setAttribute("msg", "You Entered Wrong Password");
-			request.setAttribute("cssMsg", "warning");
+			
+			redir.addFlashAttribute("msg", "Please don't use privious password");
+			redir.addFlashAttribute("cssMsg", "warning");
 			return "redirect:changePassword";
-		}
+		}	
 
 
 

@@ -89,22 +89,26 @@
 						<h2>Login</h2>
 					</div>					
 					<div class="clearfix"></div>
+						<form action="/customerlogin" method="post"> 
 					<div class="login-top"> 	
-						<form action=customerlogin method="post"> 
 						  <input type="hidden" name="userType" id="userType" value="customerUser"/>
-							<input type="text" class="form name" name="username" id="username" onfocus="this.placeholder=''" onblur="this.placeholder='Mobile Number'" placeholder="Mobile Number" required=""/>
-							<input type="password" class="form password" name="password" onfocus="this.placeholder=''" onblur="this.placeholder='Password'" placeholder="Password" required=""/>
-						</form> 	
+							<input type="text" class="form name" name="username" id="username" onfocus="this.placeholder=''" onblur="this.placeholder='Mobile Number'" placeholder="Mobile Number" required />
+							<input type="password" class="form password" name="password" onfocus="this.placeholder=''" onblur="this.placeholder='Password'" placeholder="Password" required />
+						
 					</div> 
 					<div class="login-bottom"> 
 						<div class="col-sm-6">
 							<h6><a href="#" data-toggle="modal" data-target="#passwordModel" class="tag">Forgot password</a></h6>
 						</div>
 						<div class="col-sm-6">
+						
+						   <!--  <input   class="btn btn-danger" type="reset" value="Reset"> 
+							<input  class="btn btn-primary" type="submit" value="Login"> -->
 							<button class="btn btn-primary" type="submit" value="Login">Login</button>
 							<button class="btn btn-danger" type="reset" value="Reset">Reset</button>
 						</div><div class="clearfix"></div>
 					</div>
+					</form> 	
 					<div class="login-bottom"> 
 						<h6 style="margin-top:40px;">Click here to <a href="#" data-toggle="modal" onclick="openRegistrationModel()"  class="tag">register</a></h6>
 					</div> 
