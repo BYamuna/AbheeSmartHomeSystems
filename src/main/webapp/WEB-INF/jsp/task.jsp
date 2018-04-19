@@ -467,7 +467,7 @@
 	function displayTable(listOrders) {
 		$('#tableId').html('');
 		var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-				+ '<thead><tr><th>Task No</th><th>Category</th><th>Model Name</th><th>ServiceType</th><th>Severity</th><th>Priority</th><th>Assigned To</th><th>Subject</th><th>Task Deadline</th><th>Task Status</th><th>CreateTime</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
+				+ '<thead><tr><th>Task No</th><th>Category</th><th>Model Name</th><th>CustomerID</th><th>ServiceType</th><th>Severity</th><th>Priority</th><th>Assigned To</th><th>Subject</th><th>Task Deadline</th><th>Task Status</th><th>CreateTime</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
 		$('#tableId').html(tableHead);
 		serviceUnitArray = {};
 
@@ -506,6 +506,15 @@
 									+ orderObj.taskno
 									+ "&pgn=0'>"
 									+ orderObj.taskno + "</a>"
+									
+						 var view3 = "<a class='view viewIt' href='viewTicket?id="
+										+ orderObj.customer_id
+										+ "&pgn=0'>"
+										+ orderObj.customer_id + "</a>"
+										
+									
+									
+									
 							var comment = "<a class='comment commentIt' onclick='addComment("
 									+ orderObj.id
 									+ ")'>   <i class='fa fa-comments'></i></a>"
@@ -526,6 +535,9 @@
 									+ "</td>"
 									+ "<td title='"+orderObj.modelname+"'>"
 									+ orderObj.modelname
+									+ "</td>"
+									+ "<td title='"+orderObj.customer_id+"'>"
+									+ view3
 									+ "</td>"
 									+ "<td title='"+orderObj.servicetypename+"'>"
 									+ orderObj.servicetypename
