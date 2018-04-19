@@ -23,8 +23,9 @@ public class AbheeTask  {
 	
 	private String taskno;
 	
-	
+	private String customerId;
 
+	
 	@CreationTimestamp
 	private Date createdTime;
 
@@ -75,7 +76,13 @@ public class AbheeTask  {
 	
 	
 	
-	
+	public String getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+
 	
 	public String getAssignbyid() {
 		return assignbyid;
