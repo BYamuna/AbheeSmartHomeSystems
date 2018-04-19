@@ -518,7 +518,6 @@ public class TaskController {
 		String servicetypeid=request.getParameter("servicetypeid");
 		String catid=request.getParameter("catid");
 		String modelid=request.getParameter("modelid");
-		
 		String customerId =request.getParameter("customerId");
 		AbheeTask task =new AbheeTask();
 		task.setAdditionalinfo("0");
@@ -534,7 +533,8 @@ public class TaskController {
 		task.setServiceType(servicetypeid);
 		task.setCategory(catid);
 		task.setModelid(modelid);
-		task.setAssignby(customerId);
+
+		task.setCustomerId(customerId);
 	
 		
 		
