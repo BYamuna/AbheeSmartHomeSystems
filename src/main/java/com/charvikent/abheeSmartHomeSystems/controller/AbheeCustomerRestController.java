@@ -47,7 +47,6 @@ import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mysql.jdbc.util.Base64Decoder;
 
 @RestController
 public class AbheeCustomerRestController {
@@ -482,7 +481,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 		for(String multipartFile : file) {
 		//String imgData = request.getParameter("imgfile");
 		if (StringUtils.isNotBlank(multipartFile)) {
-			Base64Decoder decoder = new Base64Decoder(); 
+		//	Base64Decoder decoder = new Base64Decoder(); 
 			
 			File pathFile=fileTemplate.makeDirectory();
 			try (FileOutputStream imageOutFile = new FileOutputStream(pathFile)) {

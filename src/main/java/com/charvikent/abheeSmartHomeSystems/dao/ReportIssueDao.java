@@ -13,6 +13,7 @@ import java.util.TreeSet;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -732,6 +733,21 @@ public List<ReportIssue> getAllReportIssues()
 		
 		
 		return listissue;
+	}
+
+	public AbheeTask checkServiceRequestExisrOrNot(AbheeTask task) {
+		String hql ="from AbheeTask where customerId =' "+task.getCustomerId()+"' and modelid='"+task.getModelid()+"' and kstatus <> '4'";
+		
+		Query query = em.createQuery(hql);
+		
+		List<AbheeTask> list =query.getResultList();
+		
+		if(list.size()>0)
+			return list.get(0);
+		else
+			return null;
+		
+		
 	}
 
 	
