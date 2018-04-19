@@ -73,6 +73,8 @@ public class AbheeTask  {
 	
 	private  String modelid;
 	
+	private  String addComment;
+	
 	
 	
 	
@@ -283,6 +285,16 @@ public class AbheeTask  {
 	public void setModelid(String modelid) {
 		this.modelid = modelid;
 	}
+	
+	
+	
+	public String getAddComment() {
+		return addComment;
+	}
+	public void setAddComment(String addComment) {
+		this.addComment = addComment;
+	}
+	
 	@Override
 	public String toString() {
 		return "AbheeTask [id=" + id + ", taskno=" + taskno + ", createdTime=" + createdTime + ", updatedTime="

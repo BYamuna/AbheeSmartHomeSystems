@@ -204,6 +204,18 @@
 								</div>
 							</div>
 						</div>
+						<div class="col-md-6">
+								<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">Comment
+										<span class="impColor">*</span>
+									</label>
+									<div class="col-md-5">
+										<form:textarea path="addComment"
+											class="form-control validate" placeholder="Enter Comment" />
+										<span class="hasError" id="stationnameError"></span>
+									</div>
+								</div>
+							</div>
 						
 
 						<div id="getting-started"></div>

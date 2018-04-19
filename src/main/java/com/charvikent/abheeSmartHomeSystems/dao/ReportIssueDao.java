@@ -369,6 +369,7 @@ public List<ReportIssue> getAllReportIssues()
      editissue.setSubject(issue.getSubject());
      editissue.setTaskdeadline(issue.getTaskdeadline());
      editissue.setKstatus(issue.getKstatus());
+     editissue.setAddComment(issue.getAddComment());
      if(issue.getUploadfile()!=null)
      {
      editissue.setUploadfile(fileTemplate.concurrentFileNames());
