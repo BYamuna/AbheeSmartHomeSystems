@@ -398,7 +398,6 @@ $.each(productdetailslist, function(k,v){
 		 message =$('#message').val();
 		 servicetypeid =$('#servicetypeid').val();
 		 
-		 alert(customerId);
 		
 		$.ajax({
 			type : "POST",
@@ -417,7 +416,7 @@ $.each(productdetailslist, function(k,v){
 					$('#formModal').modal('toggle');					
 				}
 				else
-					alert("Enter valid OTP")
+					alert(data);
 				
 			},
 			complete: function () {

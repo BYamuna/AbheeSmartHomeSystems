@@ -42,6 +42,8 @@ public class HomeController {
 	
 	
  static 	String loginurl=""; 
+ 
+ static boolean falg =true;
 	
 	
 	@RequestMapping("/admin")
@@ -65,11 +67,7 @@ public class HomeController {
 		return "userlogin";
 	}
 	
-	/*@RequestMapping("*")
-	public String erro404r(Model model) {
-	//	System.out.println("login called at /");
-		return "login";
-	}*/
+	
 	@RequestMapping("/login")
 	public String loginView(Model model) {
 		System.out.println("login called at /login page");
@@ -105,7 +103,7 @@ public class HomeController {
 	}*/
 	@RequestMapping("/customerlogin")
 	public String ShowCustomerLoginPage(Model model,HttpServletRequest request) {
-		
+		if(falg)
 		loginurl =request.getHeader("referer");
 		
 		return "customerlogin";
@@ -122,7 +120,8 @@ public class HomeController {
 		
 		if(null ==customer)
 		{
-			System.out.println("Customer does not exists");
+			System.out.println("Customer does not exists"+referalUrl);
+			falg=false;
 			redir.addFlashAttribute("msg", "Invalid Details");
 			redir.addFlashAttribute("cssMsg", "danger");
 			return "redirect:customerlogin";
@@ -210,6 +209,13 @@ public class HomeController {
 		
 		 
 		return String.valueOf(jsonObj);
+	}
+	
+	
+	@RequestMapping("*")
+	public String erro404(Model model,HttpServletRequest request) {
+		String referalUrl=request.getHeader("referer");
+		return "redirect:"+ referalUrl;
 	}
 	
 	

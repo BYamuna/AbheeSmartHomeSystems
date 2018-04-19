@@ -510,7 +510,7 @@ public class TaskController {
 	
 	
 	@RequestMapping(value = "/saveServiceRequest", method = RequestMethod.POST)
-	public @ResponseBody  boolean modelSubmit(Model model,HttpServletRequest request) throws IOException 
+	public @ResponseBody  String modelSubmit(Model model,HttpServletRequest request) throws IOException 
 	{
 		System.out.println("enter to task controller Submit");
 		
@@ -537,13 +537,21 @@ public class TaskController {
 		task.setCustomerId(customerId);
 	
 		
-		
-		
+		AbheeTask abheeTask =reportIssueDao.checkServiceRequestExisrOrNot(task);
+		if(null !=abheeTask )
+		{
 		reportIssueDao.saveReportIssue(task);
 		taskHistoryLogsDao.historyLog(task);
 		
 		System.out.println(message+"  "+servicetypeid);
-		return true;
+		return "true";
+		}
+		else
+		{
+			System.out.println("Service request alreadyExists");
+			return "Your Request till didn't closed";
+			
+		}
 		
 	}
 	@RequestMapping(value = "/inActiveTasks")
