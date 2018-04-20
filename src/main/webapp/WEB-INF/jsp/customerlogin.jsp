@@ -52,7 +52,7 @@
 
 <script type="text/javascript">
 	var isClick = 'No';
-		window.setTimeout(function() {
+		 window.setTimeout(function() {
 		    $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
 		        $(this).remove(); 
 		    });
@@ -61,7 +61,7 @@
 		 $(document).ready(function(){
 			
 			
-		}); 
+		});  
 		
 </script>
 
@@ -69,26 +69,25 @@
 
 </header>
     <%@include file="abheeheader.jsp" %>
-<body>
 
 
 
 	<div style="margin-bottom:45px;" class="main">
 		<div class="main-row">
-			<c:if test="${not empty msg}">
-				<div class="msgcss row">
-					<div align="center" class="form-group">
-						<div style="width:80%" class="alert alert-${cssMsg} fadeIn animated">${msg}</div>
-					</div>
-				</div>
-			</c:if>
 			<!-- login form -->
 			<div class="login-form login-form-left"> 
 				<div class="row">
 					<div class="head">
+							 <c:if test="${not empty msg}">
+								<div class="msgcss1 row">
+									<div align="center" class="form-group">
+										<div style="width:80%" class="alert alert-${cssMsg} fadeIn animated">${msg}</div>
+									</div>
+								</div>
+							</c:if>
 						<h2>Login</h2>
 					</div>					
-					<div class="clearfix"></div>
+									<div class="clearfix"></div>
 						<form action="/customerlogin" method="post"> 
 					<div class="login-top"> 	
 						  <input type="hidden" name="userType" id="userType" value="customerUser"/>

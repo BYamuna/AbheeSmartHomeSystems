@@ -14,7 +14,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "abheeCustomer")
+@Table(name = "abhee_customer")
 public class Customer {
 	
 	@Id
@@ -48,11 +48,21 @@ public class Customer {
 	private String address;
 	
 	private String registedredFromAndroid;
+	
+	private String customerType;
 
 
 
 
 	
+
+	public String getCustomerType() {
+		return customerType;
+	}
+
+	public void setCustomerType(String customerType) {
+		this.customerType = customerType;
+	}
 
 	public String getStatus() {
 		return status;

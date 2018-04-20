@@ -140,7 +140,7 @@ public class HomeController {
 		session.setAttribute("customer", customer);
 		session.setAttribute("loggedstatus", "login");
 		session.setAttribute("customerId", customer.getCustomerId());
-			
+			System.out.println("()()()()()()()()()()("+loginurl);
 			return "redirect:"+ loginurl;
 		}
 		

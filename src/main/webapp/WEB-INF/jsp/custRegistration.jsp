@@ -4,7 +4,11 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-	
+	<style>
+	.form-group {
+	padding-top:10px;
+	}
+	</style>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
 		<li><a href="dashBoard">Home</a></li>
@@ -44,7 +48,18 @@
 					
 					<form:form modelAttribute="custReg" action="custreg" class="form-horizontal " method="Post">
 	                  <form:hidden path="id"/>
-					<div class="col-md-6"><br>
+	                  <div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Customer Type<span class="impColor">*</span></label>
+								<div class="col-md-6">
+										<form:select path="customerType" class="form-control validate" placeholder="Select Customer Type">
+											<form:option value="">-- Select Customer Type--</form:option>
+											<form:options items="${customerTypes}"/>
+										</form:select>
+									</div>
+								</div>
+								</div>
+					<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
@@ -53,7 +68,7 @@
 								</div>
 								
 								</div>
-								<div class="col-md-6"><br>
+								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Last name<span class="impColor">*</span></label>
 									<div class="col-md-6">
@@ -94,6 +109,7 @@
 									</div>
 								</div>
 								</div>
+								
 						<div class="panel-footer">
 				      	<div class="row">
 				      		<div class="col-sm-12">

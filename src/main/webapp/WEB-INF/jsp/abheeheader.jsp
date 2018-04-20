@@ -58,7 +58,7 @@
 </style>
 </head>
 <body>
-<c:if test="${not empty msg}">
+<%-- <c:if test="${not empty msg}">
 		<div class="msgcss row">
 			<div class="col-sm-4 col-sm-offset-4">
 				<div class="form-group">
@@ -66,7 +66,7 @@
 				</div>
 			</div>
 		</div>
-	</c:if>
+	</c:if> --%>
   	<div class="container">
     	<div class="top">
         	<img width="300px" src="${baseurl }/abhee/images/logo.png" class="img-resposive" alt="logo" title="Logo"/>
@@ -134,22 +134,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  --%>    
   	<script type="text/javascript">
-  	window.setTimeout(function() {
-	    $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
+  	 window.setTimeout(function() {
+	    $(".msgcss1").fadeTo(500, 0).slideUp(500, function(){
 	        $(this).remove(); 
 	    });
 	}, 5000);
   	
-  	
-  	/*  var categorieslist =${allOrders1};
-  	var rowdata;
-  	
-  	$.each(categorieslist, function(k,v){
-  		$("#cathead").text("hi");
-  		
-  		
-  		rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
-  		$("#cmlist").append(rowdata);
-  	});  */
-  	  
   	</script>
