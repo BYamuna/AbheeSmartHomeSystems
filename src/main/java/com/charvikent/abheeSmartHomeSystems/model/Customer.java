@@ -50,11 +50,23 @@ public class Customer {
 	private String registedredFromAndroid;
 	
 	private String customerType;
+	
+	private String gst;
+	
+	
 
 
 
 
 	
+
+	public String getGst() {
+		return gst;
+	}
+
+	public void setGst(String gst) {
+		this.gst = gst;
+	}
 
 	public String getCustomerType() {
 		return customerType;

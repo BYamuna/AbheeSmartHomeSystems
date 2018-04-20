@@ -7,17 +7,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
+import com.charvikent.abheeSmartHomeSystems.model.AbheeCustomerTypes;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
-import com.charvikent.abheeSmartHomeSystems.model.User;
 
 
 @Repository
@@ -215,6 +217,15 @@ public List<Customer> getAbheeCustomerNames()
 	return (List<Customer>)entityManager.createQuery("from Customer where enabled='1'").getResultList();
 	 
  }
+
+public List<String> getCustomerTypes() {
+	List<String> customerType = null;
+	Criteria criteria=entityManager.unwrap(Session.class).createCriteria(AbheeCustomerTypes.class);
+	criteria.setProjection(Projections.property("customerType"));
+	
+	customerType =criteria.list();
+	return customerType;
+}
 
 public String getOPTByMobileno(String mobile)
 {

@@ -62,7 +62,7 @@ public class AbheeCustRegistrationController
 	  List<Customer> listOrderBeans = null;
 	  ObjectMapper objectMapper = null;
 	  String sJson = null;
-	  model.addAttribute("customerTypes", null);
+	  model.addAttribute("customerTypes", customerDao.getCustomerTypes());
 	  try 
 	  {
 			listOrderBeans = customerDao.getAbheeCustomerNames();

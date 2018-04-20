@@ -81,14 +81,14 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="email" class="form-control validate emailOnly" placeholder="Enter Emailid"/>
+										<form:input path="email" class="form-control validate emailOnly" placeholder="Enter Email"/>
 									</div>
 								</div></div>
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile Number<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:input path="mobilenumber" class="form-control validate numericOnly"  maxlength="10" placeholder="Enter Mobileno"/>
+										<form:input path="mobilenumber" class="form-control validate numericOnly"  maxlength="10" placeholder="Enter Mobile Number"/>
 									</div>
 								</div>
 								</div>
@@ -106,6 +106,14 @@
 									<label class="col-md-3 control-label no-padding-right">Address<span class="impColor">*</span></label>
 								<div class="col-md-6">
 										<form:textarea path="address" class="form-control validate " placeholder="Enter Address"/>
+									</div>
+								</div>
+								</div>
+								<div class="col-md-6" id="gst">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">GST<span class="impColor">*</span></label>
+								<div class="col-md-6">
+										<form:input path="gst" class="form-control validate numericOnly"  maxlength="10" placeholder="Enter Mobileno"/>
 									</div>
 								</div>
 								</div>
@@ -504,6 +512,25 @@ $('#email').blur(function() {
 	}
 
 		}); 
+		
+		
+	$('#gst').hide();	
+	
+	$('#customerType').change(function(){
+		//var option = $(this).find('option:selected');
+		
+		if($(this).val() == "FormType-2"){
+			
+			console.log($(this).val());
+			
+			$('#gst').show();
+			
+		}else{
+			console.log($(this).val());
+			$('#gst').hide();
+		}
+		
+	});
 
 	
    
