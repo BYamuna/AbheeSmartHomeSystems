@@ -39,13 +39,39 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4TkibnxHHIJtDj1Dp59VAOSHp_sdA1KQ&sensor=false&libraries=places"></script>  
 <!--      <script src='https://maps.google.com/maps/api/js?sensor=false&libraries=places'></script> -->
+<style type="text/css">
+
+.msgcss
+{
+/* 	width: 50% !important; */
+/* 	font-weight: bold; */
+	margin: auto;
+	text-align: center;
+	top: 3px !important;
+	left:0;
+	right:0;
+	position: fixed;
+	font-size: 14px;
+	z-index:99999;
+}
+
+</style>
 </head>
 <body>
+<%-- <c:if test="${not empty msg}">
+		<div class="msgcss row">
+			<div class="col-sm-4 col-sm-offset-4">
+				<div class="form-group">
+					<div class="alert alert-${cssMsg} fadeIn animated">${msg}</div>
+				</div>
+			</div>
+		</div>
+	</c:if> --%>
   	<div class="container">
     	<div class="top">
         	<img width="300px" src="${baseurl }/abhee/images/logo.png" class="img-resposive" alt="logo" title="Logo"/>
-        	<a style="float:right; margin-top:20px; margin-left:20px;" type="admin" class="btn btn-primary" href="admin">Admin Login</a>
-        </div>
+        	<a style="float:right; margin-top:30px; margin-left:20px;" type="admin" class="button btn btn-primary" href="admin">Admin Login</a>
+        </div><div class="clearfix"></div>
         <!-- Menu Starts here -->
         <div class="menu">
         	<nav class="navbar navbar-default">
@@ -108,15 +134,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  --%>    
   	<script type="text/javascript">
-  	/*  var categorieslist =${allOrders1};
-  	var rowdata;
+  	 window.setTimeout(function() {
+	    $(".msgcss1").fadeTo(500, 0).slideUp(500, function(){
+	        $(this).remove(); 
+	    });
+	}, 5000);
   	
-  	$.each(categorieslist, function(k,v){
-  		$("#cathead").text("hi");
-  		
-  		
-  		rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
-  		$("#cmlist").append(rowdata);
-  	});  */
-  	  
   	</script>

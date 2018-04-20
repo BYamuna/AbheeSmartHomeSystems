@@ -21,7 +21,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
+
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
@@ -46,8 +48,10 @@ public class SendingMail {
 	@Autowired	FilesStuff filePath;
 	@Autowired
 	 CustomerDao  customerDao;
+
 	@Autowired
 	AbheeTaskDao abheeTaskDao;
+
 	
 	public void sendConfirmationEmail(Customer user) throws MessagingException {  
 		try {
@@ -317,6 +321,7 @@ public class SendingMail {
 			
 			VelocityContext velocityContext = new VelocityContext();
 			velocityContext.put("name",customer.getFirstname());
+
 			velocityContext.put("taskno", abheetask.getTaskno());
 			StringWriter stringWriter = new StringWriter();
 			velocityEngine.mergeTemplate("ServiceRequestEmailTemplate.vm", "UTF-8", velocityContext, stringWriter);
@@ -357,6 +362,7 @@ public class SendingMail {
 			helper.setText(stringWriter.toString(), true);
 			helper.setTo( emailid);
 		    helper.setSubject("Task service request sent successfully");
+
 		  		   
 		   
 			javaMailSender.send(message);

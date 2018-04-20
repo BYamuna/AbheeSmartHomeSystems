@@ -355,13 +355,13 @@ function getHeadersCounts(){
 			</div>
 		</div>
 	</c:if>
-	<div class="msgcss1 row" style="visibility: hidden" >
+	<!-- <div class="msgcss1 row" style="visibility: hidden" >
 			<div class="col-sm-4 col-sm-offset-4">
 				<div class="form-group">
 					<div class="alert alert-success fadeIn animated" id="msg1"></div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner" style="background:#cccccc;">
@@ -521,6 +521,12 @@ function getHeadersCounts(){
                <security:authorize access="hasRole('ROLE_CUSTOMER')">
                <li class="custDash"><a href="${baseurl }/customerDashBoard"><i class="fa fa-cloud cloud cld"></i><span>MyView</span></a></li>
 			</security:authorize>
+			 <security:authorize access="hasRole('ROLE_USER') or hasRole('ROLE_BRANCHHEAD')">
+                <li class="CustomerType"><a href="${baseurl }/customerType"><i class="fa fa-user register"></i> <span>Customer Type</span></a></li>
+              </security:authorize>
+              <security:authorize access="hasRole('ROLE_USER') or hasRole('ROLE_BRANCHHEAD')">
+                <li class="productGuarantee"><a href="${baseurl }/productGuarantee"><i class="fas fa-certificate register"></i> <span> Product Guarantee</span></a></li>
+              </security:authorize>
 			</ul>
 		</div>
     </nav>
