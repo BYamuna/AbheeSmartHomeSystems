@@ -55,8 +55,7 @@ public class Customer {
 
 
 	
-<<<<<<< HEAD
-=======
+
 
 	public String getCustomerType() {
 		return customerType;
@@ -65,7 +64,7 @@ public class Customer {
 	public void setCustomerType(String customerType) {
 		this.customerType = customerType;
 	}
->>>>>>> b2df3e6e56b9c4d31a47c3e4efb0c6ed05e36b2f
+
 
 	public String getStatus() {
 		return status;

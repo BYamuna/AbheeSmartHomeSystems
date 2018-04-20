@@ -207,19 +207,12 @@
 						<div class="col-md-6">
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Comment
-<<<<<<< HEAD
+
 										<span class="impColor">*</span>
 									</label>
 									<div class="col-md-5">
 										<form:textarea path="addComment"
 											class="form-control validate" placeholder="Enter Comment" />
-=======
-										
-									</label>
-									<div class="col-md-5">
-										<form:textarea path="addComment"
-											class="form-control " placeholder="Enter Comment" />
->>>>>>> b2df3e6e56b9c4d31a47c3e4efb0c6ed05e36b2f
 										<span class="hasError" id="stationnameError"></span>
 									</div>
 								</div>
