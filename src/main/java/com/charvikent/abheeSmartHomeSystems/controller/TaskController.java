@@ -514,8 +514,11 @@ public class TaskController {
 	
 	
 	@RequestMapping(value = "/saveServiceRequest", method = RequestMethod.POST)
-	public @ResponseBody  String modelSubmit(Model model,HttpServletRequest request) throws IOException 
-		{
+
+	public @ResponseBody  String modelSubmit(Model model,HttpServletRequest request) throws IOException, MessagingException 
+	{
+
+	
 		System.out.println("enter to task controller Submit");
 		
 		String message=request.getParameter("message");
@@ -546,12 +549,14 @@ public class TaskController {
 		{
 		reportIssueDao.saveReportIssue(task);
 		taskHistoryLogsDao.historyLog(task);
+
 		try {
 			sendingMail.sendingMailWithTaskStatus(task);
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		System.out.println(message+"  "+servicetypeid);
 		return "true";
 		}

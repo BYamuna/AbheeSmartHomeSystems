@@ -90,7 +90,6 @@
 								<table class="table table-bordered priority prioritybg"
 									style="border: 1px solid #0460a4; width:;" id="viewTaskTable">
 
-									
 <c:forEach var="listOuter" items="${test2}">
        
               <c:forEach var="listInner" items="${listOuter}">
