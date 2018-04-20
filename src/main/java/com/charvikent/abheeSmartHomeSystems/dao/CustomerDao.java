@@ -147,7 +147,7 @@ public void Sendsms(String message,String mobileNumber)
 public Customer findCustomerByCustId(String custId)
 {
 	
-	String hql ="from Customer where custID='"+custId+"'";
+	String hql ="from Customer where customerId='"+custId+"'";
 	
 	
 List<Customer> custlist =	entityManager.createQuery(hql).getResultList();

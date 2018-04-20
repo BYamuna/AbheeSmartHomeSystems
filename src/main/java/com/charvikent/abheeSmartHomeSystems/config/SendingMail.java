@@ -3,6 +3,8 @@ package com.charvikent.abheeSmartHomeSystems.config;
 import java.io.File;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
+import java.util.List;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -19,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
@@ -43,6 +46,8 @@ public class SendingMail {
 	@Autowired	FilesStuff filePath;
 	@Autowired
 	 CustomerDao  customerDao;
+	@Autowired
+	AbheeTaskDao abheeTaskDao;
 	
 	public void sendConfirmationEmail(Customer user) throws MessagingException {  
 		try {
@@ -312,12 +317,12 @@ public class SendingMail {
 			
 			VelocityContext velocityContext = new VelocityContext();
 			velocityContext.put("name",customer.getFirstname());
-			
+			velocityContext.put("taskno", abheetask.getTaskno());
 			StringWriter stringWriter = new StringWriter();
-			velocityEngine.mergeTemplate(".vm", "UTF-8", velocityContext, stringWriter);
+			velocityEngine.mergeTemplate("ServiceRequestEmailTemplate.vm", "UTF-8", velocityContext, stringWriter);
 			helper.setText(stringWriter.toString(), true);
 			helper.setTo( emailid);
-		    helper.setSubject("Task status sent successfully");
+		    helper.setSubject("Task service request sent successfully");
 		  		   
 		   
 			javaMailSender.send(message);
@@ -328,6 +333,41 @@ public class SendingMail {
 			System.out.println(e);
 		}  
 	}
+	public  void  sendingMailWithTaskStatusUpdate(AbheeTask abheetask) throws MessagingException
+	{
+		try {
+			
+			
+			String customerid =  abheetask.getCustomerId();
+			//String password=custbean2.getPassword();
+			Customer customer= customerDao.findCustomerByCustId(customerid);
+			List<Map<String, Object>> task=abheeTaskDao.getAbheeTaskById(customerid);
+			String emailid=customer.getEmail();
+			MimeMessage message = javaMailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			
+			
+			VelocityContext velocityContext = new VelocityContext();
+			velocityContext.put("name",customer.getFirstname());
+			velocityContext.put("taskno", abheetask.getTaskno());
+			velocityContext.put("service_type",task.get(0).get("service_type") );
+			velocityContext.put("severity", task.get(0).get("severity"));
+			StringWriter stringWriter = new StringWriter();
+			velocityEngine.mergeTemplate("ServiceRequestTemplate.vm", "UTF-8", velocityContext, stringWriter);
+			helper.setText(stringWriter.toString(), true);
+			helper.setTo( emailid);
+		    helper.setSubject("Task service request sent successfully");
+		  		   
+		   
+			javaMailSender.send(message);
+				
+			
+		} catch (MailException e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}  
+	}
+
 
 
 		}
