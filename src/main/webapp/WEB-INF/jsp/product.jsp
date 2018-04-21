@@ -47,7 +47,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Product Category <span class="impColor">*</span></label>
 									<div class="col-md-5">
-									<form:select path="categoryid" class="form-control validate" onkeydown="removeBorder(this.id)">
+									<form:select path="categoryid" class="form-control validate"  onfocus="removeBorder(this.id)">
 											<form:option value="">-- Select Product Category --</form:option>
 											<form:options items="${CategoriesMap}"/>
 										</form:select>
@@ -58,7 +58,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Product Company <span class="impColor">*</span></label>
 									<div class="col-md-5">
-									<form:select path="companyid" class="form-control validate" onkeydown="removeBorder(this.id)">
+									<form:select path="companyid" class="form-control validate" onkeydown="removeBorder(this.id)" onfocus="removeBorder(this.id)">
 											<form:option value="">-- Select Product Company --</form:option>
 											<form:options items="${companiesMap}"/>
 										</form:select>
@@ -123,9 +123,9 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">VideosLinks Id(11Digits)<span class="impColor">*</span></label>
+									<label for="focusedinput" class="col-md-6 control-label">VideosLinks Id(11Digits)<!-- <span class="impColor">*</span> --></label>
 								    <div class="col-md-3" id ="dtext">
-										<input type="text" id="name1" name='vlink' class="form-control validate" maxlength="11"  placeholder="Enter  Videolink Id"/>	
+										<input type="text" id="name1" name='vlink' class="form-control " maxlength="11"  placeholder="Enter  Videolink Id"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div> 
 								    <div><input type="button" value="Add Another Link id" onclick="addNewTextBox()"></div>

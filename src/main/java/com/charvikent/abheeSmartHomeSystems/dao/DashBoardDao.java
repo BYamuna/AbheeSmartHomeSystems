@@ -10,7 +10,10 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,6 +21,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.User;
@@ -172,5 +179,71 @@ public Set<Map<String, Object>> getIssuesByAssignToUnderMonitor(String id) {
 		
 		return listissue;
 	}
+
+
+
+public HashMap<String, String>  getTasksCountBystatus()
+{
+	
+	HashMap<String,String> tasksStatusCounts =new LinkedHashMap<String,String>();
+	
+	String hql ="select abheetaskstatus.name ,COUNT(abhee_task.severity)as number  FROM abhee_task RIGHT  JOIN abheetaskstatus "
+               +" ON (abheetaskstatus.id=abhee_task.kstatus) and abhee_task.kstatus <> '4' ";
+	
+	
+	 User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		Collection<? extends GrantedAuthority> authorities =authentication.getAuthorities();
+		
+		if(authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")))
+		{
+		
+	
+	
+	 hql =hql+" GROUP BY abheetaskstatus.id ";
+		}
+		
+		else
+		{
+	    hql =hql+" and abhee_task.assignto='"+objuserBean.getId()+"'  GROUP BY abheetaskstatus.id " ;	
+			
+		}
+		System.out.println(hql);
+		
+		@SuppressWarnings("unchecked")
+		List<Object[]> rows = entityManager.createNativeQuery(hql).getResultList();
+		for (Object[] row : rows) {
+			tasksStatusCounts.put((String)row[0], String.valueOf(row[1]));
+    }
+	
+	
+		return tasksStatusCounts;
 	
 }
+
+public HashMap<String,Object> getAllCountBystatus() {
+	
+	HashMap<String,Object> alTtasksStatusCounts =new LinkedHashMap<String,Object>();
+	
+	String hql ="select count(*) from abhee_task t, abheetaskstatus s where t.kstatus=s.id and t.kstatus <>'7' and t.kstatus <>'4' ";
+	//List<Object[]> rows = entityManager.createNativeQuery(hql).getResultList();
+	
+	
+	
+	//for (Object[] row : rows) 
+		alTtasksStatusCounts.put("allServiceCounts",  entityManager.createNativeQuery(hql).getResultList().get(0));
+	
+	return alTtasksStatusCounts;
+}
+
+}
+	
+
+
+
+
+
+	
+

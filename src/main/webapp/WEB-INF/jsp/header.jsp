@@ -286,19 +286,20 @@ color: inherit !important;
 			 
 			// getHeadersCounts();
 			
-			  /* var formData = new FormData();
+			   var formData = new FormData();
 		    
 			$.fn.makeMultipartRequest('POST', 'getCount', false,
 					formData, false, 'text', function(data){
 				var jsonobj = $.parseJSON(data);
-				$("#unseentasks").text(jsonobj.unseentasks);
+				$("#paymentPending").text(jsonobj.paymentPending);
+				$("#ServiceRquests").text(jsonobj.AllServiceRequests);
 				
-				$("#reopentaskscount").text(jsonobj.reopentaskscount);
+				//$("#reopentaskscount").text(jsonobj.reopentaskscount);
 				
 //		 		var alldata = jsonobj.allOrders1;
 //		 		console.log(jsonobj.allOrders1);
 //		 		displayTable(alldata);
-			});   */
+			});   
 		}); 
 		
 </script>
@@ -516,7 +517,7 @@ function getHeadersCounts(){
               	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users emp"></i> <span>Employees</span></a></li>
                 </security:authorize>
                  <security:authorize access="hasRole('ROLE_USER') or hasRole('ROLE_BRANCHHEAD')">
-                <li class="task"><a href="${baseurl }/task"><i class="fa fa-tasks task"></i> <span>Task</span></a></li>
+                <li class="task"><a href="${baseurl }/task"><i class="fa fa-tasks task"></i> <span>Service Requests</span></a></li>
               </security:authorize>
                <security:authorize access="hasRole('ROLE_CUSTOMER')">
                <li class="custDash"><a href="${baseurl }/customerDashBoard"><i class="fa fa-cloud cloud cld"></i><span>MyView</span></a></li>
@@ -541,8 +542,8 @@ function getHeadersCounts(){
 				
 				 <security:authorize access="hasRole('ROLE_ADMIN')">
 				<div class="btn-toolbar pull-right">
-		                    <a href="#" class="btn btn-danger "><span id="unseentasks">5</span><br>Sales Requests</a>
-		                    <a href="#" class="btn btn-warning"><span id="reopentaskscount">10</span><br>Services Requests</a>
+		                    <a href="#" class="btn btn-danger "><span id="paymentPending">0</span><br>Total Payment Pending</a>
+		                    <a href="#" class="btn btn-warning"><span id="ServiceRquests">0</span><br>Total Services Requests</a>
 		                    <!-- <a href="#" class="btn btn-info"><span id="totalGas1">27956</span><br>Gas in Kgs</a> -->
 		                </div>
 		                </security:authorize>
