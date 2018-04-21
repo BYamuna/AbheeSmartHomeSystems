@@ -218,13 +218,17 @@ public List<Customer> getAbheeCustomerNames()
 	 
  }
 
-public List<String> getCustomerTypes() {
-	List<String> customerType = null;
+@SuppressWarnings("unchecked")
+public List<AbheeCustomerTypes> getCustomerTypes() {
+	List<AbheeCustomerTypes> customerType = null;
 	Criteria criteria=entityManager.unwrap(Session.class).createCriteria(AbheeCustomerTypes.class);
-	criteria.setProjection(Projections.property("customerType"));
+	//criteria.setProjection(Projections.property("customerType"));
 	
 	customerType =criteria.list();
+	
+	entityManager.close();
 	return customerType;
+	
 }
 
 public String getOPTByMobileno(String mobile)

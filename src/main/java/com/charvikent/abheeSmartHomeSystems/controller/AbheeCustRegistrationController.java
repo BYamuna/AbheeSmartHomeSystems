@@ -62,7 +62,7 @@ public class AbheeCustRegistrationController
 	  List<Customer> listOrderBeans = null;
 	  ObjectMapper objectMapper = null;
 	  String sJson = null;
-	  model.addAttribute("customerTypes", customerDao.getCustomerTypes());
+	  model.addAttribute("allCustomerTypes", customerDao.getCustomerTypes());
 	  try 
 	  {
 			listOrderBeans = customerDao.getAbheeCustomerNames();
@@ -409,7 +409,7 @@ public class AbheeCustRegistrationController
 		
 		if(custbean2 != null)
 		{
-			//sendSMS.sendSMS(custbean2.getPassword(),custMobile);
+			sendSMS.sendSMS(custbean2.getPassword(),custMobile);
 			sendingMail.resetPassword(custbean2);
 			return true;
 			

@@ -22,7 +22,7 @@
 <br>
 <div class="clearfix"></div>
 <div class="container">
-	<!-- <div class="row">
+	<div class="row">
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -42,10 +42,10 @@
 							id="example">
 							<thead>
 								<tr>
-									<th>ProductID</th>
-									<th>products</th>
-									<th>Duration</th>
-									
+									<th>CustomerID</th>
+									<th>productmodelID</th>
+									<th>Purchased Date</th>
+									<th>Expired Date</th>
 									<th style="text-align: center;">Options</th>
 								</tr>
 							</thead>
@@ -55,7 +55,7 @@
 				</div>
 			</div>
 		</div>
-	</div> -->
+	</div>
 	<div class="row" id="moveTo">
 		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-primary">
@@ -70,32 +70,31 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<form:hidden path="id" />
-									<label for="focusedinput" class="col-md-6 control-label ">ProductId
+									<label for="focusedinput" class="col-md-6 control-label ">ProductmodelId
 										<span class="impColor">*</span>
 									</label>
 										
-									<form:select path="productid"
+									<form:select path="productmodelid"
 										class="col-xs-10 col-sm-5 validate"
 										onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
-									<form:options items="${customerId}" />
+									<form:options items="${productmodelid}" />
 									</form:select>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label ">Products
+									<form:hidden path="id" />
+									<label for="focusedinput" class="col-md-6 control-label ">Customer ID
 										<span class="impColor">*</span>
 									</label>
-
-									<form:select path="products"
+										
+									<form:select path="customerid"
 										class="col-xs-10 col-sm-5 validate"
 										onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
-										<form:options items="${products}" />
+									<form:options items="${customerid}" />
 									</form:select>
-									<span class="hasError" id="stationnameError"></span>
-
 								</div>
 							</div>
 
@@ -104,11 +103,23 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Duration
+									<label for="focusedinput" class="col-md-6 control-label">Purchased Date
 										<span class="impColor">*</span>
 									</label>
 									<div class="col-md-6">
-										<form:input type="text" path="duration"
+										<form:input type="text" path="purchaseddate"
+											class="form-control validate" />
+
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">Expired Date
+										<span class="impColor">*</span>
+									</label>
+									<div class="col-md-6">
+										<form:input type="text" path="expireddate"
 											class="form-control validate" />
 
 									</div>
@@ -136,14 +147,10 @@
 </div>
 <script type="text/javascript">
 
-$("#duration").keypress(function() {
-	return false;
-})
-$(document).ready(function() {
-		$('#duration').datetimepicker({
+		$('#purchaseddate').datetimepicker({
 
 			useCurrent : false,
-			format : 'DD-MMM-YYYY hh:mm A',
+			format : 'DD-MMM-YYYY',
 			showTodayButton : true,
 			sideBySide : true,
 			
@@ -151,88 +158,127 @@ $(document).ready(function() {
 			focusOnShow : false,
 
 		});
-	});
-var countDownDate;
+	
+		$('#expireddate').datetimepicker({
 
-var x = 0;
+			useCurrent : false,
+			format : 'DD-MMM-YYYY',
+			showTodayButton : true,
+			sideBySide : true,
+			
+			toolbarPlacement : 'top',
+			focusOnShow : false,
 
-function showduration(id) {
+		});
 
-	//$('#timeModal').html('');
-	countDownDate = serviceUnitArray[id].duration
-
-	var count = new Date(countDownDate).getTime();
-	/*  x=setInterval(function() {clearInterval();}); */
-
-	// Update the count down every 1 second
-	if (x == 0) {
-		x = setInterval(function() {
-			// Get todays date and time
-			var now = new Date().getTime();
-
-			// Find the distance between now an the count down date
-			var distance = count - now;
-
-			document.getElementById("demo").innerHTML = '';
-
-			// Time calculations for days, hours, minutes and seconds
-			var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-			var hours = Math.floor((distance % (1000 * 60 * 60 * 24))
-					/ (1000 * 60 * 60));
-			var minutes = Math.floor((distance % (1000 * 60 * 60))
-					/ (1000 * 60));
-			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-			document.getElementById("demo").innerHTML = '';
-			// Output the result in an element with id="demo"
-			document.getElementById("demo").innerHTML = days + "d " + hours
-					+ "h " + minutes + "m " + seconds + "s ";
-
-			// If the count down is over, write some text 
-			if (distance < 0) {
-				document.getElementById("demo").innerHTML = "EXPIRED";
-				showduration();
-			}
-		}, 1000);
-
-		$("#timeModal").modal();
-	} else {
-		clearInterval(x);
-		document.getElementById("demo").innerHTML = '';
-
-		x = setInterval(function() {
-			// Get todays date and time
-			var now = new Date().getTime();
-
-			// Find the distance between now an the count down date
-			var distance = count - now;
-
-			document.getElementById("demo").innerHTML = '';
-
-			// Time calculations for days, hours, minutes and seconds
-			var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-			var hours = Math.floor((distance % (1000 * 60 * 60 * 24))
-					/ (1000 * 60 * 60));
-			var minutes = Math.floor((distance % (1000 * 60 * 60))
-					/ (1000 * 60));
-			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-			document.getElementById("demo").innerHTML = '';
-			// Output the result in an element with id="demo"
-			document.getElementById("demo").innerHTML = days + "d " + hours
-					+ "h " + minutes + "m " + seconds + "s ";
-
-			// If the count down is over, write some text 
-			if (distance < 0) {
-				document.getElementById("demo").innerHTML = "EXPIRED";
-				showduration();
-			}
-		}, 1000);
-		$("#timeModal").modal();
- 
-	}
-
+var listOrders1 = ${allOrders1};
+if (listOrders1 != "") {
+	displayTable(listOrders1);
 }
-$("#pageName").text("Product Guarantee Master");
+
+function displayTable(listOrders) {
+	$('#tableId').html('');
+	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
+			+ '<thead><tr><th>CustomerID</th><th>ProductModelName</th><th>Purchaseddate</th><th>Expired Date</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+	$('#tableId').html(tableHead);
+	serviceUnitArray = {};
+	$.each(listOrders,function(i, orderObj) {
+		if(orderObj.status == "1"){
+			var deleterow = "<a class='deactivate' onclick='deleteProductWarranty("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
+		}else{  
+			var deleterow = "<a class='activate' onclick='deleteProductWarranty("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
+		}
+		var edit = "<a class='edit editIt' onclick='editProductWarranty("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
+		serviceUnitArray[orderObj.id] = orderObj;
+		var tblRow = "<tr>"
+			+ "<td title='"+orderObj.customerid+"'>"+ orderObj.customerid + "</td>"
+			+ "<td title='"+orderObj.productmodelname+"'>"+ orderObj.productmodelname + "</td>"
+			+ "<td title='"+orderObj.purchaseddate+"'>"+ orderObj.purchaseddate + "</td>"
+			+ "<td title='"+orderObj.expirededdate+"'>"+ orderObj.expireddate + "</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
+			+ "</tr>";
+		$(tblRow).appendTo("#tableId table tbody");
+	});
+	if(isClick=='Yes') $('.datatables').dataTable();
+	
+}
+
+
+function editProductWarranty(id) {
+	$("#id").val(serviceUnitArray[id].id);
+	$("#customerid").val(serviceUnitArray[id].customerid);
+	$("#productmodelname").val(serviceUnitArray[id].productmodelname);
+	$("#purchaseddate").val(serviceUnitArray[id].purchaseddate);
+	$("#expireddate").val(serviceUnitArray[id].expireddate);
+	$("#submit1").val("Update");
+	$(window).scrollTop($('#moveTo').offset().top);
+}
+
+function deleteProductWarranty(id,status){
+	
+	var checkstr=null;
+	if(status == 0){
+		 checkstr = confirm('Are you sure you want to Deactivate?');
+	}else{
+		 checkstr = confirm('Are you sure you want to Activate?');
+	}
+	if(checkstr == true){
+		var formData = new FormData();
+	    formData.append('id', id);
+	    formData.append('status', status);
+		$.fn.makeMultipartRequest('POST', 'deleteProductWarranty', false, formData, false, 'text', function(data){
+			var jsonobj = $.parseJSON(data);
+			var alldata = jsonobj.allOrders1;
+			displayTable(alldata);
+			toolTips();
+			$('#inActive').prop('checked', false);
+		});
+	}
+}
+
+function validate(id, errorMessage)
+{
+	var styleBlock = '.placeholder-style.placeholder-style::-moz-placeholder {color: #cc0000;} .placeholder-style::-webkit-input-placeholder {color: #cc0000;}';
+	if($('#'+id).val() ==  null || $('#'+id).val() == ""  || $('#'+id).val()=="undefined" ) {
+		$('style').append(styleBlock);
+		$('#'+id).css('border-color','#cc0000');
+		$('#'+id).css('color','#cc0000');
+		$('#'+id).attr('placeholder',errorMessage);
+		$('#'+id).addClass('placeholder-style your-class');
+//			$('#'+id).css('color','#cc0000');
+//			$('#'+id+'Error').text(errorMessage);
+	}else{
+		$('#'+id).css('border-color','');
+		$('#'+id).removeClass('placeholder-style your-class');
+//			$('#'+id).css('color','');
+//			$('#'+id+'Error').text("");
+	}
+	
+}
+
+function inactiveData() {
+	var status="0";
+	if($('#inActive').is(":checked") == true){
+		status="0";
+	}else{
+		status="1";
+	}
+		var formData = new FormData();
+		formData.append('status', status);
+		
+		$.fn.makeMultipartRequest('POST', 'inActiveProductWarranty', false,
+				formData, false, 'text', function(data) {
+			var jsonobj = $.parseJSON(data);
+			var alldata = jsonobj.allOrders1;
+			displayTable(alldata);
+			console.log(jsonobj.allOrders1);
+				});
+		
+}
+
+$("#pageName").text("Product Warranty Details");
 $(".productGuarantee").addClass("active");
+
 </script>
 
 	
