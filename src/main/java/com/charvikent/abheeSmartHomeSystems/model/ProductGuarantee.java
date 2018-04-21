@@ -13,60 +13,79 @@ public class ProductGuarantee
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer  id;
-	private String productid;
-	private String products;
-	private String duration;
+	private String productmodelid;
+	private String customerid;
+	private String purchaseddate;
+	private String expireddate;
+	private String status;
 	public ProductGuarantee() 
 	{
 		super();
 		
 	}
-	public ProductGuarantee(Integer id, String productid, String products, String duration) 
-	{
+	
+
+	public ProductGuarantee(Integer id, String productmodelid, String customerid, String purchaseddate,
+			String expireddate, String status) {
 		super();
 		this.id = id;
-		this.productid = productid;
-		this.products = products;
-		this.duration = duration;
+		this.productmodelid = productmodelid;
+		this.customerid = customerid;
+		this.purchaseddate = purchaseddate;
+		this.expireddate = expireddate;
+		this.status = status;
 	}
-	public Integer getId() 
-	{
+
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Integer id) 
-	{
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getProductid() 
-	{
-		return productid;
+	public String getProductmodelid() {
+		return productmodelid;
 	}
-	public void setProductid(String productid) 
-	{
-		this.productid = productid;
+	public void setProductmodelid(String productmodelid) {
+		this.productmodelid = productmodelid;
 	}
-	public String getProducts() 
-	{
-		return products;
+	public String getCustomerid() {
+		return customerid;
 	}
-	public void setProducts(String products) 
-	{
-		this.products = products;
+	public void setCustomerid(String customerid) {
+		this.customerid = customerid;
 	}
-	public String getDuration() 
-	{
-		return duration;
+	public String getPurchaseddate() {
+		return purchaseddate;
 	}
-	public void setDuration(String duration) 
-	{
-		this.duration = duration;
+	public void setPurchaseddate(String purchaseddate) {
+		this.purchaseddate = purchaseddate;
 	}
+	public String getExpireddate() {
+		return expireddate;
+	}
+	public void setExpireddate(String expireddate) {
+		this.expireddate = expireddate;
+	}
+	
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
 	@Override
-	public String toString() 
-	{
-		return "ProductGuarantee [id=" + id + ", productid=" + productid + ", products=" + products + ", duration="
-				+ duration + "]";
+	public String toString() {
+		return "ProductGuarantee [id=" + id + ", productmodelid=" + productmodelid + ", customerid=" + customerid
+				+ ", purchaseddate=" + purchaseddate + ", expireddate=" + expireddate + ", status=" + status + "]";
 	}
+
+
+	
 	
 	
 }
