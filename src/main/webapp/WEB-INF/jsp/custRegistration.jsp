@@ -53,8 +53,10 @@
 									<label class="col-md-3 control-label no-padding-right">Customer Type<span class="impColor">*</span></label>
 								<div class="col-md-6">
 										<form:select path="customerType" class="form-control validate" placeholder="Select Customer Type">
-											<form:option value="">-- Select Customer Type--</form:option>
-											<form:options items="${customerTypes}"/>
+											<option value="">-- Select Customer Type--</option>
+											<c:forEach var="customerTypes" items="${allCustomerTypes}">
+											<option value ="${customerTypes.id}" >${customerTypes.customerType}</option>
+											</c:forEach>
 										</form:select>
 									</div>
 								</div>
@@ -113,7 +115,16 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">GST<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:input path="gst" class="form-control validate numericOnly"  maxlength="10" placeholder="Enter Mobileno"/>
+										<form:input path="gst" class="form-control validate numericOnly"  maxlength="10" placeholder="Enter GST"/>
+									</div>
+								</div>
+								</div>
+								
+								<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Purchased Customer</label>
+								<div class="col-md-3 ">
+										<form:checkbox path="purchaseCustomer" style="width:20px;height:20px;" />
 									</div>
 								</div>
 								</div>
@@ -514,19 +525,20 @@ $('#email').blur(function() {
 		}); 
 		
 		
-	$('#gst').hide();	
+	$('#gst').hide();
+	
 	
 	$('#customerType').change(function(){
 		//var option = $(this).find('option:selected');
 		
-		if($(this).val() == "FormType-2"){
+		if($( "#customerType option:selected" ).text() == "Firm"){
 			
-			console.log($(this).val());
+			console.log($( "#customerType option:selected" ).text());
 			
 			$('#gst').show();
 			
 		}else{
-			console.log($(this).val());
+			console.log($( "#customerType option:selected" ).text());
 			$('#gst').hide();
 		}
 		

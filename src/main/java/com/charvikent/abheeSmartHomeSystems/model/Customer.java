@@ -51,12 +51,25 @@ public class Customer {
 	
 	private String gst;
 	
+	private boolean purchaseCustomer;
+	
+	
+	
+	
 	
 
 
 
 
 	
+
+	public boolean isPurchaseCustomer() {
+		return purchaseCustomer;
+	}
+
+	public void setPurchaseCustomer(boolean purchaseCustomer) {
+		this.purchaseCustomer = purchaseCustomer;
+	}
 
 	public String getGst() {
 		return gst;
