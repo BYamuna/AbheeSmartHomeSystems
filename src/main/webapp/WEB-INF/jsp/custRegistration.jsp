@@ -57,6 +57,7 @@
 											<c:forEach var="customerTypes" items="${allCustomerTypes}">
 											<option value ="${customerTypes.id}" >${customerTypes.customerType}</option>
 											</c:forEach>
+
 										</form:select>
 									</div>
 								</div>
