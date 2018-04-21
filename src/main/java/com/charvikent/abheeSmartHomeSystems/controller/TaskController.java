@@ -543,11 +543,11 @@ public class TaskController {
 	
 		
 		AbheeTask abheeTask =reportIssueDao.checkServiceRequestExisrOrNot(task);
-		if(null !=abheeTask )
+		if(null ==abheeTask )
 		{
 		reportIssueDao.saveReportIssue(task);
 		taskHistoryLogsDao.historyLog(task);
-		sendingMail.sendingMailWithTaskStatus(task);
+		//sendingMail.sendingMailWithTaskStatus(task);
 		System.out.println(message+"  "+servicetypeid);
 		return "true";
 		}
