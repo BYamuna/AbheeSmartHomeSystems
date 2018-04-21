@@ -8,6 +8,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
+import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -50,13 +52,14 @@ public class SalesRequestController
 		int filecount =0;
 		
 		String str[] = latlong.split("&");
-		
+//		Customer objLoginCustomer= (Customer)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
 		
 		salesrequest.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
 		salesrequest.setLat(str[0]);
 		salesrequest.setLongitude(str[1]);
 		salesrequest.setEnable("1");
+		//salesrequest.setMobileno(objLoginCustomer.getMobilenumber());
    	 for(MultipartFile multipartFile : uploadedFiles) {
 				String fileName = multipartFile.getOriginalFilename();
 				if(!multipartFile.isEmpty())
@@ -68,7 +71,7 @@ public class SalesRequestController
    	 
    	 if(filecount>0)
    	 {
-   		 salesrequest.setImgfiles(fileTemplate.concurrentFileNames());
+   		salesrequest.setImgfiles(fileTemplate.concurrentFileNames());
    		 fileTemplate.clearFiles();
    		 
    	 }
@@ -77,7 +80,7 @@ public class SalesRequestController
 	   	{
 			srequestDao.saveRequest(salesrequest);
 	   		//sendingMail.SendingSalesRequestByEmail(salesrequest.getEmail());
-	   		sendingMail.sendSalesRequestEmailWithattachment(salesrequest.getEmail(), uploadedFiles);
+	   		//sendingMail.sendSalesRequestEmailWithattachment(objLoginCustomer.getEmail(), uploadedFiles);
 	   	}
 	   	else {
 	   		redir.addFlashAttribute("msg","Record Already Exists");

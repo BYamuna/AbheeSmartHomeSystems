@@ -52,7 +52,7 @@
 
 <script type="text/javascript">
 	var isClick = 'No';
-		window.setTimeout(function() {
+		 window.setTimeout(function() {
 		    $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
 		        $(this).remove(); 
 		    });
@@ -61,7 +61,7 @@
 		 $(document).ready(function(){
 			
 			
-		}); 
+		});  
 		
 </script>
 
@@ -69,38 +69,45 @@
 
 </header>
     <%@include file="abheeheader.jsp" %>
-<body>
 
 
 
 	<div style="margin-bottom:45px;" class="main">
 		<div class="main-row">
-			<c:if test="${not empty msg}">
-				<div class="msgcss row">
-					<div align="center" class="form-group">
-						<div style="width:80%" class="alert alert-${cssMsg} fadeIn animated">${msg}</div>
-					</div>
-				</div>
-			</c:if>
 			<!-- login form -->
 			<div class="login-form login-form-left"> 
 				<div class="row">
 					<div class="head">
+							 <c:if test="${not empty msg}">
+								<div class="msgcss1 row">
+									<div align="center" class="form-group">
+										<div style="width:80%" class="alert alert-${cssMsg} fadeIn animated">${msg}</div>
+									</div>
+								</div>
+							</c:if>
 						<h2>Login</h2>
 					</div>					
-					<div class="clearfix"></div>
+									<div class="clearfix"></div>
+						<form action="/customerlogin" method="post"> 
 					<div class="login-top"> 	
-						<form action=customerlogin method="post"> 
 						  <input type="hidden" name="userType" id="userType" value="customerUser"/>
-							<input type="text"  name="username"  id="username"  placeholder="Mobilenumber" />
-							<input type="password"  name="password" placeholder="Password" />
-							<input type="reset" value="Reset"> 
-							<input type="submit" value="Login">
-						</form> 	
+							<input type="text" class="form name" name="username" id="username" onfocus="this.placeholder=''" onblur="this.placeholder='Mobile Number'" placeholder="Mobile Number" required />
+							<input type="password" class="form password" name="password" onfocus="this.placeholder=''" onblur="this.placeholder='Password'" placeholder="Password" required />
+						
 					</div> 
 					<div class="login-bottom"> 
-						<h6><a href="#" data-toggle="modal" data-target="#passwordModel" class="tag">Forgot password</a></h6>
+						<div class="col-sm-6">
+							<h6><a href="#" data-toggle="modal" data-target="#passwordModel" class="tag">Forgot password</a></h6>
+						</div>
+						<div class="col-sm-6">
+						
+						   <!--  <input   class="btn btn-danger" type="reset" value="Reset"> 
+							<input  class="btn btn-primary" type="submit" value="Login"> -->
+							<button class="btn btn-primary" type="submit" value="Login">Login</button>
+							<button class="btn btn-danger" type="reset" value="Reset">Reset</button>
+						</div><div class="clearfix"></div>
 					</div>
+					</form> 	
 					<div class="login-bottom"> 
 						<h6 style="margin-top:40px;">Click here to <a href="#" data-toggle="modal" onclick="openRegistrationModel()"  class="tag">register</a></h6>
 					</div> 

@@ -4,7 +4,11 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-	
+	<style>
+	.form-group {
+	padding-top:10px;
+	}
+	</style>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
 		<li><a href="dashBoard">Home</a></li>
@@ -44,7 +48,18 @@
 					
 					<form:form modelAttribute="custReg" action="custreg" class="form-horizontal " method="Post">
 	                  <form:hidden path="id"/>
-					<div class="col-md-6"><br>
+	                  <div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Customer Type<span class="impColor">*</span></label>
+								<div class="col-md-6">
+										<form:select path="customerType" class="form-control validate" placeholder="Select Customer Type">
+											<form:option value="">-- Select Customer Type--</form:option>
+											<form:options items="${customerTypes}"/>
+										</form:select>
+									</div>
+								</div>
+								</div>
+					<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
@@ -53,7 +68,7 @@
 								</div>
 								
 								</div>
-								<div class="col-md-6"><br>
+								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Last name<span class="impColor">*</span></label>
 									<div class="col-md-6">
@@ -66,14 +81,14 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="email" class="form-control validate emailOnly" placeholder="Enter Emailid"/>
+										<form:input path="email" class="form-control validate emailOnly" placeholder="Enter Email"/>
 									</div>
 								</div></div>
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile Number<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:input path="mobilenumber" class="form-control validate numericOnly"  maxlength="10" placeholder="Enter Mobileno"/>
+										<form:input path="mobilenumber" class="form-control validate numericOnly"  maxlength="10" placeholder="Enter Mobile Number"/>
 									</div>
 								</div>
 								</div>
@@ -94,6 +109,15 @@
 									</div>
 								</div>
 								</div>
+								<div class="col-md-6" id="gst">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">GST<span class="impColor">*</span></label>
+								<div class="col-md-6">
+										<form:input path="gst" class="form-control validate numericOnly"  maxlength="10" placeholder="Enter Mobileno"/>
+									</div>
+								</div>
+								</div>
+								
 						<div class="panel-footer">
 				      	<div class="row">
 				      		<div class="col-sm-12">
@@ -488,6 +512,25 @@ $('#email').blur(function() {
 	}
 
 		}); 
+		
+		
+	$('#gst').hide();	
+	
+	$('#customerType').change(function(){
+		//var option = $(this).find('option:selected');
+		
+		if($(this).val() == "FormType-2"){
+			
+			console.log($(this).val());
+			
+			$('#gst').show();
+			
+		}else{
+			console.log($(this).val());
+			$('#gst').hide();
+		}
+		
+	});
 
 	
    

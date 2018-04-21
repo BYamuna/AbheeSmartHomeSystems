@@ -11,6 +11,19 @@
 <link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
 <link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
 <link rel="canonical" href="https://codepen.io/jonvadillo/pen/NNZzwB" />	
+<style>
+@media (min-width: 768px) {
+.form-horizontal .control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: left;
+    padding-left: 18px;
+}
+}
+
+
+
+</style>
 <div class="container">	
 <!-- Breadcrumb Starts here -->
         <nav aria-label="breadcrumb">
@@ -24,19 +37,19 @@
         	
 							<form:form modelAttribute="salesRequest" action="salesRequest" class="form-horizontal" method="Post" enctype="multipart/form-data">
 	                  <form:hidden path="id"/>
-					<div class="col-md-6"><br>
-					<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Product Model<span class="impColor"> *</span></label>
-									<div class="col-md-6">
-										<form:input path="modelnumber" id="modelnumber"  class="form-control validate" placeholder="Enter Product Model"/>
-									</div>
-								</div>
-								<div class="form-group">
+					<div class="col-md-6">
+				<!--<div class="form-group"> -->
+								<!-- <label class="col-md-3 control-label no-padding-right">Product Model<span class="impColor"> *</span></label> -->
+								<!--<div class="col-md-6"> -->
+										<form:hidden path="modelnumber" id="modelnumber"  class="form-control validate" placeholder="Enter Product Model"/>
+							<!--</div> -->
+   							<!--	</div> -->
+								<%-- <div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor"> *</span></label>
 									<div class="col-md-6">
 										<form:input path="email" class="form-control validate" placeholder="Enter Email"/>
 									</div>
-								</div>
+								</div> --%>
 								<%-- <div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
 									<div class="col-md-6">
@@ -51,12 +64,12 @@
 										<input type="text" name="locationData" id="locationData" class="form-control"/> 
 									</div>
 								</div><div class="clearfix"></div>
-								<div class="form-group">
+								<%-- <div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor"> *</span></label>
 									<div class="col-md-6">
 										<form:input path="mobileno" class="form-control validate numericOnly" maxlength="10"  placeholder="Enter Mobile Number"/>
 									</div>
-								</div>
+								</div> --%>
 								<div class="clearfix"></div>
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Address</label>
@@ -87,7 +100,7 @@
 								</div>
 								
 								<div class="col-md-6">
-								<div id="us2" style="width: 500px; height: 400px;"></div>	
+								<div id="us2" style="width: 450px; height: 260px;"></div>	
 								</div>
 					</form:form>
 								

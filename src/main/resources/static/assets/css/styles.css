@@ -10432,7 +10432,7 @@ body.collapse-leftbar #search.keep-open form button[type="submit"] {
   .navbar-nav > li > a {
     padding-top: 10px;
     padding-bottom: 10px;
-    padding:10px 20px;
+    padding:10px 15px;
   }
 }
 @media (min-width: 768px) {
