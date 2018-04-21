@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -191,7 +193,6 @@ public class AbheeDashBoardController {
 		model.addAttribute("category", serviceDao.getServicemap());
 		model.addAttribute("taskstatus", abheeTaskStatusDao.getTaskStatusMap());
 		
-		
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String id=String.valueOf(objuserBean.getId());
 		
@@ -219,6 +220,41 @@ public class AbheeDashBoardController {
 		
 		return "task";
 	
+	}
+	
+	
+	@RequestMapping(value = "/getCount")
+	public @ResponseBody String getCount(AbheeTask  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult)
+	{
+		JSONObject jsonObj = new JSONObject();
+		Integer unseentasks =0;
+		try{
+			
+			// session.setAttribute("acknotification", kpHistoryService.getHeaderNotificationsforack());
+			 
+			// session.setAttribute("notifications", kpHistoryService.getHeaderNotifications());
+					
+			//unseentasks = taskService.getUnseenTaskCount();
+			//jsonObj.put("unseentasks",unseentasks);
+			
+			
+			
+			System.out.println("enter from header");
+			
+			
+			jsonObj.put("paymentPending",dashBoardDao.getTasksCountBystatus().get("PAYMENT PENDING"));
+			jsonObj.put("AllServiceRequests",dashBoardDao.getAllCountBystatus().get("allServiceCounts"));
+			
+			System.out.println(dashBoardDao.getAllCountBystatus());
+		    System.out.println(dashBoardDao.getTasksCountBystatus());
+			
+		}catch(Exception e){
+			e.printStackTrace();
+	System.out.println(e);
+			return String.valueOf(jsonObj);
+			
+		}
+		return String.valueOf(jsonObj);
 	}
 	
 

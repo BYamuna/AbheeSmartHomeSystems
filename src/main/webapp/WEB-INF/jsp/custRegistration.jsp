@@ -52,7 +52,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Customer Type<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:select path="customerType" class="form-control validate" placeholder="Select Customer Type">
+										<form:select path="customerType" class="form-control validate" placeholder="Select Customer Type"  onfocus="removeBorder(this.id)">
 											<form:option value="">-- Select Customer Type--</form:option>
 											<form:options items="${customerTypes}"/>
 										</form:select>
@@ -519,7 +519,7 @@ $('#email').blur(function() {
 	$('#customerType').change(function(){
 		//var option = $(this).find('option:selected');
 		
-		if($(this).val() == "FormType-2"){
+		if($(this).val() == "Firm"){
 			
 			console.log($(this).val());
 			
