@@ -36,7 +36,7 @@ public class AbheeBranchDao {
 	public List<AbheeBranch> getAbheeBranchNames()
 	 {
 		  
-		return (List<AbheeBranch>)entityManager.createQuery("from AbheeBranch where status='1'").getResultList();
+		return (List<AbheeBranch>)entityManager.createQuery("from AbheeBranch where status='1' order by updatedTime desc").getResultList();
 		 
 	 }
 
@@ -44,7 +44,7 @@ public class AbheeBranchDao {
 	public AbheeBranch getAbheeBranchById(AbheeBranch abheeBranch) {
 		
 		//String hql ="";
-		List<AbheeBranch> abheeBranchList =(List<AbheeBranch>) entityManager.createQuery(" FROM  AbheeBranch where name =:custName ").setParameter("custName",abheeBranch.getName()).getResultList();
+		List<AbheeBranch> abheeBranchList =(List<AbheeBranch>) entityManager.createQuery(" FROM  AbheeBranch where name =:custName").setParameter("custName",abheeBranch.getName()).getResultList();
 		if(abheeBranchList.size() > 0)
 			return abheeBranchList.get(0);
 		return null;
@@ -61,7 +61,7 @@ public class AbheeBranchDao {
 	
 	
 	public void updateAbheeBranch(AbheeBranch abheeBranch) {
-		String hql="update AbheeBranch set  description =:d, name =:n  where  id =:i";
+		String hql="update AbheeBranch set  description =:d, name =:n  where  id =:i ";
 		
 		Query query =entityManager.createQuery(hql); 
 		
@@ -91,7 +91,7 @@ public class AbheeBranchDao {
 	
 	public boolean deleteAbheeBranch(Integer id, String status) {
 		
-		String hql="update AbheeBranch set status =:s where  id =:i";
+		String hql="update AbheeBranch set status =:s where  id =:i ";
 		Query query =entityManager.createQuery(hql);  
 		query.setParameter("s", status);
 		query.setParameter("i", id);
@@ -108,7 +108,7 @@ public class AbheeBranchDao {
 	@SuppressWarnings("unchecked")
 	public List<AbheeBranch> getInActiveList() {
 		// TODO Auto-generated method stub
-		return (List<AbheeBranch>)entityManager.createQuery(" from AbheeBranch where status='0'").getResultList();
+		return (List<AbheeBranch>)entityManager.createQuery(" from AbheeBranch where status='0' order by updatedTime desc").getResultList();
 		 	}
 	
 	
@@ -172,7 +172,7 @@ public class AbheeBranchDao {
 
 
 		try {
-			List<Object[]> rows = entityManager.createNativeQuery("select ab.id,ab.name,ab.description,ab.status from abhee_branch ab where    ab.status='1'").getResultList();
+			List<Object[]> rows = entityManager.createNativeQuery("select ab.id,ab.name,ab.description,ab.status,ab.updated_time from abhee_branch ab where ab.status='1' order by updated_time desc").getResultList();
 			for (Object[] row : rows) {
 				AbheeBranch abheebranch=new AbheeBranch();
 

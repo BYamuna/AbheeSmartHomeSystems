@@ -73,7 +73,7 @@
 				<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div style="margin:0 auto;" class="panel-heading">
-						<h4><i class="ace-icon fa fa-bars"></i>View Issue Details</h4>
+						<h4><i class="ace-icon fa fa-bars"></i>View Customer Details</h4>
 						<div class="options">
 							<a href="" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
 						</div>
@@ -178,6 +178,8 @@
 
 	<link rel="stylesheet" type="text/css" href="http://charvikent.com/mantis/css/dropzone-4.3.0.min.css" />
 <script type="text/javascript">
+$(".task").addClass("active");
+$("#pageName").text("View Customer Details");
 
 
 var 	severityCounts  = ${viewTask};
@@ -193,8 +195,6 @@ var rowdata;
 $("#severityTable").append(rowdata);
 	
 	
-$(".task").addClass("active");
-$("#pageName").text("View Customer Details");
 
 
 </script> 

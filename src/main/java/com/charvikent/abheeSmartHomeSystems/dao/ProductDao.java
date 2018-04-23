@@ -88,7 +88,7 @@ public class ProductDao
 		
 		List<Product> listProducts =new ArrayList<Product>();
 		
-		String hql ="select p.id,p.categoryid,cat.category,p.companyid,com.name,p.description,p.name,p.productmodelpics,p.productmodelvideoslinks,p.status from Product  p , Category cat , Company com where p.categoryid=cat.id and p.companyid=com.id and p.status='0'";
+		String hql ="select p.id,p.categoryid,cat.category,p.companyid,com.name,p.description,p.name,p.productmodelpics,p.productmodelvideoslinks,p.status,p.updatedTime from Product  p , Category cat , Company com where p.categoryid=cat.id and p.companyid=com.id and p.status='0' order by p.updatedTime desc";
 
 		List<Object[]> rows = entityManager.createQuery(hql).getResultList();
 		
@@ -117,7 +117,7 @@ public class ProductDao
 	 {
 		List<Product> listProducts =new ArrayList<Product>();
 		
-		String hql ="select p.id,p.categoryid,cat.category,p.companyid,com.name,p.description,p.name,p.productmodelpics,p.productmodelvideoslinks,p.status,p.ProductModelSpecifications,p.ProductPrice,p.maxAllowedDiscount from Product  p , Category cat , Company com where p.categoryid=cat.id and p.companyid=com.id and p.status='1'";
+		String hql ="select p.id,p.categoryid,cat.category,p.companyid,com.name,p.description,p.name,p.productmodelpics,p.productmodelvideoslinks,p.status,p.ProductModelSpecifications,p.ProductPrice,p.maxAllowedDiscount,p.updatedTime from Product  p , Category cat , Company com where p.categoryid=cat.id and p.companyid=com.id and p.status='1' order by p.updatedTime desc";
 
 		List<Object[]> rows = entityManager.createQuery(hql).getResultList();
 		
@@ -151,7 +151,8 @@ public class ProductDao
 		
 		String hql ="select p.id,p.name,c.name as companyname,p.productmodelvideoslinks,p.productmodelpics,p.companyid from Product p,Company c where p.categoryid='"+categoryid+"' and p.companyid=c.id group by c.name";
 
-List<Object[]> rows = entityManager.createQuery(hql).getResultList();
+		@SuppressWarnings("unchecked")
+		List<Object[]> rows = entityManager.createQuery(hql).getResultList();
 		
 		for (Object[] row : rows) {
 			

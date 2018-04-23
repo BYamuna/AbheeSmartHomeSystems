@@ -207,6 +207,7 @@ function displayTable(listOrders) {
 function editProductWarranty(id) {
 	$("#id").val(serviceUnitArray[id].id);
 	$("#customerid").val(serviceUnitArray[id].customerid);
+	$("#productmodelid").val(serviceUnitArray[id].productmodelid);
 	$("#productmodelname").val(serviceUnitArray[id].productmodelname);
 	$("#purchaseddate").val(serviceUnitArray[id].purchaseddate);
 	$("#expireddate").val(serviceUnitArray[id].expireddate);

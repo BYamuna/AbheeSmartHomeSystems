@@ -1,10 +1,14 @@
 package com.charvikent.abheeSmartHomeSystems.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "abheeproductguarantee")
@@ -18,6 +22,10 @@ public class ProductGuarantee
 	private String purchaseddate;
 	private String expireddate;
 	private String status;
+	@CreationTimestamp
+	protected Date createdTime ;
+	@CreationTimestamp
+	protected Date UpdatedTime ;
 	public ProductGuarantee() 
 	{
 		super();
@@ -25,8 +33,10 @@ public class ProductGuarantee
 	}
 	
 
+	
+
 	public ProductGuarantee(Integer id, String productmodelid, String customerid, String purchaseddate,
-			String expireddate, String status) {
+			String expireddate, String status, Date createdTime, Date updatedTime) {
 		super();
 		this.id = id;
 		this.productmodelid = productmodelid;
@@ -34,7 +44,12 @@ public class ProductGuarantee
 		this.purchaseddate = purchaseddate;
 		this.expireddate = expireddate;
 		this.status = status;
+		this.createdTime = createdTime;
+		UpdatedTime = updatedTime;
 	}
+
+
+
 
 	public Integer getId() {
 		return id;
@@ -78,14 +93,39 @@ public class ProductGuarantee
 	}
 
 
-	@Override
-	public String toString() {
-		return "ProductGuarantee [id=" + id + ", productmodelid=" + productmodelid + ", customerid=" + customerid
-				+ ", purchaseddate=" + purchaseddate + ", expireddate=" + expireddate + ", status=" + status + "]";
+	public Date getCreatedTime() {
+		return createdTime;
 	}
 
 
-	
-	
+
+
+	public void setCreatedTime(Date createdTime) {
+		this.createdTime = createdTime;
+	}
+
+
+
+
+	public Date getUpdatedTime() {
+		return UpdatedTime;
+	}
+
+
+
+
+	public void setUpdatedTime(Date updatedTime) {
+		UpdatedTime = updatedTime;
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "ProductGuarantee [id=" + id + ", productmodelid=" + productmodelid + ", customerid=" + customerid
+				+ ", purchaseddate=" + purchaseddate + ", expireddate=" + expireddate + ", status=" + status
+				+ ", createdTime=" + createdTime + ", UpdatedTime=" + UpdatedTime + "]";
+	}
 	
 }
