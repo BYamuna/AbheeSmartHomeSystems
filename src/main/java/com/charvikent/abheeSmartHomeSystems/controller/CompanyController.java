@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,12 +28,14 @@ import com.charvikent.abheeSmartHomeSystems.model.Company;
 @Controller
 public class CompanyController 
 {
+	private static final Logger LOGGER = LoggerFactory.getLogger(CompanyController  .class);
 	@Autowired
 	CompanyDao companyDao;
 	
 	@RequestMapping("/company")
 	public String  companyList( @ModelAttribute("companyf")  Company comf,Model model ,HttpServletRequest request) 
 	{
+		LOGGER.debug("Calling company at controller");
 		List<Company> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
@@ -62,7 +66,7 @@ public class CompanyController
 	public String saveCompany(@Valid @ModelAttribute  Company com, BindingResult bindingresults,
 			RedirectAttributes redir) throws IOException 
 	{
-		
+		LOGGER.debug("Calling company at controller");
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
 			return "redirect:/";
@@ -129,6 +133,7 @@ public class CompanyController
 	@RequestMapping(value = "/deleteCompany")
 	public @ResponseBody String deleteCompany(Company  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) 
 	{
+		LOGGER.debug("Calling deleteCompany at controller");
 		//System.out.println("deleteEducation page...");
 		List<Company> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
@@ -171,6 +176,7 @@ public class CompanyController
 	@RequestMapping(value = "/inActiveCompanies")
 	public @ResponseBody String getAllActiveOrInactiveCompanies(Company  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) 
 	{
+		LOGGER.debug("Calling inActiveCompanies at controller");
 		List<Company> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;

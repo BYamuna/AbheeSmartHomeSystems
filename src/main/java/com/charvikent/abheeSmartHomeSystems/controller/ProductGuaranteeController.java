@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class ProductGuaranteeController 
 {
+	private static final Logger LOGGER = LoggerFactory.getLogger(ProductGuaranteeController .class);
+
 	@Autowired ProductGuaranteeDao productGuaranteeDao;
 	/*@RequestMapping(value = "/productGuarantee" ,method = RequestMethod.GET)
 	public String productWarrantyView(Model model)
@@ -43,6 +47,7 @@ public class ProductGuaranteeController
 	@RequestMapping(value = "/productGuarantee" ,method = RequestMethod.POST)
 	public String saveProductWarranty(@Valid @ModelAttribute("guaranteef") ProductGuarantee productGuarantee,BindingResult bindingresults, RedirectAttributes redir) throws IOException 
 	{
+		LOGGER.debug("Calling productGuarantee at controller");
 		System.out.println("Enter to post............");
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
@@ -113,6 +118,7 @@ public class ProductGuaranteeController
 	@RequestMapping(value = "/productGuarantee" ,method = RequestMethod.GET)
 	public String  ProductWarrantyList( @ModelAttribute("guaranteef") ProductGuarantee productGuarantee,Model model ,HttpServletRequest request) 
 	{
+		LOGGER.debug("Calling productGuarantee at controller");
 		List<Map<String, Object>> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
@@ -143,6 +149,7 @@ public class ProductGuaranteeController
 	}
 	@RequestMapping(value = "/deleteProductWarranty")
 	public @ResponseBody String deactiveProductWarranty(ProductGuarantee  productGuarantee ,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling deleteProductWarranty at controller");
 		List<Map<String, Object>> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
@@ -185,6 +192,7 @@ public class ProductGuaranteeController
 	
 	@RequestMapping(value = "/inActiveProductWarranty")
 	public @ResponseBody String getAllActiveOrInactiveWarrantyList( ProductGuarantee  productGuarantee ,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling inActiveProductWarranty at controller");
 		List<Map<String, Object>> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;

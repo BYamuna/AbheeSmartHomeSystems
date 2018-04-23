@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +39,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class AbheeCustRegistrationController 
 {
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger( AbheeCustRegistrationController .class);
 	
 	@Autowired
 	SendSMS sendSMS;
@@ -58,6 +60,7 @@ public class AbheeCustRegistrationController
 	@RequestMapping("/custRegistration")	
 	public String AbheeCustRegistrationPage(Model model,HttpServletRequest request)
 	{
+		LOGGER.debug("Calling  custRegistration at controller");
 	  model.addAttribute("custReg",new Customer());
 	  List<Customer> listOrderBeans = null;
 	  ObjectMapper objectMapper = null;
@@ -108,6 +111,7 @@ public class AbheeCustRegistrationController
 	@RequestMapping(value = "/checkCustExst", method = RequestMethod.POST)
 	public @ResponseBody  Boolean checkCustomerExistence(@Validated @ModelAttribute  Customer abheecustregistration,Model model,HttpServletRequest request) throws IOException 
 	{
+		LOGGER.debug("Calling  checkCustExst at controller");
 		System.out.println("enter to checkCustExst");
 		
 		String custMobile=request.getParameter("cmobile");
@@ -135,6 +139,7 @@ public class AbheeCustRegistrationController
 	@RequestMapping(value = "/customerDashBoard", method = RequestMethod.GET)
 	public String showCustomerdashBoard(Model model) throws IOException 
 	{
+		LOGGER.debug("Calling  customerDashBoard at controller");
 		return "customerDashBoard";
 		
 	}
@@ -143,6 +148,7 @@ public class AbheeCustRegistrationController
 	@RequestMapping(value = "/modelSubmit", method = RequestMethod.POST)
 	public @ResponseBody  boolean modelSubmit(Model model,HttpServletRequest request) throws IOException 
 	{
+		LOGGER.debug("Calling  modelSubmit at controller");
 		System.out.println("enter to model Submit");
 		
 		String custMobile=request.getParameter("cmobile");
@@ -201,6 +207,7 @@ public class AbheeCustRegistrationController
 	@RequestMapping(value = "/getOtp", method = RequestMethod.POST)
 	public @ResponseBody  Boolean getOTP(Model model,HttpServletRequest request) throws IOException 
 	{
+		LOGGER.debug("Calling  getOtp at controller");
 		System.out.println("enter to getOtp");
 		
 		String custMobile=request.getParameter("cmobile");
@@ -225,6 +232,7 @@ public class AbheeCustRegistrationController
 	@RequestMapping(value = "/checkEmailExst", method = RequestMethod.POST)
 	public @ResponseBody  Boolean checkemailExistence(@Validated @ModelAttribute  Customer abheecustregistration,Model model,HttpServletRequest request) throws IOException 
 	{
+		LOGGER.debug("Calling  checkEmailExst at controller");
 		System.out.println("enter to checkCustExst");
 		
 		String custEmail=request.getParameter("cemail");
@@ -244,6 +252,7 @@ public class AbheeCustRegistrationController
 	
 	@RequestMapping(value = "/inActiveCust")
 	public @ResponseBody String getAllActiveOrInactiveOrgnizations(Customer  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling  inActiveCust at controller");
 		List<Customer> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
@@ -281,6 +290,7 @@ public class AbheeCustRegistrationController
 	
 	@RequestMapping(value = "/deleteCustomer")
 	public @ResponseBody String deleteEmployee(Customer  objUser,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling  deleteCustomer at controller");
 		List<Customer> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
@@ -324,7 +334,7 @@ public class AbheeCustRegistrationController
 	public String saveCustomer(@Valid @ModelAttribute  Customer user, BindingResult bindingresults,
 			RedirectAttributes redir) throws IOException {
 		
-		
+		LOGGER.debug("Calling  custreg at controller");
 		
 
 		if (bindingresults.hasErrors()) {
@@ -401,6 +411,7 @@ public class AbheeCustRegistrationController
 	@RequestMapping(value = "/getresetcustomerpassword", method = RequestMethod.POST)
 	public @ResponseBody  Boolean getResetCustomerPassword(Model model,HttpServletRequest request) throws IOException, MessagingException 
 	{
+		LOGGER.debug("Calling  getresetcustomerpassword at controller");
 		System.out.println("enter to getresetcustomerpassword");
 		
 		String custMobile=request.getParameter("resetmobile");
@@ -421,6 +432,7 @@ public class AbheeCustRegistrationController
 	@RequestMapping(value = "/checkEmpExst", method = RequestMethod.POST)
 	public @ResponseBody  Boolean checkCustomerExistence1(@Validated @ModelAttribute Customer abheecustregistration,Model model,HttpServletRequest request) throws IOException 
 	{
+		LOGGER.debug("Calling  checkEmpExst at controller");
 		System.out.println("enter to checkCustExst");
 		
 		String custMobile=request.getParameter("cmobile");
@@ -440,6 +452,7 @@ public class AbheeCustRegistrationController
 	@RequestMapping(value = "/checkEmpExstbyemail", method = RequestMethod.POST)
 	public @ResponseBody  Boolean checkEmployeeExistence(@Validated @ModelAttribute  Customer abheecustregistration,Model model,HttpServletRequest request) throws IOException 
 	{
+		LOGGER.debug("Calling  checkEmpExstbyemail at controller");
 		System.out.println("enter to checkCustExst");
 		
 		String empcemail=request.getParameter("cemail");
