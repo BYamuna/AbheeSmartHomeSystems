@@ -71,7 +71,7 @@ public class ReportIssueDao {
 		
 		em.persist(taskHistory);*/
 		
-		taskHistoryLogsDao.historyLog(reportIssue);
+		taskHistoryLogsDao.historyLogForcustomerEntry(reportIssue);
 		
 		/*TaskHistoryLogs taskHistoryLogs=new TaskHistoryLogs();
 		taskHistoryLogs.setTaskid(reportIssue.getId());
@@ -664,7 +664,7 @@ public List<ReportIssue> getAllReportIssues()
 			
 			AbheeTask task= (AbheeTask)em.find(AbheeTask.class ,id);
 			   task.setAdditionalinfo(status);
-			   task.setKstatus("3");
+			   task.setKstatus("2");
 			   em.merge(task);
 			if(!status.equals(task.getAdditionalinfo()))
 			{

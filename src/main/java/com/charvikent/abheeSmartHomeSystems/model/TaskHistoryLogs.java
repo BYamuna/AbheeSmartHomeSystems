@@ -51,6 +51,8 @@ public class TaskHistoryLogs  {
 	
 	private String ServiceType;
 	
+	private String ModifiedBy;
+	
 	
 	
 	@Transient
@@ -293,6 +295,14 @@ public class TaskHistoryLogs  {
 	}
 	
 	
+	
+	
+	public String getModifiedBy() {
+		return ModifiedBy;
+	}
+	public void setModifiedBy(String modifiedBy) {
+		ModifiedBy = modifiedBy;
+	}
 	@Override
 	public String toString() {
 		return "TaskHistoryLogs [id=" + id + ", taskno=" + taskno + ", taskid=" + taskid + ", createdTime="
