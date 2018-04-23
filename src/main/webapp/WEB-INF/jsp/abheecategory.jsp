@@ -379,7 +379,6 @@ $.each(productdetailslist, function(k,v){
 	}
 	
 	function checkService(){
-		alert("Enter to service");
            if(login){
 		$("#formModal").modal();
            }
