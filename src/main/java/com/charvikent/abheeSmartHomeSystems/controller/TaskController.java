@@ -548,7 +548,7 @@ public class TaskController {
 		if(null ==abheeTask )
 		{
 		reportIssueDao.saveReportIssue(task);
-		taskHistoryLogsDao.historyLog(task);
+		taskHistoryLogsDao.historyLogForcustomerEntry(task);
 		//sendingMail.sendingMailWithTaskStatus(task);
 
 		System.out.println(message+"  "+servicetypeid);
