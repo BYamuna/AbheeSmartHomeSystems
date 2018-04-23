@@ -53,7 +53,7 @@ public class HomeController {
 	@RequestMapping("/admin")
 	public String customlogin(Model model) {
 		
-		LOGGER.debug("Calling Admin Login page index::{}");
+		LOGGER.debug("Calling Admin Login page index::{} at controller");
 		
 		 /*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		 
@@ -68,6 +68,8 @@ public class HomeController {
 	@RequestMapping("/userlogin")
 	public String userLogin(Model model) {
 		
+		LOGGER.debug("Calling User Login page index::{} at controller");
+		
 		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		 
 		return "userlogin";
@@ -76,6 +78,7 @@ public class HomeController {
 	
 	@RequestMapping("/login")
 	public String loginView(Model model) {
+		LOGGER.debug("Calling Login page index::{} at controller");
 		System.out.println("login called at /login page");
 		//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 //userService.setLoginRecord(objuserBean.getId(),"login");
@@ -85,6 +88,9 @@ public class HomeController {
 	
 	@RequestMapping("/logout")
 	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+		
+		LOGGER.debug("Calling Logout page index::{} at controller");
+		
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -109,6 +115,7 @@ public class HomeController {
 	}*/
 	@RequestMapping("/customerlogin")
 	public String ShowCustomerLoginPage(Model model,HttpServletRequest request) {
+		LOGGER.debug("Calling Customer Login page index::{} at controller");
 		if(falg)
 		loginurl =request.getHeader("referer");
 		
@@ -118,6 +125,7 @@ public class HomeController {
 	@PostMapping("/customerlogin")
 	public String validateCustomerLogin(Model model,HttpServletRequest request,HttpSession session,RedirectAttributes redir) throws JsonProcessingException {
 		
+		LOGGER.debug("Validating Customer Login page index::{} at controller");
 		String loginid=request.getParameter("username");
 		String password=request.getParameter("password");
 		
@@ -154,6 +162,7 @@ public class HomeController {
 	
 	@PostMapping("/test")
 	public String test(Model model,HttpServletRequest request) {
+		LOGGER.debug("Calling Admin Login page index::{} at controller");
 		//URI str= hrequest.getURI();
 		
 		System.out.println(request.getContextPath());
@@ -174,6 +183,7 @@ public class HomeController {
 	@RequestMapping("/")
 	public String ShowAbhee(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException 
 	{
+		LOGGER.debug("Calling Abhee site Main page at controller");
 		List<Category> listOrderBeans = categoryDao.getCategoryNames();
 		//model.addAttribute("categories", listOrderBeans);
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -190,6 +200,7 @@ public class HomeController {
 	
 	@RequestMapping("/signout")
 	public String SignOut(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
+		LOGGER.debug("Calling Signout page at controller");
 		String referalUrl=request.getHeader("referer");
 		System.out.println(referalUrl);
 		
@@ -201,7 +212,7 @@ public class HomeController {
 	@RequestMapping("/getCategoryList")
 	public @ResponseBody String getCategoryList(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException 
 	{
-		
+		LOGGER.debug("Retrieving Categories list at controller");
 		List<Category> listOrderBeans = categoryDao.getCategoryNames();
 		//model.addAttribute("categories", listOrderBeans);
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -220,6 +231,7 @@ public class HomeController {
 	
 	@RequestMapping("*")
 	public String erro404(Model model,HttpServletRequest request) {
+		LOGGER.debug("Calling 404 error page at controller");
 		String referalUrl=request.getHeader("referer");
 		return "redirect:"+ referalUrl;
 	}

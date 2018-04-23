@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import com.charvikent.abheeSmartHomeSystems.service.UserService;
 @Controller
 public class AdminController {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(AdminController.class);
 
 
 	@Autowired
@@ -258,6 +261,7 @@ public class AdminController {
 	@SuppressWarnings("unused")
 	@RequestMapping(value="/adminChangePassword", method= RequestMethod.POST )
 	public  @ResponseBody String adminChangePassword(User user,RedirectAttributes redir,HttpServletRequest request) throws JSONException{
+		LOGGER.debug("Calling adminChangePassword at controller");
 		boolean result=false;
 		JSONObject jsonObj = new JSONObject();
 		User users = userService.getUserById(user.getId());

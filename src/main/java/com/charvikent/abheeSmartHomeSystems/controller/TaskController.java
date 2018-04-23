@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -48,6 +50,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class TaskController {
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger( TaskController.class);
+
+
 	@Autowired
 	ReportIssueDao reportIssueDao;
 	@Autowired
@@ -82,6 +87,7 @@ public class TaskController {
 	
 	@GetMapping("/task")
 	public String  department(Model model , HttpServletRequest request,HttpSession session) {
+		LOGGER.debug("Calling task at controller");
 		List<Map<String, Object>> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
@@ -126,6 +132,7 @@ public class TaskController {
 	@PostMapping(value = "/savetask1" )
 	public String saveAdmin(@Valid @ModelAttribute("taskf")  AbheeTask task, TaskHistoryLogs taskHistoryLogs,BindingResult bindingresults, @RequestParam("file1") MultipartFile[] uploadedFiles,
 			RedirectAttributes redir) throws IOException {
+		LOGGER.debug("Calling savetask1 at controller");
 		
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
@@ -230,6 +237,7 @@ public class TaskController {
 	
 	@RequestMapping(value = "/deleteTask")
 	public @ResponseBody String deleteDept(AbheeTask  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling deleteTask at controller");
 		System.out.println("deleteEducation page...");
 		List<Map<String, Object>> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
@@ -517,7 +525,7 @@ public class TaskController {
 
 	public @ResponseBody  String modelSubmit(Model model,HttpServletRequest request) throws IOException, MessagingException 
 	{
-
+		LOGGER.debug("Calling saveServiceRequest at controller");
 	
 		System.out.println("enter to task controller Submit");
 		
@@ -562,6 +570,7 @@ public class TaskController {
 	}
 	@RequestMapping(value = "/inActiveTasks")
 	public @ResponseBody String getAllActiveOrInactiveOrgnizations(AbheeTask  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling inActiveTasks at controller");
 		List<Map<String, Object>>listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;

@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +53,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RestController
 public class AbheeCustomerRestController {
 	
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger(AbheeCustomerRestController.class);
+
 	@Autowired CustomerDao customerDao;
 	
 	@Autowired
@@ -83,6 +86,7 @@ public class AbheeCustomerRestController {
 	@RequestMapping("/Customer")
 	public String showCustomerRegistrationForm(Model model,HttpServletRequest request) throws JsonProcessingException
 	{
+		LOGGER.debug("Calling Customer at controller");
 		return null;
 		
 	}
@@ -94,7 +98,7 @@ public class AbheeCustomerRestController {
 	@SuppressWarnings("static-access")
 	@RequestMapping(value="/saveRestCustomer", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public HashMap<String, String>  SaveAbheeCustomer( @RequestBody Customer customer) {
-		
+		LOGGER.debug("Calling saveRestCustomer at controller");
 		String code =null;
 		String regSuccessMsg =customer.getFirstname()+" "+customer.getLastname()+",  Successfully registered with ABhee Smart Homes. \n You can login using  \n UserId:  "+customer.getMobilenumber()+" or "+customer.getEmail()+"\n password: "+customer.getPassword();
 
@@ -119,7 +123,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	@RequestMapping(value="/requestsms", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public ResponseEntity<String>  getOTP( @RequestBody Customer user) {
 		
-		
+		LOGGER.debug("Calling requestsms at controller");
 		String custMobile=user.getMobilenumber();
 		Random random = new Random();
 		String  otpnumber = String.format("%04d", random.nextInt(10000));
@@ -152,7 +156,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	
 	@RequestMapping(value="/requestsms2", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public HashMap<String, String> VerifyingAndSendOTP( @RequestBody Customer custBean) {
-		
+		LOGGER.debug("Calling requestsms2 at controller");
 		String custMobile=custBean.getMobilenumber();
 		
 		String custemail=custBean.getEmail();
@@ -215,7 +219,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	@SuppressWarnings("unused")
 	@RequestMapping(value="/logincredentials", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public String  checkingLogincredentials( @RequestBody Customer customer) throws JsonProcessingException, JSONException {
-		
+		LOGGER.debug("Calling logincrentails at controller");
 		String code =null;
 		HashMap<String,String> hm =new HashMap<String,String>();
 		
@@ -296,7 +300,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	
 	@RequestMapping(value="/getcategories", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public String  getCategoriesList() throws JsonProcessingException, JSONException {
-		
+		LOGGER.debug("Calling getCategories at controller");
 		String code =null;
 		HashMap<String,String> hm =new HashMap<String,String>();
 		List<Category> listOrderBeans = categoryDao.getCategoryNames();
@@ -332,7 +336,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 
 	@RequestMapping(value="/getproducts", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public String  getProductslist() throws JsonProcessingException, JSONException {
-		
+		LOGGER.debug("Calling getproducts at controller");
 		List<Product> listOrderBeans =  productDao.getProductDetails();
 		
 		JSONObject json =new JSONObject();
@@ -364,7 +368,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	
 	@RequestMapping(value="/getcompanies", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public String  getCompaniesBycategoryId(@RequestParam(value="id", required=false) String categoryid) throws JsonProcessingException, JSONException {
-		
+		LOGGER.debug("Calling getcompanies at controller");
 		List<Map<String, Object>>  listOrderBeans =  companyDao.getCompaniesByCategoryId(categoryid);
 		
 		JSONObject json =new JSONObject();
@@ -386,7 +390,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	
 	@RequestMapping(value="/getproductsby", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public String  getProductsByCompantId(@RequestParam(value="id", required=false) String companyid) throws JsonProcessingException, JSONException {
-		
+		LOGGER.debug("Calling getproductsby at controller");
 		System.out.println(companyid);
 		List<Map<String, Object>>  listOrderBeans =  productDao.getProductsByCompanyId(companyid);
 		
@@ -410,7 +414,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	
 	@PostMapping(value="/savequationrequest", consumes = "application/json", produces = "application/json")  
 	public HashMap<String, String>  saveQuationRequest( @RequestBody SalesRequest salesrequest,@RequestParam("imgfile") MultipartFile[] uploadedFiles) {
-		
+		LOGGER.debug("Calling savequationrequest at controller");
 		String code =null;
 		int filecount =0;
 
@@ -457,7 +461,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 			                           
 									@RequestParam(value = "imgfile") String[] file,HttpServletRequest request,RedirectAttributes redir) throws IllegalStateException, IOException, MessagingException
 	{
-		
+		LOGGER.debug("Calling restSalesRequest at controller");
 		String referalUrl=request.getHeader("referer");
 		int filecount =0;
 		
