@@ -146,7 +146,7 @@ public class AbheeDashBoardController {
 	
 	@RequestMapping(value = "/viewTicket")
 	public String viewIssue(@RequestParam(value = "id", required = true) String taskId,
-			@RequestParam(value = "pgn", required = true) String pgn,Model model,HttpSession session) 
+			@RequestParam(value = "pgn", required = true) String pgn,Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException, JSONException 
 	{
 		 
 		if(pgn.equals("1"))
@@ -157,7 +157,24 @@ public class AbheeDashBoardController {
 			List<Map<String, Object>> viewtaskBean = abheeTaskDao.getAbheeTaskById(taskId);
 			model.addAttribute("test2",viewtaskBean);
 			
+			List<Map<String, Object>> statuslist=abheeTaskDao.getTaskStatusHistoryByTaskNo(taskId);
 			
+			ObjectMapper objectMapper = new ObjectMapper();
+			String sJson;
+			JSONObject jsonObj = new JSONObject();
+			if (statuslist != null && statuslist.size() > 0) {
+				
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(statuslist);
+				request.setAttribute("statuslist1", sJson);
+				jsonObj.put("statuslist1", statuslist);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(statuslist);
+				request.setAttribute("statuslist1", "''");
+				jsonObj.put("statuslist1", statuslist);
+			}
 		
 		return "ViewTicket";
 

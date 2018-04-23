@@ -29,6 +29,9 @@ public class AbheeTaskDao {
 	@PersistenceContext
     private EntityManager entityManager;
 	
+	@Autowired
+	TaskHistoryLogsDao taskHistoryLogsDao;
+	
 	
 	
 	public List<Map<String,Object>> getTasksList()
@@ -180,11 +183,9 @@ public void  openTask(String taskno) {
 			if(!task.getAdditionalinfo().equals("1"))
 			{
 			   task.setAdditionalinfo("1");
-			   task.setKstatus("3");
+			   task.setKstatus("2");
 			   entityManager.merge(task);
-			
-			
-
+			 taskHistoryLogsDao.historyLog(task);
 			
 			}
 		}catch(Exception e){
@@ -265,6 +266,18 @@ public List<Map<String,Object>> getTasksListAssignToMeById(String id)
 		System.out.println(sql);
 	
 	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
+	System.out.println(retlist);
+	return retlist;
+	
+}
+
+public List<Map<String, Object>> getTaskStatusHistoryByTaskNo(String taskno) {
+	
+	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname,t.created_time from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and taskno='LZIB9'  order by t.created_time desc";
+	
+         System.out.println(hql);
+	
+	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
 	System.out.println(retlist);
 	return retlist;
 	

@@ -528,8 +528,6 @@ public class TaskController {
 		String customerId =request.getParameter("customerId");
 		AbheeTask task =new AbheeTask();
 		task.setAdditionalinfo("0");
-		task.setAssignby("1");
-		task.setAssignto("1");
 		task.setAssignto("1");
 		task.setDescription(message);
 		task.setKstatus("5");
@@ -548,7 +546,7 @@ public class TaskController {
 		if(null ==abheeTask )
 		{
 		reportIssueDao.saveReportIssue(task);
-		taskHistoryLogsDao.historyLogForcustomerEntry(task);
+		//taskHistoryLogsDao.historyLogForcustomerEntry(task);
 		//sendingMail.sendingMailWithTaskStatus(task);
 
 		System.out.println(message+"  "+servicetypeid);

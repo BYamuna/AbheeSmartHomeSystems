@@ -126,7 +126,64 @@
 			
 </div>
 
+<div class="container">
+<div class="col-md-12">
+				<div class="panel panel-primary">
+					<div style="margin:0 auto;" class="panel-heading rounded-bottom">
+						<h4><i class="ace-icon fa fa-bars"></i>View Service Request Details</h4>
+						<div class="options">
+							<a href="" class="panel-collapse"><i class="fa fa-chevron-up"></i></a>
+						</div>
+					</div>
+					<div class="panel panel-body collapse in" style="display: none;">
+						<div class="clearfix"></div>
+						<br>
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+						
+						<div class="table-responsive">
+								<table class="table table-bordered priority prioritybg" style="border: 1px solid #0460a4; width:;" id="viewStatusTable">
 
+
+       
+              
+                 <thead><tr>
+                  <th>
+                   Modified User Name   
+                  </th>
+                  <th>
+                    Product model
+                  </th>
+                  <th>
+                    ModifiedDate
+                  </th>
+                  <th>
+                     created_time  
+                  </th>
+                  <th>
+                     Note
+                  </th>
+                   </tr>
+                 <tr>
+                 
+                 </tr>
+                
+              
+         
+      
+									
+
+									
+
+																	</thead><tbody></tbody></table>
+							</div>
+</div>
+	<div class="col-md-2"></div>
+</div>
+
+				</div>
+							</div>
+</div>
 </div>
 		
 					</div><!-- /.page-content -->
@@ -146,8 +203,22 @@
 	<link rel="stylesheet" type="text/css" href="http://charvikent.com/mantis/css/dropzone-4.3.0.min.css" />
 <script type="text/javascript">
 
+var allstatus = ${statuslist1};
+//allstatus=JSON.parse(allstatus);
+$.each(allstatus, function(k, v){
+	var tr=	'<tr>'
+			+'<td>'+ v.username +'</td>'
+			+'<td>'+ v.productname +'</td>'
+			+'<td>'+ v.servicestatus +'</td>'
+			+'<td>'+ v.created_time +'</td>'
+			+'<td>'+ v.add_comment +'</td>'
+			+'</tr>';
+	$('#viewStatusTable tbody').append(tr);
+});
 
-var 	severityCounts  = ${viewTask};
+/* var 	severityCounts  = ${viewTask};
+
+
 
 
 var rowdata;
@@ -157,7 +228,7 @@ var rowdata;
 			+'<td><a href="severityBy?id=2">'+ severityCounts.MAJOR +'</a></td>'
 			+'<td><a href="severityBy?id=1">'+ severityCounts.MINOR +'</a></td>'
 				+'</tr>';
-$("#severityTable").append(rowdata);
+$("#severityTable").append(rowdata); */
 	
 	
 $(".task").addClass("active");

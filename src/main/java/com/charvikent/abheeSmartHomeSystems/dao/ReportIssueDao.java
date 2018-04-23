@@ -2,6 +2,7 @@ package com.charvikent.abheeSmartHomeSystems.dao;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -17,6 +18,9 @@ import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -315,6 +319,10 @@ public List<ReportIssue> getAllReportIssues()
 
 	@SuppressWarnings("unchecked")
 	public  Set<AbheeTask> getRecentlyModified(String id) {
+		
+		
+		
+			
 
 		Set<AbheeTask> listissue=new TreeSet<AbheeTask>();
 
@@ -361,7 +369,29 @@ public List<ReportIssue> getAllReportIssues()
 
 	public void updateIssue(AbheeTask issue) {
 		
-     AbheeTask editissue=getReportIssueById(issue.getId());
+		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			Collection<? extends GrantedAuthority> authorities =authentication.getAuthorities();
+			
+			AbheeTask editissue=getReportIssueById(issue.getId());
+			 editissue.setAdditionalinfo("0");
+			
+			if(authorities.contains(new SimpleGrantedAuthority("ROLE_USER")))
+			{
+			     editissue.setDescription(issue.getDescription());
+			     editissue.setKstatus(issue.getKstatus());
+			     editissue.setAddComment(issue.getAddComment());
+			     if(issue.getUploadfile()!=null)
+			     {
+			     editissue.setUploadfile(fileTemplate.concurrentFileNames());
+			     }
+			     
+			     taskHistoryLogsDao.historyLog(editissue);
+				
+			}
+			else
+			{
+		
      editissue.setAssignto(issue.getAssignto());
      editissue.setCategory(issue.getCategory());
      editissue.setDescription(issue.getDescription());
@@ -371,42 +401,17 @@ public List<ReportIssue> getAllReportIssues()
      editissue.setTaskdeadline(issue.getTaskdeadline());
      editissue.setKstatus(issue.getKstatus());
      editissue.setAddComment(issue.getAddComment());
+    
+     
      if(issue.getUploadfile()!=null)
      {
      editissue.setUploadfile(fileTemplate.concurrentFileNames());
      }
 		em.flush();
 
-         /*TaskHistory taskHistory =new TaskHistory();
-		
-		taskHistory.setTaskid(String.valueOf(editissue.getId()));
-		taskHistory.setTaskno(editissue.getTaskno());
-		taskHistory.setTaskstatus(editissue.getKstatus());
-		taskHistory.setMessage(editissue.getDescription());
-		
-		taskHistory.setTaskdeadline(editissue.getTaskdeadline());
-		
-		em.persist(taskHistory);*/
-		
-		/*TaskHistoryLogs taskHistoryLogs=new TaskHistoryLogs();
-		taskHistoryLogs.setTaskid( editissue.getId());
-		taskHistoryLogs.setServiceType( editissue.getServiceType());
-		taskHistoryLogs.setAdditionalinfo( editissue.getAdditionalinfo());
-		taskHistoryLogs.setAssignby( editissue.getAssignby());
-		taskHistoryLogs.setAssignto( editissue.getAdditionalinfo());
-		taskHistoryLogs.setCategory( editissue.getCategory());
-		taskHistoryLogs.setDescription( editissue.getDescription());
-		taskHistoryLogs.setKstatus( editissue.getKstatus());
-		taskHistoryLogs.setModelid( editissue.getModelid());
-		taskHistoryLogs.setPriority( editissue.getPriority());
-		taskHistoryLogs.setSeverity( editissue.getSeverity());
-		taskHistoryLogs.setStatus( editissue.getStatus());
-		taskHistoryLogs.setSubject( editissue.getSubject());
-		taskHistoryLogs.setTaskdeadline( editissue.getTaskdeadline());
-		taskHistoryLogs.setTaskno( editissue.getTaskno());
-		taskHistoryLogs.setUploadfile( editissue.getUploadfile());
-		em.persist(taskHistoryLogs);*/
+        
 		taskHistoryLogsDao.historyLog(editissue);
+			}
 	}
 
 

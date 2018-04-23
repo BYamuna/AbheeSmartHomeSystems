@@ -34,8 +34,8 @@ public class TaskHistoryLogsDao {
 		taskHistoryLogs.setTaskid(reportIssue.getId());
 		taskHistoryLogs.setServiceType(reportIssue.getServiceType());
 		taskHistoryLogs.setAdditionalinfo(reportIssue.getAdditionalinfo());
-		taskHistoryLogs.setAssignby(reportIssue.getAssignby());
-		taskHistoryLogs.setAssignto(reportIssue.getAdditionalinfo());
+		taskHistoryLogs.setAssignby(reportIssue.getCustomerId());
+		taskHistoryLogs.setAssignto(reportIssue.getAssignto());
 		taskHistoryLogs.setCategory(reportIssue.getCategory());
 		taskHistoryLogs.setDescription(reportIssue.getDescription());
 		taskHistoryLogs.setKstatus(reportIssue.getKstatus());
@@ -48,7 +48,7 @@ public class TaskHistoryLogsDao {
 		taskHistoryLogs.setTaskno(reportIssue.getTaskno());
 		taskHistoryLogs.setAddComment(reportIssue.getAddComment());
 		
-		taskHistoryLogs.setModelid(String.valueOf(objuserBean.getId()));
+		taskHistoryLogs.setModifiedBy(String.valueOf(objuserBean.getId()));
 		
 		
 		
@@ -72,8 +72,8 @@ public class TaskHistoryLogsDao {
 		taskHistoryLogs.setTaskid(reportIssue.getId());
 		taskHistoryLogs.setServiceType(reportIssue.getServiceType());
 		taskHistoryLogs.setAdditionalinfo(reportIssue.getAdditionalinfo());
-		taskHistoryLogs.setAssignby(reportIssue.getAssignby());
-		taskHistoryLogs.setAssignto(reportIssue.getAdditionalinfo());
+		taskHistoryLogs.setAssignby(reportIssue.getCustomerId());
+		taskHistoryLogs.setAssignto(reportIssue.getAssignto());
 		taskHistoryLogs.setCategory(reportIssue.getCategory());
 		taskHistoryLogs.setDescription(reportIssue.getDescription());
 		taskHistoryLogs.setKstatus(reportIssue.getKstatus());
