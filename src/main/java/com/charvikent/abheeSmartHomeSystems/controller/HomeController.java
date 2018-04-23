@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,6 +35,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class HomeController {
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
+	
 	@Autowired UserService userService;
 	
 	@Autowired CustomerDao customerDao;
@@ -48,6 +52,8 @@ public class HomeController {
 	
 	@RequestMapping("/admin")
 	public String customlogin(Model model) {
+		
+		LOGGER.debug("Calling Admin Login page index::{}");
 		
 		 /*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		 
