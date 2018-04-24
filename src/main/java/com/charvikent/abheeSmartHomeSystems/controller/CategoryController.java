@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +37,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class CategoryController {
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger( CategoryController .class);
 	@Autowired
 	CategoryDao categoryDao;
 	
@@ -47,6 +50,7 @@ public class CategoryController {
 	
 	@RequestMapping("/cate")
 	public String  department( @ModelAttribute("catef")  Category catef,Model model ,HttpServletRequest request) {
+		LOGGER.debug("Calling cate at controller");
 		List<Category> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
@@ -80,6 +84,7 @@ public class CategoryController {
 	public String saveAdmin(@Valid @ModelAttribute  Category cate, BindingResult bindingresults,
 			RedirectAttributes redir, @RequestParam("file1") MultipartFile[] categorypic) throws IOException {
 		
+		LOGGER.debug("Calling cate at controller");
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
 			return "redirect:/";
@@ -181,6 +186,7 @@ public class CategoryController {
 	
 	@RequestMapping(value = "/deleteCate")
 	public @ResponseBody String deleteDept(Category  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling deleteCate at controller");
 		System.out.println("deleteEducation page...");
 		List<Category> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
@@ -223,6 +229,7 @@ public class CategoryController {
 	
 	@RequestMapping(value = "/inActiveCategories")
 	public @ResponseBody String getAllActiveOrInactiveCategories(Category  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling inActiveCategories at controller");
 		List<Category> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
@@ -263,6 +270,9 @@ public class CategoryController {
 	public String abheeCategories(@RequestParam(value="id", required=false) String categoryid,@RequestParam(value="company", required=false) String companyid,
 			@RequestParam(value="model", required=false) String modelid,
 			Model model,HttpServletRequest request) throws JsonProcessingException {
+		
+		LOGGER.debug("Calling abheecategory at controller");
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<Category> listOrderBeans = categoryDao.getCategoryNames();
 		//model.addAttribute("categories", listOrderBeans);
@@ -287,6 +297,7 @@ public class CategoryController {
 	@RequestMapping("/abheeproductinfo")
 	public String abheeProductInfo(Model model) {
 		
+		LOGGER.debug("Calling abheeproductinfo at controller");
 		
 		return "abheeproductinfo";
 	}

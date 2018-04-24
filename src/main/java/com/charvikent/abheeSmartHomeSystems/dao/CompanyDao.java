@@ -35,7 +35,7 @@ public class CompanyDao
 	public List<Company> getCompanyNames()
 	 {
 
-		return entityManager.createQuery("  from Company where status='1'").getResultList();
+		return entityManager.createQuery("  from Company where status='1' order by updatedTime desc").getResultList();
 
 	 }
 	public Company getCompanyNameById(Company com) 
@@ -77,7 +77,7 @@ public class CompanyDao
 	public List<Company> getAllInActiveList() 
 	{
 		
-		return entityManager.createQuery("from Company where status='0'").getResultList();
+		return entityManager.createQuery("from Company where status='0' order by updatedTime desc").getResultList();
 	}
 	
 	

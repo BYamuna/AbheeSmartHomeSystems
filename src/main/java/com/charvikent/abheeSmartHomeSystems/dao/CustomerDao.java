@@ -256,6 +256,9 @@ public List<Customer> getAbheeCustomerNames()
 	//return (List<Customer>)entityManager.createQuery(hql).getResultList();
 	
 	 return listCustomer;
+	  
+	//return (List<Customer>)entityManager.createQuery("from Customer where enabled='1' order by updatedTime desc").getResultList();
+	 
  }
 
 @SuppressWarnings("unchecked")
@@ -304,7 +307,7 @@ public boolean deleteCustomer(Integer id, String status) {
 @SuppressWarnings("unchecked")
 public List<Customer> getCustomerInActiveList() 
 {
-	return (List<Customer>)entityManager.createQuery("from Customer where enabled='0'").getResultList();
+	return (List<Customer>)entityManager.createQuery("from Customer where enabled='0' order by updatedTime desc").getResultList();
 	
 }
 

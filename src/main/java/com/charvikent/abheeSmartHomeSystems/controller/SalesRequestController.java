@@ -7,6 +7,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class SalesRequestController 
 {
+	private static final Logger LOGGER = LoggerFactory.getLogger(SalesRequestController.class);
+
 	@Autowired
 	SalesRequestDao srequestDao;
 	@Autowired
@@ -51,6 +55,7 @@ public class SalesRequestController
 		
 		Customer customer=(Customer) request.getAttribute("customer");
 		
+		LOGGER.debug("Calling salesRequest at controller");
 		String referalUrl=request.getHeader("referer");
 		Integer id = salesrequest.getId();
 		String email = srequestDao.getSalesRequestEmailById(id.toString()); // for get the email address 
@@ -101,6 +106,7 @@ public class SalesRequestController
 	@RequestMapping("/allsalesrequest")
 	public String  totalSalesList( @ModelAttribute("salesrequestf")  SalesRequest salesrequest,Model model ,HttpServletRequest request) 
 	{
+		LOGGER.debug("Calling allsalesrequest at controller");
 		List<SalesRequest> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
@@ -131,7 +137,7 @@ public class SalesRequestController
 	public @ResponseBody String sendingQuotation(@RequestParam("id")  String id,@RequestParam("description")  String description,
 			@RequestParam("file") MultipartFile[] uploadedFiles,HttpServletRequest request,RedirectAttributes redir) throws IllegalStateException, IOException, MessagingException
 	{
-		
+		LOGGER.debug("Calling sendingQuotation at controller");
 		int filecount=0;
 		String email = srequestDao.getSalesRequestEmailById(id); // for get the email address 
 		SalesRequest salesrequest = srequestDao.getSalesRequestById(id);

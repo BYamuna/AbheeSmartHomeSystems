@@ -73,7 +73,7 @@
 									<tr
 										style="background-color: #0460a4; color: #fff; text-align: center;">
 
-										<th>Unclosed Tasks /Severity</th>
+										<th>Unclosed ServiceRequest /Severity</th>
 										<th>Critical</th>
 										<th>Major</th>
 										<th>Minor</th>
@@ -495,7 +495,7 @@
 			<div class="panel panel-primary">
 
 				<div class="panel-heading">
-					<h4>Unread Tasks List</h4>
+					<h4>Unread ServiceRequest List</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="panel-body collapse in">
@@ -582,7 +582,7 @@ $("#severityTable").append(rowdata2);
 	function displayTable(listOrders) {
 		$('#tableId').html('');
 		var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-				+ '<thead><tr><th>Task No</th><th>Category</th><th>Model Name</th><th>ServiceType</th><th>Severity</th><th>Priority</th><th>Assigned To</th><th>Subject</th><th>Task Deadline</th><th>Task Status</th><th>CreateTime</th></tr></thead><tbody></tbody></table>';
+				+ '<thead><tr><th>ServiceRequest No</th><th>Category</th><th>Model Name</th><th>ServiceType</th><th>Severity</th><th>Priority</th><th>Assigned To</th><th>Subject</th><th>ServiceRequest Deadline</th><th>Task Status</th><th>CreateTime</th></tr></thead><tbody></tbody></table>';
 		$('#tableId').html(tableHead);
 		serviceUnitArray = {};
 		

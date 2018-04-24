@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -38,7 +40,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class AbheeDashBoardController {
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger( AbheeDashBoardController .class);
 	@Autowired
 	ReportIssueDao reportIssueDao;
 	@Autowired
@@ -67,6 +69,7 @@ public class AbheeDashBoardController {
 	
 	@RequestMapping(value = "/severityBy")
 	public String  tasksFilterByseverityOnAssignedTo(@RequestParam(value="id", required=true) String sev,Model model,HttpServletRequest request,HttpSession session,@ModelAttribute("taskf")  AbheeTask taskf){
+		LOGGER.debug("Calling  severityBy at controller");
 		List<Map<String, Object>> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
@@ -111,7 +114,7 @@ public class AbheeDashBoardController {
 	@RequestMapping(value = "/setNotifyData",method = RequestMethod.POST)
 	public @ResponseBody Object setNotificationData(@RequestParam(value = "ttypeid", required = true) String ttypeid,Model model,HttpServletRequest request, HttpSession session) throws JSONException, JsonProcessingException {
 		
-		
+		LOGGER.debug("Calling  setNotifyData at controller");
 		
 		List<Map<String, Object>> listOrderBeans = null;
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -146,9 +149,10 @@ public class AbheeDashBoardController {
 	
 	@RequestMapping(value = "/viewTicket")
 	public String viewIssue(@RequestParam(value = "id", required = true) String taskId,
-			@RequestParam(value = "pgn", required = true) String pgn,Model model,HttpSession session) 
+			@RequestParam(value = "pgn", required = true) String pgn,Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException, JSONException 
 	{
-		 
+		LOGGER.debug("Calling  viewTicket at controller");
+		
 		if(pgn.equals("1"))
 		{
 			abheeTaskDao.openTask(taskId);
@@ -157,7 +161,24 @@ public class AbheeDashBoardController {
 			List<Map<String, Object>> viewtaskBean = abheeTaskDao.getAbheeTaskById(taskId);
 			model.addAttribute("test2",viewtaskBean);
 			
+			List<Map<String, Object>> statuslist=abheeTaskDao.getTaskStatusHistoryByTaskNo(taskId);
 			
+			ObjectMapper objectMapper = new ObjectMapper();
+			String sJson;
+			JSONObject jsonObj = new JSONObject();
+			if (statuslist != null && statuslist.size() > 0) {
+				
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(statuslist);
+				request.setAttribute("statuslist1", sJson);
+				jsonObj.put("statuslist1", statuslist);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(statuslist);
+				request.setAttribute("statuslist1", "''");
+				jsonObj.put("statuslist1", statuslist);
+			}
 		
 		return "ViewTicket";
 
@@ -166,7 +187,7 @@ public class AbheeDashBoardController {
 	public String viewDetails(@RequestParam(value = "id", required = true) String customerId,
 			@RequestParam(value = "pgn", required = true) String pgn,Model model,HttpSession session) 
 	{
-		 
+		LOGGER.debug("Calling  viewCustomerDetails at controller");
 		/*if(pgn.equals("1"))
 		{
 			abheeTaskDao.openTask(taskId);
@@ -183,6 +204,7 @@ public class AbheeDashBoardController {
 	
 	@RequestMapping(value = "/severityByReportTo")
 	public String  tasksFilterByseverityOnReportTo(@RequestParam(value="id", required=true) String sev,Model model,HttpServletRequest request,HttpSession session,@ModelAttribute("taskf")  AbheeTask taskf){
+		LOGGER.debug("Calling  severityByReportTo at controller");
 		Set<Map<String, Object>> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
@@ -226,6 +248,7 @@ public class AbheeDashBoardController {
 	@RequestMapping(value = "/getCount")
 	public @ResponseBody String getCount(AbheeTask  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult)
 	{
+		LOGGER.debug("Calling  getCount at controller");
 		JSONObject jsonObj = new JSONObject();
 		Integer unseentasks =0;
 		try{

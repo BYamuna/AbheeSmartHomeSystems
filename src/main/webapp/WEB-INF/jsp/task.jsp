@@ -14,7 +14,7 @@
 <div class="clearfix"></div>
 <ol class="breadcrumb">
 	<li><a href="dashBoard">Home</a></li>
-	<li>Task Master</li>
+	<li>Service Request Master</li>
 </ol>
 
 <br>
@@ -24,7 +24,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h4>Task List</h4>
+					<h4>Service Request List</h4>
 					<div class="options">
 						<a href="javascript:;" class="panel-collapse"><i
 							class="fa fa-chevron-down"></i></a>
@@ -40,14 +40,14 @@
 							id="example">
 							<thead>
 								<tr>
-									<th>Task No</th>
+									<th>Service Request No</th>
 									<th>ServiceType</th>
 									<th>Severity</th>
 									<th>Priority</th>
 									<th>Assigned To</th>
 									<th>Subject</th>
-									<th>Task Deadline</th>
-									<th>Task Status</th>
+									<th>Service Request Deadline</th>
+									<th>Service Request Status</th>
 									<th>CreateTime</th>
 									<th style="text-align: center;">Options</th>
 								</tr>
@@ -63,7 +63,7 @@
 		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h4>Add Task</h4>
+					<h4>Add Service Request</h4>
 				</div>
 				<form:form class="form-horizontal" modelAttribute="taskf"
 					action="savetask1" method="post" enctype="multipart/form-data">
@@ -149,7 +149,7 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Task
+									<label for="focusedinput" class="col-md-6 control-label">Service Request
 										DeadLine <span class="impColor">*</span>
 									</label>
 									<div class="col-md-6">
@@ -247,7 +247,7 @@
 		<div class="modal-content">
 			<div class="modal-header" style="background: #4f8edc;">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Task History</h4>
+				<h4 class="modal-title">Service Request History</h4>
 			</div>
 			<div class="modal-body">
 				<div class="row">
@@ -283,7 +283,7 @@
 		<div class="modal-content">
 			<div class="modal-header" style="background: #4f8edc;">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Task History</h4>
+				<h4 class="modal-title">Service Request History</h4>
 			</div>
 			<div class="modal-body">
 				<div class="row">
@@ -408,7 +408,7 @@
 		<div class="modal-content">
 			<div class="modal-header" style="background: #2973cf;">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title" style="color: white;">Task Count Down</h4>
+				<h4 class="modal-title" style="color: white;">Service Request Count Down</h4>
 			</div>
 			<div></div>
 			<div class="modal-body">
@@ -486,7 +486,7 @@
 	function displayTable(listOrders) {
 		$('#tableId').html('');
 		var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-				+ '<thead><tr><th>Task No</th><th>Category</th><th>Model Name</th><th>CustomerID</th><th>ServiceType</th><th>Severity</th><th>Priority</th><th>Assigned To</th><th>Subject</th><th>Task Deadline</th><th>Task Status</th><th>CreateTime</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
+				+ '<thead><tr><th>Service Request No</th><th>Category</th><th>Model Name</th><th>CustomerID</th><th>ServiceType</th><th>Severity</th><th>Priority</th><th>Assigned To</th><th>Subject</th><th>Service Request Deadline</th><th>Service Request Status</th><th>CreateTime</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
 		$('#tableId').html(tableHead);
 		serviceUnitArray = {};
 
@@ -1098,6 +1098,6 @@
 	 });
 	 */
 
-	$("#pageName").text("Task Master");
+	$("#pageName").text("Service Request Master");
 	$(".task").addClass("active");
 </script>

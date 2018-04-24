@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class AbheeBranchController {
 	
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger( AbheeBranchController.class);
 
 	@Autowired
 	AbheeBranchDao abheeBranchDao;
@@ -37,6 +39,7 @@ public class AbheeBranchController {
 	
 	@RequestMapping("/abBranch")
 	public String  showBranches( @ModelAttribute("abheeBranchf")  AbheeBranch abheeBranchf,Model model ,HttpServletRequest request) {
+		LOGGER.debug("Calling  abBranch list at controller");
 		List<AbheeBranch> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
@@ -70,6 +73,8 @@ public class AbheeBranchController {
 	@RequestMapping(value = "/abBranch", method = RequestMethod.POST)
 	public String saveBranch(@Valid @ModelAttribute  AbheeBranch abheeBranch, BindingResult bindingresults,
 			RedirectAttributes redir) throws IOException {
+		
+		LOGGER.debug("Saving, Updating and Checking duplicates by calling abBranch at controller");
 		
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
@@ -136,6 +141,7 @@ public class AbheeBranchController {
 	
 	@RequestMapping(value = "/deleteAbBranch")
 	public @ResponseBody String deactiveBranch(AbheeBranch  abheeBranch,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling  deleteAbBranch at controller");
 		List<AbheeBranch> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
@@ -178,6 +184,7 @@ public class AbheeBranchController {
 	
 	@RequestMapping(value = "/inActiveAbBranch")
 	public @ResponseBody String getAllActiveOrInactiveBranches(AbheeBranch  abheeBranch,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling inActiveAbBranch  at controller");
 		List<AbheeBranch> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
@@ -215,6 +222,7 @@ public class AbheeBranchController {
 	@RequestMapping("/dashBoard")
 	public String showDashBoard(Model model,HttpServletRequest request) 
 	{
+		LOGGER.debug("Calling dashBoard  at controller");
 		 return "dashBoard";
 		
 	}

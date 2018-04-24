@@ -31,7 +31,7 @@ public class CategoryDao {
 	public List<Category> getCategoryNames()
 	 {
 
-		return entityManager.createQuery("  from Category where status='1'").getResultList();
+		return entityManager.createQuery("  from Category where status='1' ").getResultList();
 
 	 }
 	public Category getCategoryNameById(Category cate) {
@@ -74,7 +74,7 @@ public class CategoryDao {
 
 	@SuppressWarnings("unchecked")
 	public List<Category> getAllInActiveList() {
-		return entityManager.createQuery("  from Category where status='0'").getResultList();
+		return entityManager.createQuery("  from Category where status='0' order by updatedTime desc").getResultList();
 	}
 	
 	

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -30,7 +32,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class EmployeeController {
 
-
+	private static final Logger LOGGER = LoggerFactory.getLogger( EmployeeController .class);
 	@Autowired
 	private UserService userService;
 
@@ -51,6 +53,7 @@ public class EmployeeController {
 
 	@RequestMapping("/employee")
 	public String homeUser(Model model,HttpServletRequest request) {
+		LOGGER.debug("Calling employee at controller");
 		List<User> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
@@ -90,7 +93,7 @@ public class EmployeeController {
 	@RequestMapping(value = "/employee" ,method = RequestMethod.POST)
 	public String saveAdmin(@Valid @ModelAttribute  User user, BindingResult bindingresults,
 			RedirectAttributes redir) throws IOException {
-		
+		LOGGER.debug("Calling employee at controller");
 		
 		if(user.getBranchId()==null || user.getReportto()==null)
 		{
@@ -173,6 +176,7 @@ public class EmployeeController {
 
 	@RequestMapping(value = "/deleteUser")
 	public @ResponseBody String deleteEmployee(User  objUser,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling deleteUser at controller");
 		List<User> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
@@ -216,12 +220,14 @@ public class EmployeeController {
 	@RequestMapping("/changePassword")
 	public String changePasswordHome(@ModelAttribute("changePassword") User user){
 
+		LOGGER.debug("Calling changePassword Home page at controller");
+		
 		return "changePassword";
 
 	}
 	@RequestMapping(value="/changePassword", method= RequestMethod.POST )
 	public String changePassword(@ModelAttribute("changePassword") User user,RedirectAttributes redir,HttpServletRequest request){
-
+		LOGGER.debug("Calling changePassword at controller");
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		//String id=String.valueOf(objuserBean.getId());
 
@@ -257,7 +263,7 @@ public class EmployeeController {
 
 	@RequestMapping("/editProfile")
 	public String editProfileHome(@ModelAttribute("editProfile") User user,Model model){
-
+		LOGGER.debug("Calling editProfile at controller");
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		//String id=String.valueOf(objuserBean.getId());
 
@@ -269,7 +275,8 @@ public class EmployeeController {
 	}
 	@RequestMapping(value="/editProfile", method= RequestMethod.POST )
 	public String editProfile(@ModelAttribute("editProfile") User user,RedirectAttributes redir,HttpServletRequest request){
-
+		
+		LOGGER.debug("Calling editProfile at controller");
 		User emp = userService.getUserById(user.getId());
 		emp.setFirstname(user.getFirstname());
 		emp.setLastname(user.getLastname());
@@ -290,6 +297,7 @@ public class EmployeeController {
 	@RequestMapping("/getUserName")
 	public  @ResponseBody  Boolean getUserName(HttpServletRequest request, HttpSession session)
 	{
+		LOGGER.debug("Calling getUserName at controller");
 		String username=request.getParameter("username");
 
 		username = username.replaceAll("\\s+","");
@@ -298,6 +306,7 @@ public class EmployeeController {
 
 	@RequestMapping(value = "/inActiveEmp")
 	public @ResponseBody String getAllActiveOrInactiveOrgnizations(User  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling inActiveEmp at controller");
 		List<User> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;

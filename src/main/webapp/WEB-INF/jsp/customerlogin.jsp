@@ -4,10 +4,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <spring:url var="loginAction" value="/loginAction"></spring:url>
-<!DOCTYPE html>
-<html lang="en">
-
-<header>
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -67,7 +63,6 @@
 
 
 
-</header>
     <%@include file="abheeheader.jsp" %>
 
 
@@ -91,7 +86,7 @@
 						<form action="/customerlogin" method="post"> 
 					<div class="login-top"> 	
 						  <input type="hidden" name="userType" id="userType" value="customerUser"/>
-							<input type="text" class="form name" name="username" id="username" onfocus="this.placeholder=''" onblur="this.placeholder='Mobile Number'" placeholder="Mobile Number" required />
+							<input type="text" class="form name" name="username" id="username" onfocus="this.placeholder=''" onblur="this.placeholder='Mobile Number'" placeholder="Mobile Number" required/>
 							<input type="password" class="form password" name="password" onfocus="this.placeholder=''" onblur="this.placeholder='Password'" placeholder="Password" required />
 						
 					</div> 
@@ -223,7 +218,7 @@
      
       <div class="modal-content">
         <div class="modal-header">
-          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Password Assistance</h4>
         </div>
     
@@ -257,7 +252,6 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		
 
-</body>
 <%@include file="abheefooter.jsp" %>
 <script type="text/javascript">
 
@@ -650,6 +644,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 			  		else
 			  			{
 			  				alert("Enter registered mobile number");
+			  				$('#resetpassword').prop('disabled', false);
 			  				
 			  			}
 			  		

@@ -6,11 +6,6 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
     
     <%@include file="abheeheader.jsp" %>
-    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>Abhee Smart Homes</title>
 
@@ -22,8 +17,6 @@
 		    });
 		}, 5000);
 		</script>
-</head>
-<body>
 	<c:if test="${not empty msg}">
 		<div class="msgcss row">
 			<div class="col-sm-4 col-sm-offset-4">
@@ -143,6 +136,13 @@
 						<div class="col-sm-8">
 							<textarea class="form-control" id="message" name="message" placeholder="Message"></textarea>
 						</div>
+						
+						<div class="col-sm-4">
+							<label>Address</label>
+						</div>
+						<div class="col-sm-8">
+							<textarea class="form-control" id="custaddress" name="custaddress" placeholder="address"></textarea>
+						</div>
 							<!--<div class="col-sm-4">
 							<label>Attach File(s)</label>
 						</div>
@@ -173,7 +173,6 @@
 					
 				</div> 
 
-</body>
 <c:choose>
     <c:when test="${empty param.id}">
        <script>var catid="";
@@ -206,12 +205,14 @@
         var bradcrmmodel=true;</script>
     </c:otherwise>
 </c:choose>
+<input type="hidden" id="custhiddenid" value=${customerId} >
+
 <%@include file="abheefooter.jsp" %>
 
 <script type="text/javascript">
 
 
- var customerId=${customerId}
+ var customerId=$('#custhiddenid').val();
  
  console.log(customerId);
  /* var productdetailslist =${productdetails};
@@ -379,7 +380,6 @@ $.each(productdetailslist, function(k,v){
 	}
 	
 	function checkService(){
-		alert("Enter to service");
            if(login){
 		$("#formModal").modal();
            }
@@ -398,11 +398,27 @@ $.each(productdetailslist, function(k,v){
 		 message =$('#message').val();
 		 servicetypeid =$('#servicetypeid').val();
 		 
+		 custaddress =$('#custaddress').val();
+		 
+		 
+		 
+		 if (message == null || message == "" || message == "undefined") {
+			 return false;
+			 
+			 
+		 }
+		 if (custaddress == null || custaddress == "" || custaddress == "undefined") {
+			 return false;
+			 
+			 
+		 }
+		 alert(custaddress);
+		 
 		
 		$.ajax({
 			type : "POST",
 			url : "saveServiceRequest",
-			data :"message="+message+"&servicetypeid="+servicetypeid+"&catid="+catid+"&modelid="+modelid+"&customerId="+customerId,
+			data :"message="+message+"&servicetypeid="+servicetypeid+"&catid="+catid+"&modelid="+modelid+"&customerId="+customerId+"&custaddress="+custaddress,
 			dataType : "text",
 			beforeSend : function() {
 	             $.blockUI({ message: 'Please wait' });
@@ -430,4 +446,3 @@ $.each(productdetailslist, function(k,v){
 	}
  
 </script>
-</html>

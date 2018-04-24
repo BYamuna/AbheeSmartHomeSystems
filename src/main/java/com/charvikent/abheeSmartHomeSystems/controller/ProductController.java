@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +33,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class ProductController 
 {
+	private static final Logger LOGGER = LoggerFactory.getLogger( ProductController   .class);
 	@Autowired
 	ProductDao productDao;
 	@Autowired
@@ -44,6 +47,7 @@ public class ProductController
 	@RequestMapping("/product")
 	public String  ProductList( @ModelAttribute("productf")  Product prof,Model model ,HttpServletRequest request) 
 	{
+		LOGGER.debug("Calling product at controller");
 		List<Product> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
@@ -77,7 +81,7 @@ public class ProductController
 	public String saveProduct(@Valid @ModelAttribute  Product pro, BindingResult bindingresults, @RequestParam("file1") MultipartFile[] productpics,@RequestParam("vlink") String vlink[]  ,
 			RedirectAttributes redir) throws IOException 
 	{
-		
+		LOGGER.debug("Calling product at controller");
 		System.out.println(vlink.length);
 		
 		if (bindingresults.hasErrors()) {
@@ -193,6 +197,7 @@ public class ProductController
 	public @ResponseBody String deleteProduct(Product objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) 
 	{
 		//System.out.println("deleteEducation page...");
+		LOGGER.debug("Calling deleteProduct at controller");
 		List<Product> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
@@ -234,6 +239,7 @@ public class ProductController
 	@RequestMapping(value = "/inActiveProducts")
 	public @ResponseBody String getAllActiveOrInactiveProducts(Product objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) 
 	{
+		LOGGER.debug("Calling inActiveProducts at controller");
 		List<Product> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;

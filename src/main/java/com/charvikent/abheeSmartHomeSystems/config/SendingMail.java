@@ -25,9 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
+import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
-import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
+
 /*import com.charvikent.abheeSmartHomeSystems.dao.UserDao;*/
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
@@ -51,7 +52,8 @@ public class SendingMail {
 
 	@Autowired
 	AbheeTaskDao abheeTaskDao;
-
+	@Autowired
+	UserDao userDao;
 	
 	public void sendConfirmationEmail(Customer user) throws MessagingException {  
 		try {
@@ -374,6 +376,42 @@ public class SendingMail {
 		}  
 	}
 
+		public void sendMailTocustomer(AbheeTask editissue) throws MessagingException 
+		{
+			try {
+				
+				
+				String customerid =  editissue.getCustomerId();
+				String assigntechnician=editissue.getAssignto();
+				User emp=userDao.getUserById(Integer.parseInt(assigntechnician));
+				Customer customer= customerDao.findCustomerByCustId(customerid);
+				String emailid=customer.getEmail();
+				
+				MimeMessage message = javaMailSender.createMimeMessage();
+				MimeMessageHelper helper = new MimeMessageHelper(message, true);
+				
+				
+				VelocityContext velocityContext = new VelocityContext();
+				velocityContext.put("name",customer.getFirstname());
+				velocityContext.put("Firstname",emp.getFirstname());
+				velocityContext.put("Lastname",emp.getLastname());
+				velocityContext.put("taskno", editissue.getTaskno());
+				velocityContext.put("description", editissue.getDescription());
+				velocityContext.put("mobileno", emp.getMobilenumber());
+				StringWriter stringWriter = new StringWriter();
+				velocityEngine.mergeTemplate("CustomerEmailTemplate.vm", "UTF-8", velocityContext, stringWriter);
+				helper.setText(stringWriter.toString(), true);
+				helper.setTo( emailid);
+			    helper.setSubject("Technician is assigned to you successfully");
+			  		   
+			   
+				javaMailSender.send(message);
+			
+		}catch (MailException e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}  
 
 
-		}
+	}		
+}

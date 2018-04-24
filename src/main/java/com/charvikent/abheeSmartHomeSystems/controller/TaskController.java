@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,7 @@ import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskStatusDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
+import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.PriorityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ServiceDao;
@@ -39,6 +42,7 @@ import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
 //import com.charvikent.abheeSmartHomeSystems.model.KpStatusLogs;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
@@ -48,6 +52,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class TaskController {
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger( TaskController.class);
+
+
 	@Autowired
 	ReportIssueDao reportIssueDao;
 	@Autowired
@@ -67,6 +74,8 @@ public class TaskController {
 	FilesStuff fileTemplate;
 	@Autowired
 	AbheeTaskDao abheeTaskDao;
+	@Autowired
+	CustomerDao customerDao;
 	
 	@Autowired
 	AbheeTaskStatusDao abheeTaskStatusDao;
@@ -82,6 +91,7 @@ public class TaskController {
 	
 	@GetMapping("/task")
 	public String  department(Model model , HttpServletRequest request,HttpSession session) {
+		LOGGER.debug("Calling task at controller");
 		List<Map<String, Object>> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
@@ -126,6 +136,7 @@ public class TaskController {
 	@PostMapping(value = "/savetask1" )
 	public String saveAdmin(@Valid @ModelAttribute("taskf")  AbheeTask task, TaskHistoryLogs taskHistoryLogs,BindingResult bindingresults, @RequestParam("file1") MultipartFile[] uploadedFiles,
 			RedirectAttributes redir) throws IOException {
+		LOGGER.debug("Calling savetask1 at controller");
 		
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
@@ -230,6 +241,7 @@ public class TaskController {
 	
 	@RequestMapping(value = "/deleteTask")
 	public @ResponseBody String deleteDept(AbheeTask  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling deleteTask at controller");
 		System.out.println("deleteEducation page...");
 		List<Map<String, Object>> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
@@ -517,7 +529,7 @@ public class TaskController {
 
 	public @ResponseBody  String modelSubmit(Model model,HttpServletRequest request) throws IOException, MessagingException 
 	{
-
+		LOGGER.debug("Calling saveServiceRequest at controller");
 	
 		System.out.println("enter to task controller Submit");
 		
@@ -526,10 +538,10 @@ public class TaskController {
 		String catid=request.getParameter("catid");
 		String modelid=request.getParameter("modelid");
 		String customerId =request.getParameter("customerId");
+		String custaddress =request.getParameter("custaddress");
+		
 		AbheeTask task =new AbheeTask();
 		task.setAdditionalinfo("0");
-		task.setAssignby("1");
-		task.setAssignto("1");
 		task.setAssignto("1");
 		task.setDescription(message);
 		task.setKstatus("5");
@@ -542,13 +554,23 @@ public class TaskController {
 		task.setModelid(modelid);
 
 		task.setCustomerId(customerId);
+		
+		Customer customer= customerDao.findCustomerByCustId(customerId);
+		
+		customer.setAddress(custaddress);
+		try {
+			customerDao.updateCustomer(customer);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	
 		
 		AbheeTask abheeTask =reportIssueDao.checkServiceRequestExisrOrNot(task);
 		if(null ==abheeTask )
 		{
 		reportIssueDao.saveReportIssue(task);
-		taskHistoryLogsDao.historyLog(task);
+		//taskHistoryLogsDao.historyLogForcustomerEntry(task);
 		//sendingMail.sendingMailWithTaskStatus(task);
 
 		System.out.println(message+"  "+servicetypeid);
@@ -564,6 +586,7 @@ public class TaskController {
 	}
 	@RequestMapping(value = "/inActiveTasks")
 	public @ResponseBody String getAllActiveOrInactiveOrgnizations(AbheeTask  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling inActiveTasks at controller");
 		List<Map<String, Object>>listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;

@@ -17,7 +17,7 @@
 <div class="clearfix"></div>
 <ol class="breadcrumb">
 	<li><a href="dashBoard">Home</a></li>
-	<li>Guarantee Master</li>
+	<li>Warranty Master</li>
 </ol>
 <br>
 <div class="clearfix"></div>
@@ -26,7 +26,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h4>Guarantee List</h4>
+					<h4>Warranty List</h4>
 					<div class="options">
 						<a href="javascript:;" class="panel-collapse"><i
 							class="fa fa-chevron-down"></i></a>
@@ -60,7 +60,7 @@
 		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-				<h4>Product Guarantee Form</h4>
+				<h4>Add Product Warranty Details</h4>
 				</div>
 				<form:form class="form-horizontal" modelAttribute="guaranteef"
 					action="productGuarantee" method="post" >
@@ -207,6 +207,7 @@ function displayTable(listOrders) {
 function editProductWarranty(id) {
 	$("#id").val(serviceUnitArray[id].id);
 	$("#customerid").val(serviceUnitArray[id].customerid);
+	$("#productmodelid").val(serviceUnitArray[id].productmodelid);
 	$("#productmodelname").val(serviceUnitArray[id].productmodelname);
 	$("#purchaseddate").val(serviceUnitArray[id].purchaseddate);
 	$("#expireddate").val(serviceUnitArray[id].expireddate);

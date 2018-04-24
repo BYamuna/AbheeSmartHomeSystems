@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class ServiceRequestController 
 {
+	private static final Logger LOGGER = LoggerFactory.getLogger(ServiceRequestController .class);
 	@Autowired
 	FilesStuff fileTemplate;
 	@Autowired
@@ -68,6 +71,7 @@ public class ServiceRequestController
 	@RequestMapping("/serviceRequest")
 	public String  totalServicesList( @ModelAttribute("servicerequestf") AllServiceRequests servicerequest ,Model model ,HttpServletRequest request) 
 	{
+		LOGGER.debug("Calling serviceRequest at controller");
 		List<AllServiceRequests> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
@@ -97,7 +101,7 @@ public class ServiceRequestController
 	@RequestMapping(value = "/editrequest", method = RequestMethod.POST)
 	public String saveOReditRequest(@Valid @ModelAttribute  AllServiceRequests servicerequest, BindingResult bindingresults,
 			RedirectAttributes redir, @RequestParam("files") MultipartFile[] uploadedFiles) throws IOException {
-		
+		LOGGER.debug("Calling editrequest at controller");
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
 			return "redirect:/";
@@ -199,6 +203,7 @@ public class ServiceRequestController
 	
 	@RequestMapping(value = "/deleteRequest")
 	public @ResponseBody String deleteRequest(AllServiceRequests  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling deleteRequest at controller");
 		System.out.println("deleteEducation page...");
 		List<AllServiceRequests> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
@@ -241,6 +246,7 @@ public class ServiceRequestController
 	
 	@RequestMapping(value = "/inActiveRequests")
 	public @ResponseBody String getAllActiveOrInactiveCategories(AllServiceRequests  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling inActiveRequests at controller");
 		List<AllServiceRequests> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;

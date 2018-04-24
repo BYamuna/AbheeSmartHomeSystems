@@ -1,5 +1,5 @@
 package com.charvikent.abheeSmartHomeSystems.dao;
-import java.util.ArrayList;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -123,7 +123,7 @@ public class ProductGuaranteeDao
 	 {
 			
 		//return em.createQuery("  abg.id,abg.customerid,abg.expireddate,abg.expireddate,p.name as productmodelname from ProductGuarantee abg,Product p where abg.productmodelid=p.id and status='1'").getResultList();
-			String sql="select abg.id,abg.customerid,abg.purchaseddate,abg.expireddate,p.name as productmodelname,abg.status from abheeproductguarantee abg,abhee_product p where abg.productmodelid=p.id and abg.status='1'";
+			String sql="select abg.id,abg.customerid,abg.productmodelid,abg.purchaseddate,abg.expireddate,p.name as productmodelname,abg.status from abheeproductguarantee abg,abhee_product p where abg.productmodelid=p.id and abg.status='1' order by abg.updated_time desc";
 			System.out.println(sql);
 			
 			List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
@@ -152,7 +152,7 @@ public class ProductGuaranteeDao
 
 	public List<Map<String, Object>> getAllInActiveList() 
 	{
-		String sql="select abg.id,abg.customerid,abg.purchaseddate,abg.expireddate,p.name as productmodelname,abg.status from abheeproductguarantee abg,abhee_product p where abg.productmodelid=p.id and abg.status='0'";
+		String sql="select abg.id,abg.customerid,abg.productmodelid,abg.purchaseddate,abg.expireddate,p.name as productmodelname,abg.status from abheeproductguarantee abg,abhee_product p where abg.productmodelid=p.id and abg.status='0' order by abg.updated_time desc";
 		System.out.println(sql);
 		
 		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
