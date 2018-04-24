@@ -1,6 +1,7 @@
 package com.charvikent.abheeSmartHomeSystems.dao;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -27,6 +29,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
+import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
+import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistory;
@@ -52,6 +56,11 @@ public class ReportIssueDao {
 	TaskHistoryDao taskHistoryDao;
 	@Autowired
 	TaskHistoryLogsDao taskHistoryLogsDao;
+	@Autowired
+	SendingMail sendingMail;
+	
+	@Autowired
+	SendSMS sendSMS;
 
 	public void saveReportIssue(AbheeTask reportIssue) {
 		String randomNum = utilities.randNum();
@@ -367,7 +376,7 @@ public List<ReportIssue> getAllReportIssues()
 	}
 	
 
-	public void updateIssue(AbheeTask issue) {
+	public void updateIssue(AbheeTask issue) throws IOException {
 		
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -411,7 +420,17 @@ public List<ReportIssue> getAllReportIssues()
 
         
 		taskHistoryLogsDao.historyLog(editissue);
-			}
+		try 
+		{
+			sendingMail.sendMailTocustomer(editissue);
+		} 
+		catch (MessagingException e) 
+		{
+			e.printStackTrace();
+		}
+		sendSMS.sendsmsToCustomer(editissue);
+          
+		}
 	}
 
 
