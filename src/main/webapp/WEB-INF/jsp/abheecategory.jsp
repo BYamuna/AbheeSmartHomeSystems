@@ -136,6 +136,13 @@
 						<div class="col-sm-8">
 							<textarea class="form-control" id="message" name="message" placeholder="Message"></textarea>
 						</div>
+						
+						<div class="col-sm-4">
+							<label>Message</label>
+						</div>
+						<div class="col-sm-8">
+							<textarea class="form-control" id="custaddress" name="custaddress" placeholder="address"></textarea>
+						</div>
 							<!--<div class="col-sm-4">
 							<label>Attach File(s)</label>
 						</div>
@@ -389,11 +396,24 @@ $.each(productdetailslist, function(k,v){
 		 message =$('#message').val();
 		 servicetypeid =$('#servicetypeid').val();
 		 
+		 custaddress =$('#custaddress').val();
+		 
+		 if (message == null || message == "" || message == "undefined") {
+			 return false;
+			 
+			 
+		 }
+		 if (custaddress == null || custaddress == "" || custaddress == "undefined") {
+			 return false;
+			 
+			 
+		 }
+		 
 		
 		$.ajax({
 			type : "POST",
 			url : "saveServiceRequest",
-			data :"message="+message+"&servicetypeid="+servicetypeid+"&catid="+catid+"&modelid="+modelid+"&customerId="+customerId,
+			data :"message="+message+"&servicetypeid="+servicetypeid+"&catid="+catid+"&modelid="+modelid+"&customerId="+customerId+"&custaddress"+custaddress,
 			dataType : "text",
 			beforeSend : function() {
 	             $.blockUI({ message: 'Please wait' });
