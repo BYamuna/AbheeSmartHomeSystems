@@ -650,6 +650,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 			  		else
 			  			{
 			  				alert("Enter registered mobile number");
+			  				$('#resetpassword').prop('disabled', false);
 			  				
 			  			}
 			  		
