@@ -321,12 +321,9 @@ public class AbheeCustRegistrationController
 	}
 	
 	@RequestMapping(value = "/custreg" ,method = RequestMethod.POST)
-	public String saveCustomer(@Valid @ModelAttribute  Customer user, BindingResult bindingresults,
-			RedirectAttributes redir) throws IOException {
+	public String saveCustomer(@Valid @ModelAttribute("custreg")  Customer user, BindingResult bindingresults,RedirectAttributes redir) throws IOException {
 		
 		
-		
-
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
 			return "redirect:/";
@@ -368,7 +365,6 @@ public class AbheeCustRegistrationController
 					redir.addFlashAttribute("cssMsg", "danger");
 
 				}
-
 
 			}
 

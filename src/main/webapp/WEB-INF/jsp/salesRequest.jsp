@@ -41,7 +41,7 @@
 				<!--<div class="form-group"> -->
 								<!-- <label class="col-md-3 control-label no-padding-right">Product Model<span class="impColor"> *</span></label> -->
 								<!--<div class="col-md-6"> -->
-										<form:hidden path="modelnumber" id="modelnumber"  class="form-control validate" placeholder="Enter Product Model"/>
+									<%-- <form:hidden path="modelnumber" id="modelnumber"  class="form-control validate" placeholder="Enter Product Model"/> --%>
 							<!--</div> -->
    							<!--	</div> -->
 								<%-- <div class="form-group">
@@ -57,7 +57,7 @@
 									</div>
 								</div> --%>
 								<div class="clearfix"></div>
-								<div class="form-group" id="passwordDiv">
+								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">location<span class="impColor"> *</span></label>
 									<div class="col-md-6">
 <!-- 										<input type="text" id="us2-address" class="form-control validate"/> -->
@@ -120,11 +120,11 @@
 <!-- <script src='https://cdn.rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.min.js'></script> -->
 <script type="text/javascript" src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
 <script >//Plugin used: https://github.com/Logicify/jquery-locationpicker-plugin
-
+console.log($('#id').val());
 $('#modelName').text(localStorage.getItem("modelName"));
 $('#modelnumber').val(localStorage.getItem("modelName"));
 
-document.getElementById('modelnumber').readOnly=true;
+//document.getElementById('modelnumber').readOnly=true;
 
 $('#us2').locationpicker({
 	location: {
