@@ -34,6 +34,7 @@ import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskStatusDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
+import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.PriorityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ServiceDao;
@@ -41,6 +42,7 @@ import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
 //import com.charvikent.abheeSmartHomeSystems.model.KpStatusLogs;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
@@ -72,6 +74,8 @@ public class TaskController {
 	FilesStuff fileTemplate;
 	@Autowired
 	AbheeTaskDao abheeTaskDao;
+	@Autowired
+	CustomerDao customerDao;
 	
 	@Autowired
 	AbheeTaskStatusDao abheeTaskStatusDao;
@@ -534,6 +538,8 @@ public class TaskController {
 		String catid=request.getParameter("catid");
 		String modelid=request.getParameter("modelid");
 		String customerId =request.getParameter("customerId");
+		String custaddress =request.getParameter("custaddress");
+		
 		AbheeTask task =new AbheeTask();
 		task.setAdditionalinfo("0");
 		task.setAssignto("1");
@@ -548,6 +554,16 @@ public class TaskController {
 		task.setModelid(modelid);
 
 		task.setCustomerId(customerId);
+		
+		Customer customer= customerDao.findCustomerByCustId(customerId);
+		
+		customer.setAddress(custaddress);
+		try {
+			customerDao.saveAbheeCustomer(customer);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	
 		
 		AbheeTask abheeTask =reportIssueDao.checkServiceRequestExisrOrNot(task);
