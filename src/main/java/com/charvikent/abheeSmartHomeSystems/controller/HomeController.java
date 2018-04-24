@@ -237,5 +237,14 @@ public class HomeController {
 	}
 	
 	
+	@RequestMapping("/customerprofile")
+	public String customerProfile() throws JSONException, JsonProcessingException {
+		LOGGER.debug("Calling Customer Profile  page at controller");
+		
+		 
+		return "customerprofile";
+	}
+	
+	
 
 }

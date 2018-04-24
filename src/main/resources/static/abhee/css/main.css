@@ -531,3 +531,19 @@ font-size:18px !important;
 .impColor {
 	color:red !important;
 }
+.con {
+	background: #ffffff;
+	min-height:100px;
+}
+.con h4 {
+}
+.con  a {
+	text-decoration: none;
+	color: #000000;
+}
+.con  a:hover {
+	color: #166eaf;
+}
+.cdata {
+	margin-left:20px;
+}

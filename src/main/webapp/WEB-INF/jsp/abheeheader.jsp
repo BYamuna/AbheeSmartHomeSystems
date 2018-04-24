@@ -111,7 +111,7 @@
           
             <c:choose>
     <c:when test="${not empty loggedstatus}">
-     <li><a href="#">My Profile</a></li>
+     <li><a href="${baseurl}/customerprofile">My Profile</a></li>
             <li><a href="${baseurl}/signout">Sign out</a></li>
     </c:when>
     <c:otherwise>
