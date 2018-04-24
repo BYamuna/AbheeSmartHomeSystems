@@ -73,15 +73,12 @@
 				<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div style="margin:0 auto;" class="panel-heading">
-						<h4><i class="ace-icon fa fa-bars"></i>View Customer Details</h4>
+						<h4>View Customer Details</h4>
 						<div class="options">
-							<a href="" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+							<a href="" class="panel-collapse"><i class="fa fa-chevron-up"></i></a>
 						</div>
 					</div>
 					<div class="panel panel-body collapse in">
-						<div class="widget-toolbox padding-8 clearfix noprint">
-							<div class="btn-group pull-left">
-							<a class="btn btn-primary  btn-round btn-sm" href="">Wiki</a><a class="btn btn-success  btn-round btn-sm" href="">Jump to Notes</a><a class="btn btn-warning  btn-round btn-sm" href="#history">Jump to History</a></div><div class="btn-group pull-right"></div></div><div class="clearfix"></div>
 						<br>
 						<div class="col-md-2"></div>
 						<div class="col-md-8">
@@ -182,7 +179,7 @@ $(".task").addClass("active");
 $("#pageName").text("View Customer Details");
 
 
-var 	severityCounts  = ${viewTask};
+/* var 	severityCounts  = ${viewTask};
 
 
 var rowdata;
@@ -193,7 +190,7 @@ var rowdata;
 			+'<td><a href="severityBy?id=1">'+ severityCounts.MINOR +'</a></td>'
 				+'</tr>';
 $("#severityTable").append(rowdata);
-	
+	 */
 	
 
 
