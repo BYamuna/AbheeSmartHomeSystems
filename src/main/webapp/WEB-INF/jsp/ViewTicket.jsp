@@ -229,7 +229,7 @@ $("#severityTable").append(rowdata); */
 	
 	
 $(".task").addClass("active");
-$("#pageName").text("View Task");
+$("#pageName").text("View Service Request");
 
 
 </script> 
