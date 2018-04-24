@@ -559,7 +559,7 @@ public class TaskController {
 		
 		customer.setAddress(custaddress);
 		try {
-			customerDao.saveAbheeCustomer(customer);
+			customerDao.updateCustomer(customer);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

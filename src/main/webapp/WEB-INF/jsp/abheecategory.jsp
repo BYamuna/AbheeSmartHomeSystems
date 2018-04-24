@@ -205,12 +205,14 @@
         var bradcrmmodel=true;</script>
     </c:otherwise>
 </c:choose>
+<input type="hidden" id="custhiddenid" value=${customerId} >
+
 <%@include file="abheefooter.jsp" %>
 
 <script type="text/javascript">
 
 
- var customerId=${customerId}
+ var customerId=$('#custhiddenid').val();
  
  console.log(customerId);
  /* var productdetailslist =${productdetails};
@@ -398,6 +400,8 @@ $.each(productdetailslist, function(k,v){
 		 
 		 custaddress =$('#custaddress').val();
 		 
+		 
+		 
 		 if (message == null || message == "" || message == "undefined") {
 			 return false;
 			 
@@ -408,12 +412,13 @@ $.each(productdetailslist, function(k,v){
 			 
 			 
 		 }
+		 alert(custaddress);
 		 
 		
 		$.ajax({
 			type : "POST",
 			url : "saveServiceRequest",
-			data :"message="+message+"&servicetypeid="+servicetypeid+"&catid="+catid+"&modelid="+modelid+"&customerId="+customerId+"&custaddress"+custaddress,
+			data :"message="+message+"&servicetypeid="+servicetypeid+"&catid="+catid+"&modelid="+modelid+"&customerId="+customerId+"&custaddress="+custaddress,
 			dataType : "text",
 			beforeSend : function() {
 	             $.blockUI({ message: 'Please wait' });
