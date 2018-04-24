@@ -534,16 +534,25 @@ font-size:18px !important;
 .con {
 	background: #ffffff;
 	min-height:100px;
+	border-radius:5px;
 }
 .con h4 {
+	margin-left:10px;
 }
 .con  a {
 	text-decoration: none;
-	color: #000000;
+	color: #166eaf;
 }
 .con  a:hover {
-	color: #166eaf;
+	color: #3c5d6b;
 }
 .cdata {
 	margin-left:20px;
+}
+.cdata  a {
+	text-decoration: none;
+	color: #166eaf;
+}
+.cdata  a:hover {
+	color: #3c5d6b;
 }

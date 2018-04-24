@@ -1098,6 +1098,6 @@
 	 });
 	 */
 
-	$("#pageName").text("Task Master");
+	$("#pageName").text("Service Request Master");
 	$(".task").addClass("active");
 </script>

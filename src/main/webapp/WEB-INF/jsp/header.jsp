@@ -526,7 +526,7 @@ function getHeadersCounts(){
                 <li class="CustomerType"><a href="${baseurl }/customerType"><i class="fa fa-user register"></i> <span>Customer Type</span></a></li>
               </security:authorize> --%>
               <security:authorize access="hasRole('ROLE_ADMIN')">
-                <li class="productGuarantee"><a href="${baseurl }/productGuarantee"><i class="fas fa-certificate register"></i> <span> Product Guarantee</span></a></li>
+                <li class="productGuarantee"><a href="${baseurl }/productGuarantee"><i class="fas fa-certificate register"></i> <span> Product Warranty</span></a></li>
               </security:authorize>
 			</ul>
 		</div>
