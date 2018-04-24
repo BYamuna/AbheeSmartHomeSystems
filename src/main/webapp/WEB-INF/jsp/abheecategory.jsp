@@ -138,7 +138,7 @@
 						</div>
 						
 						<div class="col-sm-4">
-							<label>Message</label>
+							<label>Address</label>
 						</div>
 						<div class="col-sm-8">
 							<textarea class="form-control" id="custaddress" name="custaddress" placeholder="address"></textarea>
