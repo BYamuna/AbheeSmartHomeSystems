@@ -6,11 +6,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,7 +41,8 @@ public class SalesRequestController
 	SendingMail sendingMail;
 	@RequestMapping(value = "/salesRequest" ,method = RequestMethod.GET)
 	public String saveRequest(@ModelAttribute("salesRequest")SalesRequest salesrequest,Model model)
-	{
+	{ 
+		
 		model.addAttribute("salesRequest", new SalesRequest());
 		return "salesRequest";
 		
@@ -49,21 +50,25 @@ public class SalesRequestController
 	@RequestMapping(value = "/salesRequest", method = RequestMethod.POST)
 	public String saveRequestDetails(@ModelAttribute("salesRequest")SalesRequest salesrequest,
 									@RequestParam("imgfile") MultipartFile[] uploadedFiles,
-									@RequestParam(value = "locationData") String latlong,HttpServletRequest request,RedirectAttributes redir) throws IllegalStateException, IOException, MessagingException
+									@RequestParam(value = "locationData") String latlong,HttpServletRequest request,RedirectAttributes redir,HttpSession session) throws IllegalStateException, IOException, MessagingException
 	{
+		
+		Customer customer=(Customer) session.getAttribute("customer");
+		//Customer customer=(Customer) request.getAttribute("customer");
+		
 		LOGGER.debug("Calling salesRequest at controller");
 		String referalUrl=request.getHeader("referer");
+		SalesRequest loginDetails = salesrequest;
 		int filecount =0;
 		
 		String str[] = latlong.split("&");
-//		Customer objLoginCustomer= (Customer)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
 		
-		salesrequest.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
-		salesrequest.setLat(str[0]);
-		salesrequest.setLongitude(str[1]);
-		salesrequest.setEnable("1");
-		//salesrequest.setMobileno(objLoginCustomer.getMobilenumber());
+		loginDetails.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
+		loginDetails.setLat(str[0]);
+		loginDetails.setLongitude(str[1]);
+		loginDetails.setEnable("1");
+		salesrequest.setMobileno(customer.getMobilenumber());
    	 for(MultipartFile multipartFile : uploadedFiles) {
 				String fileName = multipartFile.getOriginalFilename();
 				if(!multipartFile.isEmpty())
@@ -75,16 +80,16 @@ public class SalesRequestController
    	 
    	 if(filecount>0)
    	 {
-   		salesrequest.setImgfiles(fileTemplate.concurrentFileNames());
+   		loginDetails.setImgfiles(fileTemplate.concurrentFileNames());
    		 fileTemplate.clearFiles();
    		 
    	 }
-	   	Boolean result =srequestDao.checkSalesrequestExistsorNotByEmailAndModelNo(salesrequest);
+	   	Boolean result =srequestDao.checkSalesrequestExistsorNotByEmailAndModelNo(loginDetails);
 	   	if(result==false)
 	   	{
-			srequestDao.saveRequest(salesrequest);
+			srequestDao.saveRequest(loginDetails);
 	   		//sendingMail.SendingSalesRequestByEmail(salesrequest.getEmail());
-	   		//sendingMail.sendSalesRequestEmailWithattachment(objLoginCustomer.getEmail(), uploadedFiles);
+	   		sendingMail.sendSalesRequestEmailWithattachment(customer.getEmail() , uploadedFiles);
 	   	}
 	   	else {
 	   		redir.addFlashAttribute("msg","Record Already Exists");

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -49,19 +50,22 @@ public class Customer {
 	
 	private String customerType;
 	
+	@Transient
+	private String customerTypeName;
+	
 	private String gst;
 	
 	private boolean purchaseCustomer;
 	
 	
-	
-	
-	
 
+	public String getCustomerTypeName() {
+		return customerTypeName;
+	}
 
-
-
-	
+	public void setCustomerTypeName(String customerTypeName) {
+		this.customerTypeName = customerTypeName;
+	}
 
 	public boolean isPurchaseCustomer() {
 		return purchaseCustomer;

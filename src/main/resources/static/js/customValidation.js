@@ -218,7 +218,11 @@ $('#submit1').click(function(event) {
 	$.each(idArray, function(i, val) {
 		var value = $("#" + idArray[i]).val();
 		var placeholder = $("#" + idArray[i]).attr('placeholder');
-		if (value == null || value == "" || value == "undefined") {
+		
+		/* optional variable is for hidden and show input field validation  */
+		 
+		var optional = $("#" + idArray[i]).hasClass('display-none');
+		if ((value == null || value == "" || value == "undefined") && !optional ) {
 			$('style').append(styleBlock);
 			$("#" + idArray[i] ).attr("placeholder", placeholder);
 			$("#" + idArray[i] ).css('border-color','#e73d4a');
@@ -237,7 +241,6 @@ $('#submit1').click(function(event) {
 		$("#submit1").attr("disabled",true);
 		$("#submit1").val("Please wait...");
 		$("form").submit();											
-		event.preventDefault();
 	}else {
 		return false;
 		event.preventDefault();
@@ -268,8 +271,8 @@ $('#submit3').click(function(event) {
 		} 
 	});
 	if(validation) {
-		$("#submit2").attr("disabled",true);
-		$("#submit2").val("Please wait...");
+		$("#submit3").attr("disabled",true);
+		$("#submit3").val("Please wait...");
 		$("form").submit();											
 		event.preventDefault();
 	}else {
