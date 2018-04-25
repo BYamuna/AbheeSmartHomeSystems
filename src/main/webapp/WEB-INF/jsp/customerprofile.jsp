@@ -12,7 +12,7 @@
     	<div class="col-sm-3">
     		<div class="con">
     			<h4 class="active"><a href="${baseurl}/customerprofile"><span class="glyphicon glyphicon-user"></span> My Profile</a></h4>
-    			<h4><a href="#order"><span class="glyphicon glyphicon-briefcase"></span> My Orders</a></h4>
+    			<h4><a href="#order" id="myorders"><span class="glyphicon glyphicon-briefcase"></span> My Orders</a></h4>
     		</div>
     	</div>
     	<div class="col-sm-9">
@@ -22,7 +22,8 @@
     					<h3>Personal Information</h3>
     				</div>
     				<div class="col-xs-6">
-    					<h4 style="float:right; margin-top:20px;"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
+    					<h4 id="edit" style="float:right; margin-top:20px;"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
+    					<h4 id="save" style="float:right; margin-top:20px;"><a href="#"><i class="glyphicon glyphicon-saved"></i> Save</a></h4>
     				</div>
     			</div><div class="clearfix"></div>
     			<div class="inp">
@@ -41,10 +42,18 @@
     				<textarea style="margin-top:20px;" class="form-control" type="text" placeholder="Address" disabled></textarea>
     			</div>
     		</div>
-    		<div class="order">
-    			<img src="${baseurl }/reportDocuments/1.jpg">
+    		<div id="order">
+    			<div style="margin-top:-15px;" class="odata">
+    				<h1>Pavan</h1>
+    			</div>
     		</div>
     	</div><div class="clearfix"></div>
     </div>
-
+<script>
+$("#myorders").click(function(){
+	var id=$(this).attr('href');
+	$(id).css('display','block');
+	$(".cdata").css('display','none');
+});
+</script>
 <%@include file="abheefooter.jsp" %>

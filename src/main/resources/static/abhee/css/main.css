@@ -4,11 +4,6 @@ body {
 #carousel {
 	margin-top:-20px;
 }
-.data .imgm img {
-	padding-left:10px;
-	padding-right:10px;
-	height:206px;
-}
 .cont .col-sm-4 .img {
 	margin-left:10px;
 	margin-right:10px;
@@ -23,7 +18,6 @@ body {
 .col-md-4 {
 	margin-top:20px;
 	float:left;
-	margin-bottom:20px;
 }
 .footer {
 	background:#333333;
@@ -556,3 +550,49 @@ font-size:18px !important;
 .cdata  a:hover {
 	color: #3c5d6b;
 }
+#order {
+	margin-left:20px;
+	display:none;
+}
+#save {
+	display:none;
+}
+
+
+
+/* scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius:10px; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #166eaf; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #013950; 
+}
+/* scrollbar */
+
+
+
+/* selection bar */
+::-moz-selection { /* Code for Firefox */
+    color: #fff;
+    background: #013950;
+}
+
+::selection {
+    color: #fff;
+    background: #013950;
+}
+/* selection bar */

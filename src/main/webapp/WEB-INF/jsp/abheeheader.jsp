@@ -71,7 +71,7 @@
   	<div class="container">
     	<div class="top">
         	<img width="300px" src="${baseurl }/abhee/images/logo.png" class="img-resposive" alt="logo" title="Logo"/>
-        	<a style="float:right; margin-top:30px; margin-left:20px;" type="admin" class="button btn btn-primary" href="admin">Admin Login</a>
+<!--         	<a style="float:right; margin-top:30px; margin-left:20px;" type="admin" class="button btn btn-primary" href="admin">Admin Login</a> -->
         </div><div class="clearfix"></div>
         <!-- Menu Starts here -->
         <div class="menu">
