@@ -83,7 +83,7 @@
 						<h2>Login</h2>
 					</div>					
 									<div class="clearfix"></div>
-						<form action="/customerlogin" method="post"> 
+						<form action="customerlogin" method="post"> 
 					<div class="login-top"> 	
 						  <input type="hidden" name="userType" id="userType" value="customerUser"/>
 							<input type="text" class="form name" name="username" id="username" onfocus="this.placeholder=''" onblur="this.placeholder='Mobile Number'" placeholder="Mobile Number" required/>
