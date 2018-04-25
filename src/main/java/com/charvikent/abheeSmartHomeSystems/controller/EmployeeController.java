@@ -251,7 +251,7 @@ public class EmployeeController {
 				}
 		}else {
 			
-			redir.addFlashAttribute("msg", "Please don't use privious password");
+			redir.addFlashAttribute("msg", "Please don't use previous password");
 			redir.addFlashAttribute("cssMsg", "warning");
 			return "redirect:changePassword";
 		}	

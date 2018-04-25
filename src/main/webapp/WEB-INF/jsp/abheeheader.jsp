@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ page import="com.charvikent.abheeSmartHomeSystems.model.Customer" %>
 <spring:url var="loginAction" value="/loginAction"></spring:url>
     
     
@@ -139,5 +140,8 @@
 	        $(this).remove(); 
 	    });
 	}, 5000);
+  	 
+  	 
+  	
   	
   	</script>

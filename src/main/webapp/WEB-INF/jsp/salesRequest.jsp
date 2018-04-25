@@ -41,7 +41,7 @@
 				<!--<div class="form-group"> -->
 								<!-- <label class="col-md-3 control-label no-padding-right">Product Model<span class="impColor"> *</span></label> -->
 								<!--<div class="col-md-6"> -->
-									<%-- <form:hidden path="modelnumber" id="modelnumber"  class="form-control validate" placeholder="Enter Product Model"/> --%>
+									 <form:hidden path="modelnumber" id="modelnumber"  class="form-control validate" placeholder="Enter Product Model"/>
 							<!--</div> -->
    							<!--	</div> -->
 								<%-- <div class="form-group">
