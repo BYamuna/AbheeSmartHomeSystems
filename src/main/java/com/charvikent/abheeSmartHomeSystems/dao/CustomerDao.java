@@ -1,15 +1,16 @@
 package com.charvikent.abheeSmartHomeSystems.dao;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+//import org.hibernate.Query
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Projections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeCustomerTypes;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
+import com.charvikent.abheeSmartHomeSystems.model.User;
 
 
 @Repository
@@ -213,8 +215,49 @@ return null;
 @SuppressWarnings("unchecked")
 public List<Customer> getAbheeCustomerNames()
  {
+	List<Customer> listCustomer =new ArrayList<Customer>();
+	//select c.id,c.createdTime,c.customerId,c.mobilenumber,c.updatedTime,c.BranchId,c.address,c.branchName,c.email,c.enabled,c.firstname,c.lastname,c.mobilenumber,c.status,c.registedredFromAndroid,ct.customerType,c.gst,c.purchaseCustomer
+	
+	String hql="select c.id,c.customerId,c.mobilenumber,c.BranchId,c.address,c.branchName,c.email,c.enabled,c.firstname,c.lastname,c.status,c.registedredFromAndroid,ct.customerType,c.gst,c.purchaseCustomer, c.customerType from Customer c, AbheeCustomerTypes ct where c.enabled='1' and c.customerType=ct.id";
+	
+	try{//String hql ="SELECT c FROM Customer c, AbheeCustomerTypes ct where c.enabled='1' and  c.customerType=ct.id";
+	List<Object[]> rows = entityManager.createQuery(hql).getResultList();
+	
+	for (Object[] row : rows) {
+		Customer customer =new Customer();
+		
+		customer.setId(Integer.parseInt(String.valueOf(row[0])));
+
+		customer.setCustomerId((String) row[1]);
+		customer.setMobilenumber((String) row[2]);
+		customer.setBranchId((String) row[3]);
+		customer.setAddress((String) row[4]);
+		customer.setBranchName((String) row[5]);
+		customer.setEmail((String) row[6]);
+		customer.setEnabled((String) row[7]);
+		customer.setFirstname((String) row[8]);
+		customer.setLastname((String) row[9]);
+		customer.setStatus((String) row[10]);
+		customer.setRegistedredFromAndroid((String) row[11]);
+		customer.setCustomerTypeName((String) row[12]);
+		customer.setGst((String) row[13]);
+		customer.setPurchaseCustomer((boolean) row[14]);
+		customer.setCustomerType((String) row[15]);
+	
+		
+		
+		listCustomer.add(customer);
+
+	}
+	}catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	//return (List<Customer>)entityManager.createQuery(hql).getResultList();
+	
+	 return listCustomer;
 	  
-	return (List<Customer>)entityManager.createQuery("from Customer where enabled='1' order by updatedTime desc").getResultList();
+	//return (List<Customer>)entityManager.createQuery("from Customer where enabled='1' order by updatedTime desc").getResultList();
 	 
  }
 

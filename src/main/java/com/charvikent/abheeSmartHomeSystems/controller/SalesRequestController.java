@@ -41,7 +41,8 @@ public class SalesRequestController
 	SendingMail sendingMail;
 	@RequestMapping(value = "/salesRequest" ,method = RequestMethod.GET)
 	public String saveRequest(@ModelAttribute("salesRequest")SalesRequest salesrequest,Model model)
-	{
+	{ 
+		
 		model.addAttribute("salesRequest", new SalesRequest());
 		return "salesRequest";
 		
@@ -51,18 +52,24 @@ public class SalesRequestController
 									@RequestParam("imgfile") MultipartFile[] uploadedFiles,
 									@RequestParam(value = "locationData") String latlong,HttpServletRequest request,RedirectAttributes redir) throws IllegalStateException, IOException, MessagingException
 	{
+		
+		Customer customer=(Customer) request.getAttribute("customer");
+		
 		LOGGER.debug("Calling salesRequest at controller");
 		String referalUrl=request.getHeader("referer");
+		Integer id = salesrequest.getId();
+		String email = srequestDao.getSalesRequestEmailById(id.toString()); // for get the email address 
+		SalesRequest loginDetails = srequestDao.getSalesRequestById(id.toString());
 		int filecount =0;
 		
 		String str[] = latlong.split("&");
 //		Customer objLoginCustomer= (Customer)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
 		
-		salesrequest.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
-		salesrequest.setLat(str[0]);
-		salesrequest.setLongitude(str[1]);
-		salesrequest.setEnable("1");
+		loginDetails.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
+		loginDetails.setLat(str[0]);
+		loginDetails.setLongitude(str[1]);
+		loginDetails.setEnable("1");
 		//salesrequest.setMobileno(objLoginCustomer.getMobilenumber());
    	 for(MultipartFile multipartFile : uploadedFiles) {
 				String fileName = multipartFile.getOriginalFilename();
@@ -75,16 +82,16 @@ public class SalesRequestController
    	 
    	 if(filecount>0)
    	 {
-   		salesrequest.setImgfiles(fileTemplate.concurrentFileNames());
+   		loginDetails.setImgfiles(fileTemplate.concurrentFileNames());
    		 fileTemplate.clearFiles();
    		 
    	 }
-	   	Boolean result =srequestDao.checkSalesrequestExistsorNotByEmailAndModelNo(salesrequest);
+	   	Boolean result =srequestDao.checkSalesrequestExistsorNotByEmailAndModelNo(loginDetails);
 	   	if(result==false)
 	   	{
-			srequestDao.saveRequest(salesrequest);
+			srequestDao.saveRequest(loginDetails);
 	   		//sendingMail.SendingSalesRequestByEmail(salesrequest.getEmail());
-	   		//sendingMail.sendSalesRequestEmailWithattachment(objLoginCustomer.getEmail(), uploadedFiles);
+	   		sendingMail.sendSalesRequestEmailWithattachment(email, uploadedFiles);
 	   	}
 	   	else {
 	   		redir.addFlashAttribute("msg","Record Already Exists");

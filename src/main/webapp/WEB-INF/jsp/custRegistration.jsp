@@ -8,6 +8,10 @@
 	.form-group {
 	padding-top:10px;
 	}
+	.display-none
+	{
+		display:none;
+	}
 	</style>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
@@ -52,12 +56,11 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Customer Type<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:select path="customerType" class="form-control validate" placeholder="Select Customer Type">
+										<form:select path="customerType" class="form-control validate" onfocus="removeBorder(this.id)" placeholder="Select Customer Type">
 											<option value="">-- Select Customer Type--</option>
 											<c:forEach var="customerTypes" items="${allCustomerTypes}">
 											<option value ="${customerTypes.id}" >${customerTypes.customerType}</option>
 											</c:forEach>
-
 										</form:select>
 									</div>
 								</div>
@@ -85,6 +88,7 @@
 									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:input path="email" class="form-control validate emailOnly" placeholder="Enter Email"/>
+										 <span id="errorEmaiMsg" style="color:red;"></span>
 									</div>
 								</div></div>
 								<div class="col-md-6">
@@ -92,6 +96,7 @@
 									<label class="col-md-3 control-label no-padding-right">Mobile Number<span class="impColor">*</span></label>
 								<div class="col-md-6">
 										<form:input path="mobilenumber" class="form-control validate numericOnly"  maxlength="10" placeholder="Enter Mobile Number"/>
+										<span id="errorMobileMsg" style="color:red;"></span>
 									</div>
 								</div>
 								</div>
@@ -112,11 +117,11 @@
 									</div>
 								</div>
 								</div>
-								<div class="col-md-6" id="gst">
+								<div class="col-md-6" id="gstDiv">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">GST<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:input path="gst" class="form-control validate numericOnly"  maxlength="10" placeholder="Enter GST"/>
+										<form:input path="gst" class="form-control numericOnly validate"  maxlength="10" placeholder="Enter GST"/>
 									</div>
 								</div>
 								</div>
@@ -125,7 +130,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Purchased Customer</label>
 								<div class="col-md-3 ">
-										<form:checkbox path="purchaseCustomer" style="width:20px;height:20px;" />
+										<form:checkbox path="purchaseCustomer" style="width:15px;height:20px;" />
 									</div>
 								</div>
 								</div>
@@ -209,7 +214,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th> Cust ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>MobileNo</th><th>Address</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th> Cust ID</th><th>customer Type</th><th>First Name</th><th>Last Name</th><th>Email</th><th>MobileNo</th><th>Address</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -224,10 +229,12 @@ function displayTable(listOrders) {
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr class='"+ cls +"'>"
 			 + "<td title='"+orderObj.customerId+"'>"+ orderObj.customerId + "</td>" 
+			 + "<td title='"+orderObj.customerTypeName+"'>"+ orderObj.customerTypeName + "</td>" 
 			+ "<td title='"+orderObj.firstname+"'>"+ orderObj.firstname + "</td>"
 			+ "<td title='"+orderObj.lastname+"'>"+ orderObj.lastname + "</td>"
 			+ "<td title='"+orderObj.email+"'>"+ orderObj.email + "</td>"
 			+ "<td title='"+orderObj.mobilenumber+"'>"+ orderObj.mobilenumber + "</td>"
+			
 			+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "</tr>";
@@ -242,13 +249,26 @@ function editCustomer(id) {
 	
 	$("#id").val(serviceUnitArray[id].id);
 	$("#firstname").val(serviceUnitArray[id].firstname);
+	$("#customerType").val(serviceUnitArray[id].customerType);
+	//$("#customerType").readOnly=true;
+	$('#customerType').attr('readonly', true);
+
+	if( $( "#customerType option:selected" ).text() == "Firm"){
+		
+		$('#gstDiv').show();
+		$('#gstDiv').find('input').removeClass('display-none');
+		$("#gst").val(serviceUnitArray[id].gst); 
+	}else{
+		$('#gstDiv').hide();
+		$('#gstDiv').find('input').addClass('display-none');
+	}
 	$("#lastname").val(serviceUnitArray[id].lastname); 
 	$("#mobilenumber").val(serviceUnitArray[id].mobilenumber);
 	$("#email").val(serviceUnitArray[id].email);
 	$("#address").val(serviceUnitArray[id].address);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
-	document.getElementById("username").readOnly  = true;
+	//document.getElementById("username").readOnly  = true;
 	//document.querySelector("password").required = false;
     $("#passwordDiv").hide();
     var idArray = $.makeArray($('.validate').map(function() {
@@ -418,24 +438,25 @@ function inactiveData() {
 		
 }
 
-$('#mobilenumber').blur(function() {
-	var cmobile=$(this).val();
+// $('#mobilenumber').blur(function() {
+	
 	
 	
 	 
-	 if(cmobile.length != 10 )
-		 {
-		 alert("Password Length Must Be 10 Digits")
-		 $('#cmobile').css('border-color', 'red');
+	  $('#mobilenumber').focusout(function(){
+		  var cmobile=$(this).val();
+		  
+		if(cmobile.length != 10 ){
+			
+			$('#cmobile').css('border-color', 'red');
 		// $('#submitModel').prop('disabled', true);
-		 
+		$('#errorMobileMsg').text( "*Mobile Number Length Must Be 10 Digits") ;
+		setTimeout(function() { $("#errorMobileMsg").text(''); }, 3000);
+					 
 		 subValidation =false;
 		 
-		 }
-	 
-	
-	 else
-		 {
+		 event.preventDefault();
+		 }else {
 	
 	
 	$.ajax({
@@ -449,16 +470,23 @@ $('#mobilenumber').blur(function() {
 				success : function(data) {
 					if(data ==='true')
 						{
-						alert("Mobile Number already exists")
 	 					$('#mobilenumber').css('border-color', 'red');
+						$('#errorMobileMsg').text( "* Mobile Number already exists") ;
+						setTimeout(function() { $("#errorMobileMsg").text(''); }, 3000);
+						 $('#submit1').prop('disabled', true);
+						 
 	 					 $('#submit1').prop('disabled', true);
 	 					subValidation =false;
+	 					
+	 					event.preventDefault();
 						}
 					 else
 						{
 						$('#mobilenumber').css('border-color', 'none');
 						 $('#submit1').prop('disabled', false);
 						 subValidation =true;
+						 
+						 event.preventDefault();
 						} 
 					
 				},
@@ -471,8 +499,9 @@ $('#mobilenumber').blur(function() {
 			});
 	
 		 }
+	  });
 
-		}); 
+// 		}); 
 		
 		
 $('#email').blur(function() {
@@ -496,9 +525,12 @@ $('#email').blur(function() {
 				success : function(data) {
 					if(data ==='true')
 						{
-						alert("Email already exists")
 	 					$('#email').css('border-color', 'red');
-	 					 $('#submit1').prop('disabled', true);
+						$('#errorEmaiMsg').text( "* Email already exists") ;
+						setTimeout(function() { $("#errorEmaiMsg").hide(); }, 3000);
+						 $('#submit1').prop('disabled', true);
+						 event.preventDefault();
+							return false;
 						}
 					else
 						{
@@ -526,7 +558,8 @@ $('#email').blur(function() {
 		}); 
 		
 		
-	$('#gst').hide();
+	$('#gstDiv').hide();
+	$('#gstDiv').find('input').addClass('display-none');
 	
 	
 	$('#customerType').change(function(){
@@ -534,13 +567,13 @@ $('#email').blur(function() {
 		
 		if($( "#customerType option:selected" ).text() == "Firm"){
 			
-			console.log($( "#customerType option:selected" ).text());
 			
-			$('#gst').show();
+			$('#gstDiv').show();
+			$('#gstDiv').find('input').removeClass('display-none');
 			
 		}else{
-			console.log($( "#customerType option:selected" ).text());
-			$('#gst').hide();
+			$('#gstDiv').hide();
+			$('#gstDiv').find('input').addClass('display-none');
 		}
 		
 	});
