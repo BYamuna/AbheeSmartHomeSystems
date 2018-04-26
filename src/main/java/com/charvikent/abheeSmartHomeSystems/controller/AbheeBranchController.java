@@ -219,11 +219,5 @@ public class AbheeBranchController {
 		}
 		return String.valueOf(jsonObj);
 	}
-	@RequestMapping("/dashBoard")
-	public String showDashBoard(Model model,HttpServletRequest request) 
-	{
-		LOGGER.debug("Calling dashBoard  at controller");
-		 return "dashBoard";
-		
-	}
+	
 }

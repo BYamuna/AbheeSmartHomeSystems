@@ -24,6 +24,7 @@
     				<div class="col-xs-6">
     					<h4 id="edit" style="float:right; margin-top:20px;"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
 <!--     					<h4 id="save" style="float:right; margin-top:20px;"><a href="#"><i class="glyphicon glyphicon-saved"></i> Save</a></h4> -->
+    					<h4 id="save" style="float:right; margin-top:20px;"><a href="#"><i class="glyphicon glyphicon-saved"></i> Save</a></h4>
     				</div>
     			</div><div class="clearfix"></div>
     			<div class="inp">

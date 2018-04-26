@@ -63,7 +63,7 @@
 		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h4>Add Service Request</h4>
+					<h4 id="service">Add Service Request</h4>
 				</div>
 				<form:form class="form-horizontal" modelAttribute="taskf"
 					action="savetask1" method="post" enctype="multipart/form-data">
@@ -600,7 +600,7 @@
 	function editTask(id) {
 
 		// alert("Hello");
-
+		$("#service").text("Edit Service Request");
 		$("#id").val(serviceUnitArray[id].id);
 		$("#subject").val(serviceUnitArray[id].subject);
 		$("#category").val(serviceUnitArray[id].categoryid);
