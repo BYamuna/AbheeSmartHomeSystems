@@ -269,7 +269,7 @@ $.each(productmodelslist, function(k,v){
 		+"<a href='#'onclick='getModels("+v.id+")' >"
 		+"<img src='${baseurl }/reportDocuments/"+v.productmodelpics+"' class='img-responsive' alt='1810' title='YHT-1810'>"
 		+"<h4>"+v.companyname+"</h4>"
-		+"<p>"+v.name+"</p>"
+		+"<p  id ='modelName'>"+v.name+"</p>"
         +"</a>"
         +"</div>";
 		
@@ -351,11 +351,10 @@ $.each(productdetailslist, function(k,v){
 	
 	function checkLogin(){
 		if(login){
-			
+			//console.log($("#modelName").text());
+				localStorage.setItem("modelName",document.getElementById('modelName').innerHTML);
 			window.location.href='${baseurl }/salesRequest'
 			
-				localStorage.setItem("modelName",document.getElementById('modelName').innerHTML);
-			console.log(document.getElementById('modelName').innerHTML);
 		}else{
 			window.location.href='${baseurl }/customerlogin';
 		}

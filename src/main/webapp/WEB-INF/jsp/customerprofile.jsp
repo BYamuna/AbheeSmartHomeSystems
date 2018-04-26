@@ -27,16 +27,16 @@
     			</div><div class="clearfix"></div>
     			<div class="inp">
     				<div class="col-xs-6">
-    					<input style="width:95%; margin-top:20px;" class="form-control" type="text" placeholder="First Name" disabled>
+    					<input id="firstName" style="width:95%; margin-top:20px;" class="form-control" type="text" placeholder="First Name" disabled>
     				</div>
     				<div class="col-xs-6">
-    					<input style="width:95%; margin-left:20px; margin-top:20px;" class="form-control" type="text" placeholder="Last Name" disabled>
+    					<input id="lastName" style="width:95%; margin-left:20px; margin-top:20px;" class="form-control" type="text" placeholder="Last Name" disabled>
     				</div><div class="clearfix"></div>
     				<div class="col-xs-6">
-    					<input style="width:95%; margin-top:20px;" class="form-control" type="text" placeholder="Emailid" disabled>
+    					<input id="email" style="width:95%; margin-top:20px;" class="form-control" type="text" placeholder="Emailid" disabled>
     				</div>
     				<div class="col-xs-6">
-    					<input style="width:95%; margin-left:20px; margin-top:20px;" class="form-control" type="text" placeholder="Mobile Number" disabled>
+    					<input id="mobileNumber" style="width:95%; margin-left:20px; margin-top:20px;" class="form-control" type="text" placeholder="Mobile Number" disabled>
     				</div><div class="clearfix"></div>
     				<textarea style="margin-top:20px;" class="form-control" type="text" placeholder="Address" disabled></textarea>
     			</div>
