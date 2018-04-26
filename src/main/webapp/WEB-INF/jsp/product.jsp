@@ -37,7 +37,7 @@
 			<div class="col-md-12 col-sm-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Add Product</h4>
+						<h4 id="titleProduct">Add Product</h4>
 					</div>
 					<form:form class="form-horizontal" commandName="productf" role="form" id="fillingstation-form" action="product" method="post" enctype="multipart/form-data">
 					<div class="panel-body">
@@ -137,7 +137,7 @@
                     	
                     	<div class="row">
                     		<div class="col-md-6">
-                    			<div class="form-group">
+                    			<div class="form-group" id="fileDiv">
 									<label for="focusedinput" class="col-md-6 control-label">Product Images <span class="impColor">*</span></label>
 									<div class="col-md-5">
 										<input type="file" name="file1" id="file1" class="validate"  accept="image/*"  multiple="multiple" style="margin: 7px 0px 0px 0px;">
@@ -235,6 +235,8 @@ function displayTable(listOrders) {
 
 
 function editProduct(id) {
+	$('#titleProduct').text("Edit Product");
+	
 	$("#id").val(serviceUnitArray[id].id);
 	$("#name").val(serviceUnitArray[id].name);
 	$("#description").val(serviceUnitArray[id].description);

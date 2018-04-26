@@ -39,7 +39,7 @@
 			<div class="col-md-12 col-sm-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Add Employee</h4>
+						<h4 id="emp">Add Employee</h4>
 					</div>
 					
 					<form:form modelAttribute="userForm" action="employee" class="form-horizontal " method="Post">
@@ -299,7 +299,7 @@ function getPasswordModal(id)
 
 
 function editEmployee(id) {
-	
+	$("#emp").text("Edit Employee");
 	$("#id").val(serviceUnitArray[id].id);
 	$("#username").val(serviceUnitArray[id].username);
 	$("#password").val(serviceUnitArray[id].password);

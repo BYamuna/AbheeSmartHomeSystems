@@ -37,7 +37,7 @@
 			<div class="col-md-12 col-sm-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Add Category</h4>
+						<h4 id="cate">Add Category</h4>
 					</div>
 					<form:form class="form-horizontal" commandName="catef" role="form" id="fillingstation-form" action="cate" method="post" enctype="multipart/form-data">
 					<div class="panel-body">
@@ -147,6 +147,7 @@ function displayTable(listOrders) {
 
 
 function editCate(id) {
+	$("#cate").text("Edit Category");
 	$("#id").val(serviceUnitArray[id].id);
 	$("#category").val(serviceUnitArray[id].category);
 	$("#status").val(serviceUnitArray[id].status);
