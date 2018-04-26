@@ -60,7 +60,7 @@
 		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-				<h4>Add Product Warranty Details</h4>
+				<h4 id="productw">Add Product Warranty Details</h4>
 				</div>
 				<form:form class="form-horizontal" modelAttribute="guaranteef"
 					action="productGuarantee" method="post" >
@@ -205,6 +205,7 @@ function displayTable(listOrders) {
 
 
 function editProductWarranty(id) {
+	$("#productw").text("Edit Warranty Details");
 	$("#id").val(serviceUnitArray[id].id);
 	$("#customerid").val(serviceUnitArray[id].customerid);
 	$("#productmodelid").val(serviceUnitArray[id].productmodelid);

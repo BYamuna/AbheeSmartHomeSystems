@@ -37,7 +37,7 @@
 			<div class="col-md-12 col-sm-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Add Company</h4>
+						<h4 id="com">Add Company</h4>
 					</div>
 					<form:form class="form-horizontal" commandName="companyf" role="form" id="fillingstation-form" action="company" method="post">
 					<div class="panel-body">
@@ -134,6 +134,7 @@ function displayTable(listOrders) {
 
 
 function editCompany(id) {
+	$('#com').text("Edit Company");
 	$("#id").val(serviceUnitArray[id].id);
 	$("#name").val(serviceUnitArray[id].name);
 	$("#description").val(serviceUnitArray[id].description);

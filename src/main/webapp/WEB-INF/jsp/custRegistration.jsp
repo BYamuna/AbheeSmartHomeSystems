@@ -47,7 +47,7 @@
 			<div class="col-md-12 col-sm-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Add Customer</h4>
+						<h4 id="customer">Add Customer</h4>
 					</div>
 					
 					<form:form modelAttribute="custReg" action="custreg" class="form-horizontal " method="Post">
@@ -246,7 +246,7 @@ function displayTable(listOrders) {
 
 
 function editCustomer(id) {
-	
+	$('#customer').text("Edit Customer");
 	$("#id").val(serviceUnitArray[id].id);
 	$("#firstname").val(serviceUnitArray[id].firstname);
 	$("#customerType").val(serviceUnitArray[id].customerType);
@@ -569,7 +569,7 @@ $('#email').blur(function() {
 			
 			
 			$('#gstDiv').show();
-			$('#gstDiv').find('input').removeClass('display-none');
+			
 			
 		}else{
 			$('#gstDiv').hide();
