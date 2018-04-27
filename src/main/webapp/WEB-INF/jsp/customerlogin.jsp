@@ -297,6 +297,7 @@ $('#cmobile').blur(function() {
 						alert("Mobile Number already exists")
 	 					$('#cmobile').css('border-color', 'red');
 	 					 $('#submitModel').prop('disabled', true);
+	 					 //alert("customer could not be registered")
 	 					subValidation =false;
 						}
 					 else

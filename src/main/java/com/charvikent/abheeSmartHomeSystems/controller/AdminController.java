@@ -262,6 +262,7 @@ public class AdminController {
 	@RequestMapping(value="/adminChangePassword", method= RequestMethod.POST )
 	public  @ResponseBody String adminChangePassword(User user,RedirectAttributes redir,HttpServletRequest request) throws JSONException{
 		LOGGER.debug("Calling adminChangePassword at controller");
+		System.out.println("entering into post.....");
 		boolean result=false;
 		JSONObject jsonObj = new JSONObject();
 		User users = userService.getUserById(user.getId());
@@ -270,6 +271,7 @@ public class AdminController {
 			users.setPassword(user.getNpassword());
 			userService.updatePassword(users);
 			jsonObj.put("message", "Password Updated Successfully");
+			
 //				System.out.println("**************************************************"+result+"**************"+jsonObject);
 //				jsonObject.put("msg", "You Entered Wrong Password");
 //				System.out.println("**************************************************"+result+"**************"+jsonObject);

@@ -242,11 +242,11 @@ public class EmployeeController {
 					users.setPassword(user.getCpassword());
 					userService.updatePassword(users);
 					redir.addFlashAttribute("msg", "Password Updated Successfully");
-					redir.addFlashAttribute("cssMsg", "warning");
+					redir.addFlashAttribute("cssMsg", "success");
 					return "redirect:/";
 				}else {
 					redir.addFlashAttribute("msg", "You Entered Wrong Password");
-					redir.addFlashAttribute("cssMsg", "warning");
+					redir.addFlashAttribute("cssMsg", "danger");
 					return "redirect:changePassword";
 				}
 		}else {

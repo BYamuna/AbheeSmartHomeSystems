@@ -189,6 +189,7 @@
 						<div class="col-md-6">
 							<input type="password" id="cpassword" class="form-control"	placeholder="Re-Enter New Password" />
 						</div>
+						 <span id="successMsg" style="color:green;"></span>
 						<div class="col-md-2"></div>
 					</div>
 				</div><div class="clearfix"></div>
@@ -265,6 +266,7 @@ function changePasswordModal(){
 				formData, false, 'text', function(data) {
 			
 			$("#passwordModal").modal('toggle');
+			$("#successMsg").text("Password Changed Successfully");
 			/* var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;
 			displayTable(alldata);

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
+   <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> 
     
 <style>
 </style>
@@ -22,23 +22,25 @@
     					<h3>Personal Information</h3>
     				</div>
     				<div class="col-xs-6">
-    					<h4 style="float:right; margin-top:20px;"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
+    					<h4 style="float:right; margin-top:20px;" id="edit"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
     				</div>
     			</div><div class="clearfix"></div>
     			<div class="inp">
+    			<form:form  modelAttribute="customerProfile"  class="form-horizontal"  method="POST">
     				<div class="col-xs-6">
-    					<input id="firstName" style="width:95%; margin-top:20px;" class="form-control" type="text" placeholder="First Name" disabled>
+    					<form:input path="firstname" style="width:95%; margin-top:20px;" class="form-control" type="text" placeholder="First Name"  disabled="true"/>
     				</div>
     				<div class="col-xs-6">
-    					<input id="lastName" style="width:95%; margin-left:20px; margin-top:20px;" class="form-control" type="text" placeholder="Last Name" disabled>
+    					<form:input path="lastname" style="width:95%; margin-left:20px; margin-top:20px;" class="form-control" type="text" placeholder="Last Name" disabled="true" />
     				</div><div class="clearfix"></div>
     				<div class="col-xs-6">
-    					<input id="email" style="width:95%; margin-top:20px;" class="form-control" type="text" placeholder="Emailid" disabled>
+    					<form:input path="email" style="width:95%; margin-top:20px;" class="form-control" type="text" placeholder="Emailid" disabled="true"/>
     				</div>
     				<div class="col-xs-6">
-    					<input id="mobileNumber" style="width:95%; margin-left:20px; margin-top:20px;" class="form-control" type="text" placeholder="Mobile Number" disabled>
+    					<form:input path="mobilenumber" style="width:95%; margin-left:20px; margin-top:20px;" class="form-control" type="text" placeholder="Mobile Number" disabled="true"/>
     				</div><div class="clearfix"></div>
-    				<textarea style="margin-top:20px;" class="form-control" type="text" placeholder="Address" disabled></textarea>
+    				<form:textarea path= "address" style="margin-top:20px;" class="form-control" type="text" placeholder="Address" disabled="true" />
+    				</form:form>
     			</div>
     		</div>
     		<div class="order">
@@ -46,5 +48,40 @@
     		</div>
     	</div><div class="clearfix"></div>
     </div>
+<script type="text/javascript">
+$('#customer').blur(function() {
+	var customer=$(this).val();
 
+	$.ajax({
+				type : "POST",
+				url : "editCustomerProfile",
+				data : {"customer":customer},
+				dataType : "text",
+				beforeSend : function() {
+		             $.blockUI({ message: 'Please wait' });
+		          }, 
+				success : function(data) {
+					if(data ==='true')
+						{
+						//alert("username already exists")
+	 					$('#customer').css('border-color', 'red');
+						 $('#submit1').prop('disabled', true);
+						}
+					else
+						{
+						$('#customer').css('border-color', 'none');
+						$('#edit').prop('disabled', false);
+						}
+					
+				},
+				complete: function () {
+		            
+		            $.unblockUI();
+		       },
+				error :  function(e){$.unblockUI();console.log(e);}
+				
+			});
+
+		}); 
+</script>
 <%@include file="abheefooter.jsp" %>
