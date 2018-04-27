@@ -1,19 +1,23 @@
 package com.charvikent.abheeSmartHomeSystems.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "abheecustomerorderitems")
 public class CustomerOrderItems {
-	
-	private String orderId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int orderId;
 	private String productId;
 	private String quantity;
-	public String getOrderId() {
+	public int getOrderId() {
 		return orderId;
 	}
-	public void setOrderId(String orderId) {
+	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
 	public String getProductId() {
