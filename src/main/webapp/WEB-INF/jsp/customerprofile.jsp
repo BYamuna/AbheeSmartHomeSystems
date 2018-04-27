@@ -22,27 +22,30 @@
     					<h3>Personal Information</h3>
     				</div>
     				<div class="col-xs-6">
-    					<h4 style="float:right; margin-top:20px;" id="edit"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
 
+    					<h4 style="float:right; margin-top:20px;" id="edit"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
     				</div>
     			</div><div class="clearfix"></div>
     			<div class="inp">
     			<form:form  modelAttribute="customerProfile"  class="form-horizontal"  method="POST">
     				<div class="col-xs-6">
+
     					<form:input path="firstname" style="width:95%; margin-top:20px;" class="form-control" type="text" placeholder="First Name"  disabled="true"/>
     				</div>
     				<div class="col-xs-6">
+
     					<form:input path="lastname" style="width:95%; margin-left:20px; margin-top:20px;" class="form-control" type="text" placeholder="Last Name" disabled="true" />
     				</div><div class="clearfix"></div>
     				<div class="col-xs-6">
+
     					<form:input path="email" style="width:95%; margin-top:20px;" class="form-control" type="text" placeholder="Emailid" disabled="true"/>
     				</div>
     				<div class="col-xs-6">
-    					<form:input path="mobilenumber" style="width:95%; margin-left:20px; margin-top:20px;" class="form-control" type="text" placeholder="Mobile Number" disabled="true"/>
+			<form:input path="mobilenumber" style="width:95%; margin-left:20px; margin-top:20px;" class="form-control" type="text" placeholder="Mobile Number" disabled="true"/>
     				</div><div class="clearfix"></div>
+
     				<form:textarea path= "address" style="margin-top:20px;" class="form-control" type="text" placeholder="Address" disabled="true" />
     				</form:form>
-
     			</div>
     		</div>
     		<div id="order">
@@ -75,7 +78,14 @@
     		</div>
     	</div><div class="clearfix"></div>
     </div>
+
 <script type="text/javascript">
+
+$("#myorders").click(function(){
+	var id=$(this).attr('href');
+	$(id).css('display','block');
+	$(".cdata").css('display','none');
+});
 $('#customer').blur(function() {
 	var customer=$(this).val();
 
@@ -110,12 +120,5 @@ $('#customer').blur(function() {
 			});
 
 		}); 
-$("#myorders").click(function(){
-	var id=$(this).attr('href');
-	$(id).css('display','block');
-	$(".cdata").css('display','none');
-});
-
-
 </script>
 <%@include file="abheefooter.jsp" %>
