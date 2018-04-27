@@ -291,5 +291,49 @@ public class HomeController {
 	}
 	
 	
+	@RequestMapping("/about")
+	public String about() throws JSONException, JsonProcessingException {
+		LOGGER.debug("Calling Customer Profile  page at controller");
+		
+		 
+		return "about";
+	}
+	@RequestMapping("/career")
+	public String career() throws JSONException, JsonProcessingException {
+		LOGGER.debug("Calling Customer Profile  page at controller");
+		
+		 
+		return "career";
+	}
+	@RequestMapping("/contact")
+	public String contact() throws JSONException, JsonProcessingException {
+		LOGGER.debug("Calling Customer Profile  page at controller");
+		
+		 
+		return "contact";
+	}
+	@RequestMapping("/gallery")
+	public String gallery() throws JSONException, JsonProcessingException {
+		LOGGER.debug("Calling Customer Profile  page at controller");
+		
+		 
+		return "gallery";
+	}
+	@RequestMapping("/location")
+	public String location() throws JSONException, JsonProcessingException {
+		LOGGER.debug("Calling Customer Profile  page at controller");
+		
+		 
+		return "location";
+	}
+	@RequestMapping("/mission")
+	public String mission() throws JSONException, JsonProcessingException {
+		LOGGER.debug("Calling Customer Profile  page at controller");
+		
+		 
+		return "mission";
+	}
+	
+	
 
 }

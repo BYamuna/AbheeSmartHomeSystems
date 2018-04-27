@@ -48,6 +48,29 @@
     		<div id="order">
     			<div style="margin-top:-15px;" class="odata">
     				<h1>Pavan</h1>
+    				
+    				<div class="table-responsive">
+								<table class="table table-bordered priority prioritybg"	style="border: 1px solid #0460a4;" id="customerOrderTable">
+									<thead>
+										<tr style="background-color: #0460a4; color: #fff; text-align: center;">
+											<th>OrderId</th>
+											<th>Product(s)</th>
+											<th>Date of Purchased</th>
+											<th>Warranty Expired Date</th>
+											<th>Price</th>
+										</tr>
+										
+									
+									</thead>
+									<tbody>
+
+
+									</tbody>
+									
+
+								</table>
+							</div>
+    				
     			</div>
     		</div>
     	</div><div class="clearfix"></div>
@@ -92,5 +115,7 @@ $("#myorders").click(function(){
 	$(id).css('display','block');
 	$(".cdata").css('display','none');
 });
+
+
 </script>
 <%@include file="abheefooter.jsp" %>
