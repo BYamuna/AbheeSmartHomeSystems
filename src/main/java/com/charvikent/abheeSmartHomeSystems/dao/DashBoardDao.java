@@ -1,5 +1,6 @@
 package com.charvikent.abheeSmartHomeSystems.dao;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -10,10 +11,9 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,18 +21,18 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+import com.charvikent.abheeSmartHomeSystems.controller.AbheeBranchController;
+import com.charvikent.abheeSmartHomeSystems.model.DashBoardByCategory;
+import com.charvikent.abheeSmartHomeSystems.model.DashBoardByStatus;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
 @Repository
 @Transactional
 public class DashBoardDao {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger( AbheeBranchController.class); 
+	
 	@PersistenceContext
     private EntityManager entityManager;
 	
@@ -236,6 +236,77 @@ public HashMap<String,Object> getAllCountBystatus() {
 		alTtasksStatusCounts.put("allServiceCounts",  entityManager.createNativeQuery(hql).getResultList().get(0));
 	
 	return alTtasksStatusCounts;
+}
+
+
+@SuppressWarnings("unchecked")
+public List<DashBoardByStatus> getStatusList() {
+	LOGGER.debug("In getStatusList for Dashboard Status Table");
+
+	List<DashBoardByStatus> dashBoardStatusList=new ArrayList<>();
+	
+	try {
+	
+	
+	String hqladmin ="select  kstatus, ks.name,GROUP_CONCAT(ks.name) from abhee_task ri,abheecategory kc,abheetaskstatus ks where ri.category=kc.id and ks.id=kstatus  and ri.kstatus in(2,3,4) group by ri.kstatus ORDER BY ri.kstatus";
+		
+	List<Object[]> rows =null;
+	
+	
+		rows= entityManager.createNativeQuery(hqladmin).getResultList();
+			
+			for (Object[] row : rows) {
+				DashBoardByStatus dashBordByStatus= new DashBoardByStatus();
+				dashBordByStatus.setStatusId((String)row[0]);
+				dashBordByStatus.setStatusName((String) row[1]);
+				dashBordByStatus.setStatusConcatination((String) row[2]);
+				dashBoardStatusList.add(dashBordByStatus);
+
+			}
+		} catch (Exception e) {
+			System.out.println("error here");
+			e.printStackTrace();
+		}
+
+	
+	return dashBoardStatusList;
+	}
+
+
+@SuppressWarnings("unchecked")
+public List<DashBoardByCategory> getCategory() {
+	
+	LOGGER.debug("In getSeverityCountsUnderReportTo calling createnativeQuery");
+
+	
+	
+	List<DashBoardByCategory> dashBoardCategoryList=new ArrayList<>();
+	try {
+	
+	
+	String hqladmin ="select ri.category,kc.category as categoryname,kstatus  ,GROUP_CONCAT(ks.name) from abhee_task ri,abheecategory kc,abheetaskstatus ks where ri.category=kc.id and ks.id=kstatus  and ri.kstatus in(2,3,4) group by ri.category ORDER BY ri.category";
+		
+	List<Object[]> rows =null;
+	
+		rows= entityManager.createNativeQuery(hqladmin).getResultList();
+		
+			for (Object[] row : rows) {
+				DashBoardByCategory dashBoardByCategory= new DashBoardByCategory();
+				dashBoardByCategory.setCategoryId((String)row[0]);
+				dashBoardByCategory.setCategoryName((String) row[1]);
+				dashBoardByCategory.setkStatus((String) row[2]);
+				dashBoardByCategory.setkStatusNameWithId((String) row[3]);
+				dashBoardCategoryList.add(dashBoardByCategory);
+
+			}
+		} catch (Exception e) {
+			System.out.println("error here");
+			e.printStackTrace();
+		}
+
+	
+	return dashBoardCategoryList;
+	
 }
 
 }
