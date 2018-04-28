@@ -134,14 +134,14 @@
 							<label>Message</label>
 						</div>
 						<div class="col-sm-8">
-							<textarea class="form-control" id="message" name="message" placeholder="Message"></textarea>
+							<textarea class="form-control" id="message" name="message" placeholder=" Enter Message"></textarea>
 						</div>
 						
 						<div class="col-sm-4">
 							<label>Address</label>
 						</div>
 						<div class="col-sm-8">
-							<textarea class="form-control" id="custaddress" name="custaddress" placeholder="address"></textarea>
+							<textarea class="form-control" id="custaddress" name="custaddress" placeholder=" Enter Address"></textarea>
 						</div>
 							<!--<div class="col-sm-4">
 							<label>Attach File(s)</label>
