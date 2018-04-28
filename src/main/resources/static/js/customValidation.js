@@ -34,6 +34,33 @@ $(".capsOnly").keyup(function() {
  * if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false; });
  */
 
+
+$('.mobilenumber').focusout(function() {
+    $('span.error-keyup-4').remove();
+    var inputVal = $(this).val();
+    if(inputVal != "" ){
+    	
+    var characterReg = /^[6789]\d{9}$/;
+    if(!characterReg.test(inputVal)) {
+        $(this).after('<span class="error error-keyup-4">Not a valid Mobile Number </span>');
+        
+        $('.mobilenumber' ).css('border-color','#e73d4a');
+		$('.mobilenumber' ).css('color','#e73d4a');
+		
+		$('.mobilenumber' ).addClass("errorCls");
+        //setTimeout(function() { $("#error-keyup-4").text(''); }, 3000);
+        
+        return false;
+    }else{
+    	
+    	return true;
+    }
+    }else{
+    	
+    	return false;
+    }
+});
+
 jQuery('.numericOnly').keyup(function() {
 	this.value = this.value.replace(/[^0-9\.]/g, '');
 });
@@ -222,7 +249,8 @@ $('#submit1').click(function(event) {
 		/* optional variable is for hidden and show input field validation  */
 		 
 		var optional = $("#" + idArray[i]).hasClass('display-none');
-		if ((value == null || value == "" || value == "undefined") && !optional ) {
+		var errorCls = $("#" + idArray[i]).hasClass('errorCls');
+		if ((value == null || value == "" || value == "undefined" || errorCls) && !optional) {
 			$('style').append(styleBlock);
 			$("#" + idArray[i] ).attr("placeholder", placeholder);
 			$("#" + idArray[i] ).css('border-color','#e73d4a');

@@ -95,7 +95,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile Number<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:input path="mobilenumber" class="form-control validate numericOnly"  maxlength="10" placeholder="Enter Mobile Number"/>
+										<form:input path="mobilenumber"   class="form-control validate  mobilenumber"  maxlength="10" placeholder="Enter Mobile Number"/>
 										<span id="errorMobileMsg" style="color:red;"></span>
 									</div>
 								</div>
@@ -443,7 +443,7 @@ function inactiveData() {
 	
 	
 	 
-	  $('#mobilenumber').focusout(function(){
+	 /*  $('#mobilenumber').focusout(function(){
 		  var cmobile=$(this).val();
 		  
 		if(cmobile.length != 10 ){
@@ -499,7 +499,7 @@ function inactiveData() {
 			});
 	
 		 }
-	  });
+	  }); */
 
 // 		}); 
 		
@@ -567,7 +567,7 @@ $('#email').blur(function() {
 		
 		if($( "#customerType option:selected" ).text() == "Firm"){
 			
-			
+			$('#gstDiv').find('input').removeClass('display-none');
 			$('#gstDiv').show();
 			
 			
