@@ -566,7 +566,7 @@ public class TaskController {
 		
 	
 		
-		AbheeTask abheeTask =reportIssueDao.checkServiceRequestExisrOrNot(task);
+		Map<String, Object> abheeTask =reportIssueDao.checkServiceRequestExisrOrNot(task);
 		if(null ==abheeTask )
 		{
 		reportIssueDao.saveReportIssue(task);

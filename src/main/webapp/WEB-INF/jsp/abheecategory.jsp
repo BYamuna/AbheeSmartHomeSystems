@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
@@ -212,6 +212,14 @@
 <script type="text/javascript">
 
 
+function makeServiceRequestFieldsEmpty()
+{
+	$('#message').val("");
+	$('#custaddress').val("");
+	
+	}
+
+
  var customerId=$('#custhiddenid').val();
  
  console.log(customerId);
@@ -381,6 +389,7 @@ $.each(productdetailslist, function(k,v){
 	function checkService(){
            if(login){
 		$("#formModal").modal();
+		makeServiceRequestFieldsEmpty();
            }
            else
            {
@@ -430,7 +439,10 @@ $.each(productdetailslist, function(k,v){
 					$('#formModal').modal('toggle');					
 				}
 				else
+					{
 					alert(data);
+					$('#formModal').modal('toggle');
+					}
 				
 			},
 			complete: function () {
