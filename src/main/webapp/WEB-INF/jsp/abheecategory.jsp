@@ -4,7 +4,6 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-    
     <%@include file="abheeheader.jsp" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>Abhee Smart Homes</title>
@@ -117,14 +116,14 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title" style="color: white;">Service Request Form </h4>
         	</div>
-        	<div class="modal-body">
-				<div class="panel-body">
+        	<div style="max-width:90%; margin:0 auto;" class="modal-body">
+        		<div align="center" class="text"><span class="impColor0"></span></div>
 					<form>
 						<div class="col-sm-4">
 							<label>Service Type</label> <span class="impColor">*</span>
 						</div>
 						<div class="col-sm-8">
-											<select  id="servicetypeid"  class="form-control" >
+											<select  id="servicetypeid"  class="form-control" onfocus="removeBorder2(this.id)">
 											<option value="">-- Service Type -- </option>
 											<c:forEach var="list" items="${servicetypes}">
 											<option value=${list.key}>${list.value} </option>
@@ -135,14 +134,14 @@
 							<label>Message</label> <span class="impColor">*</span>
 						</div>
 						<div class="col-sm-8">
-							<textarea class="form-control" id="message" name="message" placeholder=" Enter Message"></textarea>
+							<textarea class="form-control" id="message" name="message" placeholder=" Enter Message"  onfocus="removeBorder2(this.id)"></textarea>
 						</div>
 						
 						<div class="col-sm-4">
 							<label>Address</label> <span class="impColor">*</span>
 						</div>
 						<div class="col-sm-8">
-							<textarea class="form-control" id="custaddress" name="custaddress" placeholder=" Enter Address"></textarea>
+							<textarea class="form-control" id="custaddress" name="custaddress" placeholder=" Enter Address"  onfocus="removeBorder2(this.id)"></textarea>
 						</div>
 							<!--<div class="col-sm-4">
 							<label>Attach File(s)</label>
@@ -153,22 +152,22 @@
 						 -->
 						
 				
-				</div>
             </div>
-                    		
                     		
                     		<div class="panel-footer">
 				      	<div class="row">
 				      		<div class="col-sm-12">
 				      			<div style="float:right; margin-right:20px;" class="btn-toolbar text-center">
+                    		<br>
 					      			<input type="button" id="modelSubmit" value="Submit"  onclick="serviceSubmit()" class="btn-primary btn"/>
 					      			<input type="reset" value="Reset" class="btn-danger btn cancel1"/>
 				      			</div>
 				      		</div>
 				      	</div>
 			      	</div>
-                    		</div>
+                    		
                     		</form>
+                    		</div>
                     		
 				</div> 
 					
@@ -409,11 +408,27 @@ $.each(productdetailslist, function(k,v){
 		 
 		 custaddress =$('#custaddress').val();
 		 
+		 servicetypeid =$("#servicetypeid").val();
+		 
 		 $('span.error-keyup-4').remove();
+		 
+		 
+		
+		 
+ if (servicetypeid == null || servicetypeid == "" || servicetypeid == "undefined") {
+			 
+			 $('.impColor0').after('<span class="error error-keyup-4">Fill Service Type Field </span>');
+			 $('#servicetypeid' ).css('border-color','#e73d4a');
+				$('#servicetypeid' ).css('color','#e73d4a');
+			 return false;
+			 
+			 
+		 }
+ 
 		 
 		 if (message == null || message == "" || message == "undefined") {
 			 
-			 $('#message').after('<span class="error error-keyup-4">Not a valid Mobile Number </span>');
+			 $('.impColor0').after('<span class="error error-keyup-4">Fill Message Field </span>');
 			 $('#message' ).css('border-color','#e73d4a');
 				$('#message' ).css('color','#e73d4a');
 			 return false;
@@ -421,6 +436,9 @@ $.each(productdetailslist, function(k,v){
 			 
 		 }
 		 if (custaddress == null || custaddress == "" || custaddress == "undefined") {
+			 $('.impColor0').after('<span class="error error-keyup-4">Fill Address Field </span>');
+			 $('#custaddress' ).css('border-color','#e73d4a');
+				$('#custaddress' ).css('color','#e73d4a');
 			 return false;
 			 
 			 
@@ -458,6 +476,19 @@ $.each(productdetailslist, function(k,v){
 			
 		});
 
+	}
+	
+	
+	function removeBorder2(el){	
+		  $("#"+el).css("border", "");
+		  $("#"+el).css('color','black');
+		  $('#'+el).addClass('default-class');
+		  if ($("#" + el+"_chosen").length)
+			{
+				$("#" +el+"_chosen").children('a').css('border-color','black');
+			}
+		  
+		  $('span.error-keyup-4').remove();
 	}
  
 </script>

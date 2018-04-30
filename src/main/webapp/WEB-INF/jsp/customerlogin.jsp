@@ -267,7 +267,7 @@ $('#cmobile').blur(function() {
 	var cmobile=$(this).val();
 	$('span.error-keyup-4').remove();
     var inputVal = $(this).val();
-    if(inputVal != "" ){
+    
     	
     var characterReg = /^[6789]\d{9}$/;
     if(!characterReg.test(inputVal)) {
@@ -282,12 +282,7 @@ $('#cmobile').blur(function() {
         return false;
     }else{
     	
-    	return true;
-    }
-    }else{
     	
-    	return false;
-    }
 	
 	 /* if(cmobile.length != 10 )
 		 {
@@ -333,6 +328,9 @@ $('#cmobile').blur(function() {
 				error :  function(e){$.unblockUI();console.log(e);}
 				
 			});
+	  
+	  
+    }
 	
 		}); 
 		
