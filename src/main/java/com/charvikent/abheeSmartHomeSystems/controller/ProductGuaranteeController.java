@@ -71,7 +71,7 @@ public class ProductGuaranteeController
 			if(productGuarantee.getId()==null)
 			{
 				if(dummyId ==0)
-				{	
+				{	productGuarantee.setStatus("1");
 					productGuaranteeDao.saveWarranty(productGuarantee);
 					
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");

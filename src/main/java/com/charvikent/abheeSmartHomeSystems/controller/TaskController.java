@@ -213,7 +213,6 @@ public class TaskController {
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
 					}
-					task.setKstatus("2");
 					/*taskHistoryLogsDao.savetaskhistorylogs(taskHistoryLogs);*/
 					//sendingMail.sendingMailWithTaskStatus(task);
 					reportIssueDao.updateIssue(task);

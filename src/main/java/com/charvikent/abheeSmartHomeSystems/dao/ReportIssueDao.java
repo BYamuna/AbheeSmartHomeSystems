@@ -16,7 +16,7 @@ import java.util.TreeSet;
 import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+//import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +33,9 @@ import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
-import com.charvikent.abheeSmartHomeSystems.model.Customer;
-import com.charvikent.abheeSmartHomeSystems.model.TaskHistory;
-import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
+//import com.charvikent.abheeSmartHomeSystems.model.Customer;
+//import com.charvikent.abheeSmartHomeSystems.model.TaskHistory;
+//import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
 
@@ -381,6 +381,7 @@ public List<ReportIssue> getAllReportIssues()
 	}
 	
 
+	@SuppressWarnings("unused")
 	public void updateIssue(AbheeTask issue) throws IOException {
 		
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -427,14 +428,20 @@ public List<ReportIssue> getAllReportIssues()
 		taskHistoryLogsDao.historyLog(editissue);
 		try 
 		{
+			if(editissue.getKstatus().equals("1")||editissue.getKstatus().equals("6")) 
+			{
+				
 			sendingMail.sendMailTocustomer(editissue);
+			sendingMail.sendMailToUser(editissue);
+			sendSMS.sendsmsToCustomer(editissue);
+	        sendSMS.sendsmsToUser(editissue); 
+			}
 		} 
 		catch (MessagingException e) 
 		{
 			e.printStackTrace();
 		}
-		sendSMS.sendsmsToCustomer(editissue);
-          
+		
 		}
 	}
 

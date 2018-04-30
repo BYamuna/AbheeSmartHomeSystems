@@ -1,4 +1,4 @@
 /target/
-/src/main/resources/*
+
 /src/main/webapp/QuotationDocuments/*
 /src/main/webapp/reportDocuments/*
