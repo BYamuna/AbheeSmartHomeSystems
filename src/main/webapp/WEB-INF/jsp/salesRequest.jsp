@@ -61,7 +61,7 @@
 									<label class="col-md-3 control-label no-padding-right">location<span class="impColor"> *</span></label>
 									<div class="col-md-6">
 <!-- 										<input type="text" id="us2-address" class="form-control validate"/> -->
-										<input type="text" name="locationData" id="locationData" class="form-control"/> 
+										<input type="text" name="locationData" id="locationData" class="form-control validate"  placeholder="Please Select Location in Map"/> 
 									</div>
 								</div><div class="clearfix"></div>
 								<%-- <div class="form-group">
@@ -72,23 +72,23 @@
 								</div> --%>
 								<div class="clearfix"></div>
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Address</label>
+									<label class="col-md-3 control-label no-padding-right">Address <span class="impColor">*</span></label> 
 									<div class="col-md-6">
-										<form:textarea path="address" class="form-control validate emailOnly" placeholder="Enter Address"/>
+										<form:textarea path="address" class="form-control validate " placeholder="Enter Address"/>
 									</div>
 								</div>
 								<div class="clearfix"></div>
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Requirements Description</label>
+									<label class="col-md-3 control-label no-padding-right">Requirements Description <span class="impColor">*</span></label> 
 									<div class="col-md-6">
-										<form:textarea path="reqdesc" class="form-control validate emailOnly" placeholder="Enter Description"/>
+										<form:textarea path="reqdesc" class="form-control validate" placeholder="Enter Description"/>
 									</div>
 								</div>
 								<div class="clearfix"></div>
 								<div class="form-group">
-								<label class="col-md-3 control-label no-padding-right">Choose File<span class="impColor">*</span></label>
+								<label class="col-md-3 control-label no-padding-right">Choose File  <span class="impColor">*</span></label> 
 									<div class="col-md-6">
-										<input class="form-control" type="file" name="imgfile" id="imgfile" multiple/>
+										<input class="form-control validate" type="file" name="imgfile" id="imgfile" multiple/>
 									</div>
 								</div>
 								
@@ -151,10 +151,10 @@ function updateControls(addressComponents) {
   console.log(addressComponents);
 }
 
-
+var styleBlock = '.placeholder-style.placeholder-style::-moz-placeholder {color: #cc0000;} .placeholder-style::-webkit-input-placeholder {color: #cc0000;}';
 function submitRequest()
 {
- idArrayCmt11 = $.makeArray($('.validate2').map(function() {
+ idArrayCmt11 = $.makeArray($('.validate').map(function() {
 	return this.id;
 	}));
 validation = true;
@@ -178,8 +178,27 @@ $.each(idArrayCmt11, function(i, val) {
 });
 if(validation) {
 	
+	
+	$("#submit1").attr("disabled",true);
+	$("#submit1").val("Please wait...");
+	$("form").submit();	
 }else {
+	event.preventDefault();
 	return false;
+}
+$('.validate').keydown(function() {
+	var id = $(this).attr('id');
+	removeBorder(id);
+});
+//remove borders
+function removeBorder(el){	
+	  $("#"+el).css("border", "");
+	  $("#"+el).css('color','black');
+	  $('#'+el).addClass('default-class');
+	  if ($("#" + el+"_chosen").length)
+		{
+			$("#" +el+"_chosen").children('a').css('border-color','black');
+		}
 }
 
 

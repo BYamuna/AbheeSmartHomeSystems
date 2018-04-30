@@ -121,24 +121,25 @@
 				<div class="panel-body">
 					<form>
 						<div class="col-sm-4">
-							<label>Service Type</label>
+							<label>Service Type</label> <span class="impColor">*</span>
 						</div>
 						<div class="col-sm-8">
-						<select  id="servicetypeid"  class="form-control" >
+											<select  id="servicetypeid"  class="form-control" >
+											<option value="">-- Service Type -- </option>
 											<c:forEach var="list" items="${servicetypes}">
 											<option value=${list.key}>${list.value} </option>
 											</c:forEach>
 										</select>
 						</div>
 						<div class="col-sm-4">
-							<label>Message</label>
+							<label>Message</label> <span class="impColor">*</span>
 						</div>
 						<div class="col-sm-8">
 							<textarea class="form-control" id="message" name="message" placeholder=" Enter Message"></textarea>
 						</div>
 						
 						<div class="col-sm-4">
-							<label>Address</label>
+							<label>Address</label> <span class="impColor">*</span>
 						</div>
 						<div class="col-sm-8">
 							<textarea class="form-control" id="custaddress" name="custaddress" placeholder=" Enter Address"></textarea>
@@ -408,9 +409,13 @@ $.each(productdetailslist, function(k,v){
 		 
 		 custaddress =$('#custaddress').val();
 		 
-		 
+		 $('span.error-keyup-4').remove();
 		 
 		 if (message == null || message == "" || message == "undefined") {
+			 
+			 $('#message').after('<span class="error error-keyup-4">Not a valid Mobile Number </span>');
+			 $('#message' ).css('border-color','#e73d4a');
+				$('#message' ).css('color','#e73d4a');
 			 return false;
 			 
 			 
