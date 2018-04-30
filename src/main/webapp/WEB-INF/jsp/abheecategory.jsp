@@ -412,7 +412,6 @@ $.each(productdetailslist, function(k,v){
 			 
 			 
 		 }
-		 alert(custaddress);
 		 
 		
 		$.ajax({
