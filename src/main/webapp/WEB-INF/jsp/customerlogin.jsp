@@ -83,7 +83,7 @@
 						<h2>Login</h2>
 					</div>					
 									<div class="clearfix"></div>
-						<form action="/customerlogin" method="post"> 
+						<form action="customerlogin" method="post"> 
 					<div class="login-top"> 	
 						  <input type="hidden" name="userType" id="userType" value="customerUser"/>
 							<input type="text" class="form name" name="username" id="username" onfocus="this.placeholder=''" onblur="this.placeholder='Mobile Number'" placeholder="Mobile Number" required/>
@@ -144,7 +144,7 @@
 							</div>
 							<div class="form-group">
 								<label for="user_name">Enter MobileNumber :</label> 
-								<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" maxlength="10" class="form-control validate1 numericOnly" placeholder="Enter Mobile Number"/>
+								<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" maxlength="10" class="form-control validate1 mobilenumber" placeholder="Enter Mobile Number"/>
 								<span class="hasError" id="cmobileError" style="font-size: 13px;"></span>
 							</div>
 
@@ -256,8 +256,6 @@
 <script type="text/javascript">
 
 
-
-
 var validation = true;
 
 
@@ -265,10 +263,31 @@ var subValidation =false;
 
 $('#cmobile').blur(function() {
 	var cmobile=$(this).val();
+	$('span.error-keyup-4').remove();
+    var inputVal = $(this).val();
+    if(inputVal != "" ){
+    	
+    var characterReg = /^[6789]\d{9}$/;
+    if(!characterReg.test(inputVal)) {
+        $(this).after('<span class="error error-keyup-4">Not a valid Mobile Number </span>');
+        
+        $('.mobilenumber' ).css('border-color','#e73d4a');
+		$('.mobilenumber' ).css('color','#e73d4a');
+		
+		$('.mobilenumber' ).addClass("errorCls");
+        //setTimeout(function() { $("#error-keyup-4").text(''); }, 3000);
+        
+        return false;
+    }else{
+    	
+    	return true;
+    }
+    }else{
+    	
+    	return false;
+    }
 	
-	
-	 
-	 if(cmobile.length != 10 )
+	 /* if(cmobile.length != 10 )
 		 {
 		 alert("Mobile Number Length Must Be 10 Digits")
 		 $('#cmobile').css('border-color', 'red');
@@ -277,10 +296,7 @@ $('#cmobile').blur(function() {
 		 subValidation =false;
 		 
 		 }
-	 
-	
-	 else
-		 {
+	  */
 	
 	
 	$.ajax({
@@ -297,6 +313,7 @@ $('#cmobile').blur(function() {
 						alert("Mobile Number already exists")
 	 					$('#cmobile').css('border-color', 'red');
 	 					 $('#submitModel').prop('disabled', true);
+	 					 //alert("customer could not be registered")
 	 					subValidation =false;
 						}
 					 else
@@ -315,8 +332,6 @@ $('#cmobile').blur(function() {
 				
 			});
 	
-		 }
-
 		}); 
 		
 		
@@ -366,8 +381,9 @@ var idArrayCmt1 = null;
 		
 	$.each(idArrayCmt1, function(i, val) {
 		var value = $("#" + idArrayCmt1[i]).val();
+		var errorCls = $("#" + idArray[i]).hasClass('errorCls');
 		var placeholder = $("#" + idArrayCmt1[i]).attr('placeholder');
-		if (value == null || value == "" || value == "undefined" ) {
+		if (value == null || value == "" || value == "undefined" || errorCls ) {
 			$('style').append(styleBlock);
 			$("#" + idArrayCmt1[i] ).attr("placeholder", placeholder);
 			$("#" + idArrayCmt1[i] ).css('border-color','#e73d4a');
@@ -403,10 +419,9 @@ var idArrayCmt1 = null;
 	
 	
 	if(validation) {
-	/* 	$("#submit1").attr("disabled",true);
+		$("#submit1").attr("disabled",true);
 		$("#submit1").val("Please wait...");
 		$("#submit1").submit();											
-		event.preventDefault(); */
 		 getOTP();
 	}else {
 		return false;

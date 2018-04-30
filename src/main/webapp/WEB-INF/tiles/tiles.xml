@@ -141,6 +141,9 @@
 	</definition>   
 		<definition name="productguarantee" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/jsp/productguarantee.jsp" />
-	</definition>   
-
+	</definition>
+	
+	<definition name="customerProfile" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/customerprofile.jsp" />
+	</definition>
 </tiles-definitions>

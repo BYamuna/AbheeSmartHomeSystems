@@ -37,7 +37,7 @@
 			<div class="col-md-12 col-sm-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Add Branch</h4>
+						<h4 id="Branch">Add Branch</h4>
 					</div>
 					</div>
 					<form:form class="form-horizontal" commandName="abheeBranchf" role="form" id="fillingstation-form" action="abBranch" method="post">
@@ -133,6 +133,7 @@ function displayTable(listOrders) {
 
 
 function editBranch(id) {
+	$("#Branch").text("Edit Branch");
 	$("#id").val(serviceUnitArray[id].id);
 	$("#name").val(serviceUnitArray[id].name);
 	$("#description").val(serviceUnitArray[id].description);

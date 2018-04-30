@@ -1,121 +1,50 @@
-/*package com.charvikent.abheeSmartHomeSystems.controller;
+package com.charvikent.abheeSmartHomeSystems.controller;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.dao.DashBoardDao;
-import com.charvikent.abheeSmartHomeSystems.model.DashBordByCategory;
-import com.charvikent.abheeSmartHomeSystems.model.DashBordByStatus;
-import com.charvikent.abheeSmartHomeSystems.model.KpStatusLogs;
-import com.charvikent.abheeSmartHomeSystems.model.ReportIssue;
-import com.charvikent.abheeSmartHomeSystems.model.User;
-import com.charvikent.abheeSmartHomeSystems.service.CategoryService;
-import com.charvikent.abheeSmartHomeSystems.service.DashBoardService;
-import com.charvikent.abheeSmartHomeSystems.service.KpHistoryService;
-import com.charvikent.abheeSmartHomeSystems.service.MastersService;
-import com.charvikent.abheeSmartHomeSystems.service.PriorityService;
-import com.charvikent.abheeSmartHomeSystems.service.ReportIssueService;
-import com.charvikent.abheeSmartHomeSystems.service.SeverityService;
-import com.charvikent.abheeSmartHomeSystems.service.TasksSelectionService;
-import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-
+import com.charvikent.abheeSmartHomeSystems.model.DashBoardByCategory;
+import com.charvikent.abheeSmartHomeSystems.model.DashBoardByStatus;
 @Controller
 public class DashBoardController {
 	
-	@Autowired
-	HttpSession session;
+	@Autowired DashBoardDao dashBoardDao;
 	
-	@Autowired
-	DashBoardService dashBoardService;
-	
-	
-	@Autowired
-	private PriorityService priorityService;
-
-	@Autowired
-	private SeverityService severityService;
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private CategoryService categoryService;
-	
-	@Autowired
-	MastersService  mastersService;
-
-	@Autowired
-	FilesStuff fileTemplate;
-	
-	
-	
-	@Autowired
-	private ReportIssueService reportIssueService;
-	
-	@Autowired
-	TasksSelectionService tasksSelectionService;
-	
-	@Autowired
-	KpHistoryService kpHistoryService;
-	
-	@Autowired
-	DashBoardDao dashBoardDao;
-	
-	
-	
-   
+	private static final Logger LOGGER = LoggerFactory.getLogger( AbheeBranchController.class);
+	/*@RequestMapping("/dashBoard")
+	public String showDashBoard(Model model,HttpServletRequest request) 
+	{
+		LOGGER.debug("Calling dashBoard  at controller");
+		 return "dashBoard";
+		
+	}
+   */
 	@RequestMapping("/dashBoard")
 	public String showDashBoard(Model model,HttpServletRequest request) throws JsonProcessingException
 	{
 		
-		 model.addAttribute("statusCount" ,reportIssueService.getCountByStatusWise());
-		 model.addAttribute("gapAndCount", reportIssueService.getGapAndCount());
-		 model.addAttribute("severityCount",dashBoardService.getSeverityWiseCount() );
-		 model.addAttribute("severityCountsBY",dashBoardService.getSeverityWiseCountsByAssignedBy() );
-		 
-		 model.addAttribute("ackdetails", dashBoardService.getAllTasksForAck());
-		 
-		 model.addAttribute("lastLoginTime", dashBoardService.getLastLoginTime());
-		 
-		 model.addAttribute("deptCounts", dashBoardService.getDepartmentCounts());
-		 
-		 model.addAttribute("deptCountsForClosed", dashBoardService.getDepartmentCountsForClosed());
 		
-		 
+		LOGGER.debug("Calling dashBoard  at controller");
+		
 		 ObjectMapper deptmapper =new ObjectMapper();
-		String deptcountjson = deptmapper.writeValueAsString(dashBoardService.getDepartmentCounts());
-		String deptcountclosedjson = deptmapper.writeValueAsString(dashBoardService.getDepartmentCountsForClosed());
-		request.setAttribute("deptcountjson", deptcountjson);
-		request.setAttribute("deptcountclosedjson", deptcountclosedjson);
-		
-		System.out.println(deptcountjson);
-		 
-		 
-		
-		 //System.out.println(dashBoardService.getAllTasksForAck());
-		 
-		 
-		 model.addAttribute("SevMonitoredCounts", dashBoardService.getSeverityCountsUnderReportTo());
-		//model.addAttribute("byCategory",dashBoardService.getCategory() );	
-		List<DashBordByCategory> list=null;
-		List<DashBordByStatus> byStatusList=null;
+		;	
+		List<DashBoardByCategory> list=null;
+		List<DashBoardByStatus> byStatusList=null;
 		try {
 			String json = null;
-			list = dashBoardService.getCategory();
-			byStatusList=dashBoardService.getStatusList();
+			list = dashBoardDao.getCategory();
+			byStatusList=dashBoardDao.getStatusList();
 			ObjectMapper objmapper = new ObjectMapper();
 			if(list !=null ) {
 				json = objmapper.writeValueAsString(list);
@@ -144,7 +73,7 @@ public class DashBoardController {
 		
 	}
 	
-	
+/*	
 	@RequestMapping(value = "/severity")
 	public String  tasksFilterByseverityOnAssignedTo(@RequestParam(value="id", required=true) String sev,Model model,HttpServletRequest request,HttpSession session){
 		Set<ReportIssue> listOrderBeans = null;
@@ -765,7 +694,7 @@ public class DashBoardController {
 			
 			return "task";
 
-	}
+	}*/
 	
 	
 	
@@ -774,4 +703,3 @@ public class DashBoardController {
 	
 	
 
-*/

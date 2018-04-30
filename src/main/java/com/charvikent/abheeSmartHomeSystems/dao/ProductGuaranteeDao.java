@@ -42,7 +42,10 @@ public class ProductGuaranteeDao
 		{
 		List<Customer> customersList=  customerDao.getAbheeCustomerNames();
 		for(Customer bean: customersList){
+			
+			if(bean.isPurchaseCustomer()) {
 			rolesMap.put(bean.getCustomerId(),bean.getCustomerId());
+			}
 		}
 				
 	} catch (Exception e) {

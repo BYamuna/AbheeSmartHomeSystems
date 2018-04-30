@@ -18,8 +18,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -238,11 +240,98 @@ public class HomeController {
 	
 	
 	@RequestMapping("/customerprofile")
-	public String customerProfile() throws JSONException, JsonProcessingException {
+	public String customerProfile(@ModelAttribute("customerProfile") Customer customer,Model model,HttpServletRequest request,HttpSession session,RedirectAttributes redir) throws JSONException, JsonProcessingException {
+		LOGGER.debug("Calling Customer Profile  page at controller");
+		
+		Customer customerProfile=(Customer) session.getAttribute("customer");
+		//String id=String.valueOf(objuserBean.getId());
+
+
+		model.addAttribute("customerProfile", customerProfile);
+
+		
+		/*String customerid=request.getParameter("custId");
+		String firstname=request.getParameter("firstname");
+		String Lastname=request.getParameter("lastname");
+		String mobileno=request.getParameter("mobilenumber");
+		String Address=request.getParameter("address");
+		Customer customer =customerDao.findCustomerByCustId(customerid);
+		String referalUrl=request.getHeader("referer");
+		if(null==loginurl)
+			{
+		session.setAttribute("customer", customer);
+		session.setAttribute("loggedstatus", "login");
+		//session.setAttribute("customerId", customer.getCustomerId());
+		session.setAttribute("firstname", customer.getFirstname());
+		session.setAttribute("lastname", customer.getLastname());
+		session.setAttribute("mobileno", customer.getMobilenumber());
+		session.setAttribute("address",customer.getAddress());
+		return "redirect:/";
+		}*/
+		return "customerprofile";
+	}
+	
+	@RequestMapping(value="/editCustomerProfile", method= RequestMethod.POST )
+	public String editProfile(@ModelAttribute("customerProfile") Customer customer,RedirectAttributes redir,HttpServletRequest request){
+		
+		LOGGER.debug("Calling editCustomerProfile at controller");
+		/*String custId=request.getParameter("customerid");
+		Customer user=customerDao.findCustomerByCustId(custId);
+		user.setFirstname(user.getFirstname());
+		user.setLastname(user.getLastname());
+		user.setEmail(user.getEmail());
+		user.setMobilenumber(user.getMobilenumber());
+		user.setAddress(user.getAddress());*/
+		customerDao.saveAbheeCustomer(customer);
+		redir.addFlashAttribute("msg", "Your Details Updated Successfully");
+		redir.addFlashAttribute("cssMsg", "warning");
+
+			return "redirect:customerprofile";
+
+	}
+	
+	
+	@RequestMapping("/about")
+	public String about() throws JSONException, JsonProcessingException {
 		LOGGER.debug("Calling Customer Profile  page at controller");
 		
 		 
-		return "customerprofile";
+		return "about";
+	}
+	@RequestMapping("/career")
+	public String career() throws JSONException, JsonProcessingException {
+		LOGGER.debug("Calling Customer Profile  page at controller");
+		
+		 
+		return "career";
+	}
+	@RequestMapping("/contact")
+	public String contact() throws JSONException, JsonProcessingException {
+		LOGGER.debug("Calling Customer Profile  page at controller");
+		
+		 
+		return "contact";
+	}
+	@RequestMapping("/gallery")
+	public String gallery() throws JSONException, JsonProcessingException {
+		LOGGER.debug("Calling Customer Profile  page at controller");
+		
+		 
+		return "gallery";
+	}
+	@RequestMapping("/location")
+	public String location() throws JSONException, JsonProcessingException {
+		LOGGER.debug("Calling Customer Profile  page at controller");
+		
+		 
+		return "location";
+	}
+	@RequestMapping("/mission")
+	public String mission() throws JSONException, JsonProcessingException {
+		LOGGER.debug("Calling Customer Profile  page at controller");
+		
+		 
+		return "mission";
 	}
 	
 	

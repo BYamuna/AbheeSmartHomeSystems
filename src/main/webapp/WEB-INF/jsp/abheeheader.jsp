@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ page import="com.charvikent.abheeSmartHomeSystems.model.Customer" %>
 <spring:url var="loginAction" value="/loginAction"></spring:url>
     
     
@@ -70,7 +71,7 @@
   	<div class="container">
     	<div class="top">
         	<img width="300px" src="${baseurl }/abhee/images/logo.png" class="img-resposive" alt="logo" title="Logo"/>
-        	<a style="float:right; margin-top:30px; margin-left:20px;" type="admin" class="button btn btn-primary" href="admin">Admin Login</a>
+<!--         	<a style="float:right; margin-top:30px; margin-left:20px;" type="admin" class="button btn btn-primary" href="admin">Admin Login</a> -->
         </div><div class="clearfix"></div>
         <!-- Menu Starts here -->
         <div class="menu">
@@ -95,12 +96,12 @@
           <li id="cmlist"></li>
           </ul>
         </li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Our Mission & Vision</a></li>
-        <li><a href="#">Gallery</a></li>
-        <li><a href="#">Portfolia</a></li>
-        <li><a href="#">Our other Locations</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="${baseurl }/mission">Our Mission & Vision</a></li>
+        <li><a href="${baseurl }/gallery">Gallery</a></li>
+        <li><a href="${baseurl }/career">Career</a></li>
+        <li><a href="${baseurl }/location">Our other Locations</a></li>
+        <li><a href="${baseurl }/contact">Contact Us</a></li>
+        <li><a href="${baseurl }/about">About Us</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
@@ -139,5 +140,8 @@
 	        $(this).remove(); 
 	    });
 	}, 5000);
+  	 
+  	 
+  	
   	
   	</script>
