@@ -162,13 +162,5 @@ $( document ).ready(function() {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
- 
 </script>
 </html>
