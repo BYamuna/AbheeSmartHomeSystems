@@ -22,19 +22,25 @@ public class ProductGuarantee
 	private String purchaseddate;
 	private String expireddate;
 	private String status;
+	private String orderId;
 	@CreationTimestamp
 	protected Date createdTime ;
 	@CreationTimestamp
 	protected Date UpdatedTime ;
+	public String getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+
 	public ProductGuarantee() 
 	{
 		super();
 		
 	}
 	
-
-	
-
 	public ProductGuarantee(Integer id, String productmodelid, String customerid, String purchaseddate,
 			String expireddate, String status, Date createdTime, Date updatedTime) {
 		super();
@@ -125,7 +131,7 @@ public class ProductGuarantee
 	public String toString() {
 		return "ProductGuarantee [id=" + id + ", productmodelid=" + productmodelid + ", customerid=" + customerid
 				+ ", purchaseddate=" + purchaseddate + ", expireddate=" + expireddate + ", status=" + status
-				+ ", createdTime=" + createdTime + ", UpdatedTime=" + UpdatedTime + "]";
+				+ ", orderId=" + orderId + ", createdTime=" + createdTime + ", UpdatedTime=" + UpdatedTime + "]";
 	}
 	
 }
