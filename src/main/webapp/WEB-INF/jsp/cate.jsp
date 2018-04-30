@@ -219,7 +219,7 @@ function inactiveData() {
 		document.getElementById("file1").onchange = function () {
 		    var reader = new FileReader();
 		    if(this.files[0].size>528385){
-		        alert("Image Size should not be greater than 1000Kb");
+		        alert("Image Size should not be greater than 528Kb");
 		        $("#file1").attr("src","blank");
 		       // $("#file1").hide();  
 		        $('#file1').wrap('<form>').closest('form').get(0).reset();

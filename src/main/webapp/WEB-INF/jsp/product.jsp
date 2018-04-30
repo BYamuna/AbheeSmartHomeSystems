@@ -342,8 +342,8 @@ document.getElementById("file1").onchange = function () {
     for(var i=0; i<=this.files.length; i++)
     {
      
-    if(this.files[i].size>500000){
-        alert("Image Size should not be greater than 500Kb");
+    if(this.files[i].size>528385){
+        alert("Image Size should not be greater than 528Kb");
         $("#file1").attr("src","blank");
        // $("#file1").hide();  
         $('#file1').wrap('<form>').closest('form').get(0).reset();
