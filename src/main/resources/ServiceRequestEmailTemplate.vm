@@ -1,0 +1,8 @@
+<html>  
+  <body>  
+  <h3>Hi ${name}, </h3> 
+  <div>
+  Your service request sent successfully with id ${taskno}
+  </div> 
+  </body>  
+  </html> 

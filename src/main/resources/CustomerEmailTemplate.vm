@@ -1,0 +1,23 @@
+<html> 
+
+  <body>  
+  <h3>Dear ${name}, </h3> 
+  <div>
+  The Following Technician is assigned to you related to the service request no ${taskno} and His details is given below:
+  </div>
+  <table>
+   <th>Technician Name:</th>
+  <td>${Firstname} ${Lastname}</td>
+  </tr>
+  <tr>
+  <th>Technician MobileNumber:</th>
+  <td>${mobileno}</td>
+  </tr>
+  <tr>
+  <th>Description:</th>
+  <td>${description}</td>
+  </tr>
+  </table>
+  <div>Thanks & Regards</div>
+  </body> 
+  </html> 

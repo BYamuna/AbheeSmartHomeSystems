@@ -340,7 +340,7 @@ public class SendingMail {
 			System.out.println(e);
 		}  
 	}
-	public  void  sendingMailWithTaskStatusUpdate(AbheeTask abheetask) throws MessagingException
+	/*public  void  sendingMailWithTaskStatusUpdate(AbheeTask abheetask) throws MessagingException
 	{
 		try {
 			
@@ -374,7 +374,7 @@ public class SendingMail {
 			e.printStackTrace();
 			System.out.println(e);
 		}  
-	}
+	}*/
 
 		public void sendMailTocustomer(AbheeTask editissue) throws MessagingException 
 		{
@@ -413,5 +413,46 @@ public class SendingMail {
 		}  
 
 
-	}		
+	}
+
+		public void sendMailToUser(AbheeTask editissue) throws MessagingException
+		{
+			try {
+				
+				
+				String customerid =  editissue.getCustomerId();
+				String assigntechnician=editissue.getAssignto();
+				User emp=userDao.getUserById(Integer.parseInt(assigntechnician));
+				Customer customer= customerDao.findCustomerByCustId(customerid);
+				String emailid=customer.getEmail();
+				
+				MimeMessage message = javaMailSender.createMimeMessage();
+				MimeMessageHelper helper = new MimeMessageHelper(message, true);
+				
+				
+				VelocityContext velocityContext = new VelocityContext();
+				velocityContext.put("name",customer.getFirstname());
+				velocityContext.put("Firstname",emp.getFirstname());
+				velocityContext.put("Lastname",emp.getLastname());
+				velocityContext.put("taskno", editissue.getTaskno());
+				velocityContext.put("description", editissue.getDescription());
+				velocityContext.put("mobileno", customer.getMobilenumber());
+				
+				StringWriter stringWriter = new StringWriter();
+				velocityEngine.mergeTemplate("UserEmailTemplate.vm", "UTF-8", velocityContext, stringWriter);
+				helper.setText(stringWriter.toString(), true);
+				helper.setTo( emailid);
+			    helper.setSubject("Service Request Assigned To You Successfully");
+			  		   
+			   
+				javaMailSender.send(message);
+			
+		}catch (MailException e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}  
+
+
+			
+		}		
 }
