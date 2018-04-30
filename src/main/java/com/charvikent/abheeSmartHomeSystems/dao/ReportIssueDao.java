@@ -760,11 +760,11 @@ public List<ReportIssue> getAllReportIssues()
 	}
 
 	public AbheeTask checkServiceRequestExisrOrNot(AbheeTask task) {
-		String hql ="from AbheeTask where customerId =' "+task.getCustomerId()+"' and modelid='"+task.getModelid()+"' and kstatus <> '4'";
+		String hql ="from AbheeTask where customerId =' "+task.getCustomerId()+"' and modelid='"+task.getModelid()+"' and kstatus <> '4' ";
 		
-		Query query = em.createQuery(hql);
+		//Query query = em.createQuery(hql);
 		
-		List<AbheeTask> list =query.getResultList();
+		List<AbheeTask> list=em.createQuery(hql).getResultList();
 		
 		if(list.size()>0)
 			return list.get(0);
