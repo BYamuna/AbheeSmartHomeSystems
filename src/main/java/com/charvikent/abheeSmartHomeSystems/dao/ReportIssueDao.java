@@ -20,6 +20,7 @@ import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -61,6 +62,10 @@ public class ReportIssueDao {
 	
 	@Autowired
 	SendSMS sendSMS;
+	
+	@Autowired
+    private JdbcTemplate jdbcTemplate;
+	
 
 	public void saveReportIssue(AbheeTask reportIssue) {
 		String randomNum = utilities.randNum();
@@ -759,12 +764,17 @@ public List<ReportIssue> getAllReportIssues()
 		return listissue;
 	}
 
-	public AbheeTask checkServiceRequestExisrOrNot(AbheeTask task) {
-		String hql ="from AbheeTask where customerId =' "+task.getCustomerId()+"' and modelid='"+task.getModelid()+"' and kstatus <> '4' ";
+	public Map<String, Object> checkServiceRequestExisrOrNot(AbheeTask task) {
 		
+		//String hql ="from AbheeTask where customerId =' "+task.getCustomerId()+"' and modelid='"+task.getModelid()+"' and kstatus <> '4' ";
+		
+		String hql ="select * from abhee_task where customer_id='123' and modelid ='8' and kstatus <> '4'";
 		//Query query = em.createQuery(hql);
 		
-		List<AbheeTask> list=em.createQuery(hql).getResultList();
+		List<Map<String,Object>>  list = jdbcTemplate.queryForList(hql,new Object[]{});
+		
+		System.out.println(list);
+		
 		
 		if(list.size()>0)
 			return list.get(0);
