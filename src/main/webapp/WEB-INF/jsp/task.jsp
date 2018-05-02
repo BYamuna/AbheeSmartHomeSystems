@@ -599,7 +599,7 @@
 
 	function editTask(id) {
 		
-		$("#description").prop("disabled",true);
+		
 
 		// alert("Hello");
 		$("#service").text("Edit Service Request");
@@ -616,6 +616,7 @@
 		$("#kstatus").val(serviceUnitArray[id].kstatus);
 		$("#submit1").val("Update");
 		$(window).scrollTop($('#moveTo').offset().top);
+		document.getElementById("description").readOnly  = true;
 	}
 
 	/* view task history */
