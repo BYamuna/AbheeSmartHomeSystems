@@ -279,7 +279,7 @@ public class HomeController {
 		LOGGER.debug("Calling editCustomerProfile at controller");
 		customerDao.saveAbheeCustomer(customer);
 		redir.addFlashAttribute("msg", "Your Details Updated Successfully");
-		redir.addFlashAttribute("cssMsg", "warning");
+		redir.addFlashAttribute("cssMsg", "info");
 
 			return "redirect:customerprofile";
 
