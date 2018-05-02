@@ -275,13 +275,6 @@ public class HomeController {
 	public String editProfile(@ModelAttribute("customerProfile") Customer customer,RedirectAttributes redir,HttpServletRequest request){
 		
 		LOGGER.debug("Calling editCustomerProfile at controller");
-		/*String custId=request.getParameter("customerid");
-		Customer user=customerDao.findCustomerByCustId(custId);
-		user.setFirstname(user.getFirstname());
-		user.setLastname(user.getLastname());
-		user.setEmail(user.getEmail());
-		user.setMobilenumber(user.getMobilenumber());
-		user.setAddress(user.getAddress());*/
 		customerDao.saveAbheeCustomer(customer);
 		redir.addFlashAttribute("msg", "Your Details Updated Successfully");
 		redir.addFlashAttribute("cssMsg", "warning");
