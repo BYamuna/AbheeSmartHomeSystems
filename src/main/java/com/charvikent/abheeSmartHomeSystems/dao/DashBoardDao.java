@@ -202,7 +202,7 @@ public HashMap<String, String>  getTasksCountBystatus()
 		
 	
 	
-	 hql =hql+" GROUP BY abheetaskstatus.id ";
+	 hql =hql+" GROUP BY abheetaskstatus.id "; 
 		}
 		
 		else
