@@ -73,7 +73,7 @@
 				<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div style="margin:0 auto;" class="panel-heading">
-						<h4></i>View Service Request Details</h4>
+						<h4>View Service Request Details</h4>
 						<div class="options">
 							<a href="" class="panel-collapse"><i class="fa fa-chevron-up"></i></a>
 						</div>
