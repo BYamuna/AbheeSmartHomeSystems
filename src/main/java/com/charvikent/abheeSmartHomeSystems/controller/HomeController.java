@@ -206,6 +206,8 @@ public class HomeController {
 		String referalUrl=request.getHeader("referer");
 		System.out.println(referalUrl);
 		
+		falg=true;
+		
 		session.invalidate();
 		 
 		return "redirect:"+ referalUrl;

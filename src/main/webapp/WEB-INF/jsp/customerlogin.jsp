@@ -42,7 +42,7 @@
 	float:right;
 }
 .tag {
-	color:#FF0000;
+	color:#000000;
 }
 </style>
 
@@ -92,7 +92,7 @@
 					</div> 
 					<div class="login-bottom"> 
 						<div class="col-sm-6">
-							<h6><a href="#" data-toggle="modal" data-target="#passwordModel" class="tag">Forgot password</a></h6>
+							<h6><a href="#" data-toggle="modal" data-target="#passwordModel" style="color:#005696;" class="tag">Forgot Password</a></h6>
 						</div>
 						<div class="col-sm-6">
 						
@@ -104,7 +104,7 @@
 					</div>
 					</form> 	
 					<div class="login-bottom"> 
-						<h6 style="margin-top:40px;">Click here to <a href="#" data-toggle="modal" onclick="openRegistrationModel()"  class="tag">register</a></h6>
+						<h6 style="margin-top:40px;">Click Here To <a href="#" data-toggle="modal" onclick="openRegistrationModel()" style="color:#FF0000; text-decoration:underline;" class="tag">Register</a></h6>
 					</div> 
 
 				</div>  
@@ -262,6 +262,7 @@ var validation = true;
 
 
 var subValidation =false;
+var subValidationemail =false;
 
 $('#cmobile').blur(function() {
 	var cmobile=$(this).val();
@@ -309,14 +310,14 @@ $('#cmobile').blur(function() {
 						{
 						alert("Mobile Number already exists")
 	 					$('#cmobile').css('border-color', 'red');
-	 					 $('#submitModel').prop('disabled', true);
+// 	 					 $('#submitModel').prop('disabled', true);
 	 					 //alert("customer could not be registered")
 	 					subValidation =false;
 						}
 					 else
 						{
 						$('#cmobile').css('border-color', 'none');
-						 $('#submitModel').prop('disabled', false);
+// 						 $('#submitModel').prop('disabled', false);
 						 subValidation =true;
 						} 
 					
@@ -401,7 +402,7 @@ var idArrayCmt1 = null;
 			validation = true;
 		}
 	});
-	validation =subValidation;
+	//validation =subValidation;
 	// retype password validation
 	
 	 var cpassword1 =$('#cpassword').val();
@@ -418,12 +419,18 @@ var idArrayCmt1 = null;
 	} 
 	
 	
-	if(validation) {
+	if(validation && subValidation && subValidationemail) {
 		$("#submit1").attr("disabled",true);
 		$("#submit1").val("Please wait...");
 		$("#submit1").submit();											
 		 getOTP();
 	}else {
+		if(!subValidation){
+			alert("Mobile number already Exists");
+		}
+		if(!subValidationemail){
+			alert("Email already Exists");
+		}
 		return false;
 		 event.preventDefault(); 
 	}
@@ -557,7 +564,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		  if( regex.test(cemail))
 			  {
-			  subValidation =true;
+			  subValidationemail =true;
 		
 		
 		$.ajax({
@@ -571,14 +578,16 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 					success : function(data) {
 						if(data ==='true')
 							{
+							subValidationemail =false;
 							alert("Email already exists")
 		 					$('#cemail').css('border-color', 'red');
-		 					 $('#submitModel').prop('disabled', true);
+// 		 					 $('#submitModel').prop('disabled', true);
 							}
 						else
 							{
 							$('#cemail').css('border-color', 'none');
-							 $('#submitModel').prop('disabled', false);
+// 							 $('#submitModel').prop('disabled', false);
+							  subValidationemail =true;
 							}
 						
 					},
@@ -594,7 +603,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 			  
 		{
 			  $('#cemail').css('border-color', 'red');
-			  subValidation =false;
+			  subValidationemail =false;
 			  
 		}
 
