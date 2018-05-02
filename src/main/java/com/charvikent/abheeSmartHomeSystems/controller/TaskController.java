@@ -547,7 +547,7 @@ public class TaskController {
 		task.setPriority("1");
 		task.setSeverity("1");
 		task.setStatus("1");
-		task.setSubject("Task creadted By Customer");
+		task.setSubject("Task created By Customer");
 		task.setServiceType(servicetypeid);
 		task.setCategory(catid);
 		task.setModelid(modelid);
