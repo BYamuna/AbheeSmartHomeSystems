@@ -154,7 +154,7 @@
 									</label>
 									<div class="col-md-6">
 										<form:input type="text" path="taskdeadline"
-											class="form-control validate" />
+											class="form-control validate"  onfocus="removeBorder(this.id)"/>
 
 									</div>
 								</div>
@@ -598,6 +598,8 @@
 	}
 
 	function editTask(id) {
+		
+		
 
 		// alert("Hello");
 		$("#service").text("Edit Service Request");
@@ -614,6 +616,7 @@
 		$("#kstatus").val(serviceUnitArray[id].kstatus);
 		$("#submit1").val("Update");
 		$(window).scrollTop($('#moveTo').offset().top);
+		document.getElementById("description").readOnly  = true;
 	}
 
 	/* view task history */

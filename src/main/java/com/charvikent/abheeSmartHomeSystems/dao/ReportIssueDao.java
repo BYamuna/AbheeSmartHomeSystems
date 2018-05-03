@@ -775,7 +775,7 @@ public List<ReportIssue> getAllReportIssues()
 		
 		//String hql ="from AbheeTask where customerId =' "+task.getCustomerId()+"' and modelid='"+task.getModelid()+"' and kstatus <> '4' ";
 		
-		String hql ="select * from abhee_task where customer_id='123' and modelid ='8' and kstatus <> '4'";
+		String hql =" select * from abhee_task where category ='"+task.getCategory()+"' and customer_id='"+task.getCustomerId()+"' and modelid ='"+task.getModelid()+"' and kstatus <> '4' ";
 		//Query query = em.createQuery(hql);
 		
 		List<Map<String,Object>>  list = jdbcTemplate.queryForList(hql,new Object[]{});

@@ -45,6 +45,7 @@
                     	<div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
+                    			<form:hidden path="id"/>
 									<label for="focusedinput" class="col-md-6 control-label">Product Category <span class="impColor">*</span></label>
 									<div class="col-md-5">
 									<form:select path="categoryid" class="form-control validate"  onfocus="removeBorder(this.id)">
@@ -129,9 +130,11 @@
 										<span class="hasError" id="stationnameError"></span>
 								    </div> 
 								    <div><input type="button" value="Add Another Link id" onclick="addNewTextBox()"></div>
+								    	<form:hidden path="productmodelvideoslinks"/>
                     			</div>
                     		</div>
                     		</div>
+                    		
                     		
                     		
                     	
@@ -249,7 +252,29 @@ function editProduct(id) {
 	$("#ProductModelSpecifications").val(serviceUnitArray[id].productModelSpecifications);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
+	
+	$("#dtext").html("");
+	    $('#name1').hide();
+	    
+	    var productmodelvideoslinks = $('#productmodelvideoslinks').val();
+	    
+	    var videosParts =productmodelvideoslinks.split('*');
+        
+        for(var i=0;i<videosParts.length;i++)
+        	{
+        	
+        	j=i+1;
+        	
+        	var row ="<div><input type='text' name='vlink' id='name"+j+"' value ='"+videosParts[i]+"' class='form-control validate' length='11' placeholder='Enter Videos links'/></div>";
+        	$("#dtext").append(row);
+        	
+        	}
+
 }
+
+
+
+    $('#editVideoslinks').hide();
 
 function deleteProduct(id,status)
 {
@@ -342,8 +367,8 @@ document.getElementById("file1").onchange = function () {
     for(var i=0; i<=this.files.length; i++)
     {
      
-    if(this.files[i].size>500000){
-        alert("Image Size should not be greater than 500Kb");
+    if(this.files[i].size>528385){
+        alert("Image Size should not be greater than 528Kb");
         $("#file1").attr("src","blank");
        // $("#file1").hide();  
         $('#file1').wrap('<form>').closest('form').get(0).reset();

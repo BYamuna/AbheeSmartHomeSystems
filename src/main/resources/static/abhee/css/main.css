@@ -525,6 +525,9 @@ font-size:18px !important;
 .impColor {
 	color:red !important;
 }
+.error {
+	color:red !important;
+}
 .con {
 	background: #ffffff;
 	min-height:100px;

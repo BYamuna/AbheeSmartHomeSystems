@@ -202,7 +202,7 @@ public HashMap<String, String>  getTasksCountBystatus()
 		
 	
 	
-	 hql =hql+" GROUP BY abheetaskstatus.id ";
+	 hql =hql+" GROUP BY abheetaskstatus.id "; 
 		}
 		
 		else
@@ -227,8 +227,27 @@ public HashMap<String,Object> getAllCountBystatus() {
 	
 	HashMap<String,Object> alTtasksStatusCounts =new LinkedHashMap<String,Object>();
 	
-	String hql ="select count(*) from abhee_task t, abheetaskstatus s where t.kstatus=s.id and t.kstatus <>'7' and t.kstatus <>'4' ";
-	//List<Object[]> rows = entityManager.createNativeQuery(hql).getResultList();
+	
+	User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	
+	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+	
+	Collection<? extends GrantedAuthority> authorities =authentication.getAuthorities();
+	
+	String hql="";
+	
+	if(authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")))
+	{
+		hql ="select count(*) from abhee_task t, abheetaskstatus s where t.kstatus=s.id and t.kstatus <>'7' and t.kstatus <>'4' ";
+		//List<Object[]> rows = entityManager.createNativeQuery(hql).getResultList();
+	}
+	else
+	{
+		hql ="select count(*) from abhee_task t, abheetaskstatus s where t.kstatus=s.id and t.kstatus <>'7' and t.kstatus <>'4'  and  t.assignto='"+objuserBean.getId()+"'";
+	}
+	
+	
 	
 	
 	

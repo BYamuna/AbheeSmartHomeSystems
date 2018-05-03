@@ -21,34 +21,59 @@
     				<div class="col-xs-6">
     					<h3>Personal Information</h3>
     				</div>
+    				
     				<div class="col-xs-6">
-
     					<h4 style="float:right; margin-top:20px;" id="edit"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
     				</div>
     			</div><div class="clearfix"></div>
     			<div class="inp">
     			<form:form  modelAttribute="customerProfile"  class="form-horizontal"  method="POST">
     				<div class="col-xs-6">
-						<label class="col-md-3 control-label no-padding-right">First Name</label>
-    					<form:input path="firstname" style="width:95%; margin-top:20px;" class="form-control" type="text" placeholder="First Name"  disabled="true"/>
+
+    					<div class="col-sm-3">
+    						<label style="margin-top:28px;">First Name: </label>
+    					</div>
+    					<div class="col-sm-9">
+    						<form:input path="firstname" style="width:93%; margin-top:20px;" class="form-control" type="text" placeholder="First Name"  disabled="true"/>
+    					</div><div class="clearfix"></div>
     				</div>
     				<div class="col-xs-6">
-<label class="col-md-3 control-label no-padding-right">Last Name</label>
-    					<form:input path="lastname" style="width:95%; margin-left:20px; margin-top:20px;" class="form-control" type="text" placeholder="Last Name" disabled="true" />
+
+    					<div class="col-sm-3">
+    						<label style="margin-top:28px;">Last Name: </label>
+    					</div>
+    					<div class="col-sm-9">
+    						<form:input path="lastname" style="width:100%; margin-top:20px;" class="form-control" type="text" placeholder="Last Name" disabled="true" />
+    					</div><div class="clearfix"></div>
     				</div><div class="clearfix"></div>
     				<div class="col-xs-6">
-<label class="col-md-3 control-label no-padding-right">Email</label>
-    					<form:input path="email" style="width:95%; margin-top:20px;" class="form-control" type="text" placeholder="Emailid" disabled="true"/>
+
+    					<div class="col-sm-3">
+    						<label style="margin-top:28px;">Email Id: </label>
+    					</div>
+    					<div class="col-sm-9">
+    						<form:input path="email" style="width:93%; margin-top:20px;" class="form-control" type="text" placeholder="Emailid" disabled="true"/>
+    					</div><div class="clearfix"></div>
     				</div>
     				<div class="col-xs-6">
-    				<label class="col-md-3 control-label no-padding-right">Mobile Number</label>
-			<form:input path="mobilenumber" style="width:95%; margin-left:20px; margin-top:20px;" class="form-control" type="text" placeholder="Mobile Number" disabled="true"/>
+
+    					<div class="col-sm-3">
+    						<label style="margin-top:28px;">Mobile No: </label>
+    					</div>
+    					<div class="col-sm-9">
+							<form:input path="mobilenumber" style="width:100%; margin-top:20px; float:left;" class="form-control" type="text" placeholder="Mobile Number" disabled="true"/>
+						</div><div class="clearfix"></div>
     				</div><div class="clearfix"></div>
-<label class="col-md-3 control-label no-padding-right">Address</label>
-    				<form:textarea path= "address" style="margin-top:20px;" class="form-control" type="text" placeholder="Address" disabled="true" />
+
+					<div class="col-sm-1">
+						<label style="margin-top:35px;">Address: </label>
+					</div>
+					<div class="col-sm-11">
+    					<form:textarea path= "address" style="margin-top:20px;" class="form-control" type="text" placeholder="Address" disabled="true" />
+					</div>
     				</form:form>
     			</div>
-    		</div>
+    		</div>    		
     		<div id="order">
     			<div style="margin-top:-15px;" class="odata">
     				<h1>Pavan</h1>

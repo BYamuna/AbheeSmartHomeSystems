@@ -541,7 +541,7 @@ function getHeadersCounts(){
 					<h1 id="pageName">Branch Master</h1>
 				</div>
 				
-				 <security:authorize access="hasRole('ROLE_ADMIN')">
+				   <security:authorize access="hasRole('ROLE_USER') or hasRole('ROLE_BRANCHHEAD')">
 				<div class="btn-toolbar pull-right">
 		                    <a href="#" class="btn btn-danger "><span id="paymentPending">0</span><br>Total Payment Pending</a>
 		                    <a href="#" class="btn btn-warning"><span id="ServiceRquests">0</span><br>Total Services Requests</a>
