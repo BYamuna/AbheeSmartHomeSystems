@@ -29,6 +29,7 @@
     			<div class="inp">
     			<form:form  modelAttribute="customerProfile"  class="form-horizontal"  method="POST">
     				<div class="col-xs-6">
+
     					<div class="col-sm-3">
     						<label style="margin-top:28px;">First Name: </label>
     					</div>
@@ -37,6 +38,7 @@
     					</div><div class="clearfix"></div>
     				</div>
     				<div class="col-xs-6">
+
     					<div class="col-sm-3">
     						<label style="margin-top:28px;">Last Name: </label>
     					</div>
@@ -45,6 +47,7 @@
     					</div><div class="clearfix"></div>
     				</div><div class="clearfix"></div>
     				<div class="col-xs-6">
+
     					<div class="col-sm-3">
     						<label style="margin-top:28px;">Email Id: </label>
     					</div>
@@ -53,6 +56,7 @@
     					</div><div class="clearfix"></div>
     				</div>
     				<div class="col-xs-6">
+
     					<div class="col-sm-3">
     						<label style="margin-top:28px;">Mobile No: </label>
     					</div>
@@ -60,6 +64,7 @@
 							<form:input path="mobilenumber" style="width:100%; margin-top:20px; float:left;" class="form-control" type="text" placeholder="Mobile Number" disabled="true"/>
 						</div><div class="clearfix"></div>
     				</div><div class="clearfix"></div>
+
 					<div class="col-sm-1">
 						<label style="margin-top:35px;">Address: </label>
 					</div>

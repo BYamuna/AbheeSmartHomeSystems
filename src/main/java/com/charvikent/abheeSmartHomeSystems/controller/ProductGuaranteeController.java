@@ -53,7 +53,7 @@ public class ProductGuaranteeController
 			System.out.println("has some errors");
 			return "redirect:/";
 		}
-		int id = 0;
+		String id = null;
 		try
 		{
 			ProductGuarantee orgBean=null;
@@ -62,16 +62,17 @@ public class ProductGuaranteeController
 			  orgBean=  (ProductGuarantee) productGuaranteeDao.getProductWarrantyDetailsByObject(productGuarantee);
 			
 			}
-			int dummyId =0;
+			String  dummyId =null;
 			
 			if(orgBean != null){
 				dummyId = orgBean.getId();
 			}
 			
-			if(productGuarantee.getId()==null)
+			if(productGuarantee.getId()== null)
 			{
-				if(dummyId ==0)
-				{	productGuarantee.setStatus("1");
+				if(dummyId ==null)
+				{	
+					productGuarantee.setStatus("1");
 					productGuaranteeDao.saveWarranty(productGuarantee);
 					
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");
@@ -156,7 +157,7 @@ public class ProductGuaranteeController
 		String sJson=null;
 		boolean delete = false;
 		try{
-			if(productGuarantee.getId() != 0){
+			if(productGuarantee.getId() != null){
  				delete = productGuaranteeDao.deleteProductWarranty(productGuarantee.getId(),productGuarantee.getStatus());
  				if(delete){
  					jsonObj.put("message", "deleted");

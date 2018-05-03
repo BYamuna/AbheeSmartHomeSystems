@@ -88,7 +88,7 @@
 								<div class="form-group">
 								<label class="col-md-3 control-label no-padding-right">Choose File  <span class="impColor">*</span></label> 
 									<div class="col-md-6">
-										<input class="form-control validate" type="file" name="imgfile" id="imgfile" multiple/>
+										<input class=" validate" type="file" name="imgfile"  style= "margin-top:15px;" id="imgfile" multiple />
 									</div>
 								</div>
 								
@@ -186,20 +186,7 @@ if(validation) {
 	event.preventDefault();
 	return false;
 }
-$('.validate').keydown(function() {
-	var id = $(this).attr('id');
-	removeBorder(id);
-});
-//remove borders
-function removeBorder(el){	
-	  $("#"+el).css("border", "");
-	  $("#"+el).css('color','black');
-	  $('#'+el).addClass('default-class');
-	  if ($("#" + el+"_chosen").length)
-		{
-			$("#" +el+"_chosen").children('a').css('border-color','black');
-		}
-}
+
 
 
 /* var form = $('#completeData')[0];
@@ -269,6 +256,20 @@ var data = new FormData(form);
 		});
 	
 }
+$('.validate').keydown(function() {
+	var id = $(this).attr('id');
+	removeBorder(id);
+});
+//remove borders
+function removeBorder(el){	
+	  $("#"+el).css("border", "");
+	  $("#"+el).css('color','black');
+	  $('#'+el).addClass('default-class');
+	  if ($("#" + el+"_chosen").length)
+		{
+			$("#" +el+"_chosen").children('a').css('border-color','black');
+		}
+} 
 //$("#pageName").text("-------");
  </script>
  </html>
