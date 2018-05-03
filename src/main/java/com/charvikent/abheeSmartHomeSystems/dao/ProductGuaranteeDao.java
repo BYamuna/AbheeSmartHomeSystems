@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -32,7 +33,9 @@ public class ProductGuaranteeDao
 	
 	public void saveWarranty(ProductGuarantee productGuarantee ) 
 	{
-		em.persist(productGuarantee);
+		//em.persist(productGuarantee);
+		em.merge(productGuarantee);
+	
 
 	}
 	public Map<String, String> getCustomersMap()
@@ -82,7 +85,7 @@ public class ProductGuaranteeDao
 		em.flush();
 		
 	}
-	public ProductGuarantee getProductWarrantyById(Integer id) 
+	public ProductGuarantee getProductWarrantyById(String id) 
 	{
 		return em.find(ProductGuarantee.class, id);	
 	}
@@ -135,7 +138,7 @@ public class ProductGuaranteeDao
 		
 	 }
 	
-	public boolean deleteProductWarranty(Integer id, String status) 
+	public boolean deleteProductWarranty(String id, String status) 
 	{
 		Boolean delete=false;
 		try{

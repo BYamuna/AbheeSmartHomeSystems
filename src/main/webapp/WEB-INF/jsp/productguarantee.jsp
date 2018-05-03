@@ -37,12 +37,11 @@
 						onclick="inactiveData();" id="inActive"> <label
 						class="form-check-label">Show Inactive List</label>
 					<div class="table-responsive" id="tableId">
-						<table cellpadding="0" cellspacing="0" border="0"
-							class="table table-striped table-bordered datatables"
-							id="example">
+						<table cellpadding="0" cellspacing="0" border="0"	class="table table-striped table-bordered datatables"	id="example">
 							<thead>
 								<tr>
 									<th>CustomerID</th>
+									<th>Order ID</th>
 									<th>productmodelID</th>
 									<th>Purchased Date</th>
 									<th>Expired Date</th>
@@ -69,14 +68,11 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<form:hidden path="id" />
-									<label for="focusedinput" class="col-md-6 control-label ">ProductmodelId
-										<span class="impColor">*</span>
+									<%-- <form:hidden path= "id" /> --%>
+									<label for="focusedinput" class="col-md-6 control-label ">ProductmodelId<span class="impColor">*</span>
 									</label>
 										
-									<form:select path="productmodelid"
-										class="col-xs-10 col-sm-5 validate"
-										onfocus="removeBorder(this.id)">
+									<form:select path="productmodelid"	class="col-xs-10 col-sm-5 validate"	onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 									<form:options items="${productmodelid}" />
 									</form:select>
@@ -84,14 +80,11 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<form:hidden path="id" />
-									<label for="focusedinput" class="col-md-6 control-label ">Customer ID
-										<span class="impColor">*</span>
+									<%--<form:hidden path="id" /> --%>
+									<label for="focusedinput" class="col-md-6 control-label ">Customer ID	<span class="impColor">*</span>
 									</label>
 										
-									<form:select path="customerid"
-										class="col-xs-10 col-sm-5 validate"
-										onfocus="removeBorder(this.id)">
+									<form:select path="customerid"	class="col-xs-10 col-sm-5 validate"	onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 									<form:options items="${customerid}" />
 									</form:select>
@@ -103,20 +96,17 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Purchased Date
-										<span class="impColor">*</span>
+									<label for="focusedinput" class="col-md-6 control-label">Purchased Date	<span class="impColor">*</span>
 									</label>
 									<div class="col-md-6">
-										<form:input type="text" path="purchaseddate"
-											class="form-control validate" />
+										<form:input type="text" path="purchaseddate"	class="form-control validate" />
 
 									</div>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Expired Date
-										<span class="impColor">*</span>
+									<label for="focusedinput" class="col-md-6 control-label">Expired Date	<span class="impColor">*</span>
 									</label>
 									<div class="col-md-6">
 										<form:input type="text" path="expireddate"
@@ -179,7 +169,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>CustomerID</th><th>ProductModelName</th><th>Purchaseddate</th><th>Expired Date</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>CustomerID</th><th>Order ID</th><th>ProductModelName</th><th>Purchaseddate</th><th>Expired Date</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -192,6 +182,7 @@ function displayTable(listOrders) {
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.customerid+"'>"+ orderObj.customerid + "</td>"
+			+ "<td title='"+orderObj.id+"'>"+ orderObj.id + "</td>"
 			+ "<td title='"+orderObj.productmodelname+"'>"+ orderObj.productmodelname + "</td>"
 			+ "<td title='"+orderObj.purchaseddate+"'>"+ orderObj.purchaseddate + "</td>"
 			+ "<td title='"+orderObj.expirededdate+"'>"+ orderObj.expireddate + "</td>"

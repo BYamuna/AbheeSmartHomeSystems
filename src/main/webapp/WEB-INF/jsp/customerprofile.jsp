@@ -29,21 +29,22 @@
     			<div class="inp">
     			<form:form  modelAttribute="customerProfile"  class="form-horizontal"  method="POST">
     				<div class="col-xs-6">
-
+						<label class="col-md-3 control-label no-padding-right">First Name</label>
     					<form:input path="firstname" style="width:95%; margin-top:20px;" class="form-control" type="text" placeholder="First Name"  disabled="true"/>
     				</div>
     				<div class="col-xs-6">
-
+<label class="col-md-3 control-label no-padding-right">Last Name</label>
     					<form:input path="lastname" style="width:95%; margin-left:20px; margin-top:20px;" class="form-control" type="text" placeholder="Last Name" disabled="true" />
     				</div><div class="clearfix"></div>
     				<div class="col-xs-6">
-
+<label class="col-md-3 control-label no-padding-right">Email</label>
     					<form:input path="email" style="width:95%; margin-top:20px;" class="form-control" type="text" placeholder="Emailid" disabled="true"/>
     				</div>
     				<div class="col-xs-6">
+    				<label class="col-md-3 control-label no-padding-right">Mobile Number</label>
 			<form:input path="mobilenumber" style="width:95%; margin-left:20px; margin-top:20px;" class="form-control" type="text" placeholder="Mobile Number" disabled="true"/>
     				</div><div class="clearfix"></div>
-
+<label class="col-md-3 control-label no-padding-right">Address</label>
     				<form:textarea path= "address" style="margin-top:20px;" class="form-control" type="text" placeholder="Address" disabled="true" />
     				</form:form>
     			</div>

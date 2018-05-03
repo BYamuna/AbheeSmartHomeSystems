@@ -1,28 +1,37 @@
 package com.charvikent.abheeSmartHomeSystems.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "abheeproductguarantee")
-public class ProductGuarantee 
+public class ProductGuarantee implements Serializable
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer  id;
+	//@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator = "order_id") 
+	@GenericGenerator(name = "order_id", strategy = "com.charvikent.abheeSmartHomeSystems.config.OrderIdGenerator")
+	@Column( name= "id", unique=true, nullable=false)
+	private String  id;
 	private String productmodelid;
 	private String customerid;
 	private String purchaseddate;
 	private String expireddate;
 	private String status;
+	
+	/*@GenericGenerator(name = "sequence_order_id", strategy = "com.charvikent.abheeSmartHomeSystems.config.OrderIdGenerator")
+	@GeneratedValue(generator = "sequence_order_id")  */
 	private String orderId;
+	
 	@CreationTimestamp
 	protected Date createdTime ;
 	@CreationTimestamp
@@ -41,7 +50,7 @@ public class ProductGuarantee
 		
 	}
 	
-	public ProductGuarantee(Integer id, String productmodelid, String customerid, String purchaseddate,
+	public ProductGuarantee(String id, String productmodelid, String customerid, String purchaseddate,
 			String expireddate, String status, Date createdTime, Date updatedTime) {
 		super();
 		this.id = id;
@@ -57,10 +66,10 @@ public class ProductGuarantee
 
 
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getProductmodelid() {

@@ -77,13 +77,7 @@ $('.mobilenumber').focusout(function() {
         //setTimeout(function() { $("#error-keyup-4").text(''); }, 3000);
         
         return false;
-    }else{
-    	
-    	return true;
     }
-    }else{
-    	
-    	return false;
     }
 });
 
