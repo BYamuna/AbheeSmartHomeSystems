@@ -87,7 +87,7 @@
 					<div class="login-top"> 	
 						  <input type="hidden" name="userType" id="userType" value="customerUser"/>
 							<input type="text" class="form-control validate1 numericOnly" name="username" id="username" onfocus="this.placeholder=''" onblur="this.placeholder='Mobile Number'" maxlength="10" placeholder="Mobile Number" required/>
-							<input type="password" maxlength="4" class="form-control validate1 numericOnly" name="password" onfocus="this.placeholder=''" onblur="this.placeholder='Password'" placeholder="Password" required />
+							<input type="password" maxlength="4" class="form-control validate1 numericOnly2" name="password" onfocus="this.placeholder=''" onblur="this.placeholder='Password'" placeholder="Password" required />
 						
 					</div> 
 					<div class="login-bottom"> 
