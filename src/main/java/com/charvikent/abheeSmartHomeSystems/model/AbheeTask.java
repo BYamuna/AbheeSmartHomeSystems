@@ -14,9 +14,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 public class AbheeTask  {
-
-
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer  id;

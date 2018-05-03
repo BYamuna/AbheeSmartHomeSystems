@@ -166,7 +166,6 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<form:hidden path="id" />
 									<label for="focusedinput" class="col-md-6 control-label">
 										Status <span class="impColor">*</span>
 									</label>

@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -40,12 +41,15 @@ import com.charvikent.abheeSmartHomeSystems.dao.CompanyDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ProductDao;
+import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
 import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
+import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.OTPDetails;
 import com.charvikent.abheeSmartHomeSystems.model.Product;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
+import com.charvikent.abheeSmartHomeSystems.model.ServiceRequest;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -83,6 +87,9 @@ public class AbheeCustomerRestController {
 
 	@Autowired
 	SendingMail sendingMail;
+	
+	@Autowired
+	ReportIssueDao reportIssueDao;
 	@RequestMapping("/Customer")
 	public String showCustomerRegistrationForm(Model model,HttpServletRequest request) throws JsonProcessingException
 	{
@@ -518,5 +525,69 @@ HashMap<String,String> hm =new HashMap<String,String>();
 		
 	}
 	
+	
 
+	@PostMapping(value="/restSaveServiceRequest", consumes = "application/json", produces = "application/json")
+	public String  saveServiceRequest( @RequestBody ServiceRequest serviceRequest) throws JsonProcessingException, JSONException {
+	
+		LOGGER.debug("Calling saveServiceRequest at controller");
+	
+		System.out.println("enter to task controller Submit");
+		
+		String message=serviceRequest.getMessage();
+		String servicetypeid=serviceRequest.getServicetypeid();
+		String catid=serviceRequest.getCatid();
+		String modelid=serviceRequest.getModelid();
+		String customerId =serviceRequest.getCustomerId();
+		String custaddress =serviceRequest.getCustaddress();
+		
+		AbheeTask task =new AbheeTask();
+		task.setAdditionalinfo("0");
+		task.setAssignto("1");
+		task.setDescription(message);
+		task.setKstatus("5");
+		task.setPriority("1");
+		task.setSeverity("1");
+		task.setStatus("1");
+		task.setSubject("Task created By Customer");
+		task.setServiceType(servicetypeid);
+		task.setCategory(catid);
+		task.setModelid(modelid);
+
+		task.setCustomerId(customerId);
+		
+		Customer customer= customerDao.findCustomerByCustId(customerId);
+		
+		
+		
+	
+		
+		Map<String, Object> abheeTask =reportIssueDao.checkServiceRequestExisrOrNot(task);
+		if(null ==abheeTask )
+		{
+		reportIssueDao.saveReportIssue(task);
+		//taskHistoryLogsDao.historyLogForcustomerEntry(task);
+		//sendingMail.sendingMailWithTaskStatus(task);
+		
+		customer.setAddress(custaddress);
+		try {
+			customerDao.updateCustomer(customer);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		System.out.println(message+"  "+servicetypeid);
+		return "true";
+		}
+		else
+		{
+			System.out.println("Service request alreadyExists");
+			return "Your Request till didn't closed";
+			
+		}
+		
+	}
+	
+
+	
 }
