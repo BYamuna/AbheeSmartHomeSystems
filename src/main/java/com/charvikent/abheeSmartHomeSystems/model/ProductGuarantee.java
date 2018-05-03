@@ -20,8 +20,8 @@ public class ProductGuarantee implements Serializable
 	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@GeneratedValue(generator = "order_id") 
 	@GenericGenerator(name = "order_id", strategy = "com.charvikent.abheeSmartHomeSystems.config.OrderIdGenerator")
-	@Column( name= "id", unique=true, nullable=false)
-	private String  id;
+	@Column( name= "orderId", unique=true, nullable=false)
+	private String  orderId=null;
 	private String productmodelid;
 	private String customerid;
 	private String purchaseddate;
@@ -30,12 +30,12 @@ public class ProductGuarantee implements Serializable
 	
 	/*@GenericGenerator(name = "sequence_order_id", strategy = "com.charvikent.abheeSmartHomeSystems.config.OrderIdGenerator")
 	@GeneratedValue(generator = "sequence_order_id")  */
-	private String orderId;
 	
 	@CreationTimestamp
 	protected Date createdTime ;
 	@CreationTimestamp
 	protected Date UpdatedTime ;
+	
 	public String getOrderId() {
 		return orderId;
 	}
@@ -50,10 +50,15 @@ public class ProductGuarantee implements Serializable
 		
 	}
 	
-	public ProductGuarantee(String id, String productmodelid, String customerid, String purchaseddate,
+
+
+
+
+
+	public ProductGuarantee(String orderId, String productmodelid, String customerid, String purchaseddate,
 			String expireddate, String status, Date createdTime, Date updatedTime) {
 		super();
-		this.id = id;
+		this.orderId = orderId;
 		this.productmodelid = productmodelid;
 		this.customerid = customerid;
 		this.purchaseddate = purchaseddate;
@@ -63,15 +68,6 @@ public class ProductGuarantee implements Serializable
 		UpdatedTime = updatedTime;
 	}
 
-
-
-
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public String getProductmodelid() {
 		return productmodelid;
 	}
@@ -138,9 +134,9 @@ public class ProductGuarantee implements Serializable
 
 	@Override
 	public String toString() {
-		return "ProductGuarantee [id=" + id + ", productmodelid=" + productmodelid + ", customerid=" + customerid
-				+ ", purchaseddate=" + purchaseddate + ", expireddate=" + expireddate + ", status=" + status
-				+ ", orderId=" + orderId + ", createdTime=" + createdTime + ", UpdatedTime=" + UpdatedTime + "]";
+		return "ProductGuarantee [orderId=" + orderId + ", productmodelid=" + productmodelid + ", customerid="
+				+ customerid + ", purchaseddate=" + purchaseddate + ", expireddate=" + expireddate + ", status="
+				+ status + ", createdTime=" + createdTime + ", UpdatedTime=" + UpdatedTime + "]";
 	}
 	
 }
