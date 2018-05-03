@@ -56,11 +56,15 @@ public class ProductDao
 	public void UpdateProduct(Product pro)
 	{
 		Product uc= (Product)entityManager.find(Product.class ,pro.getId());
-		uc.setName(pro.getName());
-		uc.setDescription(pro.getDescription());
 		uc.setCategoryid(pro.getCategoryid());
 		uc.setCompanyid(pro.getCompanyid());
+		uc.setName(pro.getName());
+		uc.setDescription(pro.getDescription());
+		uc.setProductModelSpecifications(pro.getProductModelSpecifications());
+		uc.setProductPrice(pro.getProductPrice());
+		uc.setMaxAllowedDiscount(pro.getMaxAllowedDiscount());
 		uc.setProductmodelvideoslinks(pro.getProductmodelvideoslinks());
+		uc.setProductmodelpics(pro.getProductmodelpics());
 		
 		entityManager.flush();
 	}
