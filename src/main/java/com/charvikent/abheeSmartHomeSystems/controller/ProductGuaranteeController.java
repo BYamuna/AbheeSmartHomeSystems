@@ -57,7 +57,7 @@ public class ProductGuaranteeController
 		try
 		{
 			ProductGuarantee orgBean=null;
-			if(productGuarantee.getId()!=null)
+			if(productGuarantee.getOrderId()!="" && productGuarantee.getOrderId() != null)
 			{
 			  orgBean=  (ProductGuarantee) productGuaranteeDao.getProductWarrantyDetailsByObject(productGuarantee);
 			
@@ -65,10 +65,10 @@ public class ProductGuaranteeController
 			String  dummyId =null;
 			
 			if(orgBean != null){
-				dummyId = orgBean.getId();
+				dummyId = orgBean.getOrderId();
 			}
 			
-			if(productGuarantee.getId()== null)
+			if(productGuarantee.getOrderId()== "" || productGuarantee.getOrderId() == null)
 			{
 				if(dummyId ==null)
 				{	
@@ -90,7 +90,7 @@ public class ProductGuaranteeController
 			
 			else
 			{
-				id=productGuarantee.getId();
+				id=productGuarantee.getOrderId();
 				if(id == dummyId || orgBean == null)
 				{
 					
@@ -157,8 +157,8 @@ public class ProductGuaranteeController
 		String sJson=null;
 		boolean delete = false;
 		try{
-			if(productGuarantee.getId() != null){
- 				delete = productGuaranteeDao.deleteProductWarranty(productGuarantee.getId(),productGuarantee.getStatus());
+			if(productGuarantee.getOrderId() != null){
+ 				delete = productGuaranteeDao.deleteProductWarranty(productGuarantee.getOrderId(),productGuarantee.getStatus());
  				if(delete){
  					jsonObj.put("message", "deleted");
  				}else{

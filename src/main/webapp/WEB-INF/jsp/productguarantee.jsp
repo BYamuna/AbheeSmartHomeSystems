@@ -61,8 +61,7 @@
 				<div class="panel-heading">
 				<h4 id="productw">Add Product Warranty Details</h4>
 				</div>
-				<form:form class="form-horizontal" modelAttribute="guaranteef"
-					action="productGuarantee" method="post" >
+				<form:form class="form-horizontal" modelAttribute="guaranteef"	action="productGuarantee" method="post" >
 					<div class="panel-body">
 					  <security:authorize access="hasRole('ROLE_ADMIN')">
 						<div class="row">
@@ -80,7 +79,7 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<%--<form:hidden path="id" /> --%>
+									<form:hidden path="orderId" /> 
 									<label for="focusedinput" class="col-md-6 control-label ">Customer ID	<span class="impColor">*</span>
 									</label>
 										
@@ -174,15 +173,15 @@ function displayTable(listOrders) {
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deleteProductWarranty("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
+			var deleterow = "<a class='deactivate' onclick=deleteProductWarranty('"+ orderObj.orderId+ "',0)><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate' onclick='deleteProductWarranty("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
+			var deleterow = "<a class='activate' onclick=deleteProductWarranty('"+ orderObj.orderId+ "',1)><i class='fa fa-eye-slash'></i></a>"
 		}
-		var edit = "<a class='edit editIt' onclick='editProductWarranty("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
-		serviceUnitArray[orderObj.id] = orderObj;
+		var edit = "<a class='edit editIt' onclick=editProductWarranty('"+orderObj.orderId+"')><i class='fa fa-edit'></i></a>"
+		serviceUnitArray[orderObj.orderId] = orderObj;
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.customerid+"'>"+ orderObj.customerid + "</td>"
-			+ "<td title='"+orderObj.id+"'>"+ orderObj.id + "</td>"
+			+ "<td title='"+orderObj.orderId+"'>"+ orderObj.orderId + "</td>"
 			+ "<td title='"+orderObj.productmodelname+"'>"+ orderObj.productmodelname + "</td>"
 			+ "<td title='"+orderObj.purchaseddate+"'>"+ orderObj.purchaseddate + "</td>"
 			+ "<td title='"+orderObj.expirededdate+"'>"+ orderObj.expireddate + "</td>"
@@ -197,7 +196,7 @@ function displayTable(listOrders) {
 
 function editProductWarranty(id) {
 	$("#productw").text("Edit Warranty Details");
-	$("#id").val(serviceUnitArray[id].id);
+	$("#orderId").val(serviceUnitArray[id].orderId);
 	$("#customerid").val(serviceUnitArray[id].customerid);
 	$("#productmodelid").val(serviceUnitArray[id].productmodelid);
 	$("#productmodelname").val(serviceUnitArray[id].productmodelname);
@@ -217,7 +216,7 @@ function deleteProductWarranty(id,status){
 	}
 	if(checkstr == true){
 		var formData = new FormData();
-	    formData.append('id', id);
+	    formData.append('orderId', id);
 	    formData.append('status', status);
 		$.fn.makeMultipartRequest('POST', 'deleteProductWarranty', false, formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
