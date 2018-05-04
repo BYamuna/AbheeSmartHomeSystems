@@ -42,7 +42,7 @@
 	float:right;
 }
 .tag {
-	color:#000000;
+	color:#FF0000;
 }
 </style>
 
@@ -86,25 +86,25 @@
 						<form action="customerlogin" method="post"> 
 					<div class="login-top"> 	
 						  <input type="hidden" name="userType" id="userType" value="customerUser"/>
-							<input type="text" class="form-control validate1 numericOnly" name="username" id="username" onfocus="this.placeholder=''" onblur="this.placeholder='Mobile Number'" maxlength="10" placeholder="Mobile Number" required/>
-							<input type="password" maxlength="4" class="form-control validate1 numericOnly2" name="password" onfocus="this.placeholder=''" onblur="this.placeholder='Password'" placeholder="Password" required />
+							<input type="text"  name="username" id="username" class="form-control validate numericOnly2"  onfocus="this.placeholder=''" onblur="this.placeholder='Mobile Number'"  maxlength="10"   placeholder="Mobile Number"/>
+							<input type="password"  name="password"  onfocus="this.placeholder=''"  class="form-control  numericOnly"  maxlength="4"  onblur="this.placeholder='Password'" placeholder="Password"  />
 						
 					</div> 
 					<div class="login-bottom"> 
 						<div class="col-sm-6">
-							<h6><a href="#" data-toggle="modal" data-target="#passwordModel" style="color:#005696;" class="tag">Forgot Password</a></h6>
+							<h6><a href="#" data-toggle="modal" data-target="#passwordModel" style="color:orange;" class="tag">Forgot password</a></h6>
 						</div>
 						<div class="col-sm-6">
 						
 						   <!--  <input   class="btn btn-danger" type="reset" value="Reset"> 
 							<input  class="btn btn-primary" type="submit" value="Login"> -->
-							<button class="btn btn-primary" type="submit" value="Login">Login</button>
+							<button type="submit"   class="btn btn-primary"  value="Login">Login</button>
 							<button class="btn btn-danger" type="reset" value="Reset">Reset</button>
 						</div><div class="clearfix"></div>
 					</div>
 					</form> 	
 					<div class="login-bottom"> 
-						<h6 style="margin-top:40px;">Click Here To <a href="#" data-toggle="modal" onclick="openRegistrationModel()" style="color:#FF0000; text-decoration:underline;" class="tag">Register</a></h6>
+						<h6 style="margin-top:40px;">Click Here To <a href="#" data-toggle="modal" onclick="openRegistrationModel()" style="color: red; text-decoration:underline;" class="tag">Register</a></h6>
 					</div> 
 
 				</div>  
@@ -144,7 +144,7 @@
 							</div>
 							<div class="form-group">
 								<label for="user_name">Enter MobileNumber :</label> 
-								<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" maxlength="10" class="form-control validate1 mobilenumber" placeholder="Enter Mobile Number"/>
+								<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" maxlength="10" class="form-control validate1 numericOnly2" placeholder="Enter Mobile Number"/>
 								<span class="hasError" id="cmobileError" style="font-size: 13px;"></span>
 							</div>
 
@@ -258,17 +258,24 @@
 
 var validation = true;
 
-
-
-
+var mobilevalidation=true;
 var subValidation =false;
-var subValidationemail =false;
 
 $('#cmobile').blur(function() {
+	
+	var cmobile=$(this).val();
+	
+	if (cmobile == null || cmobile == "" || cmobile == "undefined") {
+		
+		return false;
+	}
+	else
+	{
+	/* }
 	var cmobile=$(this).val();
 	$('span.error-keyup-4').remove();
     var inputVal = $(this).val();
-    
+         
     	
     var characterReg = /^[6789]\d{9}$/;
     if(!characterReg.test(inputVal)) {
@@ -282,7 +289,7 @@ $('#cmobile').blur(function() {
         
         return false;
     }else{
-    	
+    	 */
     	
 	
 	 /* if(cmobile.length != 10 )
@@ -295,6 +302,8 @@ $('#cmobile').blur(function() {
 		 
 		 }
 	  */
+	
+	  
 	
 	
 	$.ajax({
@@ -310,15 +319,17 @@ $('#cmobile').blur(function() {
 						{
 						alert("Mobile Number already exists")
 	 					$('#cmobile').css('border-color', 'red');
-// 	 					 $('#submitModel').prop('disabled', true);
+	 					 $('#submitModel').prop('disabled', true);
 	 					 //alert("customer could not be registered")
+	 					 mobilevalidation=false;
 	 					subValidation =false;
 						}
 					 else
 						{
 						$('#cmobile').css('border-color', 'none');
-// 						 $('#submitModel').prop('disabled', false);
+						 $('#submitModel').prop('disabled', false);
 						 subValidation =true;
+						 mobilevalidation=true;
 						} 
 					
 				},
@@ -376,9 +387,12 @@ var idArrayCmt1 = null;
 	idArrayCmt1 = $.makeArray($('.validate1').map(function() {
 		return this.id ;
 	}));
+	
+	
 		
 	
 	$('#submitModel').click(function(event) {
+		
 		
 	$.each(idArrayCmt1, function(i, val) {
 		var value = $("#" + idArrayCmt1[i]).val();
@@ -402,12 +416,13 @@ var idArrayCmt1 = null;
 			validation = true;
 		}
 	});
-	//validation =subValidation;
+	validation =subValidation;
 	// retype password validation
 	
 	 var cpassword1 =$('#cpassword').val();
 	 
 	var crtpassword1=$('#crtpassword').val();
+	alert(mobilevalidation);
 	
 	if(cpassword1 != "" && crtpassword1 != "" && cpassword1==crtpassword1){
 		validation = true;
@@ -419,18 +434,12 @@ var idArrayCmt1 = null;
 	} 
 	
 	
-	if(validation && subValidation && subValidationemail) {
+	if(validation && mobilevalidation) {
 		$("#submit1").attr("disabled",true);
 		$("#submit1").val("Please wait...");
 		$("#submit1").submit();											
 		 getOTP();
 	}else {
-		if(!subValidation){
-			alert("Mobile number already Exists");
-		}
-		if(!subValidationemail){
-			alert("Email already Exists");
-		}
 		return false;
 		 event.preventDefault(); 
 	}
@@ -564,7 +573,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		  if( regex.test(cemail))
 			  {
-			  subValidationemail =true;
+			  subValidation =true;
 		
 		
 		$.ajax({
@@ -578,16 +587,14 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 					success : function(data) {
 						if(data ==='true')
 							{
-							subValidationemail =false;
 							alert("Email already exists")
 		 					$('#cemail').css('border-color', 'red');
-// 		 					 $('#submitModel').prop('disabled', true);
+		 					 $('#submitModel').prop('disabled', true);
 							}
 						else
 							{
 							$('#cemail').css('border-color', 'none');
-// 							 $('#submitModel').prop('disabled', false);
-							  subValidationemail =true;
+							 $('#submitModel').prop('disabled', false);
 							}
 						
 					},
@@ -603,7 +610,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 			  
 		{
 			  $('#cemail').css('border-color', 'red');
-			  subValidationemail =false;
+			  subValidation =false;
 			  
 		}
 
@@ -687,7 +694,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 	{
 		$('#csname').val("");
 		$('#cname').val("");
-		$('#csmobile').val("");
+		$('#cmobile').val("");
 		$('#cemail').val("");
 		$('#csname').val("");
 		$('#cpassword').val("");
@@ -700,6 +707,10 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		$('#register-info').modal();
 		
 	}
+	
+	
+	
+	
 
 	/* $('#cpassword').blur(function() {
 		ccpassword =$('#cpassword').val();
