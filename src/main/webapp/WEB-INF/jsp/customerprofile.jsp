@@ -220,8 +220,8 @@ list-style-image:url(images/Right-pointer.png);
                   			<h3>Personal Inforation</h3>
                   		</div>
                   		<div class="col-md-6">
-                  			<h4 style="float:right; margin-top:20px;" id="edit"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
-                  			<h4 style="float:right; margin-top:20px;" id="edit"><a href="#"><i class="glyphicon glyphicon-save"></i> Save</a></h4>
+                  			<h4 style="float:right; margin-top:20px;" id="editpersnolinfo"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
+                  			<h4 style="float:right; margin-top:20px;" id="savepersnolinfo"><a href="#"><i class="glyphicon glyphicon-save"></i> Save</a></h4>
                   		</div><div class="clearfix"></div>
                   	</div>
                   	<div class="edata">
@@ -230,15 +230,15 @@ list-style-image:url(images/Right-pointer.png);
                   				<label style="margin-top:18px;">First Name: </label>
                   			</div>
                   			<div class="col-md-9">
-                  				<input class="form-control" type="text" placeholder="First Name" disabled="true">
+                  				<input class="form-control" id="firstname" type="text" placeholder="First Name">
                   			</div><div class="clearfix"></div>
                   		</div>
                   		<div class="col-sm-6">
                   			<div class="col-md-3">
-                  				<label style="margin-top:18px; margin-left:5px;">Last Name: </label>
+                  				<label style="margin-top:18px;  idmargin-left:5px;">Last Name: </label>
                   			</div>
                   			<div class="col-md-9">
-                  				<input class="form-control" type="text" placeholder="Last Name" disabled="true">
+                  				<input class="form-control" type="text" id="lastname"  placeholder="Last Name" >
                   			</div><div class="clearfix"></div>
                   		</div><div class="clearfix"></div>
                   		<div class="ainfo">
@@ -246,7 +246,7 @@ list-style-image:url(images/Right-pointer.png);
                   				<label style="margin-top:25px;">Address: </label>
                   			</div>
                   			<div class="col-md-11">
-                  				<textarea path= "address" class="form-control" type="text" placeholder="Address" disabled="true"></textarea>
+                  				<textarea  class="form-control" id="address" type="text" placeholder="Address"></textarea>
                   			</div><div class="clearfix"></div>
                   		</div>
                   	</div>
@@ -269,7 +269,7 @@ list-style-image:url(images/Right-pointer.png);
                   				<label style="margin-top:18px;">Email Id: </label>
                   			</div>
                   			<div class="col-md-11">
-                  				<input style="float:left;" class="form-control" type="text" placeholder="Email Id" disabled="true">
+                  				<input style="float:left;" id="pemail" class="form-control" type="text" placeholder="Email Id" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div><div class="clearfix"></div>
                   	</div>
@@ -292,7 +292,7 @@ list-style-image:url(images/Right-pointer.png);
                   				<label style="margin-top:18px; margin-left:5px;">Mobile Number: </label>
                   			</div>
                   			<div class="col-md-10">
-                  				<input class="form-control" type="text" placeholder="Mobile Number" disabled="true">
+                  				<input class="form-control" type="text"  id="pmobilenumber" placeholder="Mobile Number" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div><div class="clearfix"></div>
                   	</div>
@@ -315,7 +315,7 @@ list-style-image:url(images/Right-pointer.png);
                   				<label style="margin-top:18px;">Current Password: </label>
                   			</div>
                   			<div class="col-md-9">
-                  				<input style="float:left;" class="form-control" type="text" placeholder="*****" disabled="true">
+                  				<input style="float:left;" id="pcurrentpassword" class="form-control" type="text" placeholder="*****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>
                   		<div class="col-sm-12">
@@ -323,7 +323,7 @@ list-style-image:url(images/Right-pointer.png);
                   				<label style="margin-top:18px;">New Password: </label>
                   			</div>
                   			<div class="col-md-9">
-                  				<input style="float:left;" class="form-control" type="text" placeholder="*****" disabled="true">
+                  				<input style="float:left;" id="pnewpassword" class="form-control" type="text" placeholder="*****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>
                   		<div class="col-sm-12">
@@ -331,7 +331,7 @@ list-style-image:url(images/Right-pointer.png);
                   				<label style="margin-top:18px;">Confirm Password: </label>
                   			</div>
                   			<div class="col-md-9">
-                  				<input style="float:left;" class="form-control" type="text" placeholder="*****" disabled="true">
+                  				<input style="float:left;" id="pconfirmpassword" class="form-control" type="text" placeholder="*****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>
                   	</div>
@@ -376,6 +376,32 @@ list-style-image:url(images/Right-pointer.png);
 
 
 <script type="text/javascript">
+
+
+$( document ).ready(function() {
+	
+	$('#savepersnolinfo').hide();
+	
+	$("#firstname").prop('disabled',true);
+	$("#lastname").prop('disabled',true);
+	$("#address").prop('disabled',true);
+});
+
+var customerProfile1 =${customerProfile1};
+console.log(customerProfile1);
+displayTable(customerProfile1);
+
+function displayTable(listOrders) {
+	$.each(listOrders,function(i, orderObj) {
+		$("#firstname").val(orderObj.firstname);
+		$("#lastname").val(orderObj.lastname);
+		$("#pemail").val(orderObj.email);
+		$("#address").val(orderObj.address);
+		$("#pmobilenumber").val(orderObj.mobilenumber);
+	});
+	}
+
+
 $('#customer').blur(function() {
 	var customer=$(this).val();
 
@@ -410,5 +436,19 @@ $('#customer').blur(function() {
 			});
 
 		}); 
+		
+$('#editpersnolinfo').click(function (){
+	
+	
+	$('#savepersnolinfo').show();
+	$('#editpersnolinfo').hide();
+	
+	$("#firstname").prop('disabled',false);
+	$("#lastname").prop('disabled',false);
+	$("#address").prop('disabled',false);
+	
+});
+		
+		
 </script>
 <%@include file="abheefooter.jsp" %>

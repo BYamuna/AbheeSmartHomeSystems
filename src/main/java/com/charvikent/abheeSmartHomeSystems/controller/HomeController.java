@@ -2,6 +2,7 @@ package com.charvikent.abheeSmartHomeSystems.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -247,29 +248,16 @@ public class HomeController {
 		
 		Customer customerProfile=(Customer) session.getAttribute("customer");
 		//String id=String.valueOf(objuserBean.getId());
+          
+		List<Customer> customerList =new  ArrayList<Customer>(); 
+		customerList.add(customerProfile);
 
+		//model.addAttribute("customerProfile", customerProfile);
 
-		model.addAttribute("customerProfile", customerProfile);
-
+		ObjectMapper objectMapper = new ObjectMapper();
+		String sJson = objectMapper.writeValueAsString(customerList);
+		request.setAttribute("customerProfile1", sJson);
 		
-		/*String customerid=request.getParameter("custId");
-		String firstname=request.getParameter("firstname");
-		String Lastname=request.getParameter("lastname");
-		String mobileno=request.getParameter("mobilenumber");
-		String Address=request.getParameter("address");
-		Customer customer =customerDao.findCustomerByCustId(customerid);
-		String referalUrl=request.getHeader("referer");
-		if(null==loginurl)
-			{
-		session.setAttribute("customer", customer);
-		session.setAttribute("loggedstatus", "login");
-		//session.setAttribute("customerId", customer.getCustomerId());
-		session.setAttribute("firstname", customer.getFirstname());
-		session.setAttribute("lastname", customer.getLastname());
-		session.setAttribute("mobileno", customer.getMobilenumber());
-		session.setAttribute("address",customer.getAddress());
-		return "redirect:/";
-		}*/
 		return "customerprofile";
 	}
 	
