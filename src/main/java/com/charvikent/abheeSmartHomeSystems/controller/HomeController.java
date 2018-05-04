@@ -2,9 +2,12 @@ package com.charvikent.abheeSmartHomeSystems.controller;
 
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,6 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
+import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.User;
@@ -318,5 +322,72 @@ public class HomeController {
 	}
 	
 	
+	@RequestMapping(value = "/editprofilecustomer", method = RequestMethod.POST)
+	public @ResponseBody  String editProfileCustomer(Model model,HttpServletRequest request) throws IOException, MessagingException 
+	{
+		LOGGER.debug("Calling editProfileCustomer at controller");
+	
+		
+		String firstname=request.getParameter("firstname");
+		String lastname=request.getParameter("lastname");
+		String address=request.getParameter("address");
+		String pemail=request.getParameter("pemail");
+		String pmobilenumber =request.getParameter("pmobilenumber");
+		String customerid =request.getParameter("customerid");
+		
+		
+		 Customer customer = new Customer();
+		 customer.setFirstname(firstname);
+		 customer.setLastname(lastname);
+		 customer.setAddress(address);
+		 customer.setEmail(pemail);
+		 customer.setMobilenumber(pmobilenumber);
+		 customer.setId(Integer.parseInt((customerid)));
+		 
+		 try {
+			customerDao.updateCustomerProfile(customer);
+			return "true";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
+		 
+		
+		
+	
+		
+		
+		
+	}
+	
+	@RequestMapping(value = "/saveProfilePassword", method = RequestMethod.POST)
+	public @ResponseBody  String saveProfilePassword(Model model,HttpServletRequest request) throws IOException, MessagingException 
+	{
+		LOGGER.debug("Calling saveProfilePassword at controller");
+	
+		
+		String pconfirmpassword =request.getParameter("pconfirmpassword");
+		String customerid =request.getParameter("customerid");
+		
+		
+		 Customer customer = new Customer();
+		 customer.setId(Integer.parseInt((customerid)));
+		 customer.setPassword(pconfirmpassword);
+		 
+		 try {
+			customerDao.updateCustomerProfilepassword(customer);
+			return "true";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
+		 
+		
+		
+	
+		
+		
+		
+	}
 
 }

@@ -311,4 +311,27 @@ public List<Customer> getCustomerInActiveList()
 	
 }
 
+
+public void updateCustomerProfile(Customer user) 
+{
+	Customer uc= (Customer)entityManager.find(Customer.class ,user.getId());
+	
+	uc.setMobilenumber(user.getMobilenumber());
+	uc.setEmail(user.getEmail());
+	uc.setAddress(user.getAddress());
+	uc.setFirstname(user.getFirstname());
+	uc.setLastname(user.getLastname());
+	
+	entityManager.flush();
+	
+}
+
+public void updateCustomerProfilepassword(Customer customer) {
+Customer uc= (Customer)entityManager.find(Customer.class ,customer.getId());
+	
+	uc.setPassword(customer.getPassword());
+	
+	entityManager.flush();
+}
+
 }

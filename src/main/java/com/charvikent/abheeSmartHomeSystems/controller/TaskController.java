@@ -525,7 +525,6 @@ public class TaskController {
 	
 	
 	@RequestMapping(value = "/saveServiceRequest", method = RequestMethod.POST)
-
 	public @ResponseBody  String modelSubmit(Model model,HttpServletRequest request) throws IOException, MessagingException 
 	{
 		LOGGER.debug("Calling saveServiceRequest at controller");

@@ -293,6 +293,7 @@ list-style-image:url(images/Right-pointer.png);
                   			</div>
                   			<div class="col-md-10">
                   				<input class="form-control" type="text"  id="pmobilenumber" placeholder="Mobile Number" disabled="true">
+                  				<input class="form-control" type="hidden"  id="customerid" placeholder="Mobile Number">
                   			</div><div class="clearfix"></div>
                   		</div><div class="clearfix"></div>
                   	</div>
@@ -305,8 +306,8 @@ list-style-image:url(images/Right-pointer.png);
                   			<h3>Change Password</h3>
                   		</div>
                   		<div class="col-md-6">
-                  			<h4 style="float:right; margin-top:20px;" id="edit"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
-                  			<h4 style="float:right; margin-top:20px;" id="edit"><a href="#"><i class="glyphicon glyphicon-save"></i> Save</a></h4>
+                  			<h4 style="float:right; margin-top:20px;" id="editProfilePassword"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
+                  			<h4 style="float:right; margin-top:20px;" id="saveProfilePassword"><a href="#"><i class="glyphicon glyphicon-save"></i> Save</a></h4>
                   		</div><div class="clearfix"></div>
                   	</div>
                   	<div class="pdata">
@@ -315,7 +316,7 @@ list-style-image:url(images/Right-pointer.png);
                   				<label style="margin-top:18px;">Current Password: </label>
                   			</div>
                   			<div class="col-md-9">
-                  				<input style="float:left;" id="pcurrentpassword" class="form-control" type="text" placeholder="*****" disabled="true">
+                  				<input style="float:left;" id="pcurrentpassword" class="form-control" type="password" placeholder="*****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>
                   		<div class="col-sm-12">
@@ -323,7 +324,7 @@ list-style-image:url(images/Right-pointer.png);
                   				<label style="margin-top:18px;">New Password: </label>
                   			</div>
                   			<div class="col-md-9">
-                  				<input style="float:left;" id="pnewpassword" class="form-control" type="text" placeholder="*****" disabled="true">
+                  				<input style="float:left;" id="pnewpassword" class="form-control" type="password" placeholder="*****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>
                   		<div class="col-sm-12">
@@ -331,7 +332,7 @@ list-style-image:url(images/Right-pointer.png);
                   				<label style="margin-top:18px;">Confirm Password: </label>
                   			</div>
                   			<div class="col-md-9">
-                  				<input style="float:left;" id="pconfirmpassword" class="form-control" type="text" placeholder="*****" disabled="true">
+                  				<input style="float:left;" id="pconfirmpassword" class="form-control" type="password" placeholder="*****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>
                   	</div>
@@ -381,6 +382,7 @@ list-style-image:url(images/Right-pointer.png);
 $( document ).ready(function() {
 	
 	$('#savepersnolinfo').hide();
+	$('#saveProfilePassword').hide();
 	
 	$("#firstname").prop('disabled',true);
 	$("#lastname").prop('disabled',true);
@@ -398,6 +400,7 @@ function displayTable(listOrders) {
 		$("#pemail").val(orderObj.email);
 		$("#address").val(orderObj.address);
 		$("#pmobilenumber").val(orderObj.mobilenumber);
+		$("#customerid").val(orderObj.id);
 	});
 	}
 
@@ -448,6 +451,121 @@ $('#editpersnolinfo').click(function (){
 	$("#address").prop('disabled',false);
 	
 });
+
+
+$('#savepersnolinfo').click(function (){
+var firstname=	$("#firstname").val();
+var lastname =	$("#lastname").val();
+var address =$("#address").val();
+var pemail =$("#pemail").val();
+var pmobilenumber=$("#pmobilenumber").val();
+var customerid=$("#customerid").val();
+	
+	alert(customerid);
+	
+	
+	
+	$.ajax({
+		type : "POST",
+		url : "editprofilecustomer",
+		data :"firstname="+firstname+"&lastname="+lastname+"&address="+address+"&pemail="+pemail+"&pmobilenumber="+pmobilenumber+"&customerid="+customerid,
+		dataType : "text",
+		beforeSend : function() {
+             $.blockUI({ message: 'Please wait' });
+          }, 
+		success : function(data) {
+			//alert(data);
+			
+			if(data ==='true')
+			{
+				$("#firstname").prop('disabled',true);
+				$("#lastname").prop('disabled',true);
+				$("#address").prop('disabled',true);
+				$("#pemail").prop('disabled',true);
+				$("#pmobilenumber").prop('disabled',true);
+				$('#savepersnolinfo').hide();
+				$('#editpersnolinfo').show();
+				alert(" Profile Updated Successfully ");
+			}
+			else
+				{
+				alert(data);
+				}
+			
+		},
+		complete: function () {
+            
+            $.unblockUI();
+       },
+		error :  function(e){$.unblockUI();console.log(e);}
+		
+	});
+	
+	
+});
+
+$('#editProfilePassword').click(function (){
+	
+	
+	$('#saveProfilePassword').show();
+	$('#editProfilePassword').hide();
+	
+	$("#pcurrentpassword").prop('disabled',false);
+	$("#pnewpassword").prop('disabled',false);
+	$("#pconfirmpassword").prop('disabled',false);
+	
+});
+
+
+$('#saveProfilePassword').click(function (){
+	
+	var pconfirmpassword=$("#pconfirmpassword").val();
+	var customerid=$("#customerid").val();
+		
+		
+		$.ajax({
+			type : "POST",
+			url : "saveProfilePassword",
+			data :"pconfirmpassword="+pconfirmpassword+"&customerid="+customerid,
+			dataType : "text",
+			beforeSend : function() {
+	             $.blockUI({ message: 'Please wait' });
+	          }, 
+			success : function(data) {
+				
+				if(data ==='true')
+				{
+					$("#firstname").prop('disabled',true);
+					$("#lastname").prop('disabled',true);
+					$("#address").prop('disabled',true);
+					$("#pemail").prop('disabled',true);
+					$("#pmobilenumber").prop('disabled',true);
+					$("#pcurrentpassword").prop('disabled',true);
+					$("#pnewpassword").prop('disabled',true);
+					$("#pconfirmpassword").prop('disabled',true);
+					$("#pcurrentpassword").val();
+					$("#pnewpassword").val();
+					$("#pconfirmpassword").val("");
+					$('#saveProfilePassword').hide();
+					$('#editProfilePassword').show();
+					alert(" Profile Password  Updated Successfully ");
+				}
+				else
+					{
+					alert(data);
+					}
+				
+			},
+			complete: function () {
+	            
+	            $.unblockUI();
+	       },
+			error :  function(e){$.unblockUI();console.log(e);}
+			
+		});
+		
+		
+	});
 		
 		
 </script>
