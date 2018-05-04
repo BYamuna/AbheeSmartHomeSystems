@@ -487,7 +487,7 @@
 	function displayTable(listOrders) {
 		$('#tableId').html('');
 		var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-				+ '<thead><tr><th>Service Request No</th><th>Category</th><th>Model Name</th><th>CustomerID</th><th>ServiceType</th><th>Severity</th><th>Priority</th><th>Assigned To</th><th>Subject</th><th>Service Request Deadline</th><th>Service Request Status</th><th>CreateTime</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
+				+ '<thead><tr><th>Service Request No</th><th>Category</th><th>Model Name</th><th>CustomerID</th><th>ServiceType</th><th>Severity</th><th>Priority</th><th>Assigned To</th><th>Subject</th><th>Service Request Deadline</th><th>Service Request Status</th><th>CreateTime</th><th>Address</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
 		$('#tableId').html(tableHead);
 		serviceUnitArray = {};
 
@@ -582,6 +582,9 @@
 									+ "</td>"
 									+ "<td title='"+orderObj.created_time+"'>"
 									+ new Date(orderObj.created_time).toDateString() 
+									+ "</td>"
+									+ "<td title='"+orderObj.communicationaddress+"'>"
+									+ orderObj.communicationaddress
 									+ "</td>"
 									+ "<td style='text-align: center;white-space: nowrap;'>"
 									+ edit

@@ -551,10 +551,10 @@ public class TaskController {
 		task.setServiceType(servicetypeid);
 		task.setCategory(catid);
 		task.setModelid(modelid);
+		task.setCommunicationaddress(custaddress);
 
 		task.setCustomerId(customerId);
 		
-		Customer customer= customerDao.findCustomerByCustId(customerId);
 		
 		
 		
@@ -567,14 +567,7 @@ public class TaskController {
 		//taskHistoryLogsDao.historyLogForcustomerEntry(task);
 		//sendingMail.sendingMailWithTaskStatus(task);
 		
-		customer.setAddress(custaddress);
-		try {
-			customerDao.updateCustomer(customer);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		System.out.println(message+"  "+servicetypeid);
+				System.out.println(message+"  "+servicetypeid);
 		return "true";
 		}
 		else
