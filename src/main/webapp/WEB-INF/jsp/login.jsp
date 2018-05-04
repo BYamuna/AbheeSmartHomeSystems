@@ -535,7 +535,20 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 
 			}); 
 	
+	/*  var pageURL = $(location).attr("href");
+     alert(pageURL);
+     
+     if(pageURL.endsWith("error")){
+    	    alert("String Found");
+    	    changeUrl();
+    	}
+	function changeUrl()
+	{
 	
+	var temp="/login/";
+	$(location).attr('href','http://'+temp);
+	
+	} */
 
 	/* $('#cpassword').blur(function() {
 		ccpassword =$('#cpassword').val();

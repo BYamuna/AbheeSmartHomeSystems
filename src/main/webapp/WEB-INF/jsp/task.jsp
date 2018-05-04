@@ -72,7 +72,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<form:hidden path="id" />
+									
 									<label for="focusedinput" class="col-md-6 control-label ">Service
 										Type <span class="impColor">*</span>
 									</label>
@@ -162,6 +162,8 @@
 							
 						</div>
 						 </security:authorize>
+						 
+						 <form:hidden path="id" />
 
 						<div class="row">
 							<div class="col-md-6">

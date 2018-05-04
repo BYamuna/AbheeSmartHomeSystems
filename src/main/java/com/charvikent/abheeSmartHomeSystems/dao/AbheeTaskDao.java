@@ -185,7 +185,7 @@ public void  openTask(String taskno) {
 			   task.setAdditionalinfo("1");
 			   task.setKstatus("2");
 			   entityManager.merge(task);
-			 taskHistoryLogsDao.historyLog(task);
+			// taskHistoryLogsDao.historyLog(task);
 			
 			}
 		}catch(Exception e){
@@ -273,7 +273,7 @@ public List<Map<String,Object>> getTasksListAssignToMeById(String id)
 
 public List<Map<String, Object>> getTaskStatusHistoryByTaskNo(String taskno) {
 	
-	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname,t.created_time from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and taskno='LZIB9'  order by t.created_time desc";
+	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and taskno='"+taskno+" '  order by t.created_time desc";
 	
          System.out.println(hql);
 	

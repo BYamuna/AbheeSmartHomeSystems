@@ -1,5 +1,8 @@
 package com.charvikent.abheeSmartHomeSystems.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -69,6 +72,7 @@ public class TaskHistoryLogsDao {
 	{
 		
 		TaskHistoryLogs taskHistoryLogs=new TaskHistoryLogs();
+		
 		taskHistoryLogs.setTaskid(reportIssue.getId());
 		taskHistoryLogs.setServiceType(reportIssue.getServiceType());
 		taskHistoryLogs.setAdditionalinfo(reportIssue.getAdditionalinfo());
@@ -92,5 +96,41 @@ public class TaskHistoryLogsDao {
 		taskHistoryLogs.setUploadfile(reportIssue.getUploadfile());
 		
 		entityManager.persist(taskHistoryLogs);
+	}
+
+
+	public void historyLog1(Object object) {
+		
+		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		AbheeTask abheeTask=	entityManager.find(AbheeTask.class, object);
+		TaskHistoryLogs taskHistoryLogs=new TaskHistoryLogs();
+		
+		
+		taskHistoryLogs.setTaskid(abheeTask.getId());
+		taskHistoryLogs.setServiceType(abheeTask.getServiceType());
+		taskHistoryLogs.setAdditionalinfo(abheeTask.getAdditionalinfo());
+		taskHistoryLogs.setAssignby(abheeTask.getCustomerId());
+		taskHistoryLogs.setAssignto(abheeTask.getAssignto());
+		taskHistoryLogs.setCategory(abheeTask.getCategory());
+		taskHistoryLogs.setDescription(abheeTask.getDescription());
+		taskHistoryLogs.setKstatus(abheeTask.getKstatus());
+		taskHistoryLogs.setModelid(abheeTask.getModelid());
+		taskHistoryLogs.setPriority(abheeTask.getPriority());
+		taskHistoryLogs.setSeverity(abheeTask.getSeverity());
+		taskHistoryLogs.setStatus(abheeTask.getStatus());
+		taskHistoryLogs.setSubject(abheeTask.getSubject());
+		taskHistoryLogs.setTaskdeadline(abheeTask.getTaskdeadline());
+		taskHistoryLogs.setTaskno(abheeTask.getTaskno());
+		taskHistoryLogs.setAddComment("serverice request marked as read");
+		
+		taskHistoryLogs.setModifiedBy(String.valueOf(objuserBean.getId()));
+		
+		taskHistoryLogs.setUploadfile(abheeTask.getUploadfile());
+		
+		entityManager.persist(taskHistoryLogs);
+
+		
+		
 	}
 }

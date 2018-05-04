@@ -557,7 +557,7 @@ $("#severityTable").append(rowdata2);
 	function displayTable(listOrders) {
 		$('#tableId').html('');
 		var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-				+ '<thead><tr><th>ServiceRequest No</th><th>Category</th><th>Model Name</th><th>ServiceType</th><th>Severity</th><th>Priority</th><th>Assigned To</th><th>Subject</th><th>ServiceRequest Deadline</th><th>Task Status</th><th>CreateTime</th></tr></thead><tbody></tbody></table>';
+				+ '<thead><tr><th>ServiceRequest No</th><th>Category</th><th>Model Name</th><th>ServiceType</th><th>Severity</th><th>Priority</th><th>Assigned To</th><th>Subject</th><th>Task Status</th><th>CreateTime</th></tr></thead><tbody></tbody></table>';
 		$('#tableId').html(tableHead);
 		serviceUnitArray = {};
 		
@@ -598,7 +598,6 @@ $("#severityTable").append(rowdata2);
 				+ "<td title='"+orderObj.priority+"'>"+ orderObj.priority + "</td>"
 				+ "<td title='"+orderObj.username+"'>"+ orderObj.username + "</td>"
 				+ "<td title='"+orderObj.subject+"'>"+ orderObj.subject + "</td>"
-				+ "<td title='"+orderObj.taskdeadline+"'>"+ orderObj.taskdeadline + "</td>"
 				+ "<td title='"+orderObj.statusname+"'>"+ orderObj.statusname + "</td>"
 				+ "<td title='"+orderObj.created_time+"'>"+ orderObj.created_time + "</td>"
 				+ "</tr>";

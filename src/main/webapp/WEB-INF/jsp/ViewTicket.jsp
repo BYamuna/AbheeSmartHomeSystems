@@ -123,8 +123,11 @@
 			
 </div>
 
+
 <div class="container">
-<div class="col-md-12">
+<div align="center">
+<button onclick="goBack()" class="btn btn-primary"> <i class="fa fa-step-backward"></i> Back  </button></div>
+<div class="col-md-12"><br>
 				<div class="panel panel-primary">
 					<div style="margin:0 auto;" class="panel-heading rounded-bottom">
 						<h4>View Service Request Details</h4>
@@ -212,6 +215,12 @@ $.each(allstatus, function(k, v){
 			+'</tr>';
 	$('#viewStatusTable tbody').append(tr);
 });
+
+
+
+function goBack() {
+    window.history.go(-1);
+}
 
 /* var 	severityCounts  = ${viewTask};
 

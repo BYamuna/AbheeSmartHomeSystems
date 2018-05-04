@@ -115,6 +115,8 @@
 
 				</div>
 							</div>
+							<div align="center">
+<button onclick="goBack()" class="btn btn-primary"> <i class="fa fa-step-backward"></i> Back  </button></div>
 						
 				
                 
@@ -177,6 +179,11 @@
 <script type="text/javascript">
 $(".task").addClass("active");
 $("#pageName").text("View Customer Details");
+
+
+function goBack() {
+    window.history.go(-1);
+}
 
 
 /* var 	severityCounts  = ${viewTask};
