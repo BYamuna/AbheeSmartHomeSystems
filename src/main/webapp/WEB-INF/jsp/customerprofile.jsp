@@ -217,7 +217,7 @@ list-style-image:url(images/Right-pointer.png);
                   <div class="tab-data-info">
                   	<div style="margin-top:-20px;" class="pinfo">
                   		<div class="col-md-6">
-                  			<h3>Personal Inforation</h3>
+                  			<h3>Personal Information</h3>
                   		</div>
                   		<div class="col-md-6">
                   			<h4 style="float:right; margin-top:20px;" id="editpersnolinfo"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
@@ -256,11 +256,11 @@ list-style-image:url(images/Right-pointer.png);
                   <div class="tab-data-info">
                   	<div style="margin-top:-20px;" class="cinfo">
                   		<div class="col-md-6">
-                  			<h3>Email Inforation</h3>
+                  			<h3>Email Information</h3>
                   		</div>
                   		<div class="col-md-6">
-                  			<h4 style="float:right; margin-top:20px;" id="edit"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
-                  			<h4 style="float:right; margin-top:20px;" id="edit"><a href="#"><i class="glyphicon glyphicon-save"></i> Save</a></h4>
+                  			<h4 style="float:right; margin-top:20px;" id="editemailinfo"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
+                  			<h4 style="float:right; margin-top:20px;" id="saveemailinfo"><a href="#"><i class="glyphicon glyphicon-save"></i> Save</a></h4>
                   		</div><div class="clearfix"></div>
                   	</div>
                   	<div class="cdata">
@@ -282,8 +282,8 @@ list-style-image:url(images/Right-pointer.png);
                   			<h3>Mobile Number</h3>
                   		</div>
                   		<div class="col-md-6">
-                  			<h4 style="float:right; margin-top:20px;" id="edit"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
-                  			<h4 style="float:right; margin-top:20px;" id="edit"><a href="#"><i class="glyphicon glyphicon-save"></i> Save</a></h4>
+                  			<h4 style="float:right; margin-top:20px;" id="editmobileno"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
+                  			<h4 style="float:right; margin-top:20px;" id="savemobileno"><a href="#"><i class="glyphicon glyphicon-save"></i> Save</a></h4>
                   		</div><div class="clearfix"></div>
                   	</div>
                   	<div class="cdata">
@@ -294,6 +294,7 @@ list-style-image:url(images/Right-pointer.png);
                   			<div class="col-md-10">
                   				<input class="form-control" type="text"  id="pmobilenumber" placeholder="Mobile Number" disabled="true">
                   				<input class="form-control" type="hidden"  id="customerid" placeholder="Mobile Number">
+                  				<input class="form-control" type="hidden"  id="checkpass">
                   			</div><div class="clearfix"></div>
                   		</div><div class="clearfix"></div>
                   	</div>
@@ -383,6 +384,8 @@ $( document ).ready(function() {
 	
 	$('#savepersnolinfo').hide();
 	$('#saveProfilePassword').hide();
+	$('#saveemailinfo').hide();
+	$('#savemobileno').hide();
 	
 	$("#firstname").prop('disabled',true);
 	$("#lastname").prop('disabled',true);
@@ -401,6 +404,7 @@ function displayTable(listOrders) {
 		$("#address").val(orderObj.address);
 		$("#pmobilenumber").val(orderObj.mobilenumber);
 		$("#customerid").val(orderObj.id);
+		$("#checkpass").val(orderObj.id);
 	});
 	}
 
@@ -521,7 +525,23 @@ $('#saveProfilePassword').click(function (){
 	
 	var pconfirmpassword=$("#pconfirmpassword").val();
 	var customerid=$("#customerid").val();
+	
+	var checkpass=$("#checkpass").val();
+	if(checkpass!=pconfirmpassword)
+		{
+		alert("Enter Valid Password");
+		return false;
+		}
+	
 		
+	var pnewpassword=$("#pnewpassword").val();
+	
+	if( pnewpassword !=pconfirmpassword)
+		{
+		alert("New Password and Confirm Password Not Matched");
+		}
+	else
+		{
 		
 		$.ajax({
 			type : "POST",
@@ -548,6 +568,7 @@ $('#saveProfilePassword').click(function (){
 					$("#pconfirmpassword").val("");
 					$('#saveProfilePassword').hide();
 					$('#editProfilePassword').show();
+					
 					alert(" Profile Password  Updated Successfully ");
 				}
 				else
@@ -564,9 +585,110 @@ $('#saveProfilePassword').click(function (){
 			
 		});
 		
+		}
+		
 		
 	});
+$('#editemailinfo').click(function (){
+	
+	
+	$('#saveemailinfo').show();
+	$('#editemailinfo').hide();
+	
+	$("#pemail").prop('disabled',false);
+	
+	
+});	
+$('#saveemailinfo').click(function (){
+	var pemail =$("#pemail").val();
+	var customerid=$("#customerid").val();
+	
+	alert(customerid);
+	$.ajax({
+		type : "POST",
+		url : "editprofileemail",
+		data :"pemail="+pemail+"&customerid="+customerid,
+		dataType : "text",
+		beforeSend : function() {
+             $.blockUI({ message: 'Please wait' });
+          }, 
+          success : function(data) {
+  			
+  			if(data ==='true')
+  			{     
+				$("#pemail").prop('disabled',true);
+  				$('#saveemailinfo').hide();
+				$('#editemailinfo').show();
+  				alert(" Email Updated Successfully ");
+			}
+			else if(data ==='false')
+			{
+				alert("Email already exists");
+				
+			}
+			else
+				{
+				alert("Email Updation failed");
+				}
+			
+		},
+		complete: function () {
+          
+          $.unblockUI();
+     },
+		error :  function(e){$.unblockUI();console.log(e);}
 		
+		});	
+	});	
+$('#editmobileno').click(function (){
+	
+	
+	$('#savemobileno').show();
+	$('#editmobileno').hide();
+	
+	$("#pmobilenumber").prop('disabled',false);
+	
+	
+});	
+$('#savemobileno').click(function (){
+	var pmobilenumber =$("#pmobilenumber").val();
+	var customerid=$("#customerid").val();
+	
+	alert(customerid);
+	$.ajax({
+		type : "POST",
+		url : "editprofilemobileno",
+		data :"pmobilenumber="+pmobilenumber+"&customerid="+customerid,
+		dataType : "text",
+		beforeSend : function() {
+             $.blockUI({ message: 'Please wait' });
+          }, 
+          success : function(data) {
+  			
+  			if(data ==='true')
+  			{     
+				$("#pmobilenumber").prop('disabled',true);
+  				$('#savemobileno').hide();
+				$('#editmobileno').show();
+  				alert(" Mobilenumber Updated Successfully ");
+			}
+  			else if(data === 'false')
+  				{
+  				alert("MobileNumber already exists");
+  				}
+			else
+			{
+				alert("MobileNumber Updation Failed");
+			}
+			
+		},
+		complete: function () {
+          
+          $.unblockUI();
+     },
+		error :  function(e){$.unblockUI();console.log(e);}
 		
+	});
+});		
 </script>
 <%@include file="abheefooter.jsp" %>

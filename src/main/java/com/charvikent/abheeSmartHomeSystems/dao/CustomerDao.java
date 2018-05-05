@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 //import org.hibernate.Query
 
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.slf4j.Logger;
@@ -333,5 +334,45 @@ Customer uc= (Customer)entityManager.find(Customer.class ,customer.getId());
 	
 	entityManager.flush();
 }
+
+public void updateCustomerProfileEmail(Customer customer) {
+	Customer uc= (Customer)entityManager.find(Customer.class ,customer.getId());
+	uc.setEmail(customer.getEmail());
+	entityManager.flush();
+}
+
+public void updateCustomerProfileMobileNo(Customer customer) {
+	Customer uc= (Customer)entityManager.find(Customer.class ,customer.getId());
+	uc.setMobilenumber(customer.getMobilenumber());
+	entityManager.flush();
+	
+}
+
+@SuppressWarnings("unchecked")
+public Customer checkProfileEmailExistsOrNot(Customer customer) {
+	
+	String hql ="from Customer where  email ='"+customer.getEmail()+"' and id <>'"+customer.getId()+"'";
+	Query query =entityManager.createQuery(hql);
+
+	List<Customer>ProfileCustomersList =query.getResultList();
+	if(ProfileCustomersList.isEmpty())
+           return null;
+           else
+	return ProfileCustomersList.get(0);
+}
+
+@SuppressWarnings("unchecked")
+public Customer checkProfileMobileNoExistsOrNot(Customer customer) {
+	String hql ="from Customer where  mobilenumber ='"+customer.getMobilenumber()+"' and id <>'"+customer.getId()+"'";
+	Query query =entityManager.createQuery(hql);
+
+	List<Customer>ProfileCustomersList =query.getResultList();
+	if(ProfileCustomersList.isEmpty())
+           return null;
+           else
+	return ProfileCustomersList.get(0);
+}
+
+
 
 }

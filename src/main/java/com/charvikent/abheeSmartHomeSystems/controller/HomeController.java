@@ -389,5 +389,75 @@ public class HomeController {
 		
 		
 	}
+	
+	//edit email
+	@RequestMapping(value = "/editprofileemail", method = RequestMethod.POST)
+	public @ResponseBody  String EditProfileEmail(Model model,HttpServletRequest request) throws IOException, MessagingException 
+	{
+		LOGGER.debug("Calling EditProfileEmail at controller");
+	
+		
+		String pemail=request.getParameter("pemail");
+		String customerid =request.getParameter("customerid");
+		
+		
+		 Customer customer = new Customer();
+		 customer.setId(Integer.parseInt((customerid)));
+		 customer.setEmail(pemail);
+		Customer profilecustomer =	customerDao.checkProfileEmailExistsOrNot(customer);
+			if( profilecustomer==null)
+			{ 
+				try 
+			{
+				customerDao.updateCustomerProfileEmail(customer);
+				return "true";
+			}
+			catch (Exception e) 
+				{
+				e.printStackTrace();
+				return "failed";
+				}		
+			}
+			else
+			{
+				return "false";
+			}
+		
+	}
 
+//edit mobileno
+	
+	
+	@RequestMapping(value = "/editprofilemobileno", method = RequestMethod.POST)
+	public @ResponseBody  String EditProfileMobileNo(Model model,HttpServletRequest request) throws IOException, MessagingException 
+	{
+		LOGGER.debug("Calling EditProfileMobileNo at controller");
+	
+		
+		String pmobilenumber =request.getParameter("pmobilenumber");
+		String customerid =request.getParameter("customerid");
+	
+		 Customer customer = new Customer();
+		 customer.setId(Integer.parseInt((customerid)));
+		 customer.setMobilenumber(pmobilenumber);
+		 Customer profilecustomer =	customerDao.checkProfileMobileNoExistsOrNot(customer);
+		 if(profilecustomer==null)
+		 {
+			 try 
+			 {
+				customerDao.updateCustomerProfileMobileNo(customer);
+				return "true";
+			 } 
+			 catch (Exception e) 
+			 {
+				e.printStackTrace();
+				return "failed";
+			 }
+		 }	
+		 else
+		 {
+			 return "false";
+		 }
+	}
+	
 }
