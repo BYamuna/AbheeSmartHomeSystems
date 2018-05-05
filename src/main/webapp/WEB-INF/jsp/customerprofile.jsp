@@ -269,7 +269,7 @@ list-style-image:url(images/Right-pointer.png);
                   				<label style="margin-top:18px;">Email Id: </label>
                   			</div>
                   			<div class="col-md-11">
-                  				<input style="float:left;" id="pemail" class="form-control" type="text" placeholder="Email Id" disabled="true">
+                  				<input style="float:left;" id="pemail" class="form-control validate emailOnly" type="text"  placeholder="Email Id" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div><div class="clearfix"></div>
                   	</div>
@@ -292,7 +292,7 @@ list-style-image:url(images/Right-pointer.png);
                   				<label style="margin-top:18px; margin-left:5px;">Mobile Number: </label>
                   			</div>
                   			<div class="col-md-10">
-                  				<input class="form-control" type="text"  id="pmobilenumber" placeholder="Mobile Number" disabled="true">
+                  				<input class="form-control validate numericOnly2" maxlength="10" type="text"  id="pmobilenumber" onkeypress='validateMobile(event)' placeholder="Mobile Number" disabled="true">
                   				<input class="form-control" type="hidden"  id="customerid" placeholder="Mobile Number">
                   				<input class="form-control" type="hidden"  id="checkpass">
                   			</div><div class="clearfix"></div>
@@ -317,7 +317,7 @@ list-style-image:url(images/Right-pointer.png);
                   				<label style="margin-top:18px;">Current Password: </label>
                   			</div>
                   			<div class="col-md-9">
-                  				<input style="float:left;" id="pcurrentpassword" class="form-control" type="password" placeholder="*****" disabled="true">
+                  				<input style="float:left;" id="pcurrentpassword" class="form-control" maxlength="4" type="password" placeholder="*****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>
                   		<div class="col-sm-12">
@@ -325,7 +325,7 @@ list-style-image:url(images/Right-pointer.png);
                   				<label style="margin-top:18px;">New Password: </label>
                   			</div>
                   			<div class="col-md-9">
-                  				<input style="float:left;" id="pnewpassword" class="form-control" type="password" placeholder="*****" disabled="true">
+                  				<input style="float:left;" id="pnewpassword" class="form-control" maxlength="4" type="password" placeholder="*****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>
                   		<div class="col-sm-12">
@@ -333,7 +333,7 @@ list-style-image:url(images/Right-pointer.png);
                   				<label style="margin-top:18px;">Confirm Password: </label>
                   			</div>
                   			<div class="col-md-9">
-                  				<input style="float:left;" id="pconfirmpassword" class="form-control" type="password" placeholder="*****" disabled="true">
+                  				<input style="float:left;" id="pconfirmpassword" class="form-control" maxlength="4" type="password" placeholder="*****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>
                   	</div>
@@ -689,6 +689,17 @@ $('#savemobileno').click(function (){
 		error :  function(e){$.unblockUI();console.log(e);}
 		
 	});
-});		
+});	
+function validateMobile(evt) {
+	  var theEvent = evt || window.event;
+	  var key = theEvent.keyCode || theEvent.which;
+	  key = String.fromCharCode( key );
+	  var regex = /[0-9]/;
+	  if( !regex.test(key) ) {
+	    theEvent.returnValue = false;
+	    if(theEvent.preventDefault) theEvent.preventDefault();
+	  }
+	}
+	
 </script>
 <%@include file="abheefooter.jsp" %>
