@@ -87,7 +87,7 @@
 								<div class="form-group">
 								<label class="col-md-3 control-label no-padding-right ">Choose File  <span class="impColor">*</span></label> 
 									<div class="col-md-6">
-										<input class=" validate" type="file" name="imgfile"  style= "margin-top:15px;" id="imgfile" multiple />
+										<input class=" validate" type="file" name="imgfile"  onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="imgfile" multiple />
 									</div>
 								</div>
 								
