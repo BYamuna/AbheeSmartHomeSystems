@@ -199,6 +199,7 @@ function inactiveData() {
 			var alldata = jsonobj.allOrders1;
 			displayTable(alldata);
 			console.log(jsonobj.allOrders1);
+			 toolTips();
 				});
 		
 }

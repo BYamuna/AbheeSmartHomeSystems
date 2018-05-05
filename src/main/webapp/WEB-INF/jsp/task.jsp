@@ -963,6 +963,7 @@
 						var alldata = jsonobj.allOrders1;
 						var result = $.parseJSON(alldata);
 						displayTable(result);
+						 toolTips();
 					});
 		}
 	}
@@ -1015,6 +1016,7 @@
 					var alldata = jsonobj.allOrders1;
 					displayTable(alldata);
 					console.log(jsonobj.allOrders1);
+					 toolTips();
 				});
 
 	}
