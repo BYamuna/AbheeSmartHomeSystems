@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-   
+   <style>
+   	
+   </style>
     <%@include file="abheeheader.jsp" %>
 	<div class="container">
 		
@@ -66,3 +68,6 @@
 <%@include file="abheefooter.jsp" %>
 <script type="text/javascript">
 </script>
+    <script>
+    $(".home").addClass("active");
+    </script>

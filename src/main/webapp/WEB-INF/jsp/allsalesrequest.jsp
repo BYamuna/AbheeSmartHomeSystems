@@ -373,6 +373,6 @@ function addNewTextBox()
 }; */
 
 
-$("#pageName").text("All Sales Requests");
+$("#pageName").text("Quotation Request");
 $(".allsalesrequest").addClass("active"); 
 </script>

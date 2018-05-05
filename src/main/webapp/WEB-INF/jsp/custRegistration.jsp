@@ -371,12 +371,6 @@ $('#username').blur(function() {
 		}); 
 		
 
-
-
-
-
-
-
 function validate(id, errorMessage)
 {
 	var styleBlock = '.placeholder-style.placeholder-style::-moz-placeholder {color: #cc0000;} .placeholder-style::-webkit-input-placeholder {color: #cc0000;}';
@@ -443,10 +437,10 @@ function inactiveData() {
 	
 	
 	 
-	 /*  $('#mobilenumber').focusout(function(){
+	  $('#mobilenumber').focusout(function(){
 		  var cmobile=$(this).val();
 		  
-		if(cmobile.length != 10 ){
+		/* if(cmobile.length != 10 ){
 			
 			$('#cmobile').css('border-color', 'red');
 		// $('#submitModel').prop('disabled', true);
@@ -456,7 +450,7 @@ function inactiveData() {
 		 subValidation =false;
 		 
 		 event.preventDefault();
-		 }else {
+		 }else { */
 	
 	
 	$.ajax({
@@ -475,7 +469,6 @@ function inactiveData() {
 						setTimeout(function() { $("#errorMobileMsg").text(''); }, 3000);
 						 $('#submit1').prop('disabled', true);
 						 
-	 					 $('#submit1').prop('disabled', true);
 	 					subValidation =false;
 	 					
 	 					event.preventDefault();
@@ -486,7 +479,6 @@ function inactiveData() {
 						 $('#submit1').prop('disabled', false);
 						 subValidation =true;
 						 
-						 event.preventDefault();
 						} 
 					
 				},
@@ -498,10 +490,10 @@ function inactiveData() {
 				
 			});
 	
-		 }
-	  }); */
+		 
+	  }); 
 
-// 		}); 
+//	}); 
 		
 		
 $('#email').blur(function() {

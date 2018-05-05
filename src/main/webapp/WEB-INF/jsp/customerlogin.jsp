@@ -700,6 +700,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		$('#register-info').modal();
 		
 	}
+	$(".acc").addClass("active");
 
 	/* $('#cpassword').blur(function() {
 		ccpassword =$('#cpassword').val();

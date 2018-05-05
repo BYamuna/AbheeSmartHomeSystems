@@ -24,7 +24,7 @@
 <head>
     <meta charset="utf-8">
     <title>Abhee Smart Homes</title>
-    <link rel="shortcut icon" href="${baseurl }/assets/img/logoicon.jpg"/>
+    <link rel="shortcut icon" href="${baseurl }/abhee/images/icon.png"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -368,7 +368,7 @@ function getHeadersCounts(){
 
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner" style="background:#cccccc;">
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/klogo.png"  style ="width:280px; height:68px;" class="img-responsive"></a>
+            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/abhee/images/logo.png"  style ="width:220px; margin-left:-9px;" class="img-responsive"></a>
             <div class="clearfix"></div>
         </div>
 		<div class="masters">
@@ -509,7 +509,7 @@ function getHeadersCounts(){
             </security:authorize>
               <security:authorize access="hasRole('ROLE_ADMIN')">
               <li class="cate"><a href="${baseurl }/cate"><i class="fa fa-tags tag"></i> <span>Category</span></a></li>
-              <li class="allsalesrequest"><a href="${baseurl }/allsalesrequest"><i class="fa fa-totalallsalesrequest-hunt sreq"></i> <span>All Sales Request</span></a></li>
+              <li class="allsalesrequest"><a href="${baseurl }/allsalesrequest"><i class="fa fa-totalallsalesrequest-hunt sreq"></i> <span> Quotation Request</span></a></li>
              <li class="company"><a href="${baseurl }/company"><i class="fa  fa-building company"></i> <span> Company</span></a></li>
                  <li class="product"><a href="${baseurl }/product"><i class="fa fa-product-hunt prdct"></i> <span>Product Model</span></a></li>
                  <li class="abheecust"><a href="${baseurl }/custRegistration"><i class="fa fa-registered register"></i> <span>Customers</span></a></li>

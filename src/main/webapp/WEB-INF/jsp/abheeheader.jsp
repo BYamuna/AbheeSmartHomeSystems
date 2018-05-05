@@ -37,7 +37,12 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
     <!-- Google Fonts -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+     <script src="${baseurl }/abhee/js/bootstrap-dropdownhover.min.js"></script> 
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script type='text/javascript' src="${baseurl }/js/jquery.blockUI.min.js" ></script>
+     <script src='//static.codepen.io/assets/editor/live/console_runner-ce3034e6bde3912cc25f83cccb7caa2b0f976196f2f2d52303a462c826d54a73.js'>
+</script><script src='//static.codepen.io/assets/editor/live/css_live_reload_init-890dc39bb89183d4642d58b1ae5376a0193342f9aed88ea04330dc14c8d52f55.js'></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4TkibnxHHIJtDj1Dp59VAOSHp_sdA1KQ&sensor=false&libraries=places"></script>  
 <!--      <script src='https://maps.google.com/maps/api/js?sensor=false&libraries=places'></script> -->
 <style type="text/css">
@@ -55,7 +60,9 @@
 	font-size: 14px;
 	z-index:99999;
 }
-
+.myacd {
+min-width:104px;
+}
 </style>
 </head>
 <body>
@@ -89,24 +96,24 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="${baseurl }/">Home</a></li>
-        <li class="dropdown">
+        <li class="home"><a href="${baseurl }/">Home</a></li>
+        <li class="dropdown category">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Categories</a>
           <ul class="dropdown-menu">
           <li id="cmlist"></li>
           </ul>
         </li>
-        <li><a href="${baseurl }/mission">Our Mission & Vision</a></li>
-        <li><a href="${baseurl }/gallery">Gallery</a></li>
-        <li><a href="${baseurl }/career">Career</a></li>
-        <li><a href="${baseurl }/location">Our other Locations</a></li>
-        <li><a href="${baseurl }/contact">Contact Us</a></li>
-        <li><a href="${baseurl }/about">About Us</a></li>
+        <li class="vision"><a href="${baseurl }/mission">Our Mission & Vision</a></li>
+        <li class="gallery"><a href="${baseurl }/gallery">Gallery</a></li>
+        <li class="career"><a href="${baseurl }/career">Career</a></li>
+        <li class="location"><a href="${baseurl }/location">Our other Locations</a></li>
+        <li id="contact"><a href="${baseurl }/contact">Contact Us</a></li>
+        <li class="about"><a href="${baseurl }/about">About Us</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
+        <li class="dropdown acc">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">My Account</a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu myacd">
           <li id="cmlist"></li>
          
           
@@ -128,20 +135,10 @@
   	</div>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
 <%--     <script src="${baseurl }/abhee/js/bootstrap.min.js"></script> --%>
-    <script src="${baseurl }/abhee/js/bootstrap-dropdownhover.min.js"></script> 
+   
     
 <%-- 
 <script type='text/javascript' src="${baseurl }js/jquery.blockUI.min.js" ></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  --%>    
-  	<script type="text/javascript">
-  	 window.setTimeout(function() {
-	    $(".msgcss1").fadeTo(500, 0).slideUp(500, function(){
-	        $(this).remove(); 
-	    });
-	}, 5000);
-  	 
-  	 
   	
-  	
-  	</script>

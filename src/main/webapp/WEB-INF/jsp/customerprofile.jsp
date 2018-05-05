@@ -146,5 +146,6 @@ $('#customer').blur(function() {
 			});
 
 		}); 
+		$(".acc").addClass("active");
 </script>
 <%@include file="abheefooter.jsp" %>
