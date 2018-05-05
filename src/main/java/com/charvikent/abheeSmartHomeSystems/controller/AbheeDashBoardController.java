@@ -32,6 +32,7 @@ import com.charvikent.abheeSmartHomeSystems.dao.PriorityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ServiceDao;
 import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
+import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
@@ -65,6 +66,8 @@ public class AbheeDashBoardController {
 	AbheeTaskStatusDao abheeTaskStatusDao;
 	@Autowired
 	DashBoardDao dashBoardDao;
+	@Autowired
+	TaskHistoryLogsDao taskHistoryLogsDao;
 	
 	
 	@RequestMapping(value = "/severityBy")
@@ -153,13 +156,17 @@ public class AbheeDashBoardController {
 	{
 		LOGGER.debug("Calling  viewTicket at controller");
 		
-		if(pgn.equals("1"))
-		{
-			abheeTaskDao.openTask(taskId);
-		}
+		
 		
 			List<Map<String, Object>> viewtaskBean = abheeTaskDao.getAbheeTaskById(taskId);
 			model.addAttribute("test2",viewtaskBean);
+			
+			if(pgn.equals("1"))
+			{
+				abheeTaskDao.openTask(taskId);
+				
+				 taskHistoryLogsDao.historyLog1(viewtaskBean.get(0).get("id"));
+			}
 			
 			List<Map<String, Object>> statuslist=abheeTaskDao.getTaskStatusHistoryByTaskNo(taskId);
 			

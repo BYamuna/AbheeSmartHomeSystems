@@ -533,7 +533,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 		LOGGER.debug("Calling saveServiceRequest at controller");
 	
 		System.out.println("enter to task controller Submit");
-		
+		JSONObject objJson = new JSONObject();
 		String message=serviceRequest.getMessage();
 		String servicetypeid=serviceRequest.getServicetypeid();
 		String catid=serviceRequest.getCatid();
@@ -577,15 +577,16 @@ HashMap<String,String> hm =new HashMap<String,String>();
 		}
 
 		System.out.println(message+"  "+servicetypeid);
-		return "true";
+		objJson.put("msg", "true");
 		}
 		else
 		{
+			objJson.put("msg", "false");
 			System.out.println("Service request alreadyExists");
-			return "Your Request till didn't closed";
+			
 			
 		}
-		
+		return String.valueOf(objJson);
 	}
 	
 

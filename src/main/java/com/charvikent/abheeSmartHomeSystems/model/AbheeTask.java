@@ -72,9 +72,20 @@ public class AbheeTask  {
 	
 	private  String addComment;
 	
+	private  String communicationaddress;
 	
 	
 	
+	
+	
+	
+	
+	public String getCommunicationaddress() {
+		return communicationaddress;
+	}
+	public void setCommunicationaddress(String communicationaddress) {
+		this.communicationaddress = communicationaddress;
+	}
 	public String getCustomerId() {
 		return customerId;
 	}

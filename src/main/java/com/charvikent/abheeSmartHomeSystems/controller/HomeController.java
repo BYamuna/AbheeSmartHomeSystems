@@ -2,8 +2,12 @@ package com.charvikent.abheeSmartHomeSystems.controller;
 
 
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,6 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
+import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.User;
@@ -247,29 +252,16 @@ public class HomeController {
 		
 		Customer customerProfile=(Customer) session.getAttribute("customer");
 		//String id=String.valueOf(objuserBean.getId());
+          
+		List<Customer> customerList =new  ArrayList<Customer>(); 
+		customerList.add(customerProfile);
 
+		//model.addAttribute("customerProfile", customerProfile);
 
-		model.addAttribute("customerProfile", customerProfile);
-
+		ObjectMapper objectMapper = new ObjectMapper();
+		String sJson = objectMapper.writeValueAsString(customerList);
+		request.setAttribute("customerProfile1", sJson);
 		
-		/*String customerid=request.getParameter("custId");
-		String firstname=request.getParameter("firstname");
-		String Lastname=request.getParameter("lastname");
-		String mobileno=request.getParameter("mobilenumber");
-		String Address=request.getParameter("address");
-		Customer customer =customerDao.findCustomerByCustId(customerid);
-		String referalUrl=request.getHeader("referer");
-		if(null==loginurl)
-			{
-		session.setAttribute("customer", customer);
-		session.setAttribute("loggedstatus", "login");
-		//session.setAttribute("customerId", customer.getCustomerId());
-		session.setAttribute("firstname", customer.getFirstname());
-		session.setAttribute("lastname", customer.getLastname());
-		session.setAttribute("mobileno", customer.getMobilenumber());
-		session.setAttribute("address",customer.getAddress());
-		return "redirect:/";
-		}*/
 		return "customerprofile";
 	}
 	
@@ -330,5 +322,142 @@ public class HomeController {
 	}
 	
 	
+	@RequestMapping(value = "/editprofilecustomer", method = RequestMethod.POST)
+	public @ResponseBody  String editProfileCustomer(Model model,HttpServletRequest request) throws IOException, MessagingException 
+	{
+		LOGGER.debug("Calling editProfileCustomer at controller");
+	
+		
+		String firstname=request.getParameter("firstname");
+		String lastname=request.getParameter("lastname");
+		String address=request.getParameter("address");
+		String pemail=request.getParameter("pemail");
+		String pmobilenumber =request.getParameter("pmobilenumber");
+		String customerid =request.getParameter("customerid");
+		
+		
+		 Customer customer = new Customer();
+		 customer.setFirstname(firstname);
+		 customer.setLastname(lastname);
+		 customer.setAddress(address);
+		 customer.setEmail(pemail);
+		 customer.setMobilenumber(pmobilenumber);
+		 customer.setId(Integer.parseInt((customerid)));
+		 
+		 try {
+			customerDao.updateCustomerProfile(customer);
+			return "true";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
+		 
+		
+		
+	
+		
+		
+		
+	}
+	
+	@RequestMapping(value = "/saveProfilePassword", method = RequestMethod.POST)
+	public @ResponseBody  String saveProfilePassword(Model model,HttpServletRequest request) throws IOException, MessagingException 
+	{
+		LOGGER.debug("Calling saveProfilePassword at controller");
+	
+		
+		String pconfirmpassword =request.getParameter("pconfirmpassword");
+		String customerid =request.getParameter("customerid");
+		
+		
+		 Customer customer = new Customer();
+		 customer.setId(Integer.parseInt((customerid)));
+		 customer.setPassword(pconfirmpassword);
+		 
+		 try {
+			customerDao.updateCustomerProfilepassword(customer);
+			return "true";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
+		 
+		
+		
+	
+		
+		
+		
+	}
+	
+	//edit email
+	@RequestMapping(value = "/editprofileemail", method = RequestMethod.POST)
+	public @ResponseBody  String EditProfileEmail(Model model,HttpServletRequest request) throws IOException, MessagingException 
+	{
+		LOGGER.debug("Calling EditProfileEmail at controller");
+	
+		
+		String pemail=request.getParameter("pemail");
+		String customerid =request.getParameter("customerid");
+		
+		
+		 Customer customer = new Customer();
+		 customer.setId(Integer.parseInt((customerid)));
+		 customer.setEmail(pemail);
+		Customer profilecustomer =	customerDao.checkProfileEmailExistsOrNot(customer);
+			if( profilecustomer==null)
+			{ 
+				try 
+			{
+				customerDao.updateCustomerProfileEmail(customer);
+				return "true";
+			}
+			catch (Exception e) 
+				{
+				e.printStackTrace();
+				return "failed";
+				}		
+			}
+			else
+			{
+				return "false";
+			}
+		
+	}
 
+//edit mobileno
+	
+	
+	@RequestMapping(value = "/editprofilemobileno", method = RequestMethod.POST)
+	public @ResponseBody  String EditProfileMobileNo(Model model,HttpServletRequest request) throws IOException, MessagingException 
+	{
+		LOGGER.debug("Calling EditProfileMobileNo at controller");
+	
+		
+		String pmobilenumber =request.getParameter("pmobilenumber");
+		String customerid =request.getParameter("customerid");
+	
+		 Customer customer = new Customer();
+		 customer.setId(Integer.parseInt((customerid)));
+		 customer.setMobilenumber(pmobilenumber);
+		 Customer profilecustomer =	customerDao.checkProfileMobileNoExistsOrNot(customer);
+		 if(profilecustomer==null)
+		 {
+			 try 
+			 {
+				customerDao.updateCustomerProfileMobileNo(customer);
+				return "true";
+			 } 
+			 catch (Exception e) 
+			 {
+				e.printStackTrace();
+				return "failed";
+			 }
+		 }	
+		 else
+		 {
+			 return "false";
+		 }
+	}
+	
 }

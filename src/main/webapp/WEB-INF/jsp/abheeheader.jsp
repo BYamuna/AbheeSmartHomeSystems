@@ -98,6 +98,7 @@ min-width:104px;
       <ul class="nav navbar-nav">
         <li class="home"><a href="${baseurl }/">Home</a></li>
         <li class="dropdown category">
+        
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Categories</a>
           <ul class="dropdown-menu">
           <li id="cmlist"></li>

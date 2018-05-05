@@ -36,7 +36,7 @@ public class AbheeTaskDao {
 	
 	public List<Map<String,Object>> getTasksList()
 	{
-		String sql="select t.id,t.assignto,u.username,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,sev.severity, "
+		String sql="select t.id,t.assignto,u.username,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,sev.severity, t.communicationaddress "
 				 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id"
 				+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp"
 				+" where t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid order by t.updated_time desc";
@@ -62,7 +62,7 @@ public class AbheeTaskDao {
 		if(authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")))
 		{
 		 sql="select t.id,t.assignto,u.username,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,sev.severity, "
-				 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id"
+				 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id,t.communicationaddress "
 				+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp"
 				+" where t.kstatus<>'4' and t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.severity='"+sev+"' order by t.updated_time desc ";
 		
@@ -70,7 +70,7 @@ public class AbheeTaskDao {
 		else
 		{
 			sql="select t.id,t.assignto,u.username,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,sev.severity, "
-					 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id"
+					 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id, t.communicationaddress "
 					+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp"
 
 					+" where t.kstatus<>'4'and  t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.severity='"+sev+"' and t.assignto='"+objuserBean.getId()+"' order by t.updated_time desc ";
@@ -102,14 +102,14 @@ public class AbheeTaskDao {
 			{
 			
 		 sql="select t.id,t.assignto,u.username,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,sev.severity, "
-				 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id"
+				 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id, t.communicationaddress"
 				+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp"
 				+" where  t.kstatus<>'4' and t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.status='1'  order by t.created_time desc ";
 	}
 			else
 			{
 				sql="select t.id,t.assignto,u.username,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,sev.severity, "
-						 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id"
+						 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id , t.communicationaddress "
 						+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp"
 						+" where  t.kstatus<>'4' and  t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.status='1'and  t.assignto='"+objuserBean.getId()+" ' order by t.created_time desc " ;
 			}
@@ -138,14 +138,14 @@ public class AbheeTaskDao {
 			{
 			
 		 sql="select t.id,t.assignto,u.username,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,sev.severity, "
-				 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id"
+				 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id,t.communicationaddress"
 				+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp"
 				+" where t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.status='0'  order by t.created_time desc ";
 	}
 			else
 			{
 				sql="select t.id,t.assignto,u.username,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,sev.severity, "
-						 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id"
+						 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id,t.communicationaddress"
 						+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp"
 						+" where t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.status='0'and  t.assignto='"+objuserBean.getId()+" ' order by t.created_time desc ";
 			}
@@ -162,7 +162,7 @@ public class AbheeTaskDao {
 		 User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			
 			String sql="select t.id,t.assignto,u.username,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,sev.severity, "
-					 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id "
+					 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id ,t.communicationaddress"
 					+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp"
 					+" where  t.kstatus<>'4' and  t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and  t.additionalinfo ='0'and  t.assignto='"+objuserBean.getId()+"' order by t.updated_time desc ";
 			System.out.println(sql);
@@ -185,7 +185,7 @@ public void  openTask(String taskno) {
 			   task.setAdditionalinfo("1");
 			   task.setKstatus("2");
 			   entityManager.merge(task);
-			 taskHistoryLogsDao.historyLog(task);
+			// taskHistoryLogsDao.historyLog(task);
 			
 			}
 		}catch(Exception e){
@@ -215,7 +215,7 @@ private AbheeTask getAbheeTaskByTaskNo(String taskno) {
 public List<Map<String, Object>> getAbheeTaskById(String id) {
 	
 	String sql="select t.id,u.username,s.servicetypename,t.created_time,t.description,ts.name as statusname,p.priority,sev.severity, "
-			 + " t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id "
+			 + " t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id ,t.communicationaddress  "
 			+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp"
 			+" where t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.taskno='"+id+"' order by t.updated_time desc ";
 	System.out.println(sql);
@@ -258,7 +258,7 @@ public List<Map<String,Object>> getTasksListAssignToMeById(String id)
 		else*/
 		{
 			sql="select t.id,t.assignto,u.username,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,sev.severity, "
-					 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id "
+					 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id ,t.communicationaddress "
 					+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp"
 					+" where  t.kstatus<>'4' and  t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.status='1'and  t.assignto='"+id+"' order by t.updated_time desc ";
 		}
@@ -273,7 +273,7 @@ public List<Map<String,Object>> getTasksListAssignToMeById(String id)
 
 public List<Map<String, Object>> getTaskStatusHistoryByTaskNo(String taskno) {
 	
-	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname,t.created_time from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and taskno='LZIB9'  order by t.created_time desc";
+	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and taskno='"+taskno+" '  order by t.created_time desc";
 	
          System.out.println(hql);
 	

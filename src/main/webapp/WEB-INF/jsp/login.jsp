@@ -73,11 +73,11 @@
 
 <!-- <script type='text/javascript' src='assets/js/jquery-1.10.2.min.js'></script> -->
 <script type="text/javascript">
-/* window.setTimeout(function() {
+ window.setTimeout(function() {
     $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
         $(this).remove(); 
     });
-}, 5000); */
+}, 2000); 
 </script>
 
 </head>
@@ -91,13 +91,19 @@
 		<div class="panel-body">
 			<h4 class="text-center" style="margin-bottom: 25px;">Login to get started</h4>
 			<c:if test="${param.error ne null}">
-				<div class="alert-danger">Invalid username and password.</div>
+			   
+			   <div class="msgcss1 row">
+									<div align="center" class="form-group">
+										<div style="width:80%" class=" msgcss alert alert-danger fadeIn animated">Invalid username and password.</div>
+									</div>
+								</div>
+				<%-- <div class="alert-danger">Invalid username and password.</div>
 			
 				<div class="col-sm-12" style="margin-bottom: -1.3em;">
 					<div class="form-group">
 						<div class="msgcss fadeIn animated alert" style="text-align: center;">${msg}</div>
 					</div>
-				</div>
+				</div> --%>
 			</c:if>
 			
 			  <input type="hidden" name="userType" id="userType" value="adminUser"/>
@@ -122,6 +128,8 @@
 			<div class="pull-right">
 				<input type="submit" value="Sign-in"  class="btn btn-primary">
 				<input type="reset" value="Reset" class="btn btn-danger cancel"/>
+				<!-- <input type="reset" value="Reset" class="btn btn-default cancel"/>
+				<input type="submit" id="submit1" value="Sign-in"  class="btn btn-primary"> -->
 			</div>
 		</div>
 		<input type="hidden" name="${_csrf.parameterName}"
@@ -543,7 +551,20 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 
 			}); 
 	
+	/*  var pageURL = $(location).attr("href");
+     alert(pageURL);
+     
+     if(pageURL.endsWith("error")){
+    	    alert("String Found");
+    	    changeUrl();
+    	}
+	function changeUrl()
+	{
 	
+	var temp="/login/";
+	$(location).attr('href','http://'+temp);
+	
+	} */
 
 	/* $('#cpassword').blur(function() {
 		ccpassword =$('#cpassword').val();

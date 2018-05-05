@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 //import org.hibernate.Query
 
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.slf4j.Logger;
@@ -310,5 +311,68 @@ public List<Customer> getCustomerInActiveList()
 	return (List<Customer>)entityManager.createQuery("from Customer where enabled='0' order by updatedTime desc").getResultList();
 	
 }
+
+
+public void updateCustomerProfile(Customer user) 
+{
+	Customer uc= (Customer)entityManager.find(Customer.class ,user.getId());
+	
+	uc.setMobilenumber(user.getMobilenumber());
+	uc.setEmail(user.getEmail());
+	uc.setAddress(user.getAddress());
+	uc.setFirstname(user.getFirstname());
+	uc.setLastname(user.getLastname());
+	
+	entityManager.flush();
+	
+}
+
+public void updateCustomerProfilepassword(Customer customer) {
+Customer uc= (Customer)entityManager.find(Customer.class ,customer.getId());
+	
+	uc.setPassword(customer.getPassword());
+	
+	entityManager.flush();
+}
+
+public void updateCustomerProfileEmail(Customer customer) {
+	Customer uc= (Customer)entityManager.find(Customer.class ,customer.getId());
+	uc.setEmail(customer.getEmail());
+	entityManager.flush();
+}
+
+public void updateCustomerProfileMobileNo(Customer customer) {
+	Customer uc= (Customer)entityManager.find(Customer.class ,customer.getId());
+	uc.setMobilenumber(customer.getMobilenumber());
+	entityManager.flush();
+	
+}
+
+@SuppressWarnings("unchecked")
+public Customer checkProfileEmailExistsOrNot(Customer customer) {
+	
+	String hql ="from Customer where  email ='"+customer.getEmail()+"' and id <>'"+customer.getId()+"'";
+	Query query =entityManager.createQuery(hql);
+
+	List<Customer>ProfileCustomersList =query.getResultList();
+	if(ProfileCustomersList.isEmpty())
+           return null;
+           else
+	return ProfileCustomersList.get(0);
+}
+
+@SuppressWarnings("unchecked")
+public Customer checkProfileMobileNoExistsOrNot(Customer customer) {
+	String hql ="from Customer where  mobilenumber ='"+customer.getMobilenumber()+"' and id <>'"+customer.getId()+"'";
+	Query query =entityManager.createQuery(hql);
+
+	List<Customer>ProfileCustomersList =query.getResultList();
+	if(ProfileCustomersList.isEmpty())
+           return null;
+           else
+	return ProfileCustomersList.get(0);
+}
+
+
 
 }
