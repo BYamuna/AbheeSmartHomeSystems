@@ -24,7 +24,7 @@
 <head>
     <meta charset="utf-8">
     <title>Abhee Smart Homes</title>
-    <link rel="shortcut icon" href="${baseurl }/abhee/images/icon.png"/>
+    <link rel="shortcut icon" href="${baseurl }/abhee/images/icon.png" type="icon"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 

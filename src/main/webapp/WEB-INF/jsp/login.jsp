@@ -6,23 +6,21 @@
 <spring:url var="loginAction" value="/loginAction"></spring:url>
 <!DOCTYPE html>
 <html lang="en">
-
-<header>
+<head>
+    <meta charset="utf-8">
+    <title>Abhee Smart Homes</title>
+    <link rel="shortcut icon" href="${baseurl }/abhee/images/icon.png" type="icon"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 <link rel='stylesheet' type='text/css' href='assets/plugins/charts-morrisjs/morris.css' /> 
 <link rel='stylesheet' type='text/css' href='assets/plugins/codeprettifier/prettify.css' /> 
 <link rel='stylesheet' type='text/css' href='assets/plugins/form-toggle/toggles.css' /> 
 <link rel='stylesheet' type='text/css' href='assets/plugins/datatables/dataTables.css' />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</header>
-<head>
-    <meta charset="utf-8">
-    <title>Abhee Smart Homes</title>
-    <link rel="shortcut icon" href="/assets/img/logoicon.jpg"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  
+  </head>
 </body>
     <link rel="stylesheet" href="assets/css/styles.css">
 <!--     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'> -->
