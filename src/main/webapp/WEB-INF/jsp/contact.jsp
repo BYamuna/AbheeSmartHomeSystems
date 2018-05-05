@@ -37,6 +37,7 @@
                     	<input class="form-control" placeholder="Subject">
                     </div><div class="clearfix"></div>
                 </div><div class="clearfix"></div>
+                <a style="float:right;" class="btn btn-primary" type="button">Submit</a>
             </div>
         </div>
         <!-- Contact us starts here -->
