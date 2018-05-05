@@ -153,7 +153,7 @@ public class ProductDao
 		
 		List<Product> listProducts =new ArrayList<Product>();
 		
-		String hql ="select p.id,p.name,c.name as companyname,p.productmodelvideoslinks,p.productmodelpics,p.companyid from Product p,Company c where p.categoryid='"+categoryid+"' and p.companyid=c.id group by c.name";
+		String hql ="select p.id,p.name,c.name as companyname,p.productmodelvideoslinks,p.productmodelpics,p.companyid from Product p,Company c where p.categoryid='"+categoryid+"' and status='1' and p.companyid=c.id group by c.name";
 
 		@SuppressWarnings("unchecked")
 		List<Object[]> rows = entityManager.createQuery(hql).getResultList();
@@ -176,7 +176,7 @@ public class ProductDao
 }
 	
 	public List<Map<String,Object>> getProductModels(String categoryid,String companyId,String modelid){
-		StringBuffer buffer = new StringBuffer("select abc.category as categoryname,p.id,p.name,c.name as companyname,p.productmodelvideoslinks,p.productmodelpics,p.companyid,categoryid,p.description,p.product_model_specifications,product_price,max_allowed_discount from abhee_product p,abhee_company c,abheecategory abc where p.companyid=c.id and p.categoryid =abc.id ");
+		StringBuffer buffer = new StringBuffer("select abc.category as categoryname,p.id,p.name,c.name as companyname,p.productmodelvideoslinks,p.productmodelpics,p.companyid,categoryid,p.description,p.product_model_specifications,product_price,max_allowed_discount from abhee_product p,abhee_company c,abheecategory abc where p.companyid=c.id and p.categoryid =abc.id and status='1' ");
 		
 		if(categoryid  !=null && categoryid !="" )
 		{
