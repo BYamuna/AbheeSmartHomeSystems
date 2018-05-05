@@ -22,6 +22,21 @@
 	line-height: 0.8;
 	border-radius: 10px;
 }
+@media all and (max-width: 640px) and (min-width: 320px) {
+.popupunread{
+width:100% !important;
+margin-left:0px !important;
+}
+}
+.popupunread{
+width:1200px;
+margin-left:-298px;
+}
+.popupunread .close {
+margin-top:8px;
+color:#fff;
+opacity:1;
+}
 .btn-toolbar {
 	margin-top:5px;
 }
@@ -466,7 +481,7 @@
 	data-keyboard="false" role="dialog">
 	<div class="modal-dialog">
 		<!-- Modal content-->
-		<div class="col-md-12" style="width: 800px; margin-left: -55px;">
+		<div class="col-md-12 popupunread">
 			<div class="panel panel-primary">
 
 				<div class="panel-heading">
@@ -725,8 +740,8 @@ $("#severityTable").append(rowdata2);
 							var tblRow = "<tr'>"
 									+ "<td  title='"+orderObj.categoryName+"'>"+ orderObj.categoryName+ "</td>"
 									+ "<td title='"+assigned+"' ><a href='categoryDashBord?status=2&categoryId="+ orderObj.categoryId+ "'>"+ assigned+ "</a></td>"
-									+ "<td title='"+resolved+"'><a href='categoryDashBord?status=4&categoryId="+ orderObj.categoryId+ "'>"+ resolved+ "</td>"
-									+ "<td title='"+closed1+"'><a href='categoryDashBord?status=1&categoryId="+ orderObj.categoryId+ "'>"+ closed1 + "</td>"
+									+ "<td title='"+resolved+"'><a href='categoryDashBord?status=3&categoryId="+ orderObj.categoryId+ "'>"+ resolved+ "</td>"
+									+ "<td title='"+closed1+"'><a href='categoryDashBord?status=4&categoryId="+ orderObj.categoryId+ "'>"+ closed1 + "</td>"
 									+ "<td title='"+totalcategory+"'>"+ totalcategory + "</td>" 
 									+ "</tr >";
 							$(tblRow).appendTo("#categoryTable tbody");

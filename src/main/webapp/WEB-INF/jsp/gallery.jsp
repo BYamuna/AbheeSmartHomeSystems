@@ -85,4 +85,7 @@
       <!--//Gallery-->     
     </div><!-- container -->
     <script src="js/lightbox-plus-jquery.min.js"></script>
+    <script>
+    $(".gallery").addClass("active");
+    </script>
      <%@include file="abheefooter.jsp" %>

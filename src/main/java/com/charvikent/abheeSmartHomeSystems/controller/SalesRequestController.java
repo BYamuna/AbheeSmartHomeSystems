@@ -48,9 +48,9 @@ public class SalesRequestController
 		
 	}
 	@RequestMapping(value = "/salesRequest", method = RequestMethod.POST)
-	public String saveRequestDetails(@ModelAttribute("salesRequest")SalesRequest salesrequest,
+	public String saveRequestDetails(@ModelAttribute("salesRequest")SalesRequest salesRequest,
 									@RequestParam("imgfile") MultipartFile[] uploadedFiles,
-									@RequestParam(value = "locationData") String latlong,HttpServletRequest request,RedirectAttributes redir,HttpSession session) throws IllegalStateException, IOException, MessagingException
+									/*@RequestParam(value = "locationData") String latlong,*/HttpServletRequest request,RedirectAttributes redir,HttpSession session) throws IllegalStateException, IOException, MessagingException
 	{
 		
 		Customer customer=(Customer) session.getAttribute("customer");
@@ -58,17 +58,17 @@ public class SalesRequestController
 		
 		LOGGER.debug("Calling salesRequest at controller");
 		String referalUrl=request.getHeader("referer");
-		SalesRequest loginDetails = salesrequest;
+		SalesRequest loginDetails = salesRequest;
 		int filecount =0;
 		
-		String str[] = latlong.split("&");
+		String str[] = salesRequest.getLocationData().split("&");
 		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
 		
-		loginDetails.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
+		loginDetails.setSalesrequestnumber(salesRequest.getModelnumber()+randomNum);
 		loginDetails.setLat(str[0]);
 		loginDetails.setLongitude(str[1]);
 		loginDetails.setEnable("1");
-		salesrequest.setMobileno(customer.getMobilenumber());
+		salesRequest.setMobileno(customer.getMobilenumber());
    	 for(MultipartFile multipartFile : uploadedFiles) {
 				String fileName = multipartFile.getOriginalFilename();
 				if(!multipartFile.isEmpty())

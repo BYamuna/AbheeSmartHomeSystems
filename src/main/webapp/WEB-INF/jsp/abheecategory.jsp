@@ -174,6 +174,18 @@
 				</div> 
 
 <c:choose>
+    <c:when test="${empty param.model}">
+       <script type="text/javascript">
+        $("#productDetails").hide();
+       </script>
+    </c:when>
+    <c:otherwise>
+    <script type="text/javascript">
+	         $("#productModels").hide();
+	         </script>
+    </c:otherwise>
+</c:choose>
+<c:choose>
     <c:when test="${empty param.id}">
        <script>var catid="";
        var bradcrmcategory=false;</script>
@@ -491,4 +503,6 @@ $.each(productdetailslist, function(k,v){
 		  $('span.error-keyup-4').remove();
 	}
  
+	$('.category').addClass("active");
 </script>
+    

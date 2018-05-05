@@ -39,10 +39,18 @@
 
 
 <style type="text/css">
+.alert {
+    padding: 15px;
+    margin-bottom: 0px;
+    border: 1px solid transparent;
+    border-radius: 1px;
+}
 .alert-success, .alert-warning, .alert-danger{color: white !important;}
 .alert-success{background-color: #4CAF50 !important;}
 .alert-warning{background-color: #ff6600 !important;}
-.alert-danger{background-color: #d43f3a !important;}
+.alert-danger{background-color: #d43f3a !important; padding: 5px;
+    width: 208px;
+    margin: 0 auto;}
 
 .your-class::-webkit-input-placeholder {color: #e73d4a !important;}
 .your-class::-moz-placeholder {color: #e73d4a !important;}
@@ -93,7 +101,7 @@
 			
 				<div class="col-sm-12" style="margin-bottom: -1.3em;">
 					<div class="form-group">
-						<div class="msgcss fadeIn animated alert alert-danger" style="text-align: center;">${msg}</div>
+						<div class="msgcss fadeIn animated alert" style="text-align: center;">${msg}</div>
 					</div>
 				</div> --%>
 			</c:if>
@@ -118,8 +126,10 @@
 		</div>
 		<div class="panel-footer">
 			<div class="pull-right">
-				<input type="reset" value="Reset" class="btn btn-default cancel"/>
-				<input type="submit" id="submit1" value="Sign-in"  class="btn btn-primary">
+				<input type="submit" value="Sign-in"  class="btn btn-primary">
+				<input type="reset" value="Reset" class="btn btn-danger cancel"/>
+				<!-- <input type="reset" value="Reset" class="btn btn-default cancel"/>
+				<input type="submit" id="submit1" value="Sign-in"  class="btn btn-primary"> -->
 			</div>
 		</div>
 		<input type="hidden" name="${_csrf.parameterName}"

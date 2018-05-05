@@ -443,6 +443,7 @@ $('#customer').blur(function() {
 			});
 
 		}); 
+		$(".acc").addClass("active");
 		
 $('#editpersnolinfo').click(function (){
 	

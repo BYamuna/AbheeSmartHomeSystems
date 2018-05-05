@@ -7,5 +7,8 @@
         </div>
         <!-- Creers Ends Here -->    
     </div><!-- container -->
+	<script>
+		$(".career").addClass("active");
+	</script>
 
      <%@include file="abheefooter.jsp" %>

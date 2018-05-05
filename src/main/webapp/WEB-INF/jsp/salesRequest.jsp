@@ -5,8 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@include file="abheeheader.jsp" %>
-<script src='//static.codepen.io/assets/editor/live/console_runner-ce3034e6bde3912cc25f83cccb7caa2b0f976196f2f2d52303a462c826d54a73.js'>
-</script><script src='//static.codepen.io/assets/editor/live/css_live_reload_init-890dc39bb89183d4642d58b1ae5376a0193342f9aed88ea04330dc14c8d52f55.js'></script>
+
 <meta charset='UTF-8'><meta name="robots" content="noindex">
 <link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
 <link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
@@ -86,7 +85,7 @@
 								</div>
 								<div class="clearfix"></div>
 								<div class="form-group">
-								<label class="col-md-3 control-label no-padding-right">Choose File  <span class="impColor">*</span></label> 
+								<label class="col-md-3 control-label no-padding-right ">Choose File  <span class="impColor">*</span></label> 
 									<div class="col-md-6">
 										<input class=" validate" type="file" name="imgfile"  style= "margin-top:15px;" id="imgfile" multiple />
 									</div>
@@ -94,7 +93,7 @@
 								
 								<div class="clearfix"></div>
 									<div align="center" class="but">							
-					      				<input type="submit" id="submit1" value="Submit" class="btn-primary btn" onclick="submitRequest()"/>
+					      				<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
 					      				<input type="reset" value="Reset" class="btn-danger btn cancel"/>
 					      			</div>
 								</div>
@@ -107,19 +106,20 @@
 		</div>							
 					
 
-<%@include file="abheefooter.jsp" %>
-<script src='//static.codepen.io/assets/editor/live/console_runner-ce3034e6bde3912cc25f83cccb7caa2b0f976196f2f2d52303a462c826d54a73.js'></script>
-<script src='//static.codepen.io/assets/editor/live/css_live_reload_init-890dc39bb89183d4642d58b1ae5376a0193342f9aed88ea04330dc14c8d52f55.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/jonvadillo/pen/NNZzwB" />
+
+<script src='https://static.codepen.io/assets/editor/live/console_runner-ce3034e6bde3912cc25f83cccb7caa2b0f976196f2f2d52303a462c826d54a73.js'></script>
+<script src='https://static.codepen.io/assets/editor/live/css_live_reload_init-890dc39bb89183d4642d58b1ae5376a0193342f9aed88ea04330dc14c8d52f55.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/jonvadillo/pen/NNZzwB" />
 
 
 <!-- AIzaSyBof-nUbLfnD7fyKZ2DvfLXwWX-RPgdU8c -->
 <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBof-nUbLfnD7fyKZ2DvfLXwWX-RPgdU8c"></script>   -->
-<script src='//static.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+<!-- <script src='//static.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script> -->
+
 <!--  <script src='https://maps.google.com/maps/api/js?sensor=false&libraries=places'></script> -->
 <!-- <script src='https://cdn.rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.min.js'></script> -->
 <script type="text/javascript" src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
-<script >//Plugin used: https://github.com/Logicify/jquery-locationpicker-plugin
+<script>
+//Plugin used: https://github.com/Logicify/jquery-locationpicker-plugin
 console.log($('#id').val());
 $('#modelName').text(localStorage.getItem("modelName"));
 $('#modelnumber').val(localStorage.getItem("modelName"));
@@ -143,18 +143,27 @@ enableAutocomplete: true,
   onchanged: function (currentLocation, radius, isMarkerDropped) {
         var addressComponents = $(this).locationpicker('map').location.addressComponents;
       $("#locationData").val(currentLocation.latitude+'&'+currentLocation.longitude);
-    updateControls(addressComponents); //Data
+    //updateControls(addressComponents); //Data
+    
+    
+    	//var id = $(this).attr('id');
+    if( (currentLocation.latitude+'&'+currentLocation.longitude) !=  ""){
+    	
+    	removeBorder('locationData');
     }
+   
+    }
+    	
 });
 
 function updateControls(addressComponents) {
   console.log(addressComponents);
 }
 
-var styleBlock = '.placeholder-style.placeholder-style::-moz-placeholder {color: #cc0000;} .placeholder-style::-webkit-input-placeholder {color: #cc0000;}';
-function submitRequest()
-{
- idArrayCmt11 = $.makeArray($('.validate').map(function() {
+
+
+/* var styleBlock = '.placeholder-style.placeholder-style::-moz-placeholder {color: #cc0000;} .placeholder-style::-webkit-input-placeholder {color: #cc0000;}';
+idArrayCmt11 = $.makeArray($('.validate').map(function() {
 	return this.id;
 	}));
 validation = true;
@@ -178,25 +187,16 @@ $.each(idArrayCmt11, function(i, val) {
 });
 if(validation) {
 	
-	
-	$("#submit1").attr("disabled",true);
-	$("#submit1").val("Please wait...");
+	$("#submitSalesRequest").attr("disabled",true);
+	$("#submitSalesRequest").val("Please wait...");
 	$("form").submit();	
-}else {
-	event.preventDefault();
-	return false;
-}
+	
+} */
 
-
-
-/* var form = $('#completeData')[0];
-
-var data = new FormData(form);
- */
-
-			var modelnumber=$('#modelnumber').val();
-			var email=$('#email').val();
-			var mobileno=$('#mobileno').val();
+	
+/*  var modelnumber=$('#modelnumber').val();
+			//var email=$('#email').val();
+			//var mobileno=$('#mobileno').val();
 	    	var locationData=$('#locationData').val();
 	    	var address=$('#address').val();
 	    	var reqdesc=$('#reqdesc').val();
@@ -205,7 +205,7 @@ var data = new FormData(form);
 	    	//var params = form.serializeArray();
 	    	
 	    	
-	    	var salesRequest = {	"modelnumber":modelnumber,	"email":email,"mobileno":mobileno,"address":address,"reqdesc":reqdesc};
+	    	var salesRequest = {"modelnumber":modelnumber,"address":address,"reqdesc":reqdesc};
 	    	var salesreq= JSON.stringify(salesRequest);
 		   
 		   var formData = new FormData();
@@ -219,7 +219,7 @@ var data = new FormData(form);
 		   
 		   
 		   
-    	var ins = document.getElementById('imgfile').files.length;
+    	/* var ins = document.getElementById('imgfile').files.length;
     	
     	for(var i=0; i< ins; i++)
     	{	
@@ -228,10 +228,7 @@ var data = new FormData(form);
 		} 
     	
     	
-    	/* //Now Looping the parameters for all form input fields and assigning them as Name Value pairs. 
-        $(params).each(function (index, element) {
-            formData.append(element.name, element.value);
-        }); */
+    	
     	console.log(formData);
  		$.ajax({
 			type:"POST",
@@ -254,9 +251,11 @@ var data = new FormData(form);
 	        }
 				    
 		});
-	
-}
-$('.validate').keydown(function() {
+ 		 */  
+ 	
+
+ 		 
+ /* $('.validate').keydown(function() {
 	var id = $(this).attr('id');
 	removeBorder(id);
 });
@@ -268,9 +267,9 @@ function removeBorder(el){
 	  if ($("#" + el+"_chosen").length)
 		{
 			$("#" +el+"_chosen").children('a').css('border-color','black');
-		}
-} 
+		} 
+} */
 //$("#pageName").text("-------");
  </script>
- </html>
- 
+
+ <%@include file="abheefooter.jsp" %>
