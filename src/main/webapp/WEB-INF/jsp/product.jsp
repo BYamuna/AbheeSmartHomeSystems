@@ -3,7 +3,11 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
-
+<style>
+	#0>.fa-trash {
+		display:none;
+	}
+</style>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
 		<li><a href="dashBoard">Home</a></li>
@@ -123,23 +127,6 @@
                     			</div>
                     		</div>
                     		<div class="col-md-6">
-                    			<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">VideosLinks Id(11Digits)<!-- <span class="impColor">*</span> --></label>
-								    <div class="col-md-3" id ="dtext">
-										<input type="text" id="name1" name='vlink' class="form-control " maxlength="11"  placeholder="Enter  Videolink Id"/>	
-										<span class="hasError" id="stationnameError"></span>
-								    </div> 
-								    <div><input type="button" value="Add Another Link id" onclick="addNewTextBox()"></div>
-								    	<form:hidden path="productmodelvideoslinks"/>
-                    			</div>
-                    		</div>
-                    		</div>
-                    		
-                    		
-                    		
-                    	
-                    	<div class="row">
-                    		<div class="col-md-6">
                     			<div class="form-group" id="fileDiv">
 									<label for="focusedinput" class="col-md-6 control-label">Product Images <span class="impColor">*</span></label>
 									<div class="col-md-5">
@@ -147,6 +134,25 @@
 									</div>
                     			</div>
                     		</div>
+                    		
+                    		</div>
+                    		
+                    		
+                    		
+                    	
+                    	<div class="row">
+                    	<div class="col-md-6">
+                    			<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">VideosLinks Id(11Digits)<!-- <span class="impColor">*</span> --></label>
+								    <div class="col-md-3" id ="dtext">
+										<input type="text" id="name1" name='vlink' class="form-control " maxlength="11"  placeholder="Enter  Videolink Id"/>	
+										<span class="hasError" id="stationnameError"></span>
+								    </div> 
+								    <div><input type="button" value="Add Another" onclick="addNewTextBox()"></div>
+								    	<form:hidden path="productmodelvideoslinks"/>
+                    			</div>
+                    		</div>
+                    		
                     		
                     	</div>
                     		
@@ -187,6 +193,7 @@
 	 } );
 }); */
 
+var k =1;
 
 var listOrders1 = ${allOrders1};
 if (listOrders1 != "") {
@@ -263,10 +270,12 @@ function editProduct(id) {
         for(var i=0;i<videosParts.length;i++)
         	{
         	
+        	
         	j=i+1;
         	
-        	var row ="<div><input type='text' name='vlink' id='name"+j+"' value ='"+videosParts[i]+"' class='form-control validate' length='11' placeholder='Enter Videos links'/></div>";
+        	var row ="<div id="+i+"><input type='text' name='vlink' id='name"+j+"' value ='"+videosParts[i]+"' class='form-control validate' length='11' placeholder='Enter Videos links'/><a href='javascript:void(0);' style='color: red;' onclick='removeDependentRow("+i+");'><i class='fa fa-trash' style='color: red;text-decoration: none;cursor: pointer; float: right; margin-top:-25px; margin-right:-25px;'></i></a></div>";
         	$("#dtext").append(row);
+        	
         	
         	}
 
@@ -339,10 +348,10 @@ function inactiveData()
 		
 }
 
-var i =1;
+
 function addNewTextBox()
 {
-	 var  dvalue =  $("#name"+i).val().trim();
+	 var  dvalue =  $("#name"+k).val().trim();
 	 if((dvalue == undefined) || (dvalue==''))
 	 {
 		 return false;
@@ -350,15 +359,22 @@ function addNewTextBox()
 	 }
 	 else
 		 {
-			i=i+1;
-	var row ="<div><input type='text' name='vlink' id='name"+i+"' class='form-control validate' placeholder='Enter Videos links'/></div>";
+			k=k+1;
+	var row ="<div id="+k+"><input type='text' name='vlink' id='name"+k+"' class='form-control validate' placeholder='Enter Videos links'/><a href='javascript:void(0);' style='color: red;' onclick='removeDependentRow("+k+");'><i class='fa fa-trash' style='color: red;text-decoration: none;cursor: pointer; float: right; margin-top:-25px; margin-right:-25px;'></i></a></div>";
 	$("#dtext").append(row);
 	
 		 }
 	
 	
 	}
+function removeDependentRow(dependentRowCount) {
+	jQuery('#' + dependentRowCount).remove();
 	
+	k=k-1;
+
+	
+	
+}
 	
 
 document.getElementById("file1").onchange = function () {
