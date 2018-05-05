@@ -133,27 +133,27 @@
     border-radius: 3px;
 }
 .list-items li a {
-    font-size: 16px;
+	font-size:12px;
     color: #000;
     margin: 0;
     display: block;
     padding: 13px 25px 14px 0px;
     transition: none;
     border: 1px solid #e7e7e7 !important; border-left: none !important; transition: all 0.4s ease 0s;
-    font-weight: 400;
 }
 .list-items li a:hover {
+	font-size:12px;
     color: #fff;
     text-decoration: none;
     border-right: none;
     border-left: none !important;
 }
 .list-items li.active a {
+	font-size:12px;
     background: #013950 !important;
     color: #fff;
     border: none;
-    padding: 13px 25px 14px 0px;
-    border-right-color: #013950 !important; border: 1px solid #013950 !important; font-weight: 700;
+    border-right-color: #013950 !important; border: 1px solid #013950 !important;
 }
 .nav.list-items > li > a:focus,
 .nav.list-items > li > a:hover {
@@ -192,6 +192,9 @@
 .ulimagecss{
 list-style-image:url(images/Right-pointer.png);
 }
+.col-md-6 h3 {
+color:#ea8080 !important;
+}
 </style>
     
 
@@ -201,7 +204,7 @@ list-style-image:url(images/Right-pointer.png);
       <div>
         <div class="">
           <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-2">
               <ul class="nav nav-tabs list-items">
                 <li class="arrow_box active"><a data-toggle="tab" href="#1_1">Personal Information</a> </li>
                 <li class="arrow_box"><a data-toggle="tab" href="#1_2">Change Email</a> </li>
@@ -210,7 +213,7 @@ list-style-image:url(images/Right-pointer.png);
                 <li class="arrow_box"><a data-toggle="tab" href="#1_5">My Orders</a> </li>
               </ul>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-10">
               <!-- Tab panes -->
               <div class="tab-content">
                 <div class="tab-pane fade active in" id="1_1">
@@ -229,16 +232,20 @@ list-style-image:url(images/Right-pointer.png);
                   			<div class="col-md-3">
                   				<label style="margin-top:18px;">First Name: </label>
                   			</div>
-                  			<div class="col-md-9">
+                  			<div class="col-md-5">
                   				<input class="form-control" id="firstname" type="text" placeholder="First Name">
+                  			</div>
+                  			<div class="4">
                   			</div><div class="clearfix"></div>
                   		</div>
                   		<div class="col-sm-6">
                   			<div class="col-md-3">
-                  				<label style="margin-top:18px;  idmargin-left:5px;">Last Name: </label>
+                  				<label style="margin-top:18px;  margin-left:5px;">Last Name: </label>
                   			</div>
-                  			<div class="col-md-9">
+                  			<div class="col-md-5">
                   				<input class="form-control" type="text" id="lastname"  placeholder="Last Name" >
+                  			</div>
+                  			<div class="4">
                   			</div><div class="clearfix"></div>
                   		</div><div class="clearfix"></div>
                   		<div class="ainfo">
@@ -264,13 +271,17 @@ list-style-image:url(images/Right-pointer.png);
                   		</div><div class="clearfix"></div>
                   	</div>
                   	<div class="cdata">
-                  		<div class="col-sm-12">
-                  			<div class="col-md-1">
+                  		<div class="col-sm-6">
+                  			<div class="col-md-2">
                   				<label style="margin-top:18px;">Email Id: </label>
                   			</div>
-                  			<div class="col-md-11">
+                  			<div class="col-md-6">
                   				<input style="float:left;" id="pemail" class="form-control" type="text" placeholder="Email Id" disabled="true">
+                  			</div>
+                  			<div class="col-md-4">
                   			</div><div class="clearfix"></div>
+                  		</div>
+                  		<div class="col-md-6">
                   		</div><div class="clearfix"></div>
                   	</div>
                   </div>
@@ -287,15 +298,19 @@ list-style-image:url(images/Right-pointer.png);
                   		</div><div class="clearfix"></div>
                   	</div>
                   	<div class="cdata">
-                  		<div class="col-sm-12">
-                  			<div class="col-md-2">
+                  		<div class="col-sm-6">
+                  			<div class="col-md-3">
                   				<label style="margin-top:18px; margin-left:5px;">Mobile Number: </label>
                   			</div>
                   			<div class="col-md-10">
-                  				<input class="form-control" type="text"  id="pmobilenumber" placeholder="Mobile Number" disabled="true">
+                  				<input class="form-control validate numericOnly2" maxlength="10" type="text"  id="pmobilenumber" onkeypress='validateMobile(event)' placeholder="Mobile Number" disabled="true">
                   				<input class="form-control" type="hidden"  id="customerid" placeholder="Mobile Number">
                   				<input class="form-control" type="hidden"  id="checkpass">
+                  			</div>
+                  			<div class="col-md-4">
                   			</div><div class="clearfix"></div>
+                  		</div>
+                  		<div class="col-md-6">
                   		</div><div class="clearfix"></div>
                   	</div>
                   </div>
@@ -312,30 +327,36 @@ list-style-image:url(images/Right-pointer.png);
                   		</div><div class="clearfix"></div>
                   	</div>
                   	<div class="pdata">
-                  		<div class="col-sm-12">
-                  			<div class="col-md-3">
-                  				<label style="margin-top:18px;">Current Password: </label>
+                  		<div class="col-sm-6">
+                  			<div class="col-md-4">
+                  				<label style="margin-top:-5px;">Current Password: </label>
                   			</div>
                   			<div class="col-md-9">
-                  				<input style="float:left;" id="pcurrentpassword" class="form-control" type="password" placeholder="*****" disabled="true">
+                  				<input style="float:left;" id="pcurrentpassword" class="form-control" maxlength="4" type="password" placeholder="*****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>
-                  		<div class="col-sm-12">
-                  			<div class="col-md-3">
-                  				<label style="margin-top:18px;">New Password: </label>
+                  		<div class="col-sm-6">
+                  		</div><div class="clearfix"></div>
+                  		<div class="col-sm-6">
+                  			<div class="col-md-4">
+                  				<label style="margin-top:-5px;">New Password: </label>
                   			</div>
                   			<div class="col-md-9">
-                  				<input style="float:left;" id="pnewpassword" class="form-control" type="password" placeholder="*****" disabled="true">
+                  				<input style="float:left;" id="pnewpassword" class="form-control" maxlength="4" type="password" placeholder="*****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>
-                  		<div class="col-sm-12">
-                  			<div class="col-md-3">
-                  				<label style="margin-top:18px;">Confirm Password: </label>
+                  		<div class="col-sm-6">
+                  		</div><div class="clearfix"></div>
+                  		<div class="col-sm-6">
+                  			<div class="col-md-4">
+                  				<label style="margin-top:-5px;">Confirm Password: </label>
                   			</div>
                   			<div class="col-md-9">
-                  				<input style="float:left;" id="pconfirmpassword" class="form-control" type="password" placeholder="*****" disabled="true">
+                  				<input style="float:left;" id="pconfirmpassword" class="form-control" maxlength="4" type="password" placeholder="*****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>
+                  		<div class="col-sm-6">
+                  		</div><div class="clearfix"></div>
                   	</div>
                   </div>
                 </div>
@@ -690,6 +711,17 @@ $('#savemobileno').click(function (){
 		error :  function(e){$.unblockUI();console.log(e);}
 		
 	});
-});		
+});	
+function validateMobile(evt) {
+	  var theEvent = evt || window.event;
+	  var key = theEvent.keyCode || theEvent.which;
+	  key = String.fromCharCode( key );
+	  var regex = /[0-9]/;
+	  if( !regex.test(key) ) {
+	    theEvent.returnValue = false;
+	    if(theEvent.preventDefault) theEvent.preventDefault();
+	  }
+	}
+	
 </script>
 <%@include file="abheefooter.jsp" %>
