@@ -152,11 +152,11 @@
 									<label for="focusedinput" class="col-md-6 control-label">Service Request
 										DeadLine <span class="impColor">*</span>
 									</label>
-									<div class="col-md-6">
+									
 										<form:input type="text" path="taskdeadline"
-											class="form-control validate"  onfocus="removeBorder(this.id)"/>
+											class="col-xs-10 col-sm-5 validate"  onfocus="removeBorder(this.id)"/>
 
-									</div>
+									
 								</div>
 							</div>
 							
@@ -183,16 +183,16 @@
 									<label for="focusedinput" class="col-md-6 control-label">Description
 										<span class="impColor">*</span>
 									</label>
-									<div class="col-md-5">
+									
 										<form:textarea path="description"
-											class="form-control validate" placeholder="Enter Description" />
+											class="col-xs-10 col-sm-5 validate" placeholder="Enter Description" />
 										<span class="hasError" id="stationnameError"></span>
-									</div>
+									
 								</div>
 							</div>
 							
 						</div>
-
+<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
 								<label
@@ -211,12 +211,13 @@
 
 										<span class="impColor">*</span>
 									</label>
-									<div class="col-md-5">
+									
 										<form:textarea path="addComment"
-											class="form-control validate " placeholder="Enter Comment" />
+											class="col-xs-10 col-sm-5 validate " placeholder="Enter Comment" />
 										<span class="hasError" id="stationnameError"></span>
-									</div>
+									
 								</div>
+							</div>
 							</div>
 						
 
@@ -963,6 +964,7 @@
 						var alldata = jsonobj.allOrders1;
 						var result = $.parseJSON(alldata);
 						displayTable(result);
+						 toolTips();
 					});
 		}
 	}
@@ -1015,6 +1017,7 @@
 					var alldata = jsonobj.allOrders1;
 					displayTable(alldata);
 					console.log(jsonobj.allOrders1);
+					 toolTips();
 				});
 
 	}

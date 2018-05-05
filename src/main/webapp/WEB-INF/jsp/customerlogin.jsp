@@ -707,8 +707,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		$('#register-info').modal();
 		
 	}
-	
-	
+	$(".acc").addClass("active");
 	
 	
 

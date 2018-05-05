@@ -39,6 +39,9 @@
         </div>
         </div>
         <!-- Location End Here -->
+        <script>
+        	$(".location").addClass("active");
+        </script>
    <%@include file="abheefooter.jsp" %>      
        
 

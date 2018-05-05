@@ -24,7 +24,7 @@
 <head>
     <meta charset="utf-8">
     <title>Abhee Smart Homes</title>
-    <link rel="shortcut icon" href="${baseurl }/assets/img/logoicon.jpg"/>
+    <link rel="shortcut icon" href="${baseurl }/abhee/images/icon.png" type="icon"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -42,10 +42,10 @@
     <!-- The following CSS are included as plugins and can be removed if unused-->
 
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/charts-morrisjs/morris.css' /> 
-<link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/codeprettifier/prettify.css' /> 
+<link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/codeprettifier/prettify.css' />
+<%-- <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/codeprettifier/prettify.css' />  --%> 
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/form-toggle/toggles.css' /> 
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/charts-morrisjs/morris.css' /> 
-<link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/codeprettifier/prettify.css' /> 
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/form-toggle/toggles.css' /> 
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/datatables/dataTables.css' /> 
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/css/styles.css' /> 
@@ -271,6 +271,12 @@ color: inherit !important;
     .prdct {
     color: #dab729 !important;
     }
+    .cert {
+    color: #ff7600 !important;
+    }
+    .sales {
+    color: #00118a !important
+    }
 </style>
 <script type="text/javascript">
 	var isClick = 'No';
@@ -319,7 +325,7 @@ function toolTips(){
 		$('.deactivate').attr('data-toggle','tooltip');
 		$('.deactivate').attr('data-original-title','Deactivate');
 		$('.comment').attr('data-toggle', 'tooltip');
-		$('.comment').attr('data-original-title', 'Add Comment');
+		$('.comment').attr('data-original-title', 'Send Email');
 		$('.time').attr('data-toggle', 'tooltip');
 		$('.time').attr('data-original-title', 'View Deadline');
 		$('.history').attr('data-toggle','tooltip');
@@ -368,7 +374,7 @@ function getHeadersCounts(){
 
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner" style="background:#cccccc;">
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/klogo.png"  style ="width:280px; height:68px;" class="img-responsive"></a>
+            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/abhee/images/logo.png"  style ="width:220px; margin-left:-9px;" class="img-responsive"></a>
             <div class="clearfix"></div>
         </div>
 		<div class="masters">
@@ -509,7 +515,7 @@ function getHeadersCounts(){
             </security:authorize>
               <security:authorize access="hasRole('ROLE_ADMIN')">
               <li class="cate"><a href="${baseurl }/cate"><i class="fa fa-tags tag"></i> <span>Category</span></a></li>
-              <li class="allsalesrequest"><a href="${baseurl }/allsalesrequest"><i class="fa fa-totalallsalesrequest-hunt sreq"></i> <span>All Sales Request</span></a></li>
+              <li class="allsalesrequest"><a href="${baseurl }/allsalesrequest"><i class="fa fa-shopping-basket sales"></i> <span>Quotation Requests</span></a></li>
              <li class="company"><a href="${baseurl }/company"><i class="fa  fa-building company"></i> <span> Company</span></a></li>
                  <li class="product"><a href="${baseurl }/product"><i class="fa fa-product-hunt prdct"></i> <span>Product Model</span></a></li>
                  <li class="abheecust"><a href="${baseurl }/custRegistration"><i class="fa fa-registered register"></i> <span>Customers</span></a></li>
@@ -527,7 +533,7 @@ function getHeadersCounts(){
                 <li class="CustomerType"><a href="${baseurl }/customerType"><i class="fa fa-user register"></i> <span>Customer Type</span></a></li>
               </security:authorize> --%>
               <security:authorize access="hasRole('ROLE_ADMIN')">
-                <li class="productGuarantee"><a href="${baseurl }/productGuarantee"><i class="fas fa-certificate register"></i> <span> Product Warranty</span></a></li>
+                <li class="productGuarantee"><a href="${baseurl }/productGuarantee"><i class="fa fa-certificate cert"></i> <span> Product Warranty</span></a></li>
               </security:authorize>
 			</ul>
 		</div>

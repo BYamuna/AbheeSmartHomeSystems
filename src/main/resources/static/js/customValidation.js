@@ -51,7 +51,7 @@ $('.mobilenumber').keyup(function() {
         
         return false;
     }else{
-    	
+    	$('.mobilenumber' ).removeClass("errorCls");
     	return true;
     }
     }else{

@@ -121,7 +121,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">GST<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:input path="gst" class="form-control numericOnly validate"  maxlength="10" placeholder="Enter GST"/>
+										<form:input path="gst" class="form-control  validate"  maxlength="10" placeholder="Enter GST"/>
 									</div>
 								</div>
 								</div>
@@ -371,12 +371,6 @@ $('#username').blur(function() {
 		}); 
 		
 
-
-
-
-
-
-
 function validate(id, errorMessage)
 {
 	var styleBlock = '.placeholder-style.placeholder-style::-moz-placeholder {color: #cc0000;} .placeholder-style::-webkit-input-placeholder {color: #cc0000;}';
@@ -433,7 +427,8 @@ function inactiveData() {
 			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;
 			displayTable(alldata);
-			console.log(jsonobj.allOrders1);
+			//console.log(jsonobj.allOrders1);
+			 toolTips();
 				});
 		
 }
@@ -443,10 +438,10 @@ function inactiveData() {
 	
 	
 	 
-	 /*  $('#mobilenumber').focusout(function(){
+	  $('#mobilenumber').focusout(function(){
 		  var cmobile=$(this).val();
 		  
-		if(cmobile.length != 10 ){
+		/* if(cmobile.length != 10 ){
 			
 			$('#cmobile').css('border-color', 'red');
 		// $('#submitModel').prop('disabled', true);
@@ -456,7 +451,7 @@ function inactiveData() {
 		 subValidation =false;
 		 
 		 event.preventDefault();
-		 }else {
+		 }else { */
 	
 	
 	$.ajax({
@@ -475,7 +470,6 @@ function inactiveData() {
 						setTimeout(function() { $("#errorMobileMsg").text(''); }, 3000);
 						 $('#submit1').prop('disabled', true);
 						 
-	 					 $('#submit1').prop('disabled', true);
 	 					subValidation =false;
 	 					
 	 					event.preventDefault();
@@ -486,7 +480,6 @@ function inactiveData() {
 						 $('#submit1').prop('disabled', false);
 						 subValidation =true;
 						 
-						 event.preventDefault();
 						} 
 					
 				},
@@ -498,10 +491,10 @@ function inactiveData() {
 				
 			});
 	
-		 }
-	  }); */
+		 
+	  }); 
 
-// 		}); 
+//	}); 
 		
 		
 $('#email').blur(function() {

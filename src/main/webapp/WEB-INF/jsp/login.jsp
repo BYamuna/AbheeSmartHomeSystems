@@ -6,23 +6,21 @@
 <spring:url var="loginAction" value="/loginAction"></spring:url>
 <!DOCTYPE html>
 <html lang="en">
-
-<header>
+<head>
+    <meta charset="utf-8">
+    <title>Abhee Smart Homes</title>
+    <link rel="shortcut icon" href="${baseurl }/abhee/images/icon.png" type="icon"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 <link rel='stylesheet' type='text/css' href='assets/plugins/charts-morrisjs/morris.css' /> 
 <link rel='stylesheet' type='text/css' href='assets/plugins/codeprettifier/prettify.css' /> 
 <link rel='stylesheet' type='text/css' href='assets/plugins/form-toggle/toggles.css' /> 
 <link rel='stylesheet' type='text/css' href='assets/plugins/datatables/dataTables.css' />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</header>
-<head>
-    <meta charset="utf-8">
-    <title>Abhee Smart Homes</title>
-    <link rel="shortcut icon" href="/assets/img/logoicon.jpg"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  
+  </head>
 </body>
     <link rel="stylesheet" href="assets/css/styles.css">
 <!--     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'> -->
@@ -39,10 +37,18 @@
 
 
 <style type="text/css">
+.alert {
+    padding: 15px;
+    margin-bottom: 0px;
+    border: 1px solid transparent;
+    border-radius: 1px;
+}
 .alert-success, .alert-warning, .alert-danger{color: white !important;}
 .alert-success{background-color: #4CAF50 !important;}
 .alert-warning{background-color: #ff6600 !important;}
-.alert-danger{background-color: #d43f3a !important;}
+.alert-danger{background-color: #d43f3a !important; padding: 5px;
+    width: 208px;
+    margin: 0 auto;}
 
 .your-class::-webkit-input-placeholder {color: #e73d4a !important;}
 .your-class::-moz-placeholder {color: #e73d4a !important;}
@@ -93,7 +99,7 @@
 			
 				<div class="col-sm-12" style="margin-bottom: -1.3em;">
 					<div class="form-group">
-						<div class="msgcss fadeIn animated alert alert-danger" style="text-align: center;">${msg}</div>
+						<div class="msgcss fadeIn animated alert" style="text-align: center;">${msg}</div>
 					</div>
 				</div> --%>
 			</c:if>
@@ -118,8 +124,10 @@
 		</div>
 		<div class="panel-footer">
 			<div class="pull-right">
-				<input type="reset" value="Reset" class="btn btn-default cancel"/>
-				<input type="submit" id="submit1" value="Sign-in"  class="btn btn-primary">
+				<input type="submit" value="Sign-in"  class="btn btn-primary">
+				<input type="reset" value="Reset" class="btn btn-danger cancel"/>
+				<!-- <input type="reset" value="Reset" class="btn btn-default cancel"/>
+				<input type="submit" id="submit1" value="Sign-in"  class="btn btn-primary"> -->
 			</div>
 		</div>
 		<input type="hidden" name="${_csrf.parameterName}"

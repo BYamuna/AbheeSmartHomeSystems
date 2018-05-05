@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "abheeSalesRequest")
@@ -28,10 +29,18 @@ public class SalesRequest
 	private String lat;
 	private String longitude;
 	private String customerid;
+	@Transient
+	private String locationData;
 
 
 
 
+	public String getLocationData() {
+		return locationData;
+	}
+	public void setLocationData(String locationData) {
+		this.locationData = locationData;
+	}
 	public String getEnable() {
 		return enable;
 	}

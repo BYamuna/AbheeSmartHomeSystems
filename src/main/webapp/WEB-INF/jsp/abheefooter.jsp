@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
 .btn1 {
 background-color:#337ab7 !important;
@@ -10,7 +9,8 @@ label, .form-control {
 	margin-top:10px;
 }
 </style>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
+
 	<div class="container">
         <div class="footer">
         	<div style="padding-left:15px;padding-right:15px;" class="col-md-3">
@@ -46,6 +46,9 @@ width="250" height="200" frameborder="0" ></iframe>
         </div>
 	</div>
 	
+	
+	
+<%-- 	
 	<!--service Model start here to   -->
 	 
 <div class="modal fade" id="formModal" data-backdrop="static" data-keyboard="false" role="dialog">
@@ -107,46 +110,53 @@ width="250" height="200" frameborder="0" ></iframe>
 				
 			</div>  
       	</div> 
-	
-	
-</body>
-<c:choose>
+	 --%>
+
+
+<%-- <c:choose>
     <c:when test="${empty param.model}">
-       <script>
+       <script type="text/javascript">
         $("#productDetails").hide();
        </script>
     </c:when>
     <c:otherwise>
-     <script>
+    <script type="text/javascript">
 	         $("#productModels").hide();
 	         </script>
     </c:otherwise>
-</c:choose>
+</c:choose> --%>
  <c:choose>
     <c:when test="${not empty loggedstatus}">
-     <script> var login=true;</script>
+     <script type="text/javascript"> var login=true;</script>
      
     </c:when>
     <c:otherwise>
-        <script> var login=false;</script>
+        <script type="text/javascript"> var login=false;</script>
     </c:otherwise>
 </c:choose>
-<script type='text/javascript' src="${baseurl }/js/jquery.blockUI.min.js" ></script>
-<script type='text/javascript' src='${baseurl }js/customValidation.js'></script> 
+<script type='text/javascript' src='${baseurl }/js/customValidation.js'></script> 
 <script type="text/javascript">
 
-
+	 window.setTimeout(function() {
+   $(".msgcss1").fadeTo(500, 0).slideUp(500, function(){
+       $(this).remove(); 
+   });
+}, 5000);
+	 
+	 
+	
+	 
 // var categorieslist =${allOrders1};
 $( document ).ready(function() {
 	getlist();
 });
 	
-	function getlist(){
-			var rowdata =null;
+	 function getlist(){
+			var rowdata ="iii";
 	$.ajax({
 		type : "POST",
 		url : "getCategoryList",
-		data :"message="+message+"&servicetypeid="+servicetypeid,
+		data :"message="+rowdata,
 		dataType : "text",
 		
 		success : function(data) {
@@ -159,8 +169,11 @@ $( document ).ready(function() {
 		}
 	});
 	
-	}
+	} 
 	
 	
 </script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <script type='text/javascript' src="${baseurl }/js/jquery.blockUI.min.js" ></script>
+</body>
 </html>

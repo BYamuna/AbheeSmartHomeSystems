@@ -97,21 +97,17 @@
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Purchased Date	<span class="impColor">*</span>
 									</label>
-									<div class="col-md-6">
-										<form:input type="text" path="purchaseddate"	class="form-control validate" />
+										<form:input type="text" path="purchaseddate"	class="col-xs-10 col-sm-5 validate" />
 
-									</div>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Expired Date	<span class="impColor">*</span>
 									</label>
-									<div class="col-md-6">
 										<form:input type="text" path="expireddate"
-											class="form-control validate" />
+											class="col-xs-10 col-sm-5 validate" />
 
-									</div>
 								</div>
 							</div>
 							

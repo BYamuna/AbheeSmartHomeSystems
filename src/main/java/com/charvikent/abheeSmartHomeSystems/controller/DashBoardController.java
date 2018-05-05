@@ -1,8 +1,10 @@
 package com.charvikent.abheeSmartHomeSystems.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,15 +13,34 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskStatusDao;
 import com.charvikent.abheeSmartHomeSystems.dao.DashBoardDao;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.charvikent.abheeSmartHomeSystems.dao.PriorityDao;
+import com.charvikent.abheeSmartHomeSystems.dao.ServiceDao;
+import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
+import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.DashBoardByCategory;
 import com.charvikent.abheeSmartHomeSystems.model.DashBoardByStatus;
+import com.charvikent.abheeSmartHomeSystems.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class DashBoardController {
+	@Autowired
+	private ServiceDao  serviceDao ;
+	
+	@Autowired
+	private PriorityDao priorityDao;
+
+	@Autowired
+	private SeverityDao severityDao;
+	@Autowired
+	private UserService userService;
 	
 	@Autowired DashBoardDao dashBoardDao;
+	
+	@Autowired
+	AbheeTaskStatusDao abheeTaskStatusDao;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger( AbheeBranchController.class);
 	/*@RequestMapping("/dashBoard")
@@ -72,6 +93,107 @@ public class DashBoardController {
 		 return "dashBoard";
 		
 	}
+	
+	@RequestMapping(value = "/statusDashBord")
+	public String tasksByStatus(	Model model,HttpServletRequest request,HttpSession session){
+		List<Map<String, Object>> listOrderBeans = null;
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		
+		String status=null;
+		
+		model.addAttribute("taskf", new AbheeTask());
+		
+		model.addAttribute("severity", severityDao.getSeverityMap());
+		model.addAttribute("priority", priorityDao.getPriorityMap());
+		model.addAttribute("userNames", userService.getUserName());
+		model.addAttribute("category", serviceDao.getServicemap());
+		model.addAttribute("taskstatus", abheeTaskStatusDao.getTaskStatusMap());
+		
+		
+		/*User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id=String.valueOf(objuserBean.getId());
+		
+		model.addAttribute("objuserBean", objuserBean);*/
+		
+			
+		
+			try {
+				status = request.getParameter("status");
+				listOrderBeans =  dashBoardDao.getSalesRequestByStatusListDashBord(status);
+				if (listOrderBeans != null && listOrderBeans.size() > 0) {
+					objectMapper = new ObjectMapper();
+					sJson = objectMapper.writeValueAsString(listOrderBeans);
+					request.setAttribute("allOrders1", sJson);
+				 //System.out.println("##############3"+sJson);
+				} else {
+					objectMapper = new ObjectMapper();
+					sJson = objectMapper.writeValueAsString(listOrderBeans);
+					request.setAttribute("allOrders1", "''");
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(e);
+
+			}
+			
+			
+			return "task";
+
+	}
+	
+	
+	@RequestMapping(value = "/categoryDashBord")
+	public String taskscategoryOnReportTo(	Model model,HttpServletRequest request,HttpSession session){
+		List<Map<String, Object>> listOrderBeans = null;
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		
+		String status=null;
+		model.addAttribute("taskf", new AbheeTask());
+		
+		model.addAttribute("severity", severityDao.getSeverityMap());
+		model.addAttribute("priority", priorityDao.getPriorityMap());
+		model.addAttribute("userNames", userService.getUserName());
+		model.addAttribute("category", serviceDao.getServicemap());
+		model.addAttribute("taskstatus", abheeTaskStatusDao.getTaskStatusMap());
+		
+		/*User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id=String.valueOf(objuserBean.getId());
+		
+		model.addAttribute("objuserBean", objuserBean);*/
+		
+			
+		
+			try {
+				status = request.getParameter("status");
+				String categoryId =request.getParameter("categoryId");
+				listOrderBeans =  dashBoardDao.getSalesRequestByCategoryListDashBord(status,categoryId);
+				if (listOrderBeans != null && listOrderBeans.size() > 0) {
+					objectMapper = new ObjectMapper();
+					sJson = objectMapper.writeValueAsString(listOrderBeans);
+					request.setAttribute("allOrders1", sJson);
+				 //System.out.println("##############3"+sJson);
+				} else {
+					objectMapper = new ObjectMapper();
+					sJson = objectMapper.writeValueAsString(listOrderBeans);
+					request.setAttribute("allOrders1", "''");
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(e);
+
+			}
+			
+			
+			return "task";
+
+	}
+	
+	
+	
 	
 /*	
 	@RequestMapping(value = "/severity")
@@ -282,109 +404,7 @@ public class DashBoardController {
 	}
 	
 	
-	@RequestMapping(value = "/statusDashBord")
-	public String tasksByStatus(	Model model,HttpServletRequest request,HttpSession session){
-		Set<ReportIssue> listOrderBeans = null;
-		ObjectMapper objectMapper = null;
-		String sJson = null;
-		
-		String status=null;
-		model.addAttribute("taskf", new ReportIssue());
-		model.addAttribute("subTaskf", new KpStatusLogs());   // model attribute for formmodel popup
-		model.addAttribute("severity", severityService.getSeverityNames());
-		model.addAttribute("priority", priorityService.getPriorityNames());
-		model.addAttribute("userNames", userService.getUserName());
-		//model.addAttribute("category", categoryService.getCategoryNames());
-		//model.addAttribute("departmentNames", mastersService.getDepartmentNames());
-		model.addAttribute("kpstatuses", mastersService.getKpStatues());
-		model.addAttribute("tasksSelection", tasksSelectionService.getTasksSelectionMap());
-		
-		model.addAttribute("departmentNames", mastersService.getSortedDepartments());
-		
-		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String id=String.valueOf(objuserBean.getId());
-		
-		model.addAttribute("objuserBean", objuserBean);
-		
-			
-		
-			try {
-				status = request.getParameter("status");
-				listOrderBeans =  dashBoardService.getTasksByStatusListDashBord(status);
-				if (listOrderBeans != null && listOrderBeans.size() > 0) {
-					objectMapper = new ObjectMapper();
-					sJson = objectMapper.writeValueAsString(listOrderBeans);
-					request.setAttribute("allOrders1", sJson);
-				 //System.out.println("##############3"+sJson);
-				} else {
-					objectMapper = new ObjectMapper();
-					sJson = objectMapper.writeValueAsString(listOrderBeans);
-					request.setAttribute("allOrders1", "''");
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println(e);
-
-			}
-			
-			
-			return "task";
-
-	}
 	
-	
-	@RequestMapping(value = "/categoryDashBord")
-	public String taskscategoryOnReportTo(	Model model,HttpServletRequest request,HttpSession session){
-		Set<ReportIssue> listOrderBeans = null;
-		ObjectMapper objectMapper = null;
-		String sJson = null;
-		
-		String status=null;
-		model.addAttribute("taskf", new ReportIssue());
-		model.addAttribute("subTaskf", new KpStatusLogs());   // model attribute for formmodel popup
-		model.addAttribute("severity", severityService.getSeverityNames());
-		model.addAttribute("priority", priorityService.getPriorityNames());
-		model.addAttribute("userNames", userService.getUserName());
-		//model.addAttribute("category", categoryService.getCategoryNames());
-		//model.addAttribute("departmentNames", mastersService.getDepartmentNames());
-		model.addAttribute("kpstatuses", mastersService.getKpStatues());
-		model.addAttribute("tasksSelection", tasksSelectionService.getTasksSelectionMap());
-		
-		model.addAttribute("departmentNames", mastersService.getSortedDepartments());
-		
-		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String id=String.valueOf(objuserBean.getId());
-		
-		model.addAttribute("objuserBean", objuserBean);
-		
-			
-		
-			try {
-				status = request.getParameter("status");
-				String categoryId =request.getParameter("categoryId");
-				listOrderBeans =  dashBoardService.getTasksByCategoryListDashBord(status,categoryId);
-				if (listOrderBeans != null && listOrderBeans.size() > 0) {
-					objectMapper = new ObjectMapper();
-					sJson = objectMapper.writeValueAsString(listOrderBeans);
-					request.setAttribute("allOrders1", sJson);
-				 //System.out.println("##############3"+sJson);
-				} else {
-					objectMapper = new ObjectMapper();
-					sJson = objectMapper.writeValueAsString(listOrderBeans);
-					request.setAttribute("allOrders1", "''");
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println(e);
-
-			}
-			
-			
-			return "task";
-
-	}
 	*//**
 	 * timeline is string and 1 is loop iterate value in ddashboard,sjp page
 	 * 
