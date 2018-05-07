@@ -99,7 +99,7 @@ min-width:104px;
         <li class="home"><a href="${baseurl }/">Home</a></li>
         <li class="dropdown category">
         
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Categories</a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Products</a>
           <ul class="dropdown-menu">
           <li id="cmlist"></li>
           </ul>
@@ -113,7 +113,7 @@ min-width:104px;
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown acc">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">My Account</a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Sign in</a>
           <ul class="dropdown-menu myacd">
           <li id="cmlist"></li>
          

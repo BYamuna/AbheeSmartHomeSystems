@@ -251,6 +251,7 @@ public class HomeController {
 		LOGGER.debug("Calling Customer Profile  page at controller");
 		
 		Customer customerProfile=(Customer) session.getAttribute("customer");
+		
 		//String id=String.valueOf(objuserBean.getId());
           
 		List<Customer> customerList =new  ArrayList<Customer>(); 
