@@ -7,7 +7,7 @@
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
 		<li><a href="dashBoard">Home</a></li>
-		<li>All Sales Requests</li>
+		<li>Quotation Requests</li>
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container">
@@ -15,7 +15,7 @@
 			<div class="col-md-12" style="background-color: white !important; padding-top: 15PX;">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>All Sales Requests List</h4>
+						<h4>Quotation Requests List</h4>
 						<div class="options">
 							<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
 						</div>
@@ -373,6 +373,6 @@ function addNewTextBox()
 }; */
 
 
-$("#pageName").text("Quotation Request");
+$("#pageName").text("Quotation Requests");
 $(".allsalesrequest").addClass("active"); 
 </script>

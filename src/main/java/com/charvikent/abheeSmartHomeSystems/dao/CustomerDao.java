@@ -373,6 +373,31 @@ public Customer checkProfileMobileNoExistsOrNot(Customer customer) {
 	return ProfileCustomersList.get(0);
 }
 
+public Customer checkCustomerExistOrNotbyMobileOnEdit(String custMobile, String editFieldsId) {
+	
+	
+	String hql ="from Customer where id <>'"+editFieldsId+"' and  mobilenumber='"+custMobile+"'";
+	
+	
+	List<Customer> custlist =	entityManager.createQuery(hql).getResultList();
+	    
+	if(custlist.size()>0)
+	return custlist.get(0);
+	else
+	return null;
+}
+
+public Customer checkCustomerExistOrNotByEmailOnEdit(String custEmail, String editFieldsId) {
+	String hql ="from Customer where id <>'"+editFieldsId+"'and   email ='"+custEmail+"'";
+	Query query =entityManager.createQuery(hql);
+
+	List<Customer>usersList =query.getResultList();
+	if(usersList.isEmpty())
+           return null;
+           else
+	return usersList.get(0);
+}
+
 
 
 }

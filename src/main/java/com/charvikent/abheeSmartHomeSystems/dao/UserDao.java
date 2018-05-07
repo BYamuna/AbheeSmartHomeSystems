@@ -541,6 +541,29 @@ public class UserDao {
 		System.out.println(user);
 		return user;
 	}
+
+	public User checkEmployeeExistOrNotbyEmail(String empcemail, String editFieldsId) {
+		
+		String hql ="from User where id <> '"+editFieldsId+" '   email ='"+empcemail+"'";
+		Query query =em.createQuery(hql);
+
+		List<User>usersList =query.getResultList();
+		if(usersList.isEmpty())
+               return null;
+               else
+		return usersList.get(0);
+	}
+
+	public User checkEmployeeExistOrNotbyMobileOnEdit(String custMobile, String editFieldsId) {
+		String hql ="from User where id <> '"+ editFieldsId+ " '  mobilenumber ='"+custMobile+"'";
+		Query query =em.createQuery(hql);
+
+		List<User>usersList =query.getResultList();
+		if(usersList.isEmpty())
+               return null;
+               else
+		return usersList.get(0);
+	}
 	
 	
 	

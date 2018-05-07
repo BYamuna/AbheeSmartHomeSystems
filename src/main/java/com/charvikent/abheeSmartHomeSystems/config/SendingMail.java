@@ -424,7 +424,7 @@ public class SendingMail {
 				String assigntechnician=editissue.getAssignto();
 				User emp=userDao.getUserById(Integer.parseInt(assigntechnician));
 				Customer customer= customerDao.findCustomerByCustId(customerid);
-				String emailid=customer.getEmail();
+				String emailid=emp.getEmail();
 				
 				MimeMessage message = javaMailSender.createMimeMessage();
 				MimeMessageHelper helper = new MimeMessageHelper(message, true);

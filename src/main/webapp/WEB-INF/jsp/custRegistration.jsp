@@ -74,6 +74,7 @@
 								</div>
 								
 								</div>
+								<div class="sep">
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Last name<span class="impColor">*</span></label>
@@ -90,7 +91,10 @@
 										<form:input path="email" class="form-control validate emailOnly" placeholder="Enter Email"/>
 										 <span id="errorEmaiMsg" style="color:red;"></span>
 									</div>
-								</div></div>
+								</div>
+								</div><div class="clearfix"></div>
+								</div>
+								<div class="sep">
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile Number<span class="impColor">*</span></label>
@@ -107,6 +111,7 @@
 										<form:password path="password" class="form-control validate onlyNumbers" maxlength="4" placeholder="Enter Password"/>
 									</div>
 								</div>
+								</div><div class="clearfix"></div>
 								</div>
 								
 								<div class="col-md-6">
@@ -207,6 +212,9 @@
  -->
  </body>
 <script type="text/javascript">
+
+var editFields =0;
+
 var listOrders1 = ${allOrders1};
 if (listOrders1 != "") {
 	displayTable(listOrders1);
@@ -246,6 +254,9 @@ function displayTable(listOrders) {
 
 
 function editCustomer(id) {
+	
+	
+	editFields =id;
 	$('#customer').text("Edit Customer");
 	$("#id").val(serviceUnitArray[id].id);
 	$("#firstname").val(serviceUnitArray[id].firstname);
@@ -457,7 +468,7 @@ function inactiveData() {
 	$.ajax({
 				type : "POST",
 				url : "checkCustExst",
-				data :"cmobile="+cmobile,
+				data :"cmobile="+cmobile+"&editFields="+editFields,
 				dataType : "text",
 				beforeSend : function() {
 		             $.blockUI({ message: 'Please wait' });
@@ -510,7 +521,7 @@ $('#email').blur(function() {
 	$.ajax({
 				type : "POST",
 				url : "checkEmailExst",
-				data :"cemail="+cemail,
+				data :"cemail="+cemail+"&editFields="+editFields,
 				dataType : "text",
 				beforeSend : function() {
 		             $.blockUI({ message: 'Please wait' });

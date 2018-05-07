@@ -276,7 +276,7 @@ color:#ea8080 !important;
                   				<label style="margin-top:18px;">Email Id: </label>
                   			</div>
                   			<div class="col-md-6">
-                  				<input style="float:left;" id="pemail" class="form-control" type="text" placeholder="Email Id" disabled="true">
+                  				<input style="float:left;" id="pemail" class="form-control emailOnly validate" type="text"  placeholder="Email Id" disabled="true">
                   			</div>
                   			<div class="col-md-4">
                   			</div><div class="clearfix"></div>
@@ -303,7 +303,7 @@ color:#ea8080 !important;
                   				<label style="margin-top:18px; margin-left:5px;">Mobile Number: </label>
                   			</div>
                   			<div class="col-md-10">
-                  				<input class="form-control validate numericOnly2" maxlength="10" type="text"  id="pmobilenumber" onkeypress='validateMobile(event)' placeholder="Mobile Number" disabled="true">
+                  				<input class="form-control numericOnly2 validate " maxlength="10" type="text"  id="pmobilenumber" placeholder="Mobile Number" disabled="true">
                   				<input class="form-control" type="hidden"  id="customerid" placeholder="Mobile Number">
                   				<input class="form-control" type="hidden"  id="checkpass">
                   			</div>
@@ -378,7 +378,6 @@ color:#ea8080 !important;
 										<th>Product(s)</th>
 										<th>Date of Purchased</th>
 										<th>Warranty Expired Date</th>
-										<th>Price</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -429,6 +428,29 @@ function displayTable(listOrders) {
 	});
 	}
 
+
+var productWarrantyOrdersList = ${ordersList};
+if (productWarrantyOrdersList != "") {
+	displayTable2(productWarrantyOrdersList);
+}
+function displayTable2(listOrders) {
+	$('#tableId').html('');
+	var tableHead = '<table id="customerOrderTable" class="table table-striped table-bordered datatables">'
+			+ '<thead><tr><th>orderId</th><th>Products</th><th>Date of Purchased</th><th>Warranty Expired Date</th><th>Price</th></tr></thead><tbody></tbody></table>';
+	$('#tableId').html(tableHead);
+	serviceUnitArray = {};
+	$.each(listOrders,function(i, orderObj) {
+	serviceUnitArray[orderObj.id] = orderObj;
+		var tblRow = "<tr>"
+			+ "<td title='"+orderObj.order_id+"'>"+ orderObj.order_id + "</td>"
+			+ "<td title='"+orderObj.productmodelid+"'>"+ orderObj.productmodelid + "</td>"
+			+ "<td title='"+orderObj.purchaseddate+"'>"+ orderObj.purchaseddate + "</td>" 
+			+ "<td title='"+orderObj.expireddate+"'>"+ orderObj.expireddate + "</td>" 		
+			+ "</tr>";
+		$(tblRow).appendTo("#tableId table tbody");
+	});
+	
+}
 
 $('#customer').blur(function() {
 	var customer=$(this).val();
@@ -712,7 +734,7 @@ $('#savemobileno').click(function (){
 		
 	});
 });	
-function validateMobile(evt) {
+/* function validateMobile(evt) {
 	  var theEvent = evt || window.event;
 	  var key = theEvent.keyCode || theEvent.which;
 	  key = String.fromCharCode( key );
@@ -721,7 +743,19 @@ function validateMobile(evt) {
 	    theEvent.returnValue = false;
 	    if(theEvent.preventDefault) theEvent.preventDefault();
 	  }
-	}
+	} */
+	
+	
+/* function validateEmail(evt) {
+	  var theEvent = evt || window.event;
+	  var key = theEvent.keyCode || theEvent.which;
+	  key = String.fromCharCode( key );
+	  var regex =/^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	  if( !regex.test(key) ) {
+	    theEvent.returnValue = false;
+	    if(theEvent.preventDefault) theEvent.preventDefault();
+	  }
+	}  */
 	
 </script>
 <%@include file="abheefooter.jsp" %>

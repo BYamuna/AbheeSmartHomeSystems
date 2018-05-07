@@ -116,7 +116,18 @@ public class AbheeCustRegistrationController
 		
 		String custMobile=request.getParameter("cmobile");
 		
-		Customer custbean1 =customerDao.checkCustomerExistOrNotbyMobile(custMobile);
+		String editFieldsId=request.getParameter("editFields");
+		Customer custbean1 =null;
+		if(editFieldsId.equals("0"))
+		{
+		
+			custbean1 =customerDao.checkCustomerExistOrNotbyMobile(custMobile);
+		}
+		else
+		{
+			custbean1 =customerDao.checkCustomerExistOrNotbyMobileOnEdit(custMobile,editFieldsId);
+			
+		}
 		
 		if(custbean1 != null)
 		{
@@ -185,7 +196,7 @@ public class AbheeCustRegistrationController
 		customer.setEmail(cemail);
 		customer.setPassword(cpassword);
 		customer.setEnabled("1");
-
+		customer.setCustomerType("1");
 		
 		//customer.setUsername(str);
 		String returnmsg ="";
@@ -236,9 +247,19 @@ public class AbheeCustRegistrationController
 		System.out.println("enter to checkCustExst");
 		
 		String custEmail=request.getParameter("cemail");
+		String editFieldsId=request.getParameter("editFields");
+		 Customer customer =null;
 		
-		 Customer customer =customerDao.checkCustomerExistOrNotByEmail(custEmail);
-		
+		 if(editFieldsId.equals("0"))
+			{
+			
+			 customer	=customerDao.checkCustomerExistOrNotByEmail(custEmail);
+			}
+			else
+			{
+				  customer =customerDao.checkCustomerExistOrNotByEmailOnEdit(custEmail,editFieldsId);
+				
+			}
 		if(customer != null)
 		{
 			return true;
@@ -366,6 +387,7 @@ public class AbheeCustRegistrationController
 
 					customerDao.saveAbheeCustomer(user);
 					
+					
 					sendingMail.sendConfirmationEmail(user);
 
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");
@@ -432,11 +454,21 @@ public class AbheeCustRegistrationController
 	{
 		LOGGER.debug("Calling  checkEmpExst at controller");
 		System.out.println("enter to checkCustExst");
-		
 		String custMobile=request.getParameter("cmobile");
+		String editFieldsId=request.getParameter("editFields");
+		User custbean =null;
 		
-		User custbean =userService.checkEmployeeExistOrNotbyMobile(custMobile);
 		
+		 if(editFieldsId.equals("0"))
+			{
+			
+			 custbean	=userService.checkEmployeeExistOrNotbyMobile(custMobile);
+			}
+			else
+			{
+				custbean =userService.checkEmployeeExistOrNotbyMobileOnEdit(custMobile,editFieldsId);
+				
+			}
 		if(custbean != null)
 		{
 			return true;
@@ -452,11 +484,22 @@ public class AbheeCustRegistrationController
 	{
 		LOGGER.debug("Calling  checkEmpExstbyemail at controller");
 		System.out.println("enter to checkCustExst");
-		
 		String empcemail=request.getParameter("cemail");
+		String editFieldsId=request.getParameter("editFields");
+		User custbean =null;
 		
-		User custbean =userService.checkEmployeeExistOrNotbyEmail(empcemail);
 		
+		
+		 if(editFieldsId.equals("0"))
+			{
+			
+			 custbean	=userService.checkEmployeeExistOrNotbyEmail(empcemail);
+			}
+			else
+			{
+				custbean =userService.checkEmployeeExistOrNotbyEmail(empcemail,editFieldsId);
+				
+			}
 		if(custbean != null)
 		{
 			return true;

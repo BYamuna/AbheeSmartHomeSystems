@@ -31,7 +31,7 @@
         <!-- Breadcrumb Starts here -->
         <nav aria-label="breadcrumb">
   			<ol class="breadcrumb">
-    			<li class="breadcrumb-item"><a href="/">Home</a></li>
+    			<li class="breadcrumb-item"><a href="${baseurl }/">Home</a></li>
     			<li class="breadcrumb-item"><a href="#">Catagories</a></li>
     			<li class="breadcrumb-item active" aria-current="page" id="breadcrumbname"></li>
     			<li class="breadcrumb-item active" aria-current="page" id="breadcrumbcompanyname"></li>
@@ -120,28 +120,28 @@
         		<div align="center" class="text"><span class="impColor0"></span></div>
 					<form>
 						<div class="col-sm-4">
-							<label>Service Type</label> <span class="impColor">*</span>
+							<label>Request Type</label> <span class="impColor">*</span>
 						</div>
 						<div class="col-sm-8">
 											<select  id="servicetypeid"  class="form-control" onfocus="removeBorder2(this.id)">
-											<option value="">-- Service Type -- </option>
+											<option value="">-- Request Type -- </option>
 											<c:forEach var="list" items="${servicetypes}">
 											<option value=${list.key}>${list.value} </option>
 											</c:forEach>
 										</select>
 						</div>
 						<div class="col-sm-4">
-							<label>Message</label> <span class="impColor">*</span>
+							<label>Description</label> <span class="impColor">*</span>
 						</div>
 						<div class="col-sm-8">
-							<textarea class="form-control" id="message" name="message" placeholder=" Enter Message"  onfocus="removeBorder2(this.id)"></textarea>
+							<textarea class="form-control" id="message" name="message" placeholder="Description"  onfocus="removeBorder2(this.id)"></textarea>
 						</div>
 						
 						<div class="col-sm-4">
 							<label>Address</label> <span class="impColor">*</span>
 						</div>
 						<div class="col-sm-8">
-							<textarea class="form-control" id="custaddress" name="custaddress" placeholder=" Enter Address"  onfocus="removeBorder2(this.id)"></textarea>
+							<textarea class="form-control" id="custaddress" name="custaddress" placeholder="Address"  onfocus="removeBorder2(this.id)"></textarea>
 						</div>
 							<!--<div class="col-sm-4">
 							<label>Attach File(s)</label>
@@ -318,10 +318,10 @@ $.each(productmodelslist, function(k,v){
 	               +"<div class='col-sm-6' >"
 	               +"<img width='100%' src='${baseurl }/reportDocuments/"+v.productmodelpics+"' class='img-responsive' alt='196' title='YHT-196'/>"
 	               +"<div class='col-xs-6'>"
-    	           +"<a href='#' onclick='checkLogin()' style='width:95%;margin-top:9px !important;' class='btn btn-primary' >Get Quotation</a>"
+    	           +"<a href='#' onclick='checkLogin()' style='width:95%;margin-top:9px !important;' class='btn btn-primary' >Request Quotation</a>"
     	           +"</div>"
 	               +"<div class='col-xs-6'>"
-	               +"<a href='#' onclick='checkService()' style='width:95%;margin-top:9px !important; float:right;' class='btn btn-warning' >Get service</a>"
+	               +"<a href='#' onclick='checkService()' style='width:95%;margin-top:9px !important; float:right;' class='btn btn-warning' >Request Service</a>"
                    +"</div>"
                    +"</div>"
                    +"</div>"
@@ -470,7 +470,7 @@ $.each(productdetailslist, function(k,v){
 				
 				if(data ==='true')
 				{
-					alert(" Sevice request Submitted Successfully ");
+					alert(" Thank you, your request had been submitted successfully. Our team will contact you soon");
 					$('#formModal').modal('toggle');					
 				}
 				else

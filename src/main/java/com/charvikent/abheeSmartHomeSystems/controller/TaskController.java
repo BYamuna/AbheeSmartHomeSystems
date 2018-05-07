@@ -571,8 +571,8 @@ public class TaskController {
 		}
 		else
 		{
-			System.out.println("Service request alreadyExists");
-			return "Your Request till didn't closed";
+			System.out.println("Service Request already received");
+			return "Service Request already received";
 			
 		}
 		

@@ -109,7 +109,7 @@
 				<div class="col-sm-12">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<input type="text"  name= "username" autofocus="autofocus" class="form-control validate"  placeholder=" Mobile Number"/>
+						<input type="text"  name= "username" id="muser" autofocus="autofocus" class="form-control"  placeholder=" Mobile Number"/>
 					</div>
 				</div>
 			</div>
@@ -117,14 +117,14 @@
 				<div class="col-sm-12">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-						<input type="password" name="password" class="form-control validate"  placeholder="Password"/>
+						<input type="password" name="password" id="mpass" class="form-control "  placeholder="Password"/>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="panel-footer">
 			<div class="pull-right">
-				<input type="submit" value="Sign-in"  class="btn btn-primary">
+				<input type="submit"  id="mlogin" value="Sign-in"  class="btn btn-primary">
 				<input type="reset" value="Reset" class="btn btn-danger cancel"/>
 				<!-- <input type="reset" value="Reset" class="btn btn-default cancel"/>
 				<input type="submit" id="submit1" value="Sign-in"  class="btn btn-primary"> -->
@@ -583,5 +583,19 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 			
 		
 	});  */
+	
+	$('#mlogin').click(function() {
+	var musername =	$('#muser').val();
+	var mpass =	$('#mpass').val();
+	if (musername == null || musername == "" || musername == "undefined") {
+		alert("Ente Mobile Number")
+	return false;
+	}
+	if (mpass == null || mpass == "" || mpass == "undefined") {
+		alert("Ente password")
+	return false;
+	}
+		
+	});
 </script>
 </html>

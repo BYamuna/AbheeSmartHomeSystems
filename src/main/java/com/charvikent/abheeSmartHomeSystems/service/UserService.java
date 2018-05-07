@@ -334,5 +334,14 @@ public class UserService {
 		return userDao.ceckEmployeeExistOrNotbyEmail(empcemail);
 	}
 
+	public User checkEmployeeExistOrNotbyEmail(String empcemail, String editFieldsId) {
+		// TODO Auto-generated method stub
+		return userDao.checkEmployeeExistOrNotbyEmail(empcemail,editFieldsId);
+	}
+
+	public User checkEmployeeExistOrNotbyMobileOnEdit(String custMobile, String editFieldsId) {
+		return userDao.checkEmployeeExistOrNotbyMobileOnEdit(custMobile,editFieldsId);
+	}
+
 
 }
