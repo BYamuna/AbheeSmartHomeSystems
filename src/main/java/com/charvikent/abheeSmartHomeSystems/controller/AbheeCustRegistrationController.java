@@ -454,11 +454,21 @@ public class AbheeCustRegistrationController
 	{
 		LOGGER.debug("Calling  checkEmpExst at controller");
 		System.out.println("enter to checkCustExst");
-		
 		String custMobile=request.getParameter("cmobile");
+		String editFieldsId=request.getParameter("editFields");
+		User custbean =null;
 		
-		User custbean =userService.checkEmployeeExistOrNotbyMobile(custMobile);
 		
+		 if(editFieldsId.equals("0"))
+			{
+			
+			 custbean	=userService.checkEmployeeExistOrNotbyMobile(custMobile);
+			}
+			else
+			{
+				custbean =userService.checkEmployeeExistOrNotbyMobileOnEdit(custMobile,editFieldsId);
+				
+			}
 		if(custbean != null)
 		{
 			return true;
@@ -474,11 +484,22 @@ public class AbheeCustRegistrationController
 	{
 		LOGGER.debug("Calling  checkEmpExstbyemail at controller");
 		System.out.println("enter to checkCustExst");
-		
 		String empcemail=request.getParameter("cemail");
+		String editFieldsId=request.getParameter("editFields");
+		User custbean =null;
 		
-		User custbean =userService.checkEmployeeExistOrNotbyEmail(empcemail);
 		
+		
+		 if(editFieldsId.equals("0"))
+			{
+			
+			 custbean	=userService.checkEmployeeExistOrNotbyEmail(empcemail);
+			}
+			else
+			{
+				custbean =userService.checkEmployeeExistOrNotbyEmail(empcemail,editFieldsId);
+				
+			}
 		if(custbean != null)
 		{
 			return true;

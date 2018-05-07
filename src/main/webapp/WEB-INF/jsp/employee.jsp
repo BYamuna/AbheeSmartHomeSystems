@@ -44,6 +44,7 @@
 					
 					<form:form modelAttribute="userForm" action="employee" class="form-horizontal " method="Post">
 	                  <form:hidden path="id"/>
+	                  <div class="sep">
 					<div class="col-md-6"><br>
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Username<span class="impColor">*</span></label>
@@ -61,7 +62,9 @@
 									</div>
 								</div>
 								
+								</div><div class="clearfix"></div>
 								</div>
+								<div class="sep">
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
@@ -76,8 +79,9 @@
 										<form:input path="lastname" class="form-control validate onlyCharacters" placeholder="Enter Last Name"/>
 									</div>
 								</div>
+								</div><div class="clearfix"></div>
 								</div>
-								
+								<div class="sep">
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
@@ -91,7 +95,9 @@
 									<div class="col-md-6">
 										<form:input path="email" class="form-control validate emailOnly" placeholder="Enter Email"/>
 									</div>
-								</div></div>
+								</div></div><div class="clearfix"></div>
+								</div>
+								<div class="sep">
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Designation<span class="impColor">*</span></label>
@@ -102,16 +108,11 @@
 										</form:select>
 									</div>
 								</div></div>
-								<%-- <div class="col-md-6">
+								 <div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Department<span class="impColor">*</span></label>
-									<div class="col-md-6">
-										<form:select path ="department" class="form-control validate" selected="selected" onfocus="removeBorder(this.id)">
-											<form:option value="">-- Select Department --</form:option>
-								     		<form:options  items="${departments}"/>
-										</form:select>
-									</div>
-								</div></div> --%>
+								</div></div><div class="clearfix"></div>
+								</div>
+								<div class="sep">
 								<security:authorize access="hasRole('ROLE_ADMIN')">
 								<div class="col-md-6">
 								<div class="form-group">
@@ -133,8 +134,9 @@
 								     		<form:options items="${orgNames}"/>
 										</form:select>
 									</div>
-								</div></div>
+								</div></div><div class="clearfix"></div>
 								</security:authorize>
+								</div>
 						<div class="panel-footer">
 				      	<div class="row">
 				      		<div class="col-sm-12">
@@ -206,6 +208,10 @@
 <p data-toggle='modal' id="password_modal" data-target='#passwordModal'></p>
 </body>
 <script type="text/javascript">
+
+var editFields =0;
+
+
 var listOrders1 = ${allOrders1};
 if (listOrders1 != "") {
 	displayTable(listOrders1);
@@ -300,6 +306,7 @@ function getPasswordModal(id)
 
 
 function editEmployee(id) {
+	editFields =id;
 	$("#emp").text("Edit Employee");
 	$("#id").val(serviceUnitArray[id].id);
 	$("#username").val(serviceUnitArray[id].username);
@@ -394,7 +401,7 @@ $('#email').blur(function() {
 	$.ajax({
 				type : "POST",
 				url : "checkEmpExstbyemail",
-				data :"cemail="+cemail,
+				data :"cemail="+cemail+"&editFields="+editFields,
 				dataType : "text",
 				beforeSend : function() {
 		             $.blockUI({ message: 'Please wait' });
@@ -456,7 +463,7 @@ $('#mobilenumber').blur(function() {
 	$.ajax({
 				type : "POST",
 				url : "checkEmpExst",
-				data :"cmobile="+cmobile,
+				data :"cmobile="+cmobile+"&editFields="+editFields,
 				dataType : "text",
 				beforeSend : function() {
 		             $.blockUI({ message: 'Please wait' });
