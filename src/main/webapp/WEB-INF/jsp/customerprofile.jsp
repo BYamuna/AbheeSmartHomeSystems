@@ -276,7 +276,7 @@ color:#ea8080 !important;
                   				<label style="margin-top:18px;">Email Id: </label>
                   			</div>
                   			<div class="col-md-6">
-                  				<input style="float:left;" id="pemail" class="form-control" type="text" placeholder="Email Id" disabled="true">
+                  				<input style="float:left;" id="pemail" class="form-control emailOnly validate" type="text"  placeholder="Email Id" disabled="true">
                   			</div>
                   			<div class="col-md-4">
                   			</div><div class="clearfix"></div>
@@ -303,7 +303,7 @@ color:#ea8080 !important;
                   				<label style="margin-top:18px; margin-left:5px;">Mobile Number: </label>
                   			</div>
                   			<div class="col-md-10">
-                  				<input class="form-control validate numericOnly2" maxlength="10" type="text"  id="pmobilenumber" onkeypress='validateMobile(event)' placeholder="Mobile Number" disabled="true">
+                  				<input class="form-control numericOnly2 validate " maxlength="10" type="text"  id="pmobilenumber" placeholder="Mobile Number" disabled="true">
                   				<input class="form-control" type="hidden"  id="customerid" placeholder="Mobile Number">
                   				<input class="form-control" type="hidden"  id="checkpass">
                   			</div>
@@ -712,7 +712,7 @@ $('#savemobileno').click(function (){
 		
 	});
 });	
-function validateMobile(evt) {
+/* function validateMobile(evt) {
 	  var theEvent = evt || window.event;
 	  var key = theEvent.keyCode || theEvent.which;
 	  key = String.fromCharCode( key );
@@ -721,7 +721,19 @@ function validateMobile(evt) {
 	    theEvent.returnValue = false;
 	    if(theEvent.preventDefault) theEvent.preventDefault();
 	  }
-	}
+	} */
+	
+	
+/* function validateEmail(evt) {
+	  var theEvent = evt || window.event;
+	  var key = theEvent.keyCode || theEvent.which;
+	  key = String.fromCharCode( key );
+	  var regex =/^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	  if( !regex.test(key) ) {
+	    theEvent.returnValue = false;
+	    if(theEvent.preventDefault) theEvent.preventDefault();
+	  }
+	}  */
 	
 </script>
 <%@include file="abheefooter.jsp" %>

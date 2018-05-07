@@ -163,19 +163,28 @@ function checkEmail(str) {
 	}
 }
 
-$(".emailOnly").on(	"keypress",	function(e) {
-
+$(".emailOnly").on(	"blur",	function(e) {
+	 $('span.error-keyup-4').remove();
 					// console.log(event.which);
 					var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 					// var expr =/[A-Z0-9a-z@]/;
 					var key = String.fromCharCode(event.which);
+					 var inputVal = $(this).val();
 					/*
 					 * if($(".emailOnly").match(expr)) { console.log("Email");
 					 * return true; }
 					 */
-					if (e.test(expr)) {
+					if (expr.test(inputVal)) {
 						console.log("Email");
 						return true;
+					}else{
+						
+						 $(this).after('<span class="error error-keyup-4">Not a valid Email </span>');
+					        
+					        $('.emailOnly' ).css('border-color','#e73d4a');
+							$('.emailOnly' ).css('color','#e73d4a');
+							
+							$('.emailOnly' ).addClass("errorCls");
 					}
 					// keychar = String.fromCharCode(keynum);
 					// regEx = /[A-Z0-9a-z@]/;
