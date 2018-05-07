@@ -57,7 +57,7 @@ public class SendSMS {
 			String Lastname=emp.getLastname();
 			String Description=editissue.getDescription();
 			String ServiceRequestNo=editissue.getTaskno();
-			String message=" The Following Technician is assigned to you related to the service request no ="+URLEncoder.encode(ServiceRequestNo, "UTF-8")+"and His details is given as follows-Mr:"+ Firstname+" "+ Lastname+" "+"and his mobile:"+mobileno+". ";
+			String message=" The Following Technician is assigned to you related to the service request no ="+URLEncoder.encode(ServiceRequestNo, "UTF-8")+" "+"and His details is given as follows-Mr:"+ Firstname+" "+ Lastname+" "+"and his mobile:"+mobileno+". ";
 			//String message="HI";
 			
 			requestUrl  = "http://182.18.160.225/index.php/api/bulk-sms?username="+URLEncoder.encode(username, "UTF-8")+"&password="+ URLEncoder.encode(password, "UTF-8")+"&from="+from+"&to="+URLEncoder.encode(mobileno, "UTF-8")+"&message="+URLEncoder.encode(message, "UTF-8")+"&sms_type=2";
@@ -84,7 +84,7 @@ public class SendSMS {
 			String Lastname=emp.getLastname();
 			String Description=editissue.getDescription();
 			String ServiceRequestNo=editissue.getTaskno();
-			String message=" The Following Service Request assigned to you related to the service request no ="+URLEncoder.encode(ServiceRequestNo, "UTF-8")+"and Request details is given as follows-Mr:"+ Firstname+" "+ Lastname+" "+"and his mobile:"+mobileno+". ";
+			String message=" The Following Service Request assigned to you related to the service request no ="+URLEncoder.encode(ServiceRequestNo, "UTF-8")+" "+"and Request details is given as follows-Mr:"+ Firstname+" "+ Lastname+" "+"and his mobile:"+mobileno+". ";
 			//String message="HI";
 			
 			requestUrl  = "http://182.18.160.225/index.php/api/bulk-sms?username="+URLEncoder.encode(username, "UTF-8")+"&password="+ URLEncoder.encode(password, "UTF-8")+"&from="+from+"&to="+URLEncoder.encode(mobileno, "UTF-8")+"&message="+URLEncoder.encode(message, "UTF-8")+"&sms_type=2";

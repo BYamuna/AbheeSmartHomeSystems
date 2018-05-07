@@ -378,7 +378,6 @@ color:#ea8080 !important;
 										<th>Product(s)</th>
 										<th>Date of Purchased</th>
 										<th>Warranty Expired Date</th>
-										<th>Price</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -429,6 +428,29 @@ function displayTable(listOrders) {
 	});
 	}
 
+
+var productWarrantyOrdersList = ${ordersList};
+if (productWarrantyOrdersList != "") {
+	displayTable2(productWarrantyOrdersList);
+}
+function displayTable2(listOrders) {
+	$('#tableId').html('');
+	var tableHead = '<table id="customerOrderTable" class="table table-striped table-bordered datatables">'
+			+ '<thead><tr><th>orderId</th><th>Products</th><th>Date of Purchased</th><th>Warranty Expired Date</th><th>Price</th></tr></thead><tbody></tbody></table>';
+	$('#tableId').html(tableHead);
+	serviceUnitArray = {};
+	$.each(listOrders,function(i, orderObj) {
+	serviceUnitArray[orderObj.id] = orderObj;
+		var tblRow = "<tr>"
+			+ "<td title='"+orderObj.order_id+"'>"+ orderObj.order_id + "</td>"
+			+ "<td title='"+orderObj.productmodelid+"'>"+ orderObj.productmodelid + "</td>"
+			+ "<td title='"+orderObj.purchaseddate+"'>"+ orderObj.purchaseddate + "</td>" 
+			+ "<td title='"+orderObj.expireddate+"'>"+ orderObj.expireddate + "</td>" 		
+			+ "</tr>";
+		$(tblRow).appendTo("#tableId table tbody");
+	});
+	
+}
 
 $('#customer').blur(function() {
 	var customer=$(this).val();
