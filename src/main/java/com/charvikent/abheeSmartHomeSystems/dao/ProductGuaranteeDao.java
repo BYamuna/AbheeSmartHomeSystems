@@ -6,8 +6,6 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -165,5 +163,16 @@ public class ProductGuaranteeDao
 		System.out.println(retlist);
 		return retlist;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public ProductGuarantee getProductWarrantyDetailsByCustomerId(ProductGuarantee productGuarantee) 
+	{
+		String hql ="from ProductGuarantee where customerid ='"+productGuarantee.getCustomerid()+"'";
+		List<ProductGuarantee> ordersList= em.createQuery(hql).getResultList();
+		if(ordersList.size() > 0)
+			return ordersList.get(0);
+		return null;
+	}
+	
 	
 }

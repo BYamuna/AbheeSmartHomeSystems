@@ -31,9 +31,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
+import com.charvikent.abheeSmartHomeSystems.dao.ProductGuaranteeDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
+import com.charvikent.abheeSmartHomeSystems.model.ProductGuarantee;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -50,7 +52,7 @@ public class HomeController {
 	
 	@Autowired
 	CategoryDao categoryDao;
-	
+	@Autowired ProductGuaranteeDao productGuaranteeDao;
 	
  static 	String loginurl=""; 
  
@@ -247,7 +249,7 @@ public class HomeController {
 	
 	
 	@RequestMapping("/customerprofile")
-	public String customerProfile(@ModelAttribute("customerProfile") Customer customer,Model model,HttpServletRequest request,HttpSession session,RedirectAttributes redir) throws JSONException, JsonProcessingException {
+	public String customerProfile(@ModelAttribute("customerProfile") Customer customer,ProductGuarantee productGuarantee, Model model,HttpServletRequest request,HttpSession session,RedirectAttributes redir) throws JSONException, JsonProcessingException {
 		LOGGER.debug("Calling Customer Profile  page at controller");
 		
 		Customer customerProfile=(Customer) session.getAttribute("customer");
@@ -255,12 +257,14 @@ public class HomeController {
           
 		List<Customer> customerList =new  ArrayList<Customer>(); 
 		customerList.add(customerProfile);
-
+		ProductGuarantee ordersList=productGuaranteeDao.getProductWarrantyDetailsByCustomerId(productGuarantee);
 		//model.addAttribute("customerProfile", customerProfile);
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		String sJson = objectMapper.writeValueAsString(customerList);
 		request.setAttribute("customerProfile1", sJson);
+		String sJson2 = objectMapper.writeValueAsString(ordersList);
+		request.setAttribute("ordersList", sJson2);
 		
 		return "customerprofile";
 	}
