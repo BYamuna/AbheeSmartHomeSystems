@@ -534,9 +534,9 @@ opacity:1;
 	var rowdata;
 		rowdata='<tr>'
 				+'<td> Assigned To Me</td>'
-				+'<td><a href="severityBy?id=3">'+ severityCounts.CRITICAL +'</a></td>'
-				+'<td><a href="severityBy?id=2">'+ severityCounts.MAJOR +'</a></td>'
-				+'<td><a href="severityBy?id=1">'+ severityCounts.MINOR +'</a></td>'
+				+'<td><a href="severityBy?id=3">'+ severityCounts.Critical +'</a></td>'
+				+'<td><a href="severityBy?id=2">'+ severityCounts.Major +'</a></td>'
+				+'<td><a href="severityBy?id=1">'+ severityCounts.Minor +'</a></td>'
 					+'</tr>';
 	$("#severityTable").append(rowdata);
 	

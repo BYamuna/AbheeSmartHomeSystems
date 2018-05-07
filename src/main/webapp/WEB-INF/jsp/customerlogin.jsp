@@ -170,7 +170,7 @@
 									<label for="user_name">Email :</label>
 								</div>
 								<div class="col-md-7">
-									<input	type="text" name="cemail" id="cemail" onkeydown="removeBorder(this.id)" class="form-control validate1 emailOnly" placeholder="Email"/>
+									<input	type="text" name="cemail" id="cemail" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Email"/>
 								</div><div class="clearfix"></div>
 								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
 							</div>
@@ -182,15 +182,6 @@
 									<input	type="password" name="cpassword" id="cpassword" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control validate1 numericOnly" placeholder="Password" />
 								</div><div class="clearfix"></div> 
 								<span class="hasError" id="cpasswordError" style="font-size: 13px;"></span>
-							</div>
-							<div class="form-group">
-								<div class="col-md-5">
-									<label for="user_name">Confirm password :</label>
-								</div>
-								<div class="col-md-7">
-									<input	type="password" name="crtpassword"  id="crtpassword" onkeydown="removeBorder(this.id)"  maxlength="4" class="form-control validate1 numericOnly" placeholder="Confirm Password"/>
-								</div><div class="clearfix"></div> 
-								<span class="hasError" id="crtpasswordError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
 								<div class="col-md-5">
@@ -468,7 +459,6 @@ var idArrayCmt1 = null;
 	 var cpassword1 =$('#cpassword').val();
 	 
 	var crtpassword1=$('#crtpassword').val();
-	alert(mobilevalidation);
 	
 	if(cpassword1 != "" && crtpassword1 != "" && cpassword1==crtpassword1){
 		validation = true;
@@ -745,10 +735,13 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		$('#csname').val("");
 		$('#cpassword').val("");
 		$('#crtpassword').val("");
+		
+		$('#cemail').css('border-color', 'none');
 	}
 	
 	function openRegistrationModel()
 	{
+		$(".cancel1").click();
 		makeEmptyRegistration();
 		$('#register-info').modal();
 		

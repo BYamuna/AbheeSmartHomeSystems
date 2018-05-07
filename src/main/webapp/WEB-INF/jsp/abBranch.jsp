@@ -48,7 +48,7 @@
                     				<form:hidden path="id"/>
 									<label for="focusedinput" class="col-md-6 control-label">Branch Name <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="name" class="form-control validate" placeholder="Enter Branch  Name"/>	
+										<form:input path="name" class="form-control validate" placeholder="Branch  Name"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -68,7 +68,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Branch Description <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:textarea path="description" class="form-control validate" placeholder="Enter Branch  Description"/>	
+										<form:textarea path="description" class="form-control validate" placeholder="Branch  Description"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>

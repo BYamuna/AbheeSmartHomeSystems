@@ -69,7 +69,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="firstname" class="form-control validate onlyCharacters" placeholder="Enter First Name"/>
+										<form:input path="firstname" class="form-control validate onlyCharacters" placeholder="First Name"/>
 									</div>
 								</div>
 								
@@ -79,7 +79,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Last name<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="lastname" class="form-control validate onlyCharacters" placeholder="Enter last Name"/>
+										<form:input path="lastname" class="form-control validate onlyCharacters" placeholder="last Name"/>
 									</div>
 								</div>
 								
@@ -88,7 +88,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="email" class="form-control validate emailOnly" placeholder="Enter Email"/>
+										<form:input path="email" class="form-control validate emailOnly" placeholder="Email"/>
 										 <span id="errorEmaiMsg" style="color:red;"></span>
 									</div>
 								</div>
@@ -99,7 +99,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile Number<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:input path="mobilenumber"   class="form-control validate  mobilenumber"  maxlength="10" placeholder="Enter Mobile Number"/>
+										<form:input path="mobilenumber"   class="form-control validate  mobilenumber"  maxlength="10" placeholder="Mobile Number"/>
 										<span id="errorMobileMsg" style="color:red;"></span>
 									</div>
 								</div>
@@ -108,7 +108,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Password<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:password path="password" class="form-control validate onlyNumbers" maxlength="4" placeholder="Enter Password"/>
+										<form:password path="password" class="form-control validate onlyNumbers" maxlength="4" placeholder="Password"/>
 									</div>
 								</div>
 								</div><div class="clearfix"></div>
@@ -118,7 +118,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Address<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:textarea path="address" class="form-control validate " placeholder="Enter Address"/>
+										<form:textarea path="address" class="form-control validate " placeholder="Address"/>
 									</div>
 								</div>
 								</div>
@@ -126,7 +126,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">GST<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:input path="gst" class="form-control  validate"  maxlength="10" placeholder="Enter GST"/>
+										<form:input path="gst" class="form-control  validate"  maxlength="10" placeholder="GST"/>
 									</div>
 								</div>
 								</div>
@@ -182,7 +182,7 @@
 					<div class="form-group" id="passwordDiv">
 						<label class="col-md-4 control-label no-padding-left">New Password<span class="impColor">*</span></label>
 						<div class="col-md-6">
-							<input type="password" id="npassword" class="form-control"	placeholder="Enter  New Password" />
+							<input type="password" id="npassword" class="form-control"	placeholder= New Password" />
 						</div>
 						<div class="col-md-2"></div>
 					</div>
@@ -192,7 +192,7 @@
 					<div class="form-group" id="passwordDiv">
 						<label class="col-md-4 control-label no-padding-left">Confirm Password<span class="impColor">*</span></label>
 						<div class="col-md-6">
-							<input type="password" id="cpassword" class="form-control"	placeholder="Re-Enter New Password" />
+							<input type="password" id="cpassword" class="form-control"	placeholder="Confirm New Password" />
 						</div>
 						<div class="col-md-2"></div>
 					</div>

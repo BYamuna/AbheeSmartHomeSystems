@@ -381,7 +381,7 @@ function getHeadersCounts(){
 	        <ul class="nav navbar-nav pull-right toolbar"><li style="float:left;">
             <div style="box-shadow:none;" class="navbar">
   <div style="border-left:none; margin-right:10px;" class="dropdown">
-    <diV style="color:#ffffff; background:#cccccc; font-size:25px; margin-top:10px; margin-right:10px;" class="dropbtn"">    
+    <diV style="color:#166eaf; background:#cccccc; font-size:25px; margin-top:10px; margin-right:10px;" class="dropbtn"">    
 
 
     <i class="fa fa-list-alt"></i><!-- <span class="badge">5</span> -->
@@ -422,7 +422,7 @@ function getHeadersCounts(){
             <li style="float:left;">
             <div style="box-shadow:none; margin-right:10px;" class="navbar">
   <div style="border-left:none;" class="dropdown">
-    <diV style="color:#ffffff; background:#cccccc; font-size:25px; margin-top:10px;" class="dropbtn"">
+    <diV style="color:#166eaf; background:#cccccc; font-size:25px; margin-top:10px;" class="dropbtn"">
 
 
       <i class="fa fa-bell-o"></i><!-- <span class="badge">5</span> -->
@@ -467,7 +467,7 @@ function getHeadersCounts(){
 	           <%--  <li style="float:left; margin-right:5px; margin-top:5px;"><a href="${baseurl}/severity?id=Critical" style="color:#ffffff;">Create Task</a></li> --%>
 	           </security:authorize>
 	            <li style=" margin-top:5px;" class="dropdown">
-	                <a href="#" class="dropdown-toggle username" data-toggle="dropdown" style="color: #ffffff;"><span class="hidden-xs"> ${userDesignationSession.designationName } <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
+	                <a href="#" class="dropdown-toggle username" data-toggle="dropdown" style="color: #166eaf;"><span class="hidden-xs"> ${userDesignationSession.designationName } <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
 	                <ul class="dropdown-menu userinfo arrow">
 	                    <li class="username">
 	                        <a href="#">

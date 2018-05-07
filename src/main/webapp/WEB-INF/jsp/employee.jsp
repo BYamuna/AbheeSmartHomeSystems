@@ -49,7 +49,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Username<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="username" class="form-control validate" placeholder="Enter Username"/>
+										<form:input path="username" class="form-control validate" placeholder="Username"/>
 									</div>
 								</div>
 								
@@ -58,7 +58,7 @@
 								<div class="form-group" id="passwordDiv">
 									<label class="col-md-3 control-label no-padding-right">Password<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:password path="password" class="form-control validate" placeholder="Enter Password"/>
+										<form:password path="password" class="form-control validate" placeholder="Password"/>
 									</div>
 								</div>
 								
@@ -69,14 +69,14 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="firstname" class="form-control validate onlyCharacters" placeholder="Enter First Name"/>
+										<form:input path="firstname" class="form-control validate onlyCharacters" placeholder="First Name"/>
 									</div>
 								</div></div>
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Last Name<span class="impColor">*</span></label>
 						<div class="col-md-6">
-										<form:input path="lastname" class="form-control validate onlyCharacters" placeholder="Enter Last Name"/>
+										<form:input path="lastname" class="form-control validate onlyCharacters" placeholder="Last Name"/>
 									</div>
 								</div>
 								</div><div class="clearfix"></div>
@@ -86,14 +86,14 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="mobilenumber" class="form-control validate numericOnly" maxlength="10"  placeholder="Enter Mobile Number"/>
+										<form:input path="mobilenumber" class="form-control validate numericOnly" maxlength="10"  placeholder="Mobile Number"/>
 									</div>
 								</div></div>
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="email" class="form-control validate emailOnly" placeholder="Enter Email"/>
+										<form:input path="email" class="form-control validate emailOnly" placeholder="Email"/>
 									</div>
 								</div></div><div class="clearfix"></div>
 								</div>
@@ -179,7 +179,7 @@
 					<div class="form-group" id="passwordDiv">
 						<label class="col-md-4 control-label no-padding-left">New Password<span class="impColor">*</span></label>
 						<div class="col-md-6">
-							<input type="password" id="npassword" class="form-control"	placeholder="Enter  New Password" />
+							<input type="password" id="npassword" class="form-control"	placeholder="New Password" />
 						</div>
 						<div class="col-md-2"></div>
 					</div>
@@ -189,7 +189,7 @@
 					<div class="form-group" id="passwordDiv">
 						<label class="col-md-4 control-label no-padding-left">Confirm Password<span class="impColor">*</span></label>
 						<div class="col-md-6">
-							<input type="password" id="cpassword" class="form-control"	placeholder="Re-Enter New Password" />
+							<input type="password" id="cpassword" class="form-control"	placeholder="Confirm New Password" />
 						</div>
 						<div class="col-md-2"></div>
 					</div>
@@ -259,7 +259,7 @@ function changePasswordModal(){
 	
 	if(npassword==null || npassword == "" || npassword == undefined){
 		
-		$("#passwordErrormsg").text("Please Enter New Password");
+		$("#passwordErrormsg").text("Please Confirm New Password");
 		return false;
 	}
 	if(npassword == cpassword ){

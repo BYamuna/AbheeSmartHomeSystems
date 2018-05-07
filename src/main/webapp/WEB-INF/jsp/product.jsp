@@ -78,7 +78,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Product Model<span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="name" class="form-control validate" placeholder="Enter Product Model"/>	
+										<form:input path="name" class="form-control validate" placeholder="Product Model"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -89,7 +89,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Description <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:textarea path="description" class="form-control validate" placeholder="Enter product Model Description"/>	
+										<form:textarea path="description" class="form-control validate" placeholder="Product Model Description"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -100,7 +100,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Specifications <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:textarea path="ProductModelSpecifications" class="form-control validate" placeholder="Enter product Model Specifications"/>	
+										<form:textarea path="ProductModelSpecifications" class="form-control validate" placeholder="Product Model Specifications"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -110,7 +110,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Product Price<span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="ProductPrice" class="form-control validate numericOnly" placeholder="Enter Product Price"/>	
+										<form:input path="ProductPrice" class="form-control validate numericOnly" placeholder="Product Price"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -121,7 +121,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Maximum  Allowed Discount(%) <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="maxAllowedDiscount" class="form-control validate numericOnly" maxlength="2" placeholder="Enter Maximum  Allowed Discount"/>	
+										<form:input path="maxAllowedDiscount" class="form-control validate numericOnly" maxlength="2" placeholder="Maximum  Allowed Discount"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -145,7 +145,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">VideosLinks Id(11Digits)<!-- <span class="impColor">*</span> --></label>
 								    <div class="col-md-3" id ="dtext">
-										<input type="text" id="name1" name='vlink' class="form-control " maxlength="11"  placeholder="Enter  Videolink Id"/>	
+										<input type="text" id="name1" name='vlink' class="form-control " maxlength="11"  placeholder="Videolink Id"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div> 
 								    <div><input type="button" value="Add Another" onclick="addNewTextBox()"></div>
@@ -273,13 +273,13 @@ function editProduct(id) {
         	
         	if(i==0){
         		
-        		var row ="<div id="+i+"><input type='text' name='vlink' id='name"+j+"' value ='"+videosParts[i]+"' class='form-control validate' length='11' placeholder='Enter Videos links'/></div>";
+        		var row ="<div id="+i+"><input type='text' name='vlink' id='name"+j+"' value ='"+videosParts[i]+"' class='form-control validate' length='11' placeholder='Videos links'/></div>";
             	$("#dtext").append(row);
         	}else{
         	
         		k=k+1;
         	
-        	var row ="<div id="+i+"><input type='text' name='vlink' id='name"+j+"' value ='"+videosParts[i]+"' class='form-control validate' length='11' placeholder='Enter Videos links'/><a href='javascript:void(0);' style='color: red;' onclick='removeDependentRow("+i+");'><i class='fa fa-trash' style='color: red;text-decoration: none;cursor: pointer; float: right; margin-top:-25px; margin-right:-25px;'></i></a></div>";
+        	var row ="<div id="+i+"><input type='text' name='vlink' id='name"+j+"' value ='"+videosParts[i]+"' class='form-control validate' length='11' placeholder='Videos links'/><a href='javascript:void(0);' style='color: red;' onclick='removeDependentRow("+i+");'><i class='fa fa-trash' style='color: red;text-decoration: none;cursor: pointer; float: right; margin-top:-25px; margin-right:-25px;'></i></a></div>";
         	$("#dtext").append(row);
         	
         	}
@@ -368,7 +368,7 @@ function addNewTextBox()
 	 else
 		 {
 			k=k+1;
-	var row ="<div id="+k+"><input type='text' name='vlink' id='name"+k+"' class='form-control validate' placeholder='Enter Videos links'/><a href='javascript:void(0);' style='color: red;' onclick='removeDependentRow("+k+");'><i class='fa fa-trash' style='color: red;text-decoration: none;cursor: pointer; float: right; margin-top:-25px; margin-right:-25px;'></i></a></div>";
+	var row ="<div id="+k+"><input type='text' name='vlink' id='name"+k+"' class='form-control validate' placeholder='Videos links'/><a href='javascript:void(0);' style='color: red;' onclick='removeDependentRow("+k+");'><i class='fa fa-trash' style='color: red;text-decoration: none;cursor: pointer; float: right; margin-top:-25px; margin-right:-25px;'></i></a></div>";
 	$("#dtext").append(row);
 	
 		 }
