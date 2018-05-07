@@ -116,7 +116,18 @@ public class AbheeCustRegistrationController
 		
 		String custMobile=request.getParameter("cmobile");
 		
-		Customer custbean1 =customerDao.checkCustomerExistOrNotbyMobile(custMobile);
+		String editFieldsId=request.getParameter("editFields");
+		Customer custbean1 =null;
+		if(editFieldsId.equals("0"))
+		{
+		
+			custbean1 =customerDao.checkCustomerExistOrNotbyMobile(custMobile);
+		}
+		else
+		{
+			custbean1 =customerDao.checkCustomerExistOrNotbyMobileOnEdit(custMobile,editFieldsId);
+			
+		}
 		
 		if(custbean1 != null)
 		{
@@ -236,9 +247,19 @@ public class AbheeCustRegistrationController
 		System.out.println("enter to checkCustExst");
 		
 		String custEmail=request.getParameter("cemail");
+		String editFieldsId=request.getParameter("editFields");
+		 Customer customer =null;
 		
-		 Customer customer =customerDao.checkCustomerExistOrNotByEmail(custEmail);
-		
+		 if(editFieldsId.equals("0"))
+			{
+			
+			 customer	=customerDao.checkCustomerExistOrNotByEmail(custEmail);
+			}
+			else
+			{
+				  customer =customerDao.checkCustomerExistOrNotByEmailOnEdit(custEmail,editFieldsId);
+				
+			}
 		if(customer != null)
 		{
 			return true;
@@ -365,6 +386,7 @@ public class AbheeCustRegistrationController
 					user.setEnabled("1");
 
 					customerDao.saveAbheeCustomer(user);
+					
 					
 					sendingMail.sendConfirmationEmail(user);
 

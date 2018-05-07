@@ -207,6 +207,9 @@
  -->
  </body>
 <script type="text/javascript">
+
+var editFields =0;
+
 var listOrders1 = ${allOrders1};
 if (listOrders1 != "") {
 	displayTable(listOrders1);
@@ -246,6 +249,9 @@ function displayTable(listOrders) {
 
 
 function editCustomer(id) {
+	
+	
+	editFields =id;
 	$('#customer').text("Edit Customer");
 	$("#id").val(serviceUnitArray[id].id);
 	$("#firstname").val(serviceUnitArray[id].firstname);
@@ -457,7 +463,7 @@ function inactiveData() {
 	$.ajax({
 				type : "POST",
 				url : "checkCustExst",
-				data :"cmobile="+cmobile,
+				data :"cmobile="+cmobile+"&editFields="+editFields,
 				dataType : "text",
 				beforeSend : function() {
 		             $.blockUI({ message: 'Please wait' });
@@ -510,7 +516,7 @@ $('#email').blur(function() {
 	$.ajax({
 				type : "POST",
 				url : "checkEmailExst",
-				data :"cemail="+cemail,
+				data :"cemail="+cemail+"&editFields="+editFields,
 				dataType : "text",
 				beforeSend : function() {
 		             $.blockUI({ message: 'Please wait' });
