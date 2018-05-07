@@ -269,13 +269,18 @@ function editProduct(id) {
         
         for(var i=0;i<videosParts.length;i++)
         	{
-        	
-        	
         	j=i+1;
+        	if(i==0){
+        		var row ="<div id="+i+"><input type='text' name='vlink' id='name"+j+"' value ='"+videosParts[i]+"' class='form-control validate' length='11' placeholder='Enter Videos links'/></div>";
+            	$("#dtext").append(row);
+        	}else{
+        	
+        	
         	
         	var row ="<div id="+i+"><input type='text' name='vlink' id='name"+j+"' value ='"+videosParts[i]+"' class='form-control validate' length='11' placeholder='Enter Videos links'/><a href='javascript:void(0);' style='color: red;' onclick='removeDependentRow("+i+");'><i class='fa fa-trash' style='color: red;text-decoration: none;cursor: pointer; float: right; margin-top:-25px; margin-right:-25px;'></i></a></div>";
         	$("#dtext").append(row);
         	
+        	}
         	
         	}
 
