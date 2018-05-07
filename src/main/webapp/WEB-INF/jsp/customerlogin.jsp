@@ -35,8 +35,15 @@
 .panel-primary .panel-body {
   border-top: 2px solid #e43b25;
 }
+.modal .modal-header .modal-title .modal-footer .modal-body {
+	max-width:500px;
+}
 .modal-header {
-	background-color:#ffb902;
+	background-color:#166eaf;
+}
+.modal-title {
+	color:#FFFFFF;
+	font-size:14px;
 }
 .anchor{
 	float:right;
@@ -80,7 +87,7 @@
 									</div>
 								</div>
 							</c:if>
-						<h2>Login</h2>
+						<h4>Login</h4>
 					</div>					
 									<div class="clearfix"></div>
 						<form action="customerlogin" method="post"> 
@@ -104,7 +111,7 @@
 					</div>
 					</form> 	
 					<div class="login-bottom"> 
-						<h6 style="margin-top:40px;">Click Here To <a href="#" data-toggle="modal" onclick="openRegistrationModel()" style="color: red; text-decoration:underline;" class="tag">Register</a></h6>
+						<h6 style="margin-top:10px;">Click Here To <a href="#" data-toggle="modal" onclick="openRegistrationModel()" style="color: red; text-decoration:underline;" class="tag">Register</a></h6>
 					</div> 
 
 				</div>  
@@ -118,8 +125,6 @@
 
  <div  class="modal fade" id="register-info" role="dialog">
     <div class="modal-dialog">
-    
-     
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -133,34 +138,67 @@
 						<div id="firstForm">
 						
 						<div class="form-group">
-								<label for="user_name"> First Name :</label> 
-								<input	type="text" name="csname" id="csname" onkeydown="removeBorder(this.id)" class="form-control validate1 onlyCharacters" placeholder="Enter First Name"/>
+							<div class="col-md-5">
+								<label for="user_name"> First Name :</label>
+							</div> 
+							<div class="col-md-7">
+								<input	type="text" name="csname" id="csname" onkeydown="removeBorder(this.id)" class="form-control validate1 onlyCharacters" placeholder="First Name"/>
+							</div><div class="clearfix"></div>
 								<span class="hasError" id="csnamelError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
-								<label for="user_name">Last Name :</label> 
-								<input	type="text" name="cname" id="cname" onkeydown="removeBorder(this.id)" class="form-control validate1 onlyCharacters" placeholder="Enter Last Name"/>
+								<div class="col-md-5">
+									<label for="user_name">Last Name :</label>
+								</div>
+								<div class="col-md-7">
+									<input	type="text" name="cname" id="cname" onkeydown="removeBorder(this.id)" class="form-control validate1 onlyCharacters" placeholder="Last Name"/>
+								</div><div class="clearfix"></div>
 								<span class="hasError" id="cnameError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
-								<label for="user_name">Enter MobileNumber :</label> 
-								<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" maxlength="10" class="form-control validate1 numericOnly2" placeholder="Enter Mobile Number"/>
+								<div class="col-md-5">
+									<label for="user_name">MobileNumber :</label>
+								</div>
+								<div class="col-md-7">
+									<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" maxlength="10" class="form-control validate1 numericOnly2" placeholder="Mobile Number"/>
+								</div><div class="clearfix"></div>
 								<span class="hasError" id="cmobileError" style="font-size: 13px;"></span>
 							</div>
 
 							<div class="form-group">
-								<label for="user_name">Enter Your Email-Id :</label> 
-								<input	type="email" name="cemail" id="cemail" onkeydown="removeBorder(this.id)" class="form-control validate1 emailOnly" placeholder="Enter Email"/>
+								<div class="col-md-5">
+									<label for="user_name">Email :</label>
+								</div>
+								<div class="col-md-7">
+									<input	type="text" name="cemail" id="cemail" onkeydown="removeBorder(this.id)" class="form-control validate1 emailOnly" placeholder="Email"/>
+								</div><div class="clearfix"></div>
 								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
-								<label for="user_name">Enter  password (Max 4 Digits) :</label> 
-								<input	type="password" name="cpassword" id="cpassword" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control validate1 numericOnly" placeholder="Enter password" />
+								<div class="col-md-5">
+									<label for="user_name">Password (Max 4 Digits) :</label>
+								</div>
+								<div class="col-md-7">
+									<input	type="password" name="cpassword" id="cpassword" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control validate1 numericOnly" placeholder="Password" />
+								</div><div class="clearfix"></div> 
 								<span class="hasError" id="cpasswordError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
-								<label for="user_name">Retype password :</label> 
-								<input	type="password" name="crtpassword"  id="crtpassword" onkeydown="removeBorder(this.id)"  maxlength="4" class="form-control validate1 numericOnly" placeholder="Enter Retype Password"/>
+								<div class="col-md-5">
+									<label for="user_name">Confirm password :</label>
+								</div>
+								<div class="col-md-7">
+									<input	type="password" name="crtpassword"  id="crtpassword" onkeydown="removeBorder(this.id)"  maxlength="4" class="form-control validate1 numericOnly" placeholder="Confirm Password"/>
+								</div><div class="clearfix"></div> 
+								<span class="hasError" id="crtpasswordError" style="font-size: 13px;"></span>
+							</div>
+							<div class="form-group">
+								<div class="col-md-5">
+									<label for="user_name">Confirm password :</label>
+								</div>
+								<div class="col-md-7">
+									<input	type="password" name="crtpassword"  id="crtpassword" onkeydown="removeBorder(this.id)"  maxlength="4" class="form-control validate1 numericOnly" placeholder="Confirm Password"/>
+								</div><div class="clearfix"></div> 
 								<span class="hasError" id="crtpasswordError" style="font-size: 13px;"></span>
 							</div>
 							
@@ -194,8 +232,12 @@
 
 							
 							<div class="form-group">
-								<label for="user_name">Enter OTP :</label> 
-								<input	type="password" name="cotp" id="cotp" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control numericOnly" placeholder="Enter OTP"/>
+								<div class="col-md-3">
+									<label for="user_name">OTP :</label>
+								</div>
+								<div class="col-md-9">
+									<input	type="password" name="cotp" id="cotp" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control numericOnly" placeholder="OTP"/>
+								</div><div class="clearfix"></div> 
 								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
 							</div>
 							
@@ -230,8 +272,12 @@
 						<div id="firstForm2">
 
 							<div class="form-group">
-								<label for="mobile number">Enter Registered MobileNumber :</label> 
-								<input	type="text" name="resetmobile" id="resetmobile" onkeydown="removeBorder(this.id)" maxlength="10" class="form-control validate2 numericOnly" placeholder="Enter Mobile Number"/>
+								<div class="col-md-5">
+									<label for="mobile number">Registered Mobile Number :</label>
+								</div>
+								<div class="col-md-7">
+									<input	type="text" name="resetmobile" id="resetmobile" onkeydown="removeBorder(this.id)" maxlength="10" class="form-control validate2 numericOnly" placeholder="Registered Mobile Number"/>
+								</div><div class="clearfix"></div> 
 								<span class="hasError" id="cmobileError" style="font-size: 13px;"></span>
 							</div>				
 						</div>
