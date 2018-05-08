@@ -291,7 +291,7 @@ color: inherit !important;
 			
 			 toolTips();
 			 
-			// getHeadersCounts();
+			 getAssignedNotifications();
 			
 			   var formData = new FormData();
 		    
@@ -343,6 +343,19 @@ function getHeadersCounts(){
 			var jsonobj = $.parseJSON(data);
 			$("#unseentasks").text(jsonobj.unseentasks);
 			$("#reopentaskscount").text(jsonobj.reopentaskscount);
+			
+		});  
+
+}
+
+function getAssignedNotifications(){
+	
+	 var formData = new FormData();
+	    
+		$.fn.makeMultipartRequest('POST', 'getAssignedNotifications', false,
+				formData, false, 'text', function(data){
+			var jsonobj = $.parseJSON(data);
+			alert(data);
 			
 		});  
 

@@ -74,6 +74,8 @@ public class TaskHistoryLogs  {
 	
 	private  String addComment;
 	
+	private  String communicationaddress;
+	
 	
 	
 	
@@ -302,6 +304,14 @@ public class TaskHistoryLogs  {
 	}
 	public void setModifiedBy(String modifiedBy) {
 		ModifiedBy = modifiedBy;
+	}
+	
+	
+	public String getCommunicationaddress() {
+		return communicationaddress;
+	}
+	public void setCommunicationaddress(String communicationaddress) {
+		this.communicationaddress = communicationaddress;
 	}
 	@Override
 	public String toString() {

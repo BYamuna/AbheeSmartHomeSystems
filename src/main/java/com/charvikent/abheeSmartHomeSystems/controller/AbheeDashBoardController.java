@@ -287,5 +287,27 @@ public class AbheeDashBoardController {
 		return String.valueOf(jsonObj);
 	}
 	
+	@RequestMapping(value = "/getAssignedNotifications")
+	public @ResponseBody String getAssignedNotifications(AbheeTask  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult)
+	{
+		LOGGER.debug("Calling  getAssignedNotifications at controller");
+		JSONObject jsonObj = new JSONObject();
+		Integer unseentasks =0;
+		try{
+			
+			jsonObj.put("paymentPending",dashBoardDao.getTasksCountBystatus().get("PAYMENT PENDING"));
+			jsonObj.put("AllServiceRequests",dashBoardDao.getAllCountBystatus().get("allServiceCounts"));
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+	System.out.println(e);
+			return String.valueOf(jsonObj);
+			
+		}
+		return String.valueOf(jsonObj);
+	}
+	
+	
 
 }
