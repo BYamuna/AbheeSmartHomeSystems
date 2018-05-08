@@ -288,15 +288,17 @@ public class AbheeDashBoardController {
 	}
 	
 	@RequestMapping(value = "/getAssignedNotifications")
-	public @ResponseBody String getAssignedNotifications(AbheeTask  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult)
+	public @ResponseBody String getAssignedNotifications(AbheeTask  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) throws JsonProcessingException
 	{
 		LOGGER.debug("Calling  getAssignedNotifications at controller");
 		JSONObject jsonObj = new JSONObject();
+		List<Map<String,Object>> retlist=taskHistoryLogsDao.showAssignedTasksNotification();
+		ObjectMapper objectMapper = new ObjectMapper();
+		String sJson = objectMapper.writeValueAsString(retlist);
 		Integer unseentasks =0;
 		try{
 			
-			jsonObj.put("paymentPending",dashBoardDao.getTasksCountBystatus().get("PAYMENT PENDING"));
-			jsonObj.put("AllServiceRequests",dashBoardDao.getAllCountBystatus().get("allServiceCounts"));
+			jsonObj.put("AssignedNotifications",retlist);
 			
 			
 		}catch(Exception e){
