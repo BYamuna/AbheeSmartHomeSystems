@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,8 @@ public class TaskHistoryLogsDao {
 	@PersistenceContext
     private EntityManager entityManager;
 	
+	@Autowired
+    private JdbcTemplate jdbcTemplate;
 	
 	public void savetaskhistorylogs(TaskHistoryLogs taskHistoryLogs) 
 	{
@@ -132,5 +136,18 @@ public class TaskHistoryLogsDao {
 
 		
 		
+	}
+	public List<Map<String, Object>> showAssignedTasksNotification()
+	{
+		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String hql="select t.id,t.assignto,u.username,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,sev.severity," 
+					+ "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.add_comment,u1.username as musername" 
+					+ "	FROM task_history_logs t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp,abheeusers u1"
+					+ "	where t.kstatus<>'4' and t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.modified_by=u1.id order by t.created_time desc " ;
+		System.out.println(hql);
+		
+		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+		System.out.println(retlist);
+		return retlist;
 	}
 }
