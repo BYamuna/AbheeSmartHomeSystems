@@ -534,6 +534,7 @@ var customerid=$("#customerid").val();
 				$('#savepersnolinfo').hide();
 				$('#editpersnolinfo').show();
 				alert(" Profile Updated Successfully ");
+				window.location.reload();
 			}
 			else
 				{
