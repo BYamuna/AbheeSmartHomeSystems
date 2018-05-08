@@ -369,7 +369,7 @@ function displayAssignedNotifications(listOrders) {
 // 	alert(listOrders);
 	$('#ack').html('');
 	var tableHead = '<table id="ack" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Username</th><th>comment</th></thead><tbody></tbody></table>';
+			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">Username</th><th style="text-align:center;">comment</th></thead><tbody></tbody></table>';
 	$('#ack').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -437,26 +437,11 @@ function displayAssignedNotifications(listOrders) {
       	<table class="table1">
         	<thead>
 
-            	<tr class="tr1" style="  background: #006699; color: #FFF;">               
+            	<!-- <tr class="tr1">               
                 	<th class="th1">User Name</th>
                 	<th class="th1">Comment</th>
-                	<!-- <th>Change</th> -->
-                </tr>
-                <tr class="tr1">               
-                	<td class="th1">Task No.</td>
-                	<td class="th1">Field</td>
-                	<!-- <th>Change</th> -->
-                </tr>
-                <tr class="tr1">               
-                	<td class="th1">Task No.</td>
-                	<td class="th1">Field</td>
-                	<!-- <th>Change</th> -->
-                </tr>
-                <tr class="tr1">               
-                	<td class="th1">Task No.</td>
-                	<td class="th1">Field</td>
-                	<!-- <th>Change</th> -->
-                </tr>
+                	<th>Change</th>
+                </tr> -->
             </thead>
             <tbody>
              

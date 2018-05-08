@@ -55,9 +55,7 @@
 
 .default-class::-webkit-input-placeholder {color: #e73d4a !important;}
 .default-class::-moz-placeholder {color: #e73d4a !important;}
-.panel-primary .panel-body {
-  border-top: 2px solid #e43b25;
-}
+.panel-primary .panel-body {}
 .modal-header {
 	background-color:#ffb902;
 }

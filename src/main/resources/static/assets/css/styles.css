@@ -10980,9 +10980,7 @@ body.collapse-leftbar #search.keep-open form button[type="submit"] {
   background-color: #0460a4;
   border-color: #0460a4;
 }
-.panel-primary .panel-body {
-  border-top: 2px solid #0460a4;
-}
+.panel-primary .panel-body {}
 .panel-success {
   border-color: #85c744;
 }
