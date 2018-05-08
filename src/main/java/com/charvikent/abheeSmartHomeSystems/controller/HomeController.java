@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.jms.Session;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -257,7 +258,8 @@ public class HomeController {
 		Customer customerProfile=(Customer) session.getAttribute("customer");
 		
 		//String id=String.valueOf(objuserBean.getId());
-          
+          if(null !=customerProfile)
+          {
 		List<Customer> customerList =new  ArrayList<Customer>(); 
 		customerList.add(customerProfile);
 		List<Map<String, Object>> ordersList=productGuaranteeDao.getProductWarrantyDetailsByCustomerId(customerProfile.getCustomerId());
@@ -268,7 +270,13 @@ public class HomeController {
 		request.setAttribute("customerProfile1", sJson);
 		String sJson2 = objectMapper.writeValueAsString(ordersList);
 		request.setAttribute("ordersList", sJson2);
-		
+          }
+          else
+          {
+        		request.setAttribute("customerProfile1", "''");
+        		request.setAttribute("ordersList", "''");
+        	  
+          }
 		return "customerprofile";
 	}
 	
@@ -330,7 +338,7 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "/editprofilecustomer", method = RequestMethod.POST)
-	public @ResponseBody  String editProfileCustomer(Model model,HttpServletRequest request) throws IOException, MessagingException 
+	public @ResponseBody  String editProfileCustomer(Model model,HttpServletRequest request,HttpSession session) throws IOException, MessagingException 
 	{
 		LOGGER.debug("Calling editProfileCustomer at controller");
 	
@@ -342,7 +350,6 @@ public class HomeController {
 		String pmobilenumber =request.getParameter("pmobilenumber");
 		String customerid =request.getParameter("customerid");
 		
-		
 		 Customer customer = new Customer();
 		 customer.setFirstname(firstname);
 		 customer.setLastname(lastname);
@@ -351,13 +358,27 @@ public class HomeController {
 		 customer.setMobilenumber(pmobilenumber);
 		 customer.setId(Integer.parseInt((customerid)));
 		 
+		  
+			List<Customer> customerList =new  ArrayList<Customer>(); 
+			customerList.add(customer);
+		 
 		 try {
 			customerDao.updateCustomerProfile(customer);
+			 session.removeAttribute("customerName");
+			 session.removeAttribute("customer");
+			 
+			 session.setAttribute("customerName", firstname);
+			 session.setAttribute("customer", customer);
+			 ObjectMapper objectMapper = new ObjectMapper();
+				String sJson = objectMapper.writeValueAsString(customerList);
+				request.setAttribute("customerProfile1", sJson);
 			return "true";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "false";
 		}
+		 
+		 
 		 
 		
 		
