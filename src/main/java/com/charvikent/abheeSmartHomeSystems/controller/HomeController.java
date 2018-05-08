@@ -251,7 +251,7 @@ public class HomeController {
 	
 	
 	@RequestMapping("/customerprofile")
-	public String customerProfile(@ModelAttribute("customerProfile") Customer customer,ProductGuarantee productGuarantee, Model model,HttpServletRequest request,HttpSession session,RedirectAttributes redir) throws JSONException, JsonProcessingException {
+	public String customerProfile(@ModelAttribute("customerProfile") Customer customer, Model model,HttpServletRequest request,HttpSession session,RedirectAttributes redir) throws JSONException, JsonProcessingException {
 		LOGGER.debug("Calling Customer Profile  page at controller");
 		
 		Customer customerProfile=(Customer) session.getAttribute("customer");
@@ -260,7 +260,7 @@ public class HomeController {
           
 		List<Customer> customerList =new  ArrayList<Customer>(); 
 		customerList.add(customerProfile);
-		ProductGuarantee ordersList=productGuaranteeDao.getProductWarrantyDetailsByCustomerId(productGuarantee);
+		List<Map<String, Object>> ordersList=productGuaranteeDao.getProductWarrantyDetailsByCustomerId(customerProfile.getCustomerId());
 		//model.addAttribute("customerProfile", customerProfile);
 
 		ObjectMapper objectMapper = new ObjectMapper();

@@ -26,6 +26,7 @@ public class ProductGuaranteeDao
     private EntityManager em;
 	@Autowired
     private JdbcTemplate jdbcTemplate;
+	
 	@Autowired CustomerDao customerDao;
 	@Autowired  ProductDao  productDao;
 	
@@ -164,14 +165,15 @@ public class ProductGuaranteeDao
 		return retlist;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public ProductGuarantee getProductWarrantyDetailsByCustomerId(ProductGuarantee productGuarantee) 
+
+	public List<Map<String, Object>> getProductWarrantyDetailsByCustomerId(String customerId) 
 	{
-		String hql ="from ProductGuarantee where customerid ='"+productGuarantee.getCustomerid()+"'";
-		List<ProductGuarantee> ordersList= em.createQuery(hql).getResultList();
-		if(ordersList.size() > 0)
-			return ordersList.get(0);
-		return null;
+		String hql ="select * from abheeproductguarantee where customerid='"+customerId+"'";
+		System.out.println(hql);
+		
+		List<Map<String,Object>>  ordersList = jdbcTemplate.queryForList(hql,new Object[]{});
+		System.out.println(ordersList);
+		return ordersList;
 	}
 	
 	
