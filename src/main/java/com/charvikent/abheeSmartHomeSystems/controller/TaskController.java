@@ -42,7 +42,6 @@ import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
 //import com.charvikent.abheeSmartHomeSystems.model.KpStatusLogs;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
-import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
@@ -571,8 +570,8 @@ public class TaskController {
 		}
 		else
 		{
-			System.out.println("Service request alreadyExists");
-			return "Your Request till didn't closed";
+			System.out.println("Service Request already received");
+			return "Service Request already received";
 			
 		}
 		

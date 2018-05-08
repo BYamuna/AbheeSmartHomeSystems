@@ -185,7 +185,7 @@
 									</label>
 									
 										<form:textarea path="description"
-											class="col-xs-10 col-sm-5 validate" placeholder="Enter Description" />
+											class="col-xs-10 col-sm-5 validate" placeholder="Description" />
 										<span class="hasError" id="stationnameError"></span>
 									
 								</div>
@@ -213,7 +213,7 @@
 									</label>
 									
 										<form:textarea path="addComment"
-											class="col-xs-10 col-sm-5 validate " placeholder="Enter Comment" />
+											class="col-xs-10 col-sm-5 validate " placeholder="Comment" />
 										<span class="hasError" id="stationnameError"></span>
 									
 								</div>
@@ -369,7 +369,7 @@
 									<div class="col-md-6">
 										<input type="text" name="commet" id="commet"
 											onkeyup="removeBorder(this.id)"
-											class="form-control validate2" placeholder="Enter comment"
+											class="form-control validate2" placeholder="Comment"
 											style="width: 320px;"> <span class="hasError"
 											id="stationnameError"></span>
 									</div>

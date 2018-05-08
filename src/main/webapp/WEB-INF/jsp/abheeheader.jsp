@@ -61,7 +61,10 @@
 	z-index:99999;
 }
 .myacd {
-min-width:104px;
+min-width:113px;
+}
+.ttr li a {
+	text-transform: capitalize;
 }
 </style>
 </head>
@@ -99,9 +102,9 @@ min-width:104px;
         <li class="home"><a href="${baseurl }/">Home</a></li>
         <li class="dropdown category">
         
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Categories</a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Products</a>
           <ul class="dropdown-menu">
-          <li id="cmlist"></li>
+          <li class="ttr" id="cmlist"></li>
           </ul>
         </li>
         <li class="vision"><a href="${baseurl }/mission">Our Mission & Vision</a></li>
@@ -113,7 +116,7 @@ min-width:104px;
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown acc">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">My Account</a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Hello! Sign in</a>
           <ul class="dropdown-menu myacd">
           <li id="cmlist"></li>
          

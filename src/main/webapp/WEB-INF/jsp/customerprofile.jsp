@@ -207,8 +207,8 @@ color:#ea8080 !important;
             <div class="col-sm-2">
               <ul class="nav nav-tabs list-items">
                 <li class="arrow_box active"><a data-toggle="tab" href="#1_1">Personal Information</a> </li>
-                <li class="arrow_box"><a data-toggle="tab" href="#1_2">Change Email</a> </li>
-                <li class="arrow_box"><a data-toggle="tab" href="#1_3">Change Mobile Number</a> </li>
+                <li class="arrow_box"><a data-toggle="tab" href="#1_2">Email</a> </li>
+                <li class="arrow_box"><a data-toggle="tab" href="#1_3">Mobile Number</a> </li>
                 <li class="arrow_box"><a data-toggle="tab" href="#1_4">Change Password</a> </li>
                 <li class="arrow_box"><a data-toggle="tab" href="#1_5">My Orders</a> </li>
               </ul>
@@ -273,10 +273,10 @@ color:#ea8080 !important;
                   	<div class="cdata">
                   		<div class="col-sm-6">
                   			<div class="col-md-2">
-                  				<label style="margin-top:18px;">Email Id: </label>
+                  				<label style="margin-top:18px;">Email : </label>
                   			</div>
                   			<div class="col-md-6">
-                  				<input style="float:left;" id="pemail" class="form-control emailOnly validate" type="text"  placeholder="Email Id" disabled="true">
+                  				<input style="float:left;" id="pemail" class="form-control emailOnly validate" type="text"  placeholder="Email" disabled="true">
                   			</div>
                   			<div class="col-md-4">
                   			</div><div class="clearfix"></div>
@@ -300,9 +300,9 @@ color:#ea8080 !important;
                   	<div class="cdata">
                   		<div class="col-sm-6">
                   			<div class="col-md-3">
-                  				<label style="margin-top:18px; margin-left:5px;">Mobile Number: </label>
+                  				<label style="margin-top:18px; margin-left:5px;">Mobile Number : </label>
                   			</div>
-                  			<div class="col-md-10">
+                  			<div class="col-md-9">
                   				<input class="form-control numericOnly2 validate " maxlength="10" type="text"  id="pmobilenumber" placeholder="Mobile Number" disabled="true">
                   				<input class="form-control" type="hidden"  id="customerid" placeholder="Mobile Number">
                   				<input class="form-control" type="hidden"  id="checkpass">
@@ -331,7 +331,7 @@ color:#ea8080 !important;
                   			<div class="col-md-4">
                   				<label style="margin-top:-5px;">Current Password: </label>
                   			</div>
-                  			<div class="col-md-9">
+                  			<div class="col-md-8">
                   				<input style="float:left;" id="pcurrentpassword" class="form-control" maxlength="4" type="password" placeholder="*****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>
@@ -341,7 +341,7 @@ color:#ea8080 !important;
                   			<div class="col-md-4">
                   				<label style="margin-top:-5px;">New Password: </label>
                   			</div>
-                  			<div class="col-md-9">
+                  			<div class="col-md-8">
                   				<input style="float:left;" id="pnewpassword" class="form-control" maxlength="4" type="password" placeholder="*****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>
@@ -351,7 +351,7 @@ color:#ea8080 !important;
                   			<div class="col-md-4">
                   				<label style="margin-top:-5px;">Confirm Password: </label>
                   			</div>
-                  			<div class="col-md-9">
+                  			<div class="col-md-8">
                   				<input style="float:left;" id="pconfirmpassword" class="form-control" maxlength="4" type="password" placeholder="*****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>

@@ -119,6 +119,73 @@
 <!-- <script src='https://cdn.rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.min.js'></script> -->
 <script type="text/javascript" src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
 <script>
+
+$(function(){
+	getLocation();
+})
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+       // x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    var langi = position.coords.latitude;
+	var longi = position.coords.longitude;
+
+	$('#us2').locationpicker({
+		location: {
+	        latitude: langi,
+	        longitude: longi
+	    },
+	/* enableAutocomplete: true,
+	    enableReverseGeocode: true,
+	  radius: 0,
+	  inputBinding: {
+	    latitudeInput: $('#us2-lat'),
+	    longitudeInput: $('#us2-lon'),
+	    radiusInput: $('#us2-radius'),
+	    locationNameInput: $('#us2-address')
+	  }, */
+	  onchanged: function (currentLocation, radius, isMarkerDropped) {
+	        var addressComponents = $(this).locationpicker('map').location.addressComponents;
+	      $("#locationData").val(currentLocation.latitude+'&'+currentLocation.longitude);
+	    //updateControls(addressComponents); //Data
+	    
+	    
+	    	//var id = $(this).attr('id');
+	    if( (currentLocation.latitude+'&'+currentLocation.longitude) !=  ""){
+	    	
+	    	removeBorder('locationData');
+	    }
+	   
+	    }
+	    	
+	});
+}
+//To use this code on your website, get a free API key from Google.
+//Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
+
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            x.innerHTML = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred."
+            break;
+    }
+}
+
 //Plugin used: https://github.com/Logicify/jquery-locationpicker-plugin
 console.log($('#id').val());
 $('#modelName').text(localStorage.getItem("modelName"));
@@ -126,35 +193,6 @@ $('#modelnumber').val(localStorage.getItem("modelName"));
 
 //document.getElementById('modelnumber').readOnly=true;
 
-$('#us2').locationpicker({
-	location: {
-        latitude: 13.576848329332353,
-        longitude: 78.41736346531445
-    },
-enableAutocomplete: true,
-    enableReverseGeocode: true,
-  radius: 0,
-  inputBinding: {
-    latitudeInput: $('#us2-lat'),
-    longitudeInput: $('#us2-lon'),
-    radiusInput: $('#us2-radius'),
-    locationNameInput: $('#us2-address')
-  },
-  onchanged: function (currentLocation, radius, isMarkerDropped) {
-        var addressComponents = $(this).locationpicker('map').location.addressComponents;
-      $("#locationData").val(currentLocation.latitude+'&'+currentLocation.longitude);
-    //updateControls(addressComponents); //Data
-    
-    
-    	//var id = $(this).attr('id');
-    if( (currentLocation.latitude+'&'+currentLocation.longitude) !=  ""){
-    	
-    	removeBorder('locationData');
-    }
-   
-    }
-    	
-});
 
 function updateControls(addressComponents) {
   console.log(addressComponents);
