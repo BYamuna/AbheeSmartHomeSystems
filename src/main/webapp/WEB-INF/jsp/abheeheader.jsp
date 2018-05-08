@@ -107,7 +107,7 @@ min-width:113px;
           <li class="ttr" id="cmlist"></li>
           </ul>
         </li>
-        <li class="vision"><a href="${baseurl }/mission">Our Mission & Vision</a></li>
+        <li class="vision"><a href="${baseurl }/mission">Mission & Vision</a></li>
         <li class="gallery"><a href="${baseurl }/gallery">Gallery</a></li>
         <li class="career"><a href="${baseurl }/career">Career</a></li>
         <li class="location"><a href="${baseurl }/location">Our other Locations</a></li>
