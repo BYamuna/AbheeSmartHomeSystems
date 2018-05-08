@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,9 +49,12 @@ public class SalesRequestController
 		
 	}
 	@RequestMapping(value = "/salesRequest", method = RequestMethod.POST)
-	public String saveRequestDetails(@ModelAttribute("salesRequest")SalesRequest salesRequest,
-									@RequestParam("imgfile") MultipartFile[] uploadedFiles,
-									/*@RequestParam(value = "locationData") String latlong,*/HttpServletRequest request,RedirectAttributes redir,HttpSession session) throws IllegalStateException, IOException, MessagingException
+	public String saveRequestDetails(@RequestParam("modelnumber") String modelnumber,
+			@RequestParam("locationData") String locationData,
+			@RequestParam("address") String address,
+			@RequestParam("reqdesc") String reqdesc,
+			@RequestParam("imgfile") MultipartFile[] uploadedFiles,
+			HttpServletRequest request,RedirectAttributes redir,HttpSession session) throws IllegalStateException, IOException, MessagingException
 	{
 		
 		Customer customer=(Customer) session.getAttribute("customer");
@@ -58,17 +62,19 @@ public class SalesRequestController
 		
 		LOGGER.debug("Calling salesRequest at controller");
 		String referalUrl=request.getHeader("referer");
-		SalesRequest loginDetails = salesRequest;
+		SalesRequest loginDetails = new SalesRequest();
 		int filecount =0;
 		
-		String str[] = salesRequest.getLocationData().split("&");
+		String str[] = locationData.split("&");
 		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
-		
-		loginDetails.setSalesrequestnumber(salesRequest.getModelnumber()+randomNum);
+		loginDetails.setModelnumber(modelnumber);
+		loginDetails.setAddress(address);
+		loginDetails.setReqdesc(reqdesc);
+		loginDetails.setSalesrequestnumber(modelnumber+randomNum);
 		loginDetails.setLat(str[0]);
 		loginDetails.setLongitude(str[1]);
 		loginDetails.setEnable("1");
-		salesRequest.setMobileno(customer.getMobilenumber());
+		loginDetails.setMobileno(customer.getMobilenumber());
    	 for(MultipartFile multipartFile : uploadedFiles) {
 				String fileName = multipartFile.getOriginalFilename();
 				if(!multipartFile.isEmpty())

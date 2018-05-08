@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%-- <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
@@ -43,18 +43,18 @@
 									 <form:hidden path="modelnumber" id="modelnumber"  class="form-control validate" placeholder="Enter Product Model"/>
 							<!--</div> -->
    							<!--	</div> -->
-								<%-- <div class="form-group">
+								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor"> *</span></label>
 									<div class="col-md-6">
 										<form:input path="email" class="form-control validate" placeholder="Enter Email"/>
 									</div>
-								</div> --%>
-								<%-- <div class="form-group">
+								</div>
+								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:input path="modelnumber" class="form-control validate" placeholder="Enter Username"/>
 									</div>
-								</div> --%>
+								</div>
 								<div class="clearfix"></div>
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">location<span class="impColor"> *</span></label>
@@ -63,12 +63,12 @@
 										<input type="text" name="locationData" id="locationData" class="form-control validate"  placeholder="Please Select Location in Map"/> 
 									</div>
 								</div><div class="clearfix"></div>
-								<%-- <div class="form-group">
+								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor"> *</span></label>
 									<div class="col-md-6">
 										<form:input path="mobileno" class="form-control validate numericOnly" maxlength="10"  placeholder="Enter Mobile Number"/>
 									</div>
-								</div> --%>
+								</div>
 								<div class="clearfix"></div>
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Address <span class="impColor">*</span></label> 
@@ -310,4 +310,4 @@ function removeBorder(el){
 //$("#pageName").text("-------");
  </script>
 
- <%@include file="abheefooter.jsp" %>
+ <%@include file="abheefooter.jsp" %> --%>
