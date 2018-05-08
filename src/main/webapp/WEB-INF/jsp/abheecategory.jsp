@@ -217,7 +217,7 @@
 								<div class="form-group">
 								<label class="col-md-3 control-label no-padding-right ">Attach <span class="impColor">*</span></label> 
 									<div class="col-md-6">
-										<input class=" validate" type="file" name="imgfile"  onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="imgfile" multiple />
+										<input class=" validate" type="file" name="imgfile"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="imgfile" multiple />
 									</div>
 								</div>
 					</form>
@@ -709,6 +709,51 @@ $.each(productdetailslist, function(k,v){
 
 	}
 	
+	function validateImage(id) {
+	 
+		 var photos = document.getElementById(id);
+         var howmany = photos.files.length;
+         var err = 0;
+
+         var img = new Array();
+
+         for (var i = 0; i < howmany; i++) {               
+	    
+            var file1=photos.files[i];
+            //document.getElementById('imgfile').files[i];
+            if(file1){                        
+                var file_size=file1.size;
+                if(file_size<=1024000){
+                    var ext = file1.name.split('.').pop().toLowerCase();                            
+                    if($.inArray(ext,['jpg','jpeg','gif', 'png','bmp'])===-1){
+                    	
+                        alert("Invalid file extension");
+                        return false;
+                    }
+
+                }else{
+                    alert("Screenshot size is too large.");
+                    return false;
+                }                        
+            }else{
+                alert("fill all fields..");         
+                return false;
+            }
+        }
+	 
+	   /*  var t = file.type.split('/').pop().toLowerCase();
+	    if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") {
+	        alert('Please select a valid image file');
+	        document.getElementById(id).value = '';
+	        return false;
+	    }
+	    if (file.size > 1024000) {
+	        alert('Max Upload size is 1MB only');
+	        document.getElementById(id).value = '';
+	        return false;
+	    }
+	    return true; */
+	}
 	
 	function removeBorder2(el){	
 		  $("#"+el).css("border", "");
