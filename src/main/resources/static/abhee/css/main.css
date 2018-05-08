@@ -1,6 +1,24 @@
 body {
 	background:url(../images/bg.jpg) fixed;
 }
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  src: local('Roboto Regular'), 
+       local('Roboto-Regular'), 
+       url(http://themes.googleusercontent.com/static/fonts/roboto/v11/2UX7WLTfW3W8TclTUvlFyQ.woff) 
+       format('woff');
+}
+h1, h2, h3, h4, h5, h6, p, li a, a, 
+label, 
+.form-control, 
+.btn-primary, .btn-success, .btn-warning, .btn-info, .btn-danger, .btn-default, .btn-inverse
+.login-button h6 a, 
+strong, 
+.panel-primary>.panel-heading, .panel-default>.panel-heading, .panel-inverse>.panel-heading, 
+.panel-info>.panel-heading, .panel-success>.panel-heading, .panel-warning>.panel-heading, .panel-danger>.panel-heading {
+	font-family: 'Roboto'
+}
 #carousel {
 	margin-top:-20px;
 }

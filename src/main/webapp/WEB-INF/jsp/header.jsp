@@ -469,7 +469,7 @@ function displayAssignedNotifications(listOrders) {
   </div> 
 </div>
                 </li> 
-            <li style="float:left;">
+            <%-- <li style="float:left;">
             <div style="box-shadow:none; margin-right:10px;" class="navbar">
   <div style="border-left:none;" class="dropdown">
     <diV style="color:#166eaf; background:#cccccc; font-size:25px; margin-top:10px;" class="dropbtn"">
@@ -511,7 +511,7 @@ function displayAssignedNotifications(listOrders) {
       </c:if>
   </div> 
 </div>
-                </li>
+                </li> --%>
 	             <%-- <li style="float:left;margin-right:35px"><a href="${baseurl}/task" style="color:#f3f1f1;">Create Task</a></li> --%>
 	             <security:authorize access="hasRole('ROLE_ADMIN')">
 	           <%--  <li style="float:left; margin-right:5px; margin-top:5px;"><a href="${baseurl}/severity?id=Critical" style="color:#ffffff;">Create Task</a></li> --%>

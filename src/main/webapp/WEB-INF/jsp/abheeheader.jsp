@@ -117,7 +117,7 @@ min-width:113px;
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown acc">
           <a href="#" class="dropdown-toggle"  data-toggle="dropdown" data-hover="dropdown">Hello! <span  id="loggedCustomerName"></span></a>
-          <ul class="dropdown-menu myacd">
+          <ul style="width:100% !important;" class="dropdown-menu myacd">
           <li id="cmlist"></li>
          
           
