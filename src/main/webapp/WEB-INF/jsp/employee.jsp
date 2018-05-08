@@ -269,7 +269,7 @@ function changePasswordModal(){
 		
 		$.fn.makeMultipartRequest('POST', 'adminChangePassword', false,
 				formData, false, 'text', function(data) {
-			
+			alert("password changed successfully");
 			$("#passwordModal").modal('toggle');
 			
 			/* var jsonobj = $.parseJSON(data);
