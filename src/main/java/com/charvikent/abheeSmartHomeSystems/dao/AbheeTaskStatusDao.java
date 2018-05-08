@@ -53,7 +53,7 @@ Authentication authentication = SecurityContextHolder.getContext().getAuthentica
 		else
 		{
 			for(AbheeTaskStatus bean: rolesList){
-				if(bean.getName().equals("RESOLVED") ||bean.getName().equals("PAYMENT PENDING"))
+				if(bean.getId() == 3 ||bean.getId() == 7)
 				rolesMap.put(bean.getId(), bean.getName());
 			}
 			

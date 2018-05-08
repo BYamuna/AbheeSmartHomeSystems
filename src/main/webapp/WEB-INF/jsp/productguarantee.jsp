@@ -63,7 +63,6 @@
 				</div>
 				<form:form class="form-horizontal" modelAttribute="guaranteef"	action="productGuarantee" method="post" >
 					<div class="panel-body">
-					  <security:authorize access="hasRole('ROLE_ADMIN')">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -112,7 +111,6 @@
 							</div>
 							
 						</div>
-						 </security:authorize>
 						<div id="getting-started"></div>
 					</div>
 					<div class="panel-footer">

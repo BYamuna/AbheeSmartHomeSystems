@@ -272,11 +272,11 @@ public class AbheeDashBoardController {
 			System.out.println("enter from header");
 			
 			
-			jsonObj.put("paymentPending",dashBoardDao.getTasksCountBystatus().get("PAYMENT PENDING"));
+			jsonObj.put("paymentPending",dashBoardDao.getTasksCountBystatus().get("Payment Pending"));
 			jsonObj.put("AllServiceRequests",dashBoardDao.getAllCountBystatus().get("allServiceCounts"));
 			
-			System.out.println(dashBoardDao.getAllCountBystatus());
-		    System.out.println(dashBoardDao.getTasksCountBystatus());
+			System.out.println("hi"+dashBoardDao.getAllCountBystatus());
+		    System.out.println("hihi"+dashBoardDao.getTasksCountBystatus());
 			
 		}catch(Exception e){
 			e.printStackTrace();

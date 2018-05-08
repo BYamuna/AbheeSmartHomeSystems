@@ -371,7 +371,7 @@ function displayAssignedNotifications(listOrders) {
 	var tableHead = '<table id="ack" class="table table-striped table-bordered datatables">'
 			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">Username</th><th style="text-align:center;">comment</th></thead><tbody></tbody></table>';
 	$('#ack').html(tableHead);
-	serviceUnitArray = {};
+	//serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
 		var comment =null;
 		if(orderObj.add_comment == "" ||orderObj.add_comment =="null"||typeof orderObj.add_comment === "undefined")
@@ -381,7 +381,7 @@ function displayAssignedNotifications(listOrders) {
 				comment =orderObj.add_comment;
 			
 		}
-	serviceUnitArray[orderObj.id] = orderObj;
+	//serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.musername+"'>"+ orderObj.musername + "</td>"
 			+ "<td title='"+comment+"'>"+ comment + "</td>"		

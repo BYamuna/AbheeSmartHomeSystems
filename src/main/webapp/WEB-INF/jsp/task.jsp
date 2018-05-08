@@ -73,7 +73,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									
-									<label for="focusedinput" class="col-md-6 control-label ">Service
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Service
 										Type <span class="impColor">*</span>
 									</label>
 									<form:select path="category"
@@ -86,7 +86,7 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label ">Severity
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Severity
 										<span class="impColor">*</span>
 									</label>
 
@@ -106,7 +106,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label ">Priority
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Priority
 										<span class="impColor">*</span>
 									</label>
 									<form:select path="priority"
@@ -119,7 +119,7 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label ">Assigned
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Assigned
 										to <span class="impColor">*</span>
 									</label>
 
@@ -140,7 +140,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label ">Summary
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Summary
 										<span class="impColor">*</span>
 									</label>
 									<form:input path="subject" placeholder="Summary"
@@ -149,7 +149,7 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Service Request
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">Service Request
 										DeadLine <span class="impColor">*</span>
 									</label>
 									
@@ -168,7 +168,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">
 										Status <span class="impColor">*</span>
 									</label>
 									<form:select path="kstatus" class="col-xs-10 col-sm-5 validate"
