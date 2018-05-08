@@ -52,6 +52,7 @@ public class TaskHistoryLogsDao {
 		taskHistoryLogs.setAddComment(reportIssue.getAddComment());
 		
 		taskHistoryLogs.setModifiedBy(String.valueOf(objuserBean.getId()));
+		taskHistoryLogs.setCommunicationaddress(reportIssue.getCommunicationaddress());
 		
 		
 		
@@ -89,6 +90,7 @@ public class TaskHistoryLogsDao {
 		taskHistoryLogs.setTaskdeadline(reportIssue.getTaskdeadline());
 		taskHistoryLogs.setTaskno(reportIssue.getTaskno());
 		taskHistoryLogs.setAddComment(reportIssue.getAddComment());
+		taskHistoryLogs.setCommunicationaddress(reportIssue.getCommunicationaddress());
 		
 		
 		
@@ -127,6 +129,7 @@ public class TaskHistoryLogsDao {
 		taskHistoryLogs.setModifiedBy(String.valueOf(objuserBean.getId()));
 		
 		taskHistoryLogs.setUploadfile(abheeTask.getUploadfile());
+		taskHistoryLogs.setCommunicationaddress(abheeTask.getCommunicationaddress());
 		
 		entityManager.persist(taskHistoryLogs);
 
