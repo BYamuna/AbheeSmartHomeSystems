@@ -355,10 +355,39 @@ function getAssignedNotifications(){
 		$.fn.makeMultipartRequest('POST', 'getAssignedNotifications', false,
 				formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
-			alert(data);
+			//alert(jsonobj);
+			var assigned_notifications =data;
+			displayAssignedNotifications(jsonobj.AssignedNotifications);
 			
 		});  
 
+}
+
+
+
+function displayAssignedNotifications(listOrders) {
+// 	alert(listOrders);
+	$('#ack').html('');
+	var tableHead = '<table id="ack" class="table table-striped table-bordered datatables">'
+			+ '<thead><tr><th>Username</th><th>comment</th></thead><tbody></tbody></table>';
+	$('#ack').html(tableHead);
+	serviceUnitArray = {};
+	$.each(listOrders,function(i, orderObj) {
+		var comment =null;
+		if(orderObj.add_comment == "" ||orderObj.add_comment =="null"||typeof orderObj.add_comment === "undefined")
+			{
+			comment="----";
+			}else{
+				comment =orderObj.add_comment;
+			
+		}
+	serviceUnitArray[orderObj.id] = orderObj;
+		var tblRow = "<tr>"
+			+ "<td title='"+orderObj.musername+"'>"+ orderObj.musername + "</td>"
+			+ "<td title='"+comment+"'>"+ comment + "</td>"		
+			+ "</tr>";
+		$(tblRow).appendTo("#ack table tbody");
+	});
 }
 
 
@@ -399,7 +428,7 @@ function getAssignedNotifications(){
 
     <i class="fa fa-list-alt"></i><!-- <span class="badge">5</span> -->
     </div>
-     <c:if test="${not empty acknotification}">
+     
 
 
     <div id="ack" class="dropdown-content">
@@ -409,26 +438,34 @@ function getAssignedNotifications(){
         	<thead>
 
             	<tr class="tr1" style="  background: #006699; color: #FFF;">               
-                	<th class="th1">Task No.</th>
-                	<th class="th1">Field</th>
+                	<th class="th1">User Name</th>
+                	<th class="th1">Comment</th>
+                	<!-- <th>Change</th> -->
+                </tr>
+                <tr class="tr1">               
+                	<td class="th1">Task No.</td>
+                	<td class="th1">Field</td>
+                	<!-- <th>Change</th> -->
+                </tr>
+                <tr class="tr1">               
+                	<td class="th1">Task No.</td>
+                	<td class="th1">Field</td>
+                	<!-- <th>Change</th> -->
+                </tr>
+                <tr class="tr1">               
+                	<td class="th1">Task No.</td>
+                	<td class="th1">Field</td>
                 	<!-- <th>Change</th> -->
                 </tr>
             </thead>
             <tbody>
-             <c:forEach var="issue" items="${acknotification}">
-            	<tr class="tr1">
-                	<td class="td1">${issue.taskno}</td>
-                    <td class="td1">${issue.kpfield}</td>
-                   <%--  <td>${issue.kpchange}</td> --%>
-                </tr>
-               </c:forEach>
+             
             	
             </tbody>
         </table>
         
       </a>
     </div>
-    </c:if>
   </div> 
 </div>
                 </li> 
