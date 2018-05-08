@@ -295,7 +295,7 @@ public class AbheeDashBoardController {
 		Integer unseentasks =0;
 		try{
 			
-			jsonObj.put("paymentPending",dashBoardDao.getTasksCountBystatus().get("PAYMENT PENDING"));
+			jsonObj.put("paymentPending",dashBoardDao.getTasksCountBystatus().get("Payment Pending"));
 			jsonObj.put("AllServiceRequests",dashBoardDao.getAllCountBystatus().get("allServiceCounts"));
 			
 			
