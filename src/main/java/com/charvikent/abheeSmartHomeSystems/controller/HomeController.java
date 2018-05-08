@@ -154,6 +154,7 @@ public class HomeController {
 			session.setAttribute("customer", customer);
 			session.setAttribute("loggedstatus", "login");
 			session.setAttribute("customerId", customer.getCustomerId());
+			session.setAttribute("customerName", customer.getFirstname());
 			return "redirect:/";
 			
 				}
@@ -163,6 +164,7 @@ public class HomeController {
 		session.setAttribute("customer", customer);
 		session.setAttribute("loggedstatus", "login");
 		session.setAttribute("customerId", customer.getCustomerId());
+		session.setAttribute("customerName", customer.getFirstname());
 			System.out.println("()()()()()()()()()()("+loginurl);
 			return "redirect:"+ loginurl;
 		}

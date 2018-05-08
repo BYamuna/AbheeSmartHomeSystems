@@ -116,17 +116,19 @@ min-width:113px;
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown acc">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Hello! Sign in</a>
+          <a href="#" class="dropdown-toggle"  data-toggle="dropdown" data-hover="dropdown">Hello! <span  id="loggedCustomerName"></span></a>
           <ul class="dropdown-menu myacd">
           <li id="cmlist"></li>
          
           
             <c:choose>
     <c:when test="${not empty loggedstatus}">
+      <script> $("#loggedCustomerName").text("${customerName}");</script>
      <li><a href="${baseurl}/customerprofile">My Profile</a></li>
             <li><a href="${baseurl}/signout">Sign out</a></li>
     </c:when>
     <c:otherwise>
+     <script> $("#loggedCustomerName").text("Sign-in");</script>
         <li><a href="customerlogin">Sign in</a></li>
     </c:otherwise>
 </c:choose>
