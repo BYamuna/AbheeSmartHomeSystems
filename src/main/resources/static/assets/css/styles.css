@@ -9075,7 +9075,7 @@ header a.hasnotifications {
 header .toolbar .dropdown,
 header #headerbardropdown,
 header #rightmenu-trigger {
-  border-left: 1px solid #fff;
+  border-left: 1px solid #595f69;
 }
 header #leftmenu-trigger {
   border-right: 1px solid #27292d;
@@ -10658,7 +10658,7 @@ body.collapse-leftbar #search.keep-open form button[type="submit"] {
   border-color: #34393f;
 }
 .navbar-inverse .navbar-brand {
-  color: #888888;
+  color: #595f69;
   color: rgba(255, 255, 255, 0.5);
 }
 .navbar-inverse .navbar-brand:hover,
