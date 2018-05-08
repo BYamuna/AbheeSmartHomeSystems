@@ -233,7 +233,7 @@ color:#ea8080 !important;
                   				<label style="margin-top:18px;">First Name: </label>
                   			</div>
                   			<div class="col-md-5">
-                  				<input class="form-control" id="firstname" type="text" placeholder="First Name">
+                  				<input class="form-control onlyCharacters validate" id="firstname" type="text" placeholder="First Name">
                   			</div>
                   			<div class="4">
                   			</div><div class="clearfix"></div>
@@ -243,7 +243,7 @@ color:#ea8080 !important;
                   				<label style="margin-top:18px;  margin-left:5px;">Last Name: </label>
                   			</div>
                   			<div class="col-md-5">
-                  				<input class="form-control" type="text" id="lastname"  placeholder="Last Name" >
+                  				<input class="form-control onlyCharacters validate" type="text" id="lastname"  placeholder="Last Name" >
                   			</div>
                   			<div class="4">
                   			</div><div class="clearfix"></div>
@@ -253,7 +253,7 @@ color:#ea8080 !important;
                   				<label style="margin-top:25px;">Address: </label>
                   			</div>
                   			<div class="col-md-11">
-                  				<textarea  class="form-control" id="address" type="text" placeholder="Address"></textarea>
+                  				<textarea  class="form-control onlyCharacters validate" id="address" type="text" placeholder="Address"></textarea>
                   			</div><div class="clearfix"></div>
                   		</div>
                   	</div>
