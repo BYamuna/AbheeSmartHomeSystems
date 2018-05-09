@@ -172,6 +172,84 @@
 				</div> 
 					
 				</div> 
+				
+				<!-- Request Quotaion Model Start  -->
+				
+				 <div class="modal fade" id="quotationModal" data-backdrop="static" data-keyboard="false" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header" style="background: #166eaf;">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" style="color: white;">Request Quotation </h4>
+        	</div>
+        	<div style="max-width:90%; margin:0 auto; background:#FFFFFF;" class="modal-body">
+        		<div align="center" class="text"><span class="impColor0"></span></div>
+        			<div class="col-md-6">
+						<form   class="form-horizontal" method="Post" enctype="multipart/form-data">
+	                  <input type="hidden" id="id"/>
+				
+									<input type="hidden" id="modelnumber"  class="form-control validate" placeholder="Product Model"/>
+							
+								<div class="clearfix"></div>
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">location<span class="impColor"> *</span></label>
+									<div class="col-md-6">
+										<input type="text" name="locationData" id="locationData" class="form-control validate"  placeholder="Location in Map"/> 
+									</div>
+								</div><div class="clearfix"></div>
+								
+								<div class="clearfix"></div>
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Address <span class="impColor">*</span></label> 
+									<div class="col-md-6">
+										<input type="textarea" id="address" class="form-control validate " placeholder="Address"/>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Description<span class="impColor">*</span></label> 
+									<div class="col-md-6">
+										<input type="textarea" id="reqdesc" class="form-control validate" placeholder=" Description"/>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+								<div class="form-group">
+								<label class="col-md-3 control-label no-padding-right ">Attach <span class="impColor">*</span></label> 
+									<div class="col-md-6">
+										<input class=" validate" type="file" name="imgfile"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="imgfile" multiple />
+									</div>
+								</div>
+					</form>
+        			</div>
+        			<div class="col-md-6">
+						<div id="us2" style="width: 250px; height: 250px;"></div>
+        			</div><div class="clearfix"></div>
+								
+								
+									<div class="panel-footer">
+				      	<div class="row">
+				      		<div class="col-sm-12">
+				      			<div style="float:right; margin-right:20px;" class="btn-toolbar text-center">
+                    		<br>
+                    					<input type="submit" id="submit1" value="Submit" onclick="quotationSubmit()" class="btn-primary btn"/>
+					      				<input type="reset" value="Reset" class="btn-danger btn cancel"/>
+					      			
+				      			</div>
+				      		</div>
+				      	</div>
+			      	</div>
+
+                    		
+                    	
+                    		
+                    		</div>
+                    		
+				</div> 
+					
+				</div> 
+				</div>
+				<!-- Request Qutotaion Model End -->
 
 <c:choose>
     <c:when test="${empty param.model}">
@@ -220,8 +298,77 @@
 <input type="hidden" id="custhiddenid" value=${customerId} >
 
 <%@include file="abheefooter.jsp" %>
-
+<script src='https://static.codepen.io/assets/editor/live/console_runner-ce3034e6bde3912cc25f83cccb7caa2b0f976196f2f2d52303a462c826d54a73.js'></script>
+<script src='https://static.codepen.io/assets/editor/live/css_live_reload_init-890dc39bb89183d4642d58b1ae5376a0193342f9aed88ea04330dc14c8d52f55.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/jonvadillo/pen/NNZzwB" />
+<script type="text/javascript" src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
 <script type="text/javascript">
+
+$(function(){
+	getLocation();
+})
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+       // x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    var langi = position.coords.latitude;
+	var longi = position.coords.longitude;
+
+	$('#us2').locationpicker({
+		location: {
+	        latitude: langi,
+	        longitude: longi
+	    },
+	/* enableAutocomplete: true,
+	    enableReverseGeocode: true,
+	  radius: 0,
+	  inputBinding: {
+	    latitudeInput: $('#us2-lat'),
+	    longitudeInput: $('#us2-lon'),
+	    radiusInput: $('#us2-radius'),
+	    locationNameInput: $('#us2-address')
+	  }, */
+	  onchanged: function (currentLocation, radius, isMarkerDropped) {
+	        var addressComponents = $(this).locationpicker('map').location.addressComponents;
+	      $("#locationData").val(currentLocation.latitude+'&'+currentLocation.longitude);
+	    //updateControls(addressComponents); //Data
+	    
+	    
+	    	//var id = $(this).attr('id');
+	    if( (currentLocation.latitude+'&'+currentLocation.longitude) !=  ""){
+	    	
+	    	removeBorder('locationData');
+	    }
+	   
+	    }
+	    	
+	});
+}
+//To use this code on your website, get a free API key from Google.
+//Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
+
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            x.innerHTML = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred."
+            break;
+    }
+}
+
 
 
 function makeServiceRequestFieldsEmpty()
@@ -372,8 +519,12 @@ $.each(productdetailslist, function(k,v){
 	function checkLogin(){
 		if(login){
 			//console.log($("#modelName").text());
-				localStorage.setItem("modelName",document.getElementById('modelName').innerHTML);
-			window.location.href='${baseurl }/salesRequest'
+			$("#quotationModal").modal();
+				//localStorage.setItem("modelName",document.getElementById('modelName').innerHTML);
+				//$('#modelName').text(localStorage.getItem("modelName"));
+				//$('#modelnumber').val(localStorage.getItem("modelName"));
+				$('#modelnumber').val(document.getElementById('modelName').innerHTML);
+			//window.location.href='${baseurl }/salesRequest'
 			
 		}else{
 			window.location.href='${baseurl }/customerlogin';
@@ -401,6 +552,7 @@ $.each(productdetailslist, function(k,v){
 	function checkService(){
            if(login){
 		$("#formModal").modal();
+		
 		makeServiceRequestFieldsEmpty();
            }
            else
@@ -411,6 +563,73 @@ $.each(productdetailslist, function(k,v){
 			//window.location.href='${baseurl }/customerlogin';
 		
 	}
+	function quotationSubmit(){
+		
+		var modelnumber=$('#modelnumber').val();
+    	var locationData=$('#locationData').val();
+    	var address=$('#address').val();
+    	var reqdesc=$('#reqdesc').val();
+    	
+    	 //Serializing all For Input Values (not files!) in an Array Collection so that we can iterate this collection later.
+    	//var params = form.serializeArray();
+    	
+    	var objArr = [];
+    	var jsonData = {"modelnumber":modelnumber,"address":address,"reqdesc":reqdesc, "locationData":locationData };
+    	
+	   var formData = new FormData();
+    	
+    	formData.append("salesRequest",JSON.stringify(jsonData));
+	   
+	   
+	  /*  formData.append('modelnumber',productmodel);
+	   formData.append('email',email);
+	   formData.append('mobileno',mobileno);
+	 //formData.append('locationData',locationData);
+	   formData.append('address',address);
+	   formData.append('reqdesc',reqdesc);  */
+	   
+	   
+	   
+	 var ins = document.getElementById('imgfile').files.length;
+	
+	for(var i=0; i< ins; i++)
+	{	
+	var portfolio_values = document.getElementById('imgfile').files[i];
+	formData.append('imgfile', portfolio_values);
+	} 
+	
+	formData.append( "modelnumber",modelnumber);
+	formData.append( "locationData",locationData);
+	formData.append( "address",address);
+	formData.append( "reqdesc",reqdesc);
+	console.log(formData);
+		$.ajax({
+		type:"POST",
+		//enctype: 'multipart/form-data',
+		processData:false,
+        contentType: false,
+	  	url: "salesRequest", 
+	  	data:formData,
+		//contentType: false,  // tell jQuery not to set contentType
+	  	
+	  	success: function(result){
+	  		if(result !="" && result != null){
+	  		alert(result)
+	  		}
+	  		$('#salesrequest').val("");
+	  		$('#imgfile').val("");
+	  		 $('#salesrequest-info').modal('toggle');
+	  	
+	    },
+	    error: function (e) {
+            console.log(e.responseText);
+        }
+			    
+	});
+		
+		
+	}//quotationSubmit End
+	
 	
 	function serviceSubmit()
 	{
@@ -490,6 +709,51 @@ $.each(productdetailslist, function(k,v){
 
 	}
 	
+	function validateImage(id) {
+	 
+		 var photos = document.getElementById(id);
+         var howmany = photos.files.length;
+         var err = 0;
+
+         var img = new Array();
+
+         for (var i = 0; i < howmany; i++) {               
+	    
+            var file1=photos.files[i];
+            //document.getElementById('imgfile').files[i];
+            if(file1){                        
+                var file_size=file1.size;
+                if(file_size<=1024000){
+                    var ext = file1.name.split('.').pop().toLowerCase();                            
+                    if($.inArray(ext,['jpg','jpeg','gif', 'png','bmp'])===-1){
+                    	
+                        alert("Invalid file extension");
+                        return false;
+                    }
+
+                }else{
+                    alert("Screenshot size is too large.");
+                    return false;
+                }                        
+            }else{
+                alert("fill all fields..");         
+                return false;
+            }
+        }
+	 
+	   /*  var t = file.type.split('/').pop().toLowerCase();
+	    if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") {
+	        alert('Please select a valid image file');
+	        document.getElementById(id).value = '';
+	        return false;
+	    }
+	    if (file.size > 1024000) {
+	        alert('Max Upload size is 1MB only');
+	        document.getElementById(id).value = '';
+	        return false;
+	    }
+	    return true; */
+	}
 	
 	function removeBorder2(el){	
 		  $("#"+el).css("border", "");
