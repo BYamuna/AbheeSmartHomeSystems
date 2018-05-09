@@ -7,7 +7,7 @@
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
 		<li><a href="dashBoard">Home</a></li>
-		<li>Category Master</li>
+		<li>Product Master</li>
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container">
@@ -15,7 +15,7 @@
 			<div class="col-md-12" style="background-color: white !important; padding-top: 15PX;">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Category List</h4>
+						<h4>Products List</h4>
 						<div class="options">
 							<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
 						</div>
@@ -37,7 +37,7 @@
 			<div class="col-md-12 col-sm-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4 id="cate">Add Category</h4>
+						<h4 id="cate">Add Product</h4>
 					</div>
 					<form:form class="form-horizontal" commandName="catef" role="form" id="fillingstation-form" action="cate" method="post" enctype="multipart/form-data">
 					<div class="panel-body">
@@ -45,7 +45,7 @@
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<form:hidden path="id"/>
-									<label for="focusedinput" class="col-md-6 control-label">Category Name <span class="impColor">*</span></label>
+									<label for="focusedinput" class="col-md-6 control-label">Product Name <span class="impColor">*</span></label>
 									<div class="col-md-5">
 										<form:input path="category" class="form-control validate onlyCharacters" placeholder="Category  Name"/>	
 										<span class="hasError" id="stationnameError"></span>
@@ -54,7 +54,7 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Category Images <span class="impColor">*</span></label>
+									<label for="focusedinput" class="col-md-6 control-label">Product Images <span class="impColor">*</span></label>
 									<div class="col-md-5">
 										<input type="file" name="file1" id="file1" class="validate "  accept="image/*" style="margin: 7px 0px 0px 0px;">
 									</div>
@@ -109,7 +109,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Category Name</th><th>Category Images </th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Product Name</th><th>Product Images </th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -147,7 +147,7 @@ function displayTable(listOrders) {
 
 
 function editCate(id) {
-	$("#cate").text("Edit Category");
+	$("#cate").text("Edit Product");
 	$("#id").val(serviceUnitArray[id].id);
 	$("#category").val(serviceUnitArray[id].category);
 	$("#status").val(serviceUnitArray[id].status);
@@ -248,6 +248,6 @@ function inactiveData() {
 
 
 
-$("#pageName").text("Category Master");
+$("#pageName").text("Product Master");
 $(".cate").addClass("active"); 
 </script>
