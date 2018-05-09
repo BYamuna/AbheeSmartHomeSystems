@@ -603,10 +603,7 @@
 	}
 
 	function editTask(id) {
-		
-		
-
-		alert("hello");
+		//alert("hello");
 		$("#service").text("Edit Service Request");
 		$("#id").val(serviceUnitArray[id].id);
 		$("#subject").val(serviceUnitArray[id].subject);

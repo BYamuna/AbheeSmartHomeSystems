@@ -287,7 +287,7 @@ public class EmployeeController {
 		redir.addFlashAttribute("msg", "You Details Updated Successfully");
 		redir.addFlashAttribute("cssMsg", "warning");
 
-			return "redirect:dashBoard";
+			return "redirect:editProfile";
 
 
 
