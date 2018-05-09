@@ -387,6 +387,7 @@ $(".editIt").click(function()
 $(".cancel").click(function()
 {
 	$("#id").val(0);
+	$('span.error-keyup-4').remove();
 	$.each(idArray, function(i, val)
 	{
 		var value = $("#" + idArray[i]).val();
