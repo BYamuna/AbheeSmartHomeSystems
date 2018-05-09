@@ -32,7 +32,7 @@
         <nav aria-label="breadcrumb">
   			<ol class="breadcrumb">
     			<li class="breadcrumb-item"><a href="${baseurl }/">Home</a></li>
-    			<li class="breadcrumb-item"><a href="#">Catagories</a></li>
+    			<li class="breadcrumb-item active">Products</li>
     			<li class="breadcrumb-item active" aria-current="page" id="breadcrumbname"></li>
     			<li class="breadcrumb-item active" aria-current="page" id="breadcrumbcompanyname"></li>
     			<li class="breadcrumb-item active" aria-current="page" id="breadcrumbmodelname"></li>

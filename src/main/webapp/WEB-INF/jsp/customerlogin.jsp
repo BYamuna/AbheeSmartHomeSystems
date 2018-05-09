@@ -93,8 +93,8 @@
 						<form action="customerlogin" method="post"> 
 					<div class="login-top"> 	
 						  <input type="hidden" name="userType" id="userType" value="customerUser"/>
-							<input type="text"  name="username" id="username" class="form-control validate numericOnly2"  onfocus="this.placeholder=''" onblur="this.placeholder='Mobile Number'"  maxlength="10"   placeholder="Mobile Number"/>
-							<input type="password"  name="password"  onfocus="this.placeholder=''"  class="form-control  numericOnly"  maxlength="4"  onblur="this.placeholder='Password'" placeholder="Password"  />
+							<input type="text"  name="username" id="cmusername" class="form-control validate numericOnly2"  onfocus="this.placeholder=''" onblur="this.placeholder='Mobile Number'"  maxlength="10"   placeholder="Mobile Number"/>
+							<input type="password"  name="password"  id="cmpassword" onfocus="this.placeholder=''"  class="form-control  numericOnly"  maxlength="4"  onblur="this.placeholder='Password'" placeholder="Password"  />
 						
 					</div> 
 					<div class="login-bottom"> 
@@ -105,7 +105,7 @@
 						
 						   <!--  <input   class="btn btn-danger" type="reset" value="Reset"> 
 							<input  class="btn btn-primary" type="submit" value="Login"> -->
-							<button type="submit"   class="btn btn-primary"  value="Login">Login</button>
+							<button type="submit"  id="csubmit" class="btn btn-primary"  value="Login">Login</button>
 							<button class="btn btn-danger" type="reset" value="Reset">Reset</button>
 						</div><div class="clearfix"></div>
 					</div>
@@ -746,6 +746,23 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		$('#register-info').modal();
 		
 	}
+	
+	
+	
+	
+	$('#csubmit').click(function() {
+		var musername =	$('#cmusername').val();
+		var mpass =	$('#cmpassword').val();
+		if (musername == null || musername == "" || musername == "undefined") {
+			alert("Please Enter Mobile Number")
+		return false;
+		}
+		if (mpass == null || mpass == "" || mpass == "undefined") {
+			alert("Please Enter password")
+		return false;
+		}
+			
+		});
 	$(".acc").addClass("active");
 	
 	

@@ -586,11 +586,11 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 	var musername =	$('#muser').val();
 	var mpass =	$('#mpass').val();
 	if (musername == null || musername == "" || musername == "undefined") {
-		alert("Ente Mobile Number")
+		alert("Please Enter Mobile Number")
 	return false;
 	}
 	if (mpass == null || mpass == "" || mpass == "undefined") {
-		alert("Ente password")
+		alert(" Please Enter password")
 	return false;
 	}
 		
