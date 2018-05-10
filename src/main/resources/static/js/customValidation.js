@@ -323,8 +323,8 @@ $('#submit1').click(function(event) {
 		$("#submit1").val("Please wait...");
 		$("form").submit();											
 	}else {
-		return false;
 		event.preventDefault();
+		return false;
 	}
 });
 
@@ -357,8 +357,8 @@ $('#submit3').click(function(event) {
 		$("form").submit();											
 		event.preventDefault();
 	}else {
-		return false;
 		event.preventDefault();
+		return false;
 	}
 });
 

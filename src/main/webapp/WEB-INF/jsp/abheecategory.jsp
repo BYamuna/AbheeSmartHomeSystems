@@ -5,7 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
     <%@include file="abheeheader.jsp" %>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 <title>Abhee Smart Homes</title>
 
 <script type="text/javascript">
@@ -217,7 +217,7 @@
 								<div class="form-group">
 								<label class="col-md-3 control-label no-padding-right ">Attach <span class="impColor">*</span></label> 
 									<div class="col-md-6">
-										<input class=" " type="file" name="imgfile"  accept="image/*"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="imgfile" multiple />
+										<input class="validate " type="file" name="imgfile"  accept="image/*"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="imgfile" multiple />
 									</div>
 								</div>
 					</form>
@@ -297,7 +297,7 @@
 </c:choose>
 <input type="hidden" id="custhiddenid" value=${customerId} >
 
-<%@include file="abheefooter.jsp" %>
+
 <script src='https://static.codepen.io/assets/editor/live/console_runner-ce3034e6bde3912cc25f83cccb7caa2b0f976196f2f2d52303a462c826d54a73.js'></script>
 <script src='https://static.codepen.io/assets/editor/live/css_live_reload_init-890dc39bb89183d4642d58b1ae5376a0193342f9aed88ea04330dc14c8d52f55.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/jonvadillo/pen/NNZzwB" />
 <script type="text/javascript" src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
@@ -333,11 +333,16 @@ function showPosition(position) {
 	    radiusInput: $('#us2-radius'),
 	    locationNameInput: $('#us2-address')
 	  }, */
+	  
+	  radius: 10,
 	  onchanged: function (currentLocation, radius, isMarkerDropped) {
 	        var addressComponents = $(this).locationpicker('map').location.addressComponents;
+          //addressComponents.map.setZoom(200);
 	      $("#locationData").val(currentLocation.latitude+'&'+currentLocation.longitude);
+	      
+	     // var mapContext = $(this).locationpicker('map');
 	    //updateControls(addressComponents); //Data
-	    
+	    // $("#locationData").readOnly() = true;
 	    
 	    	//var id = $(this).attr('id');
 	    if( (currentLocation.latitude+'&'+currentLocation.longitude) !=  ""){
@@ -353,7 +358,7 @@ function showPosition(position) {
 //Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
 
 function showError(error) {
-    switch(error.code) {
+   /*  switch(error.code) {
         case error.PERMISSION_DENIED:
             x.innerHTML = "User denied the request for Geolocation."
             break;
@@ -366,7 +371,7 @@ function showError(error) {
         case error.UNKNOWN_ERROR:
             x.innerHTML = "An unknown error occurred."
             break;
-    }
+    } */
 }
 
 
@@ -520,6 +525,7 @@ $.each(productdetailslist, function(k,v){
 		if(login){
 			//console.log($("#modelName").text());
 			$("#quotationModal").modal();
+			 $("#locationData").prop("readonly", true);
 				//localStorage.setItem("modelName",document.getElementById('modelName').innerHTML);
 				//$('#modelName').text(localStorage.getItem("modelName"));
 				//$('#modelnumber').val(localStorage.getItem("modelName"));
@@ -773,4 +779,4 @@ $.each(productdetailslist, function(k,v){
  
 	$('.category').addClass("active");
 </script>
-    
+ <%@include file="abheefooter.jsp" %>
