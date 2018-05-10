@@ -42,6 +42,7 @@ import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
 //import com.charvikent.abheeSmartHomeSystems.model.KpStatusLogs;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 import com.charvikent.abheeSmartHomeSystems.model.User;
@@ -542,17 +543,20 @@ public class TaskController {
 		
 		AbheeTask task =new AbheeTask();
 		task.setAdditionalinfo("0");
-		task.setAssignto("1");
+		task.setAssignto("5");
 		task.setDescription(message);
 		task.setKstatus("5");
-		task.setPriority("1");
-		task.setSeverity("1");
+		task.setPriority("3");
+		task.setSeverity("3");
 		task.setStatus("1");
-		task.setSubject("Task created By Customer");
+		//task.setSubject("Task created By Customer");
 		task.setServiceType(servicetypeid);
 		task.setCategory(catid);
 		task.setModelid(modelid);
 		task.setCommunicationaddress(custaddress);
+		
+		Customer customer= customerDao.findCustomerByCustId(customerId);
+		task.setSubject("Task created By "+customer.getFirstname()+" "+customer.getLastname());
 
 		task.setCustomerId(customerId);
 		task.setUploadfile(images);

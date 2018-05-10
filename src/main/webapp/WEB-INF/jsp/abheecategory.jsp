@@ -480,7 +480,7 @@ $.each(productmodelslist, function(k,v){
     	           +"</div>"
 	               +"<div class='col-xs-6'>"
 	               +"<a href='#' onclick='checkService()' style='width:95%;margin-top:9px !important; float:right;' class='btn btn-warning' >Request Service</a>"
-                   +"</div>"
+                   +"</div><div class='clearfix'></div>"
                    +"</div>"
                    +"</div>"
                    +"<div class='dtxt'>"
