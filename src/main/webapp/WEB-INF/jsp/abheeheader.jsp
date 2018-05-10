@@ -43,7 +43,7 @@
       
      <script src='//static.codepen.io/assets/editor/live/console_runner-ce3034e6bde3912cc25f83cccb7caa2b0f976196f2f2d52303a462c826d54a73.js'>
 </script><script src='//static.codepen.io/assets/editor/live/css_live_reload_init-890dc39bb89183d4642d58b1ae5376a0193342f9aed88ea04330dc14c8d52f55.js'></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4TkibnxHHIJtDj1Dp59VAOSHp_sdA1KQ&sensor=false&libraries=places"></script>  
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4TkibnxHHIJtDj1Dp59VAOSHp_sdA1KQ&libraries=places"></script>  
 <!--      <script src='https://maps.google.com/maps/api/js?sensor=false&libraries=places'></script> -->
 <style type="text/css">
 
@@ -123,7 +123,7 @@ min-width:113px;
           
             <c:choose>
     <c:when test="${not empty loggedstatus}">
-      <script> $("#loggedCustomerName").text("${customerName}");</script>
+      <script type="text/javascript"> $("#loggedCustomerName").text("${customerName}");</script>
      <li><a href="${baseurl}/customerprofile">My Profile</a></li>
             <li><a href="${baseurl}/signout">Sign out</a></li>
     </c:when>
