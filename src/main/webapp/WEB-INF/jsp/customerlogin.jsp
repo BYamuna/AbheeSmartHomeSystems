@@ -157,7 +157,7 @@
 							</div>
 							<div class="form-group">
 								<div class="col-md-5">
-									<label for="user_name">MobileNumber :</label>
+									<label for="user_name">Mobile Number :</label>
 								</div>
 								<div class="col-md-7">
 									<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" maxlength="10" class="form-control validate1 numericOnly2" placeholder="Mobile Number"/>
@@ -299,7 +299,7 @@ var mobilevalidation=true;
 var subValidation =false;
 
 $('#cmobile').blur(function() {
-	
+	var editFields =0;
 	var cmobile=$(this).val();
 	
 	if (cmobile == null || cmobile == "" || cmobile == "undefined") {
@@ -346,7 +346,7 @@ $('#cmobile').blur(function() {
 	$.ajax({
 				type : "POST",
 				url : "checkCustExst",
-				data :"cmobile="+cmobile,
+				data :"cmobile="+cmobile+"&editFields="+editFields,
 				dataType : "text",
 				beforeSend : function() {
 		             $.blockUI({ message: 'Please wait' });
@@ -603,7 +603,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 	
 	$('#cemail').blur(function() {
 		
-
+		var editFields =0;
 		var cemail=$(this).val();
 		
 		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -615,7 +615,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		$.ajax({
 					type : "POST",
 					url : "checkEmailExst",
-					data :"cemail="+cemail,
+					data :"cemail="+cemail+"&editFields="+editFields,
 					dataType : "text",
 					beforeSend : function() {
 			             $.blockUI({ message: 'Please wait' });

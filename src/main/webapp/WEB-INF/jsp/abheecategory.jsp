@@ -217,7 +217,7 @@
 								<div class="form-group">
 								<label class="col-md-3 control-label no-padding-right ">Attach <span class="impColor">*</span></label> 
 									<div class="col-md-6">
-										<input class=" validate" type="file" name="imgfile"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="imgfile" multiple />
+										<input class=" " type="file" name="imgfile"  accept="image/*"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="imgfile" multiple />
 									</div>
 								</div>
 					</form>
@@ -469,7 +469,7 @@ $.each(productmodelslist, function(k,v){
     	           +"</div>"
 	               +"<div class='col-xs-6'>"
 	               +"<a href='#' onclick='checkService()' style='width:95%;margin-top:9px !important; float:right;' class='btn btn-warning' >Request Service</a>"
-                   +"</div>"
+                   +"</div><div class='clearfix'></div>"
                    +"</div>"
                    +"</div>"
                    +"<div class='dtxt'>"
@@ -710,13 +710,15 @@ $.each(productdetailslist, function(k,v){
 	}
 	
 	function validateImage(id) {
-	 
+		$('span.error-keyup-4').remove();
+		removeBorder(id);
 		 var photos = document.getElementById(id);
          var howmany = photos.files.length;
          var err = 0;
 
          var img = new Array();
-
+         
+         
          for (var i = 0; i < howmany; i++) {               
 	    
             var file1=photos.files[i];
@@ -725,18 +727,20 @@ $.each(productdetailslist, function(k,v){
                 var file_size=file1.size;
                 if(file_size<=1024000){
                     var ext = file1.name.split('.').pop().toLowerCase();                            
-                    if($.inArray(ext,['jpg','jpeg','gif', 'png','bmp'])===-1){
-                    	
-                        alert("Invalid file extension");
+                    //if($.inArray(ext,['jpg','jpeg','gif', 'png','bmp'])===-1)
+                     if(file1.type.indexOf("image")==-1)
+                    {
+                    	console.log(id);
+                    	 $('#'+id).after('<span class="error error-keyup-4"> Upload images only. </span>');
                         return false;
-                    }
+                    }else{removeBorder(id);}
 
                 }else{
-                    alert("Screenshot size is too large.");
+                	$('#'+id).after('<span class="error error-keyup-4"> Image size should be less than 1MB. </span>');
                     return false;
                 }                        
             }else{
-                alert("fill all fields..");         
+                //alert("fill all fields..");         
                 return false;
             }
         }

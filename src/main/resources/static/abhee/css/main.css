@@ -940,9 +940,7 @@ figure.effect-milo:hover p {
 
 /* Lightbox */
 /* Preload images */
-body:after {
-  content: url(../images/prev.png) url(../images/next.png);
-}
+
 
 .lightboxOverlay {
   position: absolute;

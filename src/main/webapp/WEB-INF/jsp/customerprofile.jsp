@@ -373,7 +373,7 @@ color:#ea8080 !important;
     					<div class="table-responsive" id="customerOrderTable">
 							<table class="table table-bordered priority prioritybg"	style="border: 1px solid #0460a4;" >
 								<thead>
-									<tr style="background-color: #0460a4; color: #fff; text-align: center;">
+									<tr style="background-color: #0460a4; color: #fff; text-align: center; font-family:'Roboto'; font-size: 12px;">
 										<th>OrderId</th>
 										<th>Product(s)</th>
 										<th>Date of Purchased</th>
@@ -393,6 +393,7 @@ color:#ea8080 !important;
             </div>
           </div>
         </div>
+		</div>
 		</div>
 
 
@@ -436,7 +437,7 @@ if (productWarrantyOrdersList != "") {
 function displayTable2(listOrders) {
 	$('#customerOrderTable').html('');
 	var tableHead = '<table id="customerOrderTable" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>orderId</th><th>Products</th><th>Date of Purchased</th><th>Warranty Expired Date</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr style=" font-size:12px;"><th>orderId</th><th>Products</th><th>Date of Purchased</th><th>Warranty Expired Date</th></tr></thead><tbody></tbody></table>';
 	$('#customerOrderTable').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
