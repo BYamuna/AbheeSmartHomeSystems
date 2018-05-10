@@ -42,6 +42,8 @@ import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
 //import com.charvikent.abheeSmartHomeSystems.model.KpStatusLogs;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+import com.charvikent.abheeSmartHomeSystems.model.Customer;
+import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
@@ -524,48 +526,67 @@ public class TaskController {
 	
 	
 	@RequestMapping(value = "/saveServiceRequest", method = RequestMethod.POST)
-	public @ResponseBody  String modelSubmit(Model model,HttpServletRequest request) throws IOException, MessagingException 
+	public @ResponseBody  String modelSubmit(Model model,HttpServletRequest request,@RequestParam("fileimg") MultipartFile[] uploadedFiles) throws IOException, MessagingException 
 	{
 		LOGGER.debug("Calling saveServiceRequest at controller");
 	
 		System.out.println("enter to task controller Submit");
-		
+		int filecount =0;
 		String message=request.getParameter("message");
 		String servicetypeid=request.getParameter("servicetypeid");
 		String catid=request.getParameter("catid");
 		String modelid=request.getParameter("modelid");
 		String customerId =request.getParameter("customerId");
 		String custaddress =request.getParameter("custaddress");
+		String images =request.getParameter("images");
+		System.out.println(images);
 		
 		AbheeTask task =new AbheeTask();
 		task.setAdditionalinfo("0");
-		task.setAssignto("1");
+		task.setAssignto("5");
 		task.setDescription(message);
 		task.setKstatus("5");
-		task.setPriority("1");
-		task.setSeverity("1");
+		task.setPriority("3");
+		task.setSeverity("3");
 		task.setStatus("1");
-		task.setSubject("Task created By Customer");
+		//task.setSubject("Task created By Customer");
 		task.setServiceType(servicetypeid);
 		task.setCategory(catid);
 		task.setModelid(modelid);
 		task.setCommunicationaddress(custaddress);
+		
+		Customer customer= customerDao.findCustomerByCustId(customerId);
+		task.setSubject("Task created By "+customer.getFirstname()+" "+customer.getLastname());
 
 		task.setCustomerId(customerId);
+		task.setUploadfile(images);
 		
-		
-		
+		for(MultipartFile multipartFile : uploadedFiles) {
+			String fileName = multipartFile.getOriginalFilename();
+			if(!multipartFile.isEmpty())
+			{
+				filecount++;
+			 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+			}
+		}
+	 
+	 if(filecount>0)
+	 {
+		task.setUploadfile(fileTemplate.concurrentFileNames());
+		 fileTemplate.clearFiles();
+		 
+	 }
 		
 	
 		
 		Map<String, Object> abheeTask =reportIssueDao.checkServiceRequestExisrOrNot(task);
 		if(null ==abheeTask )
 		{
-		reportIssueDao.saveReportIssue(task);
+		reportIssueDao.saveServiceRequestFromCustomer(task);
 		//taskHistoryLogsDao.historyLogForcustomerEntry(task);
 		//sendingMail.sendingMailWithTaskStatus(task);
 		
-				System.out.println(message+"  "+servicetypeid);
+		System.out.println(message+"  "+servicetypeid);
 		return "true";
 		}
 		else

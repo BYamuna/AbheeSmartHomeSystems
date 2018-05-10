@@ -5,7 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
     <%@include file="abheeheader.jsp" %>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 <title>Abhee Smart Homes</title>
 
 <script type="text/javascript">
@@ -118,7 +118,7 @@
         	</div>
         	<div style="max-width:90%; margin:0 auto;" class="modal-body">
         		<div align="center" class="text"><span class="impColor0"></span></div>
-					<form>
+					<form  class="form-horizontal" method="Post" enctype="multipart/form-data">
 						<div class="col-sm-4">
 							<label>Request Type</label> <span class="impColor">*</span>
 						</div>
@@ -142,6 +142,12 @@
 						</div>
 						<div class="col-sm-8">
 							<textarea class="form-control" id="custaddress" name="custaddress" placeholder="Address"  onfocus="removeBorder2(this.id)"></textarea>
+						</div>
+						<div class="col-sm-4">
+							<label>Attach File(s)</label> <span class="impColor">*</span>
+						</div>
+						<div class="col-sm-8">
+							<input class=" " type="file" name="fileimg"  accept="image/*"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="fileimg" multiple />
 						</div>
 							<!--<div class="col-sm-4">
 							<label>Attach File(s)</label>
@@ -217,7 +223,7 @@
 								<div class="form-group">
 								<label class="col-md-3 control-label no-padding-right ">Attach <span class="impColor">*</span></label> 
 									<div class="col-md-6">
-										<input class=" " type="file" name="imgfile"  accept="image/*"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="imgfile" multiple />
+										<input class="validate " type="file" name="imgfile"  accept="image/*"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="imgfile" multiple />
 									</div>
 								</div>
 					</form>
@@ -297,7 +303,7 @@
 </c:choose>
 <input type="hidden" id="custhiddenid" value=${customerId} >
 
-<%@include file="abheefooter.jsp" %>
+
 <script src='https://static.codepen.io/assets/editor/live/console_runner-ce3034e6bde3912cc25f83cccb7caa2b0f976196f2f2d52303a462c826d54a73.js'></script>
 <script src='https://static.codepen.io/assets/editor/live/css_live_reload_init-890dc39bb89183d4642d58b1ae5376a0193342f9aed88ea04330dc14c8d52f55.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/jonvadillo/pen/NNZzwB" />
 <script type="text/javascript" src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
@@ -333,11 +339,16 @@ function showPosition(position) {
 	    radiusInput: $('#us2-radius'),
 	    locationNameInput: $('#us2-address')
 	  }, */
+	  
+	  radius: 10,
 	  onchanged: function (currentLocation, radius, isMarkerDropped) {
 	        var addressComponents = $(this).locationpicker('map').location.addressComponents;
+          //addressComponents.map.setZoom(200);
 	      $("#locationData").val(currentLocation.latitude+'&'+currentLocation.longitude);
+	      
+	     // var mapContext = $(this).locationpicker('map');
 	    //updateControls(addressComponents); //Data
-	    
+	    // $("#locationData").readOnly() = true;
 	    
 	    	//var id = $(this).attr('id');
 	    if( (currentLocation.latitude+'&'+currentLocation.longitude) !=  ""){
@@ -353,7 +364,7 @@ function showPosition(position) {
 //Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
 
 function showError(error) {
-    switch(error.code) {
+   /*  switch(error.code) {
         case error.PERMISSION_DENIED:
             x.innerHTML = "User denied the request for Geolocation."
             break;
@@ -366,7 +377,7 @@ function showError(error) {
         case error.UNKNOWN_ERROR:
             x.innerHTML = "An unknown error occurred."
             break;
-    }
+    } */
 }
 
 
@@ -520,6 +531,7 @@ $.each(productdetailslist, function(k,v){
 		if(login){
 			//console.log($("#modelName").text());
 			$("#quotationModal").modal();
+			 $("#locationData").prop("readonly", true);
 				//localStorage.setItem("modelName",document.getElementById('modelName').innerHTML);
 				//$('#modelName').text(localStorage.getItem("modelName"));
 				//$('#modelnumber').val(localStorage.getItem("modelName"));
@@ -641,6 +653,13 @@ $.each(productdetailslist, function(k,v){
 		 
 		 servicetypeid =$("#servicetypeid").val();
 		 
+		 var objArr = [];
+	    	var jsonData = {"message":message,"catid":catid,"servicetypeid":servicetypeid,"custaddress":custaddress,"modelid":modelid,"customerId":customerId};
+	    	
+		   var formData = new FormData();
+	    	
+	    	formData.append("saveServiceRequest",JSON.stringify(jsonData));
+		 
 		 $('span.error-keyup-4').remove();
 		 
 		 
@@ -675,19 +694,41 @@ $.each(productdetailslist, function(k,v){
 			 
 		 }
 		 
-		
+		 var ins = document.getElementById('fileimg').files.length;
+			
+			for(var i=0; i< ins; i++)
+			{	
+			var images = document.getElementById('fileimg').files[i];
+			formData.append('fileimg', images); 
+			}
+			alert(images);
+			formData.append( "message",message);
+			formData.append( "servicetypeid",servicetypeid);
+			formData.append( "catid",catid);
+			formData.append( "modelid",modelid);
+			formData.append( "customerId",customerId);
+			formData.append( "custaddress",custaddress);
 		$.ajax({
 			type : "POST",
+			processData:false,
+			contentType:false,
 			url : "saveServiceRequest",
-			data :"message="+message+"&servicetypeid="+servicetypeid+"&catid="+catid+"&modelid="+modelid+"&customerId="+customerId+"&custaddress="+custaddress,
+			data :formData,
 			dataType : "text",
 			beforeSend : function() {
 	             $.blockUI({ message: 'Please wait' });
 	          }, 
-			success : function(data) {
+			success : function(result) {
 				//alert(data);
 				
-				if(data ==='true')
+				if(result !="" && result != null){
+			  		alert(result)
+			  		}
+			  		$('#saveServiceRequest').val("");
+			  		$('#fileimg').val("");
+			  		 $('#formModal').modal('toggle');
+				
+				/* if(data ==='true')
 				{
 					alert(" Thank you, your request had been submitted successfully. Our team will contact you soon");
 					$('#formModal').modal('toggle');					
@@ -696,7 +737,7 @@ $.each(productdetailslist, function(k,v){
 					{
 					alert(data);
 					$('#formModal').modal('toggle');
-					}
+					} */
 				
 			},
 			complete: function () {
@@ -773,4 +814,4 @@ $.each(productdetailslist, function(k,v){
  
 	$('.category').addClass("active");
 </script>
-    
+ <%@include file="abheefooter.jsp" %>

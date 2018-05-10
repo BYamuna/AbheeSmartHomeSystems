@@ -543,11 +543,11 @@ HashMap<String,String> hm =new HashMap<String,String>();
 		
 		AbheeTask task =new AbheeTask();
 		task.setAdditionalinfo("0");
-		task.setAssignto("1");
+		task.setAssignto("5");
 		task.setDescription(message);
 		task.setKstatus("5");
-		task.setPriority("1");
-		task.setSeverity("1");
+		task.setPriority("3");
+		task.setSeverity("3");
 		task.setStatus("1");
 		task.setSubject("Task created By Customer");
 		task.setServiceType(servicetypeid);

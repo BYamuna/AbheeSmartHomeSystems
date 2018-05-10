@@ -1,5 +1,11 @@
  <%@include file="abheeheader.jsp" %>
   	<div class="container">
+<style type="text/css">
+.sl-cl2
+{
+display: none !important;
+}
+</style>
         
       <!--Gallery-->
       	 <section class="gallery">
@@ -9,7 +15,7 @@
                      <img src="${baseurl}/abhee/images/propr.jpg" alt="" class="img-responsive">
                      <figcaption>
                         <p>Abhee Smart Home Systems</p>
-                        <a href="${baseurl}/abhee/images/propr.jpg" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
+                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
                   </figure>
                </div>
                <div class="col-lg-4 gallery-grids">
@@ -17,7 +23,7 @@
                      <img src="${baseurl}/abhee/images/group.jpg" alt="" class="img-responsive">
                      <figcaption>
                         <p>Abhee Smart Home Systems</p>
-                        <a href="${baseurl}/abhee/images/group.jpg" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
+                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
                   </figure>
                </div>
                <div class="col-lg-4 gallery-grids">
@@ -25,7 +31,7 @@
                      <img src="${baseurl}/abhee/images/sec.jpg" alt="" class="img-responsive">
                      <figcaption>
                         <p>Abhee Smart Home Systems</p>
-                        <a href="${baseurl}/abhee/images/sec.jpg" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
+                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
                   </figure>
                </div><div class="clearfix"></div>
             </div>
@@ -35,7 +41,7 @@
                      <img src="${baseurl}/abhee/images/home.jpg" alt="" class="img-responsive">
                      <figcaption>
                         <p>Abhee Smart Home Systems</p>
-                        <a href="${baseurl}/abhee/images/home.jpg" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
+                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
                   </figure>
                </div>
                <div class="col-lg-4 gallery-grids">
@@ -43,7 +49,7 @@
                      <img src="${baseurl}/abhee/images/ravel.jpg" alt="" class="img-responsive">
                      <figcaption>
                         <p>Abhee Smart Home Systems</p>
-                        <a href="${baseurl}/abhee/images/ravel.jpg" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
+                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
                   </figure>
                </div>
                <div class="col-lg-4 gallery-grids">
@@ -51,7 +57,7 @@
                      <img src="${baseurl}/abhee/images/elec.jpg" alt="" class="img-responsive">
                      <figcaption>
                         <p>Abhee Smart Home Systems</p>
-                        <a href="${baseurl}/abhee/images/elec.jpg" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
+                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
                   </figure>
                </div><div class="clearfix"></div>
             </div>
@@ -61,7 +67,7 @@
                      <img src="${baseurl}/abhee/images/art.jpg" alt="" class="img-responsive">
                      <figcaption>
                         <p>Abhee Smart Home Systems</p>
-                        <a href="${baseurl}/abhee/images/art.jpg" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
+                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
                   </figure>
                </div>
               <div class="col-lg-4 gallery-grids">
@@ -69,7 +75,7 @@
                      <img src="${baseurl}/abhee/images/nam.jpg" alt="" class="img-responsive">
                      <figcaption>
                         <p>Abhee Smart Home Systems</p>
-                        <a href="${baseurl}/abhee/images/nam.jpg" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
+                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
                   </figure>
               </div>
                <div class="col-lg-4 bot gallery-grids">
@@ -77,14 +83,60 @@
                      <img src="${baseurl}/abhee/images/log.jpg" alt="" class="img-responsive">
                      <figcaption>
                         <p>Abhee Smart Home Systems</p>
-                        <a href="${baseurl}/abhee/images/log.jpg" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
+                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
                   </figure>
               </div><div class="clearfix"></div>
             </div>
       	</section><div class="clearfix"></div>
-      <!--//Gallery-->     
+      <!--//Gallery-->
+      
+      <!-- Gallery Modal -->
+      <div class="modal fade" id="gallery" tabindex="-1" role="dialog" aria-labelledby="galleryLabel" aria-hidden="true">
+  		<div class="modal-dialog" role="document">
+    		<div style="background-color:none;" class="modal-content1">
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span style="color:#013950;" aria-hidden="true">&times;</span>
+        		</button>
+        		
+    			<!-- Ninja slider -->
+    			<div id="ninja-slider">
+        			<div class="slider-inner">
+           				<ul>
+                			<li><a class="ns-img" href="abhee/images/propr.jpg"></a>
+                    			<!--<div class="caption">Propritor</div>-->
+                			</li>
+                			<li><a class="ns-img" href="abhee/images/sec.jpg"></a>
+                    			<!--<div class="caption">Propritor</div>-->
+                			</li>
+                			<li><a class="ns-img" href="abhee/images/home.jpg"></a>
+                    			<!--<div class="caption">Propritor</div>-->
+                			</li>
+                			<li><a class="ns-img" href="abhee/images/ravel.jpg"></a>
+                    			<!--<div class="caption">Propritor</div>-->
+                			</li>
+                			<li><a class="ns-img" href="abhee/images/log.jpg"></a>
+                    			<!--<div class="caption">Propritor</div>-->
+                			</li>
+                			<li><a class="ns-img" href="abhee/images/elec.jpg"></a>
+                    			<!--<div class="caption">Propritor</div>-->
+                			</li>
+                			<li><a class="ns-img" href="abhee/images/elec.jpg"></a>
+                    			<!--<div class="caption">Propritor</div>-->
+                			</li>
+                			<li><a class="ns-img" href="abhee/images/elec.jpg"></a>
+                    			<!--<div class="caption">Propritor</div>-->
+                			</li>
+            			</ul>
+       				 </div>
+    			</div>
+    			<!-- Ninja slider -->
+    		</div>
+  		</div>
+      </div>
+      <!-- Gallery Modal -->
+           
     </div><!-- container -->
-    <script src="js/lightbox-plus-jquery.min.js"></script>
+    <script src="${baseurl }/abhee/js/gallery.js"></script>
     <script>
     $(".gallery").addClass("active");
     </script>
