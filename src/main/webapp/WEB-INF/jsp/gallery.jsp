@@ -5,86 +5,45 @@
 {
 display: none !important;
 }
+.col-lg-4 img {
+	width:100%;
+	height:280px;
+}
 </style>
         
       <!--Gallery-->
       	 <section class="gallery">
             <div class="grid gallery-info">
                <div class="col-lg-4 gallery-grids">
-                  <figure class="effect-milo">
-                     <img src="${baseurl}/abhee/images/propr.jpg" alt="" class="img-responsive">
-                     <figcaption>
-                        <p>Abhee Smart Home Systems</p>
-                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
-                  </figure>
+              	<a href="#" data-toggle="modal" data-target="#gallery" ><img src="${baseurl}/abhee/images/propr.jpg" alt="" class="img-responsive"></a>
                </div>
                <div class="col-lg-4 gallery-grids">
-                  <figure class="effect-milo">
-                     <img src="${baseurl}/abhee/images/group.jpg" alt="" class="img-responsive">
-                     <figcaption>
-                        <p>Abhee Smart Home Systems</p>
-                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
-                  </figure>
+              	<a href="#" data-toggle="modal" data-target="#gallery" ><img src="${baseurl}/abhee/images/group.jpg" alt="" class="img-responsive"></a>
                </div>
                <div class="col-lg-4 gallery-grids">
-                  <figure class="effect-milo">
-                     <img src="${baseurl}/abhee/images/sec.jpg" alt="" class="img-responsive">
-                     <figcaption>
-                        <p>Abhee Smart Home Systems</p>
-                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
-                  </figure>
+              	<a href="#" data-toggle="modal" data-target="#gallery" ><img src="${baseurl}/abhee/images/sec.jpg" alt="" class="img-responsive"></a>
                </div><div class="clearfix"></div>
             </div>
             <div class="grid gallery-info">
                <div class="col-lg-4 gallery-grids">
-                  <figure class="effect-milo">
-                     <img src="${baseurl}/abhee/images/home.jpg" alt="" class="img-responsive">
-                     <figcaption>
-                        <p>Abhee Smart Home Systems</p>
-                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
-                  </figure>
+              	<a href="#" data-toggle="modal" data-target="#gallery" ><img src="${baseurl}/abhee/images/home.jpg" alt="" class="img-responsive"></a>
                </div>
                <div class="col-lg-4 gallery-grids">
-                  <figure class="effect-milo">
-                     <img src="${baseurl}/abhee/images/ravel.jpg" alt="" class="img-responsive">
-                     <figcaption>
-                        <p>Abhee Smart Home Systems</p>
-                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
-                  </figure>
+              	<a href="#" data-toggle="modal" data-target="#gallery" ><img src="${baseurl}/abhee/images/ravel.jpg" alt="" class="img-responsive"></a>
                </div>
                <div class="col-lg-4 gallery-grids">
-                  <figure class="effect-milo">
-                     <img src="${baseurl}/abhee/images/elec.jpg" alt="" class="img-responsive">
-                     <figcaption>
-                        <p>Abhee Smart Home Systems</p>
-                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
-                  </figure>
+              	<a href="#" data-toggle="modal" data-target="#gallery" ><img src="${baseurl}/abhee/images/elec.jpg" alt="" class="img-responsive"></a>
                </div><div class="clearfix"></div>
             </div>
            <div class="grid gallery-info">
                <div class="col-lg-4 gallery-grids">
-                  <figure class="effect-milo">
-                     <img src="${baseurl}/abhee/images/art.jpg" alt="" class="img-responsive">
-                     <figcaption>
-                        <p>Abhee Smart Home Systems</p>
-                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
-                  </figure>
+              	<a href="#" data-toggle="modal" data-target="#gallery" ><img src="${baseurl}/abhee/images/art.jpg" alt="" class="img-responsive"></a>
                </div>
               <div class="col-lg-4 gallery-grids">
-                  <figure class="effect-milo">
-                     <img src="${baseurl}/abhee/images/nam.jpg" alt="" class="img-responsive">
-                     <figcaption>
-                        <p>Abhee Smart Home Systems</p>
-                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
-                  </figure>
+              	<a href="#" data-toggle="modal" data-target="#gallery" ><img src="${baseurl}/abhee/images/nam.jpg" alt="" class="img-responsive"></a>
               </div>
                <div class="col-lg-4 bot gallery-grids">
-                  <figure class="effect-milo">
-                     <img src="${baseurl}/abhee/images/log.jpg" alt="" class="img-responsive">
-                     <figcaption>
-                        <p>Abhee Smart Home Systems</p>
-                        <a href="#" data-toggle="modal" data-target="#gallery" class="gallery-box" data-lightbox="example-set" data-title="">                        </a>                     </figcaption>
-                  </figure>
+              	<a href="#" data-toggle="modal" data-target="#gallery" ><img src="${baseurl}/abhee/images/log.jpg" alt="" class="img-responsive"></a>
               </div><div class="clearfix"></div>
             </div>
       	</section><div class="clearfix"></div>
@@ -105,6 +64,9 @@ display: none !important;
                 			<li><a class="ns-img" href="abhee/images/propr.jpg"></a>
                     			<!--<div class="caption">Propritor</div>-->
                 			</li>
+                			<li><a class="ns-img" href="abhee/images/group.jpg"></a>
+                    			<!--<div class="caption">Propritor</div>-->
+                			</li>
                 			<li><a class="ns-img" href="abhee/images/sec.jpg"></a>
                     			<!--<div class="caption">Propritor</div>-->
                 			</li>
@@ -114,16 +76,16 @@ display: none !important;
                 			<li><a class="ns-img" href="abhee/images/ravel.jpg"></a>
                     			<!--<div class="caption">Propritor</div>-->
                 			</li>
+                			<li><a class="ns-img" href="abhee/images/elec.jpg"></a>
+                    			<!--<div class="caption">Propritor</div>-->
+                			</li>
+                			<li><a class="ns-img" href="abhee/images/art.jpg"></a>
+                    			<!--<div class="caption">Propritor</div>-->
+                			</li>
+                			<li><a class="ns-img" href="abhee/images/nam.jpg"></a>
+                    			<!--<div class="caption">Propritor</div>-->
+                			</li>
                 			<li><a class="ns-img" href="abhee/images/log.jpg"></a>
-                    			<!--<div class="caption">Propritor</div>-->
-                			</li>
-                			<li><a class="ns-img" href="abhee/images/elec.jpg"></a>
-                    			<!--<div class="caption">Propritor</div>-->
-                			</li>
-                			<li><a class="ns-img" href="abhee/images/elec.jpg"></a>
-                    			<!--<div class="caption">Propritor</div>-->
-                			</li>
-                			<li><a class="ns-img" href="abhee/images/elec.jpg"></a>
                     			<!--<div class="caption">Propritor</div>-->
                 			</li>
             			</ul>
