@@ -118,7 +118,7 @@
         	</div>
         	<div style="max-width:90%; margin:0 auto;" class="modal-body">
         		<div align="center" class="text"><span class="impColor0"></span></div>
-					<form>
+					<form  class="form-horizontal" method="Post" enctype="multipart/form-data">
 						<div class="col-sm-4">
 							<label>Request Type</label> <span class="impColor">*</span>
 						</div>
@@ -142,6 +142,12 @@
 						</div>
 						<div class="col-sm-8">
 							<textarea class="form-control" id="custaddress" name="custaddress" placeholder="Address"  onfocus="removeBorder2(this.id)"></textarea>
+						</div>
+						<div class="col-sm-4">
+							<label>Attach File(s)</label> <span class="impColor">*</span>
+						</div>
+						<div class="col-sm-8">
+							<input class=" " type="file" name="fileimg"  accept="image/*"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="fileimg" multiple />
 						</div>
 							<!--<div class="col-sm-4">
 							<label>Attach File(s)</label>
@@ -641,6 +647,13 @@ $.each(productdetailslist, function(k,v){
 		 
 		 servicetypeid =$("#servicetypeid").val();
 		 
+		 var objArr = [];
+	    	var jsonData = {"message":message,"catid":catid,"servicetypeid":servicetypeid,"custaddress":custaddress,"modelid":modelid,"customerId":customerId};
+	    	
+		   var formData = new FormData();
+	    	
+	    	formData.append("saveServiceRequest",JSON.stringify(jsonData));
+		 
 		 $('span.error-keyup-4').remove();
 		 
 		 
@@ -675,19 +688,41 @@ $.each(productdetailslist, function(k,v){
 			 
 		 }
 		 
-		
+		 var ins = document.getElementById('fileimg').files.length;
+			
+			for(var i=0; i< ins; i++)
+			{	
+			var images = document.getElementById('fileimg').files[i];
+			formData.append('fileimg', images); 
+			}
+			alert(images);
+			formData.append( "message",message);
+			formData.append( "servicetypeid",servicetypeid);
+			formData.append( "catid",catid);
+			formData.append( "modelid",modelid);
+			formData.append( "customerId",customerId);
+			formData.append( "custaddress",custaddress);
 		$.ajax({
 			type : "POST",
+			processData:false,
+			contentType:false,
 			url : "saveServiceRequest",
-			data :"message="+message+"&servicetypeid="+servicetypeid+"&catid="+catid+"&modelid="+modelid+"&customerId="+customerId+"&custaddress="+custaddress,
+			data :formData,
 			dataType : "text",
 			beforeSend : function() {
 	             $.blockUI({ message: 'Please wait' });
 	          }, 
-			success : function(data) {
+			success : function(result) {
 				//alert(data);
 				
-				if(data ==='true')
+				if(result !="" && result != null){
+			  		alert(result)
+			  		}
+			  		$('#saveServiceRequest').val("");
+			  		$('#fileimg').val("");
+			  		 $('#formModal').modal('toggle');
+				
+				/* if(data ==='true')
 				{
 					alert(" Thank you, your request had been submitted successfully. Our team will contact you soon");
 					$('#formModal').modal('toggle');					
@@ -696,7 +731,7 @@ $.each(productdetailslist, function(k,v){
 					{
 					alert(data);
 					$('#formModal').modal('toggle');
-					}
+					} */
 				
 			},
 			complete: function () {

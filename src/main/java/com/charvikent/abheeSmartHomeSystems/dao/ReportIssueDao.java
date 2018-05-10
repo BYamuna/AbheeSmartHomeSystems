@@ -75,40 +75,16 @@ public class ReportIssueDao {
 		if(reportIssue.getUploadfile()!=null)
 	     {
 			reportIssue.setUploadfile(fileTemplate.concurrentFileNames());
+			 fileTemplate.clearFiles();
 			
 	     } 
 		em.persist(reportIssue);
 		
 		
-		/*TaskHistory taskHistory =new TaskHistory();
 		
-		taskHistory.setTaskid(String.valueOf(reportIssue.getId()));
-		taskHistory.setTaskno(reportIssue.getTaskno());
-		taskHistory.setTaskstatus(reportIssue.getKstatus());
-		taskHistory.setMessage(reportIssue.getDescription());
-		
-		em.persist(taskHistory);*/
 		
 		taskHistoryLogsDao.historyLogForcustomerEntry(reportIssue);
 		
-		/*TaskHistoryLogs taskHistoryLogs=new TaskHistoryLogs();
-		taskHistoryLogs.setTaskid(reportIssue.getId());
-		taskHistoryLogs.setServiceType(reportIssue.getServiceType());
-		taskHistoryLogs.setAdditionalinfo(reportIssue.getAdditionalinfo());
-		taskHistoryLogs.setAssignby(reportIssue.getAssignby());
-		taskHistoryLogs.setAssignto(reportIssue.getAdditionalinfo());
-		taskHistoryLogs.setCategory(reportIssue.getCategory());
-		taskHistoryLogs.setDescription(reportIssue.getDescription());
-		taskHistoryLogs.setKstatus(reportIssue.getKstatus());
-		taskHistoryLogs.setModelid(reportIssue.getModelid());
-		taskHistoryLogs.setPriority(reportIssue.getPriority());
-		taskHistoryLogs.setSeverity(reportIssue.getSeverity());
-		taskHistoryLogs.setStatus(reportIssue.getStatus());
-		taskHistoryLogs.setSubject(reportIssue.getSubject());
-		taskHistoryLogs.setTaskdeadline(reportIssue.getTaskdeadline());
-		taskHistoryLogs.setTaskno(reportIssue.getTaskno());
-		taskHistoryLogs.setUploadfile(reportIssue.getUploadfile());
-		em.persist(taskHistoryLogs);*/
 	}
 
 	/* @SuppressWarnings("unchecked")
@@ -793,7 +769,20 @@ public List<ReportIssue> getAllReportIssues()
 
 	
 	
-	
+	public void saveServiceRequestFromCustomer(AbheeTask reportIssue) {
+		String randomNum = utilities.randNum();
+		
+		reportIssue.setTaskno(randomNum);
+		
+		
+		em.persist(reportIssue);
+		
+		
+		
+		
+		taskHistoryLogsDao.historyLogForcustomerEntry(reportIssue);
+		
+	}
 
 
 
