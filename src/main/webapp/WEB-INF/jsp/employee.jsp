@@ -448,7 +448,7 @@ $('#mobilenumber').blur(function() {
 	 
 	 if(cmobile.length != 10 )
 		 {
-		 alert("Password Length Must Be 10 Digits")
+		 alert("Mobile Number Length Must Be 10 Digits")
 		 $('#mobilenumber').css('border-color', 'red');
 		 
 			 $('#submit1').prop('disabled', true);

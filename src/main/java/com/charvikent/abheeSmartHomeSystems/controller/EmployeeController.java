@@ -243,7 +243,7 @@ public class EmployeeController {
 					userService.updatePassword(users);
 					redir.addFlashAttribute("msg", "Password Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "success");
-					return "redirect:/";
+					return "redirect:changePassword";
 				}else {
 					redir.addFlashAttribute("msg", "You Entered Wrong Password");
 					redir.addFlashAttribute("cssMsg", "danger");

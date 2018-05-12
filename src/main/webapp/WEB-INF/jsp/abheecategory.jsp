@@ -144,7 +144,7 @@
 							<textarea class="form-control" id="custaddress" name="custaddress" placeholder="Address"  onfocus="removeBorder2(this.id)"></textarea>
 						</div>
 						<div class="col-sm-4">
-							<label>Attach File(s)</label> <span class="impColor">*</span>
+							<label>Attach File(s)</label> 
 						</div>
 						<div class="col-sm-8">
 							<input class=" " type="file" name="fileimg"  accept="image/*"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="fileimg" multiple />
@@ -626,11 +626,11 @@ $.each(productdetailslist, function(k,v){
 	  	
 	  	success: function(result){
 	  		if(result !="" && result != null){
-	  		alert(result)
+	  		alert(result)R
 	  		}
 	  		$('#salesrequest').val("");
 	  		$('#imgfile').val("");
-	  		 $('#salesrequest-info').modal('toggle');
+	  		 $('#quotationModal').modal('toggle');
 	  	
 	    },
 	    error: function (e) {
@@ -722,7 +722,7 @@ $.each(productdetailslist, function(k,v){
 				//alert(data);
 				
 				if(result !="" && result != null){
-			  		alert(result)
+			  		alert("Thank you, your request had been submitted successfully. Our team will contact you soon")
 			  		}
 			  		$('#saveServiceRequest').val("");
 			  		$('#fileimg').val("");

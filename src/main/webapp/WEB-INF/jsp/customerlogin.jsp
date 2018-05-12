@@ -786,5 +786,19 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 			
 		
 	});  */
+	
+	function makeEmptyOtp()
+	{
+		$('#cotp').val("");
+		/* $('#csname').val("");
+		$('#cname').val("");
+		$('#cmobile').val("");
+		$('#cemail').val("");
+		$('#csname').val("");
+		$('#cpassword').val("");
+		$('#crtpassword').val("");
+		
+		$('#cemail').css('border-color', 'none'); */
+	}
 </script>
 </html>
