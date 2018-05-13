@@ -91,6 +91,7 @@ public class AbheeCustomerRestController {
 	
 	@Autowired
 	ReportIssueDao reportIssueDao;
+	
 	@RequestMapping("/Customer")
 	public String showCustomerRegistrationForm(Model model,HttpServletRequest request) throws JsonProcessingException
 	{
@@ -529,11 +530,12 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	
 
 	@PostMapping(value="/restSaveServiceRequest", consumes = "application/json", produces = "application/json")
-	public String  saveServiceRequest( @RequestBody ServiceRequest serviceRequest) throws JsonProcessingException, JSONException {
+	public String  saveServiceRequest( @RequestBody ServiceRequest serviceRequest,@RequestParam("fileimg") MultipartFile[] uploadedFiles) throws JSONException, IllegalStateException, IOException {
 	
 		LOGGER.debug("Calling saveServiceRequest at controller");
 	
 		System.out.println("enter to task controller Submit");
+		int filecount =0;
 		JSONObject objJson = new JSONObject();
 		String message=serviceRequest.getMessage();
 		String servicetypeid=serviceRequest.getServicetypeid();
@@ -554,11 +556,32 @@ HashMap<String,String> hm =new HashMap<String,String>();
 		task.setServiceType(servicetypeid);
 		task.setCategory(catid);
 		task.setModelid(modelid);
+		task.setCommunicationaddress(custaddress);
+		
+		Customer customer= customerDao.findCustomerByCustId(customerId);
+		task.setSubject("Task created By "+customer.getFirstname()+" "+customer.getLastname());
+		
+		
 
 		task.setCustomerId(customerId);
 		
-		Customer customer= customerDao.findCustomerByCustId(customerId);
 		
+		
+		for(MultipartFile multipartFile : uploadedFiles) {
+			String fileName = multipartFile.getOriginalFilename();
+			if(!multipartFile.isEmpty())
+			{
+				filecount++;
+			 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+			}
+		}
+	 
+	 if(filecount>0)
+	 {
+		task.setUploadfile(fileTemplate.concurrentFileNames());
+		 fileTemplate.clearFiles();
+		 
+	 }
 		
 		
 	
