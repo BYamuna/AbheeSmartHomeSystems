@@ -192,7 +192,7 @@
 							</div>
 							
 						</div>
-<div class="row">
+						<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
 								<label
@@ -1104,7 +1104,14 @@
 	 });
 	 });
 	 */
-
+	 $(document).load(function()
+		{
+		 
+		 
+		 $('#moveTo').hide();
+		 
+		 
+		 });
 	$("#pageName").text("Service Request Master");
 	$(".task").addClass("active");
 </script>
