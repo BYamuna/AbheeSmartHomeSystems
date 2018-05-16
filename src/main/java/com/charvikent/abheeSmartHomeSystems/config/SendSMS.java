@@ -26,6 +26,7 @@ public class SendSMS {
 		static String username = "ssjewellers";
 		static String password = "SSjewellers@123";
 		static String from = "GTCLUB";
+		//static String from = "AbheeSmartHomes";
 		//static String from = "AARNA-MATRIMONY";
 	    static String requestUrl = null;
 	    static String toAddress = null;
