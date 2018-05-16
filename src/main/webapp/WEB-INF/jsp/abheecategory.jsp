@@ -626,7 +626,7 @@ $.each(productdetailslist, function(k,v){
 	  	
 	  	success: function(result){
 	  		if(result !="" && result != null){
-	  		alert(result)R
+	  		alert(result);
 	  		}
 	  		$('#salesrequest').val("");
 	  		$('#imgfile').val("");
@@ -722,7 +722,7 @@ $.each(productdetailslist, function(k,v){
 				//alert(data);
 				
 				if(result !="" && result != null){
-			  		alert("Thank you, your request had been submitted successfully. Our team will contact you soon")
+			  		alert("Thank you, your request had been submitted successfully. Our team will contact you soon");
 			  		}
 			  		$('#saveServiceRequest').val("");
 			  		$('#fileimg').val("");

@@ -155,7 +155,7 @@
                     Product model
                   </th>
                   <th>
-                    ModifiedDate
+                    ModifiedStatus
                   </th>
                   <th>
                      created_time  
