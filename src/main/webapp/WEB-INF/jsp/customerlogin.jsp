@@ -656,6 +656,14 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 	
 	function resetpassword()
 	{
+		
+		var resetmobile =$("#resetmobile").val();
+		
+		if(resetmobile == "" ||resetmobile == "undefined" ||resetmobile ==" null")
+			{
+			  return false;
+			}
+		
 		$('#resetpassword').prop('disabled', true);
 	 idArrayCmt11 = $.makeArray($('.validate2').map(function() {
 		return this.id;
