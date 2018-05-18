@@ -235,6 +235,9 @@
 						</div>
 					</form>	
         </div>
+        <div class="col-sm-6">
+			<h6><a href="#" data-toggle="modal" data-target="#OTPModel" style="color:orange;" onclick="resendOTP()" class="button">Resend OTP</a></h6>
+		</div>
         <div class="modal-footer">
           <button type="button" id="submit2" onclick="modelsubmit()" class="btn btn-primary" >Submit</button>
          
@@ -474,7 +477,7 @@ var idArrayCmt1 = null;
 		$("#submit1").attr("disabled",true);
 		$("#submit1").val("Please wait...");
 		$("#submit1").submit();											
-		 getOTP();
+		getOTP();
 	}else {
 		return false;
 		 event.preventDefault(); 
@@ -808,5 +811,46 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		
 		$('#cemail').css('border-color', 'none'); */
 	}
+	
+	
+	function resendOTP()
+	{
+		var cmobile =$('#cmobile').val();	
+		$.ajax({
+			type : "POST",
+			url : "resendOtp",
+			data :"cmobile="+cmobile,
+			dataType : "text",
+			beforeSend : function() {
+	             $.blockUI({ message: 'Please wait' });
+	          }, 
+			success : function(data) {
+				if(data ==='true')
+					{
+					//window.location.reload();
+					alert(data);
+					/*$('#submit1').prop('disabled', true);*/
+					/* $('#register-info').modal('hide');*/
+					
+					/*$('#OTPModel').modal('toggle');*/
+					/*$("#OTPModel").modal('show');*/
+					}
+				/* else
+					{
+					$('#cmobile').css('border-color', 'none');
+					$('#submit1').prop('disabled', false);
+					} */
+				
+			},
+			complete: function () {
+	            
+	            $.unblockUI();
+	       },
+			error :  function(e){$.unblockUI();console.log(e);}
+			
+		});
+	}
+	
+	
 </script>
 </html>

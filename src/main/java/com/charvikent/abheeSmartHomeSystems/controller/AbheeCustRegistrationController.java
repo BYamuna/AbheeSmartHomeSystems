@@ -509,5 +509,25 @@ public class AbheeCustRegistrationController
 		return false;
 		
 	}
-
+	
+	@RequestMapping(value = "/resendOtp", method = RequestMethod.POST)
+	public @ResponseBody  Boolean resendOTP(Model model,HttpServletRequest request) throws IOException 
+	{
+		LOGGER.debug("Calling  resendOtp at controller");
+		System.out.println("enter to resendOtp");
+		
+		String custMobile=request.getParameter("cmobile");
+		Random random = new Random();
+		 otpnumber = String.format("%04d", random.nextInt(10000));
+		
+		sendSMS.sendSMS(otpnumber,custMobile);
+		OTPDetails oTPDetails =new OTPDetails();
+		
+		oTPDetails.setMobileno(custMobile);
+		oTPDetails.setOTPnumber(otpnumber);
+		
+		oTPDetailsDao.saveOTPdetails(oTPDetails);	
+		return true;
+		
+	}
 }
