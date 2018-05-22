@@ -2,6 +2,7 @@ package com.charvikent.abheeSmartHomeSystems.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.MessagingException;
@@ -520,14 +521,22 @@ public class AbheeCustRegistrationController
 		Random random = new Random();
 		 otpnumber = String.format("%04d", random.nextInt(10000));
 		
-		sendSMS.sendSMS(otpnumber,custMobile);
+		
 		OTPDetails oTPDetails =new OTPDetails();
 		
 		oTPDetails.setMobileno(custMobile);
 		oTPDetails.setOTPnumber(otpnumber);
-		
+		List<Map<String, Object>> curotplist=oTPDetailsDao.getCurrentDayList(custMobile);
+		if(curotplist.size()>4) 
+		{
+			System.out.println("OTP Limit Expired For Today");
+			return false;
+		}
+		else
+		{
+		sendSMS.sendSMS(otpnumber,custMobile);
 		oTPDetailsDao.saveOTPdetails(oTPDetails);	
 		return true;
-		
+		}	
 	}
 }

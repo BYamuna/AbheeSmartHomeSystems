@@ -213,7 +213,7 @@
      
       <div class="modal-content">
         <div class="modal-header">
-          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">OTP Verification</h4>
         </div>
         <div class="modal-body">
@@ -236,7 +236,7 @@
 					</form>	
         </div>
         <div class="col-sm-6">
-			<h6><a href="#" data-toggle="modal" data-target="#OTPModel" style="color:orange;" onclick="resendOTP()" class="button">Resend OTP</a></h6>
+			<a onclick="resendOTP()" class="btn btn-warning">Resend OTP</a>
 		</div>
         <div class="modal-footer">
           <button type="button" id="submit2" onclick="modelsubmit()" class="btn btn-primary" >Submit</button>
@@ -827,19 +827,12 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 			success : function(data) {
 				if(data ==='true')
 					{
-					//window.location.reload();
-					alert(data);
-					/*$('#submit1').prop('disabled', true);*/
-					/* $('#register-info').modal('hide');*/
-					
-					/*$('#OTPModel').modal('toggle');*/
-					/*$("#OTPModel").modal('show');*/
+					alert("OTP sent to your mobile number");
 					}
-				/* else
+				else
 					{
-					$('#cmobile').css('border-color', 'none');
-					$('#submit1').prop('disabled', false);
-					} */
+					alert("OTP Limit Expired For Today");
+					} 
 				
 			},
 			complete: function () {

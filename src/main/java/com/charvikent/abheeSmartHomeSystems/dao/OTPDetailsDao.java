@@ -1,9 +1,14 @@
 package com.charvikent.abheeSmartHomeSystems.dao;
 
 
+import java.util.List;
+import java.util.Map;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +20,8 @@ public class OTPDetailsDao {
 	
 	@PersistenceContext
     private EntityManager entityManager;
+	@Autowired
+    private JdbcTemplate jdbcTemplate;
 	
 	public void saveOTPdetails(OTPDetails oTPDetails) {
 		entityManager.persist(oTPDetails);
@@ -22,20 +29,14 @@ public class OTPDetailsDao {
 	}
 	
 	
-	
-	/*public String getOTPByMobileNumber(String mobileno)
+	public List<Map<String, Object>> getCurrentDayList(String mobile)
 	{
-		
-		String hql ="from OTPDetails where custID='"+mobileno+"'";
-		
-		List<AbheeCustRegistration> custlist =	entityManager.createQuery(hql).getResultList();
-	    
-		if(custlist.size()>0)
-	   return custlist.get(0);
-	    else
-		return null;
-		return null;
-		
-	}*/
+	String hql="select * FROM otp_details WHERE DATE_FORMAT(otp_details.created_time, '%Y-%m-%d') = CURDATE() and mobileno='"+mobile+"' order by created_time desc";
+	System.out.println(hql);
+	
+	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+	System.out.println(retlist);
+	return retlist;
+	}
 
 }
