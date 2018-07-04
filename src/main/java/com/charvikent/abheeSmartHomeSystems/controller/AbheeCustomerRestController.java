@@ -530,12 +530,11 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	
 
 	@PostMapping(value="/restSaveServiceRequest", consumes = "application/json", produces = "application/json")
-	public String  saveServiceRequest( @RequestBody ServiceRequest serviceRequest,@RequestParam("fileimg") MultipartFile[] uploadedFiles) throws JSONException, IllegalStateException, IOException {
+	public String  saveServiceRequest( @RequestBody ServiceRequest serviceRequest) throws JSONException, IllegalStateException, IOException {
 	
 		LOGGER.debug("Calling saveServiceRequest at controller");
 	
 		System.out.println("enter to task controller Submit");
-		int filecount =0;
 		JSONObject objJson = new JSONObject();
 		String message=serviceRequest.getMessage();
 		String servicetypeid=serviceRequest.getServicetypeid();
@@ -566,25 +565,6 @@ HashMap<String,String> hm =new HashMap<String,String>();
 		task.setCustomerId(customerId);
 		
 		
-		
-		for(MultipartFile multipartFile : uploadedFiles) {
-			String fileName = multipartFile.getOriginalFilename();
-			if(!multipartFile.isEmpty())
-			{
-				filecount++;
-			 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
-			}
-		}
-	 
-	 if(filecount>0)
-	 {
-		task.setUploadfile(fileTemplate.concurrentFileNames());
-		 fileTemplate.clearFiles();
-		 
-	 }
-		
-		
-	
 		
 		Map<String, Object> abheeTask =reportIssueDao.checkServiceRequestExisrOrNot(task);
 		if(null ==abheeTask )
