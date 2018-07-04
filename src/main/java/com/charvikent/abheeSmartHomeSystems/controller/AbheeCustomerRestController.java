@@ -346,7 +346,7 @@ HashMap<String,String> hm =new HashMap<String,String>();
 	@RequestMapping(value="/getproducts", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public String  getProductslist() throws JsonProcessingException, JSONException {
 		LOGGER.debug("Calling getproducts at controller");
-		List<Product> listOrderBeans =  productDao.getProductDetails();
+		List<Map<String, Object>> listOrderBeans =  productDao. getProductsDescription();
 		
 		JSONObject json =new JSONObject();
 		

@@ -205,9 +205,15 @@ public class ProductDao
 	}
 	
 	public List<Map<String, Object>> getProductsByCompanyId(String companyid) {
-String sql ="select p.id,p.categoryid,p.companyid,p.created_time,p.description,p.name,p.productmodelpics,productmodelvideoslinks,p.updated_time,p.product_model_specifications ,p.product_price,p.max_allowed_discount "
+		String sql ="select p.id,p.categoryid,p.companyid,p.created_time,p.description,p.name,p.productmodelpics,productmodelvideoslinks,p.updated_time,p.product_model_specifications ,p.product_price,p.max_allowed_discount "
              +" from abhee_product p where p.companyid=? ";	
 		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{companyid});
+		
+		return retlist;
+	}
+	public List<Map<String, Object>> getProductsDescription() {
+		String sql ="select p.id,p.categoryid,cat.category,p.companyid,com.name,p.description,p.name,p.productmodelpics,p.productmodelvideoslinks,p.status,p.product_model_specifications,p.product_price,p.max_allowed_discount,p.updated_time,com.companyimg from abhee_product  p , abheecategory cat , abhee_company com  where p.categoryid=cat.id and p.companyid=com.id and p.status='1' order by p.updated_time desc";	
+		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
 		
 		return retlist;
 	}
