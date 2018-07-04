@@ -53,6 +53,7 @@ public class CompanyDao
 		Company uc= (Company)entityManager.find(Company.class ,com.getId());
 		uc.setName(com.getName());
 		uc.setDescription(com.getDescription());
+		uc.setCompanyimg(com.getCompanyimg());
 		entityManager.flush();
 	}
 	public boolean deleteCompany(Integer id, String status) 

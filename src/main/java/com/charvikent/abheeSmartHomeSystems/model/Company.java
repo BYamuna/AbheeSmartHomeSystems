@@ -19,6 +19,7 @@ public class Company
 	private Integer  id;
 	private String name;
 	private String description;
+	private String companyimg;
 	@Column
 	private String status;
 	
@@ -32,13 +33,14 @@ public class Company
 		super();
 		
 	}
-	public Company(Integer id, String name, String description, String status, Date createdTime,
+	public Company(Integer id, String name, String description,String companyimg, String status, Date createdTime,
 			Date updatedTime) 
 	{
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.companyimg=companyimg;
 		this.status = status;
 		this.createdTime = createdTime;
 		this.updatedTime = updatedTime;
@@ -67,6 +69,15 @@ public class Company
 	{
 		this.description = description;
 	}
+	
+	public String getCompanyimg() 
+	{
+		return companyimg;
+	}
+	public void setCompanyimg(String companyimg) 
+	{
+		this.companyimg = companyimg;
+	}
 	public String getStatus() 
 	{
 		return status;
@@ -92,9 +103,10 @@ public class Company
 		this.updatedTime = updatedTime;
 	}
 	@Override
-	public String toString() {
-		return "Company [id=" + id + ", name=" + name + ", description=" + description + ", status=" + status
-				+ ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
+	public String toString() 
+	{
+		return "Company [id=" + id + ", name=" + name + ", description=" + description + ", companyimg=" + companyimg
+				+ ", status=" + status + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
 	}
 	
 	

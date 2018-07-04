@@ -18,10 +18,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.dao.CompanyDao;
 import com.charvikent.abheeSmartHomeSystems.model.Company;
 
@@ -31,6 +34,8 @@ public class CompanyController
 	private static final Logger LOGGER = LoggerFactory.getLogger(CompanyController  .class);
 	@Autowired
 	CompanyDao companyDao;
+	@Autowired
+	FilesStuff fileTemplate;
 	
 	@RequestMapping("/company")
 	public String  companyList( @ModelAttribute("companyf")  Company comf,Model model ,HttpServletRequest request) 
@@ -64,7 +69,7 @@ public class CompanyController
 	
 	@RequestMapping(value = "/company", method = RequestMethod.POST)
 	public String saveCompany(@Valid @ModelAttribute  Company com, BindingResult bindingresults,
-			RedirectAttributes redir) throws IOException 
+			@RequestParam("file1") MultipartFile[] companypic,RedirectAttributes redir) throws IOException 
 	{
 		LOGGER.debug("Calling company at controller");
 		if (bindingresults.hasErrors()) {
@@ -87,6 +92,23 @@ public class CompanyController
 			{
 				if(dummyId ==0)
 				{
+					int filecount =0;
+			    	 
+			    	 for(MultipartFile multipartFile : companypic) {
+							String fileName = multipartFile.getOriginalFilename();
+							if(!multipartFile.isEmpty())
+							{
+								filecount++;
+							 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+							}
+						}
+			    	 
+			    	 if(filecount>0)
+			    	 {
+			    		 com.setCompanyimg(fileTemplate.concurrentFileNames());
+			    		 fileTemplate.clearFiles();
+			    		 
+			    	 }
 					com.setStatus("1");
 					companyDao.saveCompany(com);
 
@@ -108,6 +130,25 @@ public class CompanyController
 				id=com.getId();
 				if(id == dummyId || orgBean == null)
 				{
+					int filecount =0;
+			    	 
+			    	 for(MultipartFile multipartFile : companypic) {
+							String fileName = multipartFile.getOriginalFilename();
+							if(!multipartFile.isEmpty())
+							{
+								filecount++;
+							 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+							}
+						}
+			    	 
+			    	 if(filecount>0)
+			    	 {
+			    		 com.setCompanyimg(fileTemplate.concurrentFileNames());
+			    		 fileTemplate.clearFiles();
+			    		 
+			    	 }
+					
+					
 					companyDao.UpdateCompany(com);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");

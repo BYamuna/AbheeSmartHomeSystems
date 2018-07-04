@@ -39,7 +39,7 @@
 					<div class="panel-heading">
 						<h4 id="com">Add Company</h4>
 					</div>
-					<form:form class="form-horizontal" commandName="companyf" role="form" id="fillingstation-form" action="company" method="post">
+					<form:form class="form-horizontal" commandName="companyf" role="form" id="fillingstation-form" action="company" method="post" enctype="multipart/form-data">
 					<div class="panel-body">
 						<div class="row">
                     		<div class="col-md-6">
@@ -61,7 +61,14 @@
 								    </div>
                     			</div>
                     		</div>
-                    		
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">Company Images <span class="impColor">*</span></label>
+									<div class="col-md-5">
+										<input type="file" name="file1" id="file1" class="validate "  accept="image/*" style="margin: 7px 0px 0px 0px;">
+									</div>
+                    			</div>
+                    		</div>
                     		
                     	</div>
                     		
@@ -110,10 +117,21 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="company" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Company Name</th><th>Company Description</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Company Name</th><th>Company Description</th><th>Company Images</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
+		if(orderObj.companyimg==undefined) orderObj.companyimg='';
+		else
+			{
+				var list=orderObj.companyimg.split('*');
+				var companyimg='';
+				for(var i=0;i<list.length;i++)
+				{
+					companyimg=companyimg+'<a href="reportDocuments/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="reportDocuments/'+list[i]+'" style="height:42px; width:42px"></a>';
+				}
+				orderObj.companyimg=companyimg;
+			}
 		if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate' onclick='deleteCompany("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
@@ -124,6 +142,7 @@ function displayTable(listOrders) {
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.name+"'>"+ orderObj.name + "</td>"
 			+ "<td title='"+orderObj.description+"'>"+ orderObj.description + "</td>"
+			+ "<td title='"+orderObj.companyimg+"'>"+ orderObj.companyimg + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
@@ -206,6 +225,34 @@ function inactiveData()
 				});
 		
 }
+
+document.getElementById("file1").onchange = function () {
+    var reader = new FileReader();
+    if(this.files[0].size>528385){
+        alert("Image Size should not be greater than 528Kb");
+        $("#file1").attr("src","blank");
+       // $("#file1").hide();  
+        $('#file1').wrap('<form>').closest('form').get(0).reset();
+        $('#file1').unwrap();     
+        return false;
+    }
+    if(this.files[0].type.indexOf("image")==-1){
+        alert("Invalid Type");
+        $("#file1").attr("src","blank");
+        //$("#file1").hide();  
+       $('#file1').wrap('<form>').closest('form').get(0).reset();
+      //  $('#file1').unwrap();         
+        return false;
+    }   
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("menu_image").src = e.target.result;
+        $("#file1").show(); 
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+};
 
 
 $("#pageName").text("Company Master");
