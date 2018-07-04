@@ -86,7 +86,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="mobilenumber" class="form-control validate numericOnly" maxlength="10"  placeholder="Mobile Number"/>
+										<form:input path="mobilenumber" class="form-control validate numericOnly2" maxlength="10"  placeholder="Mobile Number"/>
 									</div>
 								</div></div>
 								<div class="col-md-6">

@@ -53,6 +53,7 @@ public class CustomerDao {
 		return customer;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Customer checkCustomerExistOrNotByEmail(String email) {
 
 		String hql ="from Customer where  email ='"+email+"'";
@@ -66,6 +67,7 @@ public class CustomerDao {
 	}
 
 
+@SuppressWarnings("unchecked")
 public Customer checkuserExistOrNot(Customer customer) {
 	
 	String hql =" from Customer  where (mobilenumber ='"+customer.getMobilenumber()+"') and password='"+customer.getPassword()+"'";
@@ -79,6 +81,7 @@ public Customer checkuserExistOrNot(Customer customer) {
 	
 }
 
+@SuppressWarnings("unchecked")
 public Customer validateCustomer(String loginid, String password) {
 	
 	String hql =" from Customer  where enabled='1'and mobilenumber ='"+loginid+"' and password='"+password +"'";
@@ -92,6 +95,7 @@ public Customer validateCustomer(String loginid, String password) {
 	
 }
 
+@SuppressWarnings("unchecked")
 public Customer getCustomerByObject(Customer customer) {
 	String hql =" from Customer  where (mobilenumber ='"+customer.getMobilenumber()+"') or email='"+customer.getEmail()+"'";
 	Query query =entityManager.createQuery(hql);
@@ -133,6 +137,7 @@ public void saveAbheeCustomer(Customer cabheeCustomer ) {
 	
 
 }
+
 
 
 
@@ -373,6 +378,7 @@ public Customer checkProfileMobileNoExistsOrNot(Customer customer) {
 	return ProfileCustomersList.get(0);
 }
 
+@SuppressWarnings("unchecked")
 public Customer checkCustomerExistOrNotbyMobileOnEdit(String custMobile, String editFieldsId) {
 	
 	
@@ -387,6 +393,7 @@ public Customer checkCustomerExistOrNotbyMobileOnEdit(String custMobile, String 
 	return null;
 }
 
+@SuppressWarnings("unchecked")
 public Customer checkCustomerExistOrNotByEmailOnEdit(String custEmail, String editFieldsId) {
 	String hql ="from Customer where id <>'"+editFieldsId+"'and   email ='"+custEmail+"'";
 	Query query =entityManager.createQuery(hql);

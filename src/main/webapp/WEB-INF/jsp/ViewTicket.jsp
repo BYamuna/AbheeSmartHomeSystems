@@ -163,6 +163,9 @@
                   <th>
                      Note
                   </th>
+                  <th>
+                     Attached Files
+                  </th>
                    </tr>
                  <tr>
                  
@@ -206,12 +209,25 @@
 var allstatus = ${statuslist1};
 //allstatus=JSON.parse(allstatus);
 $.each(allstatus, function(k, v){
+	
+		if(v.Attachfile==undefined) v.Attachfile='';
+		else
+			{
+				var list=v.Attachfile.split('*');
+				var Attachfile='';
+				for(var i=0;i<list.length;i++)
+				{
+					Attachfile=Attachfile+'<a href="reportDocuments/'+list[i]+'" target="_blank" title="'+list[i]+'"><i class="fa fa-download"></i></a>';
+				}
+				v.Attachfile=Attachfile;
+			}
 	var tr=	'<tr>'
 			+'<td>'+ v.username +'</td>'
 			+'<td>'+ v.productname +'</td>'
 			+'<td>'+ v.servicestatus +'</td>'
 			+'<td>'+ v.created_time +'</td>'
 			+'<td>'+ v.add_comment +'</td>'
+			+'<td>'+v.Attachfile+'</td>'
 			+'</tr>';
 	$('#viewStatusTable tbody').append(tr);
 });

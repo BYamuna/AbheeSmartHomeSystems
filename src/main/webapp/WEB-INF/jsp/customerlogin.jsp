@@ -213,7 +213,7 @@
      
       <div class="modal-content">
         <div class="modal-header">
-          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">OTP Verification</h4>
         </div>
         <div class="modal-body">
@@ -235,6 +235,9 @@
 						</div>
 					</form>	
         </div>
+        <div class="col-sm-6">
+			<a onclick="resendOTP()" class="btn btn-warning">Resend OTP</a>
+		</div>
         <div class="modal-footer">
           <button type="button" id="submit2" onclick="modelsubmit()" class="btn btn-primary" >Submit</button>
          
@@ -474,7 +477,7 @@ var idArrayCmt1 = null;
 		$("#submit1").attr("disabled",true);
 		$("#submit1").val("Please wait...");
 		$("#submit1").submit();											
-		 getOTP();
+		getOTP();
 	}else {
 		return false;
 		 event.preventDefault(); 
@@ -808,5 +811,39 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		
 		$('#cemail').css('border-color', 'none'); */
 	}
+	
+	
+	function resendOTP()
+	{
+		var cmobile =$('#cmobile').val();	
+		$.ajax({
+			type : "POST",
+			url : "resendOtp",
+			data :"cmobile="+cmobile,
+			dataType : "text",
+			beforeSend : function() {
+	             $.blockUI({ message: 'Please wait' });
+	          }, 
+			success : function(data) {
+				if(data ==='true')
+					{
+					alert("OTP sent to your mobile number");
+					}
+				else
+					{
+					alert("OTP Limit Expired For Today");
+					} 
+				
+			},
+			complete: function () {
+	            
+	            $.unblockUI();
+	       },
+			error :  function(e){$.unblockUI();console.log(e);}
+			
+		});
+	}
+	
+	
 </script>
 </html>

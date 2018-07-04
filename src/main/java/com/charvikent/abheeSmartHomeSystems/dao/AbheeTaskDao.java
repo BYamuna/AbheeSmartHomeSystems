@@ -215,7 +215,7 @@ private AbheeTask getAbheeTaskByTaskNo(String taskno) {
 public List<Map<String, Object>> getAbheeTaskById(String id) {
 	
 	String sql="select t.id,u.username,s.servicetypename,t.created_time,t.description,ts.name as statusname,p.priority,sev.severity, "
-			 + " t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id ,t.communicationaddress  "
+			 + " t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id ,t.communicationaddress,t.uploadfile as AttachedFiles  "
 			+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp"
 			+" where t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.taskno='"+id+"' order by t.updated_time desc ";
 	System.out.println(sql);
@@ -273,7 +273,7 @@ public List<Map<String,Object>> getTasksListAssignToMeById(String id)
 
 public List<Map<String, Object>> getTaskStatusHistoryByTaskNo(String taskno) {
 	
-	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and taskno='"+taskno+" '  order by t.created_time desc";
+	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.uploadfile as Attachfile  from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and t.taskno='"+taskno+" '  order by t.created_time desc";
 	
          System.out.println(hql);
 	
