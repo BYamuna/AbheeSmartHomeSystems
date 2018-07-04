@@ -73,6 +73,9 @@ public class CustomUserDetailsService implements UserDetailsService{
 				return new CustomCustomerUserDetails(customer,roleslist);
 			}
 			
+		
+			
+			
 		}
 	}
 		
