@@ -92,9 +92,10 @@ public class Company
 		this.updatedTime = updatedTime;
 	}
 	@Override
-	public String toString() 
-	{
+	public String toString() {
 		return "Company [id=" + id + ", name=" + name + ", description=" + description + ", status=" + status
 				+ ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
 	}
+	
+	
 }
