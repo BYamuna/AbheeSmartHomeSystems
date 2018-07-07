@@ -217,4 +217,10 @@ public class ProductDao
 		
 		return retlist;
 	}
+	public List<Map<String, Object>> getProductCompaniesdesc() {
+		String sql ="select p.id as productid,p.categoryid,cat.category as categoryname,cat.categoryimg,p.companyid,com.name as companyname,com.companyimg from abhee_product  p , abheecategory cat , abhee_company com where p.categoryid=cat.id and p.companyid=com.id and p.status='1'group by p.companyid order by p.updated_time desc";	
+		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
+		
+		return retlist;
+	}
 }
