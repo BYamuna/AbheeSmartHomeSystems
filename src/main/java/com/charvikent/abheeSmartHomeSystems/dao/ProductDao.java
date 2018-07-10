@@ -212,7 +212,7 @@ public class ProductDao
 		return retlist;
 	}
 	public List<Map<String, Object>> getProductsDescription() {
-		String sql ="select p.id,p.categoryid,cat.category,p.companyid,com.name,p.description,p.name,p.productmodelpics,p.productmodelvideoslinks,p.status,p.product_model_specifications,p.product_price,p.max_allowed_discount,p.updated_time,com.companyimg from abhee_product  p , abheecategory cat , abhee_company com  where p.categoryid=cat.id and p.companyid=com.id and p.status='1' order by p.updated_time desc";	
+		String sql ="select p.id,p.categoryid,cat.category,p.companyid,com.name as companyname,p.description,p.name as productmodelname,p.productmodelpics,p.productmodelvideoslinks,p.status,p.product_model_specifications,p.product_price,p.max_allowed_discount,p.updated_time,com.companyimg from abhee_product  p , abheecategory cat , abhee_company com  where p.categoryid=cat.id and p.companyid=com.id and p.status='1' order by p.updated_time desc";	
 		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
 		
 		return retlist;
