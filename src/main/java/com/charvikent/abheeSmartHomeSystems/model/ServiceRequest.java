@@ -10,6 +10,7 @@ public class ServiceRequest {
 	private String modelid;
 	private String customerId;
 	private String custaddress;
+	private String warranty;
 	
 	public Integer getId() {
 		return id;
@@ -53,11 +54,26 @@ public class ServiceRequest {
 	public void setCustaddress(String custaddress) {
 		this.custaddress = custaddress;
 	}
+	
+	/*public String getComid() {
+		return comid;
+	}
+	public void setComid(String comid) {
+		this.comid = comid;
+	}*/
+	public String getWarranty() {
+		return warranty;
+	}
+	public void setWarranty(String warranty) {
+		this.warranty = warranty;
+	}
 	@Override
 	public String toString() {
 		return "ServiceRequest [id=" + id + ", message=" + message + ", servicetypeid=" + servicetypeid + ", catid="
-				+ catid + ", modelid=" + modelid + ", customerId=" + customerId + ", custaddress=" + custaddress + "]";
+				+ catid + ", modelid=" + modelid + ", customerId=" + customerId + ", custaddress=" + custaddress
+				+ ", warranty=" + warranty + "]";
 	}
+	
 	
 
 	

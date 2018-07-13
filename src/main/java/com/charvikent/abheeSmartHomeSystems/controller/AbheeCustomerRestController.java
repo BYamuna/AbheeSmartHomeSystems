@@ -3,10 +3,10 @@ package com.charvikent.abheeSmartHomeSystems.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Deque;
+//import java.util.Deque;
 //import org.apache.commons.codec.binary.Base64;
 import java.util.HashMap;
-import java.util.LinkedList;
+//import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -48,7 +48,7 @@ import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.OTPDetails;
-import com.charvikent.abheeSmartHomeSystems.model.Product;
+/*import com.charvikent.abheeSmartHomeSystems.model.Product;*/
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 import com.charvikent.abheeSmartHomeSystems.model.ServiceRequest;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
@@ -540,7 +540,7 @@ public class AbheeCustomerRestController
 		String modelid=serviceRequest.getModelid();
 		String customerId =serviceRequest.getCustomerId();
 		String custaddress =serviceRequest.getCustaddress();
-		
+		String warranty=serviceRequest.getWarranty();
 		AbheeTask task =new AbheeTask();
 		task.setAdditionalinfo("0");
 		task.setAssignto("5");
@@ -555,6 +555,7 @@ public class AbheeCustomerRestController
 		task.setModelid(modelid);
 		task.setCommunicationaddress(custaddress);
 		
+		
 		Customer customer= customerDao.findCustomerByCustId(customerId);
 		task.setSubject("Task created By "+customer.getFirstname()+" "+customer.getLastname());
 		
@@ -562,7 +563,7 @@ public class AbheeCustomerRestController
 
 		task.setCustomerId(customerId);
 		
-		
+		task.setWarranty(warranty);
 		
 		Map<String, Object> abheeTask =reportIssueDao.checkServiceRequestExisrOrNot(task);
 		if(null ==abheeTask )

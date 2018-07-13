@@ -74,7 +74,7 @@ public class AbheeTask  {
 	
 	private  String communicationaddress;
 	
-	
+	private String warranty;
 	
 	
 	
@@ -303,17 +303,27 @@ public class AbheeTask  {
 		this.addComment = addComment;
 	}
 	
+	
+	public String getWarranty() {
+		return warranty;
+	}
+	public void setWarranty(String warranty) {
+		this.warranty = warranty;
+	}
 	@Override
 	public String toString() {
-		return "AbheeTask [id=" + id + ", taskno=" + taskno + ", createdTime=" + createdTime + ", updatedTime="
-				+ updatedTime + ", category=" + category + ", severity=" + severity + ", priority=" + priority
-				+ ", assignto=" + assignto + ", subject=" + subject + ", description=" + description + ", uploadfile="
-				+ uploadfile + ", gapdays=" + gapdays + ", gapcount=" + gapcount + ", kstatus=" + kstatus + ", status="
-				+ status + ", additionalinfo=" + additionalinfo + ", taskdeadline=" + taskdeadline + ", taskdeadlineid="
-				+ taskdeadlineid + ", ServiceType=" + ServiceType + ", assigntoid=" + assigntoid + ", categoryid="
-				+ categoryid + ", priorityid=" + priorityid + ", severityid=" + severityid + ", assignbyid="
-				+ assignbyid + ", kstatusid=" + kstatusid + ", modelid=" + modelid + ", assignby=" + assignby + "]";
+		return "AbheeTask [id=" + id + ", taskno=" + taskno + ", customerId=" + customerId + ", createdTime="
+				+ createdTime + ", updatedTime=" + updatedTime + ", category=" + category + ", severity=" + severity
+				+ ", priority=" + priority + ", assignto=" + assignto + ", subject=" + subject + ", description="
+				+ description + ", uploadfile=" + uploadfile + ", gapdays=" + gapdays + ", gapcount=" + gapcount
+				+ ", kstatus=" + kstatus + ", status=" + status + ", additionalinfo=" + additionalinfo
+				+ ", taskdeadline=" + taskdeadline + ", taskdeadlineid=" + taskdeadlineid + ", ServiceType="
+				+ ServiceType + ", assigntoid=" + assigntoid + ", categoryid=" + categoryid + ", priorityid="
+				+ priorityid + ", severityid=" + severityid + ", assignbyid=" + assignbyid + ", kstatusid=" + kstatusid
+				+ ", modelid=" + modelid + ", addComment=" + addComment + ", communicationaddress="
+				+ communicationaddress + ", warranty=" + warranty + ", assignby=" + assignby + "]";
 	}
+	
 	
 	
 	
