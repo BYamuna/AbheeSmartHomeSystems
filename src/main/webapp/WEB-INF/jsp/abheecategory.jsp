@@ -149,6 +149,13 @@
 						<div class="col-sm-8">
 							<input class=" " type="file" name="fileimg"  accept="image/*"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="fileimg" multiple />
 						</div>
+						<div class="col-sm-4">
+							<label>Warranty</label> 
+						</div>
+						<div class="col-sm-8">
+							<input type="radio" id="warranty" name="warranty" value="yes"> Yes
+  							<input type="radio" id="warranty" name="warranty" value="no"> No
+						</div>
 							<!--<div class="col-sm-4">
 							<label>Attach File(s)</label>
 						</div>
