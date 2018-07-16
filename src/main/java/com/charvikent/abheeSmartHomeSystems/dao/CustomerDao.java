@@ -3,6 +3,7 @@ package com.charvikent.abheeSmartHomeSystems.dao;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,6 +16,7 @@ import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,10 +40,9 @@ public class CustomerDao {
 	@Autowired
 	SendSMS sendSMS;
 	
-	/*@Autowired
-    private JdbcTemplate jdbcTemplate;
-*/
 	
+	@Autowired
+    private JdbcTemplate jdbcTemplate;
 	
 	public Customer findByUserName(String username) {
 		
@@ -405,6 +406,23 @@ public Customer checkCustomerExistOrNotByEmailOnEdit(String custEmail, String ed
 	return usersList.get(0);
 }
 
+
+
+	public int getProfileInfo(Customer customer) 
+	{
+		String sql =" update abhee_customer set firstname ='"+customer.getFirstname()+"',lastname='"+customer.getLastname()+"',mobilenumber='"+customer.getMobilenumber()+"',email='"+customer.getEmail()+"',address='"+customer.getAddress()+"' where id='"+customer.getId()+"' order by updated_time desc";	
+		int  result = jdbcTemplate.update(sql);
+		return result; 
+		
+	}
+	
+	public int getPassword(Customer customer) 
+	{
+		String sql =" update abhee_customer set password ='"+customer.getPassword()+"' where id='"+customer.getId()+"' order by updated_time desc";	
+		int  result = jdbcTemplate.update(sql);
+		return result; 
+		
+	}
 
 
 }

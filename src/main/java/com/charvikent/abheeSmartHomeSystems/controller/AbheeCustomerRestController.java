@@ -613,6 +613,44 @@ public class AbheeCustomerRestController
 			
 		return String.valueOf(json);
 	}
+	@RequestMapping(value="/restEditProfileInfo", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getPersonalInfo( @RequestBody Customer customer) throws JsonProcessingException, JSONException
+	{
+		LOGGER.debug("Calling restEditProfileInfo at controller");
+		int result = customerDao.getProfileInfo(customer);
+		
+		JSONObject json =new JSONObject();
+		
+			if(result==1)
+			{
+				json.put("profileinfo", "Updated");
+				
+			}
+			else
+				
+				json.put("profileinfo", "Not Updated");
+			
+		return String.valueOf(json);
+	}
+	@RequestMapping(value="/restChangePassword", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getPasswordInfo( @RequestBody Customer customer) throws JsonProcessingException, JSONException
+	{
+		LOGGER.debug("Calling restChangePassword at controller");
+		   int result = customerDao.getPassword(customer);
+		
+		JSONObject json =new JSONObject();
+		
+			if(result==1)
+			{
+				json.put("password", "Updated");
+				
+			}
+			else
+				
+				json.put("password", "Not Updated");
+			
+		return String.valueOf(json);
+	}
 
 }	
 
