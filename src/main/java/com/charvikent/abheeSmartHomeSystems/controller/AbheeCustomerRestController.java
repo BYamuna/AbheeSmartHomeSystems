@@ -37,6 +37,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
+import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CompanyDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
@@ -92,6 +93,9 @@ public class AbheeCustomerRestController
 	
 	@Autowired
 	ReportIssueDao reportIssueDao;
+	
+	@Autowired
+	AbheeTaskDao abheeTaskDao;
 	
 	@RequestMapping("/Customer")
 	public String showCustomerRegistrationForm(Model model,HttpServletRequest request) throws JsonProcessingException
@@ -652,5 +656,29 @@ public class AbheeCustomerRestController
 		return String.valueOf(json);
 	}
 
+	
+	@RequestMapping(value="/getTicketStatus", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getTaskStatusByCustomerId( @RequestBody Customer customer) throws JsonProcessingException, JSONException {
+		LOGGER.debug("Calling getcompanies at controller");
+		//String customerid=customer.getCustomerId();
+		List<Map<String, Object>>  listOrderBeans = abheeTaskDao.getTasksByCustomerId(customer); 
+		
+		JSONObject json =new JSONObject();
+		//String customerid=task.getCustomerId();
+		
+			if(null != listOrderBeans)
+			{
+				json.put("ticketstatus", listOrderBeans);
+				
+			}
+			else
+				
+				json.put("ticketstatus", "NOT_FOUND");
+		
+		
+
+		
+		return String.valueOf(json);
+	}
 }	
 

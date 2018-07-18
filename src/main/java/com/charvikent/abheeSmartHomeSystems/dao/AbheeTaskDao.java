@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
 @Repository
@@ -283,6 +284,16 @@ public List<Map<String, Object>> getTaskStatusHistoryByTaskNo(String taskno) {
 	
 }
 
+public List<Map<String, Object>> getTasksByCustomerId(Customer customer) {
 	
+	String hql= "select t.id,t.additionalinfo,t.assignby,t.assignto,t.category,t.created_time,t.description,t.priority,t.severity,t.status,t.subject,t.taskdeadline,t.taskno,t.updated_time,t.uploadfile,t.service_type,t.modelid,t.add_comment,t.customer_id,t.communicationaddress,t.warranty,ts.name as kstatus from abhee_task t,abheetaskstatus ts where t.customer_id='"+customer.getCustomerId()+"' and t.kstatus=ts.id";
+	
+     System.out.println(hql);
+	
+	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+	System.out.println(retlist);
+	return retlist;
+	
+}	
 
 }
