@@ -50,6 +50,7 @@ public class Customer {
 	private String customerId;
 	
 	private String address;
+	private String communicationaddress;
 	
 	private String registedredFromAndroid;
 	
@@ -269,15 +270,28 @@ public class Customer {
 	public void setRegistedredFromAndroid(String registedredFromAndroid) {
 		this.registedredFromAndroid = registedredFromAndroid;
 	}
+	
+
+	public String getCommunicationaddress() {
+		return communicationaddress;
+	}
+
+	public void setCommunicationaddress(String communicationaddress) {
+		this.communicationaddress = communicationaddress;
+	}
 
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
 				+ ", mobilenumber=" + mobilenumber + ", email=" + email + ", BranchId=" + BranchId + ", enabled="
-				+ enabled + ",  password=" + password + ", firstname=" + firstname
-				+ ", lastname=" + lastname + ", status=" + status + ", branchName=" + branchName + ", customerId="
-				+ customerId + ", address=" + address + "]";
+				+ enabled + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname
+				+ ", status=" + status + ", branchName=" + branchName + ", customerId=" + customerId + ", address="
+				+ address + ", communicationaddress=" + communicationaddress + ", registedredFromAndroid="
+				+ registedredFromAndroid + ", customerType=" + customerType + ", customerTypeName=" + customerTypeName
+				+ ", gst=" + gst + ", purchaseCustomer=" + purchaseCustomer + "]";
 	}
+
+	
 
 	
 	

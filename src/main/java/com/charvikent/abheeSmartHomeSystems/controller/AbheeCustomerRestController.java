@@ -659,7 +659,7 @@ public class AbheeCustomerRestController
 	
 	@RequestMapping(value="/getTicketStatus", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public String  getTaskStatusByCustomerId( @RequestBody Customer customer) throws JsonProcessingException, JSONException {
-		LOGGER.debug("Calling getcompanies at controller");
+		LOGGER.debug("Calling getTicketStatus at controller");
 		//String customerid=customer.getCustomerId();
 		List<Map<String, Object>>  listOrderBeans = abheeTaskDao.getTasksByCustomerId(customer); 
 		

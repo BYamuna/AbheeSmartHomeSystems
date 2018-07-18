@@ -172,6 +172,7 @@ public class AbheeTaskDao {
 			System.out.println(retlist);
 			return retlist;
 	}
+@SuppressWarnings("unused")
 public void  openTask(String taskno) {
 		
 		
@@ -239,6 +240,7 @@ public List<Map<String, Object>> getCustomerDetailsById(String id) {
 	
 }
 
+@SuppressWarnings("unused")
 public List<Map<String,Object>> getTasksListAssignToMeById(String id)
 {
 	 
@@ -286,7 +288,9 @@ public List<Map<String, Object>> getTaskStatusHistoryByTaskNo(String taskno) {
 
 public List<Map<String, Object>> getTasksByCustomerId(Customer customer) {
 	
-	String hql= "select t.id,t.additionalinfo,t.assignby,t.assignto,t.category,t.created_time,t.description,t.priority,t.severity,t.status,t.subject,t.taskdeadline,t.taskno,t.updated_time,t.uploadfile,t.service_type,t.modelid,t.add_comment,t.customer_id,t.communicationaddress,t.warranty,ts.name as kstatus from abhee_task t,abheetaskstatus ts where t.customer_id='"+customer.getCustomerId()+"' and t.kstatus=ts.id";
+	String hql= "select t.id,t.additionalinfo,t.created_time,t.description,t.status,t.subject,t.taskdeadline,t.taskno,t.updated_time,t.uploadfile,t.add_comment,t.customer_id,t.communicationaddress,t.warranty,ts.name as kstatus,p.name as model,s.severity as severity,ap.priority as priority, st.servicetypename as servicetype,c.category as category,u.username as assignedby,u1.username as assignedto,ac.name as company " 
+			+"from abhee_task t,abheetaskstatus ts,abhee_product p,abheeseverity s ,abheepriority ap,abheeservicetype st,abheecategory c,abheeusers u,abheeusers u1,abhee_company ac "
+			+"where t.customer_id='"+customer.getCustomerId()+"' and t.kstatus=ts.id and t.modelid=p.id and t.priority=ap.id and t.severity=s.id and t.service_type=st.servicetype_id and t.category=c.id and t.assignby=u.id and t.assignto=u1.id and p.companyid=ac.id ";
 	
      System.out.println(hql);
 	

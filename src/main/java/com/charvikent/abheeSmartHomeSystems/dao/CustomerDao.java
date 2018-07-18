@@ -114,7 +114,7 @@ public void updateCustomer(Customer user)
 	
 	uc.setMobilenumber(user.getMobilenumber());
 	uc.setEmail(user.getEmail());
-	uc.setAddress(user.getAddress());
+	uc.setCommunicationaddress(user.getCommunicationaddress());
 	//uc.setBranchId(user.getBranchId());
 	//uc.setBranchName(user.getBranchName());
 	//uc.setCustomerId(user.getCustomerId());
