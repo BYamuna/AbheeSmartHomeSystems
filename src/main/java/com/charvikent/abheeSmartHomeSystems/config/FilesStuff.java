@@ -44,6 +44,7 @@ public class FilesStuff {
 	{
 		//String path = request.getServletContext().getRealPath("/");
 				String path = System.getProperty("catalina.base");
+				System.out.println(path);
 				//String path =System.getProperty("catalina.home");
 				File dir = new File(path + File.separator + "webapps"+ File.separator + "abheeimg");
 				
