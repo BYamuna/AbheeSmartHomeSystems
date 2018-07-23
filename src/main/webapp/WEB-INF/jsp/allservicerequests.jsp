@@ -104,7 +104,7 @@ function displayTable(listOrders) {
 				var productmodelpics='';
 				for(var i=0;i<list.length;i++)
 				{
-					productmodelpics=productmodelpics+'<a href="reportDocuments/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="reportDocuments/'+list[i]+'" style="height:42px; width:42px"></a>';
+					productmodelpics=productmodelpics+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
 				}
 				orderObj.productmodelpics=productmodelpics;
 			} 

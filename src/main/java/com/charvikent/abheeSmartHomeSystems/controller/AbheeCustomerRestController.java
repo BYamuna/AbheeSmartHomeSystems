@@ -423,9 +423,9 @@ public class AbheeCustomerRestController
 	}
 	
 	
-	@PostMapping(value="/savequationrequest", consumes = "application/json", produces = "application/json")  
-	public HashMap<String, String>  saveQuationRequest( @RequestBody SalesRequest salesrequest,@RequestParam("imgfile") MultipartFile[] uploadedFiles) {
-		LOGGER.debug("Calling savequationrequest at controller");
+	@PostMapping(value="/savequotationrequest", consumes = "application/json", produces = "application/json")  
+	public HashMap<String, String>  saveQuotationRequest( @RequestBody SalesRequest salesrequest,@RequestParam("imgfile") MultipartFile[] uploadedFiles) {
+		LOGGER.debug("Calling savequotationrequest at controller");
 		String code =null;
 		int filecount =0;
 
