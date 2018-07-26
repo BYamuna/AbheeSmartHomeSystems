@@ -1,37 +1,30 @@
 package com.charvikent.abheeSmartHomeSystems.model;
 
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-
 @Entity
-public class AbheeTask  {
+public class AbheeTask  
+{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer  id;
-	
 	private String taskno;
-	
 	private String customerId;
-
-	
 	@CreationTimestamp
 	private Date createdTime;
-
 	@UpdateTimestamp
 	private Date updatedTime;
-
 	private String category;
 	private String severity;
 	private String priority;
+	private String  assignby;
 	private String assignto;
 	private String subject;
 	private String description;
@@ -40,19 +33,13 @@ public class AbheeTask  {
 	private Integer gapdays;
 	@Transient
 	private Integer gapcount;
-
 	private String kstatus;
 	private String status;
 	private String additionalinfo;
-	
 	private String taskdeadline;
 	@Transient
 	private String taskdeadlineid;
-	
 	private String ServiceType;
-	
-	
-	
 	@Transient
 	private String assigntoid;
 	@Transient
@@ -65,75 +52,82 @@ public class AbheeTask  {
 	private String assignbyid;
 	@Transient
 	private String kstatusid;
-	
-	
-	
 	private  String modelid;
-	
 	private  String addComment;
-	
 	private  String communicationaddress;
-	
 	private String warranty;
+	private String total;
+	private String discount;
+	private String tax;
+	private String amountreceived;
 	
-	
-	
-	
-	
-	public String getCommunicationaddress() {
+	public String getCommunicationaddress() 
+	{
 		return communicationaddress;
 	}
-	public void setCommunicationaddress(String communicationaddress) {
+	public void setCommunicationaddress(String communicationaddress) 
+	{
 		this.communicationaddress = communicationaddress;
 	}
-	public String getCustomerId() {
+	public String getCustomerId() 
+	{
 		return customerId;
 	}
-	public void setCustomerId(String customerId) {
+	public void setCustomerId(String customerId) 
+	{
 		this.customerId = customerId;
 	}
-
-	
-	public String getAssignbyid() {
+	public String getAssignbyid() 
+	{
 		return assignbyid;
 	}
-	public void setAssignbyid(String assignbyid) {
+	public void setAssignbyid(String assignbyid) 
+	{
 		this.assignbyid = assignbyid;
 	}
-	public String getTaskno() {
+	public String getTaskno() 
+	{
 		return taskno;
 	}
-	public void setTaskno(String taskno) {
+	public void setTaskno(String taskno) 
+	{
 		this.taskno = taskno;
 	}
-	public String getAdditionalinfo() {
+	public String getAdditionalinfo() 
+	{
 		return additionalinfo;
 	}
-	public void setAdditionalinfo(String additionalinfo) {
+	public void setAdditionalinfo(String additionalinfo) 
+	{
 		this.additionalinfo = additionalinfo;
 	}
-	public String getKstatus() {
+	public String getKstatus() 
+	{
 		return kstatus;
 	}
-	public void setKstatus(String kstatus) {
+	public void setKstatus(String kstatus) 
+	{
 		this.kstatus = kstatus;
 	}
-	public Integer getGapdays() {
+	public Integer getGapdays() 
+	{
 		return gapdays;
 	}
-	public void setGapdays(Integer gapdays) {
+	public void setGapdays(Integer gapdays) 
+	{
 		this.gapdays = gapdays;
 	}
-	public Integer getGapcount() {
+	public Integer getGapcount() 
+	{
 		return gapcount;
 	}
-	public void setGapcount(Integer gapcount) {
+	public void setGapcount(Integer gapcount) 
+	{
 		this.gapcount = gapcount;
 	}
 
-	private String  assignby;
-
-	public String getAssignby() {
+	public String getAssignby() 
+	{
 		return assignby;
 	}
 	public void setAssignby(String assignby) {
@@ -145,8 +139,6 @@ public class AbheeTask  {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-
 	public Date getCreatedTime() {
 		return createdTime;
 	}
@@ -195,11 +187,6 @@ public class AbheeTask  {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-
-
-
-
 	public String getStatus() {
 		return status;
 	}
@@ -212,11 +199,6 @@ public class AbheeTask  {
 	public void setUploadfile(String uploadfile) {
 		this.uploadfile = uploadfile;
 	}
-	
-	
-	
-	
-	
 	public String getAssigntoid() {
 		return assigntoid;
 	}
@@ -241,98 +223,87 @@ public class AbheeTask  {
 	public void setSeverityid(String severityid) {
 		this.severityid = severityid;
 	}
-	
-	
-	
-	
-	
-	
 	public String getTaskdeadline() {
 		return taskdeadline;
 	}
 	public void setTaskdeadline(String taskdeadline) {
 		this.taskdeadline = taskdeadline;
 	}
-	
-	
-	
 	public String getTaskdeadlineid() {
 		return taskdeadlineid;
 	}
 	public void setTaskdeadlineid(String taskdeadlineid) {
 		this.taskdeadlineid = taskdeadlineid;
 	}
-	
-	
-	
-	
-	
-	
-	
 	public String getKstatusid() {
 		return kstatusid;
 	}
 	public void setKstatusid(String kstatusid) {
 		this.kstatusid = kstatusid;
 	}
-	
-	
 	public String getServiceType() {
 		return ServiceType;
 	}
 	public void setServiceType(String serviceType) {
 		ServiceType = serviceType;
 	}
-	
-	
-	
-	
 	public String getModelid() {
 		return modelid;
 	}
 	public void setModelid(String modelid) {
 		this.modelid = modelid;
 	}
-	
-	
-	
 	public String getAddComment() {
 		return addComment;
 	}
 	public void setAddComment(String addComment) {
 		this.addComment = addComment;
 	}
-	
-	
 	public String getWarranty() {
 		return warranty;
 	}
 	public void setWarranty(String warranty) {
 		this.warranty = warranty;
 	}
+	
+	public String getTotal() {
+		return total;
+	}
+	public void setTotal(String total) {
+		this.total = total;
+	}
+	public String getDiscount() {
+		return discount;
+	}
+	public void setDiscount(String discount) {
+		this.discount = discount;
+	}
+	public String getTax() {
+		return tax;
+	}
+	public void setTax(String tax) {
+		this.tax = tax;
+	}
+	public String getAmountreceived() {
+		return amountreceived;
+	}
+	public void setAmountreceived(String amountreceived) {
+		this.amountreceived = amountreceived;
+	}
 	@Override
-	public String toString() {
+	public String toString() 
+	{
 		return "AbheeTask [id=" + id + ", taskno=" + taskno + ", customerId=" + customerId + ", createdTime="
 				+ createdTime + ", updatedTime=" + updatedTime + ", category=" + category + ", severity=" + severity
-				+ ", priority=" + priority + ", assignto=" + assignto + ", subject=" + subject + ", description="
-				+ description + ", uploadfile=" + uploadfile + ", gapdays=" + gapdays + ", gapcount=" + gapcount
-				+ ", kstatus=" + kstatus + ", status=" + status + ", additionalinfo=" + additionalinfo
-				+ ", taskdeadline=" + taskdeadline + ", taskdeadlineid=" + taskdeadlineid + ", ServiceType="
-				+ ServiceType + ", assigntoid=" + assigntoid + ", categoryid=" + categoryid + ", priorityid="
-				+ priorityid + ", severityid=" + severityid + ", assignbyid=" + assignbyid + ", kstatusid=" + kstatusid
-				+ ", modelid=" + modelid + ", addComment=" + addComment + ", communicationaddress="
-				+ communicationaddress + ", warranty=" + warranty + ", assignby=" + assignby + "]";
+				+ ", priority=" + priority + ", assignby=" + assignby + ", assignto=" + assignto + ", subject="
+				+ subject + ", description=" + description + ", uploadfile=" + uploadfile + ", gapdays=" + gapdays
+				+ ", gapcount=" + gapcount + ", kstatus=" + kstatus + ", status=" + status + ", additionalinfo="
+				+ additionalinfo + ", taskdeadline=" + taskdeadline + ", taskdeadlineid=" + taskdeadlineid
+				+ ", ServiceType=" + ServiceType + ", assigntoid=" + assigntoid + ", categoryid=" + categoryid
+				+ ", priorityid=" + priorityid + ", severityid=" + severityid + ", assignbyid=" + assignbyid
+				+ ", kstatusid=" + kstatusid + ", modelid=" + modelid + ", addComment=" + addComment
+				+ ", communicationaddress=" + communicationaddress + ", warranty=" + warranty + ", total=" + total
+				+ ", discount=" + discount + ", tax=" + tax + ", amountreceived=" + amountreceived + "]";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

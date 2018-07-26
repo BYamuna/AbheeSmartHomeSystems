@@ -109,7 +109,6 @@ public class AbheeCustomerRestController
 	
 	//@RequestMapping(value = "/api", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	
-	@SuppressWarnings("static-access")
 	@RequestMapping(value="/saveRestCustomer", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public HashMap<String, String>  SaveAbheeCustomer( @RequestBody Customer customer) 
 	{

@@ -42,14 +42,14 @@ public class FilesStuff {
 	 */
 	public  File   makeDirectory()
 	{
-		//String path = request.getServletContext().getRealPath("/");
-				String path = System.getProperty("catalina.base");
+		String path = request.getServletContext().getRealPath("/");
+				//String path = System.getProperty("catalina.base");
 				System.out.println(path);
 				//String path =System.getProperty("catalina.home");
-				File dir = new File(path + File.separator + "webapps"+ File.separator + "abheeimg");
+				//File dir = new File(path + File.separator + "webapps"+ File.separator + "abheeimg");
 				
 				
-		    	 //File dir = new File (path +"reportDocuments");
+		    	 File dir = new File (path +"reportDocuments");
 		    	 
 		    	 System.out.println(dir);
 		    	 

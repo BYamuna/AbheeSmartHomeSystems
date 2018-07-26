@@ -7,13 +7,13 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
-import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+/*import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
-import com.charvikent.abheeSmartHomeSystems.model.User;
+import com.charvikent.abheeSmartHomeSystems.model.User;*/
 @Component
 public class SendSMS {
 	
@@ -22,20 +22,24 @@ public class SendSMS {
 	
 	@Autowired
 	 CustomerDao  customerDao;
-	//public  String  mobileNumber =null;
+	@Autowired
+	private Environment env;
+	/*public  String  mobileNumber =null;
 		static String username = "ssjewellers";
 		static String password = "SSjewellers@123";
 		static String from = "GTCLUB";
-		//static String from = "AbheeSmartHomes";
-		//static String from = "AARNA-MATRIMONY";
+		static String from = "AbheeSmartHomes";
+		static String from = "AARNA-MATRIMONY";*/
 	    static String requestUrl = null;
 	    static String toAddress = null;
+	    //public String message=null;
 	    
-	     //public String message=null;
-	    
-	    
-	    public static String sendSMS(String message, String mobileNumber) throws IOException
-		{
+    	
+	    public String sendSMS(String message, String mobileNumber) throws IOException
+		{	
+	    	String username =env.getProperty("app.smsusername");
+	    	String password =env.getProperty("app.smspassword");
+	    	String from =env.getProperty("app.smsfrom");
 			System.out.println("hello sms class");
 			requestUrl  = "http://182.18.160.225/index.php/api/bulk-sms?username="+URLEncoder.encode(username, "UTF-8")+"&password="+ URLEncoder.encode(password, "UTF-8")+"&from="+from+"&to="+URLEncoder.encode(mobileNumber, "UTF-8")+"&message="+URLEncoder.encode(message, "UTF-8")+"&sms_type=2";
 	        URL url = new URL(requestUrl);
@@ -46,7 +50,7 @@ public class SendSMS {
 	        return response;
 		}
 
-		@SuppressWarnings("unused")
+		/*@SuppressWarnings("unused")
 		public String sendsmsToCustomer(AbheeTask editissue) throws IOException
 		{
 			String customerid=editissue.getCustomerId();
@@ -97,5 +101,5 @@ public class SendSMS {
 	        uc.disconnect();
 	        return response;
 		}
-
+*/
 }

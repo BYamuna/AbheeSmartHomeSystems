@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+/*import java.util.HashSet;*/
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -16,10 +17,11 @@ import java.util.TreeSet;
 import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-//import javax.persistence.Query;
+/*import javax.persistence.Query;*/
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -58,6 +60,8 @@ public class ReportIssueDao {
 	@Autowired
 	TaskHistoryLogsDao taskHistoryLogsDao;
 	@Autowired
+	UserDao userDao;
+	@Autowired
 	SendingMail sendingMail;
 	
 	@Autowired
@@ -65,6 +69,8 @@ public class ReportIssueDao {
 	
 	@Autowired
     private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private Environment environment;
 	
 
 	public void saveReportIssue(AbheeTask reportIssue) {
@@ -357,7 +363,7 @@ public List<ReportIssue> getAllReportIssues()
 	}
 	
 
-	@SuppressWarnings("unused")
+	
 	public void updateIssue(AbheeTask issue) throws IOException {
 		
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -376,6 +382,10 @@ public List<ReportIssue> getAllReportIssues()
 			     {
 			     editissue.setUploadfile(fileTemplate.concurrentFileNames());
 			     }
+			     editissue.setAmountreceived(issue.getAmountreceived());
+			     editissue.setDiscount(issue.getDiscount());
+			     editissue.setTax(issue.getTax());
+			     editissue.setTotal(issue.getTotal());
 			     
 			     taskHistoryLogsDao.historyLog(editissue);
 				
@@ -409,8 +419,29 @@ public List<ReportIssue> getAllReportIssues()
 				
 			sendingMail.sendMailTocustomer(editissue);
 			sendingMail.sendMailToUser(editissue);
-			sendSMS.sendsmsToCustomer(editissue);
-	        sendSMS.sendsmsToUser(editissue); 
+			//sendsmsToUser
+			String mobilenum=objuserBean.getMobilenumber();
+			String tmsg =environment.getProperty("app.taskmsg");
+			 System.out.println(tmsg);
+			tmsg= tmsg.replaceAll("_technicianname_", objuserBean.getFirstname()+" "+objuserBean.getLastname());
+			tmsg= tmsg.replaceAll("_mobileno_", objuserBean.getMobilenumber());
+			tmsg= tmsg.replaceAll("_ServiceRequestNo_", editissue.getTaskno());
+			//tmsg= tmsg.replaceAll("_assignto_", objuserBean.getUsername());
+			tmsg= tmsg.replaceAll("_requestdesc_", editissue.getDescription());
+			
+			sendSMS.sendSMS(tmsg,mobilenum);
+			//sendsmsToCustomer
+			String mobileno=objuserBean.getMobilenumber();
+			String msg =environment.getProperty("app.tmrmsg");
+			 System.out.println(msg);
+			 msg= msg.replaceAll("_ServiceRequestNo_", editissue.getTaskno());
+			 msg= msg.replaceAll("_fullname_", objuserBean.getFirstname()+" "+objuserBean.getLastname());
+			 msg= msg.replaceAll("_mobilenum_", objuserBean.getMobilenumber());
+			 msg= msg.replaceAll("_requestdesc_", editissue.getDescription());
+			 sendSMS.sendSMS(tmsg,mobileno);
+			/*sendSMS.sendsmsToCustomer(editissue);
+		    sendSMS.sendsmsToUser(editissue); */
+			  
 			}
 		} 
 		catch (MessagingException e) 

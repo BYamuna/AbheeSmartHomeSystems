@@ -219,8 +219,46 @@
 								</div>
 							</div>
 							</div>
-						
-
+						<security:authorize access="hasRole('ROLE_USER')">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Total
+										<span class="impColor">*</span>
+									</label>
+									<form:input path="total" placeholder="Total" class="col-xs-10 col-sm-5 validate numericOnly2" />
+								</div>
+							</div>
+							
+							<div class="col-md-6">
+								<div class="form-group">
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Discount
+										<span class="impColor">*</span>
+									</label>
+									<form:input path="discount" placeholder="Discount" class="col-xs-10 col-sm-5 validate numericOnly2" />
+								</div>
+							</div>
+						</div>	
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Tax
+										<span class="impColor">*</span>
+									</label>
+									<form:input path="tax" placeholder="Tax" class="col-xs-10 col-sm-5 validate numericOnly2" />
+								</div>
+							</div>
+							
+							<div class="col-md-6">
+								<div class="form-group">
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Amount Received
+										<span class="impColor">*</span>
+									</label>
+									<form:input path="amountreceived" placeholder="Amountreceived" class="col-xs-10 col-sm-5 validate numericOnly2" />
+								</div>
+							</div>
+						</div>	
+						</security:authorize>
 						<div id="getting-started"></div>
 					</div>
 					<div class="panel-footer">
