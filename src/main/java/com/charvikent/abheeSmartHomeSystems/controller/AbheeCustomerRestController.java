@@ -1,6 +1,8 @@
 package com.charvikent.abheeSmartHomeSystems.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 //import java.util.Deque;
@@ -16,6 +18,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+import org.castor.core.util.Base64Decoder;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -35,6 +38,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
+import com.charvikent.abheeSmartHomeSystems.config.KhaibarGasUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
@@ -55,7 +59,6 @@ import com.charvikent.abheeSmartHomeSystems.model.ServiceRequest;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 @RestController
 public class AbheeCustomerRestController 
 {
@@ -422,52 +425,39 @@ public class AbheeCustomerRestController
 	}
 	
 	
+	@SuppressWarnings("unused")
 	@PostMapping(value="/savequotationrequest", consumes = "application/json", produces = "application/json")  
-	public HashMap<String, String>  saveQuotationRequest( @RequestBody SalesRequest salesrequest,@RequestParam("imgfile") MultipartFile[] uploadedFiles) {
+	public HashMap<String, String>  saveQuotationRequest( @RequestBody SalesRequest salesrequest,HttpServletRequest request) {
 		LOGGER.debug("Calling savequotationrequest at controller");
+		//JSONObject objJson = new JSONObject();
 		String code =null;
-		int filecount =0;
+		
 
-		try {
-
-			int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
-			salesrequest.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
-			
-			
-			 for(MultipartFile multipartFile : uploadedFiles) {
-					String fileName = multipartFile.getOriginalFilename();
-					if(!multipartFile.isEmpty())
-					{
-						filecount++;
-					 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
-					}
-				}
-	   	 
-	   	 if(filecount>0)
-	   	 {
-	   		 salesrequest.setImgfiles(fileTemplate.concurrentFileNames());
-	   		 fileTemplate.clearFiles();
-	   		 
-	   	 }
-			
-	   	srequestDao.saveRequest(salesrequest);
-			code = "requestSubmittedSuccessfully";
-		} catch (IOException e) {
-			code="NOT_FOUND";
-			e.printStackTrace();
+		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
+		salesrequest.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
+		
+		
+		String modelnumber=salesrequest.getModelnumber();
+		String address=salesrequest.getAddress();
+		String customerid=salesrequest.getCustomerid();
+		String location=salesrequest.getLocation();
+		String imgpath=imgdecoder(salesrequest.getImgfiles(),request);
+		if(!salesrequest.getImgfiles().isEmpty())
+		{
+		salesrequest.setImgfiles(imgpath);
 		}
-		
-				HashMap<String,String> hm =new HashMap<String,String>();
-		
+		srequestDao.saveRequest(salesrequest);
+		code = "requestSubmittedSuccessfully";
+		HashMap<String,String> hm =new HashMap<String,String>();
 		hm.put("status", code);
 		return hm;
 	}
 	
 	
 	
-	@PostMapping(value="/restSalesRequest", consumes = "application/json", produces = "application/json")
+	/*@PostMapping(value="/restSalesRequest", consumes = "application/json", produces = "application/json")
 	public String saveRequestDetails(@ModelAttribute SalesRequest salesrequest,
-									/*@RequestParam("imgfile") MultipartFile[] uploadedFiles*/
+									@RequestParam("imgfile") MultipartFile[] uploadedFiles
 			                           
 									@RequestParam(value = "imgfile") String[] file,HttpServletRequest request,RedirectAttributes redir) throws IllegalStateException, IOException, MessagingException
 	{
@@ -480,17 +470,17 @@ public class AbheeCustomerRestController
 		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
 		
 		salesrequest.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
-		/*salesrequest.setLat(str[0]);
-		salesrequest.setLongitude(str[1]);*/
+		salesrequest.setLat(str[0]);
+		salesrequest.setLongitude(str[1]);
 		salesrequest.setEnable("1");
-		/* for(MultipartFile multipartFile : uploadedFiles) {
+		 for(MultipartFile multipartFile : uploadedFiles) {
 				String fileName = multipartFile.getOriginalFilename();
 				if(!multipartFile.isEmpty())
 				{
 					filecount++;
 				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 				}
-			}*/
+			}
 		
 		for(String multipartFile : file) {
 		//String imgData = request.getParameter("imgfile");
@@ -526,7 +516,7 @@ public class AbheeCustomerRestController
 	   	System.out.println("&&&&&&&&&&&&&&&&&&&&& Mail Sent");
 	   	return "redirect:abheecategory";
 		
-	}
+	}*/
 	
 	
 
@@ -679,5 +669,53 @@ public class AbheeCustomerRestController
 		
 		return String.valueOf(json);
 	}
-}	
+	 private String  imgdecoder(String imgData, HttpServletRequest request) {
+	    	
+	    	String filepath = null;
+	    	
+	    	FileOutputStream osf;
+	    	
+	    	KhaibarGasUtil utils=new KhaibarGasUtil();
+	    	
+	    	String id =utils.randNum(4);
+	    	
+				Base64Decoder decoder = new Base64Decoder(); 
+				//byte[] imgBytes = decoder.decode(imgData.split(",")[1]);
+				
+				byte[] imgBytes = decoder.decode(imgData);
+				/*name=name.substring(n + 1);
+				name=name+".png";*/
+				
+				long millis = System.currentTimeMillis() % 1000;
+				filepath= id+millis+".png";
+
+			       String rootPath = request.getSession().getServletContext().getRealPath("/");
+				
+				//String rootPath = System.getProperty("catalina.base");
+			       File dir = new File(rootPath + File.separator + "reportDocuments");
+				
+				//File dir = new File(rootPath + File.separator + "webapps"+ File.separator + "img");
+			        if (!dir.exists()) {
+			            dir.mkdirs();
+			        }
+			        
+			        System.out.println(dir);
+			        
+			        try {
+			        	osf = new FileOutputStream(new File(dir.getAbsolutePath() + File.separator + filepath));
+			        	osf.write(imgBytes);
+						 osf.flush();
+			        } catch (IOException e) {
+			            System.out.println("error : " + e);
+			        }
+
+
+	              filepath= "img/"+filepath;
+	    	
+	    	return  filepath;
+	    	
+			
+		}
+	    
+	}	
 
