@@ -91,14 +91,18 @@ public class ProductController
 		
 		String sfn ="";
 		
-		
+		if(vlink.length != 0)
+		{
 		 for(String files: vlink)
 	        {
 	        	sfn=sfn+files+"*"; 
 	        }
+		 
 	        String sfn2=sfn.substring(0,sfn.length()-1);
+		
 	        
 	        pro.setProductmodelvideoslinks(sfn2);
+		}
 		
 		int id = 0;
 		try
