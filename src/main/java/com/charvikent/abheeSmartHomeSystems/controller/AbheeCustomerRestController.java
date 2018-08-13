@@ -1,8 +1,7 @@
 package com.charvikent.abheeSmartHomeSystems.controller;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+/*import java.io.FileInputStream;
+import java.io.FileNotFoundException;*/
 import java.io.FileOutputStream;
 import java.io.IOException;
 //import java.util.Deque;
@@ -13,11 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
-
-import javax.mail.MessagingException;
+/*import javax.mail.MessagingException;*/
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.lang.StringUtils;
+/*import org.apache.commons.lang.StringUtils;*/
 import org.castor.core.util.Base64Decoder;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,16 +24,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+/*import org.springframework.web.bind.annotation.ModelAttribute;*/
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+/*import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;*/
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.KhaibarGasUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
@@ -59,10 +55,10 @@ import com.charvikent.abheeSmartHomeSystems.model.ServiceRequest;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 @RestController
 public class AbheeCustomerRestController 
 {
-	
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbheeCustomerRestController.class);
 	@Autowired CustomerDao customerDao;
 	@Autowired UserService userService;
@@ -81,8 +77,7 @@ public class AbheeCustomerRestController
 	public String showCustomerRegistrationForm(Model model,HttpServletRequest request) throws JsonProcessingException
 	{
 		LOGGER.debug("Calling Customer at controller");
-		return null;
-		
+		return null;	
 	}
 	
 	//@RequestMapping(value = "/api", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
@@ -235,6 +230,7 @@ public class AbheeCustomerRestController
 	}
 	*/
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value="/getcategories", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public String  getCategoriesList() throws JsonProcessingException, JSONException 
 	{
@@ -352,7 +348,6 @@ public class AbheeCustomerRestController
 				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 				}
 			}
-		
 		for(String multipartFile : file) {
 		//String imgData = request.getParameter("imgfile");
 		if (StringUtils.isNotBlank(multipartFile)) {
@@ -368,8 +363,7 @@ public class AbheeCustomerRestController
    	 if(filecount>0)
    	 {
    		 salesrequest.setImgfiles(fileTemplate.concurrentFileNames());
-   		 fileTemplate.clearFiles();
-   		 
+   		 fileTemplate.clearFiles(); 
    	 }
 	   	Boolean result =srequestDao.checkSalesrequestExistsorNotByEmailAndModelNo(salesrequest);
 	   	if(result==false)
@@ -505,6 +499,7 @@ public class AbheeCustomerRestController
 		return String.valueOf(json);
 	}
 	
+	@SuppressWarnings("static-access")
 	private String  imgdecoder(String imgData, HttpServletRequest request) 
 	 {
 	    	String filepath = null;

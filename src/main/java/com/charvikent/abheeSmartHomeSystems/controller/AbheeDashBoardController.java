@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskStatusDao;
-import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
+/*import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;*/
 import com.charvikent.abheeSmartHomeSystems.dao.DashBoardDao;
 import com.charvikent.abheeSmartHomeSystems.dao.PriorityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
@@ -52,8 +52,8 @@ public class AbheeDashBoardController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private CategoryDao categoryDao;
+	/*@Autowired
+	private CategoryDao categoryDao;*/
 	@Autowired
 	private ServiceDao  serviceDao ;
 	
@@ -70,6 +70,7 @@ public class AbheeDashBoardController {
 	TaskHistoryLogsDao taskHistoryLogsDao;
 	
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/severityBy")
 	public String  tasksFilterByseverityOnAssignedTo(@RequestParam(value="id", required=true) String sev,Model model,HttpServletRequest request,HttpSession session,@ModelAttribute("taskf")  AbheeTask taskf){
 		LOGGER.debug("Calling  severityBy at controller");
@@ -209,6 +210,7 @@ public class AbheeDashBoardController {
 
 	}
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/severityByReportTo")
 	public String  tasksFilterByseverityOnReportTo(@RequestParam(value="id", required=true) String sev,Model model,HttpServletRequest request,HttpSession session,@ModelAttribute("taskf")  AbheeTask taskf){
 		LOGGER.debug("Calling  severityByReportTo at controller");
@@ -252,6 +254,7 @@ public class AbheeDashBoardController {
 	}
 	
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/getCount")
 	public @ResponseBody String getCount(AbheeTask  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult)
 	{
@@ -287,6 +290,7 @@ public class AbheeDashBoardController {
 		return String.valueOf(jsonObj);
 	}
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/getAssignedNotifications")
 	public @ResponseBody String getAssignedNotifications(AbheeTask  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) throws JsonProcessingException
 	{

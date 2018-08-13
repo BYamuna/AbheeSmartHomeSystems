@@ -420,7 +420,7 @@ $.each(productmodelslist, function(k,v){
 	
 		var divData= "<div class='img'>"
 		+"<a href='#'onclick='getModels("+v.id+")' >"
-		+"<img src='${baseurl }/reportDocuments/"+v.productmodelpics+"' class='img-responsive' alt='1810' title='YHT-1810'>"
+		+"<img src='../abheeimg/"+v.productmodelpics+"' class='img-responsive' alt='1810' title='YHT-1810'>"
 		+"<h4>"+v.companyname+"</h4>"
 		+"<p id ='modelName'>"+v.name+"</p>"
         +"</a>"
@@ -452,7 +452,7 @@ $.each(productmodelslist, function(k,v){
 	$("#productModels").empty();
 		var divData= "<div class='img'>"
 		+"<a href='#'onclick='getModels("+v.id+")' >"
-		+"<img src='${baseurl }/reportDocuments/"+v.productmodelpics+"' class='img-responsive' alt='1810' title='YHT-1810'>"
+		+"<img src='../abheeimg/"+v.productmodelpics+"' class='img-responsive' alt='1810' title='YHT-1810'>"
 		+"<h4>"+v.companyname+"</h4>"
 		+"<p  id ='modelName'>"+v.name+"</p>"
         +"</a>"

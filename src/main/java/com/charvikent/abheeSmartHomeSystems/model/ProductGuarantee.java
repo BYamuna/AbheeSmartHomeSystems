@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "abheeproductguarantee")
 public class ProductGuarantee implements Serializable

@@ -5,13 +5,13 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+/*import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;*/
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.model.AllServiceRequests;
-import com.charvikent.abheeSmartHomeSystems.model.Category;
+/*import com.charvikent.abheeSmartHomeSystems.model.Category;*/
 
 
 
@@ -22,8 +22,8 @@ public class ServiceRequestDao
 	@PersistenceContext
     private EntityManager entityManager;
 	
-	@Autowired
-    private JdbcTemplate jdbcTemplate;
+	/*@Autowired
+    private JdbcTemplate jdbcTemplate;*/
 	
 	public void saveRequest(AllServiceRequests servicerequest) 
 	{

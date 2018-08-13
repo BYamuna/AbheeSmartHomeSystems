@@ -3,8 +3,8 @@ package com.charvikent.abheeSmartHomeSystems.config;
 import java.io.File;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
-import java.util.List;
-import java.util.Map;
+/*import java.util.List;
+import java.util.Map;*/
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;

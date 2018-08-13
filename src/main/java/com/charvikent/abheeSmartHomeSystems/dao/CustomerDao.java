@@ -3,7 +3,7 @@ package com.charvikent.abheeSmartHomeSystems.dao;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+/*import java.util.Map;*/
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,7 +24,7 @@ import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeCustomerTypes;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
-import com.charvikent.abheeSmartHomeSystems.model.User;
+/*import com.charvikent.abheeSmartHomeSystems.model.User;*/
 
 
 @Repository

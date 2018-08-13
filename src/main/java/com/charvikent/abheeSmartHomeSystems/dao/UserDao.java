@@ -296,6 +296,7 @@ public class UserDao {
 		return delete;
 	}
 
+	@SuppressWarnings("unchecked")
 	public User findByUserName(String userName)
 	{
 		/*User user= (User) em.createQuery("select user from User user where (email=:Custname or mobilenumber =:Custname) ").setParameter("Custname", userName).getSingleResult();
@@ -519,6 +520,7 @@ public class UserDao {
 		return "";
 	}
 
+	@SuppressWarnings("unchecked")
 	public User getCustomerByObject(User user) {
 		String hql ="from User where  (email ='"+user.getEmail()+"' or mobilenumber='"+user.getMobilenumber()+"')";
 		Query query =em.createQuery(hql);
@@ -530,6 +532,7 @@ public class UserDao {
 		return usersList.get(0);
 	}
 
+	@SuppressWarnings("unchecked")
 	public User heckEmployeeExistOrNotbyMobile(String empMobile) {
 		String hql ="from User where   mobilenumber ='"+empMobile+"'";
 		Query query =em.createQuery(hql);
@@ -541,6 +544,7 @@ public class UserDao {
 		return usersList.get(0);
 	}
 
+	@SuppressWarnings("unchecked")
 	public User ceckEmployeeExistOrNotbyEmail(String empcemail) {
 		String hql ="from User where   email ='"+empcemail+"'";
 		Query query =em.createQuery(hql);
@@ -558,6 +562,7 @@ public class UserDao {
 		return user;
 	}
 
+	@SuppressWarnings("unchecked")
 	public User checkEmployeeExistOrNotbyEmail(String empcemail, String editFieldsId) {
 		
 		String hql ="from User where id <> '"+editFieldsId+" '   email ='"+empcemail+"'";
@@ -570,6 +575,7 @@ public class UserDao {
 		return usersList.get(0);
 	}
 
+	@SuppressWarnings("unchecked")
 	public User checkEmployeeExistOrNotbyMobileOnEdit(String custMobile, String editFieldsId) {
 		String hql ="from User where id <> '"+ editFieldsId+ " '  mobilenumber ='"+custMobile+"'";
 		Query query =em.createQuery(hql);

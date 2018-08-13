@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
-import com.charvikent.abheeSmartHomeSystems.model.User;
+/*import com.charvikent.abheeSmartHomeSystems.model.User;*/
 
 
 

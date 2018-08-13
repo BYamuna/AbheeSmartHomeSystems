@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.charvikent.abheeSmartHomeSystems.model.User;
+/*import com.charvikent.abheeSmartHomeSystems.model.User;*/
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 
 @Component

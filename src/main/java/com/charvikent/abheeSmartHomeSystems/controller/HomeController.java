@@ -32,10 +32,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ProductGuaranteeDao;
-import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+/*import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;*/
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
-import com.charvikent.abheeSmartHomeSystems.model.ProductGuarantee;
+/*import com.charvikent.abheeSmartHomeSystems.model.ProductGuarantee;*/
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -74,6 +74,7 @@ public class HomeController {
 		return "login";
 	}
 	
+	@SuppressWarnings("unused")
 	@RequestMapping("/userlogin")
 	public String userLogin(Model model) {
 		
