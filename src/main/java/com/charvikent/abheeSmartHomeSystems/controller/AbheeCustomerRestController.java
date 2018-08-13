@@ -385,7 +385,7 @@ public class AbheeCustomerRestController
 	}*/
 	
 	@PostMapping(value="/restSaveServiceRequest", consumes = "application/json", produces = "application/json")
-	public String  saveServiceRequest( @RequestBody ServiceRequest serviceRequest) throws JSONException, IllegalStateException, IOException {
+	public String  saveServiceRequest( @RequestBody ServiceRequest serviceRequest,HttpServletRequest request) throws JSONException, IllegalStateException, IOException {
 		LOGGER.debug("Calling saveServiceRequest at controller");
 		System.out.println("enter to task controller Submit");
 		JSONObject objJson = new JSONObject();
@@ -416,6 +416,11 @@ public class AbheeCustomerRestController
 		Map<String, Object> abheeTask =reportIssueDao.checkServiceRequestExisrOrNot(task);
 		if(null ==abheeTask )
 		{
+			String imgpath=imgdecoder(task.getUploadfile(),request);
+			if(!task.getUploadfile().isEmpty())
+			{
+				task.setUploadfile(imgpath);
+			}	
 		reportIssueDao.saveReportIssue(task);
 		//taskHistoryLogsDao.historyLogForcustomerEntry(task);
 		//sendingMail.sendingMailWithTaskStatus(task);
@@ -534,7 +539,7 @@ public class AbheeCustomerRestController
 			  {
 			    System.out.println("error : " + e);
 			  }
-	           filepath= "reportDocuments/"+filepath;
+	           filepath= "abheeimg/"+filepath;
 	    	return  filepath;	
 		} 
 	}	
