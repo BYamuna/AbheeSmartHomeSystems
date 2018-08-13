@@ -89,6 +89,7 @@ public class AbheeCustomerRestController
 		String regSuccessMsg =customer.getFirstname()+" "+customer.getLastname()+",  Successfully registered with ABhee Smart Homes. \n You can login using  \n UserId:  "+customer.getMobilenumber()+" or "+customer.getEmail()+"\n password: "+customer.getPassword();
 		try 
 		{
+			customer.setRegistedredFromAndroid("1");
 			customerDao.saveAbheeCustomer(customer);
 			sendSMS.sendSMS(regSuccessMsg,customer.getMobilenumber());
 			code = customer.getFirstname()+" "+customer.getLastname();
