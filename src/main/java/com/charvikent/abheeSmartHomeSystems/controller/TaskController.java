@@ -33,7 +33,7 @@ import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskStatusDao;
-import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
+/*import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;*/
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.PriorityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
@@ -66,8 +66,8 @@ public class TaskController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private CategoryDao categoryDao;
+	/*@Autowired
+	private CategoryDao categoryDao;*/
 	@Autowired
 	private ServiceDao  serviceDao ;
 	
@@ -90,6 +90,7 @@ public class TaskController {
 	
 	
 	
+	@SuppressWarnings("unused")
 	@GetMapping("/task")
 	public String  department(Model model , HttpServletRequest request,HttpSession session) {
 		LOGGER.debug("Calling task at controller");
@@ -239,6 +240,7 @@ public class TaskController {
 	}
 	
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/deleteTask")
 	public @ResponseBody String deleteDept(AbheeTask  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		LOGGER.debug("Calling deleteTask at controller");

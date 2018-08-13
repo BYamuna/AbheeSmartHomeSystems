@@ -1,6 +1,6 @@
 package com.charvikent.abheeSmartHomeSystems.dao;
 
-import java.util.Iterator;
+/*import java.util.Iterator;*/
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -60,14 +60,15 @@ public class SalesRequestDao
 			 }
 			return reqlist;		 
 		 }
-	@SuppressWarnings("unchecked")
+	
 	public String getSalesRequestEmailById(String id) {
 		
 		String hql ="select email from SalesRequest where id=:id";
 		
 		return (String) entityManager.createQuery(hql).setParameter("id", Integer.parseInt(id)).getSingleResult();
 	}
-	@SuppressWarnings("unchecked")
+	
+	@SuppressWarnings("unused")
 	public SalesRequest getSalesRequestById(String id) {
 		
 		SalesRequest salesRequest =new SalesRequest();

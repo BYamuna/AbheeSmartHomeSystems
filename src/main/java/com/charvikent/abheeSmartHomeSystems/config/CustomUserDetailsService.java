@@ -27,8 +27,8 @@ public class CustomUserDetailsService implements UserDetailsService{
 	
 	@Autowired
 	private  CustomerDao customerRepository;
-	@Autowired
-	private  CustomerDao customerRolesRepository;
+	/*@Autowired
+	private  CustomerDao customerRolesRepository;*/
 	
 	
 	private static String USER_TYPE = "userType";

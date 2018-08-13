@@ -24,10 +24,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.controller.AbheeBranchController;
-import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+/*import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;*/
 import com.charvikent.abheeSmartHomeSystems.model.DashBoardByCategory;
 import com.charvikent.abheeSmartHomeSystems.model.DashBoardByStatus;
-import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
+/*import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;*/
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
 @Repository
@@ -89,6 +89,7 @@ public class DashBoardDao {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Map<String, Integer> getSeverityCountsUnderReportTo()
 	{
 		//LOGGER.debug("In getSeverityCountsUnderReportTo calling createnativeQuery");

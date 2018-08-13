@@ -51,6 +51,7 @@ public class DashBoardController {
 		
 	}
    */
+	@SuppressWarnings("unused")
 	@RequestMapping("/dashBoard")
 	public String showDashBoard(Model model,HttpServletRequest request) throws JsonProcessingException
 	{

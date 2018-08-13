@@ -140,6 +140,7 @@ public class TaskHistoryLogsDao {
 		
 		
 	}
+	@SuppressWarnings("unused")
 	public List<Map<String, Object>> showAssignedTasksNotification()
 	{
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();

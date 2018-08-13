@@ -128,7 +128,7 @@ function displayTable(listOrders) {
 				var companyimg='';
 				for(var i=0;i<list.length;i++)
 				{
-					companyimg=companyimg+'<a href="reportDocuments/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="reportDocuments/'+list[i]+'" style="height:42px; width:42px"></a>';
+					companyimg=companyimg+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
 				}
 				orderObj.companyimg=companyimg;
 			}
