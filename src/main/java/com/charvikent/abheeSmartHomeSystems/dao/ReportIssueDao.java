@@ -92,6 +92,26 @@ public class ReportIssueDao {
 		taskHistoryLogsDao.historyLogForcustomerEntry(reportIssue);
 		
 	}
+	
+	public void saveServiceRequest(AbheeTask reportIssue) {
+		String randomNum = utilities.randNum();
+		
+		reportIssue.setTaskno(randomNum);
+		
+		/*if(reportIssue.getUploadfile()!=null)
+	     {
+			reportIssue.setUploadfile(fileTemplate.concurrentFileNames());
+			 fileTemplate.clearFiles();
+			
+	     }*/ 
+		em.persist(reportIssue);
+		
+		
+		
+		
+		taskHistoryLogsDao.historyLogForcustomerEntry(reportIssue);
+		
+	}
 
 	/* @SuppressWarnings("unchecked")
 public List<ReportIssue> getAllReportIssues()

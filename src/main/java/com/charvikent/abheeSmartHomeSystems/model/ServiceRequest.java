@@ -12,6 +12,15 @@ public class ServiceRequest {
 	private String custaddress;
 	private String warranty;
 	
+	private String imgname;
+	
+	
+	public String getImgname() {
+		return imgname;
+	}
+	public void setImgname(String imgname) {
+		this.imgname = imgname;
+	}
 	public Integer getId() {
 		return id;
 	}

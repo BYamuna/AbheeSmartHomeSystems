@@ -413,15 +413,17 @@ public class AbheeCustomerRestController
 		task.setSubject("Task created By "+customer.getFirstname()+" "+customer.getLastname());
 		task.setCustomerId(customerId);
 		task.setWarranty(warranty);
+		
 		Map<String, Object> abheeTask =reportIssueDao.checkServiceRequestExisrOrNot(task);
 		if(null ==abheeTask )
 		{
-			String imgpath=imgdecoder(task.getUploadfile(),request);
-			if(!task.getUploadfile().isEmpty())
+			
+			if(serviceRequest.getImgname() != null)
 			{
-				task.setUploadfile(imgpath);
+			String imgpath=imgdecoder(serviceRequest.getImgname(),request);
+			task.setUploadfile(imgpath);
 			}	
-		reportIssueDao.saveReportIssue(task);
+		reportIssueDao.saveServiceRequest(task);
 		//taskHistoryLogsDao.historyLogForcustomerEntry(task);
 		//sendingMail.sendingMailWithTaskStatus(task);
 		customer.setAddress(custaddress);
@@ -433,12 +435,12 @@ public class AbheeCustomerRestController
 			e.printStackTrace();
 		}
 		System.out.println(message+"  "+servicetypeid);
-		objJson.put("msg", "true");
+		objJson.put("status", "Request Submitted Successfully");
 		}
 		else
 		{
-			objJson.put("msg", "false");
-			System.out.println("Service request alreadyExists");	
+			objJson.put("status", "Service Request Already Exists");
+			System.out.println("Service request already Exists");	
 		}
 		return String.valueOf(objJson);
 	}
@@ -519,10 +521,10 @@ public class AbheeCustomerRestController
 			name=name+".png";*/
 			long millis = System.currentTimeMillis() % 1000;
 			filepath= id+millis+".png";
-            String rootPath = request.getSession().getServletContext().getRealPath("/");
-			//String rootPath = System.getProperty("catalina.base");
-			File dir = new File(rootPath + File.separator + "reportDocuments");
-			//File dir = new File(rootPath + File.separator + "webapps"+ File.separator + "img");
+            //String rootPath = request.getSession().getServletContext().getRealPath("/");
+			String rootPath = System.getProperty("catalina.base");
+			//File dir = new File(rootPath + File.separator + "reportDocuments");
+			File dir = new File(rootPath + File.separator + "webapps"+ File.separator + "abheeimg");
 			 if (!dir.exists()) 
 			 {
 			    dir.mkdirs();
