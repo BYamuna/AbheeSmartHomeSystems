@@ -413,7 +413,7 @@ public class AbheeCustomerRestController
 		task.setSubject("Task created By "+customer.getFirstname()+" "+customer.getLastname());
 		task.setCustomerId(customerId);
 		task.setWarranty(warranty);
-		
+		task.setAssignby("1");
 		Map<String, Object> abheeTask =reportIssueDao.checkServiceRequestExisrOrNot(task);
 		if(null ==abheeTask )
 		{
