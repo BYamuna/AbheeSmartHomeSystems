@@ -317,6 +317,8 @@ public class AbheeCustomerRestController
 		String address=salesrequest.getAddress();
 		String customerid=salesrequest.getCustomerid();
 		String location=salesrequest.getLocation();
+		String mobile=salesrequest.getMobileno();
+		String email=salesrequest.getEmail();
 		String imgpath=imgdecoder(salesrequest.getImgfiles(),request);
 		if(!salesrequest.getImgfiles().isEmpty())
 		{
@@ -544,5 +546,22 @@ public class AbheeCustomerRestController
 	           filepath= "abheeimg/"+filepath;
 	    	return  filepath;	
 		} 
-	}	
+	@SuppressWarnings("unused")
+	@PostMapping(value="/saveEnquiryDetails", consumes = "application/json", produces = "application/json")  
+	public HashMap<String, String> saveEnquiryDetails( @RequestBody SalesRequest salesrequest,HttpServletRequest request) 
+	{
+		LOGGER.debug("Calling saveEnquiryDetails at controller");
+		String code =null;
+		String modelnumber=salesrequest.getModelnumber();
+		String mobile=salesrequest.getMobileno();
+		String email=salesrequest.getEmail();
+		String custname=salesrequest.getCustomername();
+		String enquirydetails=salesrequest.getReqdesc();
+		srequestDao.saveRequest(salesrequest);
+		code = "Enquiry details sent successfully";
+		HashMap<String,String> hm =new HashMap<String,String>();
+		hm.put("status", code);
+		return hm;
+	}
+}	
 
