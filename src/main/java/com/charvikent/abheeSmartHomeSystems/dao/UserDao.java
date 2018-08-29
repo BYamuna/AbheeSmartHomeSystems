@@ -3,6 +3,7 @@ package com.charvikent.abheeSmartHomeSystems.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -11,6 +12,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
@@ -29,6 +33,8 @@ public class UserDao {
 	
 	@Autowired
 	KptsUtil kptsUtil;
+	@Autowired
+	JdbcTemplate jdbcTemplate;
 
 
 
@@ -586,6 +592,29 @@ public class UserDao {
                else
 		return usersList.get(0);
 	}
+	
+	
+	
+/**
+ * @param user active user marked as enabled is '1'
+ * @return
+ */
+public List<Map<String, Object>> checkUserExistence(User user) {
+		
+		String hql ="  select * from abheeusers  where (email='"+user.getUsername()+"' or mobilenumber ='"+user.getUsername()+"') and password='"+user.getPassword()+"'  and enabled ='1' limit 1";
+		
+		String sql ="select u.*,u.reportto as reportId ,d.name as designationName,u1.username as reportto,r.desigrole from abheeusers u,abheedesignation d,abheeusers u1,abheemultiroles r where u.designation =d.id and u.reportto =u1.id and r.designationid =u.designation and u.enabled ='1' and (u.email='"+user.getUsername()+"' or u.mobilenumber ='"+user.getUsername()+"') and u.password='"+user.getPassword()+"' limit 1 ";
+		
+		
+		//RowMapper<User> rowMapper = new BeanPropertyRowMapper<User>(User.class);
+		
+		List<Map<String, Object>>   validusers =jdbcTemplate.queryForList(sql);
+		
+		
+		return validusers;
+		
+	}
+
 	
 	
 	

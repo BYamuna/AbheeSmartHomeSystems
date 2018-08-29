@@ -60,7 +60,6 @@ public class DashBoardController {
 		LOGGER.debug("Calling dashBoard  at controller");
 		
 		 ObjectMapper deptmapper =new ObjectMapper();
-		;	
 		List<DashBoardByCategory> list=null;
 		List<DashBoardByStatus> byStatusList=null;
 		try {

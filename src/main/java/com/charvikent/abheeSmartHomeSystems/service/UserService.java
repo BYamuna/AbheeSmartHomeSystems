@@ -351,5 +351,11 @@ public class UserService {
 		return userDao.checkEmployeeExistOrNotbyMobileOnEdit(custMobile,editFieldsId);
 	}
 
+	public List<Map<String, Object>> checkUserExistence(User user) {
+		// TODO Auto-generated method stub
+		return userDao.checkUserExistence(user);
+	}
+	
+
 
 }
