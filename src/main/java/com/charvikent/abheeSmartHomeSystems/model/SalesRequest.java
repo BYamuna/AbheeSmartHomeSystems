@@ -49,8 +49,6 @@ public class SalesRequest
 		this.imgfiles = imgfiles;
 		this.customername=customername;
 	}
-
-
 	public String getCustomername() {
 		return customername;
 	}
@@ -170,8 +168,4 @@ public class SalesRequest
 				+ ", enable=" + enable + ", lat=" + lat + ", longitude=" + longitude + ", customerid=" + customerid
 				+ ", customername=" + customername + ", locationData=" + locationData + "]";
 	}
-	
-	
-
-
 }
