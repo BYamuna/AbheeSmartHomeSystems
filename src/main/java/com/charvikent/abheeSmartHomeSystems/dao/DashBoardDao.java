@@ -51,6 +51,10 @@ public class DashBoardDao {
 	public HashMap<String, String>  getTasksCountBySeverity()
 	{
 		
+		
+		
+		
+		
 		HashMap<String,String> tasksSeverityCounts =new LinkedHashMap<String,String>();
 		
 		String hql ="select abheeseverity.severity ,COUNT(abhee_task.severity)as number  FROM abhee_task RIGHT  JOIN abheeseverity "
@@ -400,6 +404,43 @@ public List<Map<String, Object>> getSalesRequestByCategoryListDashBord(String st
 	System.out.println(retlist);
 	return retlist;
 			
+}
+
+
+
+
+/**
+ * @param user get severity counts for logged valid user
+ * @return
+ */
+public List<Map<String, Object>>  getTasksCountBySeverityforRest(User user)
+{
+	
+	
+	String hql ="select abheeseverity.severity ,COUNT(abhee_task.severity)as number  FROM abhee_task RIGHT  JOIN abheeseverity "
+            +"ON (abheeseverity.id=abhee_task.severity)  and abhee_task.kstatus <> '4' ";
+	
+		
+		
+		
+		if(user.getDesignation().equals("2") || user.getDesignation().equals("1")) 
+		{
+		
+	
+	
+	 hql =hql+" GROUP BY abheeseverity.id ";
+		}
+		
+		else
+		{
+	    hql =hql+" and abhee_task.assignto='"+user.getId()+"'  GROUP BY abheeseverity.id" ;	
+			
+		}
+		
+		List<Map<String, Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+	
+		return retlist;
+	
 }
 
 }

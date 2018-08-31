@@ -12,8 +12,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+
 /*import javax.mail.MessagingException;*/
 import javax.servlet.http.HttpServletRequest;
+
 /*import org.apache.commons.lang.StringUtils;*/
 import org.castor.core.util.Base64Decoder;
 import org.json.JSONException;
@@ -31,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 /*import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;*/
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
@@ -41,6 +44,7 @@ import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CompanyDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
+import com.charvikent.abheeSmartHomeSystems.dao.DashBoardDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ProductDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
@@ -52,6 +56,7 @@ import com.charvikent.abheeSmartHomeSystems.model.OTPDetails;
 /*import com.charvikent.abheeSmartHomeSystems.model.Product;*/
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 import com.charvikent.abheeSmartHomeSystems.model.ServiceRequest;
+import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -72,6 +77,7 @@ public class AbheeCustomerRestController
 	@Autowired SendingMail sendingMail;
 	@Autowired ReportIssueDao reportIssueDao;
 	@Autowired AbheeTaskDao abheeTaskDao;
+	@Autowired DashBoardDao dashBoardDao;
 	
 	@RequestMapping("/Customer")
 	public String showCustomerRegistrationForm(Model model,HttpServletRequest request) throws JsonProcessingException
@@ -563,5 +569,45 @@ public class AbheeCustomerRestController
 		hm.put("status", code);
 		return hm;
 	}
+	
+	
+	
+	@PostMapping(value="/getrestseveritycounts", consumes = "application/json", produces = "application/json")  
+	public  String getRestSeverityCounts( @RequestBody User user,HttpServletRequest request) throws JSONException 
+	{
+		JSONObject objJSON = new JSONObject();
+		
+		User Validuser =userService.getUserById(user.getId());
+		
+		List<Map<String, Object>> severityCounts = dashBoardDao.getTasksCountBySeverityforRest(Validuser);
+		
+		objJSON.put("status", severityCounts);
+		
+		
+		
+		
+		
+		return String.valueOf(objJSON);
+	}
+	
+	
+	@PostMapping(value="/userloggging", consumes = "application/json", produces = "application/json")  
+	public  String checkUserLogin( @RequestBody User user,HttpServletRequest request) throws JSONException 
+	{
+		JSONObject objJSON = new JSONObject();
+		
+		List<Map<String, Object>> validUser = userService.checkUserExistence(user);
+		
+		objJSON.put("status", validUser);
+		
+		
+		
+		return String.valueOf(objJSON);
+	}
+	
+	
+	
+	
+	
 }	
 
