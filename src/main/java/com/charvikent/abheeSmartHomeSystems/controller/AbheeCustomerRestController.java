@@ -570,44 +570,23 @@ public class AbheeCustomerRestController
 		return hm;
 	}
 	
-	
-	
 	@PostMapping(value="/getrestseveritycounts", consumes = "application/json", produces = "application/json")  
 	public  String getRestSeverityCounts( @RequestBody User user,HttpServletRequest request) throws JSONException 
 	{
 		JSONObject objJSON = new JSONObject();
-		
 		User Validuser =userService.getUserById(user.getId());
-		
 		List<Map<String, Object>> severityCounts = dashBoardDao.getTasksCountBySeverityforRest(Validuser);
-		
 		objJSON.put("status", severityCounts);
-		
-		
-		
-		
-		
 		return String.valueOf(objJSON);
 	}
-	
 	
 	@PostMapping(value="/userloggging", consumes = "application/json", produces = "application/json")  
 	public  String checkUserLogin( @RequestBody User user,HttpServletRequest request) throws JSONException 
 	{
 		JSONObject objJSON = new JSONObject();
-		
 		List<Map<String, Object>> validUser = userService.checkUserExistence(user);
-		
-		objJSON.put("status", validUser);
-		
-		
-		
+		objJSON.put("status", validUser);	
 		return String.valueOf(objJSON);
-	}
-	
-	
-	
-	
-	
+	}	
 }	
 

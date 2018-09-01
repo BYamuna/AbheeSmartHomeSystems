@@ -12,9 +12,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+/*import org.springframework.jdbc.core.BeanPropertyRowMapper;*/
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+/*import org.springframework.jdbc.core.RowMapper;*/
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
@@ -55,12 +55,11 @@ public class UserDao {
 
 		try {
 			List<Object[]> rows = em.createQuery("select  u.id,u.username,u.mobilenumber,u.email,u.reportto,u2.username,CASE WHEN u.enabled IN ('0') THEN 'Deactive' WHEN u.enabled IN ('1') THEN 'Active' ELSE '-----' END AS enabled,d.name,"
-					+ "u.firstname,u.lastname,u.reportto,u.designation  , u.enabled as status,u.password,u.BranchId,ab.name,u.userId,u.updatedTime from User u,User u2,Designation d,AbheeBranch ab where u.enabled='1' and u.designation= d.id and ab.id=u.BranchId and u.reportto=u2.id order by u.updatedTime desc ").getResultList();
+					+ "u.firstname,u.lastname,u.reportto,u.designation,u.enabled as status,u.password,u.BranchId,ab.name,u.userId,u.updatedTime from User u,User u2,Designation d,AbheeBranch ab where u.enabled='1' and u.designation= d.id and ab.id=u.BranchId and u.reportto=u2.id order by u.updatedTime desc ").getResultList();
 			for (Object[] row : rows) {
 				User users =new User();
 
 				users.setId(Integer.parseInt(String.valueOf(row[0])));
-
 				users.setUsername((String) row[1]);
 				users.setMobilenumber((String) row[2]);
 				users.setEmail((String) row[3]);
@@ -601,7 +600,7 @@ public class UserDao {
  */
 public List<Map<String, Object>> checkUserExistence(User user) {
 		
-		String hql ="  select * from abheeusers  where (email='"+user.getUsername()+"' or mobilenumber ='"+user.getUsername()+"') and password='"+user.getPassword()+"'  and enabled ='1' limit 1";
+		/*String hql ="  select * from abheeusers  where (email='"+user.getUsername()+"' or mobilenumber ='"+user.getUsername()+"') and password='"+user.getPassword()+"'  and enabled ='1' limit 1";*/
 		
 		String sql ="select u.*,u.reportto as reportId ,d.name as designationName,u1.username as reportto,r.desigrole from abheeusers u,abheedesignation d,abheeusers u1,abheemultiroles r where u.designation =d.id and u.reportto =u1.id and r.designationid =u.designation and u.enabled ='1' and (u.email='"+user.getUsername()+"' or u.mobilenumber ='"+user.getUsername()+"') and u.password='"+user.getPassword()+"' limit 1 ";
 		
