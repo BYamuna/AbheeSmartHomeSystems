@@ -1,16 +1,11 @@
 package com.charvikent.abheeSmartHomeSystems.service;
-
-
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.transaction.Transactional;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -29,25 +24,17 @@ import com.charvikent.abheeSmartHomeSystems.model.User;
 
 @Service
 @Transactional
-public class UserService {
-
+public class UserService 
+{
 	private final static Logger logger = Logger.getLogger(AdminService.class);
-
-	@Autowired
-	private UserDao userDao;
-
-	
-	@Autowired
-	private SendSMS smsTemplate;
-	@Autowired
-    private Environment environment;
-
+	@Autowired  private UserDao userDao;
+	@Autowired  private SendSMS smsTemplate;
+	@Autowired private Environment environment;
     SendSMS smstemplate =new SendSMS();
-
+    
 	@SuppressWarnings("unused")
 	public void saveUser(User user) throws IOException
 	{
-		
 		String msg =user.getFirstname()+" "+user.getLastname()+",  Successfully registered with AbheeSmartHomeSystems. \n You can login using \n Username:  "+user.getUsername()+"\n password: "+user.getPassword();
 		String mbnum=user.getMobilenumber();
 		 String tmsg =environment.getProperty("app.empregistration");

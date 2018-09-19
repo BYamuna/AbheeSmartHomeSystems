@@ -12,10 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
-
 /*import javax.mail.MessagingException;*/
 import javax.servlet.http.HttpServletRequest;
-
 /*import org.apache.commons.lang.StringUtils;*/
 import org.castor.core.util.Base64Decoder;
 import org.json.JSONException;
@@ -26,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 /*import org.springframework.web.bind.annotation.ModelAttribute;*/
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,7 +32,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 /*import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;*/
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
@@ -47,12 +45,17 @@ import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.DashBoardDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ProductDao;
+import com.charvikent.abheeSmartHomeSystems.dao.ProductGuaranteeDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
 import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
+import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
+import com.charvikent.abheeSmartHomeSystems.model.Company;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.OTPDetails;
+import com.charvikent.abheeSmartHomeSystems.model.Product;
+import com.charvikent.abheeSmartHomeSystems.model.ProductGuarantee;
 /*import com.charvikent.abheeSmartHomeSystems.model.Product;*/
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 import com.charvikent.abheeSmartHomeSystems.model.ServiceRequest;
@@ -60,7 +63,6 @@ import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 @RestController
 public class AbheeCustomerRestController 
 {
@@ -78,6 +80,8 @@ public class AbheeCustomerRestController
 	@Autowired ReportIssueDao reportIssueDao;
 	@Autowired AbheeTaskDao abheeTaskDao;
 	@Autowired DashBoardDao dashBoardDao;
+	@Autowired UserDao userDao;
+	@Autowired ProductGuaranteeDao productGuaranteeDao;
 	
 	@RequestMapping("/Customer")
 	public String showCustomerRegistrationForm(Model model,HttpServletRequest request) throws JsonProcessingException
@@ -85,8 +89,6 @@ public class AbheeCustomerRestController
 		LOGGER.debug("Calling Customer at controller");
 		return null;	
 	}
-	
-	//@RequestMapping(value = "/api", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
   @RequestMapping(value="/saveRestCustomer", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public HashMap<String, String>  SaveAbheeCustomer( @RequestBody Customer customer) 
 	{
@@ -295,7 +297,7 @@ public class AbheeCustomerRestController
 	}
 	
 	@RequestMapping(value="/getproductsby", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
-	public String  getProductsByCompantId(@RequestParam(value="id", required=false) String companyid) throws JsonProcessingException, JSONException 
+	public String  getProductsByCompanyId(@RequestParam(value="id", required=false) String companyid) throws JsonProcessingException, JSONException 
 	{
 		LOGGER.debug("Calling getproductsby at controller");
 		System.out.println(companyid);
@@ -502,10 +504,8 @@ public class AbheeCustomerRestController
 	public String  getTaskStatusByCustomerId( @RequestBody Customer customer) throws JsonProcessingException, JSONException 
 	{
 		LOGGER.debug("Calling getTicketStatus at controller");
-		//String customerid=customer.getCustomerId();
 		List<Map<String, Object>>  listOrderBeans = abheeTaskDao.getTasksByCustomerId(customer); 
 		JSONObject json =new JSONObject();
-		//String customerid=task.getCustomerId();
 			if(null != listOrderBeans)
 			{
 				json.put("ticketstatus", listOrderBeans);
@@ -585,8 +585,739 @@ public class AbheeCustomerRestController
 	{
 		JSONObject objJSON = new JSONObject();
 		List<Map<String, Object>> validUser = userService.checkUserExistence(user);
-		objJSON.put("status", validUser);	
+		
+		if(!validUser.isEmpty())
+		{
+		objJSON.put("status", validUser);
+		}
+		else
+		{
+		objJSON.put("status", "user not exists");
+		}
 		return String.valueOf(objJSON);
+	}
+	
+	@PostMapping(value="/getreststatuscounts", consumes = "application/json", produces = "application/json")  
+	public  String getRestStatusCounts( @RequestBody User user,HttpServletRequest request) throws JSONException 
+	{
+		JSONObject objJSON = new JSONObject();
+		User Validuser =userService.getUserById(user.getId());
+		List<Map<String, Object>> statusCounts = dashBoardDao.getTasksCountByStatusforRest(Validuser);
+		objJSON.put("status", statusCounts);
+		return String.valueOf(objJSON);
+	}
+	
+	@SuppressWarnings("unused")
+	@RequestMapping(value="/getPriorities", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getPrioritiesList() throws JsonProcessingException, JSONException 
+	{
+		LOGGER.debug("Calling getPriorities at controller");
+		String code =null;
+		HashMap<String,String> hm =new HashMap<String,String>();
+		List<Map<String, Object>> listOrderBeans = abheeTaskDao.getPriority();
+		JSONObject json =new JSONObject();
+		//ObjectMapper objectMapper = new ObjectMapper();
+		//String userjson = objectMapper.writeValueAsString(userBean);
+		//String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
+		if(null != listOrderBeans)
+		{
+			json.put("prioritieslist", listOrderBeans);
+		}
+		else
+			//code="NOT_FOUND";
+			json.put("prioritieslist", "NOT_FOUND");
+			System.out.println("rest call user status:  "+code);
+			return String.valueOf(json);
+	}
+	
+	@SuppressWarnings("unused")
+	@RequestMapping(value="/getSeverities", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getSeveritiesList() throws JsonProcessingException, JSONException 
+	{
+		LOGGER.debug("Calling getSeverities at controller");
+		String code =null;
+		HashMap<String,String> hm =new HashMap<String,String>();
+		List<Map<String, Object>> listOrderBeans = abheeTaskDao.getSeverity();
+		JSONObject json =new JSONObject();
+		//ObjectMapper objectMapper = new ObjectMapper();
+		//String userjson = objectMapper.writeValueAsString(userBean);
+		//String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
+		if(null != listOrderBeans)
+		{
+			json.put("severitieslist", listOrderBeans);
+		}
+		else
+			//code="NOT_FOUND";
+			json.put("severitieslist", "NOT_FOUND");
+			System.out.println("rest call user status:  "+code);
+			return String.valueOf(json);
+	}
+	
+	@SuppressWarnings("unused")
+	@RequestMapping(value="/getUsers", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getUsersList() throws JsonProcessingException, JSONException 
+	{
+		LOGGER.debug("Calling getUsers at controller");
+		String code =null;
+		HashMap<String,String> hm =new HashMap<String,String>();
+		List<User>listOrderBeans =  userDao.getAllUsers();
+		JSONObject json =new JSONObject();
+		//ObjectMapper objectMapper = new ObjectMapper();
+		//String userjson = objectMapper.writeValueAsString(userBean);
+		//String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
+		if(null != listOrderBeans)
+		{
+			json.put("userslist", listOrderBeans);
+		}
+		else
+			//code="NOT_FOUND";
+			json.put("userslist", "NOT_FOUND");
+			System.out.println("rest call user status:  "+code);
+			return String.valueOf(json);
+	}
+
+	@PostMapping(value="/saveProduct", consumes = "application/json", produces = "application/json")
+		public String saveProduct( @RequestBody Category cate,HttpServletRequest request,BindingResult bindingresults) throws JSONException 
+		{
+		LOGGER.debug("Calling saveProduct at controller");
+		JSONObject json =new JSONObject();
+		String code ="";
+		if (bindingresults.hasErrors()) {
+			System.out.println("has some errors");
+			return "redirect:/";
+		}
+		int id = 0;
+		try
+		{
+			Category orgBean= categoryDao.getCategoryNameById(cate);
+			int dummyId =0;
+			if(orgBean != null){
+				dummyId = orgBean.getId();
+			}
+			if(cate.getId()==null)
+			{
+				if(dummyId ==0)
+				{
+					String productimages=imgdecoder(cate.getCategoryimg(),request);
+					if(!cate.getCategoryimg().isEmpty())
+					{
+						cate.setCategoryimg(productimages);
+					}  
+					cate.setStatus("1");
+					categoryDao.saveCategory(cate);
+					code ="success";
+				} else
+				{
+					code ="exists";	
+				}
+			}
+			else
+			{
+				id=cate.getId();
+				if(id == dummyId || orgBean == null)
+				{
+					String productimages=imgdecoder(cate.getCategoryimg(),request);
+					if(!cate.getCategoryimg().isEmpty())
+					{
+						cate.setCategoryimg(productimages);
+					}
+					categoryDao.UpdateCategory(cate);
+					code ="updated";	
+				} else
+				{
+					code ="exists";
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		json.put("status", code);
+		
+		return String.valueOf(json);
+		}
+	
+	@RequestMapping(value="/productslist",method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String  getProductsList() 
+	{
+		LOGGER.debug("Calling productslist at controller");
+		JSONObject json =new JSONObject();
+		List<Category> listOrderBeans = null;
+		try 
+		{
+			listOrderBeans = categoryDao.getCategoryNames();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				json.put("productslist", listOrderBeans);
+			} else 
+			{
+				json.put("productslist", "NOT_FOUND");
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return String.valueOf(json);
+	}
+
+	@RequestMapping(value="/getquotationlist", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getQuotationList() throws JsonProcessingException, JSONException 
+	{
+		LOGGER.debug("Calling getquotationlist at controller");
+		JSONObject json =new JSONObject();
+		List<SalesRequest> listOrderBeans = null; 
+		try 
+		{
+			listOrderBeans = srequestDao.getSalesRequestList();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				json.put("quotationslist", listOrderBeans);
+			} else 
+			{
+				json.put("quotationslist", "NOT_FOUND");
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return String.valueOf(json);
+	}
+	
+	@PostMapping(value="/saveCompany", consumes = "application/json", produces = "application/json")
+	public String saveCompany( @RequestBody Company com,HttpServletRequest request,BindingResult bindingresults) throws JSONException 
+	{
+	LOGGER.debug("Calling saveCompany at controller");
+	JSONObject json =new JSONObject();
+	String code ="";
+	if (bindingresults.hasErrors()) {
+		System.out.println("has some errors");
+		return "redirect:/";
+	}
+	int id = 0;
+	try
+	{
+		Company orgBean= companyDao.getCompanyNameById(com);
+		int dummyId =0;
+		if(orgBean != null){
+			dummyId = orgBean.getId();
+		}
+		if(com.getId()==null)
+		{
+			if(dummyId ==0)
+			{
+				String companyimages=imgdecoder(com.getCompanyimg(),request);
+				if(!com.getCompanyimg().isEmpty())
+				{
+					com.setCompanyimg(companyimages);
+				}
+				com.setStatus("1");
+				companyDao.saveCompany(com);
+				code ="success";
+			} else
+			{
+				code="exists";	
+			}
+		}
+		else
+		{
+			id=com.getId();
+			if(id == dummyId || orgBean == null)
+			{
+				String companyimages=imgdecoder(com.getCompanyimg(),request);
+				if(!com.getCompanyimg().isEmpty())
+				{
+					com.setCompanyimg(companyimages);
+				}
+				companyDao.UpdateCompany(com);
+				code="updated";
+			} else
+			{
+				code="exists";
+			}	
+		}
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		json.put("status", code);
+		
+		return String.valueOf(json);
+		}
+	
+	@RequestMapping(value="/companieslist", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getCompaniesList() throws JsonProcessingException, JSONException 
+	{
+		LOGGER.debug("Calling companieslist at controller");
+		List<Company> listOrderBeans = null;
+		JSONObject json =new JSONObject();
+		try 
+		{
+		listOrderBeans = companyDao.getCompanyNames();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) 
+			{
+				json.put("companieslist", listOrderBeans);
+			} else 
+			{
+				json.put("companieslist", "NOT_FOUND");
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			System.out.println(e);
+		}
+	return String.valueOf(json);
 	}	
+	
+@PostMapping(value="/saveProductModel", consumes = "application/json", produces = "application/json")	
+public String savePrpductModel( @RequestBody Product pro,HttpServletRequest request) throws JSONException 
+	{
+	LOGGER.debug("Calling saveProductModel at controller");
+	JSONObject json =new JSONObject();
+	String code ="";
+	
+	String sfn ="";
+	
+	String vlinks[] =pro.getProductmodelvideoslinks().split(",");
+	
+	
+	 for(String files: vlinks)
+        {
+        	sfn=sfn+files+"*"; 
+        }
+	 
+        String sfn2=sfn.substring(0,sfn.length()-1);
+	
+        
+        pro.setProductmodelvideoslinks(sfn2);
+	
+			int id = 0;
+			try
+			{
+				 Product orgBean= productDao.getProductNameById(pro);
+				int dummyId =0;
+				if(orgBean != null)
+				{
+					dummyId = orgBean.getId();
+				}
+				if(pro.getId()==null)
+				{
+					if(dummyId ==0)
+					{
+						String productmodelpics=imgdecoder(pro.getProductmodelpics(),request);
+						if(!pro.getProductmodelpics().isEmpty())
+						{
+							pro.setProductmodelpics(productmodelpics);
+						}
+						pro.setStatus("1");
+						productDao.saveProduct(pro);
+						code="success";
+					} else
+					{
+						code="exists";	
+					}	
+				}
+				else
+				{
+					id=pro.getId();
+					if(id == dummyId || orgBean == null)
+					{
+						String productmodelpics=imgdecoder(pro.getProductmodelpics(),request);
+						if(!pro.getProductmodelpics().isEmpty())
+						{
+							pro.setProductmodelpics(productmodelpics);
+						}
+						productDao.UpdateProduct(pro);
+						code="updated";
+					} 
+					else
+					{
+						code="exists";
+					}	
+				}
+			}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		json.put("status", code);
+		return String.valueOf(json);
+	}
+
+@RequestMapping(value="/productmodelslist",method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+public String  getProductsModelsList() 
+{
+	LOGGER.debug("Calling productmodelslist at controller");
+	JSONObject json =new JSONObject();
+	List<Product> listOrderBeans = null;
+	try 
+	{
+		listOrderBeans = productDao. getProductDetails();
+		if (listOrderBeans != null && listOrderBeans.size() > 0) 
+		{
+			json.put("productmodelslist", listOrderBeans);
+		} else 
+		{
+			json.put("productmodelslist", "NOT_FOUND");
+		}
+	} 
+	catch (Exception e) 
+	{
+		e.printStackTrace();
+		System.out.println(e);
+	}
+	return String.valueOf(json);
 }	
 
+	@PostMapping(value="/saveCustomer", consumes = "application/json", produces = "application/json")
+	public String saveCustomer( @RequestBody Customer user,HttpServletRequest request,BindingResult bindingresults) throws JSONException 
+	{
+	LOGGER.debug("Calling saveCustomer at controller");
+	JSONObject json =new JSONObject();
+	String code ="";
+	if (bindingresults.hasErrors()) 
+	{
+		System.out.println("has some errors");
+		return "redirect:/";
+	}		
+	int id = 0;
+		try
+		{
+			Customer userBean=null;
+			if(user.getId()!=null)
+			{
+			  userBean= customerDao.getCustomerByObject(user);
+			}
+			int dummyId =0;
+
+			if(userBean != null){
+				dummyId = userBean.getId();
+			}
+			if(user.getId()==null)
+			{
+				if(dummyId ==0)
+				{
+					user.setEnabled("1");
+					customerDao.saveAbheeCustomer(user);
+					sendingMail.sendConfirmationEmail(user);
+					code="success";
+				} 
+				else
+				{
+					code="exists";
+				}
+			}
+			else
+			{
+				id=user.getId();
+				if(id == dummyId || userBean == null)
+				{
+					customerDao.updateCustomer(user);
+					sendingMail.sendConfirmationEmail(user);
+					code="updated";
+
+				} else
+				{
+					code="exists";
+				}	
+			}	
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		json.put("status", code);
+		return String.valueOf(json);
+	}
+	
+	@RequestMapping(value="/customerslist",method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String  getCustomersList() 
+	{
+		LOGGER.debug("Calling customerslist at controller");
+		JSONObject json =new JSONObject();
+		List<Customer> listOrderBeans = null;
+		try 
+		{
+			listOrderBeans = customerDao.getAbheeCustomerNames();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) 
+			{
+				json.put("customerslist", listOrderBeans);
+			} else 
+			{
+				json.put("customerslist", "NOT_FOUND");
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return String.valueOf(json);
+	}	
+	
+	@PostMapping(value="/saveUser", consumes = "application/json", produces = "application/json")
+	public String saveUser( @RequestBody User user,HttpServletRequest request) throws JSONException 
+	{
+	LOGGER.debug("Calling saveUser at controller");
+	JSONObject json =new JSONObject();
+	String code ="";
+			
+	int id = 0;
+		try
+		{
+			User userBean=null;
+			
+			  userBean= userService.getUserByObject(user);
+			
+			int dummyId =0;
+
+			if(userBean != null){
+				dummyId = userBean.getId();
+			}
+			if(user.getId()==null)
+			{
+				if(dummyId ==0)
+				{
+					user.setEnabled("1");
+					userService.saveUser(user);
+					sendingMail.sendUserConfirmationEmail(user);
+					code="success";
+				} else
+				{
+					code="exists";
+				}
+			}
+			else
+			{
+				id=user.getId();
+				if(id == dummyId || userBean == null)
+				{
+					userService.updateUser(user);
+					code="updated";
+				} else
+				{
+					code="exists";
+				}
+			}
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		json.put("status", code);
+		return String.valueOf(json);
+	}
+	
+	@RequestMapping(value="/userslist",method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String  getEmployeesList() 
+	{
+		LOGGER.debug("Calling userslist at controller");
+		JSONObject json =new JSONObject();
+		List<User> listOrderBeans = null;
+		try 
+		{
+			listOrderBeans = userDao.getAllUsers();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				json.put("userslist", listOrderBeans);
+			} else 
+			{
+				json.put("userslist", "NOT_FOUND");
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return String.valueOf(json);
+	}	
+	
+	@PostMapping(value="/saveServiceRequest", consumes = "application/json", produces = "application/json")
+	public String saveServiceRequest( @RequestBody AbheeTask task,HttpServletRequest request) throws JSONException 
+	{
+	LOGGER.debug("Calling saveServiceRequest at controller");
+	JSONObject json =new JSONObject();
+	String code ="";
+			
+	int id = 0;
+		try
+		{
+			AbheeTask orgBean=null;
+			if(task.getId()!=null)
+			{
+			  orgBean= reportIssueDao.getReportIssueById(task.getId());
+			}
+			int dummyId =0;
+			if(orgBean != null){
+				dummyId = orgBean.getId();
+			}
+			if(task.getId()==null)
+			{
+				if(dummyId ==0)
+				{
+					try 
+					{	
+						
+						if(!task.getUploadfile().isEmpty())
+						{
+							String images=imgdecoder(task.getUploadfile(),request);
+							task.setUploadfile(images);
+						}
+					} 
+					catch (IllegalStateException e) 
+					{
+						e.printStackTrace();
+					}
+					task.setStatus("1");
+					task.setAdditionalinfo("0");
+					reportIssueDao.saveServiceRequest(task);
+					code="success";
+				} else
+				{
+					code="exists";
+				}
+			}
+			else
+			{
+				id=task.getId();
+				if(id == dummyId || orgBean == null)
+				{	
+				try 
+				{	
+					
+					if(!task.getUploadfile().isEmpty())
+					{
+						String images=imgdecoder(task.getUploadfile(),request);
+						task.setUploadfile(images);
+					}		
+				} 
+				catch (IllegalStateException e) {
+						e.printStackTrace();
+					}
+					reportIssueDao.updateIssue(task);
+					code="updated";
+				} 
+				else
+				{
+					code="exists";
+				}
+			}
+		}			
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		json.put("status", code);
+		return String.valueOf(json);
+	}
+	
+	@RequestMapping(value="/taskslist",method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String  getServiceRequestList()
+	{
+		LOGGER.debug("Calling taskslist at controller");
+		JSONObject json =new JSONObject();
+		List<AbheeTask> listOrderBeans = null;
+		try 
+		{
+			listOrderBeans = reportIssueDao.getAllTasksList();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				json.put("taskslist", listOrderBeans);
+			} else 
+			{
+				json.put("taskslist", "NOT_FOUND");
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return String.valueOf(json);
+	}
+	
+	@PostMapping(value="/saveProductWarranty", consumes = "application/json", produces = "application/json")
+	public String saveWarranty( @RequestBody ProductGuarantee productGuarantee,HttpServletRequest request,BindingResult bindingresults) throws JSONException 
+	{
+	LOGGER.debug("Calling saveProductWarranty at controller");
+	JSONObject json =new JSONObject();
+	String code ="";
+	if (bindingresults.hasErrors()) 
+	{
+		System.out.println("has some errors");
+		return "redirect:/";
+	}		
+	String id = null;
+		try
+		{
+			ProductGuarantee orgBean=null;
+			if(productGuarantee.getOrderId()!="" && productGuarantee.getOrderId() != null)
+			{
+			  orgBean=  (ProductGuarantee) productGuaranteeDao.getProductWarrantyDetailsByObject(productGuarantee);
+			}
+			String  dummyId =null;
+			if(orgBean != null){
+				dummyId = orgBean.getOrderId();
+			}
+			if(productGuarantee.getOrderId()== "" || productGuarantee.getOrderId() == null)
+			{
+				if(dummyId ==null)
+				{	
+					productGuarantee.setStatus("1");
+					productGuaranteeDao.saveWarranty(productGuarantee);
+					code="success";
+				} else
+				{
+					code="exists";	
+				}
+			}
+			else
+			{
+				id=productGuarantee.getOrderId();
+				if(id == dummyId || orgBean == null)
+				{
+					productGuaranteeDao.updateWarranty(productGuarantee);
+					code="updated";
+				} else
+				{
+					code="exists";
+				}
+			}
+		}			
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		json.put("status", code);
+		return String.valueOf(json);
+	}
+	@RequestMapping(value="/warrantylist",method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String  ggetProductWarrantyList()
+	{
+		LOGGER.debug("Calling taskslist at controller");
+		JSONObject json =new JSONObject();
+		List<Map<String, Object>> listOrderBeans  = null;
+		try 
+		{
+			listOrderBeans = productGuaranteeDao.getProductWarrantyList();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				json.put("warrantylist", listOrderBeans);
+			} else 
+			{
+				json.put("warrantylist", "NOT_FOUND");
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return String.valueOf(json);
+	}	
+}

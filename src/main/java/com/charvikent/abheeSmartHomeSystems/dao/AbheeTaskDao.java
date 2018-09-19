@@ -299,5 +299,22 @@ public List<Map<String, Object>> getTasksByCustomerId(Customer customer) {
 	return retlist;
 	
 }	
+	public List<Map<String, Object>> getPriority() 
+	{	
+		String hql= "select * from abheepriority";
+	     System.out.println(hql);
+		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+		System.out.println(retlist);
+		return retlist;
+		
+	}
+	public List<Map<String, Object>> getSeverity() 
+	{
+		String hql= "select id,severity from abheeseverity";
+	    System.out.println(hql);
+		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+		System.out.println(retlist);
+		return retlist;
+	}
 
 }

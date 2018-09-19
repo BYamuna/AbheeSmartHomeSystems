@@ -55,7 +55,6 @@ public class Customer {
 	private String registedredFromAndroid;
 	
 	private String customerType;
-	
 	@Transient
 	private String customerTypeName;
 	

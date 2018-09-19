@@ -705,7 +705,6 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 	    	console.log(formData);
 	 		$.ajax({
 				type:"POST",
-				
 			  	url: "getresetcustomerpassword", 
 			  	data:formData,
 			  	processData: false,  // tell jQuery not to process the data

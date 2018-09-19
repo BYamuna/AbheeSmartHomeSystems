@@ -490,19 +490,14 @@ function inactiveData() {
 						$('#mobilenumber').css('border-color', 'none');
 						 $('#submit1').prop('disabled', false);
 						 subValidation =true;
-						 
-						} 
-					
+						} 	
 				},
 				complete: function () {
 		            
 		            $.unblockUI();
 		       },
-				error :  function(e){$.unblockUI();console.log(e);}
-				
+				error :  function(e){$.unblockUI();console.log(e);}	
 			});
-	
-		 
 	  }); 
 
 //	}); 

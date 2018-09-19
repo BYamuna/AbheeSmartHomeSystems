@@ -413,36 +413,36 @@ public List<Map<String, Object>> getSalesRequestByCategoryListDashBord(String st
  * @param user get severity counts for logged valid user
  * @return
  */
-public List<Map<String, Object>>  getTasksCountBySeverityforRest(User user)
-{
-	
-	
-	String hql ="select abheeseverity.severity ,COUNT(abhee_task.severity)as number  FROM abhee_task RIGHT  JOIN abheeseverity "
-            +"ON (abheeseverity.id=abhee_task.severity)  and abhee_task.kstatus <> '4' ";
-	
-		
-		
-		
-		if(user.getDesignation().equals("2") || user.getDesignation().equals("1")) 
+	public List<Map<String, Object>>  getTasksCountBySeverityforRest(User user)
 		{
-		
-	
-	
-	 hql =hql+" GROUP BY abheeseverity.id ";
+		String hql ="select abheeseverity.severity ,COUNT(abhee_task.severity)as number  FROM abhee_task RIGHT  JOIN abheeseverity "
+	            +"ON (abheeseverity.id=abhee_task.severity)  and abhee_task.kstatus <> '4' ";
+			if(user.getDesignation().equals("2") || user.getDesignation().equals("1")) 
+			{
+		 hql =hql+" GROUP BY abheeseverity.id ";
+			}
+			else
+			{
+		    hql =hql+" and abhee_task.assignto='"+user.getId()+"'  GROUP BY abheeseverity.id" ;		
+			}
+			List<Map<String, Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+			return retlist;
 		}
-		
-		else
-		{
-	    hql =hql+" and abhee_task.assignto='"+user.getId()+"'  GROUP BY abheeseverity.id" ;	
-			
-		}
-		
-		List<Map<String, Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
-	
-		return retlist;
-	
-}
 
+	public List<Map<String, Object>> getTasksCountByStatusforRest(User user) 
+		{
+		String hql="select abheetaskstatus.name as status ,COUNT(abhee_task.severity)as number  FROM abhee_task RIGHT  JOIN abheetaskstatus ON (abheetaskstatus.id=abhee_task.kstatus) and abhee_task.kstatus <> '4'";
+		if(user.getDesignation().equals("2") || user.getDesignation().equals("1")) 
+			{
+			hql =hql+" GROUP BY abheetaskstatus.id";
+			}
+			else
+			{
+		    hql =hql+" and abhee_task.assignto='"+user.getId()+"'  GROUP BY abheetaskstatus.id" ;		
+			}
+			List<Map<String, Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+			return retlist;
+		}
 }
 	
 

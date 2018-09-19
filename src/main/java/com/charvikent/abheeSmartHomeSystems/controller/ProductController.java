@@ -78,7 +78,7 @@ public class ProductController
 	}
 	
 	@RequestMapping(value = "/product", method = RequestMethod.POST)
-	public String saveProduct(@Valid @ModelAttribute  Product pro, BindingResult bindingresults, @RequestParam("file1") MultipartFile[] productpics,@RequestParam("vlink") String vlink[]  ,
+	public String saveProduct(@Valid @ModelAttribute  Product pro, BindingResult bindingresults, @RequestParam("file1") MultipartFile[] productpics,@RequestParam("vlink") String vlink[],
 			RedirectAttributes redir) throws IOException 
 	{
 		LOGGER.debug("Calling product at controller");
