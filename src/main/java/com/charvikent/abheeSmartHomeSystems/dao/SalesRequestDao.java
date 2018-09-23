@@ -51,8 +51,6 @@ public class SalesRequestDao
 		public List<SalesRequest> getSalesRequestList()
 		 {
 			 String hql ="from SalesRequest";
-			 
-			
 			 List<SalesRequest> reqlist= entityManager.createQuery(hql).getResultList();
 			 for(SalesRequest sr:reqlist)
 			 {

@@ -614,7 +614,19 @@ public List<Map<String, Object>> checkUserExistence(User user) {
 		
 	}
 
-	
+public int getProfileInfo(User user) 
+{
+	String sql =" update abheeusers set firstname ='"+user.getFirstname()+"',lastname='"+user.getLastname()+"',mobilenumber='"+user.getMobilenumber()+"',email='"+user.getEmail()+"'where id='"+user.getId()+"' order by updated_time desc";	
+	int  result = jdbcTemplate.update(sql);
+	return result; 	
+}
+
+public int getPassword(User user) 
+{
+	String sql =" update abheeusers set password ='"+user.getPassword()+"'where id='"+user.getId()+"' order by updated_time desc";	
+	int  result = jdbcTemplate.update(sql);
+	return result; 	
+}
 	
 	
 	

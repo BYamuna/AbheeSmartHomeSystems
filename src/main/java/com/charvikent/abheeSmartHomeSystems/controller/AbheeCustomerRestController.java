@@ -1298,7 +1298,7 @@ public String  getProductsModelsList()
 		return String.valueOf(json);
 	}
 	@RequestMapping(value="/warrantylist",method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public String  ggetProductWarrantyList()
+	public String  getProductWarrantyList()
 	{
 		LOGGER.debug("Calling taskslist at controller");
 		JSONObject json =new JSONObject();
@@ -1319,5 +1319,34 @@ public String  getProductsModelsList()
 			System.out.println(e);
 		}
 		return String.valueOf(json);
-	}	
+	}
+	@RequestMapping(value="/adminEditProfile", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getProfileInfo( @RequestBody User user) throws JsonProcessingException, JSONException
+	{
+		LOGGER.debug("Calling adminEditProfile at controller");
+		int result = userDao.getProfileInfo(user);
+		JSONObject json =new JSONObject();
+			if(result==1)
+			{
+				json.put("profileinfo", "Updated");
+			}
+			else
+				json.put("profileinfo", "Not Updated");
+		return String.valueOf(json);
+	}
+	
+	@RequestMapping(value="/adminChangePassword", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getPassword( @RequestBody User user) throws JsonProcessingException, JSONException
+	{
+		LOGGER.debug("Calling adminChangePassword at controller");
+		   int result = userDao.getPassword(user);
+		   JSONObject json =new JSONObject();
+			if(result==1)
+			{
+				json.put("password", "Updated");
+			}
+			else
+				json.put("password", "Not Updated");
+		return String.valueOf(json);
+	}
 }
