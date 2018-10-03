@@ -223,4 +223,9 @@ public class ProductDao
 		
 		return retlist;
 	}
+	public void deactiveProductModel(String status, Integer id) 
+	{
+		String sql="update abhee_product set status='"+status+"'where id='"+id+"'";
+		jdbcTemplate.execute(sql);	
+	}
 }

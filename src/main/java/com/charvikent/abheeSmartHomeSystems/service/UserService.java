@@ -223,8 +223,6 @@ public class UserService
 
 	}
 	
-
-
 	@SuppressWarnings("unused")
 	public Map<Integer, String> getReportToUsers()
 	{
@@ -239,8 +237,6 @@ public class UserService
 			{
 		for(User bean: rolesList){
 				userMapForMaster.put(bean.getId(), bean.getUsername());
-		
-
 	} 
 		}
 			return userMapForMaster;

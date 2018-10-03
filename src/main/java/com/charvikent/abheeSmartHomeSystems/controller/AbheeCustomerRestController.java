@@ -38,6 +38,7 @@ import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.KhaibarGasUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
+import com.charvikent.abheeSmartHomeSystems.dao.AbheeBranchDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CompanyDao;
@@ -49,14 +50,15 @@ import com.charvikent.abheeSmartHomeSystems.dao.ProductGuaranteeDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
 import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
 import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
+import com.charvikent.abheeSmartHomeSystems.model.AbheeBranch;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Company;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
+import com.charvikent.abheeSmartHomeSystems.model.Designation;
 import com.charvikent.abheeSmartHomeSystems.model.OTPDetails;
 import com.charvikent.abheeSmartHomeSystems.model.Product;
 import com.charvikent.abheeSmartHomeSystems.model.ProductGuarantee;
-/*import com.charvikent.abheeSmartHomeSystems.model.Product;*/
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 import com.charvikent.abheeSmartHomeSystems.model.ServiceRequest;
 import com.charvikent.abheeSmartHomeSystems.model.User;
@@ -82,6 +84,7 @@ public class AbheeCustomerRestController
 	@Autowired DashBoardDao dashBoardDao;
 	@Autowired UserDao userDao;
 	@Autowired ProductGuaranteeDao productGuaranteeDao;
+	@Autowired AbheeBranchDao abheeBranchDao;
 	
 	@RequestMapping("/Customer")
 	public String showCustomerRegistrationForm(Model model,HttpServletRequest request) throws JsonProcessingException
@@ -89,7 +92,8 @@ public class AbheeCustomerRestController
 		LOGGER.debug("Calling Customer at controller");
 		return null;	
 	}
-  @RequestMapping(value="/saveRestCustomer", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	
+	@RequestMapping(value="/saveRestCustomer", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public HashMap<String, String>  SaveAbheeCustomer( @RequestBody Customer customer) 
 	{
 		LOGGER.debug("Calling saveRestCustomer at controller");
@@ -677,15 +681,11 @@ public class AbheeCustomerRestController
 	}
 
 	@PostMapping(value="/saveProduct", consumes = "application/json", produces = "application/json")
-		public String saveProduct( @RequestBody Category cate,HttpServletRequest request,BindingResult bindingresults) throws JSONException 
+		public String saveProduct( @RequestBody Category cate,HttpServletRequest request) throws JSONException 
 		{
 		LOGGER.debug("Calling saveProduct at controller");
 		JSONObject json =new JSONObject();
 		String code ="";
-		if (bindingresults.hasErrors()) {
-			System.out.println("has some errors");
-			return "redirect:/";
-		}
 		int id = 0;
 		try
 		{
@@ -973,26 +973,21 @@ public String  getProductsModelsList()
 }	
 
 	@PostMapping(value="/saveCustomer", consumes = "application/json", produces = "application/json")
-	public String saveCustomer( @RequestBody Customer user,HttpServletRequest request,BindingResult bindingresults) throws JSONException 
+	public String saveCustomer( @RequestBody Customer user,HttpServletRequest request) throws JSONException 
 	{
 	LOGGER.debug("Calling saveCustomer at controller");
 	JSONObject json =new JSONObject();
-	String code ="";
-	if (bindingresults.hasErrors()) 
-	{
-		System.out.println("has some errors");
-		return "redirect:/";
-	}		
+	String code ="";		
 	int id = 0;
 		try
 		{
+			//Customer userBean= customerDao.getCustomerByObject(user);
 			Customer userBean=null;
 			if(user.getId()!=null)
 			{
 			  userBean= customerDao.getCustomerByObject(user);
 			}
 			int dummyId =0;
-
 			if(userBean != null){
 				dummyId = userBean.getId();
 			}
@@ -1001,6 +996,7 @@ public String  getProductsModelsList()
 				if(dummyId ==0)
 				{
 					user.setEnabled("1");
+					/*user.setRegistedredFromAndroid("1");*/
 					customerDao.saveAbheeCustomer(user);
 					sendingMail.sendConfirmationEmail(user);
 					code="success";
@@ -1162,7 +1158,6 @@ public String  getProductsModelsList()
 				{
 					try 
 					{	
-						
 						if(!task.getUploadfile().isEmpty())
 						{
 							String images=imgdecoder(task.getUploadfile(),request);
@@ -1189,7 +1184,6 @@ public String  getProductsModelsList()
 				{	
 				try 
 				{	
-					
 					if(!task.getUploadfile().isEmpty())
 					{
 						String images=imgdecoder(task.getUploadfile(),request);
@@ -1348,5 +1342,281 @@ public String  getProductsModelsList()
 			else
 				json.put("password", "Not Updated");
 		return String.valueOf(json);
+	}
+	
+	@SuppressWarnings("unused")
+	@RequestMapping(value="/getDesignation", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getDesignation() throws JsonProcessingException, JSONException 
+	{
+		LOGGER.debug("Calling getDesignation at controller");
+		String code =null;
+		HashMap<String,String> hm =new HashMap<String,String>();
+		List<Designation> listOrderBeans = userDao.getRoles();
+		JSONObject json =new JSONObject();
+		if(null != listOrderBeans)
+		{
+			json.put("designationlist", listOrderBeans);
+		}
+		else
+			json.put("designationlist", "NOT_FOUND");
+			System.out.println("rest call user status:  "+code);
+			return String.valueOf(json);
+	}
+	
+	@SuppressWarnings("unused")
+	@RequestMapping(value="/getBranches", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getAbheeBranches() throws JsonProcessingException, JSONException 
+	{
+		LOGGER.debug("Calling getBranches at controller");
+		String code =null;
+		HashMap<String,String> hm =new HashMap<String,String>();
+		List<AbheeBranch> listOrderBeans = abheeBranchDao.getAbheeBranchNames();
+		JSONObject json =new JSONObject();
+		if(null != listOrderBeans)
+		{
+			json.put("branchlist", listOrderBeans);
+		}
+		else
+			json.put("branchlist", "NOT_FOUND");
+			System.out.println("rest call user status:  "+code);
+			return String.valueOf(json);
+	}
+	
+	@SuppressWarnings("unused")
+	@RequestMapping(value="/getReportToUsers", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getReportToUsers() throws JsonProcessingException, JSONException 
+	{
+		LOGGER.debug("Calling getReportToUsers at controller");
+		String code =null;
+		HashMap<String,String> hm =new HashMap<String,String>();
+		List<User> listOrderBeans = userDao.getUserNames();
+		JSONObject json =new JSONObject();
+		if(null != listOrderBeans)
+		{
+			json.put("reporttouserslist", listOrderBeans);
+		}
+		else
+			json.put("reporttouserslist", "NOT_FOUND");
+			System.out.println("rest call user status:  "+code);
+			return String.valueOf(json);
+	}
+	
+	@SuppressWarnings("unused")
+	@RequestMapping(value="/inActiveProducts", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getInActiveProducts() throws JsonProcessingException, JSONException 
+	{
+		LOGGER.debug("Calling inActiveProducts at controller");
+		String code =null;
+		HashMap<String,String> hm =new HashMap<String,String>();
+		List<Category> listOrderBeans = categoryDao.getAllInActiveList();
+		JSONObject json =new JSONObject();
+		if(null != listOrderBeans)
+			json.put("inactiveproductslist", listOrderBeans);
+		else
+			json.put("inactiveproductslist", "NOT_FOUND");
+			System.out.println("rest call user status:  "+code);
+			return String.valueOf(json);
+	}
+	
+	@SuppressWarnings("unused")
+	@RequestMapping(value="/inActiveCompanies", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getInActiveCompanies() throws JsonProcessingException, JSONException 
+	{
+		LOGGER.debug("Calling inActiveCompanies at controller");
+		String code =null;
+		HashMap<String,String> hm =new HashMap<String,String>();
+		List<Company> listOrderBeans = companyDao.getAllInActiveList();
+		JSONObject json =new JSONObject();
+		if(null != listOrderBeans)
+			json.put("inactivecompaieslist", listOrderBeans);
+		else
+			json.put("inactivecompaieslist", "NOT_FOUND");
+			System.out.println("rest call user status:  "+code);
+			return String.valueOf(json);
+	}
+	
+	@RequestMapping(value = "/inActiveProductModels",method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getAllActiveOrInactiveProductModels(Product  objdept,HttpServletRequest request) throws JsonProcessingException,JSONException 
+	{
+		LOGGER.debug("Calling inActiveProductModels at controller");
+		String code =null;
+		List<Product> listOrderBeans  = productDao.getAllInActiveList();
+		JSONObject json = new JSONObject();
+		if(null != listOrderBeans)
+			json.put("inactiveproductmodelslist", listOrderBeans);
+		else
+			json.put("inactiveproductmodelslist", "NOT_FOUND");
+			System.out.println("rest call user status:  "+code);
+		return String.valueOf(json);
+	}
+	
+	@RequestMapping(value = "/inActiveCustomers",method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getAllActiveOrInactiveCustomers(Customer  objdept,HttpServletRequest request) throws JsonProcessingException,JSONException 
+	{
+		LOGGER.debug("Calling inActiveCustomers at controller");
+		String code =null;
+		List<Customer> listOrderBeans  = customerDao.getCustomerInActiveList();
+		JSONObject jsonObj = new JSONObject();
+			if (null != listOrderBeans) 
+				jsonObj.put("inactivecustomerslist", listOrderBeans); 
+			else 
+				jsonObj.put("inactivecustomerslist", "NOT_FOUND");
+				System.out.println("rest call user status:  "+code);
+		return String.valueOf(jsonObj);
+	}
+	
+	@RequestMapping(value = "/inActiveUsers",method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getAllActiveOrInactiveTasks(User  objdept,HttpServletRequest request) throws JsonProcessingException,JSONException
+	{
+		LOGGER.debug("Calling inActiveUsers at controller");
+		String code =null;
+		List<User> listOrderBeans  = userService.getInActiveList();
+		JSONObject jsonObj = new JSONObject();
+			if (null != listOrderBeans) 
+				jsonObj.put("inactiveuserslist", listOrderBeans);
+			else 
+				jsonObj.put("inactiveuserslist", "NOT_FOUND");
+			System.out.println("rest call user status:  "+code);	
+		return String.valueOf(jsonObj);
+	}
+
+	@RequestMapping(value = "/inActiveTasks",method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getAllActiveOrInactiveTasks(AbheeTask  objorg,HttpServletRequest request) throws JsonProcessingException,JSONException
+	{
+		LOGGER.debug("Calling inActiveTasks at controller");
+		String code =null;
+		List<Map<String, Object>> listOrderBeans  = abheeTaskDao.getInActiveTasksList();
+		JSONObject jsonObj = new JSONObject();
+			if (null != listOrderBeans) 
+				jsonObj.put("inactivetaskslist", listOrderBeans);
+			else 
+				jsonObj.put("inactivetaskslist", "NOT_FOUND");
+			System.out.println("rest call user status:  "+code);
+		return String.valueOf(jsonObj);
+	}
+
+	@RequestMapping(value = "/inActiveProductWarranty",method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getAllActiveOrInactiveWarrantyList(ProductGuarantee  productGuarantee ,HttpServletRequest request) throws JsonProcessingException,JSONException
+	{
+		LOGGER.debug("Calling inActiveProductWarranty at controller");
+		String code =null;
+		List<Map<String, Object>> listOrderBeans  = productGuaranteeDao.getAllInActiveList();
+		JSONObject jsonObj = new JSONObject();
+			if (null != listOrderBeans) 
+				jsonObj.put("inactiveproductwarrantylist", listOrderBeans);
+		 else 
+				jsonObj.put("inactiveproductwarrantylist", "NOT_FOUND");	
+			System.out.println("rest call user status:  "+code);
+		return String.valueOf(jsonObj);
+	}
+	
+	@PostMapping(value="/deleteProduct", consumes = "application/json", produces = "application/json")
+    public String deleteProduct( @RequestBody Category cate,HttpServletRequest request) throws JSONException       
+	{
+		LOGGER.debug("Calling deleteProduct at controller");
+		//int result = categoryDao.deactiveCategory(cate.getStatus(),cate.getId());
+		categoryDao.deactiveCategory(cate.getStatus(),cate.getId());
+		JSONObject jsonObj = new JSONObject();
+		if(!cate.getStatus().equals("0"))
+		{
+			jsonObj .put("status", "Not Deactivated");
+		}
+		else
+			jsonObj .put("status", "Deactivated");	
+            return String.valueOf(jsonObj);
+	}
+	@PostMapping(value="/deleteCompany", consumes = "application/json", produces = "application/json")
+    public String deleteCompany( @RequestBody Company com,HttpServletRequest request) throws JSONException       
+	{
+		LOGGER.debug("Calling deleteCompany at controller");
+		//int result = categoryDao.deactiveCategory(cate.getStatus(),cate.getId());
+		companyDao.deactiveCompany(com.getStatus(),com.getId());
+		JSONObject jsonObj = new JSONObject();
+		if(!com.getStatus().equals("0"))
+		{
+			jsonObj .put("status", "Not Deactivated");
+		}
+		else
+			jsonObj .put("status", "Deactivated");	
+            return String.valueOf(jsonObj);
+	}
+	
+	@PostMapping(value="/deleteProductModel", consumes = "application/json", produces = "application/json")
+    public String deleteProductModel( @RequestBody Product pro,HttpServletRequest request) throws JSONException       
+	{
+		LOGGER.debug("Calling deleteProductModel at controller");
+		//int result = categoryDao.deactiveCategory(cate.getStatus(),cate.getId());
+		productDao.deactiveProductModel(pro.getStatus(), pro.getId());
+		JSONObject jsonObj = new JSONObject();
+		if(!pro.getStatus().equals("0"))
+		{
+			jsonObj .put("status", "Not Deactivated");
+		}
+		else
+			jsonObj .put("status", "Deactivated");	
+            return String.valueOf(jsonObj);
+	}  
+	
+	@PostMapping(value="/deleteCustomer", consumes = "application/json", produces = "application/json")
+    public String deleteCustomer( @RequestBody Customer cust,HttpServletRequest request) throws JSONException       
+	{
+		LOGGER.debug("Calling deleteCustomer at controller");
+		//int result = categoryDao.deactiveCategory(cate.getStatus(),cate.getId());
+		customerDao.deactiveCustomer(cust.getStatus(), cust.getId());
+		JSONObject jsonObj = new JSONObject();
+		if(!cust.getStatus().equals("0"))
+		{
+			jsonObj .put("status", "Not Deactivated");
+		}
+		else
+			jsonObj .put("status", "Deactivated");	
+            return String.valueOf(jsonObj);
+	}
+	
+	@PostMapping(value="/deleteUser", consumes = "application/json", produces = "application/json")
+    public String deleteUser( @RequestBody User user,HttpServletRequest request) throws JSONException       
+	{
+		LOGGER.debug("Calling deleteUser at controller");
+		//int result = categoryDao.deactiveCategory(cate.getStatus(),cate.getId());
+		userDao.deactiveUser(user.getStatus(), user.getId());
+		JSONObject jsonObj = new JSONObject();
+		if(!user.getStatus().equals("0"))
+		{
+			jsonObj .put("status", "Not Deactivated");
+		}
+		else
+			jsonObj .put("status", "Deactivated");	
+            return String.valueOf(jsonObj);
+	}
+	@PostMapping(value="/deleteServiceRequest", consumes = "application/json", produces = "application/json")
+    public String deleteTask( @RequestBody AbheeTask task,HttpServletRequest request) throws JSONException       
+	{
+		LOGGER.debug("Calling deleteServiceRequest at controller");
+		//int result = categoryDao.deactiveCategory(cate.getStatus(),cate.getId());
+		abheeTaskDao.deactiveTask(task.getStatus(), task.getId());
+		JSONObject jsonObj = new JSONObject();
+		if(!task.getStatus().equals("0"))
+		{
+			jsonObj .put("status", "Not Deactivated");
+		}
+		else
+			jsonObj .put("status", "Deactivated");	
+            return String.valueOf(jsonObj);
+	}
+	
+	@PostMapping(value="/deleteProductWarranty", consumes = "application/json", produces = "application/json")
+    public String deleteProductWarranty( @RequestBody ProductGuarantee pg,HttpServletRequest request) throws JSONException       
+	{
+		LOGGER.debug("Calling deleteProduct at controller");
+		//int result = categoryDao.deactiveCategory(cate.getStatus(),cate.getId());
+		productGuaranteeDao.deactiveProductWarranty(pg.getStatus(), pg.getOrderId());
+		JSONObject jsonObj = new JSONObject();
+		if(!pg.getStatus().equals("0"))
+		{
+			jsonObj .put("status", "Not Deactivated");
+		}
+		else
+			jsonObj .put("status", "Deactivated");	
+            return String.valueOf(jsonObj);
 	}
 }

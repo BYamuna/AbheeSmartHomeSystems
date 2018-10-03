@@ -628,7 +628,11 @@ public int getPassword(User user)
 	return result; 	
 }
 	
-	
+public void deactiveUser(String status, Integer id) 
+{
+	String sql="update abheeusers set enabled='"+status+"'where id='"+id+"'";
+	jdbcTemplate.execute(sql);	
+}	
 	
 
 

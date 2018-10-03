@@ -1,49 +1,42 @@
 package com.charvikent.abheeSmartHomeSystems.dao;
 
-
-
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 
 @Repository
 @Transactional
 public class CategoryDao {
-
-	@PersistenceContext
-    private EntityManager entityManager;
-
-
+	
+	@Autowired private JdbcTemplate jdbcTemplate;
+	@PersistenceContext private EntityManager entityManager;
+	
 	public void saveCategory(Category category ) {
 		entityManager.persist(category);
-
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Category> getCategoryNames()
 	 {
-
-		return entityManager.createQuery("  from Category where status='1' ").getResultList();
+		return entityManager.createQuery("  from Category where status='1' order by updatedTime desc").getResultList();
 
 	 }
+	
 	public Category getCategoryNameById(Category cate) {
 		
 		@SuppressWarnings("unchecked")
 		List<Category> cateList =(List<Category>) entityManager.createQuery("SELECT cate FROM Category cate where category =:custName ").setParameter("custName",cate.getCategory()).getResultList();
 		if(cateList.size() > 0)
 			return cateList.get(0);
-		return null;
-		
+		return null;	
 	}
-	
 	
 	public void UpdateCategory(Category cate)
 	{
@@ -53,8 +46,6 @@ public class CategoryDao {
 		entityManager.flush();
 	}
 
-	
-	
 	public boolean deleteCategory(Integer id, String status) {
 		Boolean delete=false;
 		try{
@@ -91,8 +82,13 @@ public class CategoryDao {
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-		return rolesMap;
-				
+		return rolesMap;				
+	}
+
+	public void deactiveCategory(String status,Integer id) 
+	{
+		String sql="update abheecategory set status='"+status+"'where id='"+id+"'";
+		jdbcTemplate.execute(sql);
 		
 	}
 }

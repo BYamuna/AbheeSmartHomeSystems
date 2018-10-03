@@ -114,6 +114,7 @@ public void updateCustomer(Customer user)
 	
 	uc.setMobilenumber(user.getMobilenumber());
 	uc.setEmail(user.getEmail());
+	uc.setAddress(user.getAddress());
 	uc.setCommunicationaddress(user.getCommunicationaddress());
 	//uc.setBranchId(user.getBranchId());
 	//uc.setBranchName(user.getBranchName());
@@ -418,6 +419,10 @@ public Customer checkCustomerExistOrNotByEmailOnEdit(String custEmail, String ed
 		return result; 
 		
 	}
-
+	public void deactiveCustomer(String status, Integer id) 
+	{
+		String sql="update abhee_customer set status='"+status+"'where id='"+id+"'";
+		jdbcTemplate.execute(sql);	
+	}
 
 }

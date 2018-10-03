@@ -251,14 +251,10 @@ public class ProductController
 		try{
 			if(objdept.getStatus().equals("0"))
 				listOrderBeans = productDao.getAllInActiveList();
-				else
-					listOrderBeans = productDao.getProductDetails();
-					
-					
- 				
-			 objectMapper = new ObjectMapper();
+			else
+				listOrderBeans = productDao.getProductDetails();
+			 	objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
-				
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", sJson);
@@ -272,11 +268,9 @@ public class ProductController
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-	System.out.println(e);
-			return String.valueOf(jsonObj);
-			
+			System.out.println(e);
+			return String.valueOf(jsonObj);	
 		}
 		return String.valueOf(jsonObj);
 	}	
-
 }

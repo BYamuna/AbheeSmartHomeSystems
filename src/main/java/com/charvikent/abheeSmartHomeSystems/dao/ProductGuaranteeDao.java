@@ -176,5 +176,10 @@ public class ProductGuaranteeDao
 		return ordersList;
 	}
 	
+	public void deactiveProductWarranty(String status, String id) 
+	{
+		String sql="update abheeproductguarantee set status='"+status+"'where id='"+id+"'";
+		jdbcTemplate.execute(sql);		
+	}
 	
 }

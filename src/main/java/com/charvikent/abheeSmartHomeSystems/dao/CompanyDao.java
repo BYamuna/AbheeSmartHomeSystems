@@ -107,4 +107,9 @@ public class CompanyDao
 		
 		return retlist;
 	}
+	public void deactiveCompany(String status, Integer id) 
+	{
+		String sql="update abhee_company set status='"+status+"'where id='"+id+"'";
+		jdbcTemplate.execute(sql);	
+	}
 }
