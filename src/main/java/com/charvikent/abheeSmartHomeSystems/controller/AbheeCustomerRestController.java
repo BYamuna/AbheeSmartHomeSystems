@@ -367,7 +367,6 @@ public class AbheeCustomerRestController
 		//String imgData = request.getParameter("imgfile");
 		if (StringUtils.isNotBlank(multipartFile)) {
 		//	Base64Decoder decoder = new Base64Decoder(); 
-			
 			File pathFile=fileTemplate.makeDirectory();
 			try (FileOutputStream imageOutFile = new FileOutputStream(pathFile)) {
 			 //byte[] imgBytes = Base64.getDecoder().decode(multipartFile.split(",")[1]);
@@ -493,7 +492,7 @@ public class AbheeCustomerRestController
 	public String  getPasswordInfo( @RequestBody Customer customer) throws JsonProcessingException, JSONException
 	{
 		LOGGER.debug("Calling restChangePassword at controller");
-		   int result = customerDao.getPassword(customer);
+		int result = customerDao.getPassword(customer);
 		JSONObject json =new JSONObject();
 			if(result==1)
 			{
@@ -503,7 +502,36 @@ public class AbheeCustomerRestController
 				json.put("password", "Not Updated");
 		return String.valueOf(json);
 	}
-
+	
+	@SuppressWarnings("unused")
+	@RequestMapping(value = "/restForgotPassword", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getForgotPassword(@RequestBody Customer user,HttpServletRequest request) throws IOException, JSONException 
+	{
+		LOGGER.debug("Calling  restForgotPassword at controller");
+		System.out.println("enter to restForgotPassword");
+		HttpStatus code =null;
+		JSONObject json =new JSONObject();
+		String custMobile=user.getMobilenumber();
+		Customer custbean2 =customerDao.checkCustomerExistOrNotbyMobile(custMobile);
+		try {
+			String status = sendSMS.sendSMS(custbean2.getPassword(),custMobile);
+			if(status.equals("OK"))
+			{
+				code = HttpStatus.OK;
+			}else
+			{
+				code=HttpStatus.NOT_FOUND;
+			}
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		json.put("password", custbean2.getPassword());
+		return String.valueOf(json);
+		/*ResponseEntity<String> response = new ResponseEntity<String>(custbean2.getPassword(),code);
+		return response;*/
+	}
+	
 	@RequestMapping(value="/getTicketStatus", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public String  getTaskStatusByCustomerId( @RequestBody Customer customer) throws JsonProcessingException, JSONException 
 	{
@@ -1607,7 +1635,7 @@ public String  getProductsModelsList()
 	@PostMapping(value="/deleteProductWarranty", consumes = "application/json", produces = "application/json")
     public String deleteProductWarranty( @RequestBody ProductGuarantee pg,HttpServletRequest request) throws JSONException       
 	{
-		LOGGER.debug("Calling deleteProduct at controller");
+		LOGGER.debug("Calling deleteProductWarranty at controller");
 		//int result = categoryDao.deactiveCategory(cate.getStatus(),cate.getId());
 		productGuaranteeDao.deactiveProductWarranty(pg.getStatus(), pg.getOrderId());
 		JSONObject jsonObj = new JSONObject();

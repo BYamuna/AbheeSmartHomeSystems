@@ -437,8 +437,6 @@ public class AbheeCustRegistrationController
 		
 		String custMobile=request.getParameter("resetmobile");
 		Customer custbean2 =customerDao.checkCustomerExistOrNotbyMobile(custMobile);
-		 
-		
 		if(custbean2 != null)
 		{
 			sendSMS.sendSMS(custbean2.getPassword(),custMobile);
