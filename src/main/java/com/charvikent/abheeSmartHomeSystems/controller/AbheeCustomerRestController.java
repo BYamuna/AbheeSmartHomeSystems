@@ -93,19 +93,38 @@ public class AbheeCustomerRestController
 		return null;	
 	}
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value="/saveRestCustomer", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public HashMap<String, String>  SaveAbheeCustomer( @RequestBody Customer customer) 
 	{
 		LOGGER.debug("Calling saveRestCustomer at controller");
 		String code =null;
 		String regSuccessMsg =customer.getFirstname()+" "+customer.getLastname()+",  Successfully registered with ABhee Smart Homes. \n You can login using  \n UserId:  "+customer.getMobilenumber()+" or "+customer.getEmail()+"\n password: "+customer.getPassword();
+		int id = 0;
 		try 
 		{
-			customer.setRegistedredFromAndroid("1");
-			customerDao.saveAbheeCustomer(customer);
-			sendSMS.sendSMS(regSuccessMsg,customer.getMobilenumber());
-			code = customer.getFirstname()+" "+customer.getLastname();
-		}catch (IOException e) 
+			Customer userBean=customerDao.getCustomerByObject(customer);
+			int dummyId =0;
+						if(userBean != null)
+						{
+							dummyId = userBean.getId();
+						}
+						if(customer.getId()==null)
+						{
+							if(dummyId ==0)
+							{
+								customer.setRegistedredFromAndroid("1");
+								customerDao.saveAbheeCustomer(customer);
+								sendSMS.sendSMS(regSuccessMsg,customer.getMobilenumber());
+								code = customer.getFirstname()+" "+customer.getLastname();
+							}
+							else 
+							{
+								code="Already Registered";
+							}
+						}	
+		             }
+		catch (IOException e) 
 		{
 			code="NOT_FOUND";
 			e.printStackTrace();

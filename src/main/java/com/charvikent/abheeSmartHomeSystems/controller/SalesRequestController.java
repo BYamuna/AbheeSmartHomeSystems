@@ -43,11 +43,10 @@ public class SalesRequestController
 	@RequestMapping(value = "/salesRequest" ,method = RequestMethod.GET)
 	public String saveRequest(@ModelAttribute("salesRequest")SalesRequest salesrequest,Model model)
 	{ 
-		
 		model.addAttribute("salesRequest", new SalesRequest());
-		return "salesRequest";
-		
+		return "salesRequest";		
 	}
+	
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/salesRequest", method = RequestMethod.POST)
 	public String saveRequestDetails(@RequestParam("modelnumber") String modelnumber,

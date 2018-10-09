@@ -111,7 +111,6 @@ public Customer getCustomerByObject(Customer customer) {
 public void updateCustomer(Customer user) 
 {
 	Customer uc= (Customer)entityManager.find(Customer.class ,user.getId());
-	
 	uc.setMobilenumber(user.getMobilenumber());
 	uc.setEmail(user.getEmail());
 	uc.setAddress(user.getAddress());

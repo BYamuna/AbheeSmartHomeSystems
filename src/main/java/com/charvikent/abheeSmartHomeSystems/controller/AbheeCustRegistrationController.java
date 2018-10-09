@@ -153,7 +153,6 @@ public class AbheeCustRegistrationController
 	{
 		LOGGER.debug("Calling  customerDashBoard at controller");
 		return "customerDashBoard";
-		
 	}
 	
 	@SuppressWarnings("unused")
@@ -162,35 +161,23 @@ public class AbheeCustRegistrationController
 	{
 		LOGGER.debug("Calling  modelSubmit at controller");
 		System.out.println("enter to model Submit");
-		
 		String custMobile=request.getParameter("cmobile");
 		String cemail=request.getParameter("cemail");
 		String csname=request.getParameter("csname");
 		String cname=request.getParameter("cname");
 		String cotp=request.getParameter("cotp");
 		String cpassword=request.getParameter("cpassword");
-		
-		/*AbheeCustRegistration abcust =new AbheeCustRegistration();
-		
+		/*AbheeCustRegistration abcust =new AbheeCustRegistration();		
 		abcust.setMobileno(custMobile);
 		abcust.setName(cname);
 		abcust.setSurname(csname);
 		abcust.setEmail(cemail);
 		abcust.setOTP(cotp);
-		
 		adao.saveabheecustregistration(abcust);
 		*/
-		
 		Customer customer =new Customer();
-		
-		
 		String usernumber =kptsUtil.randNum();
-		  
 		String regSuccessMsg =csname+" "+cname+",  Successfully registered with ABhee Smart Homes. \n You can login using  \n UserId:  "+custMobile+" or "+cemail+"\n password: "+cpassword;
-
-		
-		
-		
 		customer.setMobilenumber(custMobile);
 		customer.setFirstname(csname);
 		customer.setLastname(cname);
@@ -198,7 +185,6 @@ public class AbheeCustRegistrationController
 		customer.setPassword(cpassword);
 		customer.setEnabled("1");
 		customer.setCustomerType("1");
-		
 		//customer.setUsername(str);
 		String returnmsg ="";
 		if(otpnumber.equals(cotp))
@@ -207,38 +193,25 @@ public class AbheeCustRegistrationController
 			customerDao.saveAbheeCustomer(customer);
 		sendSMS.sendSMS(regSuccessMsg,custMobile);
 		return true;
-		
 		}
 		else
-		return false;
-		
+		return false;	
 	}
-	
-	
 	
 	@RequestMapping(value = "/getOtp", method = RequestMethod.POST)
 	public @ResponseBody  Boolean getOTP(Model model,HttpServletRequest request) throws IOException 
 	{
 		LOGGER.debug("Calling  getOtp at controller");
 		System.out.println("enter to getOtp");
-		
 		String custMobile=request.getParameter("cmobile");
 		Random random = new Random();
 		 otpnumber = String.format("%04d", random.nextInt(10000));
-		
 		sendSMS.sendSMS(otpnumber,custMobile);
 		OTPDetails oTPDetails =new OTPDetails();
-		
 		oTPDetails.setMobileno(custMobile);
 		oTPDetails.setOTPnumber(otpnumber);
-		
-		oTPDetailsDao.saveOTPdetails(oTPDetails);
-		
-		
-		
-		
-		return true;
-		
+		oTPDetailsDao.saveOTPdetails(oTPDetails);		
+		return true;		
 	}
 	
 	@RequestMapping(value = "/checkEmailExst", method = RequestMethod.POST)
@@ -246,20 +219,16 @@ public class AbheeCustRegistrationController
 	{
 		LOGGER.debug("Calling  checkEmailExst at controller");
 		System.out.println("enter to checkCustExst");
-		
 		String custEmail=request.getParameter("cemail");
 		String editFieldsId=request.getParameter("editFields");
-		 Customer customer =null;
-		
+		Customer customer =null;
 		 if(editFieldsId.equals("0"))
 			{
-			
 			 customer	=customerDao.checkCustomerExistOrNotByEmail(custEmail);
 			}
 			else
 			{
 				  customer =customerDao.checkCustomerExistOrNotByEmailOnEdit(custEmail,editFieldsId);
-				
 			}
 		if(customer != null)
 		{
@@ -268,10 +237,8 @@ public class AbheeCustRegistrationController
 		else
 		
 		return false;
-		
 	}
-	
-	
+
 	@RequestMapping(value = "/inActiveCust")
 	public @ResponseBody String getAllActiveOrInactiveOrgnizations(Customer  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		LOGGER.debug("Calling  inActiveCust at controller");
@@ -283,13 +250,9 @@ public class AbheeCustRegistrationController
 			if(objdept.getStatus().equals("0"))
 				listOrderBeans = customerDao.getCustomerInActiveList();
 				else
-					listOrderBeans =  customerDao.getAbheeCustomerNames();
-
-
-
+				listOrderBeans =  customerDao.getAbheeCustomerNames();
 			 objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
-
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", sJson);
@@ -305,7 +268,6 @@ public class AbheeCustRegistrationController
 			e.printStackTrace();
 	System.out.println(e);
 			return String.valueOf(jsonObj);
-
 		}
 		return String.valueOf(jsonObj);
 	}
@@ -327,7 +289,6 @@ public class AbheeCustRegistrationController
  					jsonObj.put("message", "delete fail");
  				}
  			}
-
 			listOrderBeans =  customerDao.getAbheeCustomerNames();
 			 objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
@@ -354,15 +315,11 @@ public class AbheeCustRegistrationController
 	
 	@RequestMapping(value = "/custreg" ,method = RequestMethod.POST)
 	public String saveCustomer(@Valid @ModelAttribute("custreg")  Customer user, BindingResult bindingresults,RedirectAttributes redir) throws IOException {
-
 		LOGGER.debug("Calling  custreg at controller");
-		
-
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
 			return "redirect:/";
 		}
-
 		int id = 0;
 		try
 		{
@@ -370,27 +327,19 @@ public class AbheeCustRegistrationController
 			if(user.getId()!=null)
 			{
 			  userBean= customerDao.getCustomerByObject(user);
-
 			}
 			int dummyId =0;
 
 			if(userBean != null){
 				dummyId = userBean.getId();
 			}
-
 			if(user.getId()==null)
 			{
 				if(dummyId ==0)
 				{
-
-
 					user.setEnabled("1");
-
-					customerDao.saveAbheeCustomer(user);
-					
-					
+					customerDao.saveAbheeCustomer(user);	
 					sendingMail.sendConfirmationEmail(user);
-
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");
 					redir.addFlashAttribute("cssMsg", "success");
 
@@ -398,11 +347,8 @@ public class AbheeCustRegistrationController
 				{
 					redir.addFlashAttribute("msg", "Already Record Exist");
 					redir.addFlashAttribute("cssMsg", "danger");
-
 				}
-
 			}
-
 			else
 			{
 				id=user.getId();
@@ -412,15 +358,12 @@ public class AbheeCustRegistrationController
 					sendingMail.sendConfirmationEmail(user);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
-
 				} else
 				{
 					redir.addFlashAttribute("msg", "Already Record Exist");
 					redir.addFlashAttribute("cssMsg", "danger");
 				}
-
 			}
-
 		}catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);
@@ -428,7 +371,6 @@ public class AbheeCustRegistrationController
 		return "redirect:custRegistration";
 	}
 
-	
 	@RequestMapping(value = "/getresetcustomerpassword", method = RequestMethod.POST)
 	public @ResponseBody  Boolean getResetCustomerPassword(Model model,HttpServletRequest request) throws IOException, MessagingException 
 	{
@@ -442,7 +384,6 @@ public class AbheeCustRegistrationController
 			sendSMS.sendSMS(custbean2.getPassword(),custMobile);
 			sendingMail.resetPassword(custbean2);
 			return true;
-			
 		}
 		else
 			return false;
@@ -456,17 +397,13 @@ public class AbheeCustRegistrationController
 		String custMobile=request.getParameter("cmobile");
 		String editFieldsId=request.getParameter("editFields");
 		User custbean =null;
-		
-		
 		 if(editFieldsId.equals("0"))
 			{
-			
 			 custbean	=userService.checkEmployeeExistOrNotbyMobile(custMobile);
 			}
 			else
 			{
-				custbean =userService.checkEmployeeExistOrNotbyMobileOnEdit(custMobile,editFieldsId);
-				
+				custbean =userService.checkEmployeeExistOrNotbyMobileOnEdit(custMobile,editFieldsId);	
 			}
 		if(custbean != null)
 		{
@@ -475,7 +412,6 @@ public class AbheeCustRegistrationController
 		else
 		
 		return false;
-		
 	}
 	
 	@RequestMapping(value = "/checkEmpExstbyemail", method = RequestMethod.POST)
@@ -486,18 +422,13 @@ public class AbheeCustRegistrationController
 		String empcemail=request.getParameter("cemail");
 		String editFieldsId=request.getParameter("editFields");
 		User custbean =null;
-		
-		
-		
 		 if(editFieldsId.equals("0"))
 			{
-			
 			 custbean	=userService.checkEmployeeExistOrNotbyEmail(empcemail);
 			}
 			else
 			{
-				custbean =userService.checkEmployeeExistOrNotbyEmail(empcemail,editFieldsId);
-				
+				custbean =userService.checkEmployeeExistOrNotbyEmail(empcemail,editFieldsId);	
 			}
 		if(custbean != null)
 		{
@@ -505,8 +436,7 @@ public class AbheeCustRegistrationController
 		}
 		else
 		
-		return false;
-		
+		return false;	
 	}
 	
 	@RequestMapping(value = "/resendOtp", method = RequestMethod.POST)
@@ -514,14 +444,10 @@ public class AbheeCustRegistrationController
 	{
 		LOGGER.debug("Calling  resendOtp at controller");
 		System.out.println("enter to resendOtp");
-		
 		String custMobile=request.getParameter("cmobile");
 		Random random = new Random();
-		 otpnumber = String.format("%04d", random.nextInt(10000));
-		
-		
+		otpnumber = String.format("%04d", random.nextInt(10000));
 		OTPDetails oTPDetails =new OTPDetails();
-		
 		oTPDetails.setMobileno(custMobile);
 		oTPDetails.setOTPnumber(otpnumber);
 		List<Map<String, Object>> curotplist=oTPDetailsDao.getCurrentDayList(custMobile);

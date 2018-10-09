@@ -102,7 +102,7 @@ public class FilesStuff {
 		String sfn ="";
         for(String files: fileNames)
         {
-        	sfn=sfn+files+"*"; 
+        	sfn=sfn+files+","; 
         }
         String sfn2=sfn.substring(0,sfn.length()-1);
  
