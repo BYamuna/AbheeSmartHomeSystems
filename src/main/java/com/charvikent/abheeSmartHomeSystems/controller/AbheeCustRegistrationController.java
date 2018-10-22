@@ -191,11 +191,11 @@ public class AbheeCustRegistrationController
 		{
 			customer.setRegistedredFromAndroid("0");
 			customerDao.saveAbheeCustomer(customer);
-		sendSMS.sendSMS(regSuccessMsg,custMobile);
-		return true;
+			sendSMS.sendSMS(regSuccessMsg,custMobile);
+			return true;
 		}
 		else
-		return false;	
+			return false;	
 	}
 	
 	@RequestMapping(value = "/getOtp", method = RequestMethod.POST)
@@ -224,7 +224,7 @@ public class AbheeCustRegistrationController
 		Customer customer =null;
 		 if(editFieldsId.equals("0"))
 			{
-			 customer	=customerDao.checkCustomerExistOrNotByEmail(custEmail);
+			 customer =customerDao.checkCustomerExistOrNotByEmail(custEmail);
 			}
 			else
 			{
@@ -235,7 +235,6 @@ public class AbheeCustRegistrationController
 			return true;
 		}
 		else
-		
 		return false;
 	}
 
@@ -308,7 +307,6 @@ public class AbheeCustRegistrationController
 			e.printStackTrace();
 	System.out.println(e);
 			return String.valueOf(jsonObj);
-
 		}
 		return String.valueOf(jsonObj);
 	}
@@ -386,9 +384,9 @@ public class AbheeCustRegistrationController
 			return true;
 		}
 		else
-			return false;
-		
+			return false;	
 	}
+	
 	@RequestMapping(value = "/checkEmpExst", method = RequestMethod.POST)
 	public @ResponseBody  Boolean checkCustomerExistence1(@Validated @ModelAttribute Customer abheecustregistration,Model model,HttpServletRequest request) throws IOException 
 	{
@@ -435,8 +433,7 @@ public class AbheeCustRegistrationController
 			return true;
 		}
 		else
-		
-		return false;	
+		    return false;	
 	}
 	
 	@RequestMapping(value = "/resendOtp", method = RequestMethod.POST)

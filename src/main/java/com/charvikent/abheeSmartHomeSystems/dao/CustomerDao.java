@@ -84,8 +84,7 @@ public Customer checkuserExistOrNot(Customer customer) {
 
 @SuppressWarnings("unchecked")
 public Customer validateCustomer(String loginid, String password) {
-	
-	String hql =" from Customer  where enabled='1'and mobilenumber ='"+loginid+"' and password='"+password +"'";
+	String hql =" from Customer  where enabled='1'and (mobilenumber ='"+loginid+"' or email = '"+loginid+"') and password='"+password +"'";
 	Query query =entityManager.createQuery(hql);
 	List<Customer>usersList =query.getResultList();
 	if(usersList.isEmpty())
@@ -176,7 +175,7 @@ return null;
 public Customer checkCustomerExistOrNot(Customer custreg)
 {
 	
-	String hql ="from Customer where mobileno='"+custreg.getMobilenumber()+"'";
+	String hql ="from Customer where mobilenumber='"+custreg.getMobilenumber()+"'";
 	
 	
 List<Customer> custlist =	entityManager.createQuery(hql).getResultList();

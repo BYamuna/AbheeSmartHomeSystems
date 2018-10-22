@@ -348,19 +348,15 @@ function getHeadersCounts(){
 
 }
 
-function getAssignedNotifications(){
-	
+function getAssignedNotifications()
 	 var formData = new FormData();
-	    
 		$.fn.makeMultipartRequest('POST', 'getAssignedNotifications', false,
 				formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
 			//alert(jsonobj);
 			var assigned_notifications =data;
 			displayAssignedNotifications(jsonobj.AssignedNotifications);
-			
 		});  
-
 }
 
 

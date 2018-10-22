@@ -93,46 +93,38 @@ public class AbheeCustomerRestController
 		return null;	
 	}
 	
-	@SuppressWarnings("unused")
 	@RequestMapping(value="/saveRestCustomer", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
-	public HashMap<String, String>  SaveAbheeCustomer( @RequestBody Customer customer) 
+	public HashMap<String, String>  SaveAbheeCustomer( @RequestBody Customer customer) throws IOException 
 	{
 		LOGGER.debug("Calling saveRestCustomer at controller");
 		String code =null;
+		HashMap<String,String> hm =new HashMap<String,String>();
 		String regSuccessMsg =customer.getFirstname()+" "+customer.getLastname()+",  Successfully registered with ABhee Smart Homes. \n You can login using  \n UserId:  "+customer.getMobilenumber()+" or "+customer.getEmail()+"\n password: "+customer.getPassword();
-		int id = 0;
 		try 
-		{
-			Customer userBean=customerDao.getCustomerByObject(customer);
-			int dummyId =0;
-						if(userBean != null)
-						{
-							dummyId = userBean.getId();
-						}
-						if(customer.getId()==null)
-						{
-							if(dummyId ==0)
-							{
-								customer.setRegistedredFromAndroid("1");
-								customerDao.saveAbheeCustomer(customer);
-								sendSMS.sendSMS(regSuccessMsg,customer.getMobilenumber());
-								code = customer.getFirstname()+" "+customer.getLastname();
-							}
-							else 
-							{
-								code="Already Registered";
-							}
-						}	
-		             }
+		{			
+			Customer custexist=customerDao.checkCustomerExistOrNot(customer);
+			if(custexist==null)
+			{
+			customer.setRegistedredFromAndroid("1");
+			customer.setEnabled("1");
+			customerDao.saveAbheeCustomer(customer);
+			sendSMS.sendSMS(regSuccessMsg,customer.getMobilenumber());
+			code=customer.getFirstname()+" "+customer.getLastname();
+			}
+			else
+			{
+				code="Already Registered";
+			}
+		}
 		catch (IOException e) 
 		{
 			code="NOT_FOUND";
 			e.printStackTrace();
-		}		
-		HashMap<String,String> hm =new HashMap<String,String>();
+		}
+		System.out.println(regSuccessMsg);
 		hm.put("status", code);
-		return hm;
-	}
+		return hm;	
+		}
   
 	@RequestMapping(value="/requestsms", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public ResponseEntity<String>  getOTP( @RequestBody Customer user) 
@@ -174,17 +166,11 @@ public class AbheeCustomerRestController
 		String code =null;
         Customer custbean1 =customerDao.checkCustomerExistOrNotbyMobile(custMobile);
         Customer customer =customerDao.checkCustomerExistOrNotByEmail(custemail);
-		if(custbean1 != null)
-		{
-			code ="already exists Mobile";
-		}
-		else if(customer !=null)
-		{
-			code  ="already exists Email";
-		}
-		else
+        HashMap<String,String> hm =new HashMap<String,String>();
+		if(custMobile==custBean.getMobilenumber() || custemail==custBean.getEmail())
 		{
 		try {
+			/*customerDao.saveAbheeCustomer(custBean);*/
 			String status = sendSMS.sendSMS(otpnumber,custMobile);
 			if(status.equals("OK"))
 			{
@@ -193,19 +179,25 @@ public class AbheeCustomerRestController
 				oTPDetails.setMobileno(custMobile);
 				oTPDetails.setOTPnumber(otpnumber);
 				oTPDetailsDao.saveOTPdetails(oTPDetails);
+				hm.put("otpnumber", otpnumber);
+				hm.put("statuscode", code);
 			}
 			else
 			{
 				code="NOT_FOUND";
+				hm.put("statuscode", code);
 			}
-		}catch (IOException e) 
+		}
+		catch (IOException e) 
 		{
-			e.printStackTrace();
+		e.printStackTrace();
 		}
 		}
-		HashMap<String,String> hm =new HashMap<String,String>();
-		hm.put("otpnumber", otpnumber);
-		hm.put("statuscode", code);
+		else
+		{
+			code="Your mobilenumber and email not matched";
+			hm.put("statuscode", code);
+		}		
 		return hm;		
 	}
 	
