@@ -71,7 +71,7 @@ public class CustomerDao {
 @SuppressWarnings("unchecked")
 public Customer checkuserExistOrNot(Customer customer) {
 	
-	String hql =" from Customer  where (mobilenumber ='"+customer.getMobilenumber()+"') and password='"+customer.getPassword()+"'";
+	String hql =" from Customer  where (mobilenumber ='"+customer.getMobilenumber()+"'or email='"+customer.getEmail()+"') and password='"+customer.getPassword()+"'";
 	Query query =entityManager.createQuery(hql);
 	
 	List<Customer>usersList =query.getResultList();
@@ -174,17 +174,13 @@ return null;
 @SuppressWarnings("unchecked")
 public Customer checkCustomerExistOrNot(Customer custreg)
 {
-	
-	String hql ="from Customer where mobilenumber='"+custreg.getMobilenumber()+"'";
-	
-	
-List<Customer> custlist =	entityManager.createQuery(hql).getResultList();
-    
-if(custlist.size()>0)
-return custlist.get(0);
-else
-return null;
-	
+	String hql ="from Customer where mobilenumber='"+custreg.getMobilenumber()+"'";	
+	/*String hql ="from Customer where mobilenumber='"+custreg.getMobilenumber()+"' and email='"+custreg.getEmail()+"'";*/
+	List<Customer> custlist =	entityManager.createQuery(hql).getResultList();   
+	if(custlist.size()>0)
+	return custlist.get(0);
+	else
+	return null;	
 }
 
 @SuppressWarnings("unchecked")

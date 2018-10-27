@@ -21,19 +21,18 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-/*import org.springframework.web.bind.annotation.ModelAttribute;*/
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-/*import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;*/
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.KhaibarGasUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
@@ -85,6 +84,7 @@ public class AbheeCustomerRestController
 	@Autowired UserDao userDao;
 	@Autowired ProductGuaranteeDao productGuaranteeDao;
 	@Autowired AbheeBranchDao abheeBranchDao;
+	/*@Autowired private Environment environment;*/
 	
 	@RequestMapping("/Customer")
 	public String showCustomerRegistrationForm(Model model,HttpServletRequest request) throws JsonProcessingException
@@ -121,11 +121,50 @@ public class AbheeCustomerRestController
 			code="NOT_FOUND";
 			e.printStackTrace();
 		}
-		System.out.println(regSuccessMsg);
 		hm.put("status", code);
 		return hm;	
 		}
   
+	@RequestMapping(value = "/custMobileDuplicate", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public @ResponseBody String mobileDuplicate(@RequestBody Customer customer,  HttpServletRequest request)  {
+		JSONObject objJSON = new JSONObject();
+		try{
+			String mobileno=customer.getMobilenumber();
+			Customer custBean = customerDao.checkCustomerExistOrNotbyMobile(mobileno);
+			if(custBean!= null)
+			{
+				objJSON.put("Mobileno","already exists");
+			}else
+			{
+				objJSON.put("Mobileno","does not exists");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			objJSON.put("msg", "fail");
+		}
+		return String.valueOf(objJSON);
+	}
+	
+	@RequestMapping(value = "/custEmailDuplicate", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public @ResponseBody String emailDuplicate(@RequestBody Customer customer,  HttpServletRequest request)  {
+		JSONObject objJSON = new JSONObject();
+		try{
+			String emailId=customer.getEmail();
+			Customer custBean = customerDao.checkCustomerExistOrNotByEmail(emailId);
+			if(custBean!= null)
+			{
+				objJSON.put("Emailid","already exists");
+			}else
+			{
+				objJSON.put("Emailid","does not exists");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			objJSON.put("msg", "fail");
+		}
+		return String.valueOf(objJSON);
+	}
+	
 	@RequestMapping(value="/requestsms", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public ResponseEntity<String>  getOTP( @RequestBody Customer user) 
 	{		
@@ -133,9 +172,10 @@ public class AbheeCustomerRestController
 		String custMobile=user.getMobilenumber();
 		Random random = new Random();
 		String  otpnumber = String.format("%04d", random.nextInt(10000));
+		String msg="Dear,'"+user.getFirstname()+"' "+user.getLastname()+"', Thanks for registering with Abhee Smart Home Systems. OTP for your registration is:'"+otpnumber+"'";
 		HttpStatus code =null;
 		try {
-			String status = sendSMS.sendSMS(otpnumber,custMobile);
+			String status = sendSMS.sendSMS(msg,custMobile);
 			if(status.equals("OK"))
 			{
 				code = HttpStatus.OK;
@@ -151,7 +191,7 @@ public class AbheeCustomerRestController
 		oTPDetails.setMobileno(custMobile);
 		oTPDetails.setOTPnumber(otpnumber);
 		oTPDetailsDao.saveOTPdetails(oTPDetails);
-		ResponseEntity<String> response = new ResponseEntity<String>(otpnumber,code);
+		ResponseEntity<String> response = new ResponseEntity<String>(msg,code);
 		return response;		
 	}
 	
@@ -163,15 +203,20 @@ public class AbheeCustomerRestController
 		String custemail=custBean.getEmail();
 		Random random = new Random();
 		String  otpnumber = String.format("%04d", random.nextInt(10000));
+		/*String tmsg =environment.getProperty("app.otpmsg");
+		System.out.println(tmsg);
+		tmsg= tmsg.replaceAll("_fullname_", custBean.getFirstname()+" "+custBean.getLastname()); 
+		tmsg=tmsg.replaceAll("_otp_", otpnumber);*/
 		String code =null;
         Customer custbean1 =customerDao.checkCustomerExistOrNotbyMobile(custMobile);
         Customer customer =customerDao.checkCustomerExistOrNotByEmail(custemail);
+        String msg="Dear "+custbean1.getFirstname()+" "+custbean1.getLastname()+", Thanks for registering with Abhee Smart Home Systems. OTP for your registration is:"+otpnumber;
         HashMap<String,String> hm =new HashMap<String,String>();
 		if(custMobile==custBean.getMobilenumber() || custemail==custBean.getEmail())
 		{
 		try {
 			/*customerDao.saveAbheeCustomer(custBean);*/
-			String status = sendSMS.sendSMS(otpnumber,custMobile);
+			String status = sendSMS.sendSMS(msg,custMobile);
 			if(status.equals("OK"))
 			{
 				code = "OK";
@@ -179,7 +224,7 @@ public class AbheeCustomerRestController
 				oTPDetails.setMobileno(custMobile);
 				oTPDetails.setOTPnumber(otpnumber);
 				oTPDetailsDao.saveOTPdetails(oTPDetails);
-				hm.put("otpnumber", otpnumber);
+				hm.put("otpnumber", msg);
 				hm.put("statuscode", code);
 			}
 			else
@@ -205,7 +250,7 @@ public class AbheeCustomerRestController
 	@RequestMapping(value="/logincredentials", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public String  checkingLogincredentials( @RequestBody Customer customer) throws JsonProcessingException, JSONException 
 	{
-		LOGGER.debug("Calling logincrentails at controller");
+		LOGGER.debug("Calling logincredentails at controller");
 		String code =null;
 		HashMap<String,String> hm =new HashMap<String,String>();
 		JSONObject json =new JSONObject();

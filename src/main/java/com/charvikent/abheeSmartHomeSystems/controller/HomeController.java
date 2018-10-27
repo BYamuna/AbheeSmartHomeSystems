@@ -1,17 +1,12 @@
 package com.charvikent.abheeSmartHomeSystems.controller;
-
-
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -28,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ProductGuaranteeDao;
@@ -43,48 +37,32 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class HomeController {
-	
 	private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
-	
 	@Autowired UserService userService;
-	
 	@Autowired CustomerDao customerDao;
-	
-	@Autowired
-	CategoryDao categoryDao;
+	@Autowired CategoryDao categoryDao;
 	@Autowired ProductGuaranteeDao productGuaranteeDao;
-	
- static 	String loginurl=""; 
- 
- static boolean falg =true;
-	
+	static 	String loginurl=""; 
+	static boolean falg =true;
 	
 	@RequestMapping("/admin")
-	public String customlogin(Model model) {
-		
+	public String customlogin(Model model) {	
 		LOGGER.debug("Calling Admin Login page index::{} at controller");
-		
 		 /*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		 
 		 if (null != auth){    
 		        return "redirect:dashboard";
 		    }
 		 else*/
-		
 		return "login";
 	}
 	
 	@SuppressWarnings("unused")
 	@RequestMapping("/userlogin")
 	public String userLogin(Model model) {
-		
 		LOGGER.debug("Calling User Login page index::{} at controller");
-		
-		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		 
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		return "userlogin";
 	}
-	
 	
 	@RequestMapping("/login")
 	public String loginView(Model model) {
@@ -201,11 +179,8 @@ public class HomeController {
 		ObjectMapper objectMapper = new ObjectMapper();
 		String sJson = objectMapper.writeValueAsString(listOrderBeans);	
 		request.setAttribute("allOrders1", sJson);
-		
 		String referalUrl=request.getHeader("referer");
 		System.out.println(referalUrl);
-		
-		 
 		return "abheeindex";
 	}
 	
@@ -233,16 +208,11 @@ public class HomeController {
 		String sJson = objectMapper.writeValueAsString(listOrderBeans);	
 		request.setAttribute("allOrders1", sJson);
 		JSONObject jsonObj = new JSONObject();
-		
 		jsonObj.put("list", listOrderBeans);
 		String referalUrl=request.getHeader("referer");
 		System.out.println(referalUrl);
-		
-		 
 		return String.valueOf(jsonObj);
 	}
-	
-	
 	@RequestMapping("*")
 	public String erro404(Model model,HttpServletRequest request) {
 		LOGGER.debug("Calling 404 error page at controller");
@@ -250,13 +220,10 @@ public class HomeController {
 		return "redirect:"+ referalUrl;
 	}
 	
-	
 	@RequestMapping("/customerprofile")
 	public String customerProfile(@ModelAttribute("customerProfile") Customer customer, Model model,HttpServletRequest request,HttpSession session,RedirectAttributes redir) throws JSONException, JsonProcessingException {
-		LOGGER.debug("Calling Customer Profile  page at controller");
-		
+		LOGGER.debug("Calling Customer Profile  page at controller");	
 		Customer customerProfile=(Customer) session.getAttribute("customer");
-		
 		//String id=String.valueOf(objuserBean.getId());
           if(null !=customerProfile)
           {
@@ -264,7 +231,6 @@ public class HomeController {
 		customerList.add(customerProfile);
 		List<Map<String, Object>> ordersList=productGuaranteeDao.getProductWarrantyDetailsByCustomerId(customerProfile.getCustomerId());
 		//model.addAttribute("customerProfile", customerProfile);
-
 		ObjectMapper objectMapper = new ObjectMapper();
 		String sJson = objectMapper.writeValueAsString(customerList);
 		request.setAttribute("customerProfile1", sJson);
@@ -274,30 +240,23 @@ public class HomeController {
           else
           {
         		request.setAttribute("customerProfile1", "''");
-        		request.setAttribute("ordersList", "''");
-        	  
+        		request.setAttribute("ordersList", "''");    	  
           }
 		return "customerprofile";
 	}
 	
 	@RequestMapping(value="/editCustomerProfile", method= RequestMethod.POST )
 	public String editProfile(@ModelAttribute("customerProfile") Customer customer,RedirectAttributes redir,HttpServletRequest request){
-		
 		LOGGER.debug("Calling editCustomerProfile at controller");
 		customerDao.saveAbheeCustomer(customer);
 		redir.addFlashAttribute("msg", "Your Details Updated Successfully");
 		redir.addFlashAttribute("cssMsg", "info");
-
-			return "redirect:customerprofile";
-
+		return "redirect:customerprofile";
 	}
-	
 	
 	@RequestMapping("/about")
 	public String about() throws JSONException, JsonProcessingException {
 		LOGGER.debug("Calling Customer Profile  page at controller");
-		
-		 
 		return "about";
 	}
 	@RequestMapping("/career")
@@ -377,31 +336,17 @@ public class HomeController {
 			e.printStackTrace();
 			return "false";
 		}
-		 
-		 
-		 
-		
-		
-	
-		
-		
-		
 	}
 	
 	@RequestMapping(value = "/saveProfilePassword", method = RequestMethod.POST)
 	public @ResponseBody  String saveProfilePassword(Model model,HttpServletRequest request) throws IOException, MessagingException 
 	{
 		LOGGER.debug("Calling saveProfilePassword at controller");
-	
-		
 		String pconfirmpassword =request.getParameter("pconfirmpassword");
 		String customerid =request.getParameter("customerid");
-		
-		
 		 Customer customer = new Customer();
 		 customer.setId(Integer.parseInt((customerid)));
 		 customer.setPassword(pconfirmpassword);
-		 
 		 try {
 			customerDao.updateCustomerProfilepassword(customer);
 			return "true";
@@ -409,13 +354,6 @@ public class HomeController {
 			e.printStackTrace();
 			return "false";
 		}
-		 
-		
-		
-	
-		
-		
-		
 	}
 	
 	//edit email
@@ -423,12 +361,8 @@ public class HomeController {
 	public @ResponseBody  String EditProfileEmail(Model model,HttpServletRequest request) throws IOException, MessagingException 
 	{
 		LOGGER.debug("Calling EditProfileEmail at controller");
-	
-		
 		String pemail=request.getParameter("pemail");
 		String customerid =request.getParameter("customerid");
-		
-		
 		 Customer customer = new Customer();
 		 customer.setId(Integer.parseInt((customerid)));
 		 customer.setEmail(pemail);
@@ -450,7 +384,6 @@ public class HomeController {
 			{
 				return "false";
 			}
-		
 	}
 
 //edit mobileno
@@ -460,11 +393,8 @@ public class HomeController {
 	public @ResponseBody  String EditProfileMobileNo(Model model,HttpServletRequest request) throws IOException, MessagingException 
 	{
 		LOGGER.debug("Calling EditProfileMobileNo at controller");
-	
-		
 		String pmobilenumber =request.getParameter("pmobilenumber");
 		String customerid =request.getParameter("customerid");
-	
 		 Customer customer = new Customer();
 		 customer.setId(Integer.parseInt((customerid)));
 		 customer.setMobilenumber(pmobilenumber);
@@ -487,5 +417,4 @@ public class HomeController {
 			 return "false";
 		 }
 	}
-	
 }

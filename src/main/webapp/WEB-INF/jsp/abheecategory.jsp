@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -7,7 +6,18 @@
     <%@include file="abheeheader.jsp" %>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 <title>Abhee Smart Homes</title>
-
+<style>
+.form-horizontal .control-label {
+    padding-top: 2px;
+    margin-bottom: 0;
+    text-align: left;
+}
+.modal-header .close {
+    margin-top: -2px;
+    color: #fff;
+    opacity: 1;
+}
+</style>
 <script type="text/javascript">
 	var isClick = 'No';
 		window.setTimeout(function() {
@@ -144,17 +154,17 @@
 							<textarea class="form-control" id="custaddress" name="custaddress" placeholder="Address"  onfocus="removeBorder2(this.id)"></textarea>
 						</div>
 						<div class="col-sm-4">
-							<label>Attach File(s)</label> 
+							<label>Warranty</label> <span class="impColor">*</span>
+						</div>
+						<div class="col-sm-8" style="padding-top:8px;">
+							<input type="radio" id="warranty" name="warranty" value="yes"> Yes
+  							<input type="radio" id="warranty" name="warranty" value="no"> No
+						</div><div class="clearfix"></div>
+						<div class="col-sm-4" style="padding-top:8px;">
+							<label>Attach File(s)</label> <span class="impColor">*</span>
 						</div>
 						<div class="col-sm-8">
 							<input class=" " type="file" name="fileimg"  accept="image/*"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="fileimg" multiple />
-						</div>
-						<div class="col-sm-4">
-							<label>Warranty</label> 
-						</div>
-						<div class="col-sm-8">
-							<input type="radio" id="warranty" name="warranty" value="yes"> Yes
-  							<input type="radio" id="warranty" name="warranty" value="no"> No
 						</div>
 							<!--<div class="col-sm-4">
 							<label>Attach File(s)</label>
@@ -206,7 +216,7 @@
 							
 								<div class="clearfix"></div>
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">location<span class="impColor"> *</span></label>
+									<label class="col-md-4 control-label no-padding-right">Location<span class="impColor"> *</span></label>
 									<div class="col-md-6">
 										<input type="text" name="locationData" id="locationData" class="form-control validate"  placeholder="Location in Map"/> 
 									</div>
@@ -214,21 +224,21 @@
 								
 								<div class="clearfix"></div>
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Address <span class="impColor">*</span></label> 
+									<label class="col-md-4 control-label no-padding-right">Address <span class="impColor">*</span></label> 
 									<div class="col-md-6">
 										<input type="textarea" id="address" class="form-control validate " placeholder="Address"/>
 									</div>
 								</div>
 								<div class="clearfix"></div>
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Description<span class="impColor">*</span></label> 
+									<label class="col-md-4 control-label no-padding-right">Description<span class="impColor">*</span></label> 
 									<div class="col-md-6">
 										<input type="textarea" id="reqdesc" class="form-control validate" placeholder=" Description"/>
 									</div>
 								</div>
 								<div class="clearfix"></div>
 								<div class="form-group">
-								<label class="col-md-3 control-label no-padding-right ">Attach <span class="impColor">*</span></label> 
+								<label class="col-md-4 control-label no-padding-right ">Attach <span class="impColor">*</span></label> 
 									<div class="col-md-6">
 										<input class="validate " type="file" name="imgfile"  accept="image/*"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="imgfile" multiple />
 									</div>
@@ -293,10 +303,11 @@
        var bradcrmcompany=false;</script>
     </c:when>
     <c:otherwise>
-        <script>var company=${param.company};
-        var bradcrmcompany=true;</script>
+    <script> var company=${param.company};
+             var bradcrmcompany=true;</script>
     </c:otherwise>
 </c:choose>
+
 <c:choose>
     <c:when test="${empty param.model}">
        <script>
@@ -318,55 +329,90 @@
 
 $(function(){
 	getLocation();
-})
+	
+	 navigator.geolocation.getCurrentPosition(showPosition, showError);
+	var langi= null;
+	var longi = null;
+	if(langi != null && longi != null){
+		
+		
+		$('#us2').locationpicker({
+			onchanged: function (currentLocation, radius, isMarkerDropped) {
+		
+	        var addressComponents = $(this).locationpicker('map').location.addressComponents;
+		      //addressComponents.map.setZoom(200);
+		      $("#locationData").val(currentLocation.latitude+'&'+currentLocation.longitude);
+		      
+		     // var mapContext = $(this).locationpicker('map');
+		    //updateControls(addressComponents); //Data
+		    // $("#locationData").readOnly() = true;
+		    
+		    	//var id = $(this).attr('id');
+		    if( (currentLocation.latitude+'&'+currentLocation.longitude) !=  ""){
+		    	
+		    	removeBorder('locationData');
+		    }
+		   
+		    }
+		});
+	
+	}else{
+		
+		$('#us2').locationpicker();
+	}
+	
+});
 
-function getLocation() {
+ function showPosition(position) {
+		langi = position.coords.latitude;
+		longi = position.coords.longitude;
+		
+		$('#us2').locationpicker({
+			location: {
+		        latitude: langi,
+		        longitude: longi
+		    },
+		/* enableAutocomplete: true,
+		    enableReverseGeocode: true,
+		  radius: 0,
+		  inputBinding: {
+		    latitudeInput: $('#us2-lat'),
+		    longitudeInput: $('#us2-lon'),
+		    radiusInput: $('#us2-radius'),
+		    locationNameInput: $('#us2-address')
+		  }, */
+		  
+		  radius: 10,
+		  onchanged: function (currentLocation, radius, isMarkerDropped) {
+		        var addressComponents = $(this).locationpicker('map').location.addressComponents;
+		      //addressComponents.map.setZoom(200);
+		      $("#locationData").val(currentLocation.latitude+'&'+currentLocation.longitude);
+		      
+		     // var mapContext = $(this).locationpicker('map');
+		    //updateControls(addressComponents); //Data
+		    // $("#locationData").readOnly() = true;
+		    
+		    	//var id = $(this).attr('id');
+		    if( (currentLocation.latitude+'&'+currentLocation.longitude) !=  ""){
+		    	
+		    	removeBorder('locationData');
+		    }
+		   
+		    } 
+		    	
+		});
+	 	
+	 }
+ function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    	//var location_timeout = setTimeout("geolocFail()", 10000);
+
+        navigator.geolocation.getCurrentPosition( showPosition,showError);
     } else {
        // x.innerHTML = "Geolocation is not supported by this browser.";
     }
-}
+} 
 
-function showPosition(position) {
-    var langi = position.coords.latitude;
-	var longi = position.coords.longitude;
-
-	$('#us2').locationpicker({
-		location: {
-	        latitude: langi,
-	        longitude: longi
-	    },
-	/* enableAutocomplete: true,
-	    enableReverseGeocode: true,
-	  radius: 0,
-	  inputBinding: {
-	    latitudeInput: $('#us2-lat'),
-	    longitudeInput: $('#us2-lon'),
-	    radiusInput: $('#us2-radius'),
-	    locationNameInput: $('#us2-address')
-	  }, */
-	  
-	  radius: 10,
-	  onchanged: function (currentLocation, radius, isMarkerDropped) {
-	        var addressComponents = $(this).locationpicker('map').location.addressComponents;
-          //addressComponents.map.setZoom(200);
-	      $("#locationData").val(currentLocation.latitude+'&'+currentLocation.longitude);
-	      
-	     // var mapContext = $(this).locationpicker('map');
-	    //updateControls(addressComponents); //Data
-	    // $("#locationData").readOnly() = true;
-	    
-	    	//var id = $(this).attr('id');
-	    if( (currentLocation.latitude+'&'+currentLocation.longitude) !=  ""){
-	    	
-	    	removeBorder('locationData');
-	    }
-	   
-	    }
-	    	
-	});
-}
 //To use this code on your website, get a free API key from Google.
 //Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
 
@@ -393,31 +439,18 @@ function makeServiceRequestFieldsEmpty()
 {
 	$('#message').val("");
 	$('#custaddress').val("");
-	
-	}
-
-
+}
  var customerId=$('#custhiddenid').val();
- 
  console.log(customerId);
  /* var productdetailslist =${productdetails};
-
 	var rowdata;
-	
-	
-	$.each(productdetailslist, function(k,v){
-		
+	$.each(productdetailslist, function(k,v){	
 		//rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
-		
 		rowdata= "<a href='#' onclick='getCompanys("+v.companyid+") '>"+v.companyname+"</a><br>";
 		$("#catcom").append(rowdata);
 	}); */
-	
-	
 	var productmodelslist =${productmodels};
-	
 $.each(productmodelslist, function(k,v){
-	
 		var divData= "<div class='img'>"
 		+"<a href='#'onclick='getModels("+v.id+")' >"
 		+"<img src='../abheeimg/"+v.productmodelpics+"' class='img-responsive' alt='1810' title='YHT-1810'>"
@@ -439,13 +472,8 @@ $.each(productmodelslist, function(k,v){
 		url.replace("#", "");
 		window.location.href=url+"&company="+company+"&model="+id;
 	} 
-	
-	
-
 	var productdetailslist =${productdetails};
-
 	var rowdata;
-	
 	var productmodelslist =${productmodels};
 	
 $.each(productmodelslist, function(k,v){
@@ -537,6 +565,8 @@ $.each(productdetailslist, function(k,v){
 	function checkLogin(){
 		if(login){
 			//console.log($("#modelName").text());
+			
+			//getLocation();
 			$("#quotationModal").modal();
 			 $("#locationData").prop("readonly", true);
 				//localStorage.setItem("modelName",document.getElementById('modelName').innerHTML);
@@ -729,7 +759,7 @@ $.each(productdetailslist, function(k,v){
 				//alert(data);
 				
 				if(result !="" && result != null){
-			  		alert("Thank you, your request had been submitted successfully. Our team will contact you soon");
+			  		alert("Thank you, your request had been submitted successfully.  Our team will contact you soon");
 			  		}
 			  		$('#saveServiceRequest').val("");
 			  		$('#fileimg').val("");
