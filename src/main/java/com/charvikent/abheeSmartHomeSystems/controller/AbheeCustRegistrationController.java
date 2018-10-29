@@ -205,7 +205,7 @@ public class AbheeCustRegistrationController
 		System.out.println("enter to getOtp");
 		String custMobile=request.getParameter("cmobile");
 		Random random = new Random();
-		 otpnumber = String.format("%04d", random.nextInt(10000));
+		otpnumber = "Dear Customer,thanks for registering with Abhee Smart Home Systems. OTP for your registration is:"+String.format("%04d", random.nextInt(10000));
 		sendSMS.sendSMS(otpnumber,custMobile);
 		OTPDetails oTPDetails =new OTPDetails();
 		oTPDetails.setMobileno(custMobile);
@@ -374,12 +374,11 @@ public class AbheeCustRegistrationController
 	{
 		LOGGER.debug("Calling  getresetcustomerpassword at controller");
 		System.out.println("enter to getresetcustomerpassword");
-		
 		String custMobile=request.getParameter("resetmobile");
 		Customer custbean2 =customerDao.checkCustomerExistOrNotbyMobile(custMobile);
 		if(custbean2 != null)
 		{
-			sendSMS.sendSMS(custbean2.getPassword(),custMobile);
+			sendSMS.sendSMS("Dear"+" "+custbean2.getFirstname()+" "+custbean2.getLastname()+", your password for Abhee smart home systems account"+" '"+custbean2.getMobilenumber()+"' "+"is:"+custbean2.getPassword(),custMobile);
 			sendingMail.resetPassword(custbean2);
 			return true;
 		}

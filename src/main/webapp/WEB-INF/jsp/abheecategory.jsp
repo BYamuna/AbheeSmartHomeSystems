@@ -329,14 +329,22 @@
 
 $(function(){
 	getLocation();
-	
-	 navigator.geolocation.getCurrentPosition(showPosition, showError);
+
+	if (navigator.geolocation) {
+	    	//var location_timeout = setTimeout("geolocFail()", 10000);
+
+	        navigator.geolocation.getCurrentPosition( showPosition,showError);
+	    } else {
+	       // x.innerHTML = "Geolocation is not supported by this browser.";
+	    }
 	var langi= null;
 	var longi = null;
-	if(langi != null && longi != null){
+	
 		
 		
-		$('#us2').locationpicker({
+		$('#us2').locationpicker({ 
+			
+			radius: 10,
 			onchanged: function (currentLocation, radius, isMarkerDropped) {
 		
 	        var addressComponents = $(this).locationpicker('map').location.addressComponents;
@@ -356,16 +364,21 @@ $(function(){
 		    }
 		});
 	
-	}else{
-		
-		$('#us2').locationpicker();
-	}
 	
+	 
 });
+function getLocation() {
+    if (navigator.geolocation) {
+    	//var location_timeout = setTimeout("geolocFail()", 10000);
 
+        navigator.geolocation.getCurrentPosition( showPosition,showError,{timeout:5000});
+    } else {
+       // x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+} 
  function showPosition(position) {
-		langi = position.coords.latitude;
-		longi = position.coords.longitude;
+	var	langi = position.coords.latitude;
+	var longi = position.coords.longitude;
 		
 		$('#us2').locationpicker({
 			location: {
@@ -398,20 +411,12 @@ $(function(){
 		    	removeBorder('locationData');
 		    }
 		   
-		    } 
+		    } ,
 		    	
 		});
 	 	
 	 }
- function getLocation() {
-    if (navigator.geolocation) {
-    	//var location_timeout = setTimeout("geolocFail()", 10000);
-
-        navigator.geolocation.getCurrentPosition( showPosition,showError);
-    } else {
-       // x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-} 
+ 
 
 //To use this code on your website, get a free API key from Google.
 //Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp

@@ -253,7 +253,7 @@ color:#ea8080 !important;
                   				<label style="margin-top:25px;">Address: </label>
                   			</div>
                   			<div class="col-md-11">
-                  				<textarea  class="form-control onlyCharacters validate" id="address" type="text" placeholder="Address"></textarea>
+                  				<textarea  class="form-control validate" id="address" type="text" placeholder="Address"></textarea>
                   			</div><div class="clearfix"></div>
                   		</div>
                   	</div>

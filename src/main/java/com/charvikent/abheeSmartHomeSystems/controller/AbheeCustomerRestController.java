@@ -85,7 +85,6 @@ public class AbheeCustomerRestController
 	@Autowired ProductGuaranteeDao productGuaranteeDao;
 	@Autowired AbheeBranchDao abheeBranchDao;
 	/*@Autowired private Environment environment;*/
-	
 	@RequestMapping("/Customer")
 	public String showCustomerRegistrationForm(Model model,HttpServletRequest request) throws JsonProcessingException
 	{
@@ -172,10 +171,10 @@ public class AbheeCustomerRestController
 		String custMobile=user.getMobilenumber();
 		Random random = new Random();
 		String  otpnumber = String.format("%04d", random.nextInt(10000));
-		String msg="Dear,'"+user.getFirstname()+"' "+user.getLastname()+"', Thanks for registering with Abhee Smart Home Systems. OTP for your registration is:'"+otpnumber+"'";
+		//String msg="Dear,'"+user.getFirstname()+"' "+user.getLastname()+"', Thanks for registering with Abhee Smart Home Systems. OTP for your registration is:'"+otpnumber+"'";
 		HttpStatus code =null;
 		try {
-			String status = sendSMS.sendSMS(msg,custMobile);
+			String status = sendSMS.sendSMS(otpnumber,custMobile);
 			if(status.equals("OK"))
 			{
 				code = HttpStatus.OK;
@@ -191,10 +190,11 @@ public class AbheeCustomerRestController
 		oTPDetails.setMobileno(custMobile);
 		oTPDetails.setOTPnumber(otpnumber);
 		oTPDetailsDao.saveOTPdetails(oTPDetails);
-		ResponseEntity<String> response = new ResponseEntity<String>(msg,code);
+		ResponseEntity<String> response = new ResponseEntity<String>(otpnumber,code);
 		return response;		
 	}
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value="/requestsms2", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public HashMap<String, String> VerifyingAndSendOTP( @RequestBody Customer custBean) 
 	{
@@ -210,7 +210,7 @@ public class AbheeCustomerRestController
 		String code =null;
         Customer custbean1 =customerDao.checkCustomerExistOrNotbyMobile(custMobile);
         Customer customer =customerDao.checkCustomerExistOrNotByEmail(custemail);
-        String msg="Dear "+custbean1.getFirstname()+" "+custbean1.getLastname()+", Thanks for registering with Abhee Smart Home Systems. OTP for your registration is:"+otpnumber;
+        String msg="Dear Customer,thanks for registering with Abhee Smart Home Systems. OTP for your registration is:"+otpnumber;
         HashMap<String,String> hm =new HashMap<String,String>();
 		if(custMobile==custBean.getMobilenumber() || custemail==custBean.getEmail())
 		{
@@ -569,8 +569,9 @@ public class AbheeCustomerRestController
 		JSONObject json =new JSONObject();
 		String custMobile=user.getMobilenumber();
 		Customer custbean2 =customerDao.checkCustomerExistOrNotbyMobile(custMobile);
+		String password="Dear"+" "+custbean2.getFirstname()+" "+custbean2.getLastname()+", your password for Abhee smart home systems account"+" '"+custbean2.getMobilenumber()+"' "+"is:"+custbean2.getPassword();
 		try {
-			String status = sendSMS.sendSMS(custbean2.getPassword(),custMobile);
+			String status = sendSMS.sendSMS(password,custMobile);
 			if(status.equals("OK"))
 			{
 				code = HttpStatus.OK;
@@ -582,7 +583,7 @@ public class AbheeCustomerRestController
 		{
 			e.printStackTrace();
 		}
-		json.put("password", custbean2.getPassword());
+		json.put("password", password);
 		return String.valueOf(json);
 		/*ResponseEntity<String> response = new ResponseEntity<String>(custbean2.getPassword(),code);
 		return response;*/
