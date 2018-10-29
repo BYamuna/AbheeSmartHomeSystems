@@ -99,7 +99,7 @@
 					</div> 
 					<div class="login-bottom"> 
 						<div class="col-sm-6">
-							<h6><a href="#" data-toggle="modal" data-target="#passwordModel" style="color:orange;" class="tag">Forgot password?</a></h6>
+							<h6><a href="#" data-toggle="modal" data-target="#passwordModel" style="color:orange;" class="tag">Forgot password</a></h6>
 						</div>
 						<div class="col-sm-6">
 						
