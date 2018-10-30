@@ -39,7 +39,7 @@ public class Customer {
 
 	private String enabled;
 	
-
+	private String username;
 	private String password;
 	
 	private String firstname;
@@ -136,10 +136,13 @@ public class Customer {
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
 	}
-	
-	
+	public String getUsername() {
+		return username;
+	}
 
-	
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	public Customer() {
 	}
@@ -171,6 +174,7 @@ public class Customer {
 		this.lastname = customer.lastname;
 		this.BranchId=customer.BranchId;
 		this.address=customer.address;
+		this.username=customer.username;
 
 	}
 
@@ -283,12 +287,15 @@ public class Customer {
 	public String toString() {
 		return "Customer [id=" + id + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
 				+ ", mobilenumber=" + mobilenumber + ", email=" + email + ", BranchId=" + BranchId + ", enabled="
-				+ enabled + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", status=" + status + ", branchName=" + branchName + ", customerId=" + customerId + ", address="
-				+ address + ", communicationaddress=" + communicationaddress + ", registedredFromAndroid="
-				+ registedredFromAndroid + ", customerType=" + customerType + ", customerTypeName=" + customerTypeName
-				+ ", gst=" + gst + ", purchaseCustomer=" + purchaseCustomer + "]";
+				+ enabled + ", username=" + username + ", password=" + password + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", status=" + status + ", branchName=" + branchName + ", customerId="
+				+ customerId + ", address=" + address + ", communicationaddress=" + communicationaddress
+				+ ", registedredFromAndroid=" + registedredFromAndroid + ", customerType=" + customerType
+				+ ", customerTypeName=" + customerTypeName + ", gst=" + gst + ", purchaseCustomer=" + purchaseCustomer
+				+ "]";
 	}
+
+	
 
 	
 

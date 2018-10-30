@@ -252,6 +252,7 @@ public class AbheeCustomerRestController
 	{
 		LOGGER.debug("Calling logincredentails at controller");
 		String code =null;
+		String username=customer.getUsername();
 		HashMap<String,String> hm =new HashMap<String,String>();
 		JSONObject json =new JSONObject();
 		System.out.println("rest call user called at end");
@@ -259,16 +260,19 @@ public class AbheeCustomerRestController
 		System.out.println("rest call user called at staring"+userBean);
 		ObjectMapper objectMapper = new ObjectMapper();
 		String userjson = objectMapper.writeValueAsString(userBean);
-			if(null != userBean)
+		if(null != userBean)
+		{
+			if(username.equals(customer.getMobilenumber()) || username.equals(customer.getEmail()))
 			{
 				code =userBean.getFirstname()+" "+userBean.getLastname();
-				json.put("status", userBean);	
+				json.put("status", userBean);
 			}
-			else
-			{
+		}	
+		else
+		{
 				json.put("status", "NOT_FOUND");
 			System.out.println("rest call user called at end");
-			}
+		}
 		return userjson;
 	}
 	

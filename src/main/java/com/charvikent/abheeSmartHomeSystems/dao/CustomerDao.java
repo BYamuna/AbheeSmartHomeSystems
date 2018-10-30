@@ -70,8 +70,7 @@ public class CustomerDao {
 
 @SuppressWarnings("unchecked")
 public Customer checkuserExistOrNot(Customer customer) {
-	
-	String hql =" from Customer  where (mobilenumber ='"+customer.getMobilenumber()+"'or email='"+customer.getEmail()+"') and password='"+customer.getPassword()+"'";
+	String hql =" from Customer  where (mobilenumber='" +customer.getUsername()+"'or email='"+customer.getUsername()+"') and password='"+customer.getPassword()+"'";
 	Query query =entityManager.createQuery(hql);
 	
 	List<Customer>usersList =query.getResultList();
