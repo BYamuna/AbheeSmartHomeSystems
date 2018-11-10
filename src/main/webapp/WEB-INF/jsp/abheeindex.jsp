@@ -36,7 +36,7 @@
         <!-- Content starts here -->
         <div class="cont data">
         	<div class="col-md-4 thumbnail">
-            	<a href="#"><img src="${baseurl }/abhee/images/hmt.png" class="img-responsive" alt="Home Theater" title="Home Theater"/></a>
+            	<a href="#"><img src="${baseurl }/abhee/images/hmt.png" class="img-responsive" alt="Home Theater" title="Home Theaters"/></a>
             </div>
         	<div class="col-md-4 thumbnail">
             	<a href="#"><img src="${baseurl }/abhee/images/paa.png" class="img-responsive" alt="PA Audio" title="PA Audio"/></a>
@@ -48,7 +48,7 @@
             	<a href="#"><img src="${baseurl }/abhee/images/security.png" class="img-responsive" alt="Security" title="Security Cameras"/></a>
             </div>
         	<div class="col-md-4 thumbnail">
-            	<a href="#"><img src="${baseurl }/abhee/images/remote.png" class="img-responsive" alt="Remote" title="Remote"/></a>
+            	<a href="#"><img src="${baseurl }/abhee/images/remote.png" class="img-responsive" alt="Remote" title="Remote Gates"/></a>
             </div>
         	<div class="col-md-4 thumbnail">
             	<a href="#"><img src="${baseurl }/abhee/images/proj.jpg" class="img-responsive" alt="Projector" title="Projectors"/></a>

@@ -7,7 +7,9 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -181,5 +183,10 @@ public class ProductGuaranteeDao
 		String sql="update abheeproductguarantee set status='"+status+"'where id='"+id+"'";
 		jdbcTemplate.execute(sql);		
 	}
-	
+	public List<ProductGuarantee> getProductModelNames(ProductGuarantee productGuarantee)
+	{
+		String sql="select pw.productmodelid,p.name as prodctmodelname from abheeproductguarantee pw,abhee_product p where pw.productmodelid=p.id";
+		RowMapper<ProductGuarantee> rowMapper = new BeanPropertyRowMapper<ProductGuarantee>(ProductGuarantee.class);
+		return  this.jdbcTemplate.query(sql, rowMapper);	
+	}
 }

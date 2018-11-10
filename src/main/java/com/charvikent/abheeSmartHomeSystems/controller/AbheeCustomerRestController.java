@@ -21,7 +21,6 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -39,6 +38,7 @@ import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeBranchDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
+import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskStatusDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CompanyDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
@@ -51,6 +51,7 @@ import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
 import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeBranch;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+import com.charvikent.abheeSmartHomeSystems.model.AbheeTaskStatus;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Company;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
@@ -84,6 +85,7 @@ public class AbheeCustomerRestController
 	@Autowired UserDao userDao;
 	@Autowired ProductGuaranteeDao productGuaranteeDao;
 	@Autowired AbheeBranchDao abheeBranchDao;
+	@Autowired AbheeTaskStatusDao abheeTaskStatusDao;
 	/*@Autowired private Environment environment;*/
 	@RequestMapping("/Customer")
 	public String showCustomerRegistrationForm(Model model,HttpServletRequest request) throws JsonProcessingException
@@ -194,7 +196,21 @@ public class AbheeCustomerRestController
 		return response;		
 	}
 	
-	@SuppressWarnings("unused")
+	@RequestMapping(value = "/otpVerification", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public @ResponseBody String getOtp(@RequestBody Customer customer,  HttpServletRequest request)  
+	{
+		LOGGER.debug("Calling otpVerification at controller");
+		String otp=customer.getOtpstatus();
+		customer.setOtpstatus(otp);
+		JSONObject json =new JSONObject();
+		if(otp.equals("OTP_Verified"))
+		{
+			customerDao.getProfileInfo(customer);
+			json.put("status","Updated");
+		}
+		return String.valueOf(json);	
+	}
+	
 	@RequestMapping(value="/requestsms2", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public HashMap<String, String> VerifyingAndSendOTP( @RequestBody Customer custBean) 
 	{
@@ -212,10 +228,10 @@ public class AbheeCustomerRestController
         Customer customer =customerDao.checkCustomerExistOrNotByEmail(custemail);
         String msg="Dear Customer,thanks for registering with Abhee Smart Home Systems. OTP for your registration is:"+otpnumber;
         HashMap<String,String> hm =new HashMap<String,String>();
-		if(custMobile==custBean.getMobilenumber() || custemail==custBean.getEmail())
+		if(null==custbean1 || null == customer)
 		{
-		try {
-			/*customerDao.saveAbheeCustomer(custBean);*/
+		try 
+		{
 			String status = sendSMS.sendSMS(msg,custMobile);
 			if(status.equals("OK"))
 			{
@@ -224,8 +240,17 @@ public class AbheeCustomerRestController
 				oTPDetails.setMobileno(custMobile);
 				oTPDetails.setOTPnumber(otpnumber);
 				oTPDetailsDao.saveOTPdetails(oTPDetails);
-				hm.put("otpnumber", msg);
+				hm.put("otpnumber", otpnumber);
 				hm.put("statuscode", code);
+				/*if(null==custbean1)
+				{
+					customerDao.getMobileno(custBean);
+					
+				}
+				if(null == customer)
+				{
+					customerDao.getEmail(custBean);
+				}*/
 			}
 			else
 			{
@@ -240,7 +265,57 @@ public class AbheeCustomerRestController
 		}
 		else
 		{
-			code="Your mobilenumber and email not matched";
+			code="Mobilenumber and email not matched ";
+			hm.put("statuscode", code);
+		}		
+		return hm;		
+	}
+	
+	@RequestMapping(value="/requestsms3", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public HashMap<String, String> VerifyingAndSendOTP2( @RequestBody Customer custBean) 
+	{
+		LOGGER.debug("Calling requestsms3 at controller");
+		String custMobile=custBean.getMobilenumber();
+		String custemail=custBean.getEmail();
+		Random random = new Random();
+		String  otpnumber = String.format("%04d", random.nextInt(10000));
+		String code =null;
+        Customer custbean1 =customerDao.checkCustomerExistOrNotbyMobile(custMobile);
+        Customer customer =customerDao.checkCustomerExistOrNotByEmail(custemail);
+        String msg="Dear Customer,thanks for registering with Abhee Smart Home Systems. OTP for your registration is:"+otpnumber;
+        HashMap<String,String> hm =new HashMap<String,String>();
+		if(null==custbean1 || null == customer)
+		{
+		try 
+		{
+			String status = sendSMS.sendSMS(msg,custMobile);
+			if(status.equals("OK"))
+			{
+				code = "OK";
+				OTPDetails oTPDetails =new OTPDetails();  
+				oTPDetails.setMobileno(custMobile);
+				oTPDetails.setOTPnumber(otpnumber);
+				oTPDetailsDao.saveOTPdetails(oTPDetails);
+				hm.put("otpnumber", otpnumber);
+				hm.put("statuscode", code);
+				//hm.put("status", "Updated");
+			}
+			else
+			{
+				code="NOT_FOUND";
+				hm.put("statuscode", code);
+			}
+		}
+		catch (IOException e) 
+		{
+		e.printStackTrace();
+		code="Failed";
+		hm.put("statuscode", code);
+		}
+		}	
+		else
+		{
+			code="Not Updated";
 			hm.put("statuscode", code);
 		}		
 		return hm;		
@@ -256,24 +331,28 @@ public class AbheeCustomerRestController
 		HashMap<String,String> hm =new HashMap<String,String>();
 		JSONObject json =new JSONObject();
 		System.out.println("rest call user called at end");
-		Customer userBean =customerDao.checkuserExistOrNot(customer);
+		List<Customer> userBean=customerDao.checkcustomerExistOrNot(customer);
 		System.out.println("rest call user called at staring"+userBean);
 		ObjectMapper objectMapper = new ObjectMapper();
-		String userjson = objectMapper.writeValueAsString(userBean);
-		if(null != userBean)
-		{
-			if(username.equals(customer.getMobilenumber()) || username.equals(customer.getEmail()))
+		try {
+			if(!userBean.isEmpty())
 			{
-				code =userBean.getFirstname()+" "+userBean.getLastname();
-				json.put("status", userBean);
+					code =customer.getFirstname()+" "+customer.getLastname();
+					json.put("userbean", userBean);
+					json.put("status", "success");
+			}	
+			else 
+			{
+					System.out.println("rest call user called at end");	
+					code="NOT_FOUND";
+					json.put("status", code);
 			}
-		}	
-		else
-		{
-				json.put("status", "NOT_FOUND");
-			System.out.println("rest call user called at end");
+		} catch (Exception e) {
+			e.printStackTrace();
+			json.put("status", "fail");
+			return String.valueOf(json);
 		}
-		return userjson;
+		return String.valueOf(json);
 	}
 	
 	/*@RequestMapping(value="/getcategories", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
@@ -534,17 +613,23 @@ public class AbheeCustomerRestController
 	}
 	
 	@RequestMapping(value="/restEditProfileInfo", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
-	public String  getPersonalInfo( @RequestBody Customer customer) throws JsonProcessingException, JSONException
+	public String  getPersonalInfo( @RequestBody Customer customer) throws JsonProcessingException, JSONException,IOException
 	{
 		LOGGER.debug("Calling restEditProfileInfo at controller");
-		int result = customerDao.getProfileInfo(customer);
 		JSONObject json =new JSONObject();
-			if(result==1)
-			{
-				json.put("profileinfo", "Updated");
-			}
-			else
-				json.put("profileinfo", "Not Updated");
+		HashMap<String,String> hm =new HashMap<String,String>();
+		hm=VerifyingAndSendOTP2(customer);
+				if(hm.get("otpnumber")!=null)
+				{
+				json.put("status", hm.get("statuscode"));
+				json.put("otp", hm.get("otpnumber"));
+				//customerDao.getProfileInfo(customer);
+				}
+				else
+				{
+					json.put("status", hm.get("statuscode"));
+					customerDao.getProfileInfo(customer);
+				}
 		return String.valueOf(json);
 	}
 	
@@ -1697,7 +1782,6 @@ public String  getProductsModelsList()
     public String deleteProductWarranty( @RequestBody ProductGuarantee pg,HttpServletRequest request) throws JSONException       
 	{
 		LOGGER.debug("Calling deleteProductWarranty at controller");
-		//int result = categoryDao.deactiveCategory(cate.getStatus(),cate.getId());
 		productGuaranteeDao.deactiveProductWarranty(pg.getStatus(), pg.getOrderId());
 		JSONObject jsonObj = new JSONObject();
 		if(!pg.getStatus().equals("0"))
@@ -1708,4 +1792,38 @@ public String  getProductsModelsList()
 			jsonObj .put("status", "Deactivated");	
             return String.valueOf(jsonObj);
 	}
+	
+	@RequestMapping(value = "/getStatusList",method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getStatusList(@RequestBody AbheeTaskStatus abheeTaskStatus ,HttpServletRequest request) throws JsonProcessingException,JSONException
+	{
+		LOGGER.debug("Calling getStatusList at controller");
+		String code =null;
+		List<AbheeTaskStatus> listOrderBeans  = abheeTaskStatusDao.getTaskStatusList();
+		JSONObject jsonObj = new JSONObject();
+			if (null != listOrderBeans) 
+				jsonObj.put("statuslist", listOrderBeans);
+		 else 
+				jsonObj.put("statuslist", "NOT_FOUND");	
+			System.out.println("rest call user status:  "+code);
+		return String.valueOf(jsonObj);
+	}	
+	
+	/*@RequestMapping(value = "/editEmailAndMobileno",method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getMobileno(@RequestBody Customer customer ,HttpServletRequest request) 
+	{
+		LOGGER.debug("Calling editEmailAndMobileno at controller");
+		JSONObject json =new JSONObject();
+		HashMap<String,String> hm =new HashMap<String,String>();
+		hm=VerifyingAndSendOTP(customer);
+				if(hm.get("otpnumber")!=null)
+				{
+				json.put("status", hm.get("statuscode"));
+				json.put("otp", hm.get("otpnumber"));
+				}
+				else
+				{
+					json.put("status", hm.get("statuscode"));
+				}
+			return String.valueOf(json);
+	}*/
 }

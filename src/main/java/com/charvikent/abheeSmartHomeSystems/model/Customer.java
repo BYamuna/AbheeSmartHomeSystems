@@ -61,6 +61,7 @@ public class Customer {
 	private String gst;
 	
 	private boolean purchaseCustomer;
+	private String otpstatus;
 	
 	/*@OneToMany(fetch = FetchType.LAZY, targetEntity=CustomerOrders.class, cascade=CascadeType.ALL)
 	@JoinColumn(name="customerId")
@@ -75,6 +76,14 @@ public class Customer {
 	public void setCustomerOrders(Set<CustomerOrders> customerOrders) {
 		CustomerOrders = customerOrders;
 	}*/
+	
+	public String getOtpstatus() {
+		return otpstatus;
+	}
+
+	public void setOtpstatus(String otpstatus) {
+		this.otpstatus = otpstatus;
+	}
 
 	public String getCustomerTypeName() {
 		return customerTypeName;
@@ -175,6 +184,7 @@ public class Customer {
 		this.BranchId=customer.BranchId;
 		this.address=customer.address;
 		this.username=customer.username;
+		this.otpstatus=customer.otpstatus;
 
 	}
 
@@ -292,8 +302,10 @@ public class Customer {
 				+ customerId + ", address=" + address + ", communicationaddress=" + communicationaddress
 				+ ", registedredFromAndroid=" + registedredFromAndroid + ", customerType=" + customerType
 				+ ", customerTypeName=" + customerTypeName + ", gst=" + gst + ", purchaseCustomer=" + purchaseCustomer
-				+ "]";
+				+ ", otpstatus=" + otpstatus + "]";
 	}
+
+	
 
 	
 

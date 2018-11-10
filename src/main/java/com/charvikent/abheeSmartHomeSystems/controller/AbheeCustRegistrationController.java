@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
@@ -36,32 +33,22 @@ import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 @Controller
 public class AbheeCustRegistrationController 
 {
 	private static final Logger LOGGER = LoggerFactory.getLogger( AbheeCustRegistrationController .class);
-	
-	@Autowired
-	SendSMS sendSMS;
-	
-	@Autowired
-	OTPDetailsDao oTPDetailsDao;
-	@Autowired
-	UserService userService;
-	@Autowired
-	KptsUtil kptsUtil;
-	@Autowired
-	SendingMail sendingMail;
-	
+	@Autowired SendSMS sendSMS;
+	@Autowired OTPDetailsDao oTPDetailsDao;
+	@Autowired UserService userService;
+	@Autowired KptsUtil kptsUtil;
+	@Autowired SendingMail sendingMail;
 	@Autowired CustomerDao customerDao;
-	
 	String otpnumber ="";
 	
 	@RequestMapping("/custRegistration")	
 	public String AbheeCustRegistrationPage(Model model,HttpServletRequest request)
 	{
-		LOGGER.debug("Calling  custRegistration at controller");
+	  LOGGER.debug("Calling  custRegistration at controller");
 	  model.addAttribute("custReg",new Customer());
 	  List<Customer> listOrderBeans = null;
 	  ObjectMapper objectMapper = null;
@@ -205,7 +192,7 @@ public class AbheeCustRegistrationController
 		System.out.println("enter to getOtp");
 		String custMobile=request.getParameter("cmobile");
 		Random random = new Random();
-		otpnumber = "Dear Customer,thanks for registering with Abhee Smart Home Systems. OTP for your registration is:"+String.format("%04d", random.nextInt(10000));
+		otpnumber = /*"Dear Customer,thanks for registering with Abhee Smart Home Systems. OTP for your registration is:"+*/String.format("%04d", random.nextInt(10000));
 		sendSMS.sendSMS(otpnumber,custMobile);
 		OTPDetails oTPDetails =new OTPDetails();
 		oTPDetails.setMobileno(custMobile);
@@ -213,7 +200,6 @@ public class AbheeCustRegistrationController
 		oTPDetailsDao.saveOTPdetails(oTPDetails);		
 		return true;		
 	}
-	
 	@RequestMapping(value = "/checkEmailExst", method = RequestMethod.POST)
 	public @ResponseBody  Boolean checkemailExistence(@Validated @ModelAttribute  Customer abheecustregistration,Model model,HttpServletRequest request) throws IOException 
 	{
@@ -442,7 +428,7 @@ public class AbheeCustRegistrationController
 		System.out.println("enter to resendOtp");
 		String custMobile=request.getParameter("cmobile");
 		Random random = new Random();
-		otpnumber = String.format("%04d", random.nextInt(10000));
+		otpnumber = "Dear Customer,thanks for registering with Abhee Smart Home Systems. OTP for your registration is:"+String.format("%04d", random.nextInt(10000));
 		OTPDetails oTPDetails =new OTPDetails();
 		oTPDetails.setMobileno(custMobile);
 		oTPDetails.setOTPnumber(otpnumber);
@@ -459,4 +445,6 @@ public class AbheeCustRegistrationController
 		return true;
 		}	
 	}
+	
+	
 }

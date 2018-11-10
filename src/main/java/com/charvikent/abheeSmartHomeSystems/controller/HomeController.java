@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,12 +25,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
+import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
+import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ProductGuaranteeDao;
 /*import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;*/
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
+import com.charvikent.abheeSmartHomeSystems.model.OTPDetails;
 /*import com.charvikent.abheeSmartHomeSystems.model.ProductGuarantee;*/
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
@@ -42,8 +49,12 @@ public class HomeController {
 	@Autowired CustomerDao customerDao;
 	@Autowired CategoryDao categoryDao;
 	@Autowired ProductGuaranteeDao productGuaranteeDao;
+	@Autowired SendSMS sendSMS;
+	@Autowired OTPDetailsDao oTPDetailsDao;
+	@Autowired KptsUtil kptsUtil;
 	static 	String loginurl=""; 
 	static boolean falg =true;
+	String otpnumber ="";
 	
 	@RequestMapping("/admin")
 	public String customlogin(Model model) {	
@@ -362,6 +373,7 @@ public class HomeController {
 	{
 		LOGGER.debug("Calling EditProfileEmail at controller");
 		String pemail=request.getParameter("pemail");
+		//String pmobilenumber=request.getParameter("pmobilenumber");
 		String customerid =request.getParameter("customerid");
 		 Customer customer = new Customer();
 		 customer.setId(Integer.parseInt((customerid)));
@@ -404,7 +416,7 @@ public class HomeController {
 			 try 
 			 {
 				customerDao.updateCustomerProfileMobileNo(customer);
-				return "true";
+				return "true";	
 			 } 
 			 catch (Exception e) 
 			 {
@@ -417,4 +429,79 @@ public class HomeController {
 			 return "false";
 		 }
 	}
+	@SuppressWarnings("unused")
+	@RequestMapping(value = "/modelSubmit1", method = RequestMethod.POST)
+	public @ResponseBody  boolean modelSubmit1(Model model,HttpServletRequest request) throws IOException 
+	{
+		LOGGER.debug("Calling  modelSubmit1 at controller");
+		System.out.println("enter to model Submit1");
+		String custMobile=request.getParameter("pmobilenumber");
+		String cemail=request.getParameter("pemail");
+		/*String csname=request.getParameter("firstname");
+		String cname=request.getParameter("lastname");*/
+		String cotp=request.getParameter("cotp");
+		/*String cpassword=request.getParameter("pconfirmpassword");*/
+		Customer customer =new Customer();
+		//String usernumber =kptsUtil.randNum();
+		String regSuccessMsg ="Dear Customer,Successfully registered with ABhee Smart Homes";
+		customer.setMobilenumber(custMobile);
+		/*customer.setFirstname(csname);
+		customer.setLastname(cname);*/
+		customer.setEmail(cemail);
+		/*customer.setPassword(cpassword);*/
+		/*customer.setEnabled("1");
+		customer.setCustomerType("1");*/
+		//customer.setUsername(str);
+		String returnmsg ="";
+		if(otpnumber.equals(cotp))
+		{
+			customer.setRegistedredFromAndroid("0");
+			customerDao.saveAbheeCustomer(customer);
+			sendSMS.sendSMS(regSuccessMsg,custMobile);
+			return true;
+		}
+		else
+			return false;	
+	}
+	
+	@RequestMapping(value = "/getEditOtp", method = RequestMethod.POST)
+	public @ResponseBody  String getEditOTP(Model model,HttpServletRequest request) throws IOException 
+	{
+		LOGGER.debug("Calling  getEditOtp at controller");
+		System.out.println("enter to getEditOtp");
+		String custMobile=request.getParameter("pmobilenumber");
+		Random random = new Random();
+		otpnumber = String.format("%04d", random.nextInt(10000));
+		sendSMS.sendSMS(otpnumber,custMobile);
+		OTPDetails oTPDetails =new OTPDetails();
+		oTPDetails.setMobileno(custMobile);
+		oTPDetails.setOTPnumber(otpnumber);
+		oTPDetailsDao.saveOTPdetails(oTPDetails);		
+		return "true";		
+	}
+	
+	@RequestMapping(value = "/resendOtpOnMobileEdit", method = RequestMethod.POST)
+	public @ResponseBody  Boolean resendOtpMobile(Model model,HttpServletRequest request) throws IOException 
+	{
+		LOGGER.debug("Calling  resendOtpOnMobileEdit at controller");
+		System.out.println("enter to resendOtp");
+		String custMobile=request.getParameter("pmobilenumber");
+		Random random = new Random();
+		otpnumber = "Dear Customer,thanks for registering with Abhee Smart Home Systems. OTP for your registration is:"+String.format("%04d", random.nextInt(10000));
+		OTPDetails oTPDetails =new OTPDetails();
+		oTPDetails.setMobileno(custMobile);
+		oTPDetails.setOTPnumber(otpnumber);
+		List<Map<String, Object>> curotplist=oTPDetailsDao.getCurrentDayList(custMobile);
+		if(curotplist.size()>4) 
+		{
+			System.out.println("OTP Limit Expired For Today");
+			return false;
+		}
+		else
+		{
+		sendSMS.sendSMS(otpnumber,custMobile);
+		oTPDetailsDao.saveOTPdetails(oTPDetails);	
+		return true;
+		}	
+	}	
 }

@@ -16,7 +16,9 @@ import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,10 +41,7 @@ public class CustomerDao {
 	KptsUtil utilities;
 	@Autowired
 	SendSMS sendSMS;
-	
-	
-	@Autowired
-    private JdbcTemplate jdbcTemplate;
+	@Autowired private JdbcTemplate jdbcTemplate;
 	
 	public Customer findByUserName(String username) {
 		
@@ -79,6 +78,13 @@ public Customer checkuserExistOrNot(Customer customer) {
            else
 	return usersList.get(0);
 	
+}
+
+public List<Customer> checkcustomerExistOrNot(Customer customer) 
+{
+	String hql =" select * from  abhee_customer where (mobilenumber='" +customer.getUsername()+"'or email='"+customer.getUsername()+"') and password='"+customer.getPassword()+"'";
+	RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<Customer>(Customer.class);
+    return  this.jdbcTemplate.query(hql, rowMapper);
 }
 
 @SuppressWarnings("unchecked")
@@ -399,7 +405,7 @@ public Customer checkCustomerExistOrNotByEmailOnEdit(String custEmail, String ed
 
 	public int getProfileInfo(Customer customer) 
 	{
-		String sql =" update abhee_customer set firstname ='"+customer.getFirstname()+"',lastname='"+customer.getLastname()+"',mobilenumber='"+customer.getMobilenumber()+"',email='"+customer.getEmail()+"',address='"+customer.getAddress()+"' where id='"+customer.getId()+"' order by updated_time desc";	
+		String sql =" update abhee_customer set firstname ='"+customer.getFirstname()+"',lastname='"+customer.getLastname()+"',address='"+customer.getAddress()+"',mobilenumber ='"+customer.getMobilenumber()+"', email ='"+customer.getEmail()+"'where id='"+customer.getId()+"' order by updated_time desc";	
 		int  result = jdbcTemplate.update(sql);
 		return result; 
 		
@@ -416,6 +422,20 @@ public Customer checkCustomerExistOrNotByEmailOnEdit(String custEmail, String ed
 	{
 		String sql="update abhee_customer set status='"+status+"'where id='"+id+"'";
 		jdbcTemplate.execute(sql);	
+	}
+	
+	public int getMobileno(Customer customer) 
+	{
+		String sql =" update abhee_customer set mobilenumber ='"+customer.getMobilenumber()+"' where id='"+customer.getId()+"' order by updated_time desc";	
+		int  result = jdbcTemplate.update(sql);
+		return result; 	
+	}
+	public int getEmail(Customer customer) 
+	{
+		String sql =" update abhee_customer set email ='"+customer.getEmail()+"' where id='"+customer.getId()+"' order by updated_time desc";	
+		int  result = jdbcTemplate.update(sql);
+		return result; 
+		
 	}
 
 }

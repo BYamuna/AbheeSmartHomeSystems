@@ -396,10 +396,43 @@ color:#ea8080 !important;
 		</div>
 		</div>
 
-
+	<div class="modal fade" id="OTPModel" data-backdrop="static" data-keyboard="false" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">OTP Verification</h4>
+        </div>
+        <div class="modal-body">
+          <form  action="#"  id="registration1"  method="post" class="login-form">
+						<div id="firstForm1">
+							<div class="form-group">
+								<div class="col-md-3">
+									<label for="user_name">OTP :</label>
+								</div>
+								<div class="col-md-9">
+									<input	type="password" name="cotp" id="cotp" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control numericOnly" placeholder="OTP"/>
+								</div><div class="clearfix"></div> 
+								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
+							</div>
+						</div>
+					</form>	
+        </div>
+        <div class="col-sm-6">
+			<a onclick="resendOTP()" class="btn btn-warning">Resend OTP</a>
+		</div>
+        <div class="modal-footer">
+          <button type="button" id="submit2" onclick="modelsubmit()" class="btn btn-primary" >Submit</button>
+        </div>
+      </div>
+    </div>
+  </div> 
 
 <script type="text/javascript">
 
+var validation = true;
+var mobilevalidation=true;
+var subValidation =false;
 
 $( document ).ready(function() {
 	
@@ -541,54 +574,38 @@ var customerid=$("#customerid").val();
 				{
 				alert(data);
 				}
-			
 		},
 		complete: function () {
             
             $.unblockUI();
        },
 		error :  function(e){$.unblockUI();console.log(e);}
-		
 	});
-	
-	
 });
 
 $('#editProfilePassword').click(function (){
-	
-	
 	$('#saveProfilePassword').show();
 	$('#editProfilePassword').hide();
-	
 	$("#pcurrentpassword").prop('disabled',false);
 	$("#pnewpassword").prop('disabled',false);
-	$("#pconfirmpassword").prop('disabled',false);
-	
+	$("#pconfirmpassword").prop('disabled',false);	
 });
-
-
 $('#saveProfilePassword').click(function (){
-	
 	var pconfirmpassword=$("#pconfirmpassword").val();
 	var customerid=$("#customerid").val();
-	
 	var checkpass=$("#checkpass").val();
 	if(checkpass!=pconfirmpassword)
 		{
 		alert("Enter Valid Password");
 		return false;
 		}
-	
-		
 	var pnewpassword=$("#pnewpassword").val();
-	
 	if( pnewpassword !=pconfirmpassword)
 		{
 		alert("New Password and Confirm Password Not Matched");
 		}
 	else
 		{
-		
 		$.ajax({
 			type : "POST",
 			url : "saveProfilePassword",
@@ -614,92 +631,73 @@ $('#saveProfilePassword').click(function (){
 					$("#pconfirmpassword").val("");
 					$('#saveProfilePassword').hide();
 					$('#editProfilePassword').show();
-					
 					alert(" Profile Password  Updated Successfully ");
 				}
 				else
 					{
 					alert(data);
 					}
-				
 			},
 			complete: function () {
 	            
 	            $.unblockUI();
 	       },
-			error :  function(e){$.unblockUI();console.log(e);}
-			
+			error :  function(e){$.unblockUI();console.log(e);}	
 		});
-		
 		}
-		
-		
 	});
 $('#editemailinfo').click(function (){
-	
-	
 	$('#saveemailinfo').show();
 	$('#editemailinfo').hide();
-	
 	$("#pemail").prop('disabled',false);
-	
-	
 });	
 $('#saveemailinfo').click(function (){
 	var pemail =$("#pemail").val();
 	var customerid=$("#customerid").val();
-	
+	var pmobilenumber =$("#pmobilenumber").val();
 	alert(customerid);
 	$.ajax({
 		type : "POST",
 		url : "editprofileemail",
-		data :"pemail="+pemail+"&customerid="+customerid,
+		data :"pemail="+pemail+"&pmobilenumber="+pmobilenumber+"&customerid="+customerid,
 		dataType : "text",
 		beforeSend : function() {
              $.blockUI({ message: 'Please wait' });
           }, 
           success : function(data) {
-  			
-  			if(data ==='true')
+  			if(data =='true')
   			{     
-				$("#pemail").prop('disabled',true);
-  				$('#saveemailinfo').hide();
-				$('#editemailinfo').show();
-  				alert(" Email Updated Successfully ");
+				getOtp();
 			}
-			else if(data ==='false')
+			else if(data == "")
 			{
-				alert("Email already exists");
 				
+				alert("Email Updation failed");	
 			}
 			else
 				{
-				alert("Email Updation failed");
-				}
-			
+				alert("Email already exists");
+				}	
 		},
 		complete: function () {
-          
           $.unblockUI();
      },
 		error :  function(e){$.unblockUI();console.log(e);}
-		
 		});	
 	});	
 $('#editmobileno').click(function (){
-	
-	
 	$('#savemobileno').show();
 	$('#editmobileno').hide();
-	
 	$("#pmobilenumber").prop('disabled',false);
-	
-	
 });	
+
 $('#savemobileno').click(function (){
+	$('#savemobileno').show();
+	$('#editmobileno').hide();
 	var pmobilenumber =$("#pmobilenumber").val();
+	//var otp=$("#ctop").val();
 	var customerid=$("#customerid").val();
-	
+	//alert(pmobilenumber);
 	alert(customerid);
 	$.ajax({
 		type : "POST",
@@ -711,22 +709,20 @@ $('#savemobileno').click(function (){
           }, 
           success : function(data) {
   			
-  			if(data ==='true')
-  			{     
-				$("#pmobilenumber").prop('disabled',true);
-  				$('#savemobileno').hide();
-				$('#editmobileno').show();
-  				alert(" Mobilenumber Updated Successfully ");
+  			if(data == 'true')
+  			{   
+  				getOtp();
+				
+  				
 			}
-  			else if(data === 'false')
+  			else
   				{
   				alert("MobileNumber already exists");
   				}
-			else
+			if(data == "")
 			{
 				alert("MobileNumber Updation Failed");
 			}
-			
 		},
 		complete: function () {
           
@@ -736,28 +732,111 @@ $('#savemobileno').click(function (){
 		
 	});
 });	
-/* function validateMobile(evt) {
-	  var theEvent = evt || window.event;
-	  var key = theEvent.keyCode || theEvent.which;
-	  key = String.fromCharCode( key );
-	  var regex = /[0-9]/;
-	  if( !regex.test(key) ) {
-	    theEvent.returnValue = false;
-	    if(theEvent.preventDefault) theEvent.preventDefault();
-	  }
-	} */
-	
-	
-/* function validateEmail(evt) {
-	  var theEvent = evt || window.event;
-	  var key = theEvent.keyCode || theEvent.which;
-	  key = String.fromCharCode( key );
-	  var regex =/^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-	  if( !regex.test(key) ) {
-	    theEvent.returnValue = false;
-	    if(theEvent.preventDefault) theEvent.preventDefault();
-	  }
-	}  */
+
+function getOtp()
+{
+	var pmobilenumber =$('#pmobilenumber').val();
+	$.ajax({
+		type : "POST",
+		url : "getEditOtp",
+		data :"pmobilenumber="+pmobilenumber,
+		dataType: 'text',
+		 async: false,
+		success : function(data) {
+			if(data == 'true')
+				{
+				alert("OTP Send to Your Mobile Number ");
+				$('#OTPModel').modal('toggle');
+				$("#OTPModel").modal('show');
+				}
+			else
+				{
+				$('#pmobilenumber').css('border-color', 'none');
+				$('#submit1').prop('disabled', false);
+				}	
+		},
+		complete: function () {
+            
+            $.unblockUI();
+       },
+		error :  function(e){$.unblockUI();console.log(e);}
+		
+	});
+}
+
+function modelsubmit()
+{
+	 pmobilenumber =$('#pmobilenumber').val();
+	 pemail =$("#pemail").val();
+	 cotp=$('#cotp').val();
+	$.ajax({
+		type : "POST",
+		url : "modelSubmit1",
+		data :"pemail="+pemail+"pmobilenumber="+pmobilenumber+"&cotp="+cotp,
+		dataType : "text",
+		beforeSend : function() {
+             $.blockUI({ message: 'Please wait' });
+          }, 
+		success : function(data) {
+			//alert(data);
+			
+			if(data =='true')
+			{
+				
+				alert(" Otp Verified Successfully ");
+				//$('#OTPModel').modal('toggle');
+				$("#pmobilenumber").prop('disabled',true);
+				$('#savemobileno').hide();
+				$('#editmobileno').show();
+  				alert("Mobilenumber Updated Successfully ");
+				/* $("#pemail").prop('disabled',true);
+				$('#saveemailinfo').hide();
+				$('#editemailinfo').show();
+				alert(" Email Updated Successfully "); */	
+			}
+			else
+				alert("Enter valid OTP")
+			
+		},
+		complete: function () {
+            
+            $.unblockUI();
+       },
+		error :  function(e){$.unblockUI();console.log(e);}
+		
+	});
+
+}
+
+function resendOTP()
+{
+	var pmobilenumber =$('#pmobilenumber').val();	
+	$.ajax({
+		type : "POST",
+		url : "resendOtpOnMobileEdit",
+		data :"pmobilenumber="+pmobilenumber,
+		dataType : "text",
+		beforeSend : function() {
+             $.blockUI({ message: 'Please wait' });
+          }, 
+		success : function(data) {
+			if(data ==='true')
+				{
+				alert("OTP sent to your mobile number");
+				}
+			else
+				{
+				alert("OTP Limit Expired For Today");
+				} 
+		},
+		complete: function () {
+            
+            $.unblockUI();
+       },
+		error :  function(e){$.unblockUI();console.log(e);}
+		
+	});
+}
 	
 </script>
 <%@include file="abheefooter.jsp" %>
