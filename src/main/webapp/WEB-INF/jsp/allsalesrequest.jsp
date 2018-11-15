@@ -3,7 +3,13 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
-
+<style>
+.modal-header .close {
+    margin-top: -2px;
+    color: #fff;
+    opacity: 1;
+}
+</style>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
 		<li><a href="dashBoard">Home</a></li>
@@ -21,7 +27,7 @@
 						</div>
 					</div>
 					<div class="panel-body collapse in">
-					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
+					<!-- <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label> -->
 						<div class="table-responsive" id="tableId">
 							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 								<thead><tr><th>ModelNumber</th><th>EmailId</th><th>Mobile No</th><th>files</th><th>Location</th><th>Address</th><th>Requirements description</th><th></th></tr></thead>
@@ -105,16 +111,16 @@ function displayTable(listOrders) {
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
-		if(orderObj.productmodelpics==undefined) orderObj.productmodelpics='';
+		if(orderObj.imgfiles==undefined) orderObj.imgfiles='';
 		else
 			{
-				var list=orderObj.productmodelpics.split('*');
-				var productmodelpics='';
+				var list=orderObj.imgfiles.split('*');
+				var imgfiles='';
 				for(var i=0;i<list.length;i++)
 				{
-					productmodelpics=productmodelpics+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
+					imgfiles=imgfiles+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
 				}
-				orderObj.productmodelpics=productmodelpics;
+				orderObj.imgfiles=imgfiles;
 			}
 		/* if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate' onclick='deleteTotalSales("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"

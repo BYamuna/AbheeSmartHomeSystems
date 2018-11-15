@@ -80,7 +80,7 @@ min-width:113px;
 	</c:if> --%>
   	<div class="container">
     	<div class="top">
-        	<img width="300px" src="${baseurl }/abhee/images/logo.png" class="img-resposive" alt="logo" title="Logo"/>
+        	<img width="300px" src="${baseurl }/abhee/images/logo.png" class="img-resposive" alt="logo"/>
 <!--         	<a style="float:right; margin-top:30px; margin-left:20px;" type="admin" class="button btn btn-primary" href="admin">Admin Login</a> -->
         </div><div class="clearfix"></div>
         <!-- Menu Starts here -->
@@ -110,7 +110,7 @@ min-width:113px;
         <li class="vision"><a href="${baseurl }/mission">Mission & Vision</a></li>
         <li class="gallery"><a href="${baseurl }/gallery">Gallery</a></li>
         <li class="career"><a href="${baseurl }/career">Career</a></li>
-        <li class="location"><a href="${baseurl }/location">Our other Locations</a></li>
+        <li class="location"><a href="${baseurl }/location">Our Other Locations</a></li>
         <li id="contact"><a href="${baseurl }/contact">Contact Us</a></li>
         <li class="about"><a href="${baseurl }/about">About Us</a></li>
       </ul>

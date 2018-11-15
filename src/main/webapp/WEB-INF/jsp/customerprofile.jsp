@@ -267,7 +267,7 @@ color:#ea8080 !important;
                   		</div>
                   		<div class="col-md-6">
                   			<h4 style="float:right; margin-top:20px;" id="editemailinfo"><a href="#"><i class="glyphicon glyphicon-edit"></i> Edit</a></h4>
-                  			<h4 style="float:right; margin-top:20px;" id="saveemailinfo"><a href="#"><i class="glyphicon glyphicon-save"></i> Save</a></h4>
+                  			<h4 style="float:right; margin-top:20px;" id="saveemailinfo" onclick= "modelsubmit2()"><a href="#"><i class="glyphicon glyphicon-save"></i> Save</a></h4>
                   		</div><div class="clearfix"></div>
                   	</div>
                   	<div class="cdata">
@@ -668,10 +668,15 @@ $('#saveemailinfo').click(function (){
   			if(data =='true')
   			{     
 				getOtp();
+				/* alert(" Otp Verified Successfully ");
+				//$('#OTPModel').modal('toggle'); */
+				$("#pemail").prop('disabled',true);
+				$('#saveemailinfo').hide();
+				$('#editemailinfo').show();
+				alert(" Email Updated Successfully ");
 			}
 			else if(data == "")
 			{
-				
 				alert("Email Updation failed");	
 			}
 			else
@@ -709,10 +714,13 @@ $('#savemobileno').click(function (){
           }, 
           success : function(data) {
   			
-  			if(data == 'true')
+  			if(data == "true")
   			{   
   				getOtp();
-				
+  				("#pmobilenumber").prop('disabled',true);
+				$('#savemobileno').hide();
+				$('#editmobileno').show();
+  				alert("Mobilenumber Updated Successfully ");
   				
 			}
   			else
@@ -767,12 +775,11 @@ function getOtp()
 function modelsubmit()
 {
 	 pmobilenumber =$('#pmobilenumber').val();
-	 pemail =$("#pemail").val();
 	 cotp=$('#cotp').val();
 	$.ajax({
 		type : "POST",
 		url : "modelSubmit1",
-		data :"pemail="+pemail+"pmobilenumber="+pmobilenumber+"&cotp="+cotp,
+		data :"&pmobilenumber="+pmobilenumber+"&cotp="+cotp,
 		dataType : "text",
 		beforeSend : function() {
              $.blockUI({ message: 'Please wait' });
@@ -780,22 +787,18 @@ function modelsubmit()
 		success : function(data) {
 			//alert(data);
 			
-			if(data =='true')
+			if(data =="true")
 			{
 				
 				alert(" Otp Verified Successfully ");
-				//$('#OTPModel').modal('toggle');
-				$("#pmobilenumber").prop('disabled',true);
+				$('#OTPModel').modal('toggle');
+				$/* ("#pmobilenumber").prop('disabled',true);
 				$('#savemobileno').hide();
 				$('#editmobileno').show();
-  				alert("Mobilenumber Updated Successfully ");
-				/* $("#pemail").prop('disabled',true);
-				$('#saveemailinfo').hide();
-				$('#editemailinfo').show();
-				alert(" Email Updated Successfully "); */	
+  				alert("Mobilenumber Updated Successfully "); */	
 			}
 			else
-				alert("Enter valid OTP")
+				alert("Enter valid OTP");
 			
 		},
 		complete: function () {
@@ -807,6 +810,8 @@ function modelsubmit()
 	});
 
 }
+
+
 
 function resendOTP()
 {
