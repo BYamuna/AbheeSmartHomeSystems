@@ -55,11 +55,10 @@ public class SalesRequestDao
 			return null;
 			
 	}*/
-	 @SuppressWarnings("unchecked")
 		public List<Map<String, Object>> getSalesRequestList()
 		 {
 		 
-			 String hql ="select sr.id,sr.address,sr.email,sr.imgfiles,sr.location,sr.mobileno,sr.reqdesc,sr.salesrequestnumber,ap.name as modelname from abhee_sales_request sr, abhee_product ap where sr.modelnumber=ap.id";
+			 String hql ="select sr.id,sr.address,sr.email,sr.imgfiles,sr.location,sr.mobileno,sr.reqdesc,sr.salesrequestnumber,sr.request_type,ap.name as modelname from abhee_sales_request sr, abhee_product ap where sr.modelnumber=ap.id";
 			 System.out.println(hql);
 			/*List<SalesRequest> reqlist= entityManager.createQuery(hql).getResultList();
 			 for(SalesRequest sr:reqlist)

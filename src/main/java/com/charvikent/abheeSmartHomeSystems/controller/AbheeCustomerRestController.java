@@ -469,6 +469,7 @@ public class AbheeCustomerRestController
 		{
 		salesrequest.setImgfiles(imgpath);
 		}
+		String requesttype=salesrequest.getRequestType();
 		srequestDao.saveRequest(salesrequest);
 		code = "requestSubmittedSuccessfully";
 		HashMap<String,String> hm =new HashMap<String,String>();
@@ -738,6 +739,7 @@ public class AbheeCustomerRestController
 		String custname=salesrequest.getCustomername();
 		String enquirydetails=salesrequest.getReqdesc();
 		String enquiryimage=salesrequest.getImgfiles();
+		String enquirytype=salesrequest.getRequestType();
 		if(!salesrequest.getImgfiles().isEmpty())
 		{
 		salesrequest.setImgfiles(enquiryimage);
@@ -1828,4 +1830,5 @@ public String  getProductsModelsList()
 				}
 			return String.valueOf(json);
 	}*/
+	
 }
