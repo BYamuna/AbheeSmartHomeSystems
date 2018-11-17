@@ -1828,4 +1828,23 @@ public String  getProductsModelsList()
 				}
 			return String.valueOf(json);
 	}*/
+	
+	
+
+	@RequestMapping(value="/getEmailandMobileById", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String getemailandmobileById( @RequestBody Customer customer) throws JsonProcessingException, JSONException 
+	{
+		
+		
+		LOGGER.debug("Calling getTicketStatus at controller");
+		List<Customer>  listOrderBeans = customerDao.getEmailandMobileByCustomerId(customer);
+		JSONObject json =new JSONObject();
+			if(null != listOrderBeans)
+			{
+				json.put("em", listOrderBeans);
+			}
+			else
+				json.put("em", "NOT_FOUND");
+		return String.valueOf(json);
+	}
 }

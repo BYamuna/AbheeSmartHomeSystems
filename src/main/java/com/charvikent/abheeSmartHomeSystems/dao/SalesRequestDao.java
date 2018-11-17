@@ -61,16 +61,7 @@ public class SalesRequestDao
 		 
 			 String hql ="select sr.id,sr.address,sr.email,sr.imgfiles,sr.location,sr.mobileno,sr.reqdesc,sr.salesrequestnumber,ap.name as modelname from abhee_sales_request sr, abhee_product ap where sr.modelnumber=ap.id";
 			 System.out.println(hql);
-			/*List<SalesRequest> reqlist= entityManager.createQuery(hql).getResultList();
-			 for(SalesRequest sr:reqlist)
-			 {
-			 System.out.println(sr.getModelnumber()+" "+sr.getEmail());
-			 }
-			return reqlist;*/
-			 /*RowMapper<SalesRequest> rowMapper = new BeanPropertyRowMapper<SalesRequest>(SalesRequest.class);
-			 
-		      return  this.jdbcTemplate.query(hql, rowMapper);*/
-
+			
 				List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
 				System.out.println(retlist);
 				return retlist;

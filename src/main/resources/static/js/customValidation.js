@@ -182,15 +182,18 @@ $(".emailOnly").on(	"blur",	function(e) {
 					}else{
 						
 						 $(this).after('<span class="error error-keyup-4">Not a valid Email </span>');
-					        
+					
 					        $('.emailOnly' ).css('border-color','#e73d4a');
 							$('.emailOnly' ).css('color','#e73d4a');
 							
 							$('.emailOnly' ).addClass("errorCls");
+							 
 					}
 					// keychar = String.fromCharCode(keynum);
 					// regEx = /[A-Z0-9a-z@]/;
 					// return regEx.test(keychar);
+					
+					
 					return false;
 				});
 
