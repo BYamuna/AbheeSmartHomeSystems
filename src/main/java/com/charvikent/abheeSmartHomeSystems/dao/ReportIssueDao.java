@@ -839,7 +839,11 @@ public List<ReportIssue> getAllReportIssues()
 
 	public List<Map<String, Object>> getAllTasksList() 
 	{
+<<<<<<< HEAD
+		String sql="select t.id,t.additionalinfo,t.created_time,t.description,t.subject,t.taskdeadline,t.taskno,t.updated_time,t.uploadfile,t.add_comment,t.customer_id,t.communicationaddress,t.warranty,u1.username as assignby,u2.username as assignto,c.category,ts.name as kstatus,p.priority,s.severity,st.servicetypename as servicetype,ap.name as modelname from abhee_task t,abheeusers u1,abheeusers u2,abheecategory c, abheetaskstatus ts,abheepriority p,abheeseverity s,abheeservicetype st,abhee_product ap where t.assignby=u1.id and t.assignto=u2.id and t.category=c.id and t.kstatus=ts.id and t.priority=p.id and t.severity=s.id and t.service_type =st.id and t.modelid=ap.id";
+=======
 		String sql="select t.id,t.additionalinfo,t.created_time,t.description,t.subject,t.taskdeadline,t.taskno,t.updated_time,t.uploadfile,t.add_comment,t.customer_id as customerId,t.communicationaddress,t.warranty,u1.username as assignby,u2.username as assignto,c.category,ts.name as kstatus,p.priority,s.severity,st.servicetypename as serviceType,ap.name as modelname from abhee_task t,abheeusers u1,abheeusers u2,abheecategory c, abheetaskstatus ts,abheepriority p,abheeseverity s,abheeservicetype st,abhee_product ap where t.assignby=u1.id and t.assignto=u2.id and t.category=c.id and t.kstatus=ts.id and t.priority=p.id and t.severity=s.id and t.service_type =st.id and t.modelid=ap.id";
+>>>>>>> 94f5f5be8601f7e6adc591249186a2fa7a00490e
 		/*RowMapper<AbheeTask> rowMapper = new BeanPropertyRowMapper<AbheeTask>(AbheeTask.class);
 	    return  this.jdbcTemplate.query(sql, rowMapper);*/
 	    List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
