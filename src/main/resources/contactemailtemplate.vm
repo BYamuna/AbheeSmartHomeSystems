@@ -1,0 +1,27 @@
+<html> 
+
+  <body>  
+  <h3>Dear ${name}, </h3> 
+  <div>
+  The Following Customer Contact details is given below:
+  </div>
+  <table>
+   <th>CustomerName:</th>
+  <td>${fullname}</td>
+  </tr>
+  <tr>
+  <th>Customer MobileNumber:</th>
+  <td>${mobilenumber}</td>
+  </tr>
+  <tr>
+  <th>Customer Emailid:</th>
+  <td>${emailid}</td>
+  </tr>
+  <tr>
+  <th>Subject:</th>
+  <td>${subject}</td>
+  </tr>
+  </table>
+  <div>Thanks & Regards</div>
+  </body> 
+  </html> 
