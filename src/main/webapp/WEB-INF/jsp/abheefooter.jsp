@@ -21,10 +21,10 @@ label, .form-control {
         	<div style="padding-left:15px;padding-right:15px;" class="col-md-3">
             	<h4 style="color:#ffffff">Catalog</h4>
                 <ul>
-                	<li><a class="sme" href="#"><i class="fa fa-angle-right"></i> Home Theaters</a></li><br>
-                	<li><a class="sme" href="#"><i class="fa fa-angle-right"></i> PA Audio</a></li><br>
-                	<li><a class="sme" href="#"><i class="fa fa-angle-right"></i> Projectors</a></li><br>
-                	<li><a class="sme" href="#"><i class="fa fa-angle-right"></i> Security Cameras</a></li><br>
+                	<li><a class="sme" href="${baseurl }/abheecategory?id=1"><i class="fa fa-angle-right"></i> Home Theaters</a></li><br>
+                	<li><a class="sme" href="${baseurl }/abheecategory?id=2"><i class="fa fa-angle-right"></i> PA Audio</a></li><br>
+                	<li><a class="sme" href="${baseurl }/abheecategory?id=3"><i class="fa fa-angle-right"></i> Projectors</a></li><br>
+                	<li><a class="sme" href="${baseurl }/abheecategory?id=4"><i class="fa fa-angle-right"></i> Security Cameras</a></li><br>
                 	<li><a class="sme" href="#"><i class="fa fa-angle-right"></i> Site Map</a></li><br>
                 </ul>
             </div>
