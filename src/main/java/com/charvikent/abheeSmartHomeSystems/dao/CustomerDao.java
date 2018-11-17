@@ -437,5 +437,11 @@ public Customer checkCustomerExistOrNotByEmailOnEdit(String custEmail, String ed
 		return result; 
 		
 	}
+	
+	public List<Customer> getEmailandMobileByCustomerId(Customer customer){
+		String hql ="select c.email,c.mobilenumber  from abhee_customer c where c.customer_id='"+customer.getCustomerId()+"'";
+		RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<Customer>(Customer.class);
+	    return  this.jdbcTemplate.query(hql, rowMapper);
+	}
 
 }
