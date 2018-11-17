@@ -36,7 +36,7 @@ public class ContactController
 	{		
 		LOGGER.debug("Calling contactus at controller");
 		contactDao.saveContact(contact);
-		redir.addFlashAttribute("msg", "Contact details Saved Successfully");
+		redir.addFlashAttribute("msg", "We will contact you soon");
 		redir.addFlashAttribute("cssMsg", "success");
 		sendingMail.sendContactDetailsEmail(contact);
 		return "redirect:contact";
