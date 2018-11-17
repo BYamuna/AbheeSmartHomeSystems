@@ -463,8 +463,8 @@ $.each(productmodelslist, function(k,v){
 		+"<p id ='modelName'>"+v.name+"</p>"
         +"</a>"
         +"</div>";
-		
 		$("#productModels").append(divData);
+		 /* toolTips(); */
 	});
 	
 	function getCompanys(id){

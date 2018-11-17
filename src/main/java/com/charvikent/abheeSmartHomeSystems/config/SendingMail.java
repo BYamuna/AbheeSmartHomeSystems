@@ -27,6 +27,7 @@ import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+import com.charvikent.abheeSmartHomeSystems.model.Contact;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 
 /*import com.charvikent.abheeSmartHomeSystems.dao.UserDao;*/
@@ -208,7 +209,7 @@ public class SendingMail {
 		}  
 	}
 	
-	public void sendSalesRequestEmailWithMultipleAttachment(String emailId,MultipartFile[] files,String description ) throws MessagingException {  
+	public void sendSalesRequestEmailWithMultipleAttachment(String emailId,MultipartFile[] files,String description) throws MessagingException {  
 		try {
 			
 			
@@ -450,9 +451,38 @@ public class SendingMail {
 		}catch (MailException e) {
 			e.printStackTrace();
 			System.out.println(e);
-		}  
+		}  	
+		}
+		
+		public void sendContactDetailsEmail(Contact contact) throws MessagingException {  
+			try {
+				
+				String id=String.valueOf(contact.getId());
+				User emp=userDao.getUserById(Integer.parseInt(id));
+				String email = emp.getEmail();
+				MimeMessage message = javaMailSender.createMimeMessage();
+				MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-
-			
-		}		
+				
+				
+				VelocityContext velocityContext = new VelocityContext();
+				velocityContext.put("name",emp.getFirstname());
+				velocityContext.put("fullname",contact.getFullname());
+				velocityContext.put("mobilenumber",contact.getMobilenumber());
+				velocityContext.put("emailid",contact.getEmailid());
+				velocityContext.put("subject",contact.getSubject());
+				
+				StringWriter stringWriter = new StringWriter();
+				velocityEngine.mergeTemplate("contactemailtemplate.vm", "UTF-8", velocityContext, stringWriter);
+				helper.setText(stringWriter.toString(), true);
+				helper.setTo( email);
+				helper.setSubject("Conatct Details Sent Successfully");  
+				javaMailSender.send(message);
+					
+				
+			} catch (MailException e) {
+				e.printStackTrace();
+				System.out.println(e);
+			}  
+		}
 }
