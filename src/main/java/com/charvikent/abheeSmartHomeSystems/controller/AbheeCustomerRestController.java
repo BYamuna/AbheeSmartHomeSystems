@@ -737,6 +737,11 @@ public class AbheeCustomerRestController
 		String email=salesrequest.getEmail();
 		String custname=salesrequest.getCustomername();
 		String enquirydetails=salesrequest.getReqdesc();
+		String enquiryimage=salesrequest.getImgfiles();
+		if(!salesrequest.getImgfiles().isEmpty())
+		{
+		salesrequest.setImgfiles(enquiryimage);
+		}
 		srequestDao.saveRequest(salesrequest);
 		code = "Enquiry details sent successfully";
 		HashMap<String,String> hm =new HashMap<String,String>();

@@ -27,6 +27,7 @@ public class SalesRequest
 	private String longitude;
 	private String customerid;
 	private String customername;
+	private String requestType;
 	@Transient
 	private String locationData;
 
@@ -36,7 +37,7 @@ public class SalesRequest
 
 	}
 	public SalesRequest(Integer id, String modelnumber, String email, String mobileno, String location, String address,
-			String reqdesc, String imgfiles,String customername) 
+			String reqdesc, String imgfiles,String customername,String requestType) 
 	{
 		super();
 		this.id = id;
@@ -48,6 +49,7 @@ public class SalesRequest
 		this.reqdesc = reqdesc;
 		this.imgfiles = imgfiles;
 		this.customername=customername;
+		this.requestType=requestType;
 	}
 	public String getCustomername() {
 		return customername;
@@ -160,12 +162,20 @@ public class SalesRequest
 	public void setCustomerid(String customerid) {
 		this.customerid = customerid;
 	}
+	public String getRequestType() {
+		return requestType;
+	}
+	public void setRequestType(String requestType) {
+		this.requestType = requestType;
+	}
 	@Override
 	public String toString() {
 		return "SalesRequest [id=" + id + ", modelnumber=" + modelnumber + ", email=" + email + ", mobileno=" + mobileno
 				+ ", location=" + location + ", address=" + address + ", reqdesc=" + reqdesc + ", imgfiles=" + imgfiles
 				+ ", salesrequestnumber=" + salesrequestnumber + ", quotationDocuments=" + quotationDocuments
 				+ ", enable=" + enable + ", lat=" + lat + ", longitude=" + longitude + ", customerid=" + customerid
-				+ ", customername=" + customername + ", locationData=" + locationData + "]";
+				+ ", customername=" + customername + ", requestType=" + requestType + ", locationData=" + locationData
+				+ "]";
 	}
+	
 }

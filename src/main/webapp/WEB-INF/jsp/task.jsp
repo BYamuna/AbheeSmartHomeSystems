@@ -494,7 +494,6 @@
 
 	$(document).ready(function() {
 		//$("#taskdeadline").attr("disabled", "disabled"); 
-
 		// 	$("#taskdeadline").attr('readonly', 'readonly');
 		$('#taskdeadline').datetimepicker({
 			useCurrent : false,
@@ -503,7 +502,6 @@
 			sideBySide : true,
 			toolbarPlacement : 'top',
 			focusOnShow : false,
-
 		});
 	});
 
