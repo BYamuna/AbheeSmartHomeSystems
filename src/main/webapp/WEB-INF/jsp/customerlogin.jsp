@@ -433,12 +433,11 @@ var idArrayCmt1 = null;
 	
 	$('#submitModel').click(function(event) {
 		
-		
 	$.each(idArrayCmt1, function(i, val) {
 		var value = $("#" + idArrayCmt1[i]).val();
 		var errorCls = $("#" + idArray[i]).hasClass('errorCls');
 		var placeholder = $("#" + idArrayCmt1[i]).attr('placeholder');
-		if (value == null || value == "" || value == "undefined" || errorCls ) {
+		if (value == null || value == "" || value == "undefined" || errorCls) {
 			$('style').append(styleBlock);
 			$("#" + idArrayCmt1[i] ).attr("placeholder", placeholder);
 			$("#" + idArrayCmt1[i] ).css('border-color','#e73d4a');
@@ -452,9 +451,9 @@ var idArrayCmt1 = null;
 //			$("#" + idArray[i] + "Error").text("Please " + placeholder);
 			validation = false;
 			 event.preventDefault(); 
-		}else{
+		} else{
 			validation = true;
-		}
+		} 
 	});
 	validation =subValidation;
 	// retype password validation

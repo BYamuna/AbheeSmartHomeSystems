@@ -2,8 +2,15 @@ package com.charvikent.abheeSmartHomeSystems.dao;
 
 /*import java.util.Iterator;*/
 import java.util.List;
+import java.util.Map;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
@@ -14,6 +21,7 @@ public class SalesRequestDao
 {
 	@PersistenceContext
     private EntityManager entityManager;
+	@Autowired JdbcTemplate jdbcTemplate;
 	
 	public void saveRequest(SalesRequest salesrequest) 
 	{
@@ -48,15 +56,24 @@ public class SalesRequestDao
 			
 	}*/
 	 @SuppressWarnings("unchecked")
-		public List<SalesRequest> getSalesRequestList()
+		public List<Map<String, Object>> getSalesRequestList()
 		 {
-			 String hql ="from SalesRequest";
-			 List<SalesRequest> reqlist= entityManager.createQuery(hql).getResultList();
+		 
+			 String hql ="select sr.id,sr.address,sr.email,sr.imgfiles,sr.location,sr.mobileno,sr.reqdesc,sr.salesrequestnumber,ap.name as modelname from abhee_sales_request sr, abhee_product ap where sr.modelnumber=ap.id";
+			 System.out.println(hql);
+			/*List<SalesRequest> reqlist= entityManager.createQuery(hql).getResultList();
 			 for(SalesRequest sr:reqlist)
 			 {
 			 System.out.println(sr.getModelnumber()+" "+sr.getEmail());
 			 }
-			return reqlist;		 
+			return reqlist;*/
+			 /*RowMapper<SalesRequest> rowMapper = new BeanPropertyRowMapper<SalesRequest>(SalesRequest.class);
+			 
+		      return  this.jdbcTemplate.query(hql, rowMapper);*/
+
+				List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+				System.out.println(retlist);
+				return retlist;
 		 }
 	
 	public String getSalesRequestEmailById(String id) {

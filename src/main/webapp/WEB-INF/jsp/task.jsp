@@ -497,13 +497,10 @@
 
 		// 	$("#taskdeadline").attr('readonly', 'readonly');
 		$('#taskdeadline').datetimepicker({
-
 			useCurrent : false,
-			format : 'DD-MMM-YYYY hh:mm A',
+			format : 'DD-MMM-YYYY',
 			showTodayButton : true,
 			sideBySide : true,
-			//		    showClose: true,
-			//		    showClear: true,
 			toolbarPlacement : 'top',
 			focusOnShow : false,
 

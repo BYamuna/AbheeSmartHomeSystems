@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+
+import javax.mail.MessagingException;
 /*import javax.mail.MessagingException;*/
 import javax.servlet.http.HttpServletRequest;
 /*import org.apache.commons.lang.StringUtils;*/
@@ -95,7 +97,7 @@ public class AbheeCustomerRestController
 	}
 	
 	@RequestMapping(value="/saveRestCustomer", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
-	public HashMap<String, String>  SaveAbheeCustomer( @RequestBody Customer customer) throws IOException 
+	public HashMap<String, String>  SaveAbheeCustomer( @RequestBody Customer customer) throws IOException, MessagingException 
 	{
 		LOGGER.debug("Calling saveRestCustomer at controller");
 		String code =null;
@@ -110,6 +112,7 @@ public class AbheeCustomerRestController
 			customer.setEnabled("1");
 			customerDao.saveAbheeCustomer(customer);
 			sendSMS.sendSMS(regSuccessMsg,customer.getMobilenumber());
+			sendingMail.sendConfirmationEmail(customer);
 			code=customer.getFirstname()+" "+customer.getLastname();
 			}
 			else
@@ -228,7 +231,7 @@ public class AbheeCustomerRestController
         Customer customer =customerDao.checkCustomerExistOrNotByEmail(custemail);
         String msg="Dear Customer,thanks for registering with Abhee Smart Home Systems. OTP for your registration is:"+otpnumber;
         HashMap<String,String> hm =new HashMap<String,String>();
-		if(null==custbean1 || null == customer)
+		if(null==custbean1 && null == customer)
 		{
 		try 
 		{
@@ -242,15 +245,6 @@ public class AbheeCustomerRestController
 				oTPDetailsDao.saveOTPdetails(oTPDetails);
 				hm.put("otpnumber", otpnumber);
 				hm.put("statuscode", code);
-				/*if(null==custbean1)
-				{
-					customerDao.getMobileno(custBean);
-					
-				}
-				if(null == customer)
-				{
-					customerDao.getEmail(custBean);
-				}*/
 			}
 			else
 			{
@@ -265,7 +259,7 @@ public class AbheeCustomerRestController
 		}
 		else
 		{
-			code="Mobilenumber and email not matched ";
+			code="Mobilenumber or email id already exists";
 			hm.put("statuscode", code);
 		}		
 		return hm;		
@@ -556,7 +550,7 @@ public class AbheeCustomerRestController
 		task.setPriority("3");
 		task.setSeverity("3");
 		task.setStatus("1");
-		task.setSubject("Task created By Customer");
+		//task.setSubject("Task created By Customer");
 		task.setServiceType(servicetypeid);
 		task.setCategory(catid);
 		task.setModelid(modelid);
@@ -736,6 +730,8 @@ public class AbheeCustomerRestController
 	{
 		LOGGER.debug("Calling saveEnquiryDetails at controller");
 		String code =null;
+		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
+		salesrequest.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
 		String modelnumber=salesrequest.getModelnumber();
 		String mobile=salesrequest.getMobileno();
 		String email=salesrequest.getEmail();
@@ -940,7 +936,7 @@ public class AbheeCustomerRestController
 	{
 		LOGGER.debug("Calling getquotationlist at controller");
 		JSONObject json =new JSONObject();
-		List<SalesRequest> listOrderBeans = null; 
+		List<Map<String, Object>> listOrderBeans = null; 
 		try 
 		{
 			listOrderBeans = srequestDao.getSalesRequestList();
@@ -1390,10 +1386,11 @@ public String  getProductsModelsList()
 	{
 		LOGGER.debug("Calling taskslist at controller");
 		JSONObject json =new JSONObject();
-		List<AbheeTask> listOrderBeans = null;
+		List<Map<String, Object>> listOrderBeans = null;
 		try 
 		{
 			listOrderBeans = reportIssueDao.getAllTasksList();
+			System.out.println(listOrderBeans);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				json.put("taskslist", listOrderBeans);
 			} else 

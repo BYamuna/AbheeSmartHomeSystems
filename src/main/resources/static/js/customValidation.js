@@ -126,7 +126,9 @@ $(".numericOnly2").keydown(function(e) {
 	// Allow: home, end, left, right, down, up
 	(e.keyCode >= 35 && e.keyCode <= 40)) {
 		// let it happen, don't do anything
+		
 		return;
+		
 	}
 	// Ensure that it is a number and stop the keypress
 	if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57))
@@ -166,7 +168,7 @@ function checkEmail(str) {
 $(".emailOnly").on(	"blur",	function(e) {
 	 $('span.error-keyup-4').remove();
 					// console.log(event.which);
-					var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+					var expr =/^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 					// var expr =/[A-Z0-9a-z@]/;
 					var key = String.fromCharCode(event.which);
 					 var inputVal = $(this).val();
@@ -209,14 +211,14 @@ $(".onlyCharacters").on("keypress",	function(event) {
 
 			// Disallow anything not matching the regex pattern (A to Z
 			// uppercase, a to z lowercase and white space)
-			var englishAlphabetAndWhiteSpace = /[A-Za-z. ]/g;
+			var englishAlphabetAndWhiteSpace = /[A-Za-z.]/g;
 
 			// Retrieving the key from the char code passed in event.which
 			var key = String.fromCharCode(event.which);
 
 			// alert(event.keyCode);
 
-			if (event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37
+			if (event.keyCode == 8 || event.keyCode == 9 /*|| event.keyCode == 37*/
 					|| event.keyCode == 39
 					|| englishAlphabetAndWhiteSpace.test(key)) {
 				return true;

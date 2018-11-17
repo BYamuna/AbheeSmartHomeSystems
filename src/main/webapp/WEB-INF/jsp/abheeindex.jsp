@@ -36,31 +36,31 @@
         <!-- Content starts here -->
         <div class="cont data">
         	<div class="col-md-4 thumbnail">
-            	<a href="#"><img src="${baseurl }/abhee/images/hmt.png" class="img-responsive" alt="Home Theater" title="Home Theaters"/></a>
+            	<a href="${baseurl }/abheecategory?id=1"><img src="${baseurl }/abhee/images/hmt.png" class="img-responsive" alt="Home Theater" title="Home Theaters"/></a>
             </div>
         	<div class="col-md-4 thumbnail">
-            	<a href="#"><img src="${baseurl }/abhee/images/paa.png" class="img-responsive" alt="PA Audio" title="PA Audio"/></a>
+            	<a href="abheecategory?id=2"><img src="${baseurl }/abhee/images/paa.png" class="img-responsive" alt="PA Audio" title="PA Audio"/></a>
             </div>
         	<div class="col-md-4 thumbnail">
-            	<a href="#"><img src="${baseurl }/abhee/images/flooring.png" class="img-responsive" alt="Wooden" title="Wooden Flooring"/></a>
+            	<a href="abheecategory?id=9"><img src="${baseurl }/abhee/images/flooring.png" class="img-responsive" alt="Wooden" title="Wooden Flooring"/></a>
             </div><div class="clearfix"></div>
         	<div class="col-md-4 thumbnail">
-            	<a href="#"><img src="${baseurl }/abhee/images/security.png" class="img-responsive" alt="Security" title="Security Cameras"/></a>
+            	<a href="abheecategory?id=4"><img src="${baseurl }/abhee/images/security.png" class="img-responsive" alt="Security" title="Security Cameras"/></a>
             </div>
         	<div class="col-md-4 thumbnail">
-            	<a href="#"><img src="${baseurl }/abhee/images/remote.png" class="img-responsive" alt="Remote" title="Remote Gates"/></a>
+            	<a href="abheecategory?id=6"><img src="${baseurl }/abhee/images/remote.png" class="img-responsive" alt="Remote" title="Remote Gates"/></a>
             </div>
         	<div class="col-md-4 thumbnail">
-            	<a href="#"><img src="${baseurl }/abhee/images/proj.jpg" class="img-responsive" alt="Projector" title="Projectors"/></a>
+            	<a href="abheecategory?id=3"><img src="${baseurl }/abhee/images/proj.jpg" class="img-responsive" alt="Projector" title="Projectors"/></a>
             </div><div class="clearfix"></div>
         	<div class="col-md-4 thumbnail">
-            	<a href="#"><img src="${baseurl }/abhee/images/solar.png" class="img-responsive" alt="Solar" title="Solar Fencing"/></a>
+            	<a href="abheecategory?id=5"><img src="${baseurl }/abhee/images/solar.png" class="img-responsive" alt="Solar" title="Solar Fencing"/></a>
             </div>
         	<div class="col-md-4 thumbnail">
             	<a href="#"><img src="${baseurl }/abhee/images/car.png" class="img-responsive" alt="Car" title="Car Accessories"/></a>
             </div>
         	<div class="col-md-4 thumbnail">
-            	<a href="#"><img src="${baseurl }/abhee/images/grass.png" class="img-responsive" alt="Grass" title="Artificial Grass"/></a>
+            	<a href="abheecategory?id=7"><img src="${baseurl }/abhee/images/grass.png" class="img-responsive" alt="Grass" title="Artificial Grass"/></a>
             </div><div class="clearfix"></div>
         </div>
 	</div>

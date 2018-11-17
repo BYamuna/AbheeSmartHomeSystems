@@ -1,6 +1,7 @@
 package com.charvikent.abheeSmartHomeSystems.controller;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -108,7 +109,7 @@ public class SalesRequestController
 	public String  totalSalesList( @ModelAttribute("salesrequestf")  SalesRequest salesrequest,Model model ,HttpServletRequest request) 
 	{
 		LOGGER.debug("Calling allsalesrequest at controller");
-		List<SalesRequest> listOrderBeans = null;
+		List<Map<String, Object>> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
 		model.addAttribute("salesrequestf", new SalesRequest());
