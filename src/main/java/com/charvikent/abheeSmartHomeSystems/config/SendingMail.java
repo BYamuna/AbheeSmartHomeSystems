@@ -58,16 +58,9 @@ public class SendingMail {
 	
 	public void sendConfirmationEmail(Customer user) throws MessagingException {  
 		try {
-			
-			
-
-			
 			String email = user.getEmail();
 			MimeMessage message = javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
-
-			
-			
 			VelocityContext velocityContext = new VelocityContext();
 			velocityContext.put("name",user.getFirstname());
 			velocityContext.put("mobilenumber",user.getMobilenumber());
@@ -485,4 +478,41 @@ public class SendingMail {
 				System.out.println(e);
 			}  
 		}
+
+		/*public void sendMailToTechnician(AbheeTask editissue) throws MessagingException 
+		{
+			try {
+				String customerid =  editissue.getCustomerId();
+				String assignuser=editissue.getAssignby();
+				User emp=userDao.getUserById(Integer.parseInt(assignuser));
+				Customer customer= customerDao.findCustomerByCustId(customerid);
+				String emailid=emp.getEmail();
+				
+				MimeMessage message = javaMailSender.createMimeMessage();
+				MimeMessageHelper helper = new MimeMessageHelper(message, true);
+				
+				
+				VelocityContext velocityContext = new VelocityContext();
+				velocityContext.put("name",emp.getFirstname());
+				velocityContext.put("Firstname",customer.getFirstname());
+				velocityContext.put("Lastname",customer.getLastname());
+				velocityContext.put("taskno", editissue.getTaskno());
+				velocityContext.put("mobileno", customer.getMobilenumber());
+				velocityContext.put("productmodel", editissue.getModelid());
+				
+				StringWriter stringWriter = new StringWriter();
+				velocityEngine.mergeTemplate("TechnicianEmailTemplate.vm", "UTF-8", velocityContext, stringWriter);
+				helper.setText(stringWriter.toString(), true);
+				helper.setTo( emailid);
+			    helper.setSubject("Service Request Assigned To You Successfully");
+			  		   
+			   
+				javaMailSender.send(message);
+			
+		}catch (MailException e) {
+			e.printStackTrace();
+			System.out.println(e);
+		} 
+			
+		}*/
 }

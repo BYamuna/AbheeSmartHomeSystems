@@ -281,8 +281,8 @@ public class AdminController {
 			jsonObj.put("message", "Password Updated Successfully");
 			String tmsg =environment.getProperty("app.changepassword");
 			  System.out.println(tmsg);
-			  
-			  tmsg=  tmsg.replaceAll("_username_", users.getUsername());
+			  tmsg=  tmsg.replaceAll("_designation_", users.getDesignationName());
+			  tmsg=  tmsg.replaceAll("_mobilenumber_", users.getMobilenumber());
 			  tmsg=  tmsg.replaceAll("_password_", users.getPassword());
 			  
 			  smsTemplate.sendSMS(tmsg,users.getMobilenumber());

@@ -458,7 +458,7 @@ function makeServiceRequestFieldsEmpty()
 $.each(productmodelslist, function(k,v){
 		var divData= "<div class='img'>"
 		+"<a href='#'onclick='getModels("+v.id+")' >"
-		+"<img src='../abheeimg/"+v.productmodelpics+"' class='img-responsive' alt='1810' title='YHT-1810'>"
+		+"<img src='../abheeimg/"+v.productmodelpics+"' class='img-responsive' alt='1810' title='"+v.name+"'>"
 		+"<h4>"+v.companyname+"</h4>"
 		+"<p id ='modelName'>"+v.name+"</p>"
         +"</a>"
@@ -485,7 +485,7 @@ $.each(productmodelslist, function(k,v){
 	$("#productModels").empty();
 		var divData= "<div class='img'>"
 		+"<a href='#'onclick='getModels("+v.id+")' >"
-		+"<img src='../abheeimg/"+v.productmodelpics+"' class='img-responsive' alt='1810' title='YHT-1810'>"
+		+"<img src='../abheeimg/"+v.productmodelpics+"' class='img-responsive' alt='1810' title='"+v.name+"'>"
 		+"<h4>"+v.companyname+"</h4>"
 		+"<p  id ='modelName'>"+v.name+"</p>"
         +"</a>"
@@ -514,7 +514,7 @@ $.each(productmodelslist, function(k,v){
 	
 	var pdivdata ="<div class='dimg' >"
 	               +"<div class='col-sm-6' >"
-	               +"<img width='100%' src='../abheeimg/"+v.productmodelpics+"' class='img-responsive' alt='196' title='YHT-196'/>"
+	               +"<img width='100%' src='../abheeimg/"+v.productmodelpics+"' class='img-responsive' alt='196' title='"+v.name+"'/>"
 	               +"<div class='col-xs-6'>"
     	           +"<a href='#' onclick='checkLogin()' style='width:95%;margin-top:9px !important;' class='btn btn-primary' >Request Quotation</a>"
     	           +"</div>"

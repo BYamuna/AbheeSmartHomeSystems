@@ -164,7 +164,7 @@ public class AbheeCustRegistrationController
 		*/
 		Customer customer =new Customer();
 		String usernumber =kptsUtil.randNum();
-		String regSuccessMsg =csname+" "+cname+",  Successfully registered with ABhee Smart Homes. \n You can login using  \n UserId:  "+custMobile+" or "+cemail+"\n password: "+cpassword;
+		String regSuccessMsg =csname+" "+cname+",  Successfully registered with ABhee Smart Homes. \n You can login using  \n Mobilenumber:  "+custMobile+" or Email:"+cemail+"\n password: "+cpassword;
 		customer.setMobilenumber(custMobile);
 		customer.setFirstname(csname);
 		customer.setLastname(cname);

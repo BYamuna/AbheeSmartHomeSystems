@@ -443,7 +443,7 @@ public List<ReportIssue> getAllReportIssues()
 			sendingMail.sendMailToUser(editissue);
 			//sendsmsToUser
 			String mobilenum=objuserBean.getMobilenumber();
-			String tmsg =environment.getProperty("app.tmrmsg");
+			String tmsg =environment.getProperty("app.taskmsg");
 			 System.out.println(tmsg);
 			tmsg= tmsg.replaceAll("_technicianname_", objuserBean.getFirstname()+" "+objuserBean.getLastname());
 			tmsg= tmsg.replaceAll("_mobileno_", objuserBean.getMobilenumber());
@@ -454,16 +454,13 @@ public List<ReportIssue> getAllReportIssues()
 			sendSMS.sendSMS(tmsg,mobilenum);
 			//sendsmsToCustomer
 			String mobileno=objuserBean.getMobilenumber();
-			String msg =environment.getProperty("app.taskmsg");
+			String msg =environment.getProperty("app.tmrmsg");
 			 System.out.println(msg);
 			 msg= msg.replaceAll("_ServiceRequestNo_", editissue.getTaskno());
 			 msg= msg.replaceAll("_fullname_", objuserBean.getFirstname()+" "+objuserBean.getLastname());
 			 msg= msg.replaceAll("_mobilenum_", objuserBean.getMobilenumber());
 			 msg= msg.replaceAll("_requestdesc_", editissue.getDescription());
-			 sendSMS.sendSMS(msg,mobileno);
-			/*sendSMS.sendsmsToCustomer(editissue);
-		    sendSMS.sendsmsToUser(editissue); */
-			  
+			 sendSMS.sendSMS(msg,mobileno); 
 			}
 		} 
 		catch (MessagingException e) 
