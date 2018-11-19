@@ -59,7 +59,31 @@ public class SalesRequestDao
 		public List<Map<String, Object>> getSalesRequestList()
 		 {
 		 
-			 String hql ="select sr.id,sr.address,sr.email,sr.imgfiles,sr.location,sr.mobileno,sr.reqdesc,sr.salesrequestnumber,ap.name as modelname from abhee_sales_request sr, abhee_product ap where sr.modelnumber=ap.id";
+			 String hql ="select * from abhee_sales_request";
+			 System.out.println(hql);
+			
+				List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+				System.out.println(retlist);
+				return retlist;
+		 }
+	
+	 @SuppressWarnings("unchecked")
+		public List<Map<String, Object>> getSalesRequestList1()
+		 {
+		 
+			 String hql ="select sr.request_type,sr.salesrequestnumber,ap.name as modelname from abhee_sales_request sr,abhee_product ap where sr.modelnumber=ap.id";
+			 System.out.println(hql);
+			
+				List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+				System.out.println(retlist);
+				return retlist;
+		 }
+	 	@SuppressWarnings("unchecked")
+		public List<Map<String, Object>> getSalesRequestListByRequestNo(SalesRequest req)
+		 {
+		 
+			 String hql ="select sr.id,sr.address,sr.email,sr.imgfiles,sr.location,sr.modelnumber,sr.comments,sr.customerid,sr.mobileno,sr.reqdesc,sr.salesrequestnumber,sr.quotation_documents,sr.enable,sr.customername,sr.request_type\n" + 
+			 		"from abhee_sales_request sr where salesrequestnumber='"+req.getSalesrequestnumber()+"'";
 			 System.out.println(hql);
 			
 				List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
