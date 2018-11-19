@@ -4,7 +4,13 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-
+<style>
+.modal-header .close {
+    margin-top: -2px;
+    color: #fff;
+    opacity: 1;
+}
+</style>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
 <script type="text/javascript"

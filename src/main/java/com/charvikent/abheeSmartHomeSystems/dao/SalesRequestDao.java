@@ -55,7 +55,6 @@ public class SalesRequestDao
 			return null;
 			
 	}*/
-	 @SuppressWarnings("unchecked")
 		public List<Map<String, Object>> getSalesRequestList()
 		 {
 		 

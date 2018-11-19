@@ -469,6 +469,7 @@ public class AbheeCustomerRestController
 		{
 		salesrequest.setImgfiles(imgpath);
 		}
+		String requesttype=salesrequest.getRequestType();
 		srequestDao.saveRequest(salesrequest);
 		code = "requestSubmittedSuccessfully";
 		HashMap<String,String> hm =new HashMap<String,String>();
@@ -738,6 +739,7 @@ public class AbheeCustomerRestController
 		String custname=salesrequest.getCustomername();
 		String enquirydetails=salesrequest.getReqdesc();
 		String enquiryimage=salesrequest.getImgfiles();
+		String enquirytype=salesrequest.getRequestType();
 		if(!salesrequest.getImgfiles().isEmpty())
 		{
 		salesrequest.setImgfiles(enquiryimage);
@@ -1851,15 +1853,12 @@ public String  getProductsModelsList()
 				}
 			return String.valueOf(json);
 	}*/
-	
-	
-
 	@RequestMapping(value="/getEmailandMobileById", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public String getemailandmobileById( @RequestBody Customer customer) throws JsonProcessingException, JSONException 
 	{
 		
 		
-		LOGGER.debug("Calling getTicketStatus at controller");
+		LOGGER.debug("Calling getEmailandMobileById at controller");
 		List<Customer>  listOrderBeans = customerDao.getEmailandMobileByCustomerId(customer);
 		JSONObject json =new JSONObject();
 			if(null != listOrderBeans)
