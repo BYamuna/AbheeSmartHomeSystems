@@ -214,14 +214,14 @@ $(".onlyCharacters").on("keypress",	function(event) {
 
 			// Disallow anything not matching the regex pattern (A to Z
 			// uppercase, a to z lowercase and white space)
-			var englishAlphabetAndWhiteSpace = /[A-Za-z.]/g;
+			var englishAlphabetAndWhiteSpace = /[A-Za-z. ]/g;
 
 			// Retrieving the key from the char code passed in event.which
 			var key = String.fromCharCode(event.which);
 
 			// alert(event.keyCode);
 
-			if (event.keyCode == 8 || event.keyCode == 9 /*|| event.keyCode == 37*/
+			if (event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37
 					|| event.keyCode == 39
 					|| englishAlphabetAndWhiteSpace.test(key)) {
 				return true;

@@ -946,7 +946,30 @@ public class AbheeCustomerRestController
 		List<Map<String, Object>> listOrderBeans = null; 
 		try 
 		{
-			listOrderBeans = srequestDao.getSalesRequestList();
+			listOrderBeans = srequestDao.getSalesRequestList1();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				json.put("quotationslist", listOrderBeans);
+			} else 
+			{
+				json.put("quotationslist", "NOT_FOUND");
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return String.valueOf(json);
+	}
+	@RequestMapping(value="/getquotationlistByRequestNo", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getquotationlistByRequestNo(@RequestBody SalesRequest request) throws JsonProcessingException, JSONException 
+	{
+		LOGGER.debug("Calling getquotationlist at controller");
+		JSONObject json =new JSONObject();
+		List<Map<String, Object>> listOrderBeans = null; 
+		try 
+		{
+			listOrderBeans = srequestDao.getSalesRequestListByRequestNo(request);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				json.put("quotationslist", listOrderBeans);
 			} else 
