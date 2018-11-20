@@ -132,7 +132,7 @@ function displayTable(listOrders) {
 		serviceUnitArray[orderObj.id] = orderObj;
 		/* var checkbox="<input type='checkbox' class='form-check-input' id='salesrequest'>" */
 		var tblRow = "<tr>"
-			+ "<td title='"+orderObj.salesrequestnumber+"'>"+ orderObj.salesrequestnumber + "</td>"
+			+ "<td title='"+orderObj.salesrequestnumber+"'>"+ "<a class='view viewIt' href='viewQuotationDetails?id="+ orderObj.salesrequestnumber+ "&pgn=0'>"+ orderObj.salesrequestnumber + "</a>" + "</td>"
 			+ "<td title='"+orderObj.modelnumber+"'>"+ orderObj.modelnumber + "</td>"
 			+ "<td title='"+orderObj.email+"'>"+ orderObj.email + "</td>"
 			+ "<td title='"+orderObj.mobileno+"'>"+ orderObj.mobileno + "</td>"

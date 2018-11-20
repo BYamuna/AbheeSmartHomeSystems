@@ -24,6 +24,7 @@ public class AbheeTask
 	private String category;
 	private String severity;
 	private String priority;
+	private String ServiceType;
 	private String  assignby;
 	private String assignto;
 	private String subject;
@@ -39,7 +40,6 @@ public class AbheeTask
 	private String taskdeadline;
 	@Transient
 	private String taskdeadlineid;
-	private String ServiceType;
 	@Transient
 	private String assigntoid;
 	@Transient
@@ -48,6 +48,8 @@ public class AbheeTask
 	private String priorityid;
 	@Transient
 	private String  severityid;
+	@Transient
+	private String  servicetypeid;
 	@Transient
 	private String assignbyid;
 	@Transient
@@ -223,6 +225,12 @@ public class AbheeTask
 	public void setSeverityid(String severityid) {
 		this.severityid = severityid;
 	}
+	public String getServicetypeid() {
+		return servicetypeid;
+	}
+	public void setServicetypeid(String servicetypeid) {
+		this.servicetypeid = servicetypeid;
+	}
 	public String getTaskdeadline() {
 		return taskdeadline;
 	}
@@ -291,8 +299,7 @@ public class AbheeTask
 		this.amountreceived = amountreceived;
 	}
 	@Override
-	public String toString() 
-	{
+	public String toString() {
 		return "AbheeTask [id=" + id + ", taskno=" + taskno + ", customerId=" + customerId + ", createdTime="
 				+ createdTime + ", updatedTime=" + updatedTime + ", category=" + category + ", severity=" + severity
 				+ ", priority=" + priority + ", assignby=" + assignby + ", assignto=" + assignto + ", subject="
@@ -300,10 +307,11 @@ public class AbheeTask
 				+ ", gapcount=" + gapcount + ", kstatus=" + kstatus + ", status=" + status + ", additionalinfo="
 				+ additionalinfo + ", taskdeadline=" + taskdeadline + ", taskdeadlineid=" + taskdeadlineid
 				+ ", ServiceType=" + ServiceType + ", assigntoid=" + assigntoid + ", categoryid=" + categoryid
-				+ ", priorityid=" + priorityid + ", severityid=" + severityid + ", assignbyid=" + assignbyid
-				+ ", kstatusid=" + kstatusid + ", modelid=" + modelid + ", addComment=" + addComment
-				+ ", communicationaddress=" + communicationaddress + ", warranty=" + warranty + ", total=" + total
-				+ ", discount=" + discount + ", tax=" + tax + ", amountreceived=" + amountreceived + "]";
+				+ ", priorityid=" + priorityid + ", severityid=" + severityid + ", servicetypeid=" + servicetypeid
+				+ ", assignbyid=" + assignbyid + ", kstatusid=" + kstatusid + ", modelid=" + modelid + ", addComment="
+				+ addComment + ", communicationaddress=" + communicationaddress + ", warranty=" + warranty + ", total="
+				+ total + ", discount=" + discount + ", tax=" + tax + ", amountreceived=" + amountreceived + "]";
 	}
+	
 	
 }

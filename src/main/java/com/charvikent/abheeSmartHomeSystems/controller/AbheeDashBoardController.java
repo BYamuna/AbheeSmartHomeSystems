@@ -30,6 +30,7 @@ import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskStatusDao;
 import com.charvikent.abheeSmartHomeSystems.dao.DashBoardDao;
 import com.charvikent.abheeSmartHomeSystems.dao.PriorityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
+import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ServiceDao;
 import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
@@ -51,7 +52,8 @@ public class AbheeDashBoardController {
 	private SeverityDao severityDao;
 	@Autowired
 	private UserService userService;
-	
+	@Autowired
+	private SalesRequestDao srequestDao;
 	/*@Autowired
 	private CategoryDao categoryDao;*/
 	@Autowired
@@ -208,6 +210,17 @@ public class AbheeDashBoardController {
 		
 		return "viewcustomerdetails";
 
+	}
+	
+	@RequestMapping(value = "/viewQuotationDetails")
+	public String viewQuotationDetails(@RequestParam(value = "id", required = true) String salesrequestnumber,
+			@RequestParam(value = "pgn", required = true) String pgn,Model model,HttpSession session) 
+	{
+		LOGGER.debug("Calling  viewQuotationDetails at controller");
+		
+			List<Map<String, Object>> viewQuotationBean = srequestDao.getQuotationDocsByRequestNo(salesrequestnumber);
+			model.addAttribute("test3",viewQuotationBean);
+		return "viewquotationdetails";
 	}
 	
 	@SuppressWarnings("unused")

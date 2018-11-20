@@ -8,9 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
@@ -66,7 +64,6 @@ public class SalesRequestDao
 				return retlist;
 		 }
 	
-	 @SuppressWarnings("unchecked")
 		public List<Map<String, Object>> getSalesRequestList1()
 		 {
 		 
@@ -77,7 +74,6 @@ public class SalesRequestDao
 				System.out.println(retlist);
 				return retlist;
 		 }
-	 	@SuppressWarnings("unchecked")
 		public List<Map<String, Object>> getSalesRequestListByRequestNo(SalesRequest req)
 		 {
 		 
@@ -89,25 +85,26 @@ public class SalesRequestDao
 				System.out.println(retlist);
 				return retlist;
 		 }
-	
-	public String getSalesRequestEmailById(String id) {
-		
-		String hql ="select email from SalesRequest where id=:id";
-		
-		return (String) entityManager.createQuery(hql).setParameter("id", Integer.parseInt(id)).getSingleResult();
-	}
-	
+		public List<Map<String, Object>> getQuotationDocsByRequestNo(String srequestno)
+		 {
+			 String hql ="select sr.quotation_documents from abhee_sales_request sr where salesrequestnumber='"+srequestno+"'";
+			 System.out.println(hql);
+			 List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+			 System.out.println(retlist);
+			return retlist;
+		 }
+		public String getSalesRequestEmailById(String id) 
+		{
+			String hql ="select email from SalesRequest where id=:id";
+			return (String) entityManager.createQuery(hql).setParameter("id", Integer.parseInt(id)).getSingleResult();
+		}
 	@SuppressWarnings("unused")
 	public SalesRequest getSalesRequestById(String id) {
 		
 		SalesRequest salesRequest =new SalesRequest();
 		String hql ="from SalesRequest where id=:id";
-		 
-			
-		
 		/*Iterator itr = salesrequestlist.listIterator();
 		if(itr.hasNext()) {
-			
 			salesRequest.setAddress(salesrequestlist.g);
 			salesRequest.setEmail((String)email);
 		}
