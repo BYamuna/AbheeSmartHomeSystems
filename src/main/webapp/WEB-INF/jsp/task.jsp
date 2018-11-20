@@ -251,7 +251,7 @@
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Tax
 										<span class="impColor">*</span>
 									</label>
-									<form:input path="tax" placeholder="Tax" class="col-xs-10 col-sm-5 validate numericOnly2" />
+									<form:input path="tax" placeholder="Tax" class="col-xs-10 col-sm-5 validate numericOnly" />
 								</div>
 							</div>
 							

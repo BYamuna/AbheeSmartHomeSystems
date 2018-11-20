@@ -87,7 +87,7 @@ jQuery('.numericOnly').keyup(function() {
 
 
 jQuery('.numericOnly2').keyup(function() {
-	this.value = this.value.replace(/[^0-9]/g, '');
+	this.value = this.value.replace(/[^0-9]/g, '',);
 });
 
 

@@ -469,7 +469,6 @@ public class AbheeCustomerRestController
 		{
 		salesrequest.setImgfiles(imgpath);
 		}
-		String requesttype=salesrequest.getRequestType();
 		srequestDao.saveRequest(salesrequest);
 		code = "requestSubmittedSuccessfully";
 		HashMap<String,String> hm =new HashMap<String,String>();
@@ -731,6 +730,7 @@ public class AbheeCustomerRestController
 	{
 		LOGGER.debug("Calling saveEnquiryDetails at controller");
 		String code =null;
+		HashMap<String,String> hm =new HashMap<String,String>();
 		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
 		salesrequest.setSalesrequestnumber(salesrequest.getModelnumber()+randomNum);
 		String modelnumber=salesrequest.getModelnumber();
@@ -738,16 +738,26 @@ public class AbheeCustomerRestController
 		String email=salesrequest.getEmail();
 		String custname=salesrequest.getCustomername();
 		String enquirydetails=salesrequest.getReqdesc();
-		String enquiryimage=salesrequest.getImgfiles();
-		String enquirytype=salesrequest.getRequestType();
+		String enquiryimage=imgdecoder(salesrequest.getImgfiles(),request);
 		if(!salesrequest.getImgfiles().isEmpty())
 		{
 		salesrequest.setImgfiles(enquiryimage);
 		}
-		srequestDao.saveRequest(salesrequest);
-		code = "Enquiry details sent successfully";
-		HashMap<String,String> hm =new HashMap<String,String>();
-		hm.put("status", code);
+		if(enquirydetails!="") {
+			salesrequest.setStatus(1);
+			srequestDao.saveRequest(salesrequest);
+			code = "Enquiry details sent successfully";
+			hm.put("status", code);
+			
+		}
+		else {
+		
+			code = "Not Found";
+			hm.put("status", code);
+			
+		}
+		//srequestDao.saveRequest(salesrequest);
+		
 		return hm;
 	}
 	
@@ -1853,12 +1863,15 @@ public String  getProductsModelsList()
 				}
 			return String.valueOf(json);
 	}*/
+	
+	
+
 	@RequestMapping(value="/getEmailandMobileById", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public String getemailandmobileById( @RequestBody Customer customer) throws JsonProcessingException, JSONException 
 	{
 		
 		
-		LOGGER.debug("Calling getEmailandMobileById at controller");
+		LOGGER.debug("Calling getTicketStatus at controller");
 		List<Customer>  listOrderBeans = customerDao.getEmailandMobileByCustomerId(customer);
 		JSONObject json =new JSONObject();
 			if(null != listOrderBeans)
