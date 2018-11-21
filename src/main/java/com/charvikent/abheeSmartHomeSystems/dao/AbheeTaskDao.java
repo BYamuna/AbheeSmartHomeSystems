@@ -103,7 +103,7 @@ public class AbheeTaskDao {
 			{
 			
 		 sql="select t.id,t.assignto,u.username,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,t.service_type as servicetypeid,sev.severity, "
-				 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id, t.communicationaddress"
+				 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id, t.communicationaddress,t.amountreceived,t.discount,t.tax,t.total"
 				+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp"
 				+" where  t.kstatus<>'4' and t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.status='1'  order by t.created_time desc ";
 	}

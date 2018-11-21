@@ -1,11 +1,15 @@
 package com.charvikent.abheeSmartHomeSystems.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.CreationTimestamp;
 @Entity
 @Table(name = "abheeSalesRequest")
 public class SalesRequest 
@@ -29,6 +33,9 @@ public class SalesRequest
 	private String customername;
 	private String requestType;
 	
+	@CreationTimestamp
+	protected Date createdTime ;
+	
 	private int status;
 	
 	@Transient
@@ -40,7 +47,7 @@ public class SalesRequest
 
 	}
 	public SalesRequest(Integer id, String modelnumber, String email, String mobileno, String location, String address,
-			String reqdesc, String imgfiles,String customername,String requestType,int status) 
+			String reqdesc, String imgfiles,String customername,String requestType,int status,Date createdTime) 
 	{
 		super();
 		this.id = id;
@@ -54,6 +61,13 @@ public class SalesRequest
 		this.customername=customername;
 		this.requestType=requestType;
 		this.status=status;
+		this.createdTime=createdTime;
+	}
+	public Date getCreatedTime() {
+		return createdTime;
+	}
+	public void setCreatedTime(Date createdTime) {
+		this.createdTime = createdTime;
 	}
 	public String getCustomername() {
 		return customername;
@@ -185,8 +199,8 @@ public class SalesRequest
 				+ ", location=" + location + ", address=" + address + ", reqdesc=" + reqdesc + ", imgfiles=" + imgfiles
 				+ ", salesrequestnumber=" + salesrequestnumber + ", quotationDocuments=" + quotationDocuments
 				+ ", enable=" + enable + ", lat=" + lat + ", longitude=" + longitude + ", customerid=" + customerid
-				+ ", customername=" + customername + ", requestType=" + requestType + ", status=" + status
-				+ ", locationData=" + locationData + "]";
+				+ ", customername=" + customername + ", requestType=" + requestType + ", createdTime=" + createdTime
+				+ ", status=" + status + ", locationData=" + locationData + "]";
 	}
 	
 	
