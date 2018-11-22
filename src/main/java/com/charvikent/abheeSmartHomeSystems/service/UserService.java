@@ -317,7 +317,7 @@ public class UserService
 
 	public User checkEmployeeExistOrNotbyMobile(String custMobile) {
 		// TODO Auto-generated method stub
-		return userDao.heckEmployeeExistOrNotbyMobile(custMobile);
+		return userDao.checkEmployeeExistOrNotbyMobile(custMobile);
 	}
 
 	public User checkEmployeeExistOrNotbyEmail(String empcemail) {

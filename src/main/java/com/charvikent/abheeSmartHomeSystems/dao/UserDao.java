@@ -78,6 +78,7 @@ public class UserDao {
 				users.setBranchId((String) row[14]);
 				users.setBranchName((String) row[15]);
 				users.setUserId((String) row[16]);
+				//users.setAadharno((String) row[17]);
 				
 				
 				listusers.add(users);
@@ -213,6 +214,7 @@ public class UserDao {
 		users.setMobilenumber(user.getMobilenumber());
 		users.setUsername(user.getUsername());
 		users.setReportto(user.getReportto());
+		//users.setAadharno(user.getAadharno());
 		if(user.getDesignation().equals("9"))
 		{
 		users.setAddress(user.getAddress());
@@ -368,7 +370,7 @@ public class UserDao {
 
 
 		try {
-			List<Object[]> rows = em.createQuery("select  u.id,u.username,u.mobilenumber,u.email,u.reportto,u2.username,d.name,"
+			List<Object[]> rows = em.createQuery("select u.id,u.username,u.mobilenumber,u.email,u.reportto,u2.username,d.name,"
 					+ "u.firstname,u.lastname,u.reportto,u.designation ,u.department , u.enabled as status,u.userId,u.updatedTime from User u,User u2,Designation d where u.enabled='0'  and u.designation= d.id and  u.reportto=u2.id and u.designation !='9' order by u.updatedTime desc ").getResultList();
 			for (Object[] row : rows) {
 				User users =new User();
@@ -390,6 +392,7 @@ public class UserDao {
 				users.setDepartment((String) row[11]);
 				users.setStatus((String) row[12]);
 				users.setUserId((String) row[13]);
+				//users.setAadharno((String) row[14]);
 				listusers.add(users);
 
 			}
@@ -538,7 +541,7 @@ public class UserDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public User heckEmployeeExistOrNotbyMobile(String empMobile) {
+	public User checkEmployeeExistOrNotbyMobile(String empMobile) {
 		String hql ="from User where   mobilenumber ='"+empMobile+"'";
 		Query query =em.createQuery(hql);
 
