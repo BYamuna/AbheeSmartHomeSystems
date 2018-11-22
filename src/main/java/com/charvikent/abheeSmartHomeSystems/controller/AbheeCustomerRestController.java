@@ -744,7 +744,7 @@ public class AbheeCustomerRestController
 		salesrequest.setImgfiles(enquiryimage);
 		}
 		if(enquirydetails!="") {
-			salesrequest.setStatus(1);
+			//salesrequest.setStatus(1);
 			srequestDao.saveRequest(salesrequest);
 			code = "Enquiry details sent successfully";
 			hm.put("status", code);
@@ -976,17 +976,39 @@ public class AbheeCustomerRestController
 	{
 		LOGGER.debug("Calling getquotationlist at controller");
 		JSONObject json =new JSONObject();
-		List<Map<String, Object>> listOrderBeans = null; 
+		List<Map<String, Object>> listOrderBeans = null;
+		List<Map<String, Object>> listOrderBeans1=null,listOrderBeans2=null;
+		
 		try 
 		{
 			listOrderBeans = srequestDao.getSalesRequestListByRequestNo(request);
+			listOrderBeans1 = srequestDao.getAdminResponseListByRequestNo(request);
+			listOrderBeans2=srequestDao.getAdminResponseListByRequestNoWhenStatusZero(request);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+			
+			listOrderBeans1.get(0).get("status");
+			System.out.println("Status Code:"+listOrderBeans1.get(0).get("status"));
+			
+			if(!listOrderBeans1.get(0).get("status").equals(0)) {
 				json.put("quotationslist", listOrderBeans);
-			} else 
+				json.put("AdminResponseList",listOrderBeans1);
+			}
+			
+			else {
+				listOrderBeans1.get(0).get("status");
+				System.out.println("Status Code:"+listOrderBeans1.get(0).get("status"));
+				
+				json.put("quotationslist", listOrderBeans);
+				
+				json.put("AdminResponseList",listOrderBeans2);
+			}
+			}
+			else 
 			{
 				json.put("quotationslist", "NOT_FOUND");
 			}
 		} 
+		
 		catch (Exception e) 
 		{
 			e.printStackTrace();
