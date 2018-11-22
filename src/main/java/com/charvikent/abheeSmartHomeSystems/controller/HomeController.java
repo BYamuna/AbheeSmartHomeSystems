@@ -506,4 +506,24 @@ public class HomeController {
 		return true;
 		}	
 	}	
+	
+	@RequestMapping(value = "/getresetpassword", method = RequestMethod.POST)
+	public @ResponseBody Boolean getResetUserPassword(Model model, HttpServletRequest request)
+			throws IOException, MessagingException {
+		System.out.println("enter to getresetpassword");
+		String username = request.getParameter("username");
+		System.out.println(username);
+		/*
+		 * Random rnd = new Random(); int n = 100000 + rnd.nextInt(900000); String
+		 * strRandomNumber =String.valueOf(n); PasswordDetails pd =new
+		 * PasswordDetails(); pd.setPWDnumber(strRandomNumber);
+		 */
+		User custbean2 = userService.checkEmployeeExistOrNotbyMobile(username);
+		if (custbean2 != null) {
+			sendSMS.sendSMS(custbean2.getPassword(),username);
+			//mailTemplate.resetPassword(custbean2);
+			return true;
+		} else
+			return false;
+	}
 }

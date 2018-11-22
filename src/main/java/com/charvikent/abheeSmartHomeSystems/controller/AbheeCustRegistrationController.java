@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -43,6 +44,7 @@ public class AbheeCustRegistrationController
 	@Autowired KptsUtil kptsUtil;
 	@Autowired SendingMail sendingMail;
 	@Autowired CustomerDao customerDao;
+	@Autowired private Environment environment;
 	String otpnumber ="";
 	
 	@RequestMapping("/custRegistration")	
@@ -192,8 +194,11 @@ public class AbheeCustRegistrationController
 		System.out.println("enter to getOtp");
 		String custMobile=request.getParameter("cmobile");
 		Random random = new Random();
-		otpnumber = "Dear Customer,thanks for registering with Abhee Smart Home Systems. OTP for your registration is:"+String.format("%04d", random.nextInt(10000));
-		sendSMS.sendSMS(otpnumber,custMobile);
+		otpnumber = String.format("%04d", random.nextInt(10000));
+		String tmsg =environment.getProperty("app.otpmsg");
+		 System.out.println(tmsg);
+		tmsg= tmsg.replaceAll("_otpnumber_", otpnumber);
+		sendSMS.sendSMS(tmsg,custMobile);
 		OTPDetails oTPDetails =new OTPDetails();
 		oTPDetails.setMobileno(custMobile);
 		oTPDetails.setOTPnumber(otpnumber);

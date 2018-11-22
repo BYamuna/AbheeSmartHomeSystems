@@ -81,7 +81,7 @@
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Last Name<span class="impColor">*</span></label>
-						<div class="col-md-6">
+									<div class="col-md-6">
 										<form:input path="lastname" class="form-control validate onlyCharacters" placeholder="Last Name"/>
 									</div>
 								</div>
@@ -95,6 +95,15 @@
 										<form:input path="mobilenumber" class="form-control validate numericOnly2" maxlength="10"  placeholder="Mobile Number"/>
 									</div>
 								</div></div>
+								<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Aadhar Number</label>
+									<div class="col-md-6">
+										<form:input path="aadharno"  placeholder="Aadhar number" maxlength="12"/>
+									</div>
+								</div>
+								</div>
+								
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</span></label>
@@ -225,7 +234,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>User Id</th><th>User Name</th><th>Report To</th><th>First Name</th><th>Last Name</th><th>Designation</th><th>Mobile Number</th><th>Branch name</th><th style="text-align: center;">Options</th><th></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>User Id</th><th>User Name</th><th>Report To</th><th>First Name</th><th>Last Name</th><th>Designation</th><th>Mobile Number</th><th>Branch name</th><th>Aadhar No</th><th style="text-align: center;">Options</th><th></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -248,6 +257,7 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.designationName+"'>"+ orderObj.designationName + "</td>"
 			+ "<td title='"+orderObj.mobilenumber+"'>"+ orderObj.mobilenumber + "</td>"
 			+ "<td title='"+orderObj.branchName+"'>"+ orderObj.branchName + "</td>"
+			+ "<td title='"+orderObj.aadharno+"'>"+ orderObj.aadharno + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "<td ><a style='cursor:pointer' onclick='getPasswordModal("+ orderObj.id +")'>Change Password</a></td>" 
 			+ "</tr>";
@@ -278,29 +288,26 @@ function changePasswordModal(){
 			alert("password changed successfully");
 			$("#passwordModal").modal('show');
 			$("#passwordModal").modal('toggle');
-			
-			/* var jsonobj = $.parseJSON(data);
-			var alldata = jsonobj.allOrders1;
-			displayTable(alldata);
-			console.log(jsonobj.allOrders1); */
-			
-			
-			$.each(JSON.parse(data),function(key,value) {
-				console.log(value);
+			/* $.each(JSON.parse(data),function(key,value) {
+				console.log(value); */
 				//alert(value);
 				$("#npassword").val('');
 	           $("#cpassword").val('');
 				$(".msgcss1").css('visibility', 'visible');
 				$(".msgcss1").show();
-				$("#msg1").text(value);
+				//$("#msg1").text(value);
 				$("#msg1").fadeOut(5000);
 				
 			});
 			
-				});
+				
 		
 	}else{
 		$("#passwordErrormsg").text("Password Doesn't match");
+		  setTimeout(function(){ $("#passwordErrormsg").text(""); }, 3000);
+		
+		$("#npassword").val('');
+      $("#cpassword").val('');
 	}
 		
 }
@@ -308,6 +315,7 @@ var userData="";
 function getPasswordModal(id)
 {
 	userData=$('#userid').val(id);
+	makeEmptyPasswordModal()
 	$('#password_modal').trigger('click');
 	
 }
@@ -325,6 +333,7 @@ function editEmployee(id) {
 	$("#designation").val(serviceUnitArray[id].designation);
 	$("#reportto").val(serviceUnitArray[id].reportto);
 	$("#email").val(serviceUnitArray[id].email);
+	$("#aadharno").val(serviceUnitArray[id].aadharno);
 	$("#BranchId").val(serviceUnitArray[id].branchId);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
@@ -547,6 +556,14 @@ function inactiveData() {
 				});
 		
 }
+ function makeEmptyPasswordModal()
+ {
+ 	
+ 	$('#npassword').val("");
+ 	$('#npassword').css('border-color', 'none');
+ 	$('#cpassword').val("");
+ 	$('#cpassword').css('border-color', 'none');
+ }
 
  $("#pageName").text("Employee Master");
 $(".employee").addClass("active"); 

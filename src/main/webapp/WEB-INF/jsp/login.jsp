@@ -13,12 +13,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    
+    
 <link rel='stylesheet' type='text/css' href='assets/plugins/charts-morrisjs/morris.css' /> 
 <link rel='stylesheet' type='text/css' href='assets/plugins/codeprettifier/prettify.css' /> 
 <link rel='stylesheet' type='text/css' href='assets/plugins/form-toggle/toggles.css' /> 
 <link rel='stylesheet' type='text/css' href='assets/plugins/datatables/dataTables.css' />
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="assets/css/styles.css">
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
 </body>
@@ -120,6 +124,12 @@
 				</div>
 			</div>
 		</div>
+		 <div class="login-bottom"> 
+			<div class="col-sm-6">
+		<h6><a href="#" data-toggle="modal" data-target="#passwordModel" onclick="openPasswordModel()" style="color:orange;" class="tag">Forgot password?</a>
+		</h6>
+		</div> 
+		
 		<div class="panel-footer">
 			<div class="pull-right">
 				<input type="submit"  id="mlogin" value="Sign-in"  class="btn btn-primary">
@@ -128,11 +138,42 @@
 				<input type="submit" id="submit1" value="Sign-in"  class="btn btn-primary"> -->
 			</div>
 		</div>
+		</div>
 		<input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}" />
 		</form>
 	</div>
-	
+	<div class="modal fade" id="passwordModel" data-backdrop="static" data-keyboard="false" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Password Assistance</h4>
+        </div> 
+	<div class="modal-body">
+          <form action="#" id="resetpassword” method="post" class="login-form">
+
+<div id="firstForm2">
+
+<div class="form-group">
+<div class="col-md-5">
+<label for="username">Enter Registered Mobile Number<span class="impColor">*</span></label>
+</div>
+<div class="col-md-7">
+<input	type="text" name="username" id="username" onkeydown="removeBorder(this.id)" class="form-control validate numericOnly2"  placeholder="Registered Mobile " maxlength="10"/>
+</div><div class="clearfix"></div> 
+<span class="hasError" id="emobileError" style="font-size: 13px;"></span>
+</div>				
+</div>
+</form>	
+ </div>
+  <div class="modal-footer">
+  <button type="button" id="resetpassword" onclick="resetpassword()" class="btn btn-primary" >Submit</button>
+         
+        </div>
+      </div>
+    </div>
+  </div> 
 	<!-- <p class="anchor"> New Customer Registration <a href="#" data-toggle="modal" data-target="#register-info" class="tag">Click here</a></p> -->
 </div>
  <div  class="modal fade" id="register-info" role="dialog">
@@ -236,6 +277,86 @@
 <script type='text/javascript' src="js/jquery.blockUI.min.js" ></script>
 </body>
 <script type="text/javascript">
+
+function resetpassword()
+{
+	
+var mobile =$("#username").val();
+if(mobile == "" | mobile == "undefined" | mobile =="null")
+{
+return false;
+}
+	
+$('#resetpassword').prop('disabled', true);
+ idArrayCmt11 = $.makeArray($('.validate2').map(function() {
+	return this.id;
+	}));
+validation = true;
+$.each(idArrayCmt11, function(i, val) {
+	var value = $("#" + idArrayCmt11[i]).val();
+	var placeholder = $("#" + idArrayCmt11[i]).attr('placeholder');
+if (value == null || value == "" || value == "undefined") {
+		$('style').append(styleBlock);
+		$("#" + idArrayCmt11[i] ).attr("placeholder", placeholder);
+		$("#" + idArrayCmt11[i] ).css('border-color','#e73d4a');
+		$("#" + idArrayCmt11[i] ).css('color','#e73d4a');
+		$("#" + idArrayCmt11[i] ).addClass('placeholder-style your-class');
+		 var id11 = $("#" + idArrayCmt11[i]+"_chosen").length;
+		if ($("#" + idArrayCmt11[i]+"_chosen").length)
+		{
+			$("#" + idArrayCmt11[i]+"_chosen").children('a').css('border-color','#e73d4a');
+		}			
+validation = false;
+	} 
+});
+if(validation) {
+	
+}else {
+	return false;
+}
+var mobile=$('#username').val();   
+var formData = new FormData();
+formData.append('username',mobile);
+console.log(formData);
+ $.ajax({
+type:"POST",			
+url: "getresetpassword", 
+data:formData,
+processData: false,  // tell jQuery not to process the data
+contentType: false,  // tell jQuery not to set contentType
+success: function(result){
+if(result==true)
+{
+	
+alert("Your Password sent to registermobile number ")
+$('#passwordModel').modal('toggle');
+window.location.reload();
+}	
+else
+{
+alert("Enter registered Mobilenumber");		  				
+$('#resetpassword').prop('disabled', false);		  	
+}	  		
+},
+error: function (e) {
+console.log(e.responseText);
+}
+				    
+});	
+} 
+function makeEmptyPasswordModal()
+{
+	
+	$('#username').val("");
+	$('#username').css('border-color', 'none');
+}
+function openPasswordModal()
+{
+	$(".cancel1").click();
+	makeEmptyPasswordModal();
+	$('#passwordModel').modal();
+	
+}
 
 
 var validation = true;

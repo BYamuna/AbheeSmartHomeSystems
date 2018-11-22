@@ -19,6 +19,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	private String aadharno;
 
 	@CreationTimestamp
 	private Date createdTime;
@@ -168,6 +169,14 @@ public class User {
 		this.userId = userId;
 	}
 
+	public String getAadharno() {
+		return aadharno;
+	}
+
+	public void setAadharno(String aadharno) {
+		this.aadharno = aadharno;
+	}
+
 	public User() {
 	}
 	
@@ -208,6 +217,7 @@ public class User {
 		this.BranchId=user.BranchId;
 		this.userId=user.userId;
 		this.address=user.address;
+		this.aadharno=user.aadharno;
 
 	}
 
@@ -314,15 +324,17 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", mobilenumber="
-				+ mobilenumber + ", email=" + email + ", department=" + department + ", reportto=" + reportto
-				+ ", BranchId=" + BranchId + ", enabled=" + enabled + ", designation=" + designation + ", username="
-				+ username + ", password=" + password + ", npassword=" + npassword + ", cpassword=" + cpassword
-				+ ", departmentName=" + departmentName + ", designationName=" + designationName + ", reportId="
-				+ reportId + ", reportName=" + reportName + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", status=" + status + ", branchName=" + branchName + ", userId=" + userId + ", address=" + address
-				+ "]";
+		return "User [id=" + id + ", aadharno=" + aadharno + ", createdTime=" + createdTime + ", updatedTime="
+				+ updatedTime + ", mobilenumber=" + mobilenumber + ", email=" + email + ", department=" + department
+				+ ", reportto=" + reportto + ", BranchId=" + BranchId + ", enabled=" + enabled + ", designation="
+				+ designation + ", username=" + username + ", password=" + password + ", npassword=" + npassword
+				+ ", cpassword=" + cpassword + ", departmentName=" + departmentName + ", designationName="
+				+ designationName + ", reportId=" + reportId + ", reportName=" + reportName + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", status=" + status + ", branchName=" + branchName + ", userId=" + userId
+				+ ", address=" + address + "]";
 	}
+
+	
 
 	
 	
