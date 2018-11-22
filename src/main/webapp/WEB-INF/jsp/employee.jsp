@@ -4,7 +4,13 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-
+<style>
+.panel-heading .close {
+    margin-top: -2px;
+    color: #fff;
+    opacity: 1;
+}
+</style>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
 		<li><a href="dashBoard">Home</a></li>
@@ -179,7 +185,7 @@
 					<div class="form-group" id="passwordDiv">
 						<label class="col-md-4 control-label no-padding-left">New Password<span class="impColor">*</span></label>
 						<div class="col-md-6">
-							<input type="password" id="npassword" class="form-control"	placeholder="New Password" />
+							<input type="password" id="npassword" class="form-control"	maxlength="6" placeholder="New Password" />
 						</div>
 						<div class="col-md-2"></div>
 					</div>
@@ -189,7 +195,7 @@
 					<div class="form-group" id="passwordDiv">
 						<label class="col-md-4 control-label no-padding-left">Confirm Password<span class="impColor">*</span></label>
 						<div class="col-md-6">
-							<input type="password" id="cpassword" class="form-control"	placeholder="Confirm New Password" />
+							<input type="password" id="cpassword" class="form-control"	maxlength="6" placeholder="Confirm New Password" />
 						</div>
 						<div class="col-md-2"></div>
 					</div>
@@ -270,6 +276,7 @@ function changePasswordModal(){
 		$.fn.makeMultipartRequest('POST', 'adminChangePassword', false,
 				formData, false, 'text', function(data) {
 			alert("password changed successfully");
+			$("#passwordModal").modal('show');
 			$("#passwordModal").modal('toggle');
 			
 			/* var jsonobj = $.parseJSON(data);
@@ -302,6 +309,7 @@ function getPasswordModal(id)
 {
 	userData=$('#userid').val(id);
 	$('#password_modal').trigger('click');
+	
 }
 
 

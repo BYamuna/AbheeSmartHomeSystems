@@ -37,6 +37,7 @@ import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+import com.charvikent.abheeSmartHomeSystems.model.Customer;
 //import com.charvikent.abheeSmartHomeSystems.model.Customer;
 //import com.charvikent.abheeSmartHomeSystems.model.TaskHistory;
 //import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
@@ -65,6 +66,8 @@ public class ReportIssueDao {
 	UserDao userDao;
 	@Autowired
 	SendingMail sendingMail;
+	@Autowired
+	CustomerDao customerDao;
 	
 	@Autowired
 	SendSMS sendSMS;
@@ -441,25 +444,31 @@ public List<ReportIssue> getAllReportIssues()
 				
 			sendingMail.sendMailTocustomer(editissue);
 			sendingMail.sendMailToUser(editissue);
-			//sendsmsToUser
-			String mobilenum=objuserBean.getMobilenumber();
-			String tmsg =environment.getProperty("app.taskmsg");
-			 System.out.println(tmsg);
-			tmsg= tmsg.replaceAll("_technicianname_", objuserBean.getFirstname()+" "+objuserBean.getLastname());
-			tmsg= tmsg.replaceAll("_mobileno_", objuserBean.getMobilenumber());
-			tmsg= tmsg.replaceAll("_ServiceRequestNo_", editissue.getTaskno());
-			//tmsg= tmsg.replaceAll("_assignto_", objuserBean.getUsername());
-			tmsg= tmsg.replaceAll("_requestdesc_", editissue.getDescription());
-			
-			sendSMS.sendSMS(tmsg,mobilenum);
+			String assigntechnician=editissue.getAssignto();
+			User emp=userDao.getUserById(Integer.parseInt(assigntechnician));
+			String customerid =  editissue.getCustomerId();
+			Customer customer= customerDao.findCustomerByCustId(customerid);
 			//sendsmsToCustomer
-			String mobileno=objuserBean.getMobilenumber();
-			String msg =environment.getProperty("app.tmrmsg");
-			 System.out.println(msg);
+			String mobilenum=customer.getMobilenumber();
+			String tmsg =environment.getProperty("app.tmrmsg");
+			tmsg= tmsg.replaceAll("_technicianname_", objuserBean.getFirstname()+" "+objuserBean.getLastname());
+			tmsg= tmsg.replaceAll("_mobilenum_", emp.getMobilenumber());
+			tmsg= tmsg.replaceAll("_ServiceRequestNo_", editissue.getTaskno());
+			tmsg= tmsg.replaceAll("_requestdesc_", editissue.getDescription());
+			tmsg= tmsg.replaceAll("_taskdeadline_", editissue.getTaskdeadline());
+			System.out.println(tmsg);
+			sendSMS.sendSMS(tmsg,mobilenum);
+			//sendsmsToUser
+			String mobileno=emp.getMobilenumber();
+			String msg =environment.getProperty("app.taskmsg");
+			System.out.println(msg);
 			 msg= msg.replaceAll("_ServiceRequestNo_", editissue.getTaskno());
 			 msg= msg.replaceAll("_fullname_", objuserBean.getFirstname()+" "+objuserBean.getLastname());
-			 msg= msg.replaceAll("_mobilenum_", objuserBean.getMobilenumber());
+			 msg= msg.replaceAll("_mobileno_", objuserBean.getMobilenumber());
 			 msg= msg.replaceAll("_requestdesc_", editissue.getDescription());
+			 tmsg= tmsg.replaceAll("_taskdeadline_", editissue.getTaskdeadline());
+			 tmsg= tmsg.replaceAll("_address_", customer.getAddress());
+			 System.out.println(msg);
 			 sendSMS.sendSMS(msg,mobileno); 
 			}
 		} 

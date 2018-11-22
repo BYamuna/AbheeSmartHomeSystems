@@ -162,7 +162,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>customerID</th><th>Order ID</th><th>ProductModelName</th><th>Purchaseddate</th><th>Expired Date</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>customer ID</th><th>Order ID</th><th>Product Model Name</th><th>Purchased Date</th><th>Expired Date</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {

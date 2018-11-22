@@ -25,14 +25,14 @@ label, .form-control {
                 	<li><a class="sme" href="${baseurl }/abheecategory?id=2"><i class="fa fa-angle-right"></i> PA Audio</a></li><br>
                 	<li><a class="sme" href="${baseurl }/abheecategory?id=3"><i class="fa fa-angle-right"></i> Projectors</a></li><br>
                 	<li><a class="sme" href="${baseurl }/abheecategory?id=4"><i class="fa fa-angle-right"></i> Security Cameras</a></li><br>
-                	<li><a class="sme" href="#"><i class="fa fa-angle-right"></i> Site Map</a></li><br>
+                	<li><a class="sme" href="https://www.google.com/maps/place/ABHEE+SMART+HOME+SYSTEMS/@16.304416,80.460722,15z/data=!4m5!3m4!1s0x0:0xbdc025ad688e3a3c!8m2!3d16.304416!4d80.460722?hl=en-US"><i class="fa fa-angle-right"></i> Site Map</a></li><br>
                 </ul>
             </div>
         	<div style="padding-left:15px;padding-right:15px;" class="col-md-6">
             	<h4 style="color:#ffffff">Contact</h4>
             	<div class="col-sm-6">
                 	<!-- <p><i style="color:#0066FF;" class="fa fa-map-marker f_left"></i> Nightingale Hospital <br><span style="margin-left:10px;">Complex, Opp SBI ,</span><br><span style="margin-left:10px;">Lakshmipuram Main Road.</span><br><span style="margin-left:10px;">Guntur,522006</span></p> -->
-                	<p><i style="color:#0066FF;" class="fa fa-map-marker f_left"></i> #8-24-12/4, 1stFloor, <br><span style="margin-left:10px;">Opp Guntur&Multispeciality Hospital,</span><br><span style="margin-left:10px;">Near Padmaja Petrol Bunk,</span><br><span style="margin-left:10px;">Mangalgiri Road,Sitaram Nagar,</span><br><span style="margin-left:10px;">Guntur,AndhraPradesh- 522001</span></p>
+                	<p><i style="color:#0066FF;" class="fa fa-map-marker f_left"></i> #8-24-12/4, 1stFloor, <br><span style="margin-left:10px;">Opp Guntur Kidney and Multispeciality Hospital,</span><br><span style="margin-left:10px;">Near Padmaja Petrol Bunk,</span><br><span style="margin-left:10px;">Mangalgiri Road,Sitaram Nagar,</span><br><span style="margin-left:10px;">Guntur,AndhraPradesh- 522001</span></p>
                 	<p><i style="color:#009933;" class="fa fa-phone f_left"></i> +91 92464 83744</p>
                 	<p><i style="color:#FF0000;" class="fa fa-envelope-o f_left"></i> rajv238@gmail.com</p>
             	</div>
