@@ -55,7 +55,7 @@ public class UserDao {
 
 		try {
 			List<Object[]> rows = em.createQuery("select  u.id,u.username,u.mobilenumber,u.email,u.reportto,u2.username,CASE WHEN u.enabled IN ('0') THEN 'Deactive' WHEN u.enabled IN ('1') THEN 'Active' ELSE '-----' END AS enabled,d.name,"
-					+ "u.firstname,u.lastname,u.reportto,u.designation,u.enabled as status,u.password,u.BranchId,ab.name,u.userId,u.updatedTime from User u,User u2,Designation d,AbheeBranch ab where u.enabled='1' and u.designation= d.id and ab.id=u.BranchId and u.reportto=u2.id order by u.updatedTime desc ").getResultList();
+					+ "u.firstname,u.lastname,u.reportto,u.designation,u.enabled as status,u.password,u.BranchId,ab.name,u.userId,u.aadharno,u.updatedTime from User u,User u2,Designation d,AbheeBranch ab where u.enabled='1' and u.designation= d.id and ab.id=u.BranchId and u.reportto=u2.id order by u.updatedTime desc ").getResultList();
 			for (Object[] row : rows) {
 				User users =new User();
 
@@ -78,7 +78,7 @@ public class UserDao {
 				users.setBranchId((String) row[14]);
 				users.setBranchName((String) row[15]);
 				users.setUserId((String) row[16]);
-				//users.setAadharno((String) row[17]);
+				users.setAadharno((String) row[17]);
 				
 				
 				listusers.add(users);
@@ -214,7 +214,7 @@ public class UserDao {
 		users.setMobilenumber(user.getMobilenumber());
 		users.setUsername(user.getUsername());
 		users.setReportto(user.getReportto());
-		//users.setAadharno(user.getAadharno());
+		users.setAadharno(user.getAadharno());
 		if(user.getDesignation().equals("9"))
 		{
 		users.setAddress(user.getAddress());
@@ -371,7 +371,7 @@ public class UserDao {
 
 		try {
 			List<Object[]> rows = em.createQuery("select u.id,u.username,u.mobilenumber,u.email,u.reportto,u2.username,d.name,"
-					+ "u.firstname,u.lastname,u.reportto,u.designation ,u.department , u.enabled as status,u.userId,u.updatedTime from User u,User u2,Designation d where u.enabled='0'  and u.designation= d.id and  u.reportto=u2.id and u.designation !='9' order by u.updatedTime desc ").getResultList();
+					+ "u.firstname,u.lastname,u.reportto,u.designation ,u.department , u.enabled as status,u.userId,u.aadharno,u.updatedTime from User u,User u2,Designation d where u.enabled='0'  and u.designation= d.id and  u.reportto=u2.id and u.designation !='9' order by u.updatedTime desc ").getResultList();
 			for (Object[] row : rows) {
 				User users =new User();
 
@@ -392,7 +392,7 @@ public class UserDao {
 				users.setDepartment((String) row[11]);
 				users.setStatus((String) row[12]);
 				users.setUserId((String) row[13]);
-				//users.setAadharno((String) row[14]);
+				users.setAadharno((String) row[14]);
 				listusers.add(users);
 
 			}

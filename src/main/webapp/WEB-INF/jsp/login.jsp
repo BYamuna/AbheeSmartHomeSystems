@@ -126,7 +126,7 @@
 		</div>
 		 <div class="login-bottom"> 
 			<div class="col-sm-6">
-		<h6><a href="#" data-toggle="modal" data-target="#passwordModel" onclick="openPasswordModel()" style="color:orange;" class="tag">Forgot password?</a>
+		<h6><a href="#" data-toggle="modal" data-target="#passwordModal" onclick="openPasswordModal()" style="color:orange;" class="tag">Forgot Password?</a>
 		</h6>
 		</div> 
 		
@@ -143,7 +143,7 @@
 			value="${_csrf.token}" />
 		</form>
 	</div>
-	<div class="modal fade" id="passwordModel" data-backdrop="static" data-keyboard="false" role="dialog">
+	<div class="modal fade" id="passwordModal" data-backdrop="static" data-keyboard="false" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -151,7 +151,7 @@
           <h4 class="modal-title">Password Assistance</h4>
         </div> 
 	<div class="modal-body">
-          <form action="#" id="resetpassword” method="post" class="login-form">
+          <form action="#" id="resetpassword" method="post" class="login-form">
 
 <div id="firstForm2">
 
@@ -285,9 +285,8 @@ var mobile =$("#username").val();
 if(mobile == "" | mobile == "undefined" | mobile =="null")
 {
 return false;
-}
-	
-$('#resetpassword').prop('disabled', true);
+}	
+$('#username').prop('disabled', true);
  idArrayCmt11 = $.makeArray($('.validate2').map(function() {
 	return this.id;
 	}));
@@ -309,9 +308,12 @@ if (value == null || value == "" || value == "undefined") {
 validation = false;
 	} 
 });
-if(validation) {
+if(validation) 
+{
 	
-}else {
+}
+else 
+{
 	return false;
 }
 var mobile=$('#username').val();   
@@ -328,7 +330,7 @@ success: function(result){
 if(result==true)
 {
 	
-alert("Your Password sent to registermobile number ")
+alert("Your password sent to registered mobile number ")
 $('#passwordModel').modal('toggle');
 window.location.reload();
 }	

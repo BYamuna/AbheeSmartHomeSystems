@@ -97,20 +97,19 @@
 								</div></div>
 								<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Aadhar Number</label>
-									<div class="col-md-6">
-										<form:input path="aadharno"  placeholder="Aadhar number" maxlength="12"/>
-									</div>
-								</div>
-								</div>
-								
-								<div class="col-md-6">
-								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:input path="email" class="form-control validate emailOnly" placeholder="Email"/>
 									</div>
 								</div></div><div class="clearfix"></div>
+								<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">AadharNo</label>
+									<div class="col-md-6">
+										<form:input path="aadharno"  class="form-control" placeholder="Aadhar number" maxlength="12"/>
+									</div>
+								</div>
+								</div>
 								</div>
 								<div class="sep">
 								<div class="col-md-6">
@@ -131,7 +130,7 @@
 								<security:authorize access="hasRole('ROLE_ADMIN')">
 								<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">ReportTo<span class="impColor">*</span></label>
+									<label class="col-md-3 control-label no-padding-right">Report To<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:select path ="reportto" class="form-control validate" onfocus="removeBorder(this.id)">
 											<form:option value="">-- Select Report to --</form:option>
