@@ -15,7 +15,7 @@ label, .form-control {
         <div class="footer">
         	<div style="padding-left:15px;padding-right:15px;" class="col-md-3">
             	<h4 style="color:#ffffff">About</h4>
-                <p>Abhee Smart Home Systems located in Guntur is a expert in Home Theaters , Professional Audio & Home Automation installation & services.</p>
+                <p>Abhee Smart Home Systems located in Guntur is an expert in Home Theaters , Professional Audio & Home Automation installation & services.</p>
                 <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FAbheesystems%2F&tabs=timelines&width=250&height=130&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="295" height="130" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
             </div>
         	<div style="padding-left:15px;padding-right:15px;" class="col-md-3">
