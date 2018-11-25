@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.charvikent.abheeSmartHomeSystems.model.AbheeQuationHistory;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 
 @Repository
@@ -24,6 +26,7 @@ public class SalesRequestDao
 	public void saveRequest(SalesRequest salesrequest) 
 	{
 		entityManager.persist(salesrequest);
+		saveQuationHistory(salesrequest);
 
 	}
 	@SuppressWarnings("unchecked")
@@ -131,5 +134,32 @@ public class SalesRequestDao
 		}
 		*/
 		return (SalesRequest) entityManager.createQuery(hql).setParameter("id", Integer.parseInt(id)).getSingleResult();
+	}
+	public List<Map<String, Object>> getInActiveList() {
+		 String hql ="select * from abhee_sales_request where enable =0";
+		 System.out.println(hql);
+		
+			List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+			System.out.println(retlist);
+			return retlist;
+	}
+	public List<Map<String, Object>> getQuationHistory(String id) {
+		 String hql ="select * from abhee_quation_history where quationid ='"+id+"'";
+		 System.out.println(hql);
+		
+			List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+			System.out.println(retlist);
+			return retlist;
+	}
+	
+	
+	public void saveQuationHistory(SalesRequest salesrequest) 
+	{
+		
+		AbheeQuationHistory abheeQuationHistory = new AbheeQuationHistory();
+		abheeQuationHistory.setFilename(salesrequest.getImgfiles());
+		abheeQuationHistory.setQuationid(salesrequest.getId().toString());
+		entityManager.persist(salesrequest);
+
 	}
 }

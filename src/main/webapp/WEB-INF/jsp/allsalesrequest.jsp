@@ -27,7 +27,7 @@
 						</div>
 					</div>
 					<div class="panel-body collapse in">
-					<!-- <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label> -->
+					 <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
 						<div class="table-responsive" id="tableId">
 							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 								<thead><tr><th>ModelNumber</th><th>EmailId</th><th>Mobile No</th><th>files</th><th>Location</th><th>Address</th><th>Requirements description</th><th></th></tr></thead>
@@ -65,6 +65,13 @@
 										<input type="file" name="fileupload" id="fileupload"  class="validate "  multiple style="margin: 8px 0px 0px 0px;">
 									</div>
 							</div>
+							
+							<div class="form-group" style=" width: 154%;">
+									<label class="ace-file-input ace-file-multiple col-sm-3 control-label no-padding-right" >Description</label>
+									<div class="col-md-9">
+										<input type="text" name="description" id="description"  class="validate "  multiple style="margin: 8px 0px 0px 0px;">
+									</div>
+							</div>
 							</div>
 							</div>
 							
@@ -83,8 +90,47 @@
 				</div>	
 			</div>
 		</div>
-	</div>					
+	</div>	
+	
+	
+	
+	
+	
+	
+	<!-- Task History 2 Modal Starts here-->
+<div class="modal fade" id="myModal2" data-backdrop="static" data-keyboard="false" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header"  style="background: #4f8edc;">
+				<button style="color:#fff;opacity:100 !important;" type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 style="color:#fff;" class="modal-title"> Task History  </h4>
+        	</div>
+        	<div class="modal-body">
+				<div class="row">
+				<div class="table-responsive" id="HtableId2">
+							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example2">
+								<thead><tr class="info"><th>Date Modified</th><th>User Name</th><th>Attachment</th><th>Field</th><th>Change</th></tr></thead>
+								<tbody></tbody>
+							</table>
+						</div>
+				</div>
+			</div>
+      	</div>
+    </div>
+</div>
+<!-- Modal Ends here-->				
 </body>
+
+
+
+
+
+
+
+
+
+
 <%-- <script type='text/javascript' src='${baseurl }/js/custemValidation.js'></script>  --%>
 
 <script type="text/javascript">
@@ -130,6 +176,9 @@ function displayTable(listOrders) {
 		var edit = "<a class='edit editIt' onclick='editTotalSales("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"*/		
  		var comment = "<a class='comment commentIt' onclick='addComment("	+ orderObj.id+ ")'>   <i class='fa fa-comments'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
+ 		
+ 		var history = "<a class='history historyit' onclick='viewTask("	+ orderObj.id+ ")'> <i class='fa fa-history'></i></a>"
+ 		
 		/* var checkbox="<input type='checkbox' class='form-check-input' id='salesrequest'>" */
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.salesrequestnumber+"'>"+ "<a class='view viewIt' href='viewQuotationDetails?id="+ orderObj.salesrequestnumber+ "&pgn=0'>"+ orderObj.salesrequestnumber + "</a>" + "</td>"
@@ -140,7 +189,7 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.location+"'>"+ orderObj.location + "</td>"
 			+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>"
 			+ "<td title='"+orderObj.reqdesc+"'>"+ orderObj.reqdesc + "</td>"
-			+ "<td style='text-align: center;white-space: nowrap;' title='Send Quotation'>" +comment+"</td>" 
+			+ "<td style='text-align: center;white-space: nowrap;' title='Send Quotation'>" +comment+ "&nbsp;&nbsp;"+history+"</td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -198,10 +247,12 @@ if(validation) {
 		   formData.append('id',id);*/
 		    
 		  var id= $('#salesRequestid').val();
+		   var description= $('#description').val();
 		   
     	var ins = document.getElementById('fileupload').files.length;
       var data = new FormData();
      data.append('id',id); 
+     data.append('description',description); 
     	  for(var i=0; i< ins; i++)
     	{	
     	var quotation = document.getElementById('fileupload').files[i];
@@ -302,7 +353,7 @@ function validate(id, errorMessage)
 	
 }
 
-/* function inactiveData() 
+function inactiveData() 
 {
 	var status="0";
 	if($('#inActive').is(":checked") == true){
@@ -322,6 +373,8 @@ function validate(id, errorMessage)
 				});
 		
 }
+
+/*
 
 var i =1;
 function addNewTextBox()
@@ -377,6 +430,42 @@ function addNewTextBox()
     reader.readAsDataURL(this.files[0]);
     }
 }; */
+
+
+function viewTask(id){
+	var formData = new FormData();
+    formData.append('id', id);
+	$.fn.makeMultipartRequest('POST', 'viewTask2', false, formData, false, 'text', function(data){
+		var jsonobj = $.parseJSON(data);
+		var alldata = jsonobj.allOrders1;
+		$('#HtableId2').html('');
+		var tableHead = '<table id="example2" class="table table-striped table-bordered datatables">'
+			+ '<thead><tr><th>Date Modified</th><th>sent Quation</th><th>QuationId</th></tr></thead><tbody></tbody></table>';
+	$('#HtableId2').html(tableHead);
+	$.each(alldata,function(i, orderObj) {
+		if(orderObj.filename==undefined) orderObj.filename='';
+		else
+			{
+				var list=orderObj.filename.split('*');
+				var filename='';
+				for(var i=0;i<list.length;i++)
+				{
+					filename=filename+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><i class="fa fa-paperclip fa-lg grey"></i></a>';
+				}
+				orderObj.filename=filename;
+			}
+		var tblRow = "<tr>"
+			+ "<td title='"+orderObj.id+"'>"+ orderObj.id + "</td>"
+			+ "<td title='"+orderObj.filename+"'>"+ orderObj.filename + "</td>"
+			+ "<td title='"+orderObj.quationid+"'>"+ orderObj.quationid + "</td>"
+			
+			+ "</tr>";
+		$(tblRow).appendTo("#HtableId2 table tbody");
+		
+	});
+		$("#myModal2").modal();
+	});
+}
 
 
 $("#pageName").text("Quotation Requests");

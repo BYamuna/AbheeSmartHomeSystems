@@ -130,7 +130,7 @@ public class AbheeCustomerRestController
 		}
   
 	@RequestMapping(value = "/custMobileDuplicate", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public @ResponseBody String mobileDuplicate(@RequestBody Customer customer,  HttpServletRequest request)  {
+	public @ResponseBody String mobileDuplicate(@RequestBody Customer customer,  HttpServletRequest request) throws JSONException  {
 		JSONObject objJSON = new JSONObject();
 		try{
 			String mobileno=customer.getMobilenumber();
@@ -150,7 +150,7 @@ public class AbheeCustomerRestController
 	}
 	
 	@RequestMapping(value = "/custEmailDuplicate", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public @ResponseBody String emailDuplicate(@RequestBody Customer customer,  HttpServletRequest request)  {
+	public @ResponseBody String emailDuplicate(@RequestBody Customer customer,  HttpServletRequest request) throws JSONException  {
 		JSONObject objJSON = new JSONObject();
 		try{
 			String emailId=customer.getEmail();
@@ -200,7 +200,7 @@ public class AbheeCustomerRestController
 	}
 	
 	@RequestMapping(value = "/otpVerification", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public @ResponseBody String getOtp(@RequestBody Customer customer,  HttpServletRequest request)  
+	public @ResponseBody String getOtp(@RequestBody Customer customer,  HttpServletRequest request) throws JSONException  
 	{
 		LOGGER.debug("Calling otpVerification at controller");
 		String otp=customer.getOtpstatus();

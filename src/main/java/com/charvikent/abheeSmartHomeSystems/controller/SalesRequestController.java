@@ -6,11 +6,15 @@ import java.util.concurrent.ThreadLocalRandom;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 /*import org.springframework.web.bind.annotation.RequestBody;*/
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +29,7 @@ import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
+import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -171,6 +176,88 @@ public class SalesRequestController
 		return str;
 		
 	}
+	
+	
+	
+	@RequestMapping(value = "/inTotalSales")
+	public @ResponseBody String getAllActiveOrInactiveOrgnizations(User  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling inActiveEmp at controller");
+		List<Map<String, Object>> listOrderBeans  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		try{
+			if(objdept.getStatus().equals("0"))
+				listOrderBeans = srequestDao.getInActiveList();
+				else
+					listOrderBeans = srequestDao.getSalesRequestList();
+
+
+
+			 objectMapper = new ObjectMapper();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+	System.out.println(e);
+			return String.valueOf(jsonObj);
+
+		}
+		return String.valueOf(jsonObj);
+	}
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/viewTask2")
+	public @ResponseBody String getQuationsHistory(HttpServletRequest request,HttpSession session,@RequestParam("id")  String id) {
+		LOGGER.debug("Calling inActiveEmp at controller");
+		List<Map<String, Object>> listOrderBeans  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		try{
+			
+				listOrderBeans = srequestDao.getQuationHistory(id);
+				
+
+
+			 objectMapper = new ObjectMapper();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+	System.out.println(e);
+			return String.valueOf(jsonObj);
+
+		}
+		return String.valueOf(jsonObj);
+	}
+	
 	
 	
 }
