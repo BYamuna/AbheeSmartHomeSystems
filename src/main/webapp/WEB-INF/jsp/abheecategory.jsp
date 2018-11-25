@@ -160,12 +160,25 @@
 							<input type="radio" id="warranty" name="warranty" value="yes"> Yes
   							<input type="radio" id="warranty" name="warranty" value="no"> No
 						</div><div class="clearfix"></div>
+						<div class="col-sm-4">
+							<label>Request Time</label> <span class="impColor">*</span>
+						</div>
+						<div class="col-sm-8">
+											<select  id="requesttimeid"  class="form-control" onfocus="removeBorder2(this.id)">
+											<option value="">-- Request Time -- </option>
+											<c:forEach var="list" items="${requesttimes}">
+											<option value=${list.key}>${list.value} </option>
+											</c:forEach>
+										</select>
+						</div>
 						<div class="col-sm-4" style="padding-top:8px;">
 							<label>Attach File(s)</label> <span class="impColor">*</span>
 						</div>
+						
 						<div class="col-sm-8">
 							<input class=" " type="file" name="fileimg"  accept="image/*"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="fileimg" multiple />
 						</div>
+						
 							<!--<div class="col-sm-4">
 							<label>Attach File(s)</label>
 						</div>
@@ -694,9 +707,10 @@ $.each(productdetailslist, function(k,v){
 		 custaddress =$('#custaddress').val();
 		 
 		 servicetypeid =$("#servicetypeid").val();
+		 requesttimeid=#("#requesttimeid").val();
 		 
 		 var objArr = [];
-	    	var jsonData = {"message":message,"catid":catid,"servicetypeid":servicetypeid,"custaddress":custaddress,"modelid":modelid,"customerId":customerId};
+	    	var jsonData = {"message":message,"catid":catid,"servicetypeid":servicetypeid,"requesttimeid":requesttimeid,"custaddress":custaddress,"modelid":modelid,"customerId":customerId};
 	    	
 		   var formData = new FormData();
 	    	

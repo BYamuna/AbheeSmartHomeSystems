@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
+import com.charvikent.abheeSmartHomeSystems.dao.AbheeRequestTimeDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ProductDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ServiceTypeDao;
@@ -47,6 +48,8 @@ public class CategoryController {
 	ProductDao productDao;
 	@Autowired	
 	ServiceTypeDao serviceTypeDao;
+	@Autowired
+	AbheeRequestTimeDao  abheeRequestTimeDao; 
 	
 	@RequestMapping("/cate")
 	public String  department( @ModelAttribute("catef")  Category catef,Model model ,HttpServletRequest request) {
@@ -289,6 +292,7 @@ public class CategoryController {
 		request.setAttribute("productmodels", modelJson);
 		
 		request.setAttribute("servicetypes", serviceTypeDao.getServiceRequestTypes());
+		request.setAttribute("requesttimes", abheeRequestTimeDao.getRequestTimesMap());
 		
 		
 		return "abheecategory";

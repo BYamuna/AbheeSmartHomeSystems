@@ -1,7 +1,7 @@
 <html>  
   <body>  
-  <h3>Hello, </h3> 
-  
+  <h3>Hello, ${name}</h3> 
+  <div>${description}</div>
   <div>Your Request Submitted Successfully </div>
   <body>We received the request and our team will contact you soon.</body>
   <div>Thanks&Regards</div>

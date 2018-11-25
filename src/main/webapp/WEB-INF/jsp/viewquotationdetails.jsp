@@ -98,7 +98,7 @@
                   </td>
                   <td>
                       ${listInner.value}
-                  </td>
+                            </td>
                    </tr>
               </c:forEach>
          

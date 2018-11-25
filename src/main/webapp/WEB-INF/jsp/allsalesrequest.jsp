@@ -74,6 +74,16 @@
 							</div>
 							</div>
 							</div>
+					<div class="row">
+						<div class="col-md-6">
+								<div class="form-group" style=" width: 154%;">
+									<label class="col-sm-3 control-label no-padding-right">Notes</label>
+										<div class="col-md-6">
+											<textarea class="form-control validate" name="notes" id= "notes"  placeholder="Notes"></textarea>
+										</div>
+								</div>	
+							</div>
+					</div>	
 							
                     <div class="panel-footer">
 				      	<div class="row">
@@ -168,6 +178,17 @@ function displayTable(listOrders) {
 				}
 				orderObj.imgfiles=imgfiles;
 			}
+			/* if(orderObj.quotation_documents==undefined) orderObj.quotation_documents='';
+			else
+				{
+					var list=orderObj.quotation_documents.split('*');
+					var quotation_documents='';
+					for(var i=0;i<list.length;i++)
+					{
+						quotation_documents=quotation_documents+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
+					}
+					orderObj.quotation_documents=quotation_documents; */
+
 		/* if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate' onclick='deleteTotalSales("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
@@ -253,6 +274,7 @@ if(validation) {
       var data = new FormData();
      data.append('id',id); 
      data.append('description',description); 
+
     	  for(var i=0; i< ins; i++)
     	{	
     	var quotation = document.getElementById('fileupload').files[i];

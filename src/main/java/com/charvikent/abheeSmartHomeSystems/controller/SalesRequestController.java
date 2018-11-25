@@ -166,6 +166,7 @@ public class SalesRequestController
    	 {
    		 salesrequest.setQuotationDocuments(fileTemplate.concurrentFileNames());
    		  salesrequest.setEnable("0");
+   		  salesrequest.setNotes(description);
    		 fileTemplate.clearFiles();
    		 
    	 }

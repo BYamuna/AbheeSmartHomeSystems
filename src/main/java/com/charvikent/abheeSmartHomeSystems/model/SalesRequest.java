@@ -32,7 +32,7 @@ public class SalesRequest
 	private String customerid;
 	private String customername;
 	private String requestType;
-	
+	private String notes;
 	@CreationTimestamp
 	protected Date createdTime ;
 	
@@ -47,7 +47,7 @@ public class SalesRequest
 
 	}
 	public SalesRequest(Integer id, String modelnumber, String email, String mobileno, String location, String address,
-			String reqdesc, String imgfiles,String customername,String requestType,int status,Date createdTime) 
+			String reqdesc, String imgfiles,String customername,String requestType,int status,Date createdTime,String notes) 
 	{
 		super();
 		this.id = id;
@@ -62,6 +62,7 @@ public class SalesRequest
 		this.requestType=requestType;
 		this.status=status;
 		this.createdTime=createdTime;
+		this.notes=notes;
 	}
 	public Date getCreatedTime() {
 		return createdTime;
@@ -193,15 +194,26 @@ public class SalesRequest
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	
+	public String getNotes() {
+		return notes;
+	}
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
 	@Override
 	public String toString() {
 		return "SalesRequest [id=" + id + ", modelnumber=" + modelnumber + ", email=" + email + ", mobileno=" + mobileno
 				+ ", location=" + location + ", address=" + address + ", reqdesc=" + reqdesc + ", imgfiles=" + imgfiles
 				+ ", salesrequestnumber=" + salesrequestnumber + ", quotationDocuments=" + quotationDocuments
 				+ ", enable=" + enable + ", lat=" + lat + ", longitude=" + longitude + ", customerid=" + customerid
-				+ ", customername=" + customername + ", requestType=" + requestType + ", createdTime=" + createdTime
-				+ ", status=" + status + ", locationData=" + locationData + "]";
+				+ ", customername=" + customername + ", requestType=" + requestType + ", notes=" + notes
+				+ ", createdTime=" + createdTime + ", status=" + status + ", locationData=" + locationData + "]";
 	}
+	
+	
+	
+	
 	
 	
 	
