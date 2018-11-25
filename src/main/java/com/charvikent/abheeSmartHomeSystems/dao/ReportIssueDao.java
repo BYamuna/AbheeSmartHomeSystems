@@ -463,11 +463,11 @@ public List<ReportIssue> getAllReportIssues()
 			String msg =environment.getProperty("app.taskmsg");
 			System.out.println(msg);
 			 msg= msg.replaceAll("_ServiceRequestNo_", editissue.getTaskno());
-			 msg= msg.replaceAll("_fullname_", objuserBean.getFirstname()+" "+objuserBean.getLastname());
-			 msg= msg.replaceAll("_mobileno_", objuserBean.getMobilenumber());
-			 msg= msg.replaceAll("_requestdesc_", editissue.getDescription());
-			 tmsg= tmsg.replaceAll("_taskdeadline_", editissue.getTaskdeadline());
-			 tmsg= tmsg.replaceAll("_address_", customer.getAddress());
+			 msg= msg.replaceAll("_fullname_",customer.getFirstname()+" "+customer.getLastname());
+			 msg= msg.replaceAll("_mobileno_", customer.getMobilenumber());
+			 msg= msg.replaceAll("_reqdesc_", editissue.getDescription());
+			 msg= msg.replaceAll("_taskdeadline_", editissue.getTaskdeadline());
+			 msg= msg.replaceAll("_communicationaddress_", editissue.getCommunicationaddress());
 			 System.out.println(msg);
 			 sendSMS.sendSMS(msg,mobileno); 
 			}

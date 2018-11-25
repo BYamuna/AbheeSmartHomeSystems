@@ -31,6 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
+import com.charvikent.abheeSmartHomeSystems.dao.AbheeRequestTimeDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskStatusDao;
 /*import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;*/
@@ -77,6 +78,8 @@ public class TaskController {
 	AbheeTaskDao abheeTaskDao;
 	@Autowired
 	CustomerDao customerDao;
+	@Autowired
+	AbheeRequestTimeDao  abheeRequestTimeDao ;
 	
 	@Autowired
 	AbheeTaskStatusDao abheeTaskStatusDao;
@@ -103,6 +106,7 @@ public class TaskController {
 		model.addAttribute("priority", priorityDao.getPriorityMap());
 		model.addAttribute("userNames", userService.getUserName());
 		model.addAttribute("category", serviceDao.getServicemap());
+		/*model.addAttribute("requesttimes",abheeRequestTimeDao.getRequestTimesMap() );*/
 		model.addAttribute("taskstatus", abheeTaskStatusDao.getTaskStatusMap());
 		
 		

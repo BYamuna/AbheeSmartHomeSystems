@@ -207,13 +207,13 @@ public class SendingMail {
 			
 			
 			String email =  emailId;
+			Customer custbean=customerDao.checkCustomerExistOrNotByEmail(emailId);
 			MimeMessage message = javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
-			
-			
 			VelocityContext velocityContext = new VelocityContext();
-			velocityContext.put("name",description);
-			
+			velocityContext.put("name",custbean.getFirstname());
+			velocityContext.put("description",description);
+			/*velocityContext.put("notes",notes);*/
 			StringWriter stringWriter = new StringWriter();
 			velocityEngine.mergeTemplate("RequestemailTemplate.vm", "UTF-8", velocityContext, stringWriter);
 			helper.setText(stringWriter.toString(), true);

@@ -550,13 +550,13 @@ public class AbheeCustomerRestController
 		task.setPriority("3");
 		task.setSeverity("3");
 		task.setStatus("1");
-		//task.setSubject("Task created By Customer");
+		task.setSubject("Task created By Customer");
 		task.setServiceType(servicetypeid);
 		task.setCategory(catid);
 		task.setModelid(modelid);
 		task.setCommunicationaddress(custaddress);
 		Customer customer= customerDao.findCustomerByCustId(customerId);
-		task.setSubject("Task created By "+customer.getFirstname()+" "+customer.getLastname());
+		//task.setSubject("Task created By "+customer.getFirstname()+" "+customer.getLastname());
 		task.setCustomerId(customerId);
 		task.setWarranty(warranty);
 		task.setAssignby("1");
@@ -572,7 +572,7 @@ public class AbheeCustomerRestController
 		reportIssueDao.saveServiceRequest(task);
 		//taskHistoryLogsDao.historyLogForcustomerEntry(task);
 		//sendingMail.sendingMailWithTaskStatus(task);
-		customer.setAddress(custaddress);
+		task.setCommunicationaddress(custaddress);
 		try 
 		{
 			customerDao.updateCustomer(customer);
@@ -721,7 +721,7 @@ public class AbheeCustomerRestController
 			  {
 			    System.out.println("error : " + e);
 			  }
-	           filepath= "abheeimg/"+filepath;
+	           //filepath= "abheeimg/"+filepath;
 	    	return  filepath;	
 		} 
 	@SuppressWarnings("unused")
@@ -1891,7 +1891,7 @@ public String  getProductsModelsList()
 	@RequestMapping(value="/getEmailandMobileById", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
 	public String getemailandmobileById( @RequestBody Customer customer) throws JsonProcessingException, JSONException 
 	{
-		LOGGER.debug("Calling getTicketStatus at controller");
+		LOGGER.debug("Calling getEmailandMobileById at controller");
 		List<Customer>  listOrderBeans = customerDao.getEmailandMobileByCustomerId(customer);
 		JSONObject json =new JSONObject();
 			if(null != listOrderBeans)
