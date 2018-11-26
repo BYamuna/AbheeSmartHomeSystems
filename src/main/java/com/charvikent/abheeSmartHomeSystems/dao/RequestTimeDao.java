@@ -36,8 +36,8 @@ public class RequestTimeDao
 	}
 	
 	@SuppressWarnings("unchecked")
-	private List<AbheeRequestTime> getRequestTimes() 
+	public List<AbheeRequestTime> getRequestTimes() 
 	{
-		return entityManager.createQuery("  from abheeRequestTime where status='1'").getResultList();
+		return entityManager.createQuery(" from AbheeRequestTime").getResultList();
 	}
 }
