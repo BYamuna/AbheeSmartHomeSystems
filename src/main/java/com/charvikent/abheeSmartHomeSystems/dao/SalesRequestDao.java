@@ -92,7 +92,7 @@ public class SalesRequestDao
 		public List<Map<String, Object>> getAdminResponseListByRequestNo(SalesRequest req)
 		 {
 		 
-			 String hql ="select sr.reqdesc,sr.status from abhee_sales_request sr where salesrequestnumber='"+req.getSalesrequestnumber()+"'";
+			 String hql ="select sr.reqdesc,sr.status,sr.quotation_documents,sr.notes from abhee_sales_request sr where salesrequestnumber='"+req.getSalesrequestnumber()+"'";
 			 System.out.println(hql);
 			
 				List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
