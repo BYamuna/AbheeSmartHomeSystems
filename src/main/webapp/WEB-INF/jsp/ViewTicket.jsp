@@ -236,6 +236,7 @@ $.each(allstatus, function(k, v){
 
 function goBack() {
     window.history.go(-1);
+    //window.location.reload();
 }
 
 /* var 	severityCounts  = ${viewTask};

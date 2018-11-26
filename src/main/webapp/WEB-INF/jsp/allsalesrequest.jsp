@@ -66,12 +66,12 @@
 									</div>
 							</div>
 							
-							<div class="form-group" style=" width: 154%;">
+							<!-- <div class="form-group" style=" width: 154%;">
 									<label class="ace-file-input ace-file-multiple col-sm-3 control-label no-padding-right" >Description</label>
 									<div class="col-md-9">
 										<input type="text" name="description" id="description"  class="validate "  multiple style="margin: 8px 0px 0px 0px;">
 									</div>
-							</div>
+							</div> -->
 							</div>
 							</div>
 					<div class="row">
@@ -114,7 +114,7 @@
 		<div class="modal-content">
 			<div class="modal-header"  style="background: #4f8edc;">
 				<button style="color:#fff;opacity:100 !important;" type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 style="color:#fff;" class="modal-title"> Task History  </h4>
+				<h4 style="color:#fff;" class="modal-title"> Quotation History  </h4>
         	</div>
         	<div class="modal-body">
 				<div class="row">
@@ -202,7 +202,7 @@ function displayTable(listOrders) {
  		
 		/* var checkbox="<input type='checkbox' class='form-check-input' id='salesrequest'>" */
 		var tblRow = "<tr>"
-			+ "<td title='"+orderObj.salesrequestnumber+"'>"+ "<a class='view viewIt' href='viewQuotationDetails?id="+ orderObj.salesrequestnumber+ "&pgn=0'>"+ orderObj.salesrequestnumber + "</a>" + "</td>"
+			+ "<td title='"+orderObj.salesrequestnumber+"'>"+ orderObj.salesrequestnumber + "</td>"
 			+ "<td title='"+orderObj.modelnumber+"'>"+ orderObj.modelnumber + "</td>"
 			+ "<td title='"+orderObj.email+"'>"+ orderObj.email + "</td>"
 			+ "<td title='"+orderObj.mobileno+"'>"+ orderObj.mobileno + "</td>"
@@ -210,7 +210,7 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.location+"'>"+ orderObj.location + "</td>"
 			+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>"
 			+ "<td title='"+orderObj.reqdesc+"'>"+ orderObj.reqdesc + "</td>"
-			+ "<td style='text-align: center;white-space: nowrap;' title='Send Quotation'>" +comment+ "&nbsp;&nbsp;"+history+"</td>" 
+			+ "<td style='text-align: center;white-space: nowrap;' title='Quotation History'>" +comment+ "&nbsp;&nbsp;"+history+"</td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -273,7 +273,7 @@ if(validation) {
     	var ins = document.getElementById('fileupload').files.length;
       var data = new FormData();
      data.append('id',id); 
-     data.append('description',description); 
+     data.append('description',notes); 
 
     	  for(var i=0; i< ins; i++)
     	{	
@@ -462,7 +462,7 @@ function viewTask(id){
 		var alldata = jsonobj.allOrders1;
 		$('#HtableId2').html('');
 		var tableHead = '<table id="example2" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Date Modified</th><th>sent Quation</th><th>QuationId</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>QuotationId</th><th>Date Modified</th><th>sent Quotation</th><th>Notes</th></tr></thead><tbody></tbody></table>';
 	$('#HtableId2').html(tableHead);
 	$.each(alldata,function(i, orderObj) {
 		if(orderObj.filename==undefined) orderObj.filename='';
@@ -478,9 +478,9 @@ function viewTask(id){
 			}
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.id+"'>"+ orderObj.id + "</td>"
-			+ "<td title='"+orderObj.filename+"'>"+ orderObj.filename + "</td>"
 			+ "<td title='"+orderObj.quationid+"'>"+ orderObj.quationid + "</td>"
-			
+			+ "<td title='"+orderObj.filename+"'>"+ orderObj.filename + "</td>"
+			+ "<td title='"+orderObj.notes+"'>"+ orderObj.notes + "</td>"
 			+ "</tr>";
 		$(tblRow).appendTo("#HtableId2 table tbody");
 		

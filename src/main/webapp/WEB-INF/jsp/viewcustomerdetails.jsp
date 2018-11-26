@@ -183,6 +183,7 @@ $("#pageName").text("View Customer Details");
 
 function goBack() {
     window.history.go(-1);
+    //window.location.reload();
 }
 
 

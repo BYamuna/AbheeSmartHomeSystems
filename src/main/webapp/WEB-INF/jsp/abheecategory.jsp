@@ -707,7 +707,7 @@ $.each(productdetailslist, function(k,v){
 		 custaddress =$('#custaddress').val();
 		 
 		 servicetypeid =$("#servicetypeid").val();
-		 requesttimeid=#("#requesttimeid").val();
+		 requesttimeid =$("#requesttimeid").val();
 		 
 		 var objArr = [];
 	    	var jsonData = {"message":message,"catid":catid,"servicetypeid":servicetypeid,"requesttimeid":requesttimeid,"custaddress":custaddress,"modelid":modelid,"customerId":customerId};

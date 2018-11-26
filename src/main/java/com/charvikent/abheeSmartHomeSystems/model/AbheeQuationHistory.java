@@ -26,13 +26,21 @@ public class AbheeQuationHistory {
 	private String filename;
 	
 	private String quationid;
+	private String notes;
 	
 	
+
 	@CreationTimestamp
 	private Date createdTime;
 
 	
-	
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
 
 	public String getFilename() {
 		return filename;
@@ -71,9 +79,11 @@ public class AbheeQuationHistory {
 
 	@Override
 	public String toString() {
-		return "abheeQuationHistory [id=" + id + ", filename=" + filename + ", quationid=" + quationid
-				+ ", createdTime=" + createdTime + "]";
+		return "AbheeQuationHistory [id=" + id + ", filename=" + filename + ", quationid=" + quationid + ", notes="
+				+ notes + ", createdTime=" + createdTime + "]";
 	}
+
+	
 
 	
 	

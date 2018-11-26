@@ -668,7 +668,7 @@ $('#saveemailinfo').click(function (){
   			if(data =='true')
   			{     
 				getOtp();
-				modelsubmit2();
+				//modelsubmit2();
 				
 			}
 			else if(data == "")
@@ -749,11 +749,12 @@ function getOtp()
 				$('#OTPModel').modal('toggle');
 				$("#OTPModel").modal('show');
 				}
-			/* else
+			else
 				{
 				$('#pmobilenumber').css('border-color', 'none');
 				$('#submit1').prop('disabled', false);
-				} */	
+				} 
+			
 		},
 		complete: function () {
             
