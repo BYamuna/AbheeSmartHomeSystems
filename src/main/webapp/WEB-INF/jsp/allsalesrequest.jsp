@@ -268,7 +268,7 @@ if(validation) {
 		   formData.append('id',id);*/
 		    
 		  var id= $('#salesRequestid').val();
-		   var description= $('#description').val();
+		   var notes= $('#notes').val();
 		   
     	var ins = document.getElementById('fileupload').files.length;
       var data = new FormData();

@@ -667,8 +667,8 @@ $('#saveemailinfo').click(function (){
           success : function(data) {
   			if(data =='true')
   			{     
-				getOtp();
-				//modelsubmit2();
+				getOtp2();
+				modelsubmit2();
 				
 			}
 			else if(data == "")
@@ -803,6 +803,40 @@ function modelsubmit()
 	});
 
 }
+
+/* function getOtp2()
+{
+	var pmobilenumber =$('#pmobilenumber').val();
+	var pemail=$('#pemail').val();
+	$.ajax({
+		type : "POST",
+		url : "getEditOtp",
+		data :"pmobilenumber="+pmobilenumber,
+		dataType: 'text',
+		 async: false,
+		success : function(data) {
+			if(data == 'true')
+				{
+				alert("OTP Send to Your Mobile Number ");
+				$('#OTPModel').modal('toggle');
+				$("#OTPModel").modal('show');
+				}
+			else
+				{
+				$('#pemail').css('border-color', 'none');
+				$('#submit1').prop('disabled', false);
+				} 
+			
+		},
+		complete: function () {
+            
+            $.unblockUI();
+       },
+		error :  function(e){$.unblockUI();console.log(e);}
+		
+	});
+} */
+
 
 function modelsubmit2()
 {

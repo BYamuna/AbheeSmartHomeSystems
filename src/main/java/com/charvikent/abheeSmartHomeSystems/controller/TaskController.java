@@ -546,7 +546,7 @@ public class TaskController {
 		String custaddress =request.getParameter("custaddress");
 		String images =request.getParameter("images");
 		System.out.println(images);
-		
+		String requesttimeid=request.getParameter("requesttimeid");
 		AbheeTask task =new AbheeTask();
 		task.setAdditionalinfo("0");
 		task.setAssignto("5");
@@ -566,6 +566,7 @@ public class TaskController {
 
 		task.setCustomerId(customerId);
 		task.setUploadfile(images);
+		task.setRequesttime(requesttimeid);
 		
 		for(MultipartFile multipartFile : uploadedFiles) {
 			String fileName = multipartFile.getOriginalFilename();

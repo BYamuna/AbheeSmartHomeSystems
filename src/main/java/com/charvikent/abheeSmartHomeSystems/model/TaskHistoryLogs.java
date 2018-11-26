@@ -76,11 +76,17 @@ public class TaskHistoryLogs  {
 	
 	private  String communicationaddress;
 	
+	private String requesttime;
 	
 	
 	
 	
-	
+	public String getRequesttime() {
+		return requesttime;
+	}
+	public void setRequesttime(String requesttime) {
+		this.requesttime = requesttime;
+	}
 	public Integer getTaskid() {
 		return taskid;
 	}
@@ -321,10 +327,13 @@ public class TaskHistoryLogs  {
 				+ description + ", uploadfile=" + uploadfile + ", gapdays=" + gapdays + ", gapcount=" + gapcount
 				+ ", kstatus=" + kstatus + ", status=" + status + ", additionalinfo=" + additionalinfo
 				+ ", taskdeadline=" + taskdeadline + ", taskdeadlineid=" + taskdeadlineid + ", ServiceType="
-				+ ServiceType + ", assigntoid=" + assigntoid + ", categoryid=" + categoryid + ", priorityid="
-				+ priorityid + ", severityid=" + severityid + ", assignbyid=" + assignbyid + ", kstatusid=" + kstatusid
-				+ ", modelid=" + modelid + ", assignby=" + assignby + "]";
+				+ ServiceType + ", ModifiedBy=" + ModifiedBy + ", assigntoid=" + assigntoid + ", categoryid="
+				+ categoryid + ", priorityid=" + priorityid + ", severityid=" + severityid + ", assignbyid="
+				+ assignbyid + ", kstatusid=" + kstatusid + ", modelid=" + modelid + ", addComment=" + addComment
+				+ ", communicationaddress=" + communicationaddress + ", requesttime=" + requesttime + ", assignby="
+				+ assignby + "]";
 	}
+	
 	
 	
 	

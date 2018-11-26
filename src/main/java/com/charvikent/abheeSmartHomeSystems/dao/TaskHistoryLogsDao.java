@@ -95,7 +95,7 @@ public class TaskHistoryLogsDao {
 		taskHistoryLogs.setTaskno(reportIssue.getTaskno());
 		taskHistoryLogs.setAddComment(reportIssue.getAddComment());
 		taskHistoryLogs.setCommunicationaddress(reportIssue.getCommunicationaddress());
-		
+		taskHistoryLogs.setRequesttime(reportIssue.getRequesttime());
 		
 		
 		

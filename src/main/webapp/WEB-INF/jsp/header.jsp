@@ -365,7 +365,7 @@ function displayAssignedNotifications(listOrders) {
 // 	alert(listOrders);
 	$('#ack').html('');
 	var tableHead = '<table id="ack" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">TaskNo</th><th style="text-align:center;">Username</th><th style="text-align:center;">comment</th></thead><tbody></tbody></table>';
+			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">Service Request No</th><th style="text-align:center;">Assigned To</th><th style="text-align:center;">comment</th></thead><tbody></tbody></table>';
 	$('#ack').html(tableHead);
 	//serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
