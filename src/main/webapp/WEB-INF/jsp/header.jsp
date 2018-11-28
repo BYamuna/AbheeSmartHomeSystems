@@ -379,9 +379,10 @@ function displayAssignedNotifications(listOrders) {
 		}
 	//serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr>"
-			+ "<td title='"+orderObj.taskno+"'>"+ orderObj.taskno + "</td>"
+			+ "<td title='"+orderObj.taskno+"'><a href='task'>"+ orderObj.taskno + "</a></td>"
 			+ "<td title='"+orderObj.musername+"'>"+ orderObj.musername + "</td>"
-			+ "<td title='"+comment+"'>"+ comment + "</td>"		
+			+ "<td title='"+comment+"'>"+ comment + "</td>"	
+			+"<a class='view viewIt' href='task"
 			+ "</tr>";
 		$(tblRow).appendTo("#ack table tbody");
 	});
@@ -429,24 +430,20 @@ function displayAssignedNotifications(listOrders) {
 
 
     <div id="ack" class="dropdown-content">
-      <a style="padding: 10px 16px;" href="#">
+      <a style="padding: 10px 16px;" href="#"> 
       
-      	<table class="table1">
+      	<table class="table1" >
         	<thead>
-
-            	<!-- <tr class="tr1">               
-                	<th class="th1">User Name</th>
-                	<th class="th1">Comment</th>
-                	<th>Change</th>
+            	<!-- <tr class="tr1" style="background: #006699;color: #FFF;">
+                	<th class="th1">ServiceRequestNo</th>
+                	<th class="th1">AssignedTo</th>
+                	<th class="th1">Comment</th> 
                 </tr> -->
             </thead>
-            <tbody>
-             
-            	
-            </tbody>
+            <tbody></tbody>
         </table>
-        
-      </a>
+      
+      </a> 
     </div>
   </div> 
 </div>
@@ -588,3 +585,5 @@ function displayAssignedNotifications(listOrders) {
 		                </security:authorize>
 	        </div>
 	        </div>
+
+</script>

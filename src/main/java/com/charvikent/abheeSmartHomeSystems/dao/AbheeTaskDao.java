@@ -1,11 +1,13 @@
 package com.charvikent.abheeSmartHomeSystems.dao;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -333,4 +335,35 @@ public List<Map<String, Object>> getTasksByCustomerId(Customer customer) {
 		String sql="update abhee_task set status='"+status+"'where id='"+id+"'";
 		jdbcTemplate.execute(sql);		
 	}
+	
+	public List<Map<String, Object>> getCustomerResponseByCustomerId(String customer) {
+		
+		String hql= "select t.id,t.description,t.uploadfile,t.customer_id,t.communicationaddress,t.warranty,ar.requesttime ,ap.name as modelname ,ac.category,st.servicetypename as servicetype from abhee_task t,abheecategory ac,abheerequesttime ar,abheeservicetype st,abhee_product ap where t.taskno='"+customer+"' and t.category=ac.id and t.requesttime=ar.requesttimeid and t.modelid=ap.id and t.service_type=st.id";
+	     System.out.println(hql);
+		
+		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+		System.out.println(retlist);
+		return retlist;
+		
+	}
+public List<Map<String, Object>> getAdminResponseByCustomerId(String customer) {
+		
+		String hql= " select t.id,t.additionalinfo,t.created_time,t.description,t.status,t.subject,t.taskdeadline,t.taskno,t.updated_time,t.uploadfile,t.customer_id,t.communicationaddress,t.warranty,ts.name as kstatus,p.name as model,s.severity as severity,ap.priority as priority, st.servicetypename as servicetype,c.category as category,u.username as assignedby,u1.username as assignedto,ac.name as company,t.total,t.tax,t.discount,t.amountreceived from abhee_task t,abheetaskstatus ts,abhee_product p,abheeseverity s ,abheepriority ap,abheeservicetype st,abheecategory c,abheeusers u,abheeusers u1,abhee_company ac where t.taskno='"+customer+"' and t.kstatus=ts.id and t.modelid=p.id and t.priority=ap.id and t.severity=s.id and t.service_type=st.servicetype_id and t.category=c.id and t.assignby=u.id and t.assignto=u1.id and p.companyid=ac.id ";
+				System.out.println(hql);
+		
+		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+		System.out.println(retlist);
+		return retlist;
+		
+	}	
+public List<String> getTaskNoByCustomerId(Customer customer) {
+	
+String hql ="select t.taskno from AbheeTask t where customerId ='"+customer.getCustomerId()+"'";
+	System.out.println(hql);
+	List<String> list =entityManager.createQuery(hql).getResultList();
+	return list;
+	
+	
+}
+
 }

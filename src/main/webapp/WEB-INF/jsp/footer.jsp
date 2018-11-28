@@ -54,9 +54,31 @@
 	
 <script type="text/javascript">
 var isClick = 'Yes';
+<%-- if(test != null){
+	/* var msgIncrement = 0; */
+	$("#taskTableHeader tbody").empty();
+	$.each(test,function(i, orderObj) { 
+		/* if(orderObj.status == 1){
+			msgIncrement++; */
+		var task = "<tr>"
+			+ "<td title='"+orderObj.taskno+"'><b>"+ orderObj.taskno+ "</b></td>" 
+			+ "<td title='"+orderObj.musername+"'><b>"+ orderObj.musername + "</b></td>"
+			+ "<td title='"+orderObj.comment+"'><b>"+ orderObj.comment + "</b></td>"
+			+"<a class='view viewIt' href='task?"
+			+ "</tr>";
+		
+		$(task).appendTo("#taskTableHeader table tbody");
+		
+		 $("#taskTableHeader tbody").append(task);
+		
+	});
+	}
+		 /* $("#noOfMessages").text(msgIncrement); */
+	</script>
 
+	<script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
 
-
+ --%>
 </script>
 </body>
 </html>
