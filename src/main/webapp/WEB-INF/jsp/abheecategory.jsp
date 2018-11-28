@@ -708,6 +708,8 @@ $.each(productdetailslist, function(k,v){
 		 
 		 servicetypeid =$("#servicetypeid").val();
 		 requesttimeid =$("#requesttimeid").val();
+		 fileimg =$('#fileimg').val();
+		 
 		 
 		 var objArr = [];
 	    	var jsonData = {"message":message,"catid":catid,"servicetypeid":servicetypeid,"requesttimeid":requesttimeid,"custaddress":custaddress,"modelid":modelid,"customerId":customerId};
@@ -749,7 +751,12 @@ $.each(productdetailslist, function(k,v){
 			 
 			 
 		 }
-		 
+		 if(fileimg=="" || fileimg==null || fileimg=="undefined"){
+			$('.impColor0').after('<span class="error error-keyup-4">Choose file </span>');
+			 $('#fileimg' ).css('border-color','#e73d4a');
+				$('#fileimg' ).css('color','#e73d4a');
+			 return false;
+		 }
 		 var ins = document.getElementById('fileimg').files.length;
 			
 			for(var i=0; i< ins; i++)
