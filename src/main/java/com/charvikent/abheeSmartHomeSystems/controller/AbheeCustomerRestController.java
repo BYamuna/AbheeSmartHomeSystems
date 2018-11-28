@@ -637,21 +637,27 @@ public class AbheeCustomerRestController {
 		System.out.println(list);*/
 		JSONObject json = new JSONObject();
 		List<String> listOrderBeans = abheeTaskDao.getTaskNoByCustomerId(customer);
-		ArrayList<HashMap<String,List<Map<String, Object>>>> list=new ArrayList<HashMap<String,List<Map<String, Object>>>>();
+		
+		List<HashMap<String,ArrayList<HashMap<String,List<Map<String, Object>>>>>> list1=new ArrayList<HashMap<String,ArrayList<HashMap<String,List<Map<String, Object>>>>>>();
 		System.out.println(listOrderBeans);
 		if (null != listOrderBeans) {
-			for(int i=0;i<listOrderBeans.size();i++) {
+			int i;
+			for( i=0;i<listOrderBeans.size();i++) {
+				ArrayList<HashMap<String,List<Map<String, Object>>>> list=new ArrayList<HashMap<String,List<Map<String, Object>>>>();
+				list.clear();
 				HashMap<String,List<Map<String, Object>>> hm=new HashMap<String,List<Map<String, Object>>>();
+				HashMap<String,ArrayList<HashMap<String,List<Map<String, Object>>>>> hm1=new HashMap<String,ArrayList<HashMap<String,List<Map<String, Object>>>>>();
 				List<Map<String, Object>> listOrderBeans2 = abheeTaskDao.getCustomerResponseByCustomerId(listOrderBeans.get(i));
 				List<Map<String, Object>> listOrderBeans1 = abheeTaskDao.getAdminResponseByCustomerId(listOrderBeans.get(i));
 				hm.put("CustomerBean",listOrderBeans2 );
 				hm.put("AdminBean",listOrderBeans1 );
 				list.add(hm);
-				json.put(""+i,list);
+				hm1.put(""+i, list);
+				list1.add(hm1);
+				
 			}
-			/*json.put("CustomerResponseList", listOrderBeans);
-			json.put("AdminResponseList", listOrderBeans1);
-//			json.put("testing",list);*/
+			
+		json.put("ServiceRequest",list1);
 		} else
 			json.put("CustomerResponseList", "NOT_FOUND");
 		return String.valueOf(json);

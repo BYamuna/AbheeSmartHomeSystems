@@ -434,6 +434,10 @@ public class AbheeCustRegistrationController
 		String custMobile=request.getParameter("cmobile");
 		Random random = new Random();
 		otpnumber = "Dear Customer,thanks for registering with Abhee Smart Home Systems. OTP for your registration is:"+String.format("%04d", random.nextInt(10000));
+		String tmsg =environment.getProperty("app.otpmsg");
+		 System.out.println(tmsg);
+		tmsg= tmsg.replaceAll("_otpnumber_", otpnumber);
+		sendSMS.sendSMS(tmsg,custMobile);
 		OTPDetails oTPDetails =new OTPDetails();
 		oTPDetails.setMobileno(custMobile);
 		oTPDetails.setOTPnumber(otpnumber);
