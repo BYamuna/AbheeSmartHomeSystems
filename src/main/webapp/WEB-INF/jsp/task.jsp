@@ -200,17 +200,13 @@
 						</div>
 						<div class="row">
 						<div class="col-md-6">
-							<div class="form-group">
-								<label
-									class="ace-file-input ace-file-multiple col-sm-3 col-md-push-3 control-label no-padding-right">Attach
-									File(s)</label>
-								<div class="col-md-8">
-									<input type="file" name="file1" id="file1"
-										class="col-sm-9 col-md-push-5 validate1" multiple="multiple"
-										style="margin: 7px 0px 0px 0px;">
+								<div class="form-group">
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Tax
+										<!-- <span class="impColor">*</span> -->
+									</label>
+									<form:input path="tax" placeholder="Tax" class="col-xs-10 col-sm-5" />
 								</div>
 							</div>
-						</div>
 						<div class="col-md-6">
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Comment
@@ -225,42 +221,47 @@
 								</div>
 							</div>
 							</div>
-						<security:authorize access="hasRole('ROLE_USER')">
+						<security:authorize access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Total
-										<span class="impColor">*</span>
-									</label>
-									<form:input path="total" placeholder="Total" class="col-xs-10 col-sm-5 validate numericOnly2" />
+										<!-- <span class="impColor">*</span>
+ -->									</label>
+									<form:input path="total" placeholder="Total" class="col-xs-10 col-sm-5" />
 								</div>
 							</div>
 							
 							<div class="col-md-6">
 								<div class="form-group">
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Discount
-										<span class="impColor">*</span>
+										<!-- <span class="impColor">*</span> -->
 									</label>
-									<form:input path="discount" placeholder="Discount" class="col-xs-10 col-sm-5 validate numericOnly2" />
+									<form:input path="discount" placeholder="Discount" class="col-xs-10 col-sm-5" />
 								</div>
 							</div>
 						</div>	
 						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Tax
-										<span class="impColor">*</span>
-									</label>
-									<form:input path="tax" placeholder="Tax" class="col-xs-10 col-sm-5 validate numericOnly" />
+						<div class="col-md-6">
+							<div class="form-group">
+								<label
+									class="ace-file-input ace-file-multiple col-sm-3 col-md-push-3 control-label no-padding-right">Attach
+									File(s)</label>
+								<div class="col-md-8">
+									<input type="file" name="file1" id="file1"
+										class="col-sm-9 col-md-push-5 validate1" multiple="multiple"
+										style="margin: 7px 0px 0px 0px;">
 								</div>
 							</div>
+						</div>
+							
 							
 							<div class="col-md-6">
 								<div class="form-group">
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Amount Received
-										<span class="impColor">*</span>
+										<!-- <span class="impColor">*</span> -->
 									</label>
-									<form:input path="amountreceived" placeholder="Amountreceived" class="col-xs-10 col-sm-5 validate numericOnly2" />
+									<form:input path="amountreceived" placeholder="Amountreceived" class="col-xs-10 col-sm-5" />
 								</div>
 							</div>
 						</div>	

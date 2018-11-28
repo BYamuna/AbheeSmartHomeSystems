@@ -51,6 +51,9 @@
 .tag {
 	color:#FF0000;
 }
+.modal {
+	z-index: 1041 !important;
+}
 </style>
 
 <script type="text/javascript">
@@ -236,7 +239,7 @@
 					</form>	
         </div>
         <div class="col-sm-6">
-			<a onclick="resendOTP()" class="btn btn-warning">Resend OTP</a>
+			<a onclick="resendOTP()" class="btn btn-warning" style="margin-top:10px;">Resend OTP</a>
 		</div>
         <div class="modal-footer">
           <button type="button" id="submit2" onclick="modelsubmit()" class="btn btn-primary" >Submit</button>
@@ -300,13 +303,12 @@ var validation = true;
 
 var mobilevalidation=false;
 var subValidation =false;
-
 $('#cmobile').blur(function() {
 	var editFields =0;
 	var cmobile=$(this).val();
-	
+
+	$.blockUI({ message: '<i class="fa fa-spinner"></i> Please wait' });
 	if (cmobile == null || cmobile == "" || cmobile == "undefined") {
-		
 		return false;
 	}
 	else
@@ -353,6 +355,7 @@ $('#cmobile').blur(function() {
 				dataType : "text",
 				beforeSend : function() {
 		             $.blockUI({ message: 'Please wait' });
+					
 		          }, 
 				success : function(data) {
 					if(data ==='true')
@@ -360,6 +363,8 @@ $('#cmobile').blur(function() {
 						alert("Mobile Number already exists")
 	 					$('#cmobile').css('border-color', 'red');
 	 					 $('#submitModel').prop('disabled', true);
+	 					$('#submitModel').html('<i class="fa fa-spin"></i> Please wait...');
+						$('#submitModel').css('padding-top', '-35px');
 	 					 //alert("customer could not be registered")
 	 					 mobilevalidation=false;
 	 					subValidation =false;
@@ -844,4 +849,11 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 	
 	
 </script>
+<style type="text/css">
+
+.blockMsg
+{
+ z-index: 9999999 !improtant;
+}
+</style>
 </html>

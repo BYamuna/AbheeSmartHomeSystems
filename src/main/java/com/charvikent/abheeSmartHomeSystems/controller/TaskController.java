@@ -547,6 +547,7 @@ public class TaskController {
 		String images =request.getParameter("images");
 		System.out.println(images);
 		String requesttimeid=request.getParameter("requesttimeid");
+		String warranty=request.getParameter("warranty");
 		AbheeTask task =new AbheeTask();
 		task.setAdditionalinfo("0");
 		task.setAssignto("5");
@@ -565,9 +566,9 @@ public class TaskController {
 		task.setSubject("Task created By "+customer.getFirstname()+" "+customer.getLastname());
 
 		task.setCustomerId(customerId);
-		task.setUploadfile(images);
 		task.setRequesttime(requesttimeid);
-		
+		task.setWarranty(warranty);
+		task.setUploadfile(images);
 		for(MultipartFile multipartFile : uploadedFiles) {
 			String fileName = multipartFile.getOriginalFilename();
 			if(!multipartFile.isEmpty())

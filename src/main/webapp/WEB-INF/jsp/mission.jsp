@@ -1,5 +1,5 @@
  <%@include file="abheeheader.jsp" %>
-  	<div class="container">
+  	<div class="container"  style="min-height:300px;">
   <!-- Mission starts here -->
   <div class="mdata">
   	<h2>Our Mission</h2>
