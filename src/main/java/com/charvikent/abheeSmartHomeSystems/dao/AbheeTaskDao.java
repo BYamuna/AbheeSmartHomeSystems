@@ -348,7 +348,8 @@ public List<Map<String, Object>> getTasksByCustomerId(Customer customer) {
 	}
 public List<Map<String, Object>> getAdminResponseByCustomerId(String customer) {
 		
-		String hql= " select t.id,t.additionalinfo,t.created_time,t.description,t.status,t.subject,t.taskdeadline,t.taskno,t.updated_time,t.uploadfile,t.customer_id,t.communicationaddress,t.warranty,ts.name as kstatus,p.name as model,s.severity as severity,ap.priority as priority, st.servicetypename as servicetype,c.category as category,u.username as assignedby,u1.username as assignedto,ac.name as company,t.total,t.tax,t.discount,t.amountreceived from abhee_task t,abheetaskstatus ts,abhee_product p,abheeseverity s ,abheepriority ap,abheeservicetype st,abheecategory c,abheeusers u,abheeusers u1,abhee_company ac where t.taskno='"+customer+"' and t.kstatus=ts.id and t.modelid=p.id and t.priority=ap.id and t.severity=s.id and t.service_type=st.servicetype_id and t.category=c.id and t.assignby=u.id and t.assignto=u1.id and p.companyid=ac.id ";
+		String hql= "select ap.priority as priority,t.subject,t.status,u.username as assignedto,t.taskdeadline,t.uploadfile,t.description from abhee_task t,abheepriority ap,abheeusers u where t.taskno='"+customer+"' and t.priority=ap.id and t.assignto=u.id";
+				
 				System.out.println(hql);
 		
 		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
