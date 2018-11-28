@@ -248,11 +248,11 @@ color:#ea8080 !important;
                   			<div class="4">
                   			</div><div class="clearfix"></div>
                   		</div><div class="clearfix"></div>
-                  		<div class="ainfo">
-                  			<div class="col-md-1">
+                  		<div class="ainfo col-md-6">
+                  			<div class="col-md-3">
                   				<label style="margin-top:25px;">Address: </label>
                   			</div>
-                  			<div class="col-md-11">
+                  			<div class="col-md-5">
                   				<textarea  class="form-control validate" id="address" type="text" placeholder="Address"></textarea>
                   			</div><div class="clearfix"></div>
                   		</div>
