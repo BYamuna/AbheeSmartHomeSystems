@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;*/
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 //import java.util.Deque;
 //import org.apache.commons.codec.binary.Base64;
 import java.util.HashMap;
@@ -505,6 +506,7 @@ public class AbheeCustomerRestController {
 		String customerId = serviceRequest.getCustomerId();
 		String custaddress = serviceRequest.getCustaddress();
 		String warranty = serviceRequest.getWarranty();
+		String requesttime=serviceRequest.getRequesttime();
 		AbheeTask task = new AbheeTask();
 		task.setAdditionalinfo("0");
 		task.setAssignto("5");
@@ -523,6 +525,7 @@ public class AbheeCustomerRestController {
 		// "+customer.getLastname());
 		task.setCustomerId(customerId);
 		task.setWarranty(warranty);
+		task.setRequesttime(requesttime);
 		task.setAssignby("1");
 		Map<String, Object> abheeTask = reportIssueDao.checkServiceRequestExisrOrNot(task);
 		if (null == abheeTask) {
@@ -622,16 +625,35 @@ public class AbheeCustomerRestController {
 		 */
 	}
 
-	@RequestMapping(value = "/getTicketStatus", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	@RequestMapping(value = "/getServiceStatus", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public String getTaskStatusByCustomerId(@RequestBody Customer customer)
 			throws JsonProcessingException, JSONException {
 		LOGGER.debug("Calling getTicketStatus at controller");
-		List<Map<String, Object>> listOrderBeans = abheeTaskDao.getTasksByCustomerId(customer);
+		/*List<Map<String, Object>> listOrderBeans = abheeTaskDao.getCustomerResponseByCustomerId(customer);
+		List<Map<String, Object>> listOrderBeans1 = abheeTaskDao.getAdminResponseByCustomerId(customer);
+		ArrayList<List<Map<String, Object>>> list=new ArrayList<List<Map<String, Object>>>();
+		list.add(listOrderBeans);
+		list.add(listOrderBeans1);
+		System.out.println(list);*/
 		JSONObject json = new JSONObject();
+		List<String> listOrderBeans = abheeTaskDao.getTaskNoByCustomerId(customer);
+		ArrayList<HashMap<String,List<Map<String, Object>>>> list=new ArrayList<HashMap<String,List<Map<String, Object>>>>();
+		System.out.println(listOrderBeans);
 		if (null != listOrderBeans) {
-			json.put("ticketstatus", listOrderBeans);
+			for(int i=0;i<listOrderBeans.size();i++) {
+				HashMap<String,List<Map<String, Object>>> hm=new HashMap<String,List<Map<String, Object>>>();
+				List<Map<String, Object>> listOrderBeans2 = abheeTaskDao.getCustomerResponseByCustomerId(listOrderBeans.get(i));
+				List<Map<String, Object>> listOrderBeans1 = abheeTaskDao.getAdminResponseByCustomerId(listOrderBeans.get(i));
+				hm.put("CustomerBean",listOrderBeans2 );
+				hm.put("AdminBean",listOrderBeans1 );
+				list.add(hm);
+				json.put(""+i,list);
+			}
+			/*json.put("CustomerResponseList", listOrderBeans);
+			json.put("AdminResponseList", listOrderBeans1);
+//			json.put("testing",list);*/
 		} else
-			json.put("ticketstatus", "NOT_FOUND");
+			json.put("CustomerResponseList", "NOT_FOUND");
 		return String.valueOf(json);
 	}
 

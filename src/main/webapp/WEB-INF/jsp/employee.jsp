@@ -106,7 +106,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">AadharNo</label>
 									<div class="col-md-6">
-										<form:input path="aadharno"  class="form-control" placeholder="Aadhar number" maxlength="12"/>
+										<form:input path="aadharno" class="form-control" placeholder="Aadhar number" maxlength="12"/>
 									</div>
 								</div>
 								</div>

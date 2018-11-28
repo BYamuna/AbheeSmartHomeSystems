@@ -11,7 +11,7 @@ public class ServiceRequest {
 	private String customerId;
 	private String custaddress;
 	private String warranty;
-	
+	private String requesttime;
 	private String imgname;
 	
 	
@@ -76,12 +76,20 @@ public class ServiceRequest {
 	public void setWarranty(String warranty) {
 		this.warranty = warranty;
 	}
+	
+	public String getRequesttime() {
+		return requesttime;
+	}
+	public void setRequesttime(String requesttime) {
+		this.requesttime = requesttime;
+	}
 	@Override
 	public String toString() {
 		return "ServiceRequest [id=" + id + ", message=" + message + ", servicetypeid=" + servicetypeid + ", catid="
 				+ catid + ", modelid=" + modelid + ", customerId=" + customerId + ", custaddress=" + custaddress
-				+ ", warranty=" + warranty + "]";
+				+ ", warranty=" + warranty + ", requesttime=" + requesttime + ", imgname=" + imgname + "]";
 	}
+
 	
 	
 

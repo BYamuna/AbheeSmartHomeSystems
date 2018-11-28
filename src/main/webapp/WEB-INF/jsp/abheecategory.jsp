@@ -176,7 +176,7 @@
 						</div>
 						
 						<div class="col-sm-8">
-							<input class=" " type="file" name="fileimg"  accept="image/*"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="fileimg" multiple />
+							<input class="validate" type="file" name="fileimg"  accept="image/*"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="fileimg" multiple />
 						</div>
 						
 							<!--<div class="col-sm-4">
