@@ -157,8 +157,8 @@
 							<label>Warranty</label> <span class="impColor">*</span>
 						</div>
 						<div class="col-sm-8" style="padding-top:8px;">
-							<input type="radio" id="warranty" name="warranty" value="1"> Yes
-  							<input type="radio" id="warranty" name="warranty" value="0"> No
+							<input type="radio" id="warranty" name="warranty" value=1 > Yes
+  							<input type="radio" id="warranty" name="warranty" value=0 > No
 						</div><div class="clearfix"></div>
 						<div class="col-sm-4">
 							<label>Request Time</label> <span class="impColor">*</span>
@@ -228,14 +228,14 @@
 									<input type="hidden" id="modelnumber"  class="form-control validate" placeholder="Product Model"/>
 							
 								<div class="clearfix"></div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label class="col-md-4 control-label no-padding-right">Location<span class="impColor"> *</span></label>
 									<div class="col-md-6">
 										<input type="text" name="locationData" id="locationData" class="form-control validate"  placeholder="Location in Map"/> 
 									</div>
 								</div><div class="clearfix"></div>
 								
-								<div class="clearfix"></div>
+								<div class="clearfix"></div> -->
 								<div class="form-group">
 									<label class="col-md-4 control-label no-padding-right">Address <span class="impColor">*</span></label> 
 									<div class="col-md-6">
@@ -335,12 +335,12 @@
 <input type="hidden" id="custhiddenid" value=${customerId} >
 
 
-<script src='https://static.codepen.io/assets/editor/live/console_runner-ce3034e6bde3912cc25f83cccb7caa2b0f976196f2f2d52303a462c826d54a73.js'></script>
+<!-- <script src='https://static.codepen.io/assets/editor/live/console_runner-ce3034e6bde3912cc25f83cccb7caa2b0f976196f2f2d52303a462c826d54a73.js'></script>
 <script src='https://static.codepen.io/assets/editor/live/css_live_reload_init-890dc39bb89183d4642d58b1ae5376a0193342f9aed88ea04330dc14c8d52f55.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/jonvadillo/pen/NNZzwB" />
-<script type="text/javascript" src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
+<script type="text/javascript" src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script> -->
 <script type="text/javascript">
 
-$(function(){
+/* $(function(){
 	getLocation();
 
 	if (navigator.geolocation) {
@@ -408,17 +408,17 @@ function getLocation() {
 		    locationNameInput: $('#us2-address')
 		  }, */
 		  
-		  radius: 10,
+		 /* radius: 10,
 		  onchanged: function (currentLocation, radius, isMarkerDropped) {
 		        var addressComponents = $(this).locationpicker('map').location.addressComponents;
-		      //addressComponents.map.setZoom(200);
+		      addressComponents.map.setZoom(200);
 		      $("#locationData").val(currentLocation.latitude+'&'+currentLocation.longitude);
 		      
-		     // var mapContext = $(this).locationpicker('map');
-		    //updateControls(addressComponents); //Data
-		    // $("#locationData").readOnly() = true;
+		    var mapContext = $(this).locationpicker('map');
+		    updateControls(addressComponents); //Data
+		     $("#locationData").readOnly() = true;
 		    
-		    	//var id = $(this).attr('id');
+		    	var id = $(this).attr('id');
 		    if( (currentLocation.latitude+'&'+currentLocation.longitude) !=  ""){
 		    	
 		    	removeBorder('locationData');
@@ -429,7 +429,7 @@ function getLocation() {
 		});
 	 	
 	 }
- 
+ */ 
 
 //To use this code on your website, get a free API key from Google.
 //Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
@@ -586,7 +586,7 @@ $.each(productdetailslist, function(k,v){
 			
 			//getLocation();
 			$("#quotationModal").modal();
-			 $("#locationData").prop("readonly", true);
+			 //$("#locationData").prop("readonly", true);
 				//localStorage.setItem("modelName",document.getElementById('modelName').innerHTML);
 				//$('#modelName').text(localStorage.getItem("modelName"));
 				//$('#modelnumber').val(localStorage.getItem("modelName"));
@@ -633,7 +633,7 @@ $.each(productdetailslist, function(k,v){
 	function quotationSubmit(){
 		
 		var modelnumber=$('#modelnumber').val();
-    	var locationData=$('#locationData').val();
+    	//var locationData=$('#locationData').val();
     	var address=$('#address').val();
     	var reqdesc=$('#reqdesc').val();
     	
@@ -641,7 +641,7 @@ $.each(productdetailslist, function(k,v){
     	//var params = form.serializeArray();
     	
     	var objArr = [];
-    	var jsonData = {"modelnumber":modelnumber,"address":address,"reqdesc":reqdesc, "locationData":locationData };
+    	var jsonData = {"modelnumber":modelnumber,"address":address,"reqdesc":reqdesc /* , "locationData":locationData */ };
     	
 	   var formData = new FormData();
     	
@@ -666,7 +666,7 @@ $.each(productdetailslist, function(k,v){
 	} 
 	
 	formData.append( "modelnumber",modelnumber);
-	formData.append( "locationData",locationData);
+	//formData.append( "locationData",locationData);
 	formData.append( "address",address);
 	formData.append( "reqdesc",reqdesc);
 	console.log(formData);
@@ -681,7 +681,7 @@ $.each(productdetailslist, function(k,v){
 	  	
 	  	success: function(result){
 	  		if(result !="" && result != null){
-	  		alert(result);
+	  		alert("We received the Request and will send you the quotation soon. Thanking you.");
 	  		}
 	  		$('#salesrequest').val("");
 	  		$('#imgfile').val("");

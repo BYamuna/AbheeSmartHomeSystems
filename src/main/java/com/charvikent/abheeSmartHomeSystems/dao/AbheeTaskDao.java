@@ -338,7 +338,7 @@ public List<Map<String, Object>> getTasksByCustomerId(Customer customer) {
 	
 	public List<Map<String, Object>> getCustomerResponseByCustomerId(String customer) {
 		
-		String hql= "select t.id,t.description,t.uploadfile,t.customer_id,t.communicationaddress,t.warranty,ar.requesttime ,ap.name as modelname ,ac.category,st.servicetypename as servicetype from abhee_task t,abheecategory ac,abheerequesttime ar,abheeservicetype st,abhee_product ap where t.taskno='"+customer+"' and t.category=ac.id and t.requesttime=ar.requesttimeid and t.modelid=ap.id and t.service_type=st.id";
+		String hql= "select t.id,t.taskno,t.description,t.uploadfile,t.customer_id,t.communicationaddress,t.warranty,ar.requesttime ,ap.name as modelname ,ac.category,st.servicetypename as servicetype,c.name as companyname from abhee_task t,abheecategory ac,abhee_company c,abheerequesttime ar,abheeservicetype st,abhee_product ap where t.taskno='"+customer+"' and t.category=ac.id and t.requesttime=ar.requesttimeid and t.modelid=ap.id and t.service_type=st.id and t.id=c.id";
 	     System.out.println(hql);
 		
 		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
@@ -363,8 +363,6 @@ String hql ="select t.taskno from AbheeTask t where customerId ='"+customer.getC
 	System.out.println(hql);
 	List<String> list =entityManager.createQuery(hql).getResultList();
 	return list;
-	
-	
 }
 
 }

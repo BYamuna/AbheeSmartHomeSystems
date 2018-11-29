@@ -654,37 +654,48 @@ $('#editemailinfo').click(function (){
 $('#saveemailinfo').click(function (){
 	var pemail =$("#pemail").val();
 	var customerid=$("#customerid").val();
-	var pmobilenumber =$("#pmobilenumber").val();
-	alert(customerid);
-	$.ajax({
-		type : "POST",
-		url : "editprofileemail",
-		data :"pemail="+pemail+"&pmobilenumber="+pmobilenumber+"&customerid="+customerid,
-		dataType : "text",
-		beforeSend : function() {
-             $.blockUI({ message: 'Please wait' });
-          }, 
-          success : function(data) {
-  			if(data =='true')
-  			{     
-				getOtp2();
-				modelsubmit2();
-				
-			}
-			else if(data == "")
-			{
-				alert("Email Updation failed");	
-			}
-			else
+	
+	//var booleanValue=$("#pemail").hasClass('default-class errorCls');
+	if(!$("#pemail").hasClass('default-class errorCls')){
+		//alert('not a valid email');
+		$.ajax({
+			type : "POST",
+			url : "editprofileemail",
+			data :"pemail="+pemail+/* "&pmobilenumber="+pmobilenumber+ */"&customerid="+customerid,
+			dataType : "text",
+			beforeSend : function() {
+	             $.blockUI({ message: 'Please wait' });
+	          }, 
+	          success : function(data) {
+	  			if(data =='true')
+	  			{     
+					getOtp();
+					modelsubmit2();
+					
+				}
+				else if(data == "")
 				{
-				alert("Email already exists");
-				}	
-		},
-		complete: function () {
-          $.unblockUI();
-     },
-		error :  function(e){$.unblockUI();console.log(e);}
-		});	
+					alert("Email Updation failed");	
+				}
+				else
+					{
+					alert("Email already exists");
+					}	
+			},
+			complete: function () {
+	          $.unblockUI();
+	     },
+			error :  function(e){$.unblockUI();console.log(e);}
+			});
+		
+	}
+	else
+		{
+		event.preventDefault();
+		}
+	//var pmobilenumber =$("#pmobilenumber").val();
+	//alert(customerid);
+		
 	});	
 $('#editmobileno').click(function (){
 	$('#savemobileno').show();
@@ -840,13 +851,13 @@ function modelsubmit()
 
 function modelsubmit2()
 {
-	 pmobilenumber =$('#pmobilenumber').val();
+	 //pmobilenumber =$('#pmobilenumber').val();
 	 pemail=$('#pemail').val();
 	 cotp=$('#cotp').val();
 	$.ajax({
 		type : "POST",
 		url : "modelSubmit1",
-		data :"&pemail="+pemail+"&pmobilenumber="+pmobilenumber+"&cotp="+cotp,
+		data :"&pemail="+pemail+/* "&pmobilenumber="+pmobilenumber+ */"&cotp="+cotp,
 		dataType : "text",
 		beforeSend : function() {
              $.blockUI({ message: 'Please wait' });
