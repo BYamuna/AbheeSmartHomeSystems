@@ -55,7 +55,7 @@ public class ProductController
 		model.addAttribute("product", new Product());
 		
 		model.addAttribute("CategoriesMap",categoryDao.getCategorymap());
-		model.addAttribute("companiesMap",companyDao.getCompanymap(cate));
+		//model.addAttribute("companiesMap",companyDao.getCompanymap(cate));
 		
 		
 		try {
