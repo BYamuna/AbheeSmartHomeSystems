@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Company;
+import com.charvikent.abheeSmartHomeSystems.model.Product;
 
 
 @Repository
@@ -99,7 +100,7 @@ public class CompanyDao
 	}
 	
 	
-	public Map<Integer, String> getCompanymap(String cate)
+	public Map<Integer, String> getCompanymap(Company cate)
 	{
 		Map<Integer, String> rolesMap = new LinkedHashMap<Integer, String>();
 		try
@@ -130,9 +131,9 @@ public class CompanyDao
 		jdbcTemplate.execute(sql);	
 	}
 	
-	public List<Company> getCompanies(String cate)
+	public List<Company> getCompanies(Company cate)
 	{
-		String sql="select ac.name from abhee_company ac where ac.category='"+cate+"'";
+		String sql="select ac.name,ac.id from abhee_company ac where ac.category='"+cate.getCategoryid()+"'";
 		RowMapper<Company> rowMapper = new BeanPropertyRowMapper<Company>(Company.class);
 		  return  this.jdbcTemplate.query(sql, rowMapper);
 	}

@@ -194,25 +194,28 @@
 }); */
 
 $(document).ready(function() {
-	$('#category').change(function() {
-		var catid=$('#category').val();
+	$('#categoryid').change(function() {
+		var catid=$('#categoryid').val();
+		console.log(catid);
 		$.ajax({
 			type : "POST",
-			url : "product",
-			data :"catid="+catid,
+			url : "products",
+			data :'categoryid='+catid,
 			dataType : "text",
 			beforeSend : function() {
 	             $.blockUI({ message: 'Please wait' });
 	          }, 
 			success : function(data) {
-				if(data =='true')
-					{
-					console.log(data);
-					}
-				 /* else
-					{
-					
-					} */ 
+				var result = JSON.parse(data);
+				var s= '';
+				$('#companyid').empty();
+				s= '<option value="-1" > -- Select Product Company --</option>';
+				$('#companyid').append(s);
+				for(var i=0;i<result.length;i++){
+					s='<option value="'+result[i].id+'"> '+result[i].name+'</option>';
+					$('#companyid').append(s);
+				}
+				
 				
 			},
 			complete: function () {
@@ -224,7 +227,6 @@ $(document).ready(function() {
 		});
 	});
 });
-
 
 var k =1;
 

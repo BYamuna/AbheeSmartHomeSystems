@@ -27,6 +27,7 @@ import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CompanyDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ProductDao;
+import com.charvikent.abheeSmartHomeSystems.model.Company;
 import com.charvikent.abheeSmartHomeSystems.model.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -45,7 +46,7 @@ public class ProductController
 	FilesStuff fileTemplate;
 	
 	@RequestMapping("/product")
-	public String  ProductList( @ModelAttribute("productf")  Product prof,Model model ,HttpServletRequest request,@RequestParam(value = "id", required = false)String cate) 
+	public String  ProductList( @ModelAttribute("productf")  Product prof,Model model ,HttpServletRequest request,Company cate) 
 	{
 		LOGGER.debug("Calling product at controller");
 		List<Product> listOrderBeans = null;
@@ -55,6 +56,7 @@ public class ProductController
 		
 		model.addAttribute("CategoriesMap",categoryDao.getCategorymap());
 		model.addAttribute("companiesMap",companyDao.getCompanymap(cate));
+		
 		
 		try {
 			listOrderBeans = productDao. getProductDetails();
@@ -76,6 +78,35 @@ public class ProductController
 		}
 		return "product";
 	}
+
+	@RequestMapping(value ="/products", method = RequestMethod.POST)
+	public @ResponseBody String ProductLists( @ModelAttribute("productf")  Product prof,Model model ,HttpServletRequest request,Company cate) 
+	{
+		LOGGER.debug("Calling product at controller");
+		List<Company> listOrderBeans = null;
+		ObjectMapper objectMapper = null;
+		String sJson = null;		
+		try {
+			listOrderBeans = (List<Company>) companyDao.getCompanies(cate);
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				 System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return sJson.toString();
+	}
+	
 	
 	@RequestMapping(value = "/product", method = RequestMethod.POST)
 	public String saveProduct(@Valid @ModelAttribute  Product pro, BindingResult bindingresults, @RequestParam("file1") MultipartFile[] productpics,@RequestParam("vlink") String vlink[],
