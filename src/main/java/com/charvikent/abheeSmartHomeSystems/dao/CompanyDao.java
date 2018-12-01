@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Company;
-import com.charvikent.abheeSmartHomeSystems.model.Product;
 
 
 @Repository
@@ -53,7 +52,7 @@ public class CompanyDao
 	{
 			
 			@SuppressWarnings("unchecked")
-			List<Company> comList =(List<Company>) entityManager.createQuery("SELECT com FROM Company com where name =:custName ").setParameter("custName",com.getName()).getResultList();
+			List<Company> comList =(List<Company>) entityManager.createQuery("SELECT com FROM Company com where name =:custName and category='"+com.getCategory()+"'").setParameter("custName", com.getName()).getResultList();
 			if(comList.size() > 0)
 				return comList.get(0);
 			return null;
@@ -133,7 +132,7 @@ public class CompanyDao
 	
 	public List<Company> getCompanies(Company cate)
 	{
-		String sql="select ac.name,ac.id from abhee_company ac where ac.category='"+cate.getCategoryid()+"'";
+		String sql="select ac.name from abhee_company ac where ac.category='"+cate.getCategoryid()+"'";
 		RowMapper<Company> rowMapper = new BeanPropertyRowMapper<Company>(Company.class);
 		  return  this.jdbcTemplate.query(sql, rowMapper);
 	}
