@@ -43,7 +43,7 @@
   			<ol class="breadcrumb">
     			<li class="breadcrumb-item"><a href="${baseurl }/">Home</a></li>
     			<li class="breadcrumb-item active"><a href="#">Products</a></li>
-    			<a href="#"><li class="breadcrumb-item active" aria-current="page" id="breadcrumbname"></li></a>
+    			<li class="breadcrumb-item active" aria-current="page" id="breadcrumbname"><a href="#"></a></li>
     			<li class="breadcrumb-item active" aria-current="page" id="breadcrumbcompanyname"></li>
     			<li class="breadcrumb-item active" aria-current="page" id="breadcrumbmodelname"></li>
   			</ol>

@@ -195,6 +195,9 @@ list-style-image:url(images/Right-pointer.png);
 .col-md-6 h3 {
 color:#ea8080 !important;
 }
+.close {
+color:#000 !important;
+}
 </style>
     
 
@@ -403,7 +406,7 @@ color:#ea8080 !important;
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">OTP Verification</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="padding:20px;">
           <form  action="#"  id="registration1"  method="post" class="login-form">
 						<div id="firstForm1">
 							<div class="form-group">
@@ -418,7 +421,8 @@ color:#ea8080 !important;
 						</div>
 					</form>	
         </div>
-        <div class="col-sm-6">
+        <div class="col-md-1"></div>
+        <div class="col-sm-5" style="padding-top:15px;">
 			<a onclick="resendOTP()" class="btn btn-warning">Resend OTP</a>
 		</div>
         <div class="modal-footer">
