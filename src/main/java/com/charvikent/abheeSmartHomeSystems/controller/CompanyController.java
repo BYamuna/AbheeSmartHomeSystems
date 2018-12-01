@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
+import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CompanyDao;
 import com.charvikent.abheeSmartHomeSystems.model.Company;
 
@@ -34,6 +35,8 @@ public class CompanyController
 	private static final Logger LOGGER = LoggerFactory.getLogger(CompanyController  .class);
 	@Autowired
 	CompanyDao companyDao;
+	@Autowired
+	CategoryDao categoryDao;
 	@Autowired
 	FilesStuff fileTemplate;
 	
@@ -45,7 +48,7 @@ public class CompanyController
 		ObjectMapper objectMapper = null;
 		String sJson = null;
 		model.addAttribute("companyf", new Company());
-		
+		model.addAttribute("CategoriesMap",categoryDao.getCategorymap());
 		try {
 			listOrderBeans = companyDao.getCompanyNames();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {

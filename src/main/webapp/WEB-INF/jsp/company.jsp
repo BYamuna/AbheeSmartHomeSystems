@@ -45,6 +45,17 @@
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<form:hidden path="id"/>
+                    				<label for="focusedinput" class="col-md-6 control-label">Category <span class="impColor">*</span></label>
+									<div class="col-md-5">
+									<form:select path="category" class="form-control validate"  onfocus="removeBorder(this.id)">
+											<form:option value="">-- Select Category --</form:option>
+											<form:options items="${CategoriesMap}"/>
+										</form:select>
+										</div>
+										</div>
+									</div>	
+							<div class="col-md-6">
+                    			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Company Name <span class="impColor">*</span></label>
 									<div class="col-md-5">
 										<form:input path="name" class="form-control validate onlyCharacters" placeholder="Company Name"/>	
@@ -117,7 +128,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="company" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Company Name</th><th>Company Description</th><th>Company Images</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Category Name</th><th>Company Name</th><th>Company Description</th><th>Company Images</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -140,6 +151,7 @@ function displayTable(listOrders) {
 		var edit = "<a class='edit editIt' onclick='editCompany("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr>"
+			+ "<td title='"+orderObj.category+"'>"+ orderObj.category + "</td>"
 			+ "<td title='"+orderObj.name+"'>"+ orderObj.name + "</td>"
 			+ "<td title='"+orderObj.description+"'>"+ orderObj.description + "</td>"
 			+ "<td title='"+orderObj.companyimg+"'>"+ orderObj.companyimg + "</td>"
@@ -155,6 +167,7 @@ function displayTable(listOrders) {
 function editCompany(id) {
 	$('#com').text("Edit Company");
 	$("#id").val(serviceUnitArray[id].id);
+	$("#category").val(serviceUnitArray[id].categoryid);
 	$("#name").val(serviceUnitArray[id].name);
 	$("#description").val(serviceUnitArray[id].description);
 	$("#status").val(serviceUnitArray[id].status);

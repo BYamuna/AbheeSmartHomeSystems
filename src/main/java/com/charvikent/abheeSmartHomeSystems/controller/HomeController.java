@@ -32,6 +32,7 @@ import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ProductGuaranteeDao;
+import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
 /*import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;*/
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
@@ -49,6 +50,7 @@ public class HomeController {
 	@Autowired CustomerDao customerDao;
 	@Autowired CategoryDao categoryDao;
 	@Autowired ProductGuaranteeDao productGuaranteeDao;
+	@Autowired SalesRequestDao srequestDao;
 	@Autowired SendSMS sendSMS;
 	@Autowired OTPDetailsDao oTPDetailsDao;
 	@Autowired KptsUtil kptsUtil;
@@ -78,7 +80,7 @@ public class HomeController {
 	@RequestMapping("/login")
 	public String loginView(Model model) {
 		LOGGER.debug("Calling Login page index::{} at controller");
-		System.out.println("login called at /login page");
+		System.out.println("login called at /Rlogin page");
 		//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 //userService.setLoginRecord(objuserBean.getId(),"login");
 
@@ -304,6 +306,26 @@ public class HomeController {
 		
 		 
 		return "mission";
+	}
+	
+	@RequestMapping("/ticketstatus")
+	public String ticketstatus(/*@ModelAttribute("ticketstatus") SalesRequest request,*/Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
+		LOGGER.debug("Calling ticketstatus at controller");
+		Customer customerProfile=(Customer) session.getAttribute("customer");
+		if(null !=customerProfile)
+        {
+		List<Customer> customerList =new  ArrayList<Customer>(); 
+		customerList.add(customerProfile);
+		List<Map<String, Object>> QuotationsList=srequestDao.getSalesRequestListByCustomerId(customerProfile.getCustomerId());
+		ObjectMapper objectMapper = new ObjectMapper(); 
+		String sJson = objectMapper.writeValueAsString(QuotationsList);
+		request.setAttribute("QuotationsList", sJson);
+          }
+          else
+          {
+        		request.setAttribute("QuotationsList", "''");    	  
+          }
+		return "ticketstatus";
 	}
 	
 	

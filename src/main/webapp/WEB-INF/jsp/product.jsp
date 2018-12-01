@@ -193,6 +193,39 @@
 	 } );
 }); */
 
+$(document).ready(function() {
+	$('#category').change(function() {
+		var catid=$('#category').val();
+		$.ajax({
+			type : "POST",
+			url : "product",
+			data :"catid="+catid,
+			dataType : "text",
+			beforeSend : function() {
+	             $.blockUI({ message: 'Please wait' });
+	          }, 
+			success : function(data) {
+				if(data =='true')
+					{
+					console.log(data);
+					}
+				 /* else
+					{
+					
+					} */ 
+				
+			},
+			complete: function () {
+	            
+	            $.unblockUI();
+	       },
+			error :  function(e){$.unblockUI();console.log(e);}
+			
+		});
+	});
+});
+
+
 var k =1;
 
 var listOrders1 = ${allOrders1};

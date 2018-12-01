@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
+import javax.persistence.Transient;
 @Entity
 @Table(name = "abheeCompany")
 public class Company 
@@ -20,6 +20,9 @@ public class Company
 	private String name;
 	private String description;
 	private String companyimg;
+	private String category;
+	@Transient
+	private String categoryid;
 	@Column
 	private String status;
 	
@@ -33,14 +36,15 @@ public class Company
 		super();
 		
 	}
-	public Company(Integer id, String name, String description,String companyimg, String status, Date createdTime,
-			Date updatedTime) 
-	{
+	public Company(Integer id, String name, String description, String companyimg, String category, String categoryid,
+			String status, Date createdTime, Date updatedTime) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.companyimg=companyimg;
+		this.companyimg = companyimg;
+		this.category = category;
+		this.categoryid = categoryid;
 		this.status = status;
 		this.createdTime = createdTime;
 		this.updatedTime = updatedTime;
@@ -102,12 +106,25 @@ public class Company
 	{
 		this.updatedTime = updatedTime;
 	}
-	@Override
-	public String toString() 
-	{
-		return "Company [id=" + id + ", name=" + name + ", description=" + description + ", companyimg=" + companyimg
-				+ ", status=" + status + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + "]";
+	public String getCategory() {
+		return category;
 	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public String getCategoryid() {
+		return categoryid;
+	}
+	public void setCategoryid(String categoryid) {
+		this.categoryid = categoryid;
+	}
+	@Override
+	public String toString() {
+		return "Company [id=" + id + ", name=" + name + ", description=" + description + ", companyimg=" + companyimg
+				+ ", category=" + category + ", categoryid=" + categoryid + ", status=" + status + ", createdTime="
+				+ createdTime + ", updatedTime=" + updatedTime + "]";
+	}
+	
 	
 	
 }

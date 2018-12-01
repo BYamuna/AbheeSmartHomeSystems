@@ -8,10 +8,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Company;
 
 
@@ -32,12 +35,19 @@ public class CompanyDao
 
 	}
 	@SuppressWarnings("unchecked")
-	public List<Company> getCompanyNames()
+	/*public List<Company> getCompanyNames()
 	 {
 
 		return entityManager.createQuery("  from Company where status='1' order by updatedTime desc").getResultList();
 
-	 }
+	 }*/
+	
+	public List<Company> getCompanyNames()
+	{
+		String sql="select ac.id,ac.created_time,ac.description,ac.name,ac.companyimg,ac.category as categoryid,c.category,ac.status from abhee_company ac,abheecategory c where ac.category=c.id and ac.status='1' order by ac.updated_time desc";
+		RowMapper<Company> rowMapper = new BeanPropertyRowMapper<Company>(Company.class);
+		return  this.jdbcTemplate.query(sql, rowMapper);
+	}
 	public Company getCompanyNameById(Company com) 
 	{
 			
@@ -54,6 +64,7 @@ public class CompanyDao
 		uc.setName(com.getName());
 		uc.setDescription(com.getDescription());
 		uc.setCompanyimg(com.getCompanyimg());
+		uc.setCategory(com.getCategory());
 		entityManager.flush();
 	}
 	public boolean deleteCompany(Integer id, String status) 
@@ -74,20 +85,26 @@ public class CompanyDao
 		return delete;
 	}
 
-	@SuppressWarnings("unchecked")
+	/*@SuppressWarnings("unchecked")
 	public List<Company> getAllInActiveList() 
 	{
 		
 		return entityManager.createQuery("from Company where status='0' order by updatedTime desc").getResultList();
+	}*/
+	public List<Company> getAllInActiveList()
+	{
+		String sql="select ac.id,ac.created_time,ac.description,ac.name,ac.companyimg,ac.category as categoryid,c.category,ac.status from abhee_company ac,abheecategory c where ac.category=c.id and ac.status='0' order by ac.updated_time desc";
+		RowMapper<Company> rowMapper = new BeanPropertyRowMapper<Company>(Company.class);
+		return  this.jdbcTemplate.query(sql, rowMapper);
 	}
 	
 	
-	public Map<Integer, String> getCompanymap()
+	public Map<Integer, String> getCompanymap(String cate)
 	{
 		Map<Integer, String> rolesMap = new LinkedHashMap<Integer, String>();
 		try
 		{
-		List<Company> rolesList= getCompanyNames();
+		List<Company> rolesList= getCompanies(cate);
 		for(Company bean: rolesList){
 			rolesMap.put(bean.getId(), bean.getName());
 		}
@@ -112,4 +129,13 @@ public class CompanyDao
 		String sql="update abhee_company set status='"+status+"'where id='"+id+"'";
 		jdbcTemplate.execute(sql);	
 	}
+	
+	public List<Company> getCompanies(String cate)
+	{
+		String sql="select ac.name from abhee_company ac where ac.category='"+cate+"'";
+		RowMapper<Company> rowMapper = new BeanPropertyRowMapper<Company>(Company.class);
+		  return  this.jdbcTemplate.query(sql, rowMapper);
+	}
+	
+	
 }

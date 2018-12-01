@@ -451,7 +451,7 @@ public List<ReportIssue> getAllReportIssues()
 			//sendsmsToCustomer
 			String mobilenum=customer.getMobilenumber();
 			String tmsg =environment.getProperty("app.tmrmsg");
-			tmsg= tmsg.replaceAll("_technicianname_", objuserBean.getFirstname()+" "+objuserBean.getLastname());
+			tmsg= tmsg.replaceAll("_technicianname_", emp.getFirstname()+" "+emp.getLastname());
 			tmsg= tmsg.replaceAll("_mobilenum_", emp.getMobilenumber());
 			tmsg= tmsg.replaceAll("_ServiceRequestNo_", editissue.getTaskno());
 			tmsg= tmsg.replaceAll("_requestdesc_", editissue.getDescription());

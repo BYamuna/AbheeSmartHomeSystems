@@ -157,8 +157,8 @@
 							<label>Warranty</label> <span class="impColor">*</span>
 						</div>
 						<div class="col-sm-8" style="padding-top:8px;">
-							<input type="radio" id="warranty" name="warranty" value=1 > Yes
-  							<input type="radio" id="warranty" name="warranty" value=0 > No
+							<input type="radio" id="warranty" name="warranty" value="1" > Yes
+  							<input type="radio" id="warranty" name="warranty" value="0" > No
 						</div><div class="clearfix"></div>
 						<div class="col-sm-4">
 							<label>Request Time</label> <span class="impColor">*</span>
@@ -764,7 +764,7 @@ $.each(productdetailslist, function(k,v){
 			var images = document.getElementById('fileimg').files[i];
 			formData.append('fileimg', images); 
 			}
-			alert(images);
+			//alert(images);
 			formData.append( "message",message);
 			formData.append( "servicetypeid",servicetypeid);
 			formData.append( "catid",catid);

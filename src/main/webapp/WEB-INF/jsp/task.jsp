@@ -673,7 +673,12 @@
 		$("#kstatus").val(serviceUnitArray[id].kstatus);
 		$("#submit1").val("Update");
 		$(window).scrollTop($('#moveTo').offset().top);
-		document.getElementById("description").readOnly  = true;
+		//document.getElementById("description").readOnly  = true;
+		/* document.getElementById("ServiceType").readOnly  = true;
+		var idArray = $.makeArray($('.validate').map(function() {
+	    	return this.id;
+	    })); */
+		 $("#ServiceType").attr('disabled', true);
 	}
 
 	/* view task history */

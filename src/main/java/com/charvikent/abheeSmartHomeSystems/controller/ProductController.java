@@ -45,7 +45,7 @@ public class ProductController
 	FilesStuff fileTemplate;
 	
 	@RequestMapping("/product")
-	public String  ProductList( @ModelAttribute("productf")  Product prof,Model model ,HttpServletRequest request) 
+	public String  ProductList( @ModelAttribute("productf")  Product prof,Model model ,HttpServletRequest request,@RequestParam(value = "id", required = false)String cate) 
 	{
 		LOGGER.debug("Calling product at controller");
 		List<Product> listOrderBeans = null;
@@ -54,7 +54,7 @@ public class ProductController
 		model.addAttribute("product", new Product());
 		
 		model.addAttribute("CategoriesMap",categoryDao.getCategorymap());
-		model.addAttribute("companiesMap",companyDao.getCompanymap());
+		model.addAttribute("companiesMap",companyDao.getCompanymap(cate));
 		
 		try {
 			listOrderBeans = productDao. getProductDetails();

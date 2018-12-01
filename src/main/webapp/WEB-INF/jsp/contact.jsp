@@ -70,7 +70,7 @@ padding-top:8px;
 	    });
 	}, 5000);
 	
-		$("#contact").addClass("active");
+		$(".contact").addClass("active");
 	</script>
 	
 	
