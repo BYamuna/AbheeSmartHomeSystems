@@ -6,6 +6,9 @@ html {
 body {
   margin: 0;
 }
+.form-check-input {
+	height:auto;
+}
 article,
 aside,
 details,
