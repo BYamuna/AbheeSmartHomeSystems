@@ -42,7 +42,7 @@
         	</div>
           </div> 
           <div id="quotation" class="tabcontent">
-  			<!-- <span onclick="this.parentElement.style.display='none'" class="topright">&times</span> -->
+  			<span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
   			<div class="table-responsive" id="customerQuotationTable">
 							<table class="table table-bordered priority prioritybg"	style="border: 1px solid #0460a4;" >
 								<thead>
@@ -59,7 +59,7 @@
 						</div>
 		</div>
 		<div id="service" class="tabcontent">
-  			<!-- <span onclick="this.parentElement.style.display='none'" class="topright">&times</span> -->
+  		<span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
   			<div class="table-responsive" id="customerTaskTable">
 							<table class="table table-bordered priority prioritybg"	style="border: 1px solid #0460a4;" >
 								<thead>
