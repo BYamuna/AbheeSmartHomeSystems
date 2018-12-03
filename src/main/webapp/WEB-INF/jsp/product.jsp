@@ -63,7 +63,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Product Company <span class="impColor">*</span></label>
 									<div class="col-md-5">
-									<form:select path="companyid" class="form-control validate" onkeydown="removeBorder(this.id)" onfocus="removeBorder(this.id)">
+									<form:select path="companyid" id="companyids" class="form-control validate" onkeydown="removeBorder(this.id)" onfocus="removeBorder(this.id)">
 											<form:option value="">-- Select Product Company --</form:option>
 											<form:options items="${companiesMap}"/>
 										</form:select>
@@ -208,12 +208,12 @@ $(document).ready(function() {
 			success : function(data) {
 				var result = JSON.parse(data);
 				var s= '';
-				$('#companyid').empty();
+				$('#companyids').empty();
 				s= '<option value="-1" > -- Select Product Company --</option>';
-				$('#companyid').append(s);
+				$('#companyids').append(s);
 				for(var i=0;i<result.length;i++){
 					s='<option value="'+result[i].id+'"> '+result[i].name+'</option>';
-					$('#companyid').append(s);
+					$('#companyids').append(s);
 				}
 				
 				

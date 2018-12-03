@@ -37,21 +37,16 @@ public class ProductDao
 	@SuppressWarnings("unchecked")
 	public List<Product> getProductNames()
 	 {
-
 		return entityManager.createQuery("  from Product where status='1'").getResultList();
-
 	 }
-	
 	
 	public Product getProductNameById(Product pro) 
 	{
-			
 			@SuppressWarnings("unchecked")
-			List<Product> proList =(List<Product>) entityManager.createQuery("  FROM Product where name =:custName ").setParameter("custName",pro.getName()).getResultList();
+			List<Product> proList =(List<Product>) entityManager.createQuery("  FROM Product where name =:custName").setParameter("custName",pro.getName()).getResultList();
 			if(proList.size() > 0)
 				return proList.get(0);
 			return null;
-			
 	}
 	public void UpdateProduct(Product pro)
 	{
@@ -65,7 +60,6 @@ public class ProductDao
 		uc.setMaxAllowedDiscount(pro.getMaxAllowedDiscount());
 		uc.setProductmodelvideoslinks(pro.getProductmodelvideoslinks());
 		uc.setProductmodelpics(pro.getProductmodelpics());
-		
 		entityManager.flush();
 	}
 	public boolean deleteProduct(Integer id, String status) 
