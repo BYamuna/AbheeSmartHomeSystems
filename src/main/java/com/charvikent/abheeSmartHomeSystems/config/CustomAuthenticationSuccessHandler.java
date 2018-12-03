@@ -77,7 +77,7 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 		
 			session.setAttribute("lastLoginTime", userDao.getLastloginTime());
 			
-		 userService.setLoginRecord(objuserBean.getId(),"login");
+			userService.setLoginRecord(objuserBean.getId(),"login");
 		
 			
 			User userDesignation= userService.getUserDesignationById(objuserBean.getId());

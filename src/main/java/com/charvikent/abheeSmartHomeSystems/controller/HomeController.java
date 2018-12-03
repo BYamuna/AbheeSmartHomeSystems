@@ -28,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
+import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
@@ -54,6 +55,7 @@ public class HomeController {
 	@Autowired SendSMS sendSMS;
 	@Autowired OTPDetailsDao oTPDetailsDao;
 	@Autowired KptsUtil kptsUtil;
+	@Autowired AbheeTaskDao abheeTaskDao;
 	static 	String loginurl=""; 
 	static boolean falg =true;
 	String otpnumber ="";
@@ -303,14 +305,18 @@ public class HomeController {
 	@RequestMapping("/mission")
 	public String mission() throws JSONException, JsonProcessingException {
 		LOGGER.debug("Calling Customer Profile  page at controller");
-		
-		 
 		return "mission";
 	}
 	
 	@RequestMapping("/ticketstatus")
-	public String ticketstatus(/*@ModelAttribute("ticketstatus") SalesRequest request,*/Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
+	public String ticketstatus() {
 		LOGGER.debug("Calling ticketstatus at controller");
+		return "ticketstatus";
+	}
+	
+	@RequestMapping("/quotationrequests")
+	public String quotationRequests(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
+		LOGGER.debug("Calling quotationrequests at controller");
 		Customer customerProfile=(Customer) session.getAttribute("customer");
 		if(null !=customerProfile)
         {
@@ -324,6 +330,26 @@ public class HomeController {
           else
           {
         		request.setAttribute("QuotationsList", "''");    	  
+          }
+		return "ticketstatus";
+	}
+	
+	@RequestMapping("/servicerequests")
+	public String serviceRequests(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
+		LOGGER.debug("Calling servicerequests at controller");
+		Customer customerProfile=(Customer) session.getAttribute("customer");
+		if(null !=customerProfile)
+        {
+		List<Customer> customerList =new  ArrayList<Customer>(); 
+		customerList.add(customerProfile);
+		List<Map<String, Object>> RequestsList=abheeTaskDao.getTasksListByCustomerId(customerProfile.getCustomerId());
+		ObjectMapper objectMapper = new ObjectMapper(); 
+		String sJson = objectMapper.writeValueAsString(RequestsList);
+		request.setAttribute("RequestsList", sJson);
+          }
+          else
+          {
+        		request.setAttribute("RequestsList", "''");    	  
           }
 		return "ticketstatus";
 	}

@@ -209,7 +209,7 @@ $(document).ready(function() {
 				var result = JSON.parse(data);
 				var s= '';
 				$('#companyids').empty();
-				s= '<option value="-1" > -- Select Product Company --</option>';
+				s= '<option value="" > -- Select Product Company --</option>';
 				$('#companyids').append(s);
 				for(var i=0;i<result.length;i++){
 					s='<option value="'+result[i].id+'"> '+result[i].name+'</option>';

@@ -268,6 +268,7 @@ document.getElementById("file1").onchange = function () {
 };
 
 
+
 $("#pageName").text("Company Master");
 $(".company").addClass("active"); 
 </script>

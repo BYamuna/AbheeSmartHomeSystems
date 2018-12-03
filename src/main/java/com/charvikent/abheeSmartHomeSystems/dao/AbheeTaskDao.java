@@ -373,12 +373,21 @@ public List<Map<String, Object>> getAdminResponseByCustomerIdWhenStatusZero(Stri
 	return retlist;*/
 	
 }
+@SuppressWarnings("unchecked")
 public List<String> getTaskNoByCustomerId(Customer customer) {
 	
 String hql ="select t.taskno from AbheeTask t where customerId ='"+customer.getCustomerId()+"'";
 	System.out.println(hql);
 	List<String> list =entityManager.createQuery(hql).getResultList();
 	return list;
+}
+
+public List<Map<String, Object>> getTasksListByCustomerId(String customerId) 
+{
+	String sql="select t.id,s.servicetypename,t.add_comment,t.taskno,abp.name as modelname,t.communicationaddress,t.uploadfile FROM abhee_task t,abheeservicetype s,abhee_product abp where  t.service_type=s.id and abp.id=t.modelid and t.customer_id='"+customerId+"'order by t.created_time desc ";
+	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
+	System.out.println(retlist);
+	return retlist;
 }
 
 }
