@@ -45,13 +45,11 @@ public class ProductDao
 	
 	public Product getProductNameById(Product pro) 
 	{
-			
 			@SuppressWarnings("unchecked")
 			List<Product> proList =(List<Product>) entityManager.createQuery("  FROM Product where name =:custName ").setParameter("custName",pro.getName()).getResultList();
 			if(proList.size() > 0)
 				return proList.get(0);
-			return null;
-			
+			return null;	
 	}
 	public void UpdateProduct(Product pro)
 	{
