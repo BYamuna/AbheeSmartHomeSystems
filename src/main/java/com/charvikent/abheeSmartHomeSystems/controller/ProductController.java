@@ -87,7 +87,7 @@ public class ProductController
 		ObjectMapper objectMapper = null;
 		String sJson = null;		
 		try {
-			listOrderBeans = (List<Company>) companyDao.getCompanies(cate);
+			listOrderBeans = companyDao.getCompanies(cate);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);

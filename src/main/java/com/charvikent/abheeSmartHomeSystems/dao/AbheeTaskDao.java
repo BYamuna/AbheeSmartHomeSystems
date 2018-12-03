@@ -357,6 +357,22 @@ public List<Map<String, Object>> getAdminResponseByCustomerId(String customer) {
 		return retlist;
 		
 	}	
+public List<Map<String, Object>> getAdminResponseByCustomerIdWhenStatusZero(String customer) {
+	String hql ="select sr.status from abhee_task sr where taskno='"+customer+"'";
+	 System.out.println(hql);
+	
+		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+		System.out.println(retlist);
+		return retlist;
+	/*String hql= "select ap.priority as priority,t.subject,t.status,u.username as assignedto,t.taskdeadline,t.uploadfile,t.description from abhee_task t,abheepriority ap,abheeusers u where t.taskno='"+customer+"' and t.priority=ap.id and t.assignto=u.id";
+			
+			System.out.println(hql);
+	
+	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+	System.out.println(retlist);
+	return retlist;*/
+	
+}
 public List<String> getTaskNoByCustomerId(Customer customer) {
 	
 String hql ="select t.taskno from AbheeTask t where customerId ='"+customer.getCustomerId()+"'";

@@ -515,14 +515,13 @@ public class AbheeCustomerRestController {
 		task.setPriority("3");
 		task.setSeverity("3");
 		task.setStatus("1");
-		task.setSubject("Task created By Customer");
+		//task.setSubject("Task created By Customer");
 		task.setServiceType(servicetypeid);
 		task.setCategory(catid);
 		task.setModelid(modelid);
 		task.setCommunicationaddress(custaddress);
 		Customer customer = customerDao.findCustomerByCustId(customerId);
-		// task.setSubject("Task created By "+customer.getFirstname()+"
-		// "+customer.getLastname());
+		task.setSubject("Task created By "+customer.getFirstname()+" "+customer.getLastname());
 		task.setCustomerId(customerId);
 		task.setWarranty(warranty);
 		task.setRequesttime(requesttime);
@@ -637,7 +636,6 @@ public class AbheeCustomerRestController {
 		System.out.println(list);*/
 		JSONObject json = new JSONObject();
 		List<String> listOrderBeans = abheeTaskDao.getTaskNoByCustomerId(customer);
-		
 		List<HashMap<String,ArrayList<HashMap<String,List<Map<String, Object>>>>>> list1=new ArrayList<HashMap<String,ArrayList<HashMap<String,List<Map<String, Object>>>>>>();
 		System.out.println(listOrderBeans);
 		if (null != listOrderBeans) {
@@ -649,8 +647,15 @@ public class AbheeCustomerRestController {
 				HashMap<String,ArrayList<HashMap<String,List<Map<String, Object>>>>> hm1=new HashMap<String,ArrayList<HashMap<String,List<Map<String, Object>>>>>();
 				List<Map<String, Object>> listOrderBeans2 = abheeTaskDao.getCustomerResponseByCustomerId(listOrderBeans.get(i));
 				List<Map<String, Object>> listOrderBeans1 = abheeTaskDao.getAdminResponseByCustomerId(listOrderBeans.get(i));
-				hm.put("CustomerBean",listOrderBeans2 );
-				hm.put("AdminBean",listOrderBeans1 );
+				List<Map<String, Object>> listOrderBeans3 = abheeTaskDao.getAdminResponseByCustomerIdWhenStatusZero(listOrderBeans.get(i));
+				System.out.println(listOrderBeans3);
+				if(listOrderBeans3.get(i).get("status").equals("0")) {
+					hm.put("CustomerBean",listOrderBeans2 );
+					hm.put("AdminBean",listOrderBeans3 );
+				}else {
+					hm.put("CustomerBean",listOrderBeans2 );
+					hm.put("AdminBean",listOrderBeans1 );
+				}
 				list.add(hm);
 				hm1.put(""+i, list);
 				list1.add(hm1);
@@ -896,6 +901,24 @@ public class AbheeCustomerRestController {
 		List<Map<String, Object>> listOrderBeans = null;
 		try {
 			listOrderBeans = srequestDao.getSalesRequestList1();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				json.put("quotationslist", listOrderBeans);
+			} else {
+				json.put("quotationslist", "NOT_FOUND");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return String.valueOf(json);
+	}
+	@RequestMapping(value = "/getquotationlists", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getQuotationLists(@RequestBody SalesRequest salesRequest) throws JsonProcessingException, JSONException {
+		LOGGER.debug("Calling getquotationlist at controller");
+		JSONObject json = new JSONObject();
+		List<Map<String, Object>> listOrderBeans = null;
+		try {
+			listOrderBeans = srequestDao.getSalesRequestList2(salesRequest);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				json.put("quotationslist", listOrderBeans);
 			} else {

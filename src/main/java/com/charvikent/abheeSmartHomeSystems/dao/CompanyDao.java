@@ -34,7 +34,6 @@ public class CompanyDao
 		entityManager.persist(company);
 
 	}
-	@SuppressWarnings("unchecked")
 	/*public List<Company> getCompanyNames()
 	 {
 

@@ -26,28 +26,17 @@ public class Product
 	private String companyid;
 	private String productmodelpics;
 	private String productmodelvideoslinks;
-	
 	private String ProductModelSpecifications;
-	
 	private String ProductPrice;
-	
 	private String maxAllowedDiscount;
-	
 	@Transient
 	private String categoryname;
 	@Transient
 	private String companyname;
-	
-	
-	
-	
-	
 	@Column
 	private String status;
-	
 	@CreationTimestamp
 	private Date createdTime;
-
 	@UpdateTimestamp
 	private Date updatedTime;
 
