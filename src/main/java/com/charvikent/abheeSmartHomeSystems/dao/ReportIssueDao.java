@@ -419,7 +419,7 @@ public List<ReportIssue> getAllReportIssues()
 			{
 		
      editissue.setAssignto(issue.getAssignto());
-     editissue.setCategory(issue.getCategory());
+     //editissue.setCategory(issue.getCategory());
      editissue.setDescription(issue.getDescription());
      editissue.setPriority(issue.getPriority());
      editissue.setSeverity(issue.getSeverity());

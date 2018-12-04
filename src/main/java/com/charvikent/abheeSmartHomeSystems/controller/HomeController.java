@@ -85,7 +85,7 @@ public class HomeController {
 		System.out.println("login called at /Rlogin page");
 		//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 //userService.setLoginRecord(objuserBean.getId(),"login");
-
+		//userService.checkuserExistOrNot(objuserBean);
 		return "login";
 	}
 	

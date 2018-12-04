@@ -57,6 +57,7 @@ public class SalesRequestController
 			@RequestParam("address") String address,
 			@RequestParam("reqdesc") String reqdesc,
 			@RequestParam("imgfile") MultipartFile[] uploadedFiles,
+			//@RequestParam("requesttype") String requesttype,
 			HttpServletRequest request,RedirectAttributes redir,HttpSession session) throws IllegalStateException, IOException, MessagingException
 	{
 		
@@ -79,6 +80,9 @@ public class SalesRequestController
 		//loginDetails.setLongitude(str[1]);
 		loginDetails.setEnable("1");
 		loginDetails.setMobileno(customer.getMobilenumber());
+		loginDetails.setEmail(customer.getEmail());
+		loginDetails.setCustomerid(customer.getCustomerId());
+		loginDetails.setRequestType("1");
    	 for(MultipartFile multipartFile : uploadedFiles) {
 				String fileName = multipartFile.getOriginalFilename();
 				if(!multipartFile.isEmpty())
