@@ -262,6 +262,8 @@ function inactiveData() {
 		
 }
 
+
+
 $("#pageName").text("Product Warranty Details");
 $(".productGuarantee").addClass("active");
 

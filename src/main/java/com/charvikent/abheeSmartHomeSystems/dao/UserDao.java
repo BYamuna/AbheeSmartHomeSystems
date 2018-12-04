@@ -476,7 +476,7 @@ public class UserDao {
 	@SuppressWarnings("unchecked")
 	public User checkuserExistOrNot(User user) {
 		
-		String hql =" from User  where (email='"+user.getUsername()+"' or mobilenumber ='"+user.getUsername()+"') and password='"+user.getPassword()+"' and designation='9'";
+		String hql =" from User  where (email='"+user.getUsername()+"' or mobilenumber ='"+user.getUsername()+"') and password='"+user.getPassword()+"' and designation='9' and status='1'";
 		Query query =em.createQuery(hql);
 		
 		List<User>usersList =query.getResultList();

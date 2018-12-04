@@ -577,6 +577,7 @@ $('#email').blur(function() {
 	});
 
 	
+	
    
  $("#pageName").text("Customer Registration");
 $(".abheecust").addClass("active"); 

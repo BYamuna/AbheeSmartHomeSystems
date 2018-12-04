@@ -53,9 +53,8 @@ public class ProductController
 		ObjectMapper objectMapper = null;
 		String sJson = null;
 		model.addAttribute("product", new Product());
-		
 		model.addAttribute("CategoriesMap",categoryDao.getCategorymap());
-		//model.addAttribute("companiesMap",companyDao.getCompanymap(cate));
+		model.addAttribute("companiesMap",companyDao.getCompanymap(cate));
 		
 		
 		try {

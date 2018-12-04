@@ -547,7 +547,7 @@ var pemail =$("#pemail").val();
 var pmobilenumber=$("#pmobilenumber").val();
 var customerid=$("#customerid").val();
 	
-	alert(customerid);
+	//alert(customerid);
 	
 	
 	
@@ -714,7 +714,7 @@ $('#savemobileno').click(function (){
 	//var otp=$("#ctop").val();
 	var customerid=$("#customerid").val();
 	//alert(pmobilenumber);
-	alert(customerid);
+	//alert(customerid);
 	$.ajax({
 		type : "POST",
 		url : "editprofilemobileno",

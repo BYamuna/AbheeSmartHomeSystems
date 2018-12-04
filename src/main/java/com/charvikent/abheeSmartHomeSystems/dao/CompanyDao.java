@@ -131,7 +131,7 @@ public class CompanyDao
 	
 	public List<Company> getCompanies(Company cate)
 	{
-		String sql="select ac.name from abhee_company ac where ac.category='"+cate.getCategoryid()+"'";
+		String sql="select ac.id,ac.name from abhee_company ac where ac.category='"+cate.getCategoryid()+"'";
 		RowMapper<Company> rowMapper = new BeanPropertyRowMapper<Company>(Company.class);
 		  return  this.jdbcTemplate.query(sql, rowMapper);
 	}

@@ -77,48 +77,85 @@
 		</div>
          </div>  
 	<script>
+	
+	 /*var serviceRequestList = ${RequestsList};
+	if (serviceRequestList != "") {
+		displayTable2(serviceRequestList);
+	}
+	function displayTable3(listOrders) {
+		$('#customerTaskTable').html('');
+		var tableHead = '<table id="customerTaskTable" class="table tablestriped table-bordered datatables">'
+				+ '<thead><tr style=" font-size:12px;"><th>RequestNo</th><th>ServiceType</th><th>Product Model</th><th>Address</th><th>Description</th><th>Product Images</th></tr></thead><tbody></tbody></table>';
+		$('#customerTaskTable').html(tableHead);
+		serviceUnitArray = {};
+		serviceUnitArray[orderObj.id] = orderObj;
+		$.each(listOrders,function(i, orderObj) {
+				if(orderObj.uploadfile==undefined) orderObj.uploadfile='';
+				else
+					{
+						var list=orderObj.uploadfile.split('*');
+						var imgname='';
+						for(var i=0;i<list.length;i++)
+						{
+							uploadfile=uploadfile+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
+						}
+						orderObj.uploadfile=uploadfile;
+					}
+			var tblRow = "<tr>"
+				+ "<td title='"+orderObj.taskno+"'>"+ orderObj.taskno + "</td>"
+				+ "<td title='"+orderObj.servicetypename+"'>"+ orderObj.servicetypename
+				+ "<td title='"+orderObj.communicationaddress+"'>"+ orderObj.communicationaddress+ "</td>"
+				+ "<td title='"+orderObj.subject+"'>"+ orderObj.subject+ "</td>"
+				+ "<td title='"+orderObj.uploadfile+"'>"+ orderObj.uploadfile + "</td>" 
+				+ "</tr>";
+			$(tblRow).appendTo("#customerTaskTable table tbody");
+		});
+		
+	}*/
+	
+	var salesRequestList = ${QuotationsList};
+	if ( salesRequestList != "") {
+		displayTable2(salesRequestList);
+	}
+	function displayTable2(listOrders) {
+		$('#customerQuotationTable').html('');
+		var tableHead = '<table id="customerQuotationTable" class="table tablestriped table-bordered datatables">'
+				+ '<thead><tr style=" font-size:12px;"><th>Quotation No</th><th>Product Model</th><th>Address</th><th>Description</th><th>Quotation Images</th><th>Mobileno</th></tr></thead><tbody></tbody></table>';
+		$('#customerQuotationTable').html(tableHead);
+		serviceUnitArray = {};
+		serviceUnitArray[orderObj.id] = orderObj;
+		$.each(listOrders,function(i, orderObj) {
+				if(orderObj.imgfiles==undefined) orderObj.imgfiles='';
+				else
+					{
+						var list=orderObj.imgfiles.split('*');
+						var imgfiles='';
+						for(var i=0;i<list.length;i++)
+						{
+							imgfiles=imgfiles+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
+						}
+						orderObj.imgfiles=imgfiles;
+					}
+			var tblRow = "<tr>"
+				+ "<td title='"+orderObj.salesrequestnumber+"'>"+ orderObj.salesrequestnumber + "</td>"
+				+ "<td title='"+orderObj.modelname+"'>"+ orderObj.modelname + "</td>"
+				+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>" 
+				+ "<td title='"+orderObj.reqdesc+"'>"+ orderObj.reqdesc + "</td>" 
+				+ "<td title='"+orderObj.imgfiles+"'>"+ orderObj.imgfiles + "</td>" 
+				+ "</tr>";
+			$(tblRow).appendTo("#customerQuotationTable table tbody");
+		});
+		
+	} 
+
 	function Quotationrequest()
 	{
-		var QuotationsList = ${QuotationsList};
-		if (QuotationsList != "") {
-			displayTable2(QuotationsList);
-		}
-		function displayTable2(listOrders) {
-			$('#customerQuotationTable').html('');
-			var tableHead = '<table id="customerQuotationTable" class="table tablestriped table-bordered datatables">'
-					+ '<thead><tr style=" font-size:12px;"><th>Quotation No</th><th>Product Model</th><th>Address</th><th>Description</th><th>Quotation Images</th><th>Mobileno</th></tr></thead><tbody></tbody></table>';
-			$('#customerQuotationTable').html(tableHead);
-			serviceUnitArray = {};
-			serviceUnitArray[orderObj.id] = orderObj;
-			$.each(listOrders,function(i, orderObj) {
-					if(orderObj.imgfiles==undefined) orderObj.imgfiles='';
-					else
-						{
-							var list=orderObj.imgfiles.split('*');
-							var imgfiles='';
-							for(var i=0;i<list.length;i++)
-							{
-								imgfiles=imgfiles+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
-							}
-							orderObj.imgfiles=imgfiles;
-						}
-				var tblRow = "<tr>"
-					+ "<td title='"+orderObj.salesrequestnumber+"'>"+ orderObj.salesrequestnumber + "</td>"
-					+ "<td title='"+orderObj.modelname+"'>"+ orderObj.modelname + "</td>"
-					+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>" 
-					+ "<td title='"+orderObj.reqdesc+"'>"+ orderObj.reqdesc + "</td>" 
-					+ "<td title='"+orderObj.imgfiles+"'>"+ orderObj.imgfiles + "</td>" 
-					+ "</tr>";
-				$(tblRow).appendTo("#customerQuotationTable table tbody");
-			});
-			
-		}
+		displayTable2(salesRequestList);	
 	}
-	
-	function Servicerequest()
+	/* function Servicerequest()
 	{
-		
-	}
+		displayTable3(serviceRequestList);
+	} */
 	
 		$(".ticketstatus").addClass("active");
 	</script>
