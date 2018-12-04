@@ -74,7 +74,7 @@ public class SalesRequestController
 		loginDetails.setModelnumber(modelnumber);
 		loginDetails.setAddress(address);
 		loginDetails.setReqdesc(reqdesc);
-		loginDetails.setSalesrequestnumber(modelnumber+randomNum);
+		loginDetails.setSalesrequestnumber(String.valueOf(randomNum));
 		//loginDetails.setLat(str[0]);
 		//loginDetails.setLongitude(str[1]);
 		loginDetails.setEnable("1");

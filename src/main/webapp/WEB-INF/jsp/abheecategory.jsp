@@ -458,6 +458,14 @@ function makeServiceRequestFieldsEmpty()
 	$('#message').val("");
 	$('#custaddress').val("");
 }
+
+function makeQuotationRequestFieldsEmpty()
+{
+	$('#address').val("");
+	$('#reqdesc').val("");
+	$('#imgfile').val("");
+}
+
  var customerId=$('#custhiddenid').val();
  console.log(customerId);
  /* var productdetailslist =${productdetails};
@@ -585,7 +593,10 @@ $.each(productdetailslist, function(k,v){
 			//console.log($("#modelName").text());
 			
 			//getLocation();
+			
 			$("#quotationModal").modal();
+			makeQuotationRequestFieldsEmpty();
+			
 			 //$("#locationData").prop("readonly", true);
 				//localStorage.setItem("modelName",document.getElementById('modelName').innerHTML);
 				//$('#modelName').text(localStorage.getItem("modelName"));

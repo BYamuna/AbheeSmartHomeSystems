@@ -314,14 +314,12 @@ public class HomeController {
 		return "ticketstatus";
 	}
 	
-	@RequestMapping("/quotationrequests")
+	@RequestMapping(value="/quotationrequests",method = RequestMethod.POST )
 	public String quotationRequests(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
 		LOGGER.debug("Calling quotationrequests at controller");
 		Customer customerProfile=(Customer) session.getAttribute("customer");
 		if(null !=customerProfile)
         {
-		List<Customer> customerList =new  ArrayList<Customer>(); 
-		customerList.add(customerProfile);
 		List<Map<String, Object>> QuotationsList=srequestDao.getSalesRequestListByCustomerId(customerProfile.getCustomerId());
 		ObjectMapper objectMapper = new ObjectMapper(); 
 		String sJson = objectMapper.writeValueAsString(QuotationsList);
@@ -331,7 +329,7 @@ public class HomeController {
           {
         		request.setAttribute("QuotationsList", "''");    	  
           }
-		return "ticketstatus";
+		return "redirect:ticketstatus";
 	}
 	
 	@RequestMapping("/servicerequests")
@@ -351,7 +349,7 @@ public class HomeController {
           {
         		request.setAttribute("RequestsList", "''");    	  
           }
-		return "ticketstatus";
+		return "redirect:ticketstatus";
 	}
 	
 	

@@ -38,7 +38,7 @@
         <div class="ticketstatus">
         	<div class="tab">
         	<button class="tablinks" onclick="Quotationrequest()">Quotation Requests</button>
-  			<button class="tablinks" onclick="Servicerequest()">Service Requests</button>
+  			<!-- <button class="tablinks" onclick="Servicerequest()">Service Requests</button> -->
         	</div>
           </div> 
           <div id="quotation" class="tabcontent">
@@ -47,9 +47,9 @@
 							<table class="table table-bordered priority prioritybg"	style="border: 1px solid #0460a4;" >
 								<thead>
 									<tr style="background-color: #0460a4; color: #fff; text-align: center; font-family:'Roboto'; font-size: 12px;">
-										<th>OrderId</th>
-										<th>Product(s)</th>
-										<th>Date of Purchased</th>
+										<th>Quotation No</th>
+										<th>Product Model</th>
+										<th>Address</th>
 										<th>Warranty Expired Date</th>
 									</tr>
 								</thead>
@@ -58,7 +58,7 @@
 							</table>
 						</div>
 		</div>
-		<div id="service" class="tabcontent">
+		<!-- <div id="service" class="tabcontent">
   		<span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
   			<div class="table-responsive" id="customerTaskTable">
 							<table class="table table-bordered priority prioritybg"	style="border: 1px solid #0460a4;" >
@@ -74,7 +74,7 @@
 								</tbody>
 							</table>
 						</div>
-		</div>
+		</div> -->
          </div>  
 	<script>
 	
@@ -116,7 +116,7 @@
 	var salesRequestList = ${QuotationsList};
 	if ( salesRequestList != "") {
 		displayTable2(salesRequestList);
-	}
+	} 
 	function displayTable2(listOrders) {
 		$('#customerQuotationTable').html('');
 		var tableHead = '<table id="customerQuotationTable" class="table tablestriped table-bordered datatables">'
@@ -150,7 +150,7 @@
 
 	function Quotationrequest()
 	{
-		displayTable2(salesRequestList);	
+		displayTable2(salesRequestList);		
 	}
 	/* function Servicerequest()
 	{
