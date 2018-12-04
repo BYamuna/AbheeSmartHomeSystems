@@ -375,7 +375,7 @@ public List<Map<String, Object>> getAdminResponseByCustomerIdWhenStatusZero(Stri
 }
 public List<String> getTaskNoByCustomerId(Customer customer) {
 	
-String hql ="select t.taskno from AbheeTask t where customerId ='"+customer.getCustomerId()+"'";
+String hql ="select t.taskno from AbheeTask t where t.customerId ='"+customer.getCustomerId()+"'";
 	System.out.println(hql);
 	List<String> list =entityManager.createQuery(hql).getResultList();
 	return list;

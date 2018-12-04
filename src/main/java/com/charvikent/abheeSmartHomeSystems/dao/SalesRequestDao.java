@@ -67,10 +67,10 @@ public class SalesRequestDao
 				return retlist;
 		 }
 	
-		public List<Map<String, Object>> getSalesRequestList1()
+		public List<Map<String, Object>> getSalesRequestList1(SalesRequest salesRequest)
 		 {
 		 
-			 String hql ="select sr.request_type,sr.salesrequestnumber,ap.name as modelname from abhee_sales_request sr,abhee_product ap where sr.modelnumber=ap.id";
+			 String hql ="select sr.request_type,sr.salesrequestnumber,ap.name as modelname from abhee_sales_request sr,abhee_product ap where sr.customerid='"+salesRequest.getCustomerid()+"' and sr.modelnumber=ap.id";
 			 System.out.println(hql);
 			
 				List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
