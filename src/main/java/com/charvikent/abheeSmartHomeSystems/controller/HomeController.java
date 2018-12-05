@@ -315,12 +315,13 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/quotationrequests",method = RequestMethod.POST )
-	public String quotationRequests(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
+	public String quotationRequests(Model model,HttpServletRequest request,HttpSession session,Customer customer) throws JSONException, JsonProcessingException {
 		LOGGER.debug("Calling quotationrequests at controller");
-		Customer customerProfile=(Customer) session.getAttribute("customer");
-		if(null !=customerProfile)
+		//Customer customerProfile=(Customer) session.getAttribute("Customer");
+		System.out.println(customer);
+		if(null !=customer)
         {
-		List<Map<String, Object>> QuotationsList=srequestDao.getSalesRequestListByCustomerId(customerProfile.getCustomerId());
+		List<Map<String, Object>> QuotationsList=srequestDao.getSalesRequestListByCustomerId(customer.getCustomerId());
 		ObjectMapper objectMapper = new ObjectMapper(); 
 		String sJson = objectMapper.writeValueAsString(QuotationsList);
 		request.setAttribute("QuotationsList", sJson);

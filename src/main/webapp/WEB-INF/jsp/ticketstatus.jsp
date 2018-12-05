@@ -37,6 +37,32 @@
 	<div class="container">
         <div class="ticketstatus">
         	<div class="tab">
+        	<button class="tablinks" onclick="Quotationrequest()">test</button>
+        	<script type="text/javascript">
+        	function Quotationrequest()
+        	{
+        		$.ajax({
+        	
+        		type : "POST",
+        		url : "quotationrequests",
+        		data :'customerid='+catid,
+        		dataType : "text",
+        		beforeSend : function() {
+                     $.blockUI({ message: 'Please wait' });
+                  }, 
+        		success : function(data) {
+        			console.log(data);
+        		},
+        		complete: function () {
+                    
+                    $.unblockUI();
+               }
+        		//error :  function(e){$.unblockUI();console.log(e);});
+        		});
+        		
+        		//displayTable2(salesRequestList);		
+        	}
+        	</script>
         	<button class="tablinks" onclick="Quotationrequest()">Quotation Requests</button>
   			<!-- <button class="tablinks" onclick="Servicerequest()">Service Requests</button> -->
         	</div>
@@ -112,8 +138,28 @@
 		});
 		
 	}*/
+	var salesRequestList = "";
+	window.onload(function(e){
+		$.ajax({
+			type : "POST",
+			url : "quotationrequests",
+			//data :'categoryid='+catid,
+			dataType : "text",
+			beforeSend : function() {
+	             $.blockUI({ message: 'Please wait' });
+	          }, 
+			success : function(data) {
+				displayTable2(data);
+			},
+			complete: function () {
+	            
+	            $.unblockUI();
+	       },
+			error :  function(e){$.unblockUI();console.log(e);}
+			
+	});
 	
-	var salesRequestList = ${QuotationsList};
+	//var salesRequestList = ${QuotationsList};
 	if ( salesRequestList != "") {
 		displayTable2(salesRequestList);
 	} 
@@ -148,16 +194,32 @@
 		
 	} 
 
-	function Quotationrequest()
-	{
-		displayTable2(salesRequestList);		
-	}
+	/* function Quotationrequest()
+	{$.ajax({
+		type : "POST",
+		url : "quotationrequests",
+		//data :'categoryid='+catid,
+		dataType : "text",
+		beforeSend : function() {
+             $.blockUI({ message: 'Please wait' });
+          }, 
+		success : function(data) {
+			displayTable2(data);
+		},
+		complete: function () {
+            
+            $.unblockUI();
+       },
+		error :  function(e){$.unblockUI();console.log(e);}
+		
+		//displayTable2(salesRequestList);		
+	} */
 	/* function Servicerequest()
 	{
 		displayTable3(serviceRequestList);
 	} */
 	
-		$(".ticketstatus").addClass("active");
+		//$(".ticketstatus").addClass("active");
 	</script>
 
 <%@include file="abheefooter.jsp" %>
