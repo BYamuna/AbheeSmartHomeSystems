@@ -297,15 +297,10 @@ if(validation) {
 		  	processData: false,  // tell jQuery not to process the data
 			contentType: false,  // tell jQuery not to set contentType
 			beforeSend : function() {
-				$("#submit1").click(function(){
-	  				if($("#submit1").prop('disabled'))
-	  					{
-	  					//$("#submit1").val('Please wait.....');
-	  					$("#submit1").prop('disabled',false);
-	  					
-	  					}
-	  				else $("#submit1").prop('disabled',true);
-	  				});
+				$("#modelSubmit").click(function(){
+					$("#modelSubmit").val('Please wait...');
+					$("#modelSubmit").prop('disabled',true);
+				}); 
 				//$.blockUI({ message: 'Please wait' });
 	          },
 		  	success: function(result){

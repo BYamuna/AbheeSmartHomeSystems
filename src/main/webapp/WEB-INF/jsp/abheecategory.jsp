@@ -695,10 +695,10 @@ $.each(productdetailslist, function(k,v){
 	  	data:formData,
 		//contentType: false,  // tell jQuery not to set contentType
 	  	 beforeSend : function() {
-				$("#submit1").click(function(){
-	  				if($("#submit1").prop('disabled'))$("#submit1").prop('disabled',false);
-	  				else $("#submit1").prop('disabled',true);
-	  				});
+	  		$("#submit1").click(function(){
+					$("#submit1").val('Please wait...');
+					$("#submit1").prop('disabled',true);
+				});
 		            // $.blockUI({ message: 'Please wait' });
 		          }, 
 	  	success: function(result){
@@ -797,6 +797,11 @@ $.each(productdetailslist, function(k,v){
 			formData.append( "custaddress",custaddress);
 			formData.append( "requesttimeid",requesttimeid);
 			formData.append( "warranty",warranty);
+			/*$("#modelSubmit").click(function(){
+				$("#modelSubmit").val('Please wait...');
+				$("#modelSubmit").prop('disabled',true);
+			}); */
+			
 		$.ajax({
 			type : "POST",
 			processData:false,
@@ -805,7 +810,11 @@ $.each(productdetailslist, function(k,v){
 			data :formData,
 			dataType : "text",
 			beforeSend : function() {
-	             $.blockUI({ message: 'Please wait' });
+				$("#modelSubmit").click(function(){
+					$("#modelSubmit").val('Please wait...');
+					$("#modelSubmit").prop('disabled',true);
+				}); 
+	             //$.blockUI({ message: 'Please wait' });
 	          }, 
 			success : function(result) {
 				//alert(data);
