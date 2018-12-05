@@ -113,7 +113,7 @@ min-width:113px;
         <li class="location"><a href="${baseurl }/location">Our Other Locations</a></li>
         <li id="contact"><a href="${baseurl }/contact">Contact Us</a></li>
         <li class="about"><a href="${baseurl }/about">About Us</a></li>
-        <li class="ticketstatus"><a href="${baseurl }/ticketstatus">Ticket Status</a></li>
+        <%-- <li class="ticketstatus"><a href="${baseurl }/ticketstatus">Ticket Status</a></li> --%>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown acc">

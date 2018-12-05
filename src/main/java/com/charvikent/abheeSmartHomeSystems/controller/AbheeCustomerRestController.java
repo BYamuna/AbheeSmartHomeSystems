@@ -444,6 +444,7 @@ public class AbheeCustomerRestController {
 		if (!salesrequest.getImgfiles().isEmpty()) {
 			salesrequest.setImgfiles(imgpath);
 		}
+		salesrequest.setEnable("1");
 		srequestDao.saveRequest(salesrequest);
 		code = "requestSubmittedSuccessfully";
 		HashMap<String, String> hm = new HashMap<String, String>();

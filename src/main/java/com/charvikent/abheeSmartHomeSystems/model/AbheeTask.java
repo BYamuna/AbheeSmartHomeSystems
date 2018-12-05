@@ -9,6 +9,8 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class AbheeTask  
 {
@@ -18,6 +20,7 @@ public class AbheeTask
 	private String taskno;
 	private String customerId;
 	@CreationTimestamp
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
 	private Date createdTime;
 	@UpdateTimestamp
 	private Date updatedTime;

@@ -9,6 +9,9 @@
     color: #fff;
     opacity: 1;
 }
+/* .modal {
+	z-index: 1041 !important;
+} */
 </style>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
@@ -293,7 +296,13 @@ if(validation) {
 		  	data:data,
 		  	processData: false,  // tell jQuery not to process the data
 			contentType: false,  // tell jQuery not to set contentType
-		  	
+			beforeSend : function() {
+				$("#modelSubmit").click(function(){
+					$("#modelSubmit").val('Please wait...');
+					$("#modelSubmit").prop('disabled',true);
+				}); 
+				//$.blockUI({ message: 'Please wait' });
+	          },
 		  	success: function(result){
 		  		
 		  		if(result =="true"){

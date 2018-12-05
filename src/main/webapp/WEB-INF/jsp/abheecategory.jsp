@@ -17,6 +17,9 @@
     color: #fff;
     opacity: 1;
 }
+/* .modal {
+	z-index: 1041 !important;
+} */
 </style>
 <script type="text/javascript">
 	var isClick = 'No';
@@ -157,8 +160,8 @@
 							<label>Warranty</label> <span class="impColor">*</span>
 						</div>
 						<div class="col-sm-8" style="padding-top:8px;">
-							<input type="radio" id="warranty" name="warranty" value="1" > Yes
-  							<input type="radio" id="warranty" name="warranty" value="0" > No
+							<input type="radio" id="warranty" name="warranty" value="0" > Yes
+  							<input type="radio" id="warranty" name="warranty" value="1" > No
 						</div><div class="clearfix"></div>
 						<div class="col-sm-4">
 							<label>Request Time</label> <span class="impColor">*</span>
@@ -270,6 +273,9 @@
                     		<br>
                     					<input type="submit" id="submit1" value="Submit" onclick="quotationSubmit()" class="btn-primary btn"/>
 					      				<input type="reset" value="Reset" class="btn-danger btn cancel"/>
+					      				<!-- <script type="text/javascript">
+					      				
+					      				</script> -->
 					      			
 				      			</div>
 				      		</div>
@@ -642,7 +648,6 @@ $.each(productdetailslist, function(k,v){
 		
 	}
 	function quotationSubmit(){
-		
 		var modelnumber=$('#modelnumber').val();
     	//var locationData=$('#locationData').val();
     	var address=$('#address').val();
@@ -689,8 +694,15 @@ $.each(productdetailslist, function(k,v){
 	  	url: "salesRequest", 
 	  	data:formData,
 		//contentType: false,  // tell jQuery not to set contentType
-	  	
+	  	 beforeSend : function() {
+	  		$("#submit1").click(function(){
+					$("#submit1").val('Please wait...');
+					$("#submit1").prop('disabled',true);
+				});
+		            // $.blockUI({ message: 'Please wait' });
+		          }, 
 	  	success: function(result){
+	  		
 	  		if(result !="" && result != null){
 	  		alert("We received the Request and will send you the quotation soon. Thanking you.");
 	  		}
@@ -719,11 +731,12 @@ $.each(productdetailslist, function(k,v){
 		 
 		 servicetypeid =$("#servicetypeid").val();
 		 requesttimeid =$("#requesttimeid").val();
+		 warranty=$("#warranty").val();
 		 fileimg =$('#fileimg').val();
 		 
 		 
 		 var objArr = [];
-	    	var jsonData = {"message":message,"catid":catid,"servicetypeid":servicetypeid,"requesttimeid":requesttimeid,"custaddress":custaddress,"modelid":modelid,"customerId":customerId};
+	    	var jsonData = {"message":message,"catid":catid,"servicetypeid":servicetypeid,"requesttimeid":requesttimeid,"custaddress":custaddress,"modelid":modelid,"customerId":customerId,"warranty": warranty};
 	    	
 		   var formData = new FormData();
 	    	
@@ -783,6 +796,12 @@ $.each(productdetailslist, function(k,v){
 			formData.append( "customerId",customerId);
 			formData.append( "custaddress",custaddress);
 			formData.append( "requesttimeid",requesttimeid);
+			formData.append( "warranty",warranty);
+			/*$("#modelSubmit").click(function(){
+				$("#modelSubmit").val('Please wait...');
+				$("#modelSubmit").prop('disabled',true);
+			}); */
+			
 		$.ajax({
 			type : "POST",
 			processData:false,
@@ -791,7 +810,11 @@ $.each(productdetailslist, function(k,v){
 			data :formData,
 			dataType : "text",
 			beforeSend : function() {
-	             $.blockUI({ message: 'Please wait' });
+				$("#modelSubmit").click(function(){
+					$("#modelSubmit").val('Please wait...');
+					$("#modelSubmit").prop('disabled',true);
+				}); 
+	             //$.blockUI({ message: 'Please wait' });
 	          }, 
 			success : function(result) {
 				//alert(data);
