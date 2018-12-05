@@ -169,6 +169,7 @@ public class SendingMail {
 			
 						
 			String email =  emailId;
+			/*Customer custbean=customerDao.checkCustomerExistOrNotByEmail(emailId);*/
 			MimeMessage message = javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
@@ -179,6 +180,8 @@ public class SendingMail {
 			
 			StringWriter stringWriter = new StringWriter();
 			velocityEngine.mergeTemplate("RequestemailTemplate.vm", "UTF-8", velocityContext, stringWriter);
+			/*velocityContext.put("name",custbean.getFirstname());
+			velocityContext.put("description",);*/
 			helper.setText(stringWriter.toString(), true);
 			helper.setTo( email);
 		    helper.setSubject("Request submitted successfully");

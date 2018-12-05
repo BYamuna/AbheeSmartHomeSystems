@@ -177,6 +177,7 @@ public class SalesRequestController
    		 
    	 }
 			srequestDao.saveRequest(salesrequest);
+			srequestDao.saveQuationHistory(salesrequest);
 	   		sendingMail.sendSalesRequestEmailWithMultipleAttachment(email.toString(), uploadedFiles,description);
 	   		String str ="true";
 	   		
