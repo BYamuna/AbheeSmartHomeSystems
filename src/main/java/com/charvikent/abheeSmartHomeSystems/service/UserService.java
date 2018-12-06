@@ -338,7 +338,14 @@ public class UserService
 		// TODO Auto-generated method stub
 		return userDao.checkUserExistence(user);
 	}
-	
+
+	/*public User getCurrentUser() {
+		
+		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		return objuserBean;
+		
+	}*/
 
 
 }

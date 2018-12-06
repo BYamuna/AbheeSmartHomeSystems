@@ -45,6 +45,7 @@
 </script><script src='//static.codepen.io/assets/editor/live/css_live_reload_init-890dc39bb89183d4642d58b1ae5376a0193342f9aed88ea04330dc14c8d52f55.js'></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4TkibnxHHIJtDj1Dp59VAOSHp_sdA1KQ&libraries=places"></script>  
 <!--      <script src='https://maps.google.com/maps/api/js?sensor=false&libraries=places'></script> -->
+
 <style type="text/css">
 
 .msgcss
@@ -113,11 +114,11 @@ min-width:113px;
         <li class="location"><a href="${baseurl }/location">Our Other Locations</a></li>
         <li id="contact"><a href="${baseurl }/contact">Contact Us</a></li>
         <li class="about"><a href="${baseurl }/about">About Us</a></li>
-        <%-- <li class="ticketstatus"><a href="${baseurl }/ticketstatus">Ticket Status</a></li> --%>
+        <li class="ticketstatus"><a href="${baseurl }/ticketstatus">Ticket Status</a></li> 
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown acc">
-          <a href="#" class="dropdown-toggle"  data-toggle="dropdown" data-hover="dropdown">Hello! <span  id="loggedCustomerName"></span></a>
+          <a href="#" class="dropdown-toggle"  data-toggle="dropdown" data-hover="dropdown">Hello! <span id="loggedCustomerName"></span></a>
           <ul style="width:100% !important;" class="dropdown-menu myacd">
           <li id="cmlist"></li>
          

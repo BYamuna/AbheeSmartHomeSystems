@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -309,47 +310,73 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/ticketstatus")
-	public String ticketstatus() {
+	public String ticketstatus(HttpServletRequest request,HttpSession session) throws JsonProcessingException {
+			/*String sJson=null;
+			Customer customerProfile=(Customer) session.getAttribute("customer");
+			Customer customerId=(Customer) session.getAttribute("customerId");
+			System.out.println(customerId);
+			if(null !=customerProfile)
+	        {
+				List<Map<String, Object>> QuotationsList=srequestDao.getSalesRequestListByCustomerId(customerProfile.getCustomerId());
+				System.out.println(QuotationsList);
+				ObjectMapper objectMapper = new ObjectMapper(); 
+				 sJson = objectMapper.writeValueAsString(QuotationsList);
+		
+			request.setAttribute("QuotationsList", sJson);
+	          }
+	          else
+	          {
+	        		request.setAttribute("QuotationsList", "''");    	  
+	          }*/
 		LOGGER.debug("Calling ticketstatus at controller");
 		return "ticketstatus";
 	}
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value="/quotationrequests",method = RequestMethod.POST )
-	public String quotationRequests(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
+	public @ResponseBody String  quotationRequests(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
 		LOGGER.debug("Calling quotationrequests at controller");
+		
+		
 		Customer customerProfile=(Customer) session.getAttribute("customer");
+		/*Customer customerId=(Customer) session.getAttribute("customerId");
+		System.out.println(customerId);*/
+		String sJson=null;
 		if(null !=customerProfile)
         {
 		List<Map<String, Object>> QuotationsList=srequestDao.getSalesRequestListByCustomerId(customerProfile.getCustomerId());
+		System.out.println(QuotationsList);
 		ObjectMapper objectMapper = new ObjectMapper(); 
-		String sJson = objectMapper.writeValueAsString(QuotationsList);
+		 sJson = objectMapper.writeValueAsString(QuotationsList);
+		
 		request.setAttribute("QuotationsList", sJson);
           }
           else
           {
         		request.setAttribute("QuotationsList", "''");    	  
           }
-		return "redirect:ticketstatus";
+		return sJson;
 	}
 	
 	@RequestMapping("/servicerequests")
-	public String serviceRequests(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
+	public @ResponseBody String serviceRequests(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
 		LOGGER.debug("Calling servicerequests at controller");
 		Customer customerProfile=(Customer) session.getAttribute("customer");
+		String sJson=null;
 		if(null !=customerProfile)
         {
 		List<Customer> customerList =new  ArrayList<Customer>(); 
 		customerList.add(customerProfile);
 		List<Map<String, Object>> RequestsList=abheeTaskDao.getTasksListByCustomerId(customerProfile.getCustomerId());
 		ObjectMapper objectMapper = new ObjectMapper(); 
-		String sJson = objectMapper.writeValueAsString(RequestsList);
+	 sJson = objectMapper.writeValueAsString(RequestsList);
 		request.setAttribute("RequestsList", sJson);
           }
           else
           {
         		request.setAttribute("RequestsList", "''");    	  
           }
-		return "redirect:ticketstatus";
+		return sJson;
 	}
 	
 	

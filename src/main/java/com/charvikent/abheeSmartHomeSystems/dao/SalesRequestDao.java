@@ -91,7 +91,7 @@ public class SalesRequestDao
 		public List<Map<String, Object>> getSalesRequestListByCustomerId(String custId)
 		 {
 		 
-			 String hql ="select sr.salesrequestnumber,ap.name as modelname,sr.address,sr.reqdesc,sr.imgfiles from abhee_sales_request sr,abhee_product ap where sr.modelnumber=ap.id and sr.customerid='"+custId+"'";
+			 String hql ="select sr.salesrequestnumber,sr.mobileno,ap.name as modelname,sr.address,sr.reqdesc,sr.imgfiles from abhee_sales_request sr,abhee_product ap where sr.modelnumber=ap.name and sr.customerid='"+custId+"'";
 			 System.out.println(hql);
 			
 				List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});

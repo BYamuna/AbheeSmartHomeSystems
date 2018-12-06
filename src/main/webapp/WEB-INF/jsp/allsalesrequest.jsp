@@ -292,10 +292,11 @@ if(validation) {
  		$.ajax({
 			type:"post",
 			enctype: 'multipart/form-data',
-		  	url: "sendingQuotation", 
-		  	data:data,
+		  	
 		  	processData: false,  // tell jQuery not to process the data
 			contentType: false,  // tell jQuery not to set contentType
+			url: "sendingQuotation", 
+		  	data:data,
 			beforeSend : function() {
 				$("#modelSubmit").click(function(){
 					$("#modelSubmit").val('Please wait...');
