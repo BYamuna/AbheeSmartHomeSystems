@@ -8,6 +8,7 @@ public class ServiceRequest {
 	private String servicetypeid;
 	private String catid;
 	private String modelid;
+	private String companyid;
 	private String customerId;
 	private String custaddress;
 	private String warranty;
@@ -83,12 +84,22 @@ public class ServiceRequest {
 	public void setRequesttime(String requesttime) {
 		this.requesttime = requesttime;
 	}
+	
+	
+	public String getCompanyid() {
+		return companyid;
+	}
+	public void setCompanyid(String companyid) {
+		this.companyid = companyid;
+	}
 	@Override
 	public String toString() {
 		return "ServiceRequest [id=" + id + ", message=" + message + ", servicetypeid=" + servicetypeid + ", catid="
-				+ catid + ", modelid=" + modelid + ", customerId=" + customerId + ", custaddress=" + custaddress
-				+ ", warranty=" + warranty + ", requesttime=" + requesttime + ", imgname=" + imgname + "]";
+				+ catid + ", modelid=" + modelid + ", companyid=" + companyid + ", customerId=" + customerId
+				+ ", custaddress=" + custaddress + ", warranty=" + warranty + ", requesttime=" + requesttime
+				+ ", imgname=" + imgname + "]";
 	}
+	
 
 	
 	

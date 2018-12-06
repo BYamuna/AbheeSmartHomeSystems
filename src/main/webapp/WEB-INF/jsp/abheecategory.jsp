@@ -726,7 +726,6 @@ $.each(productdetailslist, function(k,v){
 		
 		 message =$('#message').val();
 		 servicetypeid =$('#servicetypeid').val();
-		 
 		 custaddress =$('#custaddress').val();
 		 
 		 servicetypeid =$("#servicetypeid").val();
@@ -736,7 +735,7 @@ $.each(productdetailslist, function(k,v){
 		 
 		 
 		 var objArr = [];
-	    	var jsonData = {"message":message,"catid":catid,"servicetypeid":servicetypeid,"requesttimeid":requesttimeid,"custaddress":custaddress,"modelid":modelid,"customerId":customerId,"warranty": warranty};
+	    	var jsonData = {"message":message,"catid":catid,"company":company,"servicetypeid":servicetypeid,"requesttimeid":requesttimeid,"custaddress":custaddress,"modelid":modelid,"customerId":customerId,"warranty": warranty};
 	    	
 		   var formData = new FormData();
 	    	
@@ -792,6 +791,7 @@ $.each(productdetailslist, function(k,v){
 			formData.append( "message",message);
 			formData.append( "servicetypeid",servicetypeid);
 			formData.append( "catid",catid);
+			formData.append( "company",company);
 			formData.append( "modelid",modelid);
 			formData.append( "customerId",customerId);
 			formData.append( "custaddress",custaddress);
@@ -817,7 +817,7 @@ $.each(productdetailslist, function(k,v){
 	             //$.blockUI({ message: 'Please wait' });
 	          }, 
 			success : function(result) {
-				//alert(data);
+				//alert(company);
 				
 				if(result !="" && result != null){
 			  		alert("Thank you, your request had been submitted successfully.  Our team will contact you soon");

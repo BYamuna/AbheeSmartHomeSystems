@@ -289,6 +289,7 @@ if(validation) {
 			data.append('file-'+i, file);
 		}); */
     	console.log(data);
+		
  		$.ajax({
 			type:"post",
 			enctype: 'multipart/form-data',

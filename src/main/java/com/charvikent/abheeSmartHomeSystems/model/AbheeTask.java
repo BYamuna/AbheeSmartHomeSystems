@@ -25,6 +25,7 @@ public class AbheeTask
 	@UpdateTimestamp
 	private Date updatedTime;
 	private String category;
+	private String company;
 	private String severity;
 	private String priority;
 	private String ServiceType;
@@ -69,6 +70,12 @@ public class AbheeTask
 	private String tax;
 	private String amountreceived;
 	
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
 	public String getCommunicationaddress() 
 	{
 		return communicationaddress;
@@ -319,18 +326,19 @@ public class AbheeTask
 	@Override
 	public String toString() {
 		return "AbheeTask [id=" + id + ", taskno=" + taskno + ", customerId=" + customerId + ", createdTime="
-				+ createdTime + ", updatedTime=" + updatedTime + ", category=" + category + ", severity=" + severity
-				+ ", priority=" + priority + ", ServiceType=" + ServiceType + ", assignby=" + assignby + ", assignto="
-				+ assignto + ", subject=" + subject + ", description=" + description + ", uploadfile=" + uploadfile
-				+ ", requesttime=" + requesttime + ", gapdays=" + gapdays + ", gapcount=" + gapcount + ", kstatus="
-				+ kstatus + ", status=" + status + ", additionalinfo=" + additionalinfo + ", taskdeadline="
-				+ taskdeadline + ", taskdeadlineid=" + taskdeadlineid + ", assigntoid=" + assigntoid + ", categoryid="
-				+ categoryid + ", priorityid=" + priorityid + ", severityid=" + severityid + ", servicetypeid="
-				+ servicetypeid + ", requesttimeid=" + requesttimeid + ", assignbyid=" + assignbyid + ", kstatusid="
-				+ kstatusid + ", modelid=" + modelid + ", addComment=" + addComment + ", communicationaddress="
-				+ communicationaddress + ", warranty=" + warranty + ", total=" + total + ", discount=" + discount
-				+ ", tax=" + tax + ", amountreceived=" + amountreceived + "]";
+				+ createdTime + ", updatedTime=" + updatedTime + ", category=" + category + ", company=" + company
+				+ ", severity=" + severity + ", priority=" + priority + ", ServiceType=" + ServiceType + ", assignby="
+				+ assignby + ", assignto=" + assignto + ", subject=" + subject + ", description=" + description
+				+ ", uploadfile=" + uploadfile + ", requesttime=" + requesttime + ", gapdays=" + gapdays + ", gapcount="
+				+ gapcount + ", kstatus=" + kstatus + ", status=" + status + ", additionalinfo=" + additionalinfo
+				+ ", taskdeadline=" + taskdeadline + ", taskdeadlineid=" + taskdeadlineid + ", assigntoid=" + assigntoid
+				+ ", categoryid=" + categoryid + ", priorityid=" + priorityid + ", severityid=" + severityid
+				+ ", servicetypeid=" + servicetypeid + ", requesttimeid=" + requesttimeid + ", assignbyid=" + assignbyid
+				+ ", kstatusid=" + kstatusid + ", modelid=" + modelid + ", addComment=" + addComment
+				+ ", communicationaddress=" + communicationaddress + ", warranty=" + warranty + ", total=" + total
+				+ ", discount=" + discount + ", tax=" + tax + ", amountreceived=" + amountreceived + "]";
 	}
+	
 	
 	
 	

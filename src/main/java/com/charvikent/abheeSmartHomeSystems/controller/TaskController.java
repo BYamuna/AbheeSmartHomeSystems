@@ -541,6 +541,7 @@ public class TaskController {
 		String message=request.getParameter("message");
 		String servicetypeid=request.getParameter("servicetypeid");
 		String catid=request.getParameter("catid");
+		String company=request.getParameter("company");
 		String modelid=request.getParameter("modelid");
 		String customerId =request.getParameter("customerId");
 		String custaddress =request.getParameter("custaddress");
@@ -568,6 +569,7 @@ public class TaskController {
 		task.setCustomerId(customerId);
 		task.setRequesttime(requesttimeid);
 		task.setWarranty(warranty);
+		task.setCompany(company);
 		task.setUploadfile(images);
 		for(MultipartFile multipartFile : uploadedFiles) {
 			String fileName = multipartFile.getOriginalFilename();

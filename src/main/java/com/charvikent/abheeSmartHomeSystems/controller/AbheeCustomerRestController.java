@@ -503,6 +503,7 @@ public class AbheeCustomerRestController {
 		String message = serviceRequest.getMessage();
 		String servicetypeid = serviceRequest.getServicetypeid();
 		String catid = serviceRequest.getCatid();
+		String comid=serviceRequest.getCompanyid();
 		String modelid = serviceRequest.getModelid();
 		String customerId = serviceRequest.getCustomerId();
 		String custaddress = serviceRequest.getCustaddress();
@@ -519,8 +520,10 @@ public class AbheeCustomerRestController {
 		//task.setSubject("Task created By Customer");
 		task.setServiceType(servicetypeid);
 		task.setCategory(catid);
+		task.setCompany(comid);
 		task.setModelid(modelid);
 		task.setCommunicationaddress(custaddress);
+		task.setRequesttime(requesttime);
 		Customer customer = customerDao.findCustomerByCustId(customerId);
 		task.setSubject("Task created By "+customer.getFirstname()+" "+customer.getLastname());
 		task.setCustomerId(customerId);
@@ -537,7 +540,7 @@ public class AbheeCustomerRestController {
 			reportIssueDao.saveServiceRequest(task);
 			// taskHistoryLogsDao.historyLogForcustomerEntry(task);
 			// sendingMail.sendingMailWithTaskStatus(task);
-			task.setCommunicationaddress(custaddress);
+			//task.setCommunicationaddress(custaddress);
 			try {
 				customerDao.updateCustomer(customer);
 			} catch (Exception e) {
