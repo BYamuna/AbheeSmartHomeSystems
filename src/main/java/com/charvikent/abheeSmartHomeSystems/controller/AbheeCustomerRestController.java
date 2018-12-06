@@ -433,7 +433,7 @@ public class AbheeCustomerRestController {
 		// JSONObject objJson = new JSONObject();
 		String code = null;
 		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
-		salesrequest.setSalesrequestnumber(salesrequest.getModelnumber() + randomNum);
+		salesrequest.setSalesrequestnumber(String.valueOf(randomNum));
 		String modelnumber = salesrequest.getModelnumber();
 		String address = salesrequest.getAddress();
 		String customerid = salesrequest.getCustomerid();
@@ -735,7 +735,7 @@ public class AbheeCustomerRestController {
 		String code = null;
 		HashMap<String, String> hm = new HashMap<String, String>();
 		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
-		salesrequest.setSalesrequestnumber(salesrequest.getModelnumber() + randomNum);
+		salesrequest.setSalesrequestnumber(String.valueOf(randomNum));
 		String modelnumber = salesrequest.getModelnumber();
 		String mobile = salesrequest.getMobileno();
 		String email = salesrequest.getEmail();
