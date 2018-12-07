@@ -1,46 +1,70 @@
 <%@include file="abheeheader.jsp" %>
 <style>
+body {font-family: Arial;}
+
+/* Style the tab */
 .tab {
     overflow: hidden;
     border: 1px solid #ccc;
     background-color: #f1f1f1;
 }
+
+/* Style the buttons inside the tab */
 .tab button {
     background-color: inherit;
     float: left;
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 14px 16px;
+    padding: 9px 16px;
     transition: 0.3s;
-    font-size: 17px;
+    font-size: 15px;
 }
+
+/* Change background color of buttons on hover */
 .tab button:hover {
     background-color: #ddd;
 }
 
+/* Create an active/current tablink class */
 .tab button.active {
     background-color: #ccc;
 }
+
+/* Style the tab content */
 .tabcontent {
-   /*  display: none; */
+    display: none;
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
 }
-.topright {
-    float: right;
-    cursor: pointer;
-    font-size: 28px;
-}
 </style>
+
 	<div class="container">
         <div class="ticketstatus">
         	<div class="tab">
-        	<button class="tablinks" onclick="Quotationrequests()">Quotation Requests</button>
-        	<button class="tablinks" onclick="Servicerequest()">Service Requests</button> 
+        	<!-- <button class="tablinks" onclick="Quotationrequests()">Quotation Requests</button>
+        	<button class="tablinks" onclick="Servicerequest()">Service Requests</button>  -->
         	  </div>
          </div> 
+         <div class="tab">
+  <button class="tablinks" onclick="Quotationrequests(),openCity(event, 'customerQuotationTable')" id="defaultOpen">Quotation Requests</button>
+  <button class="tablinks" onclick="Servicerequest(),openCity(event, 'customerTaskTable')">Service Requests</button>
+</div>
+
+<div id="customerQuotationTable" class="tabcontent">
+  <!-- <h3>London</h3>
+  <p>London is the capital city of England.</p>  -->
+  	
+  
+</div>
+
+<div id="customerTaskTable" class="tabcontent">
+ <!--  <h3>Paris</h3>
+  <p>Paris is the capital of France.</p> --> 
+</div>
+
+
         	<script type="text/javascript">
          function Quotationrequests(){
         		$.ajax({
@@ -59,14 +83,14 @@
         			
         			error:  function(e){$.unblockUI();console.log(e);
         			}
-        			
+
         	});
  } 
    
          function displayTable2(listOrders) {
      		$('#customerQuotationTable').html('');
      		var tableHead = '<table id="customerQuotationTable" class="table tablestriped table-bordered datatables">'
-     				+ '<thead><tr style=" font-size:12px;"><th>Quotation No</th><th>Product Model</th><th>Address</th><th>Description</th><th>Quotation Images</th><th>Mobileno</th></tr></thead><tbody></tbody></table>';
+     				+ '<thead><tr style=" font-size:12px;background-color: #0460a4; color: #fff;"><th>Quotation No</th><th>Product Model</th><th>Address</th><th>Description</th><th>Quotation Images</th><th>Mobileno</th></tr></thead><tbody></tbody></table>';
      		$('#customerQuotationTable').html(tableHead);
      		serviceUnitArray = {};
      		
@@ -97,7 +121,7 @@
      	} 
        
         	</script>
-  			
+  			 
   			<script type="text/javascript">
          function Servicerequest(){
         		$.ajax({
@@ -122,7 +146,7 @@
          function displayTable3(listOrders) {
      		$('#customerTaskTable').html('');
      		var tableHead = '<table id="customerTaskTable" class="table tablestriped table-bordered datatables">'
-     				+ '<thead><tr style=" font-size:12px;"><th>RequestNo</th><th>ServiceType</th><th>Product Model</th><th>Address</th><th>Description</th><th>Product Images</th></tr></thead><tbody></tbody></table>';
+     				+ '<thead><tr style=" font-size:12px;background-color: #0460a4; color: #fff;"><th>RequestNo</th><th>ServiceType</th><th>Product Model</th><th>Address</th><th>Description</th><th>Product Images</th></tr></thead><tbody></tbody></table>';
      		$('#customerTaskTable').html(tableHead);
      		serviceUnitArray = {};
      		
@@ -149,7 +173,6 @@
      				+ "</tr>";
      			$(tblRow).appendTo("#customerTaskTable table tbody");
      		});
-     		
      	}
          
          </script>
@@ -192,5 +215,20 @@
 	<script type="text/javascript">
 $(".ticketstatus").addClass("active");
 	</script>
-
+<script>
+function openCity(evt, cityName)  {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+document.getElementById("defaultOpen").click();
+</script>
 <%@include file="abheefooter.jsp" %>

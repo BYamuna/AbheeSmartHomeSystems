@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -57,6 +58,7 @@ public class HomeController {
 	@Autowired OTPDetailsDao oTPDetailsDao;
 	@Autowired KptsUtil kptsUtil;
 	@Autowired AbheeTaskDao abheeTaskDao;
+	@Autowired private Environment environment;
 	static 	String loginurl=""; 
 	static boolean falg =true;
 	String otpnumber ="";
@@ -211,7 +213,7 @@ public class HomeController {
 		
 		session.invalidate();
 		 
-		return "redirect:"+ referalUrl;
+		return "redirect:customerlogin";
 	}
 	
 	@RequestMapping("/getCategoryList")
@@ -530,11 +532,17 @@ public class HomeController {
 		LOGGER.debug("Calling  modelSubmit1 at controller");
 		System.out.println("enter to model Submit1");
 		String custMobile=request.getParameter("pmobilenumber");
-		//String cemail=request.getParameter("pemail");
+
 		String cotp=request.getParameter("cotp");
 		Customer customer =new Customer();
 		customer.setMobilenumber(custMobile);
-		//customer.setEmail(cemail);
+		
+		String cemail=request.getParameter("pemail");
+		
+		
+		customer.setEmail(cemail);
+		
+
 		String returnmsg ="";
 		if(otpnumber.equals(cotp))
 		{
@@ -554,7 +562,10 @@ public class HomeController {
 		String custMobile=request.getParameter("pmobilenumber");
 		Random random = new Random();
 		otpnumber = String.format("%04d", random.nextInt(10000));
-		sendSMS.sendSMS(otpnumber,custMobile);
+		String tmsg =environment.getProperty("app.otpmsg");
+		 System.out.println(tmsg);
+		tmsg= tmsg.replaceAll("_otpnumber_", otpnumber);
+		sendSMS.sendSMS(tmsg,custMobile);
 		OTPDetails oTPDetails =new OTPDetails();
 		oTPDetails.setMobileno(custMobile);
 		oTPDetails.setOTPnumber(otpnumber);
@@ -569,7 +580,11 @@ public class HomeController {
 		System.out.println("enter to resendOtp");
 		String custMobile=request.getParameter("pmobilenumber");
 		Random random = new Random();
-		otpnumber = "Dear Customer,thanks for registering with Abhee Smart Home Systems. OTP for your registration is:"+String.format("%04d", random.nextInt(10000));
+		otpnumber = String.format("%04d", random.nextInt(10000));
+		String tmsg =environment.getProperty("app.otpmsg");
+		 System.out.println(tmsg);
+		tmsg= tmsg.replaceAll("_otpnumber_", otpnumber);
+		sendSMS.sendSMS(tmsg,custMobile);
 		OTPDetails oTPDetails =new OTPDetails();
 		oTPDetails.setMobileno(custMobile);
 		oTPDetails.setOTPnumber(otpnumber);
