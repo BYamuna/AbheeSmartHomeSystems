@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -57,6 +58,7 @@ public class HomeController {
 	@Autowired OTPDetailsDao oTPDetailsDao;
 	@Autowired KptsUtil kptsUtil;
 	@Autowired AbheeTaskDao abheeTaskDao;
+	@Autowired private Environment environment;
 	static 	String loginurl=""; 
 	static boolean falg =true;
 	String otpnumber ="";
@@ -211,7 +213,7 @@ public class HomeController {
 		
 		session.invalidate();
 		 
-		return "redirect:"+ referalUrl;
+		return "redirect:customerlogin";
 	}
 	
 	@RequestMapping("/getCategoryList")
@@ -512,27 +514,19 @@ public class HomeController {
 		System.out.println("enter to model Submit1");
 		String custMobile=request.getParameter("pmobilenumber");
 		String cemail=request.getParameter("pemail");
-		/*String csname=request.getParameter("firstname");
-		String cname=request.getParameter("lastname");*/
+		
 		String cotp=request.getParameter("cotp");
-		/*String cpassword=request.getParameter("pconfirmpassword");*/
 		Customer customer =new Customer();
-		//String usernumber =kptsUtil.randNum();
-		String regSuccessMsg ="Dear Customer,Successfully registered with ABhee Smart Homes";
 		customer.setMobilenumber(custMobile);
-		/*customer.setFirstname(csname);
-		customer.setLastname(cname);*/
+		
 		customer.setEmail(cemail);
-		/*customer.setPassword(cpassword);*/
-		/*customer.setEnabled("1");
-		customer.setCustomerType("1");*/
-		//customer.setUsername(str);
+		
 		String returnmsg ="";
 		if(otpnumber.equals(cotp))
 		{
 			customer.setRegistedredFromAndroid("0");
 			customerDao.saveAbheeCustomer(customer);
-			sendSMS.sendSMS(regSuccessMsg,custMobile);
+			//sendSMS.sendSMS(regSuccessMsg,custMobile);
 			return true;
 		}
 		else
@@ -547,7 +541,10 @@ public class HomeController {
 		String custMobile=request.getParameter("pmobilenumber");
 		Random random = new Random();
 		otpnumber = String.format("%04d", random.nextInt(10000));
-		sendSMS.sendSMS(otpnumber,custMobile);
+		String tmsg =environment.getProperty("app.otpmsg");
+		 System.out.println(tmsg);
+		tmsg= tmsg.replaceAll("_otpnumber_", otpnumber);
+		sendSMS.sendSMS(tmsg,custMobile);
 		OTPDetails oTPDetails =new OTPDetails();
 		oTPDetails.setMobileno(custMobile);
 		oTPDetails.setOTPnumber(otpnumber);
@@ -562,7 +559,11 @@ public class HomeController {
 		System.out.println("enter to resendOtp");
 		String custMobile=request.getParameter("pmobilenumber");
 		Random random = new Random();
-		otpnumber = "Dear Customer,thanks for registering with Abhee Smart Home Systems. OTP for your registration is:"+String.format("%04d", random.nextInt(10000));
+		otpnumber = String.format("%04d", random.nextInt(10000));
+		String tmsg =environment.getProperty("app.otpmsg");
+		 System.out.println(tmsg);
+		tmsg= tmsg.replaceAll("_otpnumber_", otpnumber);
+		sendSMS.sendSMS(tmsg,custMobile);
 		OTPDetails oTPDetails =new OTPDetails();
 		oTPDetails.setMobileno(custMobile);
 		oTPDetails.setOTPnumber(otpnumber);

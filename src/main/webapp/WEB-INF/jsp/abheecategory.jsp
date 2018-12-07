@@ -820,7 +820,7 @@ $.each(productdetailslist, function(k,v){
 				//alert(company);
 				
 				if(result !="" && result != null){
-			  		alert("Thank you, your request had been submitted successfully.  Our team will contact you soon");
+			  		alert("Thank you, your request has been submitted successfully.  Our team will contact you soon");
 			  		}
 			  		$('#saveServiceRequest').val("");
 			  		$('#fileimg').val("");

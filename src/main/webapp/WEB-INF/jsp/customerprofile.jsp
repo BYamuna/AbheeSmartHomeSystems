@@ -198,6 +198,7 @@ color:#ea8080 !important;
 .close {
 color:#000 !important;
 }
+
 </style>
     
 
@@ -426,7 +427,7 @@ color:#000 !important;
 			<a onclick="resendOTP()" class="btn btn-warning">Resend OTP</a>
 		</div>
         <div class="modal-footer">
-          <button type="button" id="submit2" onclick="modelsubmit()" class="btn btn-primary" >Submit</button>
+           <button type="button" id="submit2" onclick="modelsubmit()" class="btn btn-primary" >Submit</button> 
         </div>
       </div>
     </div>
@@ -665,7 +666,7 @@ $('#saveemailinfo').click(function (){
 		$.ajax({
 			type : "POST",
 			url : "editprofileemail",
-			data :"pemail="+pemail+/* "&pmobilenumber="+pmobilenumber+ */"&customerid="+customerid,
+			data :"pemail="+pemail+"&customerid="+customerid,
 			dataType : "text",
 			beforeSend : function() {
 	             $.blockUI({ message: 'Please wait' });
@@ -673,8 +674,10 @@ $('#saveemailinfo').click(function (){
 	          success : function(data) {
 	  			if(data =='true')
 	  			{     
+	  				
 					getOtp();
-					modelsubmit2();
+					$("#submit2").attr("onclick","modelsubmit2()");
+					
 					
 				}
 				else if(data == "")
@@ -728,6 +731,7 @@ $('#savemobileno').click(function (){
   			if(data == "true")
   			{   
   				getOtp();
+  				$("#submit2").attr("onclick","modelsubmit()");
   					
 			}
   			else
@@ -798,12 +802,12 @@ function modelsubmit()
 			if(data =="true")
 			{
 				
-				alert(" Otp Verified Successfully ");
+				alert(" OTP Verified Successfully ");
 				$('#OTPModel').modal('toggle');
 				$("#pmobilenumber").prop('disabled',true);
 				$('#savemobileno').hide();
 				$('#editmobileno').show();
-  				alert("Mobilenumber Updated Successfully ");
+  				alert("Mobile Number Updated Successfully ");
 			}
 			else
 				alert("Enter valid OTP");
@@ -835,6 +839,7 @@ function modelsubmit()
 				alert("OTP Send to Your Mobile Number ");
 				$('#OTPModel').modal('toggle');
 				$("#OTPModel").modal('show');
+				//modelSubmit2();
 				}
 			else
 				{
@@ -850,7 +855,7 @@ function modelsubmit()
 		error :  function(e){$.unblockUI();console.log(e);}
 		
 	});
-} */
+}  */
 
 
 function modelsubmit2()
@@ -861,7 +866,7 @@ function modelsubmit2()
 	$.ajax({
 		type : "POST",
 		url : "modelSubmit1",
-		data :"&pemail="+pemail+/* "&pmobilenumber="+pmobilenumber+ */"&cotp="+cotp,
+		data :"&pemail="+pemail+"&cotp="+cotp,
 		dataType : "text",
 		beforeSend : function() {
              $.blockUI({ message: 'Please wait' });
@@ -869,15 +874,14 @@ function modelsubmit2()
 		success : function(data) {
 			//alert(data);
 			
-			if(data =="true")
+			if(data == "true")
 			{
-				
-				alert(" Otp Verified Successfully ");
+				 alert(" OTP Verified Successfully ");
 				$('#OTPModel').modal('toggle');
 				$("#pemail").prop('disabled',true);
 				$('#saveemailinfo').hide();
 				$('#editemailinfo').show();
-				alert(" Email Updated Successfully "); 
+				alert(" Email Updated Successfully ");  
 			}
 			else
 				alert("Enter valid OTP");

@@ -433,7 +433,7 @@ public class AbheeCustRegistrationController
 		System.out.println("enter to resendOtp");
 		String custMobile=request.getParameter("cmobile");
 		Random random = new Random();
-		otpnumber = "Dear Customer,thanks for registering with Abhee Smart Home Systems. OTP for your registration is:"+String.format("%04d", random.nextInt(10000));
+		otpnumber = String.format("%04d", random.nextInt(10000));
 		String tmsg =environment.getProperty("app.otpmsg");
 		 System.out.println(tmsg);
 		tmsg= tmsg.replaceAll("_otpnumber_", otpnumber);
@@ -449,7 +449,7 @@ public class AbheeCustRegistrationController
 		}
 		else
 		{
-		sendSMS.sendSMS(otpnumber,custMobile);
+		sendSMS.sendSMS(tmsg,custMobile);
 		oTPDetailsDao.saveOTPdetails(oTPDetails);	
 		return true;
 		}	

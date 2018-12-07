@@ -488,8 +488,9 @@ function viewTask(id){
 				orderObj.filename=filename;
 			}
 		var tblRow = "<tr>"
-			+ "<td title='"+orderObj.id+"'>"+ orderObj.id + "</td>"
+			/*  + "<td title='"+orderObj.id+"'>"+ orderObj.id + "</td>" */ 
 			+ "<td title='"+orderObj.quationid+"'>"+ orderObj.quationid + "</td>"
+			 + "<td title='"+orderObj.created_time+"'>"+ orderObj.created_time + "</td>" 
 			+ "<td title='"+orderObj.filename+"'>"+ orderObj.filename + "</td>"
 			+ "<td title='"+orderObj.notes+"'>"+ orderObj.notes + "</td>"
 			+ "</tr>";

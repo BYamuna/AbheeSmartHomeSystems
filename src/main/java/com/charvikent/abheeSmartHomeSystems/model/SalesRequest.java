@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 @Entity
 @Table(name = "abheeSalesRequest")
 public class SalesRequest 
@@ -36,6 +37,9 @@ public class SalesRequest
 	@CreationTimestamp
 	protected Date createdTime ;
 	
+	@UpdateTimestamp
+	protected Date updatedTime ;
+	
 	private int status;
 	
 	@Transient
@@ -47,7 +51,7 @@ public class SalesRequest
 
 	}
 	public SalesRequest(Integer id, String modelnumber, String email, String mobileno, String location, String address,
-			String reqdesc, String imgfiles,String customername,String requestType,int status,Date createdTime,String notes) 
+			String reqdesc, String imgfiles,String customername,String requestType,int status,Date createdTime,Date updatedTime, String notes) 
 	{
 		super();
 		this.id = id;
@@ -62,6 +66,7 @@ public class SalesRequest
 		this.requestType=requestType;
 		this.status=status;
 		this.createdTime=createdTime;
+		this.updatedTime=updatedTime;
 		this.notes=notes;
 	}
 	public Date getCreatedTime() {
@@ -69,6 +74,12 @@ public class SalesRequest
 	}
 	public void setCreatedTime(Date createdTime) {
 		this.createdTime = createdTime;
+	}
+	public Date getUpdatedTime() {
+		return updatedTime;
+	}
+	public void setUpdatedTime(Date updatedTime) {
+		this.updatedTime = updatedTime;
 	}
 	public String getCustomername() {
 		return customername;
@@ -208,9 +219,9 @@ public class SalesRequest
 				+ ", salesrequestnumber=" + salesrequestnumber + ", quotationDocuments=" + quotationDocuments
 				+ ", enable=" + enable + ", lat=" + lat + ", longitude=" + longitude + ", customerid=" + customerid
 				+ ", customername=" + customername + ", requestType=" + requestType + ", notes=" + notes
-				+ ", createdTime=" + createdTime + ", status=" + status + ", locationData=" + locationData + "]";
+				+ ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", status=" + status
+				+ ", locationData=" + locationData + "]";
 	}
-	
 	
 	
 	

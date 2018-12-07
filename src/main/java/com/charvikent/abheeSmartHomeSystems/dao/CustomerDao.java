@@ -340,6 +340,7 @@ Customer uc= (Customer)entityManager.find(Customer.class ,customer.getId());
 public void updateCustomerProfileEmail(Customer customer) {
 	Customer uc= (Customer)entityManager.find(Customer.class ,customer.getId());
 	uc.setEmail(customer.getEmail());
+	System.out.println(uc);
 	entityManager.flush();
 }
 
