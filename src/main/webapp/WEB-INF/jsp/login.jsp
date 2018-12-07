@@ -24,7 +24,10 @@
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <link rel="stylesheet" href="assets/css/styles.css">
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 
+ 
   </head>
+  
 </body>
     <link rel="stylesheet" href="assets/css/styles.css">
 <!--     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'> -->
@@ -69,7 +72,13 @@
 .tag {
 	color:#FF0000;
 }
-</style>
+
+ .close {
+    margin-top: -2px;
+    color: #000000;
+    opacity: 1;
+}
+  </style>
 
 <!-- <script type='text/javascript' src='assets/js/jquery-1.10.2.min.js'></script> -->
 <script type="text/javascript">

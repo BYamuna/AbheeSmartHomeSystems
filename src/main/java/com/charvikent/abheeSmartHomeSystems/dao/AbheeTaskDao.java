@@ -104,10 +104,10 @@ public class AbheeTaskDao {
 			if(authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")))
 			{
 			
-		 sql="select t.id,t.assignto,u.username,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,t.service_type as servicetypeid,sev.severity, "
+		 sql="select t.id,t.assignto,u.username,t.uploadfile,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,t.service_type as servicetypeid,sev.severity, "
 				 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id, t.communicationaddress,t.amountreceived,t.discount,t.tax,t.total,ar.requesttime"
 				+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp,abheerequesttime ar"
-				+" where  t.kstatus<>'4' and t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and  t.requesttime=ar.requesttimeid and t.status='1'  order by t.created_time desc ";
+				+" where  t.kstatus<>'4' and t.assignto=u.designation and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and  t.requesttime=ar.requesttimeid and t.status='1'  order by t.created_time desc ";
 	}
 			else
 			{
@@ -278,7 +278,7 @@ public List<Map<String,Object>> getTasksListAssignToMeById(String id)
 
 public List<Map<String, Object>> getTaskStatusHistoryByTaskNo(String taskno) {
 	
-	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.uploadfile as Attachfile  from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and t.taskno='"+taskno+" '  order by t.created_time desc";
+	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.uploadfile as Attachfile,t.imgfile from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and t.taskno='"+taskno+" '  order by t.created_time desc";
 	
          System.out.println(hql);
 	
@@ -348,7 +348,7 @@ public List<Map<String, Object>> getTasksByCustomerId(Customer customer) {
 	}
 public List<Map<String, Object>> getAdminResponseByCustomerId(String customer) {
 		
-		String hql= "select ap.priority as priority,t.subject,t.status,u.username as assignedto,t.taskdeadline,t.uploadfile,t.description from abhee_task t,abheepriority ap,abheeusers u where t.taskno='"+customer+"' and t.priority=ap.id and t.assignto=u.id";
+		String hql= "select ap.priority as priority,t.subject,t.status,u.username as assignedto,t.taskdeadline,t.imgfile,t.description from abhee_task t,abheepriority ap,abheeusers u where t.taskno='"+customer+"' and t.priority=ap.id and t.assignto=u.id";
 				
 				System.out.println(hql);
 		

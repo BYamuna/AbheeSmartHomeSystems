@@ -597,12 +597,12 @@ $('#editProfilePassword').click(function (){
 $('#saveProfilePassword').click(function (){
 	var pconfirmpassword=$("#pconfirmpassword").val();
 	var customerid=$("#customerid").val();
-	var checkpass=$("#checkpass").val();
+	/* var checkpass=$("#checkpass").val();
 	if(checkpass!=pconfirmpassword)
 		{
 		alert("Enter Valid Password");
 		return false;
-		}
+		} */
 	var pnewpassword=$("#pnewpassword").val();
 	if( pnewpassword !=pconfirmpassword)
 		{
@@ -855,19 +855,18 @@ function modelsubmit()
 
 function modelsubmit2()
 {
-	 //pmobilenumber =$('#pmobilenumber').val();
 	 pemail=$('#pemail').val();
 	 cotp=$('#cotp').val();
 	$.ajax({
 		type : "POST",
-		url : "modelSubmit1",
-		data :"&pemail="+pemail+/* "&pmobilenumber="+pmobilenumber+ */"&cotp="+cotp,
+		url : "modelSubmit2",
+		data :"&pemail="+pemail+"&cotp="+cotp,
 		dataType : "text",
 		beforeSend : function() {
              $.blockUI({ message: 'Please wait' });
           }, 
 		success : function(data) {
-			//alert(data);
+			alert(data);
 			
 			if(data =="true")
 			{

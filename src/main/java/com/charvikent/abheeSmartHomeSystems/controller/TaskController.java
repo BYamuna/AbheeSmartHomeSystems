@@ -174,7 +174,7 @@ public class TaskController {
 							String fileName = multipartFile.getOriginalFilename();
 							if(!multipartFile.isEmpty())
 							{
-							 task.setUploadfile("user browsed file(s)");            //add dummy value to check file upload status in dao layers
+							 task.setImgfile("user browsed file(s)");            //add dummy value to check file upload status in dao layers
 							 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 							}
 						}
@@ -212,7 +212,7 @@ public class TaskController {
 							String fileName = multipartFile.getOriginalFilename();
 							if(!multipartFile.isEmpty())
 							{
-							 task.setUploadfile("user browsed file(s)");            //add dummy value to check file upload status in dao layers
+								 task.setImgfile("user browsed file(s)");             //add dummy value to check file upload status in dao layers
 							 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 							}
 						}
@@ -571,6 +571,7 @@ public class TaskController {
 		task.setWarranty(warranty);
 		task.setCompany(company);
 		task.setUploadfile(images);
+		task.setTaskdeadline(" ");
 		for(MultipartFile multipartFile : uploadedFiles) {
 			String fileName = multipartFile.getOriginalFilename();
 			if(!multipartFile.isEmpty())

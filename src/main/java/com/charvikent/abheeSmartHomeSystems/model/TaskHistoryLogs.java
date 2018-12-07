@@ -36,6 +36,8 @@ public class TaskHistoryLogs  {
 	private String subject;
 	private String description;
 	private  String uploadfile;
+	private String imgfile;
+	
 	@Transient
 	private Integer gapdays;
 	@Transient
@@ -78,9 +80,12 @@ public class TaskHistoryLogs  {
 	
 	private String requesttime;
 	
-	
-	
-	
+	public String getImgfile() {
+		return imgfile;
+	}
+	public void setImgfile(String imgfile) {
+		this.imgfile = imgfile;
+	}
 	public String getRequesttime() {
 		return requesttime;
 	}
@@ -319,20 +324,22 @@ public class TaskHistoryLogs  {
 	public void setCommunicationaddress(String communicationaddress) {
 		this.communicationaddress = communicationaddress;
 	}
+	
 	@Override
 	public String toString() {
 		return "TaskHistoryLogs [id=" + id + ", taskno=" + taskno + ", taskid=" + taskid + ", createdTime="
 				+ createdTime + ", updatedTime=" + updatedTime + ", category=" + category + ", severity=" + severity
 				+ ", priority=" + priority + ", assignto=" + assignto + ", subject=" + subject + ", description="
-				+ description + ", uploadfile=" + uploadfile + ", gapdays=" + gapdays + ", gapcount=" + gapcount
-				+ ", kstatus=" + kstatus + ", status=" + status + ", additionalinfo=" + additionalinfo
-				+ ", taskdeadline=" + taskdeadline + ", taskdeadlineid=" + taskdeadlineid + ", ServiceType="
-				+ ServiceType + ", ModifiedBy=" + ModifiedBy + ", assigntoid=" + assigntoid + ", categoryid="
-				+ categoryid + ", priorityid=" + priorityid + ", severityid=" + severityid + ", assignbyid="
-				+ assignbyid + ", kstatusid=" + kstatusid + ", modelid=" + modelid + ", addComment=" + addComment
-				+ ", communicationaddress=" + communicationaddress + ", requesttime=" + requesttime + ", assignby="
-				+ assignby + "]";
+				+ description + ", uploadfile=" + uploadfile + ", imgfile=" + imgfile + ", gapdays=" + gapdays
+				+ ", gapcount=" + gapcount + ", kstatus=" + kstatus + ", status=" + status + ", additionalinfo="
+				+ additionalinfo + ", taskdeadline=" + taskdeadline + ", taskdeadlineid=" + taskdeadlineid
+				+ ", ServiceType=" + ServiceType + ", ModifiedBy=" + ModifiedBy + ", assigntoid=" + assigntoid
+				+ ", categoryid=" + categoryid + ", priorityid=" + priorityid + ", severityid=" + severityid
+				+ ", assignbyid=" + assignbyid + ", kstatusid=" + kstatusid + ", modelid=" + modelid + ", addComment="
+				+ addComment + ", communicationaddress=" + communicationaddress + ", requesttime=" + requesttime
+				+ ", assignby=" + assignby + "]";
 	}
+	
 	
 	
 	
