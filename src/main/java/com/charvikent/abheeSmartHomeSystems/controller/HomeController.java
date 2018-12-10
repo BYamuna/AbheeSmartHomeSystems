@@ -86,9 +86,9 @@ public class HomeController {
 	public String loginView(Model model) {
 		LOGGER.debug("Calling Login page index::{} at controller");
 		System.out.println("login called at /Rlogin page");
-		//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		 //userService.setLoginRecord(objuserBean.getId(),"login");
-		//userService.checkuserExistOrNot(objuserBean);
+		/*User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 userService.setLoginRecord(objuserBean.getId(),"login");
+		userService.checkuserExistOrNot(objuserBean);*/
 		return "login";
 	}
 	

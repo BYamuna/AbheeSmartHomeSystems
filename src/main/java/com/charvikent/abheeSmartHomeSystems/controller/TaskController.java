@@ -572,6 +572,7 @@ public class TaskController {
 		task.setCompany(company);
 		task.setUploadfile(images);
 		task.setTaskdeadline(" ");
+		task.setImgfile(" ");
 		for(MultipartFile multipartFile : uploadedFiles) {
 			String fileName = multipartFile.getOriginalFilename();
 			if(!multipartFile.isEmpty())

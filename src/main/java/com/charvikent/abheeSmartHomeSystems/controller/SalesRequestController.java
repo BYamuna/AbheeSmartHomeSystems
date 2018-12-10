@@ -82,7 +82,7 @@ public class SalesRequestController
 		loginDetails.setMobileno(customer.getMobilenumber());
 		loginDetails.setEmail(customer.getEmail());
 		loginDetails.setCustomerid(customer.getCustomerId());
-		loginDetails.setRequestType("1");
+		loginDetails.setRequestType("Quotation request");
    	 for(MultipartFile multipartFile : uploadedFiles) {
 				String fileName = multipartFile.getOriginalFilename();
 				if(!multipartFile.isEmpty())

@@ -300,8 +300,10 @@ if(validation) {
 		  	data:data,
 			beforeSend : function() {
 				$("#modelSubmit").click(function(){
-					$("#modelSubmit").val('Please wait...');
 					$("#modelSubmit").prop('disabled',true);
+					$("#modelSubmit").val('Please wait...');
+					$("form").submit();	
+					
 				}); 
 				//$.blockUI({ message: 'Please wait' });
 	          },
