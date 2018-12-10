@@ -61,7 +61,7 @@
 		<div class="main-content-inner">
 			<div class="breadcrumbs ace-save-state" id="breadcrumbs">
 				<ul class="breadcrumb">
-					<li class="">View Service Request</li>
+					<li class="">View Service Request History</li>
 				</ul><!-- /.breadcrumb -->
 			</div>
 			
@@ -73,7 +73,7 @@
 				<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div style="margin:0 auto;" class="panel-heading">
-						<h4>View Service Request Details</h4>
+						<h4>View Service Request History</h4>
 						<div class="options">
 							<a href="" class="panel-collapse"><i class="fa fa-chevron-up"></i></a>
 						</div>
@@ -255,7 +255,7 @@ $("#severityTable").append(rowdata); */
 	
 	
 $(".task").addClass("active");
-$("#pageName").text("View Service Request");
+$("#pageName").text("View Service Request History");
 
 
 </script> 

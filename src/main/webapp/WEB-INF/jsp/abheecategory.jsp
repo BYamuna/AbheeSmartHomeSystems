@@ -652,7 +652,7 @@ $.each(productdetailslist, function(k,v){
     	//var locationData=$('#locationData').val();
     	var address=$('#address').val();
     	var reqdesc=$('#reqdesc').val();
-    	
+    	var imgfile=$('#imgfile').val();
     	 //Serializing all For Input Values (not files!) in an Array Collection so that we can iterate this collection later.
     	//var params = form.serializeArray();
     	
@@ -671,7 +671,13 @@ $.each(productdetailslist, function(k,v){
 	   formData.append('address',address);
 	   formData.append('reqdesc',reqdesc);  */
 	   
-	   
+	   if(imgfile=="" || imgfile==null || imgfile=="undefined")
+		{
+			$('.impColor0').after('<span class="error error-keyup-4">Choose file </span>');
+			 $('#imgfile' ).css('border-color','#e73d4a');
+				$('#imgfile' ).css('color','#e73d4a');
+			 return false;
+		}  
 	   
 	 var ins = document.getElementById('imgfile').files.length;
 	
@@ -730,7 +736,7 @@ $.each(productdetailslist, function(k,v){
 		 
 		 servicetypeid =$("#servicetypeid").val();
 		 requesttimeid =$("#requesttimeid").val();
-		 warranty=$("#warranty").val();
+		 warranty=$("#warranty:checked").val();
 		 fileimg =$('#fileimg').val();
 		 
 		 

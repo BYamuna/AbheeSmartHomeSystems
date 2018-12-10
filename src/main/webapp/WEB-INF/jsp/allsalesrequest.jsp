@@ -483,7 +483,7 @@ function viewTask(id){
 				var filename='';
 				for(var i=0;i<list.length;i++)
 				{
-					filename=filename+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><i class="fa fa-paperclip fa-lg grey"></i></a>';
+					filename=filename+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
 				}
 				orderObj.filename=filename;
 			}

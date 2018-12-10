@@ -104,7 +104,7 @@
 									</div>
 								</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-6" id="passwordDiv">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Password<span class="impColor">*</span></label>
 								<div class="col-md-6">

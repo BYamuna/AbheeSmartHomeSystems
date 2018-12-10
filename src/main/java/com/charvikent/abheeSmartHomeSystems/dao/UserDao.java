@@ -112,7 +112,7 @@ public class UserDao {
 	public User findWithName(String username,String lpassword) {
 		User userbean =null;
 		try {
-			userbean=  (User) em.createQuery(" select u FROM User u where  enabled='1' and u.username =:custName AND u.password =:custPass ")
+			userbean=  (User) em.createQuery(" select u FROM User u where  u.enabled='1' and u.username =:custName AND u.password =:custPass ")
 					.setParameter("custName", username)
 					.setParameter("custPass", lpassword)
 					.getSingleResult();

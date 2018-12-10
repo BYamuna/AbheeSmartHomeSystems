@@ -63,8 +63,8 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Product Company <span class="impColor">*</span></label>
 									<div class="col-md-5">
-									<form:select path="companyid" id="companyids" class="form-control validate" onkeydown="removeBorder(this.id)" onfocus="removeBorder(this.id)">
-											<form:option value="">-- Select Product Company --</form:option>
+									<form:select path="companyid" id="companyid" class="form-control validate" onkeydown="removeBorder(this.id)" onfocus="removeBorder(this.id)">
+											<form:option value="">-- Select Product Company --</form:option> 
 											<form:options items="${companiesMap}"/>
 										</form:select>
 										</div>
@@ -208,12 +208,12 @@ $(document).ready(function() {
 			success : function(data) {
 				var result = JSON.parse(data);
 				var s= '';
-				$('#companyids').empty();
+				$('#companyid').empty();
 				s= '<option value="" > -- Select Product Company --</option>';
-				$('#companyids').append(s);
+				$('#companyid').append(s);
 				for(var i=0;i<result.length;i++){
 					s='<option value="'+result[i].id+'"> '+result[i].name+'</option>';
-					$('#companyids').append(s);
+					$('#companyid').append(s);
 				}
 				
 				
@@ -287,7 +287,9 @@ function editProduct(id) {
 	$("#description").val(serviceUnitArray[id].description);
 	$("#status").val(serviceUnitArray[id].status);
 	$("#categoryid").val(serviceUnitArray[id].categoryid);
-	$("#companyid").val(serviceUnitArray[id].companyid);
+	/* $("#companyids").val(serviceUnitArray[id].companyname); */
+	$("#companyid").empty();
+	$("#companyid").append('<option value="'+serviceUnitArray[id].companyid+'" > '+serviceUnitArray[id].companyname+'</option>');
 	$("#productmodelvideoslinks").val(serviceUnitArray[id].productmodelvideoslinks);
 	$("#maxAllowedDiscount").val(serviceUnitArray[id].maxAllowedDiscount);
 	$("#ProductPrice").val(serviceUnitArray[id].productPrice);

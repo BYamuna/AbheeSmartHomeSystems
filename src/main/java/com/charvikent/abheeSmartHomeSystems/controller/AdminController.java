@@ -280,13 +280,11 @@ public class AdminController {
 			userService.updatePassword(users);
 			jsonObj.put("message", "Password Updated Successfully");
 			String tmsg =environment.getProperty("app.changepassword");
-			  System.out.println(tmsg);
-			  tmsg=  tmsg.replaceAll("_designation_", users.getDesignationName());
+			  tmsg=  tmsg.replaceAll("_designation_", users.getFirstname());
 			  tmsg=  tmsg.replaceAll("_mobilenumber_", users.getMobilenumber());
 			  tmsg=  tmsg.replaceAll("_password_", users.getPassword());
-			  
 			  smsTemplate.sendSMS(tmsg,users.getMobilenumber());
-			
+			  System.out.println(tmsg);
 //				System.out.println("**************************************************"+result+"**************"+jsonObject);
 //				jsonObject.put("msg", "You Entered Wrong Password");
 //				System.out.println("**************************************************"+result+"**************"+jsonObject);

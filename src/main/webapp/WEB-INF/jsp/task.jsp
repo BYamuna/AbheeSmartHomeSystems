@@ -688,7 +688,8 @@
 		var idArray = $.makeArray($('.validate').map(function() {
 	    	return this.id;
 	    })); */
-		 $("#ServiceType").attr('disabled', true);
+		$("#ServiceType").attr('disabled', true);
+	    $("#description").attr('disabled', true);
 	}
 
 	/* view task history */

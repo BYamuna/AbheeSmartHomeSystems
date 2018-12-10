@@ -10,7 +10,7 @@
     <footer role="contentinfo">
         <div class="clearfix">
             <ul class="list-unstyled list-inline pull-left">
-                <li>CHARVIKENT.COM <span id="getting-started">123</span></li>
+                <li>CHARVIKENT.COM <span id="getting-started"></span></li>
             </ul>
             <button class="pull-right btn btn-inverse-alt btn-xs hidden-print" id="back-to-top"><i class="fa fa-arrow-up" style="
     color:  black;"></i></button>
