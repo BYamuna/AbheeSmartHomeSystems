@@ -69,7 +69,7 @@
 		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h4 id="service">Add Service Request</h4>
+					<h4 id="service">Service Request</h4>
 				
 				<div class="options">
 						<a href="javascript:;" class="panel-collapse"><i
@@ -504,12 +504,19 @@
 
 	}
 
+
+//	var today = new Date();
+var date = new Date();
+var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	$(document).ready(function() {
+		
+		
 		//$("#taskdeadline").attr("disabled", "disabled"); 
 		// 	$("#taskdeadline").attr('readonly', 'readonly');
 		$('#taskdeadline').datetimepicker({
 			useCurrent : false,
 			format : 'DD-MMM-YYYY',
+			minDate : today,
 			showTodayButton : true,
 			sideBySide : true,
 			toolbarPlacement : 'top',

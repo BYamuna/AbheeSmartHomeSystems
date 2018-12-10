@@ -530,6 +530,8 @@ public class AbheeCustomerRestController {
 		task.setWarranty(warranty);
 		task.setRequesttime(requesttime);
 		task.setAssignby("1");
+		task.setTaskdeadline(" ");
+		task.setImgfile(" ");
 		Map<String, Object> abheeTask = reportIssueDao.checkServiceRequestExisrOrNot(task);
 		if (null == abheeTask) {
 

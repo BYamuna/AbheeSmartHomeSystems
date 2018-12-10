@@ -310,7 +310,7 @@ public class UserDao {
 		System.out.println(user);
 		return user;*/
 
-		String hql ="From User where mobilenumber= '"+userName+"' ";
+		String hql ="From User where mobilenumber= '"+userName+"' and enabled='1'";
 		
 		Query query = em.createQuery(hql);
 		
@@ -487,7 +487,7 @@ public class UserDao {
 	}
 
 	public User getUserDesignationById(Integer id) {
-		String hql ="select  ku.username, kd.name from abheedesignation kd,abheeusers ku where ku.designation=kd.id and ku.id=:id ";
+		String hql ="select  ku.username, kd.name from abheedesignation kd,abheeusers ku where ku.designation=kd.id and ku.id=:id";
 		User users =new User();
 		try{
 			

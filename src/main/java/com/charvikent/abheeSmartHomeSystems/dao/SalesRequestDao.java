@@ -102,6 +102,7 @@ public class SalesRequestDao
 		 {
 		 
 			String hql ="select sr.id,sr.address,sr.email,DATE_FORMAT(sr.created_time,'%d-%b-%y %H:%i')as created_time,sr.imgfiles,sr.location,ap.name as modelname,sr.comments,sr.customerid,sr.mobileno,sr.reqdesc,sr.salesrequestnumber,sr.quotation_documents,sr.enable,sr.customername,sr.request_type" + 
+
 			 		"from abhee_sales_request sr, abhee_product ap where sr.modelnumber=ap.name and salesrequestnumber='"+req.getSalesrequestnumber()+"'";
 			/*String hql ="select sr.id,sr.address,sr.email,sr.created_time,sr.imgfiles,sr.location,sr.modelnumber,sr.comments,sr.customerid,sr.mobileno,sr.reqdesc,sr.salesrequestnumber,sr.quotation_documents,sr.enable,sr.customername,sr.request_type" + 
 			 		"from abhee_sales_request sr where salesrequestnumber='"+req.getSalesrequestnumber()+"'";*/
