@@ -206,14 +206,14 @@ public class ProductDao
 		
 		return retlist;
 	}
-	public List<Map<String, Object>> getProductsDescription() {
-		String sql ="select p.id,p.categoryid,cat.category,p.companyid,com.name as companyname,p.description,p.name as productmodelname,p.productmodelpics,p.productmodelvideoslinks,p.status,p.product_model_specifications,p.product_price,p.max_allowed_discount,p.updated_time,com.companyimg from abhee_product  p , abheecategory cat , abhee_company com  where p.categoryid=cat.id and p.companyid=com.id and p.status='1' order by p.updated_time desc";	
+	public List<Map<String, Object>> getProductsDescription(Product product) {
+		String sql ="select p.id,p.categoryid,cat.category,p.companyid,com.name as companyname,p.description,p.name as productmodelname,p.productmodelpics,p.productmodelvideoslinks,p.status,p.product_model_specifications,p.product_price,p.max_allowed_discount,p.updated_time,com.companyimg from abhee_product  p , abheecategory cat , abhee_company com  where p.categoryid=cat.id and p.companyid=com.id and p.status='1'and p.categoryid='"+product.getCategoryid()+"' and  p.companyid='"+product.getCompanyid()+"' order by p.updated_time desc";	
 		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
 		
 		return retlist;
 	}
-	public List<Map<String, Object>> getProductCompaniesdesc() {
-		String sql ="select p.id as productid,p.categoryid,cat.category as categoryname,cat.categoryimg,p.companyid,com.name as companyname,com.companyimg from abhee_product  p , abheecategory cat , abhee_company com where p.categoryid=cat.id and p.companyid=com.id and p.status='1'group by p.companyid order by p.updated_time desc";	
+	public List<Map<String, Object>> getProductCompaniesdesc(Product product) {
+		String sql ="select p.id as productid,p.categoryid,cat.category as categoryname,cat.categoryimg,p.companyid,com.name as companyname,com.companyimg from abhee_product  p , abheecategory cat , abhee_company com where p.categoryid=cat.id and p.companyid=com.id and p.status='1' and p.categoryid='" +product.getCategoryid()+"' group by p.companyid order by p.updated_time desc";	
 		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
 		
 		return retlist;

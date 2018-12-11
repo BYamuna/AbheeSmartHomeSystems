@@ -226,7 +226,7 @@
 								</div>
 							</div>
 							</div>
-						<security:authorize access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
+					<security:authorize access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -246,7 +246,6 @@
 								</div>
 							</div>
 						</div>	
-						<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
 								<label
@@ -269,8 +268,23 @@
 									<form:input path="amountreceived" placeholder="Amountreceived" class="col-xs-10 col-sm-5" />
 								</div>
 							</div>
-						</div>	
 						</security:authorize>
+						<security:authorize access="hasRole('ROLE_USER')">	
+							<div class="col-md-6">
+								<div class="form-group">
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">
+										Payment Mode <span class="impColor">*</span>
+									</label>
+									<form:select path="paymentstatus" class="col-xs-10 col-sm-5 validate"
+										onfocus="removeBorder(this.id)">
+										<form:option value="" label="--- Select ---" />
+										<form:options items="${paymentmode}" />
+									</form:select>
+								</div>
+							</div>
+							</security:authorize>
+						</div>	
+						
 						<div id="getting-started"></div>
 					</div>
 					<div class="panel-footer">
@@ -658,6 +672,9 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 									+ "<td title='"+orderObj.requesttime+"'>"
 									+ orderObj.requesttime
 									+ "</td>"
+									/* + "<td title='"+orderObj.paymentstatus+"'>"
+									+ orderObj.paymentstatus
+									+ "</td>" */
 									+ "<td style='text-align: center;white-space: nowrap;'>"
 									+ edit
 									+ "&nbsp;&nbsp;"

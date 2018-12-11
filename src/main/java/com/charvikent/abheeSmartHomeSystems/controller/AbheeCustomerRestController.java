@@ -383,9 +383,9 @@ public class AbheeCustomerRestController {
 	}
 
 	@RequestMapping(value = "/getproducts", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public String getProductslist() throws JsonProcessingException, JSONException {
+	public String getProductslist(@RequestBody Product product) throws JsonProcessingException, JSONException {
 		LOGGER.debug("Calling getproducts at controller");
-		List<Map<String, Object>> listOrderBeans = productDao.getProductsDescription();
+		List<Map<String, Object>> listOrderBeans = productDao.getProductsDescription(product);
 		JSONObject json = new JSONObject();
 		// ObjectMapper objectMapper = new ObjectMapper();
 		// String userjson = objectMapper.writeValueAsString(userBean);
@@ -558,9 +558,9 @@ public class AbheeCustomerRestController {
 	}
 
 	@RequestMapping(value = "/getproductcompanies", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public String getAllProductCompanies() throws JsonProcessingException, JSONException {
+	public String getAllProductCompanies(@RequestBody Product product) throws JsonProcessingException, JSONException {
 		LOGGER.debug("Calling getproductcompanies at controller");
-		List<Map<String, Object>> listOrderBeans = productDao.getProductCompaniesdesc();
+		List<Map<String, Object>> listOrderBeans = productDao.getProductCompaniesdesc(product);
 		JSONObject json = new JSONObject();
 		if (null != listOrderBeans) {
 			json.put("productcompanyDetails", listOrderBeans);

@@ -130,7 +130,7 @@
 <div class="col-md-12"><br>
 				<div class="panel panel-primary">
 					<div style="margin:0 auto;" class="panel-heading rounded-bottom">
-						<h4>View Service Request Details</h4>
+						<h4>View Service Request History</h4>
 						<div class="options">
 							<a href="" class="panel-collapse"><i class="fa fa-chevron-up"></i></a>
 						</div>
@@ -217,7 +217,7 @@ $.each(allstatus, function(k, v){
 				var Attachfile='';
 				for(var i=0;i<list.length;i++)
 				{
-					Attachfile=Attachfile+'<a href="reportDocuments/'+list[i]+'" target="_blank" title="'+list[i]+'"><i class="fa fa-download"></i></a>';
+					Attachfile=Attachfile+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
 				}
 				v.Attachfile=Attachfile;
 			}
