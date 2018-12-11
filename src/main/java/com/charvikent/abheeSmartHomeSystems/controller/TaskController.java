@@ -34,6 +34,7 @@ import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeRequestTimeDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskStatusDao;
+import com.charvikent.abheeSmartHomeSystems.dao.AbheepaymentDao;
 /*import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;*/
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.PriorityDao;
@@ -77,6 +78,8 @@ public class TaskController {
 	@Autowired
 	AbheeTaskDao abheeTaskDao;
 	@Autowired
+	AbheepaymentDao abheepaymentDao;
+	@Autowired
 	CustomerDao customerDao;
 	@Autowired
 	AbheeRequestTimeDao  abheeRequestTimeDao ;
@@ -108,6 +111,7 @@ public class TaskController {
 		model.addAttribute("category", serviceDao.getServicemap());
 		/*model.addAttribute("requesttimes",abheeRequestTimeDao.getRequestTimesMap() );*/
 		model.addAttribute("taskstatus", abheeTaskStatusDao.getTaskStatusMap());
+		//model.addAttribute("paymentstatus",abheepaymentDao.getPaymentmap());
 		
 		
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();

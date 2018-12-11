@@ -217,7 +217,7 @@ $.each(allstatus, function(k, v){
 				var Attachfile='';
 				for(var i=0;i<list.length;i++)
 				{
-					Attachfile=Attachfile+'<a href="reportDocuments/'+list[i]+'" target="_blank" title="'+list[i]+'"><i class="fa fa-download"></i></a>';
+					Attachfile=Attachfile+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
 				}
 				v.Attachfile=Attachfile;
 			}

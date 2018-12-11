@@ -192,11 +192,11 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Description
-										<span class="impColor">*</span>
+										<!-- <span class="impColor">*</span> -->
 									</label>
 									
 										<form:textarea path="description"
-											class="col-xs-10 col-sm-5 validate" placeholder="Description" />
+											class="col-xs-10 col-sm-5" placeholder="Description" />
 										<span class="hasError" id="stationnameError"></span>
 									
 								</div>
@@ -236,6 +236,7 @@
 									<form:input path="total" placeholder="Total" class="col-xs-10 col-sm-5" />
 								</div>
 							</div>
+						
 							
 							<div class="col-md-6">
 								<div class="form-group">
@@ -278,7 +279,7 @@
 							<div class="col-sm-12">
 								<div class="btn-toolbar text-center">
 									<input type="submit" id="submit1" value="Submit"
-										class="btn-primary btn" /> <input type="reset" value="Reset"
+										class="btn-primary btn" /> <input type="reset" value="Reset" onClick="window.location.reload()"
 										class="btn-danger btn cancel" />
 								</div>
 							</div>
