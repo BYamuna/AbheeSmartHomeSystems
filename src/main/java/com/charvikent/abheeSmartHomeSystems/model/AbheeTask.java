@@ -38,6 +38,7 @@ public class AbheeTask
 	private String paymentstatus;
 	@Transient
 	private Integer gapdays;
+	
 	@Transient
 	private Integer gapcount;
 	private String kstatus;
@@ -46,6 +47,8 @@ public class AbheeTask
 	private String taskdeadline;
 	@Transient
 	private String taskdeadlineid;
+	@Transient
+	private String paymentstatusid;
 	@Transient
 	private String assigntoid;
 	@Transient
@@ -58,8 +61,6 @@ public class AbheeTask
 	private String  servicetypeid;
 	@Transient
 	private String  requesttimeid;
-	@Transient
-	private String  paymentstatusid;
 	@Transient
 	private String assignbyid;
 	@Transient
@@ -333,6 +334,7 @@ public class AbheeTask
 	public void setRequesttimeid(String requesttimeid) {
 		this.requesttimeid = requesttimeid;
 	}
+
 	public String getPaymentstatus() {
 		return paymentstatus;
 	}
@@ -357,6 +359,7 @@ public class AbheeTask
 				+ taskdeadline + ", taskdeadlineid=" + taskdeadlineid + ", assigntoid=" + assigntoid + ", categoryid="
 				+ categoryid + ", priorityid=" + priorityid + ", severityid=" + severityid + ", servicetypeid="
 				+ servicetypeid + ", requesttimeid=" + requesttimeid + ", paymentstatusid=" + paymentstatusid
+
 				+ ", assignbyid=" + assignbyid + ", kstatusid=" + kstatusid + ", modelid=" + modelid + ", addComment="
 				+ addComment + ", communicationaddress=" + communicationaddress + ", warranty=" + warranty + ", total="
 				+ total + ", discount=" + discount + ", tax=" + tax + ", amountreceived=" + amountreceived + "]";

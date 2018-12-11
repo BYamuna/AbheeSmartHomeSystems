@@ -10,12 +10,12 @@ import javax.persistence.Table;
 @Table(name = "abheepayment")
 public class AbheePayment 
 {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer  id;
 	private String payment;
-	
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -26,6 +26,7 @@ public class AbheePayment
 		return payment;
 	}
 	public void setPaymentstatus(String payment) {
+
 		this.payment = payment;
 	}
 	@Override

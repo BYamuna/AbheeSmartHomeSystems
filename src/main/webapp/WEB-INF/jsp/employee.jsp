@@ -104,7 +104,7 @@
 								</div></div><div class="clearfix"></div>
 								<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">AadharNo</label>
+									<label class="col-md-3 control-label no-padding-right">AadharNumber</label>
 									<div class="col-md-6">
 										<form:input path="aadharno" class="form-control" placeholder="Aadhar number" maxlength="12"/>
 									</div>
@@ -156,7 +156,7 @@
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar text-center">
 					      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
-					      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
+					      			<input type="reset" value="Reset" onClick="window.location.reload()" class="btn-danger btn cancel"/>
 				      			</div>
 				      		</div>
 				      	</div>

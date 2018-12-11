@@ -215,6 +215,7 @@ color:#000 !important;
                 <li class="arrow_box"><a data-toggle="tab" href="#1_3">Mobile Number</a> </li>
                 <li class="arrow_box"><a data-toggle="tab" href="#1_4">Change Password</a> </li>
                 <li class="arrow_box"><a data-toggle="tab" href="#1_5">My Orders</a> </li>
+                <li class="ticketstatus"><a href="${baseurl }/ticketstatus">Ticket Status</a></li>
               </ul>
             </div>
             <div class="col-sm-10">

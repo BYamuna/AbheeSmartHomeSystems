@@ -342,8 +342,9 @@ success: function(result){
 	}	
 	else
 	{
-	alert("Enter registered Mobilenumber");		  				
-	$('#resetpassword').prop('disabled', false);		  	
+	alert("Enter registered Mobile Number");		  				
+	$('#resetpassword').prop('disabled', false);	
+	window.location.reload();
 	}	  		
 },
 error: function (e) {

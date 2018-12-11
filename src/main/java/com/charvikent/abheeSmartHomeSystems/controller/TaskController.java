@@ -31,7 +31,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
-import com.charvikent.abheeSmartHomeSystems.dao.AbheePaymentDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeRequestTimeDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskStatusDao;
@@ -42,6 +41,7 @@ import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ServiceDao;
 import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
+import com.charvikent.abheeSmartHomeSystems.model.AbheePayment;
 //import com.charvikent.abheeSmartHomeSystems.model.KpStatusLogs;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
@@ -78,6 +78,8 @@ public class TaskController {
 	@Autowired
 	AbheeTaskDao abheeTaskDao;
 	@Autowired
+	AbheeTaskDao abheepaymentDao;
+	@Autowired
 	CustomerDao customerDao;
 	@Autowired
 	AbheeRequestTimeDao  abheeRequestTimeDao ;
@@ -85,7 +87,7 @@ public class TaskController {
 	@Autowired
 	AbheeTaskStatusDao abheeTaskStatusDao;
 	@Autowired
-	AbheePaymentDao abheePaymentDao;
+	AbheePayment abheePaymentDao;
 	@Autowired
 	TaskHistoryLogsDao taskHistoryLogsDao;
 	@Autowired
@@ -110,7 +112,8 @@ public class TaskController {
 		model.addAttribute("category", serviceDao.getServicemap());
 		/*model.addAttribute("requesttimes",abheeRequestTimeDao.getRequestTimesMap() );*/
 		model.addAttribute("taskstatus", abheeTaskStatusDao.getTaskStatusMap());
-		model.addAttribute("paymentmode", abheePaymentDao.getPaymentMap());
+		//model.addAttribute("paymentmode", abheePaymentDao.getPayment);
+
 		
 		
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();

@@ -614,10 +614,11 @@ public class HomeController {
 		 * PasswordDetails(); pd.setPWDnumber(strRandomNumber);
 		 */
 		User custbean2 = userService.checkEmployeeExistOrNotbyMobile(username);
-		String password = "Dear" + " " + custbean2.getFirstname() + " " + custbean2.getLastname()
-		+ ", your password for Abhee smart home systems account" + " '" + custbean2.getMobilenumber() + "' "
-		+ "is:" + custbean2.getPassword();
+		
 		if (custbean2 != null) {
+			String password = "Dear" + " " + custbean2.getFirstname() + " " + custbean2.getLastname()
+			+ ", your password for Abhee smart home systems account" + " '" + custbean2.getMobilenumber() + "' "
+			+ "is:" + custbean2.getPassword();
 			sendSMS.sendSMS(password,username);
 			//mailTemplate.resetPassword(custbean2);
 			return true;
