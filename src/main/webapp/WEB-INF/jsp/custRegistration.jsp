@@ -109,6 +109,7 @@
 									<label class="col-md-3 control-label no-padding-right">Password<span class="impColor">*</span></label>
 								<div class="col-md-6">
 										<form:password path="password" class="form-control validate onlyNumbers" maxlength="4" placeholder="Password"/>
+										<span id="errorPasswordMsg" style="color:red;"></span>
 									</div>
 								</div>
 								</div><div class="clearfix"></div>
@@ -242,6 +243,7 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.lastname+"'>"+ orderObj.lastname + "</td>"
 			+ "<td title='"+orderObj.email+"'>"+ orderObj.email + "</td>"
 			+ "<td title='"+orderObj.mobilenumber+"'>"+ orderObj.mobilenumber + "</td>"
+		
 			+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "</tr>";
@@ -274,13 +276,15 @@ function editCustomer(id) {
 	}
 	$("#lastname").val(serviceUnitArray[id].lastname); 
 	$("#mobilenumber").val(serviceUnitArray[id].mobilenumber);
+	$("#password").val(serviceUnitArray[id].password);
 	$("#email").val(serviceUnitArray[id].email);
 	$("#address").val(serviceUnitArray[id].address);
+	
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 	//document.getElementById("username").readOnly  = true;
 	//document.querySelector("password").required = false;
-    $("#passwordDiv").hide();
+  //$("#passwordDiv").hide();
     var idArray = $.makeArray($('.validate').map(function() {
     	return this.id;
     }));
@@ -554,6 +558,60 @@ $('#email').blur(function() {
 	}
 
 		}); 
+		
+$('#password').focusout(function(){
+	  var cpassword=$(this).val();
+	  
+	/* if(cmobile.length != 10 ){
+		
+		$('#cmobile').css('border-color', 'red');
+	// $('#submitModel').prop('disabled', true);
+	$('#errorMobileMsg').text( "*Mobile Number Length Must Be 10 Digits") ;
+	setTimeout(function() { $("#errorMobileMsg").text(''); }, 3000);
+				 
+	 subValidation =false;
+	 
+	 event.preventDefault();
+	 }else { */
+
+
+ $.ajax({
+			type : "POST",
+			url : "checkCustExstOrnotByPassword",
+			data :"cpassword="+cpassword+"&editFields="+editFields,
+			dataType : "text",
+			beforeSend : function() {
+	             $.blockUI({ message: 'Please wait' });
+	          }, 
+			success : function(data) {
+				if(data ==='true')
+					{
+					$('#password').css('border-color', 'red');
+					$('#errorPasswordMsg').text( "* Password Mismatch") ;
+					setTimeout(function() { $("#errorPasswordMsg").text(''); }, 3000);
+					 $('#submit1').prop('disabled', true);
+					 
+					subValidation =false;
+					
+					event.preventDefault();
+					}
+				 else
+					{
+					$('#password').css('border-color', 'none');
+					 $('#submit1').prop('disabled', false);
+					 subValidation =true;
+					} 	
+			},
+			complete: function () {
+	            
+	            $.unblockUI();
+	       },
+			error :  function(e){$.unblockUI();console.log(e);}	
+		});
+}); 
+ 
+//}); 
+	
 		
 		
 	$('#gstDiv').hide();

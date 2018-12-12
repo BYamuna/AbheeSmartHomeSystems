@@ -79,15 +79,16 @@
 						</div>
 					</div>
 					<div class="panel panel-body collapse in">
-						<br>
-						<div class="col-md-2"></div>
-						<div class="col-md-8">
+						<br>    
+						
+						<div class="col-md-12">
 						
 						<div class="table-responsive">
-								<table class="table table-bordered priority prioritybg"
-									style="border: 1px solid #0460a4; width:;" id="viewTaskTable">
+								<table class="table table-bordered priority prioritybg" style="border: 1px solid #0460a4; width:;" id="viewTaskTable">
+								 <thead><tr><th>Username</th><th>ServiceTypename</th><th>CreatedTime</th><th>Description</th><th>Requeststatus</th><th>Priority</th><th>Severity</th><th>Subject</th><th>Deadline</th><th>Taskno</th><th>Category</th><th>ModelName</th><th>CustomerId</th>
+				                 <th>Files</th></tr><tr></tr></thead><tbody></tbody></table>
 
-			<c:forEach var="listOuter" items="${test2}">
+			<%-- <c:forEach var="listOuter" items="${test2}">
        
               <c:forEach var="listInner" items="${listOuter}">
                  <tr>
@@ -101,11 +102,11 @@
               </c:forEach>
          
       </c:forEach>
-									
+					 --%>				
+					 
 
 									
 
-																	</table>
 							</div>
 </div>
 	<div class="col-md-2"></div>
@@ -205,9 +206,10 @@
 
 	<link rel="stylesheet" type="text/css" href="http://charvikent.com/mantis/css/dropzone-4.3.0.min.css" />
 <script type="text/javascript">
-
+var viewTaskTable = ${test21};
 var allstatus = ${statuslist1};
 //allstatus=JSON.parse(allstatus);
+$(function(){
 $.each(allstatus, function(k, v){
 	
 		if(v.Attachfile==undefined) v.Attachfile='';
@@ -231,9 +233,46 @@ $.each(allstatus, function(k, v){
 			+'</tr>';
 	$('#viewStatusTable tbody').append(tr);
 });
-
-
-
+});
+$(function(){
+              
+$.each(viewTaskTable, function(k, v){
+	console.log(v);
+	
+	if(v.AttachedFiles==undefined) v.AttachedFiles='';
+	else
+		{
+			var list=v.AttachedFiles.split('*');
+			var Attachfile='';
+			for(var i=0;i<list.length;i++)
+			{
+				Attachfile=Attachfile+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
+			}
+			v.AttachedFiles=Attachfile;
+		}
+	if(v.description==null){
+		
+		v.description='---';
+	}
+var tr=	'<tr>'
+		+'<td>'+ v.username +'</td>'
+		+'<td>'+ v.servicetypename +'</td>'
+		+'<td>'+ v.created_time +'</td>'
+		+'<td>'+ v.description +'</td>'
+		+'<td>'+ v.Requeststatus  +'</td>'
+		+'<td>'+ v.priority +'</td>'
+		+'<td>'+ v.severity +'</td>'
+		+'<td>'+ v.subject +'</td>'
+		+'<td>'+ v.taskdeadline +'</td>'
+		+'<td>'+ v.taskno +'</td>'
+		+'<td>'+ v.category +'</td>'
+		+'<td>'+ v.modelname +'</td>'
+		+'<td>'+ v.customer_id +'</td>'
+		+'<td>'+v.AttachedFiles+'</td>'
+		+'</tr>';
+$('#viewTaskTable tbody').append(tr);
+});
+});
 function goBack() {
     window.history.go(-1);
     //window.location.reload();

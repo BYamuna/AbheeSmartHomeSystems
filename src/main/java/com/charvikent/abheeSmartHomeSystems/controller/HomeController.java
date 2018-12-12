@@ -313,23 +313,7 @@ public class HomeController {
 	
 	@RequestMapping("/ticketstatus")
 	public String ticketstatus(HttpServletRequest request,HttpSession session) throws JsonProcessingException {
-			/*String sJson=null;
-			Customer customerProfile=(Customer) session.getAttribute("customer");
-			Customer customerId=(Customer) session.getAttribute("customerId");
-			System.out.println(customerId);
-			if(null !=customerProfile)
-	        {
-				List<Map<String, Object>> QuotationsList=srequestDao.getSalesRequestListByCustomerId(customerProfile.getCustomerId());
-				System.out.println(QuotationsList);
-				ObjectMapper objectMapper = new ObjectMapper(); 
-				 sJson = objectMapper.writeValueAsString(QuotationsList);
-		
-			request.setAttribute("QuotationsList", sJson);
-	          }
-	          else
-	          {
-	        		request.setAttribute("QuotationsList", "''");    	  
-	          }*/
+			
 		LOGGER.debug("Calling ticketstatus at controller");
 		return "ticketstatus";
 	}

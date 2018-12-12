@@ -41,7 +41,6 @@ import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ServiceDao;
 import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
-import com.charvikent.abheeSmartHomeSystems.model.AbheePayment;
 //import com.charvikent.abheeSmartHomeSystems.model.KpStatusLogs;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
@@ -77,8 +76,8 @@ public class TaskController {
 	FilesStuff fileTemplate;
 	@Autowired
 	AbheeTaskDao abheeTaskDao;
-	@Autowired
-	AbheeTaskDao abheepaymentDao;
+	/*@Autowired
+	AbheepaymentDao abheepaymentDao;*/
 	@Autowired
 	CustomerDao customerDao;
 	@Autowired
@@ -86,8 +85,7 @@ public class TaskController {
 	
 	@Autowired
 	AbheeTaskStatusDao abheeTaskStatusDao;
-	@Autowired
-	AbheePayment abheePaymentDao;
+	
 	@Autowired
 	TaskHistoryLogsDao taskHistoryLogsDao;
 	@Autowired
@@ -112,7 +110,7 @@ public class TaskController {
 		model.addAttribute("category", serviceDao.getServicemap());
 		/*model.addAttribute("requesttimes",abheeRequestTimeDao.getRequestTimesMap() );*/
 		model.addAttribute("taskstatus", abheeTaskStatusDao.getTaskStatusMap());
-		//model.addAttribute("paymentmode", abheePaymentDao.getPayment);
+		//model.addAttribute("paymentmode", abheepaymentDao.getPaymentmap());
 
 		
 		

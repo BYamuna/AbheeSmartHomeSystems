@@ -128,6 +128,39 @@ public class AbheeCustRegistrationController
 		return false;
 		
 	}
+/*	@RequestMapping(value = "/checkCustExstOrnotByPassword", method = RequestMethod.POST)
+	public @ResponseBody  Boolean checkCustExstOrnotByPassword(@Validated @ModelAttribute  Customer abheecustregistration,Model model,HttpServletRequest request) throws IOException 
+	{
+		LOGGER.debug("Calling  checkCustExst at controller");
+		System.out.println("enter to checkCustExst");
+		
+		
+	
+		String custPassword=request.getParameter("cpassword");
+		Customer customer=customerDao.checkCustomerExistOrNotbyPassword(custPassword);
+		
+		String editFieldsId=request.getParameter("editFields");
+		Customer custbean1 =null;
+		if(editFieldsId.equals("0"))
+		{
+		
+			custbean1 =customerDao.checkCustomerExistOrNotbyPassword(custPassword);
+		}
+		else
+		{
+			custbean1 =customerDao.checkCustomerExistOrNotbyPasswordOnEdit(custPassword, editFieldsId);
+			
+		}
+		
+		if(custbean1 != null)
+		{
+			return true;
+		}
+		else
+		
+		return false;
+		
+	}*/
 	
 	/*@RequestMapping(value = "/task", method = RequestMethod.GET)
 	public String showtaskPage(@Validated @ModelAttribute Model model,HttpServletRequest request) throws IOException 
@@ -347,13 +380,15 @@ public class AbheeCustRegistrationController
 					sendingMail.sendConfirmationEmail(user);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
-				} else
+				}else
 				{
 					redir.addFlashAttribute("msg", "Already Record Exist");
 					redir.addFlashAttribute("cssMsg", "danger");
 				}
-			}
-		}catch (Exception e) {
+		
+		}
+		}
+			catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);
 		}

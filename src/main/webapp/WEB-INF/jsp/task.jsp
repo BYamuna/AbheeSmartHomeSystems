@@ -270,7 +270,7 @@
 								</div>
 							</div>
 						</security:authorize>
-						<security:authorize access="hasRole('ROLE_USER')">	
+						<%-- <security:authorize access="hasRole('ROLE_USER')">	
 							<div class="col-md-6">
 								<div class="form-group">
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">
@@ -283,7 +283,7 @@
 									</form:select>
 								</div>
 							</div>
-							</security:authorize>
+							</security:authorize> --%>
 						</div>	
 						
 						<div id="getting-started"></div>
