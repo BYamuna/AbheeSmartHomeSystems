@@ -8,9 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.Transient;
 /**
  * @author Charvik101
  *
@@ -26,6 +28,9 @@ public class Category {
 	@Column
 	private String category;
 	
+	@Transient
+	private Integer company;
+	
 	private String status;
 	
 	private String categoryimg;
@@ -39,6 +44,14 @@ public class Category {
 	private String kpOrgId;
 	
 	
+
+	public Integer getCompany() {
+		return company;
+	}
+
+	public void setCompay(Integer compay) {
+		this.company = company;
+	}
 
 	public Integer getId() {
 		return id;
@@ -106,8 +119,9 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", category=" + category + ", status=" + status + ", createdTime=" + createdTime
-				+ ", updatedTime=" + updatedTime + "]";
+		return "Category [id=" + id + ", category=" + category + ", company=" + company + ", status=" + status
+				+ ", categoryimg=" + categoryimg + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
+				+ ", kpOrgId=" + kpOrgId + "]";
 	}
 
 	

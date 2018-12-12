@@ -115,6 +115,7 @@ public Customer getCustomerByObject(Customer customer) {
 public void updateCustomer(Customer user) 
 {
 	Customer uc= (Customer)entityManager.find(Customer.class ,user.getId());
+	
 	uc.setMobilenumber(user.getMobilenumber());
 	uc.setEmail(user.getEmail());
 	uc.setAddress(user.getAddress());
@@ -127,8 +128,8 @@ public void updateCustomer(Customer user)
 	uc.setFirstname(user.getFirstname());
 	uc.setLastname(user.getLastname());
 	//uc.setStatus(user.getStatus());
-	uc.setPassword(user.getPassword());
-    //uc.setPurchaseCustomer(user.isPurchaseCustomer());
+	//uc.setPassword(user.getPassword());
+    uc.setPurchaseCustomer(user.isPurchaseCustomer());
 	
 	entityManager.flush();
 	

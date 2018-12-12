@@ -15,8 +15,7 @@ import com.charvikent.abheeSmartHomeSystems.model.AbheePayment;
 @Repository
 @Transactional
 public class AbheepaymentDao {
-	@PersistenceContext
-    private EntityManager entityManager;
+	@PersistenceContext private EntityManager entityManager;
 	
 	public Map<Integer, String> getPaymentmap()
 	{

@@ -277,11 +277,12 @@ public class CategoryController {
 		LOGGER.debug("Calling abheecategory at controller");
 		
 		ObjectMapper objectMapper = new ObjectMapper();
-		List<Category> listOrderBeans = categoryDao.getCategoryNames();
+		List<Category> listOrderBeans = categoryDao.getCategories();
 		//model.addAttribute("categories", listOrderBeans);
 		
+		
 		String sJson = objectMapper.writeValueAsString(listOrderBeans);	
-		request.setAttribute("allOrders1", sJson);
+		request.setAttribute("allOrders", sJson);
 		
 		List<Product> productdetails = productDao.getProductCompaniesByCategoryId(categoryid);
 		

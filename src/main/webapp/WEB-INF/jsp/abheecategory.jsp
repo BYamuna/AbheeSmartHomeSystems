@@ -494,11 +494,11 @@ $.each(productmodelslist, function(k,v){
 		 /* toolTips(); */
 	});
 	
-	function getCompanys(id){
+	/* function getCompanys(id){
 		var url      = '${baseurl }/abheecategory?id='+catid; 
 		url.replace("#", "");
 		window.location.href=url+"&company="+id;
-	}
+	} */
 	function getModels(id){
 		var url      = '${baseurl }/abheecategory?id='+catid; 
 		url.replace("#", "");

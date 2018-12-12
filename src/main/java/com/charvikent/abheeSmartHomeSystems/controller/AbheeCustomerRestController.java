@@ -1277,7 +1277,6 @@ public class AbheeCustomerRestController {
 		LOGGER.debug("Calling saveServiceRequest at controller");
 		JSONObject json = new JSONObject();
 		String code = "";
-
 		int id = 0;
 		try {
 			AbheeTask orgBean = null;
@@ -1291,10 +1290,10 @@ public class AbheeCustomerRestController {
 			if (task.getId() == null) {
 				if (dummyId == 0) {
 					try {
-						if (!task.getUploadfile().isEmpty()) {
+						/*if (!task.getUploadfile().isEmpty()) {
 							String images = imgdecoder(task.getUploadfile(), request);
 							task.setUploadfile(images);
-						}
+						}*/
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
 					}

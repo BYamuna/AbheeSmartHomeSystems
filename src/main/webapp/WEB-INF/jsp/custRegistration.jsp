@@ -106,7 +106,7 @@
 								</div>
 								<div class="col-md-6" id="passwordDiv">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Password<span class="impColor">*</span></label>
+									<label class="col-md-3 control-label no-padding-right">Password <span class="impColor">*</span></label>
 								<div class="col-md-6">
 										<form:password path="password" class="form-control validate onlyNumbers" maxlength="4" placeholder="Password"/>
 									</div>
@@ -281,9 +281,9 @@ function editCustomer(id) {
 	//document.getElementById("username").readOnly  = true;
 	//document.querySelector("password").required = false;
     $("#passwordDiv").hide();
-    var idArray = $.makeArray($('.validate').map(function() {
+     /* var idArray = $.makeArray($('.validate').map(function() {
     	return this.id;
-    }));
+    })); */ 
 }
 
 /* function changePasswordModal(){

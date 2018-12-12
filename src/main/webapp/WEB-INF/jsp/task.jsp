@@ -708,13 +708,13 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		$("#kstatus").val(serviceUnitArray[id].kstatus);
 		$("#submit1").val("Update");
 		$(window).scrollTop($('#moveTo').offset().top);
-		//document.getElementById("description").readOnly  = true;
-		/* document.getElementById("ServiceType").readOnly  = true;
-		var idArray = $.makeArray($('.validate').map(function() {
+		document.getElementById("description").readOnly  = true;
+		document.getElementById("ServiceType").readOnly  = true; 
+		/*var idArray = $.makeArray($('.validate').map(function() {
 	    	return this.id;
 	    })); */
-		$("#ServiceType").attr('disabled', true);
-	    $("#description").attr('disabled', true);
+	   /*  $("#ServiceType").attr('disabled', true);
+	    $("#description").attr('disabled', true); */ 
 	}
 
 	/* view task history */

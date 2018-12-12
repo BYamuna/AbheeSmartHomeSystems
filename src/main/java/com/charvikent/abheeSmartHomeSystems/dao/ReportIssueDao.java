@@ -477,7 +477,30 @@ public List<ReportIssue> getAllReportIssues()
 		
 		}
 	}
-
+	/*public void updateRequest(AbheeTask issue)
+	{
+		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			Collection<? extends GrantedAuthority> authorities =authentication.getAuthorities();
+			
+			AbheeTask editissue=getReportIssueById(issue.getId());
+			 editissue.setAdditionalinfo("0");
+			
+			if(authorities.contains(new SimpleGrantedAuthority("ROLE_USER")))
+			{
+				if(issue.getTaskno().equals(editissue.getTaskno()))
+				{	
+				     editissue.setDescription(issue.getDescription());
+				     editissue.setKstatus(issue.getKstatus());
+				     editissue.setAddComment(issue.getAddComment());
+				     if(issue.getUploadfile()!=null)
+				     {
+				     editissue.setUploadfile(fileTemplate.concurrentFileNames());
+				     }
+				} 
+			     taskHistoryLogsDao.historyLog(editissue);
+			}     
+	}*/
 
 
 	/*@SuppressWarnings("unchecked")

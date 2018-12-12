@@ -23,14 +23,17 @@ public class CategoryDao {
 	}
 
 	@SuppressWarnings("unchecked")
+	public List<Category> getCategories()
+	 {
+		return entityManager.createQuery(" select c.id,c.category,com.id as company,c.categoryimg from Category c, Company com where c.status='1' and com.category = c.id group by c.id").getResultList();
+	 }
+	@SuppressWarnings("unchecked")
 	public List<Category> getCategoryNames()
 	 {
-		return entityManager.createQuery("  from Category where status='1'").getResultList();
-
+		return entityManager.createQuery("from Category where status='1' order by updatedTime desc").getResultList();
 	 }
 	
 	public Category getCategoryNameById(Category cate) {
-		
 		@SuppressWarnings("unchecked")
 		List<Category> cateList =(List<Category>) entityManager.createQuery("SELECT cate FROM Category cate where category =:custName ").setParameter("custName",cate.getCategory()).getResultList();
 		if(cateList.size() > 0)

@@ -220,11 +220,11 @@ public class HomeController {
 	public @ResponseBody String getCategoryList(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException 
 	{
 		LOGGER.debug("Retrieving Categories list at controller");
-		List<Category> listOrderBeans = categoryDao.getCategoryNames();
+		List<Category> listOrderBeans = categoryDao.getCategories();
 		//model.addAttribute("categories", listOrderBeans);
 		ObjectMapper objectMapper = new ObjectMapper();
 		String sJson = objectMapper.writeValueAsString(listOrderBeans);	
-		request.setAttribute("allOrders1", sJson);
+		request.setAttribute("allOrders", sJson);
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("list", listOrderBeans);
 		String referalUrl=request.getHeader("referer");

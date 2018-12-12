@@ -42,7 +42,6 @@ import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ServiceDao;
 import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
-import com.charvikent.abheeSmartHomeSystems.model.AbheePayment;
 //import com.charvikent.abheeSmartHomeSystems.model.KpStatusLogs;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
@@ -88,7 +87,7 @@ public class TaskController {
 	@Autowired
 	AbheeTaskStatusDao abheeTaskStatusDao;
 	@Autowired
-	AbheePayment abheePaymentDao;
+	AbheepaymentDao abheePaymentDao;
 	@Autowired
 	TaskHistoryLogsDao taskHistoryLogsDao;
 	@Autowired
