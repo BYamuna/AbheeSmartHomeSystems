@@ -76,8 +76,8 @@ public class TaskController {
 	FilesStuff fileTemplate;
 	@Autowired
 	AbheeTaskDao abheeTaskDao;
-	/*@Autowired
-	AbheepaymentDao abheepaymentDao;*/
+
+	
 	@Autowired
 	CustomerDao customerDao;
 	@Autowired
@@ -110,7 +110,7 @@ public class TaskController {
 		model.addAttribute("category", serviceDao.getServicemap());
 		/*model.addAttribute("requesttimes",abheeRequestTimeDao.getRequestTimesMap() );*/
 		model.addAttribute("taskstatus", abheeTaskStatusDao.getTaskStatusMap());
-		//model.addAttribute("paymentmode", abheepaymentDao.getPaymentmap());
+
 
 		
 		
