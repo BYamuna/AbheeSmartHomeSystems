@@ -1,4 +1,4 @@
-package com.charvikent.abheeSmartHomeSystems.model;
+/*package com.charvikent.abheeSmartHomeSystems.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,3 +36,4 @@ public class AbheePayment
 	
 	
 }
+*/

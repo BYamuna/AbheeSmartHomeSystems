@@ -175,18 +175,24 @@ public class AbheeDashBoardController {
 			
 			ObjectMapper objectMapper = new ObjectMapper();
 			String sJson;
+			ObjectMapper objectMapper1 = new ObjectMapper();
+			String sJson1;
 			JSONObject jsonObj = new JSONObject();
 			if (statuslist != null && statuslist.size() > 0) {
 				
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(statuslist);
+				sJson1=objectMapper1.writeValueAsString(viewtaskBean);
 				request.setAttribute("statuslist1", sJson);
+				request.setAttribute("test21", sJson1);
 				jsonObj.put("statuslist1", statuslist);
 				// System.out.println(sJson);
 			} else {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(statuslist);
+				sJson1=objectMapper1.writeValueAsString(viewtaskBean);
 				request.setAttribute("statuslist1", "''");
+				request.setAttribute("test21", sJson1);
 				jsonObj.put("statuslist1", statuslist);
 			}
 		

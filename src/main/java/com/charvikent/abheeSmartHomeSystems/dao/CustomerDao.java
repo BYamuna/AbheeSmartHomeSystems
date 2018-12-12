@@ -200,6 +200,16 @@ public Customer checkCustomerExistOrNotbyMobile(String Mobile)
 	else
 	return null;	
 }
+@SuppressWarnings("unchecked")
+public Customer checkCustomerExistOrNotbyPassword(String Password)
+{
+	String hql ="from Customer where password='"+Password+"'";
+	List<Customer> custlist =entityManager.createQuery(hql).getResultList(); 
+	if(custlist.size()>0)
+	return custlist.get(0);
+	else
+	return null;	
+}
 
 @SuppressWarnings("unchecked")
 public Customer otpVeri(Customer cust)
@@ -382,6 +392,20 @@ public Customer checkCustomerExistOrNotbyMobileOnEdit(String custMobile, String 
 	
 	
 	String hql ="from Customer where id <>'"+editFieldsId+"' and  mobilenumber='"+custMobile+"'";
+	
+	
+	List<Customer> custlist =	entityManager.createQuery(hql).getResultList();
+	    
+	if(custlist.size()>0)
+	return custlist.get(0);
+	else
+	return null;
+}
+@SuppressWarnings("unchecked")
+public Customer checkCustomerExistOrNotbyPasswordOnEdit(String custPassword, String editFieldsId) {
+	
+	
+	String hql ="from Customer where id <>'"+editFieldsId+"' and  password='"+custPassword+"'";
 	
 	
 	List<Customer> custlist =	entityManager.createQuery(hql).getResultList();
