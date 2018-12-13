@@ -243,7 +243,7 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.lastname+"'>"+ orderObj.lastname + "</td>"
 			+ "<td title='"+orderObj.email+"'>"+ orderObj.email + "</td>"
 			+ "<td title='"+orderObj.mobilenumber+"'>"+ orderObj.mobilenumber + "</td>"
-		
+			/* + "<td title='"+orderObj.password+"'>"+ orderObj.password + "</td>" */
 			+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "</tr>";
@@ -263,7 +263,7 @@ function editCustomer(id) {
 	$("#firstname").val(serviceUnitArray[id].firstname);
 	$("#customerType").val(serviceUnitArray[id].customerType);
 	//$("#customerType").readOnly=true;
-	$('#customerType').attr('readonly', true);
+	//$('#customerType').attr('readonly', true);
 
 	if( $( "#customerType option:selected" ).text() == "Firm"){
 		
@@ -277,20 +277,20 @@ function editCustomer(id) {
 	$("#lastname").val(serviceUnitArray[id].lastname); 
 	$("#mobilenumber").val(serviceUnitArray[id].mobilenumber);
 	$("#password").val(serviceUnitArray[id].password);
+	//$('#password').attr('readonly',true);
 	$("#email").val(serviceUnitArray[id].email);
 	$("#address").val(serviceUnitArray[id].address);
-	
+	// $("#passwordDiv").hide();
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 	//document.getElementById("username").readOnly  = true;
 	//document.querySelector("password").required = false;
-<<<<<<< HEAD
-    $("#passwordDiv").hide();
+
+   
      /* var idArray = $.makeArray($('.validate').map(function() {
-=======
+
   //$("#passwordDiv").hide();
     var idArray = $.makeArray($('.validate').map(function() {
->>>>>>> 84476148bf415deca66beafc4d9726e942357170
     	return this.id;
     })); */ 
 }
@@ -591,20 +591,22 @@ $('#password').focusout(function(){
 			success : function(data) {
 				if(data ==='true')
 					{
-					$('#password').css('border-color', 'red');
-					$('#errorPasswordMsg').text( "* Password Mismatch") ;
-					setTimeout(function() { $("#errorPasswordMsg").text(''); }, 3000);
-					 $('#submit1').prop('disabled', true);
-					 
-					subValidation =false;
-					
-					event.preventDefault();
-					}
-				 else
-					{
 					$('#password').css('border-color', 'none');
 					 $('#submit1').prop('disabled', false);
 					 subValidation =true;
+					}
+					
+					
+				 else
+					{
+					  $('#password').css('border-color', 'red');
+						$('#errorPasswordMsg').text( "* Password Mismatch") ;
+						setTimeout(function() { $("#errorPasswordMsg").text(''); }, 3000);
+						 $('#submit1').prop('disabled', true);
+						 
+						subValidation =false;
+						
+						event.preventDefault(); 
 					} 	
 			},
 			complete: function () {
