@@ -201,6 +201,15 @@
 									
 								</div>
 							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">ServiceRequestNumber
+										<!-- <span class="impColor">*</span> -->
+									</label>
+									<form:input path="taskno" placeholder="ServiceRequestNumber" class="col-xs-10 col-sm-5" />
+								</div>
+							</div>
+							
 							
 						</div>
 						<div class="row">
@@ -696,6 +705,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		$("#service").text("Edit Service Request");
 		$("#id").val(serviceUnitArray[id].id);
 		$("#subject").val(serviceUnitArray[id].subject);
+		$("#taskno").val(serviceUnitArray[id].taskno);
 		$("#category").val(serviceUnitArray[id].categoryid);
 		$("#severity").val(serviceUnitArray[id].severityid);
 		$("#priority").val(serviceUnitArray[id].priorityid);
@@ -709,12 +719,13 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		$("#submit1").val("Update");
 		$(window).scrollTop($('#moveTo').offset().top);
 		document.getElementById("description").readOnly  = true;
-		document.getElementById("ServiceType").readOnly  = true; 
+		document.getElementById("taskno").readOnly  = true;
+		//document.getElementById("ServiceType").attr  = true;
 		/*var idArray = $.makeArray($('.validate').map(function() {
 	    	return this.id;
 	    })); */
-	   /*  $("#ServiceType").attr('disabled', true);
-	    $("#description").attr('disabled', true); */ 
+	   $("#ServiceType").attr('disabled', true);
+	    /*$("#description").attr('disabled', true); */ 
 	}
 
 	/* view task history */

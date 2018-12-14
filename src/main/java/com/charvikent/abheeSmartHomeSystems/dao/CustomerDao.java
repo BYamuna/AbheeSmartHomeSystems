@@ -335,7 +335,7 @@ public void updateCustomerProfile(Customer user)
 	uc.setAddress(user.getAddress());
 	uc.setFirstname(user.getFirstname());
 	uc.setLastname(user.getLastname());
-	
+	uc.setCustomerId(user.getCustomerId());
 	entityManager.flush();
 	
 }
@@ -401,7 +401,7 @@ public Customer checkCustomerExistOrNotbyMobileOnEdit(String custMobile, String 
 	else
 	return null;
 }
-@SuppressWarnings("unchecked")
+/*@SuppressWarnings("unchecked")
 public Customer checkCustomerExistOrNotbyPasswordOnEdit(String custPassword, String editFieldsId) {
 	
 	
@@ -414,7 +414,7 @@ public Customer checkCustomerExistOrNotbyPasswordOnEdit(String custPassword, Str
 	return custlist.get(0);
 	else
 	return null;
-}
+}*/
 
 @SuppressWarnings("unchecked")
 public Customer checkCustomerExistOrNotByEmailOnEdit(String custEmail, String editFieldsId) {

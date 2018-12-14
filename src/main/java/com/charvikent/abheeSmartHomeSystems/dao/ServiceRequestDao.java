@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 /*import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;*/
 import org.springframework.stereotype.Repository;
@@ -22,8 +24,8 @@ public class ServiceRequestDao
 	@PersistenceContext
     private EntityManager entityManager;
 	
-	/*@Autowired
-    private JdbcTemplate jdbcTemplate;*/
+	@Autowired
+    private JdbcTemplate jdbcTemplate;
 	
 	public void saveRequest(AllServiceRequests servicerequest) 
 	{
@@ -108,5 +110,10 @@ public class ServiceRequestDao
 		return null;
 	}
 	
-
+	public void updateServiceRequestStatus(String kstatus,String taskno)
+	{
+		String hql="update abhee_task set kstatus='2' where kstatus='1'and id="+taskno+"";
+		jdbcTemplate.execute(hql);
+	}
+	
 }

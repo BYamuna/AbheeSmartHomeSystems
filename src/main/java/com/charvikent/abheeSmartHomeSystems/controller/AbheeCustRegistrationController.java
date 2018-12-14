@@ -128,28 +128,20 @@ public class AbheeCustRegistrationController
 		return false;
 		
 	}
-/*	@RequestMapping(value = "/checkCustExstOrnotByPassword", method = RequestMethod.POST)
+	@RequestMapping(value = "/checkCustExstOrnotByPassword", method = RequestMethod.POST)
 	public @ResponseBody  Boolean checkCustExstOrnotByPassword(@Validated @ModelAttribute  Customer abheecustregistration,Model model,HttpServletRequest request) throws IOException 
 	{
 		LOGGER.debug("Calling  checkCustExst at controller");
 		System.out.println("enter to checkCustExst");
 		
-		
-	
-		String custPassword=request.getParameter("cpassword");
-		Customer customer=customerDao.checkCustomerExistOrNotbyPassword(custPassword);
-		
 		String editFieldsId=request.getParameter("editFields");
+		String custPassword=request.getParameter("cpassword");
+		
 		Customer custbean1 =null;
-		if(editFieldsId.equals("0"))
+		if(!editFieldsId.equals("0"))
 		{
 		
 			custbean1 =customerDao.checkCustomerExistOrNotbyPassword(custPassword);
-		}
-		else
-		{
-			custbean1 =customerDao.checkCustomerExistOrNotbyPasswordOnEdit(custPassword, editFieldsId);
-			
 		}
 		
 		if(custbean1 != null)
@@ -160,7 +152,7 @@ public class AbheeCustRegistrationController
 		
 		return false;
 		
-	}*/
+	}
 	
 	/*@RequestMapping(value = "/task", method = RequestMethod.GET)
 	public String showtaskPage(@Validated @ModelAttribute Model model,HttpServletRequest request) throws IOException 
