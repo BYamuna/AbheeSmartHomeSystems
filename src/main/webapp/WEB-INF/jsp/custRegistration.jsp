@@ -65,6 +65,7 @@
 									</div>
 								</div>
 								</div>
+								
 					<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
@@ -595,7 +596,6 @@ $('#password').focusout(function(){
 					 $('#submit1').prop('disabled', false);
 					 subValidation =true;
 					}
-					
 					
 				 else
 					{

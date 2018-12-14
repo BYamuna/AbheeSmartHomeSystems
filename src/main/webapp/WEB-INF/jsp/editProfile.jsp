@@ -60,6 +60,15 @@
 								</div>
 								
 								</div> --%>
+								<security:authorize access="hasRole('ROLE_USER')">
+								<div class="col-md-6"><br>
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">UserId</label>
+									<div class="col-md-6">
+										<form:input path="userId" class="form-control validate onlyCharacters" placeholder="userId"/>
+									</div>
+								</div></div>
+								</security:authorize>
 								<div class="col-md-6"><br>
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">First Name</label>
@@ -145,7 +154,7 @@
 </body>
 <script type="text/javascript">
 
-
+$("#userId").attr('disabled', true);
 
 	$("#submit1").val("Update");
 

@@ -245,6 +245,16 @@ color:#000 !important;
                   		</div>
                   		<div class="col-sm-6">
                   			<div class="col-md-3">
+                  				<label style="margin-top:18px;">CustomerId: </label>
+                  			</div>
+                  			<div class="col-md-5">
+                  				<input class="form-control onlyCharacters validate" id="customerId" type="text" placeholder="customerId">
+                  			</div>
+                  			<div class="4">
+                  			</div><div class="clearfix"></div>
+                  		</div>
+                  		<div class="col-sm-6">
+                  			<div class="col-md-3">
                   				<label style="margin-top:18px;  margin-left:5px;">Last Name: </label>
                   			</div>
                   			<div class="col-md-5">
@@ -409,6 +419,7 @@ color:#000 !important;
           <h4 class="modal-title">OTP Verification</h4>
         </div>
         <div class="modal-body" style="padding:20px;">
+       
           <form  action="#"  id="registration1"  method="post" class="login-form">
 						<div id="firstForm1">
 							<div class="form-group">
@@ -418,6 +429,7 @@ color:#000 !important;
 								<div class="col-md-9">
 									<input	type="password" name="cotp" id="cotp" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control numericOnly" placeholder="OTP"/>
 								</div><div class="clearfix"></div> 
+								  <input type="hidden" id="customerId" />
 								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
 							</div>
 						</div>
@@ -450,6 +462,7 @@ $( document ).ready(function() {
 	$("#firstname").prop('disabled',true);
 	$("#lastname").prop('disabled',true);
 	$("#address").prop('disabled',true);
+	$("#customerId").prop('disabled',true);
 });
 
 var customerProfile1 =${customerProfile1};
@@ -463,7 +476,7 @@ function displayTable(listOrders) {
 		$("#pemail").val(orderObj.email);
 		$("#address").val(orderObj.address);
 		$("#pmobilenumber").val(orderObj.mobilenumber);
-		$("#customerid").val(orderObj.id);
+		$("#customerId").val(orderObj.customerId);
 		$("#checkpass").val(orderObj.id);
 	});
 	}
@@ -489,6 +502,16 @@ function displayTable2(listOrders) {
 			+ "</tr>";
 		$(tblRow).appendTo("#customerOrderTable table tbody");
 	});
+	
+}
+
+
+var userData="";
+function getmodelsubmit(id)
+{
+	userData=$('#customerId').val(id);
+	makeEmptymodelsubmit()
+	$('#OTPModel').trigger('click');
 	
 }
 
@@ -537,6 +560,7 @@ $('#editpersnolinfo').click(function (){
 	$("#firstname").prop('disabled',false);
 	$("#lastname").prop('disabled',false);
 	$("#address").prop('disabled',false);
+	$("#customerId").prop('disabled',true);
 	
 });
 
@@ -768,6 +792,7 @@ function getOtp()
 				alert("OTP Send to Your Mobile Number ");
 				$('#OTPModel').modal('toggle');
 				$("#OTPModel").modal('show');
+				
 				}
 			else
 				{
@@ -809,6 +834,7 @@ function modelsubmit()
 				$('#savemobileno').hide();
 				$('#editmobileno').show();
   				alert("Mobile Number Updated Successfully ");
+  				//makeEmptyOTPModel();
 			}
 			else
 				alert("Enter valid OTP");
@@ -883,6 +909,7 @@ function modelsubmit2()
 				$('#saveemailinfo').hide();
 				$('#editemailinfo').show();
 				alert(" Email Updated Successfully ");  
+				//makeEmptyOTPModel();
 			}
 			else
 				alert("Enter valid OTP");
@@ -928,6 +955,17 @@ function resendOTP()
 		error :  function(e){$.unblockUI();console.log(e);}
 		
 	});
+	
+	function makeEmptymodelsubmit()
+	 {
+	 	
+	 	$('#cotp').val("");
+	 	$('#cotp').css('border-color', 'none');
+	 	
+	 }
+
+	
+	
 }
 	
 </script>

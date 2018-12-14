@@ -335,7 +335,7 @@ public void updateCustomerProfile(Customer user)
 	uc.setAddress(user.getAddress());
 	uc.setFirstname(user.getFirstname());
 	uc.setLastname(user.getLastname());
-	
+	uc.setCustomerId(user.getCustomerId());
 	entityManager.flush();
 	
 }

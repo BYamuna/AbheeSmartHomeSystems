@@ -324,6 +324,7 @@ function editEmployee(id) {
 	editFields =id;
 	$("#emp").text("Edit Employee");
 	$("#id").val(serviceUnitArray[id].id);
+	//$("#userId").val(serviceUnitArray[id].userId);
 	$("#username").val(serviceUnitArray[id].username);
 	$("#password").val(serviceUnitArray[id].password);
 	$("#firstname").val(serviceUnitArray[id].firstname);
@@ -337,6 +338,7 @@ function editEmployee(id) {
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 	document.getElementById("username").readOnly  = true;
+	
 	//document.querySelector("password").required = false;
     $("#passwordDiv").hide();
     var idArray = $.makeArray($('.validate').map(function() {
