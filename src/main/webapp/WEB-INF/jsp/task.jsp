@@ -555,7 +555,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	function displayTable(listOrders) {
 		$('#tableId').html('');
 		var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-				+ '<thead><tr><th>Service Request No</th><th>Category</th><th>Model Name</th><th>CustomerID</th><th>ServiceType</th><th>Priority</th><th>Subject</th><th>Service Request Status</th><th>Address</th><th>Requested Time</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
+				+ '<thead><tr><th>Service Request No</th><th>Category</th><th>Model Name</th><th>CustomerID</th><th>ServiceType</th><th>Priority</th><th>Task Created By</th><th>Service Request Status</th><th>Address</th><th>Requested Time</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
 		$('#tableId').html(tableHead);
 		serviceUnitArray = {};
 

@@ -36,6 +36,7 @@ import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
+import com.charvikent.abheeSmartHomeSystems.model.ProductGuarantee;
 //import com.charvikent.abheeSmartHomeSystems.model.Customer;
 //import com.charvikent.abheeSmartHomeSystems.model.TaskHistory;
 //import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
@@ -477,30 +478,30 @@ public List<ReportIssue> getAllReportIssues()
 		
 		}
 	}
-	/*public void updateRequest(AbheeTask issue)
+	public void updateRequest(AbheeTask issue)
 	{
-		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		/*User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			Collection<? extends GrantedAuthority> authorities =authentication.getAuthorities();
+			Collection<? extends GrantedAuthority> authorities =authentication.getAuthorities();*/
 			
-			AbheeTask editissue=getReportIssueById(issue.getId());
+			AbheeTask editissue=getRequestDetailsByObject(issue);
 			 editissue.setAdditionalinfo("0");
 			
-			if(authorities.contains(new SimpleGrantedAuthority("ROLE_USER")))
-			{
+			/*if(authorities.contains(new SimpleGrantedAuthority("ROLE_USER")))
+			{*/
 				if(issue.getTaskno().equals(editissue.getTaskno()))
 				{	
-				     editissue.setDescription(issue.getDescription());
+				     //editissue.setDescription(issue.getDescription());
 				     editissue.setKstatus(issue.getKstatus());
 				     editissue.setAddComment(issue.getAddComment());
-				     if(issue.getUploadfile()!=null)
+				     if(issue.getImgfile()!=null)
 				     {
-				     editissue.setUploadfile(fileTemplate.concurrentFileNames());
+				     editissue.setImgfile(fileTemplate.concurrentFileNames());
 				     }
 				} 
-			     taskHistoryLogsDao.historyLog(editissue);
+			     taskHistoryLogsDao.historyLogs(editissue);
 			}     
-	}*/
+	/*}*/
 
 
 	/*@SuppressWarnings("unchecked")
@@ -873,6 +874,16 @@ public List<ReportIssue> getAllReportIssues()
 	    List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
 		System.out.println(retlist);
 		return retlist;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public AbheeTask getRequestDetailsByObject(AbheeTask task) 
+	{
+		String hql ="from AbheeTask where taskno ='"+ task.getTaskno()+"'";
+		List<AbheeTask> pwd= em.createQuery(hql).getResultList();
+		if(pwd.size()>0)
+			return pwd.get(0);
+		return null;
 	}
 }
 

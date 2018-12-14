@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeQuationHistory;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 
@@ -22,9 +23,11 @@ public class SalesRequestDao
 	@PersistenceContext
     private EntityManager entityManager;
 	@Autowired JdbcTemplate jdbcTemplate;
-	
+	@Autowired KptsUtil utilities;
 	public void saveRequest(SalesRequest salesrequest) 
 	{
+		String randomNum = utilities.randNum();
+		salesrequest.setSalesrequestnumber(randomNum);
 		entityManager.persist(salesrequest);
 		//saveQuationHistory(salesrequest);
 
@@ -101,9 +104,9 @@ public class SalesRequestDao
 		public List<Map<String, Object>> getSalesRequestListByRequestNo(SalesRequest req)
 		 {
 		 
-			String hql ="select sr.id,sr.address,sr.email,DATE_FORMAT(sr.created_time,'%d-%b-%y %H:%i')as created_time,sr.imgfiles,sr.location,ap.name as modelname,sr.comments,sr.customerid,sr.mobileno,sr.reqdesc,sr.salesrequestnumber,sr.quotation_documents,sr.enable,sr.customername,sr.request_type" + 
+			String hql ="select sr.id,sr.address,sr.email,DATE_FORMAT(sr.created_time,'%d-%b-%y %H:%i')as created_time,sr.imgfiles,sr.location,ap.name as modelname,sr.comments,sr.customerid,sr.mobileno,sr.reqdesc,sr.salesrequestnumber,sr.quotation_documents,sr.enable,sr.customername,sr.request_type " + 
 
-			 		"from abhee_sales_request sr, abhee_product ap where sr.modelnumber=ap.name and salesrequestnumber='"+req.getSalesrequestnumber()+"'";
+			 		"from abhee_sales_request sr, abhee_product ap where sr.modelnumber=ap.name and sr.salesrequestnumber='"+req.getSalesrequestnumber()+"'";
 			/*String hql ="select sr.id,sr.address,sr.email,sr.created_time,sr.imgfiles,sr.location,sr.modelnumber,sr.comments,sr.customerid,sr.mobileno,sr.reqdesc,sr.salesrequestnumber,sr.quotation_documents,sr.enable,sr.customername,sr.request_type" + 
 			 		"from abhee_sales_request sr where salesrequestnumber='"+req.getSalesrequestnumber()+"'";*/
 			 System.out.println(hql);

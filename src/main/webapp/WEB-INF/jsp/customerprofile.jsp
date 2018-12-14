@@ -310,7 +310,6 @@ color:#000 !important;
                   			<div class="col-md-9">
                   				<input class="form-control numericOnly2 validate " maxlength="10" type="text"  id="pmobilenumber" placeholder="Mobile Number" disabled="true">
                   				<input class="form-control" type="hidden"  id="customerid" placeholder="Mobile Number">
-                  				<input class="form-control" type="hidden"  id="checkpass">
                   			</div>
                   			<div class="col-md-4">
                   			</div><div class="clearfix"></div>
@@ -338,6 +337,8 @@ color:#000 !important;
                   			</div>
                   			<div class="col-md-8">
                   				<input style="float:left;" id="pcurrentpassword" class="form-control" maxlength="4" type="password" placeholder="*****" disabled="true">
+                  				<input class="form-control" type="hidden"  id="checkpass">
+                  				<!-- <span id="errorPasswordMsg" style="color:red;"></span> -->
                   			</div><div class="clearfix"></div>
                   		</div>
                   		<div class="col-sm-6">
@@ -597,15 +598,19 @@ $('#editProfilePassword').click(function (){
 	$("#pconfirmpassword").prop('disabled',false);	
 });
 $('#saveProfilePassword').click(function (){
-	var pconfirmpassword=$("#pconfirmpassword").val();
+	
 	var customerid=$("#customerid").val();
-	/* var checkpass=$("#checkpass").val();
+	/*  var checkpass=$("#checkpass").val();
 	if(checkpass!=pconfirmpassword)
 		{
-		alert("Enter Valid Password");
+		//alert("Enter Valid Password");
+		$('#checkpass').css('border-color', 'red');
+		$('#errorPasswordMsg').text( "* Password Mismatch") ;
+		setTimeout(function() { $("#errorPasswordMsg").text(''); }, 3000);
 		return false;
-		} */
+		}  */
 	var pnewpassword=$("#pnewpassword").val();
+	var pconfirmpassword=$("#pconfirmpassword").val();	
 	if( pnewpassword !=pconfirmpassword)
 		{
 		alert("New Password and Confirm Password Not Matched");
@@ -660,7 +665,7 @@ $('#editemailinfo').click(function (){
 $('#saveemailinfo').click(function (){
 	var pemail =$("#pemail").val();
 	var customerid=$("#customerid").val();
-	
+	//var cotp=$("#cotp").val();
 	//var booleanValue=$("#pemail").hasClass('default-class errorCls');
 	if(!$("#pemail").hasClass('default-class errorCls')){
 		//alert('not a valid email');
@@ -737,11 +742,11 @@ $('#savemobileno').click(function (){
 			}
   			else
   				{
-  				alert("MobileNumber already exists");
+  				alert("Mobile Number already exists");
   				}
 			if(data == "")
 			{
-				alert("MobileNumber Updation Failed");
+				alert("Mobile Number Updation Failed");
 			}
 		},
 		complete: function () {
@@ -765,7 +770,7 @@ function getOtp()
 		success : function(data) {
 			if(data == 'true')
 				{
-				alert("OTP Send to Your Mobile Number ");
+				alert("OTP Sent to Your Mobile Number ");
 				$('#OTPModel').modal('toggle');
 				$("#OTPModel").modal('show');
 				}

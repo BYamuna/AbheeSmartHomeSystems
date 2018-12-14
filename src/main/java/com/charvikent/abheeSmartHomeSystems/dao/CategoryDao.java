@@ -30,7 +30,7 @@ public class CategoryDao {
 	@SuppressWarnings("unchecked")
 	public List<Category> getCategoryNames()
 	 {
-		return entityManager.createQuery("from Category where status='1' order by updatedTime desc").getResultList();
+		return entityManager.createQuery("from Category where status='1'").getResultList();
 	 }
 	
 	public Category getCategoryNameById(Category cate) {

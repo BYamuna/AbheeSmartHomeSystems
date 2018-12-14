@@ -71,11 +71,11 @@ public class SalesRequestController
 		int filecount =0;
 		
 		//String str[] = locationData.split("&");
-		int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
+		//int randomNum = ThreadLocalRandom.current().nextInt(10, 20 + 1);
 		loginDetails.setModelnumber(modelnumber);
 		loginDetails.setAddress(address);
 		loginDetails.setReqdesc(reqdesc);
-		loginDetails.setSalesrequestnumber(String.valueOf(randomNum));
+		loginDetails.setSalesrequestnumber(loginDetails.getSalesrequestnumber());
 		//loginDetails.setLat(str[0]);
 		//loginDetails.setLongitude(str[1]);
 		loginDetails.setEnable("1");

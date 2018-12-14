@@ -310,6 +310,7 @@ if(validation) {
 		  	success: function(result){
 		  		
 		  		if(result =="true"){
+		  			alert("Quotation sent successfully");
 		  			$('#formModal').modal('hide');
 		  		
 		  		/* $('#commet').val("");

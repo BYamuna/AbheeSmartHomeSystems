@@ -470,5 +470,11 @@ public Customer checkCustomerExistOrNotByEmailOnEdit(String custEmail, String ed
 		RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<Customer>(Customer.class);
 	    return  this.jdbcTemplate.query(hql, rowMapper);
 	}
+	public List<Customer> getCustomerId()
+	{
+		String hql="select * from abhee_customer where purchase_customer=true";
+		RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<Customer>(Customer.class);
+	    return  this.jdbcTemplate.query(hql, rowMapper);
+	}
 
 }

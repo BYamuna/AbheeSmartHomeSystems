@@ -55,8 +55,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class TaskController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger( TaskController.class);
-
-
 	@Autowired
 	ReportIssueDao reportIssueDao;
 	@Autowired

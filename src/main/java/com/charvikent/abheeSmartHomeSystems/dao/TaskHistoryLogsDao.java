@@ -66,6 +66,37 @@ public class TaskHistoryLogsDao {
 	}
 	
 	
+	public void historyLogs(AbheeTask Issue)
+	{
+		//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		TaskHistoryLogs taskHistoryLogs=new TaskHistoryLogs();
+		taskHistoryLogs.setTaskid(Issue.getId());
+		taskHistoryLogs.setServiceType(Issue.getServiceType());
+		taskHistoryLogs.setAdditionalinfo(Issue.getAdditionalinfo());
+		taskHistoryLogs.setAssignby(Issue.getCustomerId());
+		taskHistoryLogs.setAssignto(Issue.getAssignto());
+		taskHistoryLogs.setCategory(Issue.getCategory());
+		//taskHistoryLogs.setDescription(Issue.getDescription());
+		taskHistoryLogs.setKstatus(Issue.getKstatus());
+		taskHistoryLogs.setModelid(Issue.getModelid());
+		taskHistoryLogs.setPriority(Issue.getPriority());
+		taskHistoryLogs.setSeverity(Issue.getSeverity());
+		taskHistoryLogs.setStatus(Issue.getStatus());
+		taskHistoryLogs.setSubject(Issue.getSubject());
+		taskHistoryLogs.setTaskdeadline(Issue.getTaskdeadline());
+		taskHistoryLogs.setTaskno(Issue.getTaskno());
+		taskHistoryLogs.setAddComment(Issue.getAddComment());
+		
+		/*taskHistoryLogs.setModifiedBy(String.valueOf(objuserBean.getId()));*/
+		taskHistoryLogs.setCommunicationaddress(Issue.getCommunicationaddress());
+		
+		
+		
+		taskHistoryLogs.setImgfile(Issue.getImgfile());
+		
+		entityManager.persist(taskHistoryLogs);
+	}
 	
 	/**
 	 * @param reportIssue

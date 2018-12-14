@@ -318,7 +318,6 @@ public class HomeController {
 		return "ticketstatus";
 	}
 	
-	@SuppressWarnings("unused")
 	@RequestMapping(value="/quotationrequests",method = RequestMethod.POST )
 	public @ResponseBody String  quotationRequests(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
 		LOGGER.debug("Calling quotationrequests at controller");
@@ -440,8 +439,8 @@ public class HomeController {
 		Customer profilecustomer =	customerDao.checkProfileEmailExistsOrNot(customer);
 			if( profilecustomer==null)
 			{ 
-				try 
-			{
+			try
+			{		
 				customerDao.updateCustomerProfileEmail(customer);
 				return "true";
 			}
@@ -473,7 +472,7 @@ public class HomeController {
 		 if(profilecustomer==null)
 		 {
 			 try 
-			 {
+			 { 
 				customerDao.updateCustomerProfileMobileNo(customer);
 				return "true";	
 			 } 
@@ -488,27 +487,6 @@ public class HomeController {
 			 return "false";
 		 }
 	}
-	
-	@RequestMapping(value = "/modelSubmit2", method = RequestMethod.POST)
-	public @ResponseBody  boolean modelSubmit2(Model model,HttpServletRequest request) throws IOException 
-	{
-		LOGGER.debug("Calling  modelSubmit2 at controller");
-		System.out.println("enter to model Submit2");
-		String cemail=request.getParameter("pemail");
-		String cotp=request.getParameter("cotp");
-		Customer customer =new Customer();
-		customer.setEmail(cemail);
-		//String returnmsg ="";
-		if(otpnumber.equals(cotp))
-		{
-			customer.setRegistedredFromAndroid("0");
-			customerDao.saveAbheeCustomer(customer);
-			return true;
-		}
-		else
-			return false;	
-	}
-	
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/modelSubmit1", method = RequestMethod.POST)
 	public @ResponseBody  boolean modelSubmit1(Model model,HttpServletRequest request) throws IOException 
@@ -516,17 +494,11 @@ public class HomeController {
 		LOGGER.debug("Calling  modelSubmit1 at controller");
 		System.out.println("enter to model Submit1");
 		String custMobile=request.getParameter("pmobilenumber");
-
 		String cotp=request.getParameter("cotp");
 		Customer customer =new Customer();
 		customer.setMobilenumber(custMobile);
-		
 		String cemail=request.getParameter("pemail");
-		
-		
 		customer.setEmail(cemail);
-		
-
 		String returnmsg ="";
 		if(otpnumber.equals(cotp))
 		{

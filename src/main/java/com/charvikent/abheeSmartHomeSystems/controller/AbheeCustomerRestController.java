@@ -1277,50 +1277,34 @@ public class AbheeCustomerRestController {
 		LOGGER.debug("Calling saveServiceRequest at controller");
 		JSONObject json = new JSONObject();
 		String code = "";
-		int id = 0;
-		try {
+		String id=null;
+		try 
+		{
 			AbheeTask orgBean = null;
-			if (task.getId() != null) {
-				orgBean = reportIssueDao.getReportIssueById(task.getId());
+			if (task.getTaskno() != "" && task.getTaskno() != null) 
+			{
+				orgBean = reportIssueDao.getRequestDetailsByObject(task);
 			}
-			int dummyId = 0;
-			if (orgBean != null) {
-				dummyId = orgBean.getId();
+			String dummyId=null;
+			if (orgBean != null) 
+			{
+				dummyId = orgBean.getTaskno();
+			}	
+			id = task.getTaskno();
+			if (id.equals(dummyId) || orgBean == null) 
+			{
+				/*String images = imgdecoder(task.getImgfile(), request);
+					if (!task.getImgfile().isEmpty()) 
+					{
+						task.setImgfile(images);
+					}*/
+				reportIssueDao.updateRequest(task);
+				code = "updated";
 			}
-			if (task.getId() == null) {
-				if (dummyId == 0) {
-					try {
-						/*if (!task.getUploadfile().isEmpty()) {
-							String images = imgdecoder(task.getUploadfile(), request);
-							task.setUploadfile(images);
-						}*/
-					} catch (IllegalStateException e) {
-						e.printStackTrace();
-					}
-					task.setStatus("1");
-					task.setAdditionalinfo("0");
-					reportIssueDao.saveServiceRequest(task);
-					code = "success";
-				} else {
-					code = "exists";
-				}
-			} else {
-				id = task.getId();
-				if (id == dummyId || orgBean == null) {
-					try {
-						if (!task.getUploadfile().isEmpty()) {
-							String images = imgdecoder(task.getUploadfile(), request);
-							task.setUploadfile(images);
-						}
-					} catch (IllegalStateException e) {
-						e.printStackTrace();
-					}
-					reportIssueDao.updateIssue(task);
-					code = "updated";
-				} else {
-					code = "exists";
-				}
-			}
+			else 
+			{
+				code = "exists";
+			}	
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);
@@ -1396,7 +1380,7 @@ public class AbheeCustomerRestController {
 
 	@RequestMapping(value = "/warrantylist", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public String getProductWarrantyList() {
-		LOGGER.debug("Calling taskslist at controller");
+		LOGGER.debug("Calling warrantylist at controller");
 		JSONObject json = new JSONObject();
 		List<Map<String, Object>> listOrderBeans = null;
 		try {
@@ -1737,6 +1721,27 @@ public class AbheeCustomerRestController {
 		}
 		else
 			json.put("getRequestTimelist", "NOT_FOUND");
+			System.out.println("rest call user status:  "+code);
+			return String.valueOf(json);
+	}
+	
+	@SuppressWarnings("unused")
+	@RequestMapping(value="/getCustomerIds", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
+	public String  getCustomerIds(Customer customer) throws JsonProcessingException, JSONException 
+	{
+		LOGGER.debug("Calling getCustomerIds at controller");
+		String code =null;
+		HashMap<String,String> hm =new HashMap<String,String>();
+		List<Customer> listOrderBeans = customerDao.getCustomerId();
+		JSONObject json =new JSONObject();
+		
+		if(null != listOrderBeans)
+		{	
+				json.put("CustomerIds", listOrderBeans);
+		}
+		else
+			
+			json.put("CustomerIds", "NOT_FOUND");
 			System.out.println("rest call user status:  "+code);
 			return String.valueOf(json);
 	}

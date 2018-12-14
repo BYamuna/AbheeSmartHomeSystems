@@ -65,7 +65,7 @@
 									</div>
 								</div>
 								</div>
-					<div class="col-md-6">
+								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
@@ -104,7 +104,7 @@
 									</div>
 								</div>
 								</div>
-								<div class="col-md-6" id="passwordDiv">
+								<div class="col-md-6" id="pwd">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Password <span class="impColor">*</span></label>
 								<div class="col-md-6">
@@ -279,18 +279,13 @@ function editCustomer(id) {
 	$("#password").val(serviceUnitArray[id].password);
 	$("#email").val(serviceUnitArray[id].email);
 	$("#address").val(serviceUnitArray[id].address);
-	
+	//$("#purchaseCustomer").val(serviceUnitArray[id].purchaseCustomer);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
+	//$("#pwd").hide();
 	//document.getElementById("username").readOnly  = true;
-	//document.querySelector("password").required = false;
-<<<<<<< HEAD
-    $("#passwordDiv").hide();
+	//document.querySelector("password").required = true;
      /* var idArray = $.makeArray($('.validate').map(function() {
-=======
-  //$("#passwordDiv").hide();
-    var idArray = $.makeArray($('.validate').map(function() {
->>>>>>> 84476148bf415deca66beafc4d9726e942357170
     	return this.id;
     })); */ 
 }
