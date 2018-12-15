@@ -214,6 +214,8 @@ color:#000 !important;
                 <li class="arrow_box"><a data-toggle="tab" href="#1_3">Mobile Number</a> </li>
                 <li class="arrow_box"><a data-toggle="tab" href="#1_4">Change Password</a> </li>
                 <li class="arrow_box"><a data-toggle="tab" href="#1_5">My Orders</a> </li>
+                 <li class="ticketstatus"><a href="${baseurl }/ticketstatus">Ticket Status</a></li>
+                
               </ul>
             </div>
             <div class="col-sm-10">
@@ -640,7 +642,7 @@ $('#saveProfilePassword').click(function (){
 				}
 				else
 					{
-					alert(" Old password is wrong! ");
+					alert("You Entered Current Password is Wrong!");
 					}
 			},
 			complete: function () {
@@ -659,14 +661,14 @@ $('#editemailinfo').click(function (){
 $('#saveemailinfo').click(function (){
 	var pemail =$("#pemail").val();
 	var customerid=$("#customerid").val();
-	
+	//var cotp=$("#cotp").val();
 	//var booleanValue=$("#pemail").hasClass('default-class errorCls');
 	if(!$("#pemail").hasClass('default-class errorCls')){
 		//alert('not a valid email');
 		$.ajax({
 			type : "POST",
 			url : "editprofileemail",
-			data :"pemail="+pemail+/* "&pmobilenumber="+pmobilenumber+ */"&customerid="+customerid,
+			data :"pemail="+pemail+"&customerid="+customerid,
 			dataType : "text",
 			beforeSend : function() {
 	             $.blockUI({ message: 'Please wait' });
@@ -674,8 +676,10 @@ $('#saveemailinfo').click(function (){
 	          success : function(data) {
 	  			if(data =='true')
 	  			{     
+	  				
 					getOtp();
-					modelsubmit2();
+					$("#submit2").attr("onclick","modelsubmit2()");
+					
 					
 				}
 				else if(data == "")
@@ -702,6 +706,7 @@ $('#saveemailinfo').click(function (){
 	//alert(customerid);
 		
 	});	
+
 $('#editmobileno').click(function (){
 	$('#savemobileno').show();
 	$('#editmobileno').hide();
@@ -729,6 +734,8 @@ $('#savemobileno').click(function (){
   			if(data == "true")
   			{   
   				getOtp();
+  				$("#submit2").attr("onclick","modelsubmit()");
+
   					
 			}
   			else
@@ -856,19 +863,17 @@ function modelsubmit()
 
 function modelsubmit2()
 {
-	 //pmobilenumber =$('#pmobilenumber').val();
 	 pemail=$('#pemail').val();
 	 cotp=$('#cotp').val();
 	$.ajax({
 		type : "POST",
 		url : "modelSubmit1",
-		data :"&pemail="+pemail+/* "&pmobilenumber="+pmobilenumber+ */"&cotp="+cotp,
+		data :"&pemail="+pemail+"&cotp="+cotp,
 		dataType : "text",
 		beforeSend : function() {
              $.blockUI({ message: 'Please wait' });
           }, 
 		success : function(data) {
-			//alert(data);
 			
 			if(data =="true")
 			{
@@ -894,7 +899,7 @@ function modelsubmit2()
 
 }
 
-
+ 
 
 function resendOTP()
 {

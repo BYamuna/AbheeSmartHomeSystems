@@ -462,8 +462,8 @@ public class HomeController {
 		Customer profilecustomer =	customerDao.checkProfileEmailExistsOrNot(customer);
 			if( profilecustomer==null)
 			{ 
-				try 
-			{
+			try
+			{		
 				customerDao.updateCustomerProfileEmail(customer);
 				return "true";
 			}
@@ -478,6 +478,7 @@ public class HomeController {
 				return "false";
 			}
 	}
+
 
 //edit mobileno
 	
@@ -546,7 +547,7 @@ public class HomeController {
 		else
 			return false;	
 	}
-	
+
 	@RequestMapping(value = "/getEditOtp", method = RequestMethod.POST)
 	public @ResponseBody  String getEditOTP(Model model,HttpServletRequest request) throws IOException 
 	{
