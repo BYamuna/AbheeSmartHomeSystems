@@ -422,22 +422,30 @@ public class HomeController {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/saveProfilePassword", method = RequestMethod.POST)
-	public @ResponseBody  String saveProfilePassword(Model model,HttpServletRequest request) throws IOException, MessagingException 
+	public @ResponseBody  String saveProfilePassword(Model model,Customer cust,HttpServletRequest request) throws IOException, MessagingException 
 	{
 		LOGGER.debug("Calling saveProfilePassword at controller");
+		String pcurrentpassword=request.getParameter("pcurrentpassword");
 		String pconfirmpassword =request.getParameter("pconfirmpassword");
 		String customerid =request.getParameter("customerid");
 		 Customer customer = new Customer();
 		 customer.setId(Integer.parseInt((customerid)));
 		 customer.setPassword(pconfirmpassword);
-		 try {
-			customerDao.updateCustomerProfilepassword(customer);
+		
+		 Customer custbean1 =null;
+		 
+		 custbean1 =customerDao.checkCustomerExistOrNotbyPassword(pcurrentpassword);
+		// String password=null;
+		 
+		 if(custbean1 != null)
+			{
+			 customerDao.updateCustomerProfilepassword(customer);
 			return "true";
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "false";
-		}
+			}
+		
+		return "false";
 	}
 	
 	//edit email
