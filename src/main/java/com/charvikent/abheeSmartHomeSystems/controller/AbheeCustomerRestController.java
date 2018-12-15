@@ -1402,12 +1402,12 @@ public class AbheeCustomerRestController {
 	}
 
 	@RequestMapping(value = "/warrantylist", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public String getProductWarrantyList(@RequestBody Customer customer) {
+	public String getProductWarrantyList() {
 		LOGGER.debug("Calling warrantylist at controller");
 		JSONObject json = new JSONObject();
 		List<Map<String, Object>> listOrderBeans = null;
 		try {
-			listOrderBeans = productGuaranteeDao.getWarrantyList(customer);
+			listOrderBeans = productGuaranteeDao.getWarrantyList();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				json.put("warrantylist", listOrderBeans);
 			} else {
