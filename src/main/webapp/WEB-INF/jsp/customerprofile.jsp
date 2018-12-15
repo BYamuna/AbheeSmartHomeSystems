@@ -598,12 +598,12 @@ $('#saveProfilePassword').click(function (){
 	var pconfirmpassword=$("#pconfirmpassword").val();
 	var pcurrentpassword=$("#pcurrentpassword").val();
 	var customerid=$("#customerid").val();
-	var checkpass=$("#checkpass").val();
-	if(checkpass!=pconfirmpassword)
+	//var checkpass=$("#checkpass").val();
+	/* if(checkpass!=pconfirmpassword)
 		{
 		alert("Enter Valid Password");
 		return false;
-		}
+		} */
 	var pnewpassword=$("#pnewpassword").val();
 	if( pnewpassword !=pconfirmpassword)
 		{
@@ -614,7 +614,7 @@ $('#saveProfilePassword').click(function (){
 		$.ajax({
 			type : "POST",
 			url : "saveProfilePassword",
-			data :"pconfirmpassword="+pconfirmpassword+"&customerid="+customerid,
+			data :"pconfirmpassword="+pconfirmpassword+"&customerid="+customerid+"&pcurrentpassword="+pcurrentpassword,
 			dataType : "text",
 			beforeSend : function() {
 	             $.blockUI({ message: 'Please wait' });
@@ -640,7 +640,7 @@ $('#saveProfilePassword').click(function (){
 				}
 				else
 					{
-					alert(data);
+					alert(" Old password is wrong! ");
 					}
 			},
 			complete: function () {
