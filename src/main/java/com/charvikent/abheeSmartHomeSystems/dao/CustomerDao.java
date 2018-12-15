@@ -128,7 +128,7 @@ public void updateCustomer(Customer user)
 	uc.setFirstname(user.getFirstname());
 	uc.setLastname(user.getLastname());
 	//uc.setStatus(user.getStatus());
-	//uc.setPassword(user.getPassword());
+	uc.setPassword(user.getPassword());
     uc.setPurchaseCustomer(user.isPurchaseCustomer());
 	
 	entityManager.flush();
@@ -335,7 +335,7 @@ public void updateCustomerProfile(Customer user)
 	uc.setAddress(user.getAddress());
 	uc.setFirstname(user.getFirstname());
 	uc.setLastname(user.getLastname());
-	uc.setCustomerId(user.getCustomerId());
+	/*uc.setCustomerId(user.getCustomerId());*/
 	entityManager.flush();
 	
 }
@@ -401,20 +401,7 @@ public Customer checkCustomerExistOrNotbyMobileOnEdit(String custMobile, String 
 	else
 	return null;
 }
-/*@SuppressWarnings("unchecked")
-public Customer checkCustomerExistOrNotbyPasswordOnEdit(String custPassword, String editFieldsId) {
-	
-	
-	String hql ="from Customer where id <>'"+editFieldsId+"' and  password='"+custPassword+"'";
-	
-	
-	List<Customer> custlist =	entityManager.createQuery(hql).getResultList();
-	    
-	if(custlist.size()>0)
-	return custlist.get(0);
-	else
-	return null;
-}*/
+
 
 @SuppressWarnings("unchecked")
 public Customer checkCustomerExistOrNotByEmailOnEdit(String custEmail, String editFieldsId) {

@@ -198,7 +198,6 @@ color:#ea8080 !important;
 .close {
 color:#000 !important;
 }
-
 </style>
     
 
@@ -215,7 +214,6 @@ color:#000 !important;
                 <li class="arrow_box"><a data-toggle="tab" href="#1_3">Mobile Number</a> </li>
                 <li class="arrow_box"><a data-toggle="tab" href="#1_4">Change Password</a> </li>
                 <li class="arrow_box"><a data-toggle="tab" href="#1_5">My Orders</a> </li>
-                <li class="ticketstatus"><a href="${baseurl }/ticketstatus">Ticket Status</a></li>
               </ul>
             </div>
             <div class="col-sm-10">
@@ -239,16 +237,6 @@ color:#000 !important;
                   			</div>
                   			<div class="col-md-5">
                   				<input class="form-control onlyCharacters validate" id="firstname" type="text" placeholder="First Name">
-                  			</div>
-                  			<div class="4">
-                  			</div><div class="clearfix"></div>
-                  		</div>
-                  		<div class="col-sm-6">
-                  			<div class="col-md-3">
-                  				<label style="margin-top:18px;">CustomerId: </label>
-                  			</div>
-                  			<div class="col-md-5">
-                  				<input class="form-control onlyCharacters validate" id="customerId" type="text" placeholder="customerId">
                   			</div>
                   			<div class="4">
                   			</div><div class="clearfix"></div>
@@ -320,6 +308,7 @@ color:#000 !important;
                   			<div class="col-md-9">
                   				<input class="form-control numericOnly2 validate " maxlength="10" type="text"  id="pmobilenumber" placeholder="Mobile Number" disabled="true">
                   				<input class="form-control" type="hidden"  id="customerid" placeholder="Mobile Number">
+                  				<input class="form-control" type="hidden"  id="checkpass">
                   			</div>
                   			<div class="col-md-4">
                   			</div><div class="clearfix"></div>
@@ -347,8 +336,6 @@ color:#000 !important;
                   			</div>
                   			<div class="col-md-8">
                   				<input style="float:left;" id="pcurrentpassword" class="form-control" maxlength="4" type="password" placeholder="*****" disabled="true">
-                  				<input class="form-control" type="hidden"  id="checkpass">
-                  				<!-- <span id="errorPasswordMsg" style="color:red;"></span> -->
                   			</div><div class="clearfix"></div>
                   		</div>
                   		<div class="col-sm-6">
@@ -420,7 +407,6 @@ color:#000 !important;
           <h4 class="modal-title">OTP Verification</h4>
         </div>
         <div class="modal-body" style="padding:20px;">
-       
           <form  action="#"  id="registration1"  method="post" class="login-form">
 						<div id="firstForm1">
 							<div class="form-group">
@@ -430,7 +416,6 @@ color:#000 !important;
 								<div class="col-md-9">
 									<input	type="password" name="cotp" id="cotp" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control numericOnly" placeholder="OTP"/>
 								</div><div class="clearfix"></div> 
-								  <input type="hidden" id="customerId" />
 								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
 							</div>
 						</div>
@@ -441,7 +426,7 @@ color:#000 !important;
 			<a onclick="resendOTP()" class="btn btn-warning">Resend OTP</a>
 		</div>
         <div class="modal-footer">
-           <button type="button" id="submit2" onclick="modelsubmit()" class="btn btn-primary" >Submit</button> 
+          <button type="button" id="submit2" onclick="modelsubmit()" class="btn btn-primary" >Submit</button>
         </div>
       </div>
     </div>
@@ -463,7 +448,6 @@ $( document ).ready(function() {
 	$("#firstname").prop('disabled',true);
 	$("#lastname").prop('disabled',true);
 	$("#address").prop('disabled',true);
-	$("#customerId").prop('disabled',true);
 });
 
 var customerProfile1 =${customerProfile1};
@@ -477,7 +461,7 @@ function displayTable(listOrders) {
 		$("#pemail").val(orderObj.email);
 		$("#address").val(orderObj.address);
 		$("#pmobilenumber").val(orderObj.mobilenumber);
-		$("#customerId").val(orderObj.customerId);
+		$("#customerid").val(orderObj.id);
 		$("#checkpass").val(orderObj.id);
 	});
 	}
@@ -503,16 +487,6 @@ function displayTable2(listOrders) {
 			+ "</tr>";
 		$(tblRow).appendTo("#customerOrderTable table tbody");
 	});
-	
-}
-
-
-var userData="";
-function getmodelsubmit(id)
-{
-	userData=$('#customerId').val(id);
-	makeEmptymodelsubmit()
-	$('#OTPModel').trigger('click');
 	
 }
 
@@ -561,7 +535,6 @@ $('#editpersnolinfo').click(function (){
 	$("#firstname").prop('disabled',false);
 	$("#lastname").prop('disabled',false);
 	$("#address").prop('disabled',false);
-	$("#customerId").prop('disabled',true);
 	
 });
 
@@ -622,19 +595,16 @@ $('#editProfilePassword').click(function (){
 	$("#pconfirmpassword").prop('disabled',false);	
 });
 $('#saveProfilePassword').click(function (){
-	
+	var pconfirmpassword=$("#pconfirmpassword").val();
+	var pcurrentpassword=$("#pcurrentpassword").val();
 	var customerid=$("#customerid").val();
-	/*  var checkpass=$("#checkpass").val();
+	var checkpass=$("#checkpass").val();
 	if(checkpass!=pconfirmpassword)
 		{
-		//alert("Enter Valid Password");
-		$('#checkpass').css('border-color', 'red');
-		$('#errorPasswordMsg').text( "* Password Mismatch") ;
-		setTimeout(function() { $("#errorPasswordMsg").text(''); }, 3000);
+		alert("Enter Valid Password");
 		return false;
-		}  */
+		}
 	var pnewpassword=$("#pnewpassword").val();
-	var pconfirmpassword=$("#pconfirmpassword").val();	
 	if( pnewpassword !=pconfirmpassword)
 		{
 		alert("New Password and Confirm Password Not Matched");
@@ -689,14 +659,14 @@ $('#editemailinfo').click(function (){
 $('#saveemailinfo').click(function (){
 	var pemail =$("#pemail").val();
 	var customerid=$("#customerid").val();
-	//var cotp=$("#cotp").val();
+	
 	//var booleanValue=$("#pemail").hasClass('default-class errorCls');
 	if(!$("#pemail").hasClass('default-class errorCls')){
 		//alert('not a valid email');
 		$.ajax({
 			type : "POST",
 			url : "editprofileemail",
-			data :"pemail="+pemail+"&customerid="+customerid,
+			data :"pemail="+pemail+/* "&pmobilenumber="+pmobilenumber+ */"&customerid="+customerid,
 			dataType : "text",
 			beforeSend : function() {
 	             $.blockUI({ message: 'Please wait' });
@@ -704,10 +674,8 @@ $('#saveemailinfo').click(function (){
 	          success : function(data) {
 	  			if(data =='true')
 	  			{     
-	  				
 					getOtp();
-					$("#submit2").attr("onclick","modelsubmit2()");
-					
+					modelsubmit2();
 					
 				}
 				else if(data == "")
@@ -761,16 +729,15 @@ $('#savemobileno').click(function (){
   			if(data == "true")
   			{   
   				getOtp();
-  				$("#submit2").attr("onclick","modelsubmit()");
   					
 			}
   			else
   				{
-  				alert("Mobile Number already exists");
+  				alert("MobileNumber already exists");
   				}
 			if(data == "")
 			{
-				alert("Mobile Number Updation Failed");
+				alert("MobileNumber Updation Failed");
 			}
 		},
 		complete: function () {
@@ -794,10 +761,9 @@ function getOtp()
 		success : function(data) {
 			if(data == 'true')
 				{
-				alert("OTP Sent to Your Mobile Number ");
+				alert("OTP Send to Your Mobile Number ");
 				$('#OTPModel').modal('toggle');
 				$("#OTPModel").modal('show');
-				
 				}
 			else
 				{
@@ -833,13 +799,12 @@ function modelsubmit()
 			if(data =="true")
 			{
 				
-				alert(" OTP Verified Successfully ");
+				alert(" Otp Verified Successfully ");
 				$('#OTPModel').modal('toggle');
 				$("#pmobilenumber").prop('disabled',true);
 				$('#savemobileno').hide();
 				$('#editmobileno').show();
-  				alert("Mobile Number Updated Successfully ");
-  				//makeEmptyOTPModel();
+  				alert("Mobilenumber Updated Successfully ");
 			}
 			else
 				alert("Enter valid OTP");
@@ -871,7 +836,6 @@ function modelsubmit()
 				alert("OTP Send to Your Mobile Number ");
 				$('#OTPModel').modal('toggle');
 				$("#OTPModel").modal('show');
-				//modelSubmit2();
 				}
 			else
 				{
@@ -887,34 +851,34 @@ function modelsubmit()
 		error :  function(e){$.unblockUI();console.log(e);}
 		
 	});
-}  */
+} */
 
 
 function modelsubmit2()
 {
+	 //pmobilenumber =$('#pmobilenumber').val();
 	 pemail=$('#pemail').val();
 	 cotp=$('#cotp').val();
 	$.ajax({
 		type : "POST",
-
 		url : "modelSubmit1",
-		data :"&pemail="+pemail+"&cotp="+cotp,
+		data :"&pemail="+pemail+/* "&pmobilenumber="+pmobilenumber+ */"&cotp="+cotp,
 		dataType : "text",
 		beforeSend : function() {
              $.blockUI({ message: 'Please wait' });
           }, 
 		success : function(data) {
-			alert(data);
+			//alert(data);
 			
-			if(data == "true")
+			if(data =="true")
 			{
-				 alert(" OTP Verified Successfully ");
+				
+				alert(" Otp Verified Successfully ");
 				$('#OTPModel').modal('toggle');
 				$("#pemail").prop('disabled',true);
 				$('#saveemailinfo').hide();
 				$('#editemailinfo').show();
-				alert(" Email Updated Successfully ");  
-				//makeEmptyOTPModel();
+				alert(" Email Updated Successfully "); 
 			}
 			else
 				alert("Enter valid OTP");
@@ -960,17 +924,6 @@ function resendOTP()
 		error :  function(e){$.unblockUI();console.log(e);}
 		
 	});
-	
-	function makeEmptymodelsubmit()
-	 {
-	 	
-	 	$('#cotp').val("");
-	 	$('#cotp').css('border-color', 'none');
-	 	
-	 }
-
-	
-	
 }
 	
 </script>

@@ -276,19 +276,17 @@ function editCustomer(id) {
 	}
 	$("#lastname").val(serviceUnitArray[id].lastname); 
 	$("#mobilenumber").val(serviceUnitArray[id].mobilenumber);
-	$("#password").val(serviceUnitArray[id].password);
-	//$('#password').attr('readonly',true);
+	/* $("#password").val(serviceUnitArray[id].password); */
+	/* $('#password').attr('readonly',true); */
 	$("#email").val(serviceUnitArray[id].email);
 	$("#address").val(serviceUnitArray[id].address);
 	//$("#purchaseCustomer").val(serviceUnitArray[id].purchaseCustomer);
-
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 	//$("#pwd").hide();
 	//document.getElementById("username").readOnly  = true;
 	//document.querySelector("password").required = true;
      /* var idArray = $.makeArray($('.validate').map(function() {
-
     	return this.id;
     })); */ 
 }
@@ -562,7 +560,7 @@ $('#email').blur(function() {
 
 		}); 
 		
-$('#password').focusout(function(){
+/* $('#password').focusout(function(){
 	  var cpassword=$(this).val();
 	  
 	/* if(cmobile.length != 10 ){
@@ -578,7 +576,7 @@ $('#password').focusout(function(){
 	 }else { */
 
 
- $.ajax({
+/*  $.ajax({
 			type : "POST",
 			url : "checkCustExstOrnotByPassword",
 			data :"cpassword="+cpassword+"&editFields="+editFields,
@@ -613,7 +611,7 @@ $('#password').focusout(function(){
 			error :  function(e){$.unblockUI();console.log(e);}	
 		});
 }); 
- 
+  */ 
 //}); 
 	
 		

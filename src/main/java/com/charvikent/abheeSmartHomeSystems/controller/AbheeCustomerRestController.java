@@ -387,9 +387,7 @@ public class AbheeCustomerRestController {
 		LOGGER.debug("Calling getproducts at controller");
 		List<Map<String, Object>> listOrderBeans = productDao.getProductsDescription(product);
 		JSONObject json = new JSONObject();
-		// ObjectMapper objectMapper = new ObjectMapper();
-		// String userjson = objectMapper.writeValueAsString(userBean);
-		// String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
+		
 		if (null != listOrderBeans) {
 			json.put("productDetails", listOrderBeans);
 		} else
@@ -397,7 +395,23 @@ public class AbheeCustomerRestController {
 			json.put("productDetails", "NOT_FOUND");
 		return String.valueOf(json);
 	}
-
+	@RequestMapping(value = "/getproductdetails", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getProductslists() throws JsonProcessingException, JSONException {
+		LOGGER.debug("Calling getproducts at controller");
+		List<Map<String, Object>> listOrderBeans = productDao.getProducts();
+		JSONObject json = new JSONObject();
+		// ObjectMapper objectMapper = new ObjectMapper();
+		// String userjson = objectMapper.writeValueAsString(userBean);
+		// String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
+		if (null != listOrderBeans) {
+			json.put("productslist", listOrderBeans);
+		} else
+			// code="NOT_FOUND";
+			json.put("productslist", "NOT_FOUND");
+		return String.valueOf(json);
+	}
+	
+	
 	@RequestMapping(value = "/getcompanies", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public String getCompaniesBycategoryId(@RequestParam(value = "id", required = false) String categoryid)
 			throws JsonProcessingException, JSONException {
@@ -1322,12 +1336,13 @@ public class AbheeCustomerRestController {
 	}
 
 	@RequestMapping(value = "/taskslist", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public String getServiceRequestList() {
+	public String getServiceRequestList(@RequestBody User user, HttpServletRequest request) {
 		LOGGER.debug("Calling taskslist at controller");
 		JSONObject json = new JSONObject();
 		List<Map<String, Object>> listOrderBeans = null;
 		try {
 			listOrderBeans = reportIssueDao.getTasksList();
+
 			System.out.println(listOrderBeans);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				json.put("taskslist", listOrderBeans);
