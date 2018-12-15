@@ -86,6 +86,16 @@ public class ProductGuaranteeDao
 		em.flush();
 		
 	}
+	/*public void updateProductWarranty(ProductGuarantee productGuarantee) 
+	{
+		ProductGuarantee pg=getProductWarrantyById(productGuarantee.getOrderId());
+		pg.setCustomerid(productGuarantee.getCustomerid());
+		pg.setProductmodelid(productGuarantee.getProductmodelid());
+		pg.setPurchaseddate(productGuarantee.getPurchaseddate());
+		pg.setExpireddate(productGuarantee.getExpireddate());
+		em.flush();
+		
+	}*/
 	public ProductGuarantee getProductWarrantyById(String id) 
 	{
 		return em.find(ProductGuarantee.class, id);	
@@ -130,7 +140,20 @@ public class ProductGuaranteeDao
 	 {
 			
 		//return em.createQuery("  abg.id,abg.customerid,abg.expireddate,abg.expireddate,p.name as productmodelname from ProductGuarantee abg,Product p where abg.productmodelid=p.id and status='1'").getResultList();
-			String sql="select abg.order_id as orderId,abg.customerid,abg.productmodelid,abg.purchaseddate,abg.expireddate,p.name as productmodelname,abg.status from abheeproductguarantee abg,abhee_product p where abg.productmodelid=p.id and abg.status='1' order by abg.updated_time desc";
+			String sql="select abg.order_id as orderId,abg.customerid,abg.productmodelid,abg.purchaseddate,abg.expireddate,p.name as productmodelname,abg.status from abheeproductguarantee abg,abhee_product p where abg.productmodelid=p.id and abg.status='1'  order by abg.updated_time desc";
+			System.out.println(sql);
+			
+			List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
+			System.out.println(retlist);
+			return retlist;
+		
+	 }
+	
+	public List<Map<String, Object>> getWarrantyList(Customer customer)
+	 {
+			
+		//return em.createQuery("  abg.id,abg.customerid,abg.expireddate,abg.expireddate,p.name as productmodelname from ProductGuarantee abg,Product p where abg.productmodelid=p.id and status='1'").getResultList();
+			String sql="select abg.order_id as orderId,abg.customerid,abg.productmodelid,abg.purchaseddate,abg.expireddate,p.name as productmodelname,abg.status from abheeproductguarantee abg,abhee_product p where abg.productmodelid=p.id and abg.status='1'and'"+customer.isPurchaseCustomer()+"' order by abg.updated_time desc";
 			System.out.println(sql);
 			
 			List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});

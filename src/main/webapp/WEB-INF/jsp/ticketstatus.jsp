@@ -90,7 +90,7 @@ body {font-family: Arial;}
          function displayTable2(listOrders) {
      		$('#customerQuotationTable').html('');
      		var tableHead = '<table id="customerQuotationTable" class="table tablestriped table-bordered datatables">'
-     				+ '<thead><tr style=" font-size:12px;background-color: #0460a4; color: #fff;"><th>Quotation No</th><th>Product Model</th><th>Address</th><th>Description</th><th>Quotation Images</th><th>Mobileno</th></tr></thead><tbody></tbody></table>';
+     				+ '<thead><tr style=" font-size:12px;background-color: #0460a4; color: #fff;"><th>Quotation No</th><th>Product Model</th><th>Address</th><th>Description</th><th>Quotation Images</th><th>Mobileno</th><th>Quotation Date</th></tr></thead><tbody></tbody></table>';
      		$('#customerQuotationTable').html(tableHead);
      		serviceUnitArray = {};
      		
@@ -114,6 +114,7 @@ body {font-family: Arial;}
      				+ "<td title='"+orderObj.reqdesc+"'>"+ orderObj.reqdesc + "</td>" 
      				+ "<td title='"+orderObj.imgfiles+"'>"+ orderObj.imgfiles + "</td>" 
      				+ "<td title='"+orderObj.mobileno+"'>"+ orderObj.mobileno + "</td>"
+     				+"<td title='"+orderObj.created_time+"'>"+ orderObj.created_time + "</td>"
      				+ "</tr>";
      			$(tblRow).appendTo("#customerQuotationTable table tbody");
      		});
@@ -146,7 +147,7 @@ body {font-family: Arial;}
          function displayTable3(listOrders) {
      		$('#customerTaskTable').html('');
      		var tableHead = '<table id="customerTaskTable" class="table tablestriped table-bordered datatables">'
-     				+ '<thead><tr style=" font-size:12px;background-color: #0460a4; color: #fff;"><th>RequestNo</th><th>ServiceType</th><th>Product Model</th><th>Address</th><th>Description</th><th>Product Images</th></tr></thead><tbody></tbody></table>';
+     				+ '<thead><tr style=" font-size:12px;background-color: #0460a4; color: #fff;"><th>RequestNo</th><th>ServiceType</th><th>Product Model</th><th>Address</th><th>Description</th><th>Product Images</th><th>Request Date</th></tr></thead><tbody></tbody></table>';
      		$('#customerTaskTable').html(tableHead);
      		serviceUnitArray = {};
      		
@@ -170,6 +171,7 @@ body {font-family: Arial;}
      				+ "<td title='"+orderObj.communicationaddress+"'>"+ orderObj.communicationaddress+ "</td>"
      				+ "<td title='"+orderObj.description+"'>"+ orderObj.description+ "</td>"
      				+ "<td title='"+orderObj.uploadfile+"'>"+ orderObj.uploadfile + "</td>" 
+     				+"<td title='"+orderObj.created_time+"'>"+ orderObj.created_time + "</td>"
      				+ "</tr>";
      			$(tblRow).appendTo("#customerTaskTable table tbody");
      		});

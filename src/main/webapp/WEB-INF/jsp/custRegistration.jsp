@@ -280,27 +280,15 @@ function editCustomer(id) {
 	//$('#password').attr('readonly',true);
 	$("#email").val(serviceUnitArray[id].email);
 	$("#address").val(serviceUnitArray[id].address);
-<<<<<<< HEAD
 	//$("#purchaseCustomer").val(serviceUnitArray[id].purchaseCustomer);
-=======
-	// $("#passwordDiv").hide();
->>>>>>> 5bdaa2d7bfa3bef6c96fcbe60a8397d38bcb4bd6
+
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 	//$("#pwd").hide();
 	//document.getElementById("username").readOnly  = true;
-<<<<<<< HEAD
 	//document.querySelector("password").required = true;
      /* var idArray = $.makeArray($('.validate').map(function() {
-=======
-	//document.querySelector("password").required = false;
 
-   
-     /* var idArray = $.makeArray($('.validate').map(function() {
-
-  //$("#passwordDiv").hide();
-    var idArray = $.makeArray($('.validate').map(function() {
->>>>>>> 5bdaa2d7bfa3bef6c96fcbe60a8397d38bcb4bd6
     	return this.id;
     })); */ 
 }

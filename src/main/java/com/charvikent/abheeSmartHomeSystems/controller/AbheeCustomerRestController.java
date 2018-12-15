@@ -1298,8 +1298,16 @@ public class AbheeCustomerRestController {
 					{
 						task.setImgfile(images);
 					}*/
+				if (task.getKstatus().equals(orgBean.getKstatus()))
+				{
+					code="already updated";
+				}
+				else
+				{	
+				
 				reportIssueDao.updateRequest(task);
 				code = "updated";
+				}
 			}
 			else 
 			{
@@ -1319,7 +1327,7 @@ public class AbheeCustomerRestController {
 		JSONObject json = new JSONObject();
 		List<Map<String, Object>> listOrderBeans = null;
 		try {
-			listOrderBeans = reportIssueDao.getAllTasksList();
+			listOrderBeans = reportIssueDao.getTasksList();
 			System.out.println(listOrderBeans);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				json.put("taskslist", listOrderBeans);
@@ -1379,12 +1387,12 @@ public class AbheeCustomerRestController {
 	}
 
 	@RequestMapping(value = "/warrantylist", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public String getProductWarrantyList() {
+	public String getProductWarrantyList(@RequestBody Customer customer) {
 		LOGGER.debug("Calling warrantylist at controller");
 		JSONObject json = new JSONObject();
 		List<Map<String, Object>> listOrderBeans = null;
 		try {
-			listOrderBeans = productGuaranteeDao.getProductWarrantyList();
+			listOrderBeans = productGuaranteeDao.getWarrantyList(customer);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				json.put("warrantylist", listOrderBeans);
 			} else {

@@ -198,6 +198,10 @@ function editProductWarranty(id) {
 	$("#expireddate").val(serviceUnitArray[id].expireddate);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
+	 $("#productmodelid").attr('disabled', true);
+	 $("#customerid").attr('disabled', true);
+	 //document.getElementById("productmodelid").readOnly  = true;
+	 //document.getElementById("customerid").readOnly  = true;
 }
 
 function deleteProductWarranty(id,status){
