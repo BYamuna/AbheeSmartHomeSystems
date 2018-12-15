@@ -276,31 +276,25 @@ function editCustomer(id) {
 	}
 	$("#lastname").val(serviceUnitArray[id].lastname); 
 	$("#mobilenumber").val(serviceUnitArray[id].mobilenumber);
-	$("#password").val(serviceUnitArray[id].password);
-	//$('#password').attr('readonly',true);
+	/* $("#password").val(serviceUnitArray[id].password); */
+	/* $('#password').attr('readonly',true); */
 	$("#email").val(serviceUnitArray[id].email);
 	$("#address").val(serviceUnitArray[id].address);
-<<<<<<< HEAD
 	//$("#purchaseCustomer").val(serviceUnitArray[id].purchaseCustomer);
-=======
-	// $("#passwordDiv").hide();
->>>>>>> 5bdaa2d7bfa3bef6c96fcbe60a8397d38bcb4bd6
+	 
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 	//$("#pwd").hide();
 	//document.getElementById("username").readOnly  = true;
-<<<<<<< HEAD
 	//document.querySelector("password").required = true;
      /* var idArray = $.makeArray($('.validate').map(function() {
-=======
 	//document.querySelector("password").required = false;
 
    
-     /* var idArray = $.makeArray($('.validate').map(function() {
+      var idArray = $.makeArray($('.validate').map(function() {
 
-  //$("#passwordDiv").hide();
+  $("#passwordDiv").hide();
     var idArray = $.makeArray($('.validate').map(function() {
->>>>>>> 5bdaa2d7bfa3bef6c96fcbe60a8397d38bcb4bd6
     	return this.id;
     })); */ 
 }
@@ -574,7 +568,7 @@ $('#email').blur(function() {
 
 		}); 
 		
-$('#password').focusout(function(){
+/* $('#password').focusout(function(){
 	  var cpassword=$(this).val();
 	  
 	/* if(cmobile.length != 10 ){
@@ -590,7 +584,7 @@ $('#password').focusout(function(){
 	 }else { */
 
 
- $.ajax({
+/*  $.ajax({
 			type : "POST",
 			url : "checkCustExstOrnotByPassword",
 			data :"cpassword="+cpassword+"&editFields="+editFields,
@@ -625,7 +619,7 @@ $('#password').focusout(function(){
 			error :  function(e){$.unblockUI();console.log(e);}	
 		});
 }); 
- 
+  */ 
 //}); 
 	
 		

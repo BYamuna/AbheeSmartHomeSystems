@@ -14,7 +14,6 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -58,7 +57,6 @@ public class HomeController {
 	@Autowired OTPDetailsDao oTPDetailsDao;
 	@Autowired KptsUtil kptsUtil;
 	@Autowired AbheeTaskDao abheeTaskDao;
-	@Autowired private Environment environment;
 	static 	String loginurl=""; 
 	static boolean falg =true;
 	String otpnumber ="";
@@ -86,9 +84,9 @@ public class HomeController {
 	public String loginView(Model model) {
 		LOGGER.debug("Calling Login page index::{} at controller");
 		System.out.println("login called at /Rlogin page");
-		/*User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		 userService.setLoginRecord(objuserBean.getId(),"login");
-		userService.checkuserExistOrNot(objuserBean);*/
+		//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 //userService.setLoginRecord(objuserBean.getId(),"login");
+		//userService.checkuserExistOrNot(objuserBean);
 		return "login";
 	}
 	
@@ -213,7 +211,7 @@ public class HomeController {
 		
 		session.invalidate();
 		 
-		return "redirect:customerlogin";
+		return "redirect:"+ referalUrl;
 	}
 	
 	@RequestMapping("/getCategoryList")
@@ -224,7 +222,7 @@ public class HomeController {
 		//model.addAttribute("categories", listOrderBeans);
 		ObjectMapper objectMapper = new ObjectMapper();
 		String sJson = objectMapper.writeValueAsString(listOrderBeans);	
-		request.setAttribute("allOrders", sJson);
+		request.setAttribute("allOrders1", sJson);
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("list", listOrderBeans);
 		String referalUrl=request.getHeader("referer");
@@ -313,11 +311,28 @@ public class HomeController {
 	
 	@RequestMapping("/ticketstatus")
 	public String ticketstatus(HttpServletRequest request,HttpSession session) throws JsonProcessingException {
-			
+			/*String sJson=null;
+			Customer customerProfile=(Customer) session.getAttribute("customer");
+			Customer customerId=(Customer) session.getAttribute("customerId");
+			System.out.println(customerId);
+			if(null !=customerProfile)
+	        {
+				List<Map<String, Object>> QuotationsList=srequestDao.getSalesRequestListByCustomerId(customerProfile.getCustomerId());
+				System.out.println(QuotationsList);
+				ObjectMapper objectMapper = new ObjectMapper(); 
+				 sJson = objectMapper.writeValueAsString(QuotationsList);
+		
+			request.setAttribute("QuotationsList", sJson);
+	          }
+	          else
+	          {
+	        		request.setAttribute("QuotationsList", "''");    	  
+	          }*/
 		LOGGER.debug("Calling ticketstatus at controller");
 		return "ticketstatus";
 	}
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value="/quotationrequests",method = RequestMethod.POST )
 	public @ResponseBody String  quotationRequests(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
 		LOGGER.debug("Calling quotationrequests at controller");
@@ -439,8 +454,8 @@ public class HomeController {
 		Customer profilecustomer =	customerDao.checkProfileEmailExistsOrNot(customer);
 			if( profilecustomer==null)
 			{ 
-			try
-			{		
+				try 
+			{
 				customerDao.updateCustomerProfileEmail(customer);
 				return "true";
 			}
@@ -472,7 +487,7 @@ public class HomeController {
 		 if(profilecustomer==null)
 		 {
 			 try 
-			 { 
+			 {
 				customerDao.updateCustomerProfileMobileNo(customer);
 				return "true";	
 			 } 
@@ -487,6 +502,8 @@ public class HomeController {
 			 return "false";
 		 }
 	}
+	
+	
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/modelSubmit1", method = RequestMethod.POST)
 	public @ResponseBody  boolean modelSubmit1(Model model,HttpServletRequest request) throws IOException 
@@ -494,16 +511,28 @@ public class HomeController {
 		LOGGER.debug("Calling  modelSubmit1 at controller");
 		System.out.println("enter to model Submit1");
 		String custMobile=request.getParameter("pmobilenumber");
-		String cotp=request.getParameter("cotp");
-		Customer customer =new Customer();
-		customer.setMobilenumber(custMobile);
 		String cemail=request.getParameter("pemail");
+		/*String csname=request.getParameter("firstname");
+		String cname=request.getParameter("lastname");*/
+		String cotp=request.getParameter("cotp");
+		/*String cpassword=request.getParameter("pconfirmpassword");*/
+		Customer customer =new Customer();
+		//String usernumber =kptsUtil.randNum();
+		String regSuccessMsg ="Dear Customer,Successfully registered with ABhee Smart Homes";
+		customer.setMobilenumber(custMobile);
+		/*customer.setFirstname(csname);
+		customer.setLastname(cname);*/
 		customer.setEmail(cemail);
+		/*customer.setPassword(cpassword);*/
+		/*customer.setEnabled("1");
+		customer.setCustomerType("1");*/
+		//customer.setUsername(str);
 		String returnmsg ="";
 		if(otpnumber.equals(cotp))
 		{
 			customer.setRegistedredFromAndroid("0");
 			customerDao.saveAbheeCustomer(customer);
+			sendSMS.sendSMS(regSuccessMsg,custMobile);
 			return true;
 		}
 		else
@@ -518,10 +547,7 @@ public class HomeController {
 		String custMobile=request.getParameter("pmobilenumber");
 		Random random = new Random();
 		otpnumber = String.format("%04d", random.nextInt(10000));
-		String tmsg =environment.getProperty("app.otpmsg");
-		 System.out.println(tmsg);
-		tmsg= tmsg.replaceAll("_otpnumber_", otpnumber);
-		sendSMS.sendSMS(tmsg,custMobile);
+		sendSMS.sendSMS(otpnumber,custMobile);
 		OTPDetails oTPDetails =new OTPDetails();
 		oTPDetails.setMobileno(custMobile);
 		oTPDetails.setOTPnumber(otpnumber);
@@ -536,11 +562,7 @@ public class HomeController {
 		System.out.println("enter to resendOtp");
 		String custMobile=request.getParameter("pmobilenumber");
 		Random random = new Random();
-		otpnumber = String.format("%04d", random.nextInt(10000));
-		String tmsg =environment.getProperty("app.otpmsg");
-		 System.out.println(tmsg);
-		tmsg= tmsg.replaceAll("_otpnumber_", otpnumber);
-		sendSMS.sendSMS(tmsg,custMobile);
+		otpnumber = "Dear Customer,thanks for registering with Abhee Smart Home Systems. OTP for your registration is:"+String.format("%04d", random.nextInt(10000));
 		OTPDetails oTPDetails =new OTPDetails();
 		oTPDetails.setMobileno(custMobile);
 		oTPDetails.setOTPnumber(otpnumber);
