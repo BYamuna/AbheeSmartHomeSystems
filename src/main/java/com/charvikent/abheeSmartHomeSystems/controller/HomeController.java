@@ -520,34 +520,50 @@ public class HomeController {
 		LOGGER.debug("Calling  modelSubmit1 at controller");
 		System.out.println("enter to model Submit1");
 		String custMobile=request.getParameter("pmobilenumber");
-		String cemail=request.getParameter("pemail");
-		/*String csname=request.getParameter("firstname");
-		String cname=request.getParameter("lastname");*/
+		String customerid =request.getParameter("customerid");
 		String cotp=request.getParameter("cotp");
-		/*String cpassword=request.getParameter("pconfirmpassword");*/
 		Customer customer =new Customer();
-		//String usernumber =kptsUtil.randNum();
-		String regSuccessMsg ="Dear Customer,Successfully registered with ABhee Smart Homes";
+		customer.setId(Integer.parseInt((customerid)));
 		customer.setMobilenumber(custMobile);
-		/*customer.setFirstname(csname);
-		customer.setLastname(cname);*/
-		customer.setEmail(cemail);
-		/*customer.setPassword(cpassword);*/
-		/*customer.setEnabled("1");
-		customer.setCustomerType("1");*/
-		//customer.setUsername(str);
+		//String cemail=request.getParameter("pemail");
+		//customer.setEmail(cemail);
 		String returnmsg ="";
 		if(otpnumber.equals(cotp))
 		{
 			customer.setRegistedredFromAndroid("0");
-			customerDao.saveAbheeCustomer(customer);
-			sendSMS.sendSMS(regSuccessMsg,custMobile);
+			customerDao.updateCustomerProfileMobileNo(customer);
+			//customerDao.saveAbheeCustomer(customer);
+			//customerDao.updateCustomerProfileMobileNo(customer);
+			//customerDao.updateCustomerEmailOrMobile(customer);
 			return true;
 		}
 		else
 			return false;	
 	}
-
+	@SuppressWarnings("unused")
+	@RequestMapping(value = "/modelSubmit2", method = RequestMethod.POST)
+	public @ResponseBody  boolean modelSubmit2(Model model,HttpServletRequest request) throws IOException 
+	{
+		LOGGER.debug("Calling  modelSubmit1 at controller");
+		System.out.println("enter to model Submit1");
+		String cemail=request.getParameter("pemail");
+		String customerid =request.getParameter("customerid");
+		String cotp=request.getParameter("cotp");
+		Customer customer =new Customer();
+		customer.setId(Integer.parseInt((customerid)));
+		
+		customer.setEmail(cemail);
+		String returnmsg ="";
+		if(otpnumber.equals(cotp))
+		{
+			customer.setRegistedredFromAndroid("0");
+			customerDao.updateCustomerProfileEmail(customer);
+			
+			return true;
+		}
+		else
+			return false;	
+	}
 	@RequestMapping(value = "/getEditOtp", method = RequestMethod.POST)
 	public @ResponseBody  String getEditOTP(Model model,HttpServletRequest request) throws IOException 
 	{
