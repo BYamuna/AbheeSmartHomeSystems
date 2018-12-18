@@ -193,7 +193,17 @@ public Customer checkCustomerExistOrNot(Customer custreg)
 @SuppressWarnings("unchecked")
 public Customer checkCustomerExistOrNotbyMobile(String Mobile)
 {
-	String hql ="from Customer where mobilenumber='"+Mobile+"'";
+	String hql ="from Customer where mobilenumber ='"+Mobile+"'";
+	List<Customer> custlist =	entityManager.createQuery(hql).getResultList(); 
+	if(custlist.size()>0)
+	return custlist.get(0);
+	else
+	return null;	
+}
+@SuppressWarnings("unchecked")
+public Customer checkCustomerExistOrNotbyMobileOrEmail(String Mobile,String email)
+{
+	String hql ="from Customer where (mobilenumber ='"+Mobile+"') or email='"+email+"'";
 	List<Customer> custlist =	entityManager.createQuery(hql).getResultList(); 
 	if(custlist.size()>0)
 	return custlist.get(0);

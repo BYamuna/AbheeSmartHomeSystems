@@ -393,7 +393,8 @@ public class AbheeCustRegistrationController
 		LOGGER.debug("Calling  getresetcustomerpassword at controller");
 		System.out.println("enter to getresetcustomerpassword");
 		String custMobile=request.getParameter("resetmobile");
-		Customer custbean2 =customerDao.checkCustomerExistOrNotbyMobile(custMobile);
+		String custEmail=request.getParameter("resetmobile");
+		Customer custbean2 =customerDao.checkCustomerExistOrNotbyMobileOrEmail(custMobile,custEmail);
 		if(custbean2 != null)
 		{
 			sendSMS.sendSMS("Dear"+" "+custbean2.getFirstname()+" "+custbean2.getLastname()+", your password for Abhee smart home systems account"+" '"+custbean2.getMobilenumber()+"' "+"is:"+custbean2.getPassword(),custMobile);

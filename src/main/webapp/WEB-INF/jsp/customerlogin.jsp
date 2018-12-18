@@ -96,7 +96,7 @@
 						<form action="customerlogin" method="post"> 
 					<div class="login-top"> 	
 						  <input type="hidden" name="userType" id="userType" value="customerUser"/>
-							<input type="text"  name="username" id="cmusername" class="form-control validate numericOnly2"  onfocus="this.placeholder=''" onblur="this.placeholder='Mobile Number'"  maxlength="10"   placeholder="Mobile Number"/>
+							<input type="text"  name="username" id="cmusername" class="form-control validate"  onfocus="this.placeholder=''" onblur="this.placeholder='Mobile Number or Email'"    placeholder="Mobile Number or Email"/>
 							<input type="password"  name="password"  id="cmpassword" onfocus="this.placeholder=''"  class="form-control  numericOnly"  maxlength="4"  onblur="this.placeholder='Password'" placeholder="Password"  />
 						
 					</div> 
@@ -270,10 +270,10 @@
 
 							<div class="form-group">
 								<div class="col-md-5">
-									<label for="mobile number">Registered Mobile Number :</label>
+									<label for="mobile number">Registered Mobile Number Or Email :</label>
 								</div>
 								<div class="col-md-7">
-									<input	type="text" name="resetmobile" id="resetmobile" onkeydown="removeBorder(this.id)" maxlength="10" class="form-control validate2 numericOnly" placeholder="Registered Mobile Number"/>
+									<input	type="text" name="resetmobile" id="resetmobile" onkeydown="removeBorder(this.id)" class="form-control validate2 " placeholder="Registered Mobile Number or Email"/>
 								</div><div class="clearfix"></div> 
 								<span class="hasError" id="cmobileError" style="font-size: 13px;"></span>
 							</div>				

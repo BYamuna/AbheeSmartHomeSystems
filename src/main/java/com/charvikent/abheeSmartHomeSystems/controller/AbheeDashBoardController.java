@@ -199,6 +199,30 @@ public class AbheeDashBoardController {
 		return "ViewTicket";
 
 	}
+	
+	@RequestMapping(value = "/viewResponse")
+	public String viewIssue(@RequestParam(value = "id", required = true) String qId,
+			Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException, JSONException 
+	{
+			LOGGER.debug("Calling  viewResponse at controller");
+			List<Map<String, Object>> responselist=srequestDao.getQuationHistory(qId);
+			ObjectMapper objectMapper = new ObjectMapper();
+			String sJson;
+			if (responselist != null && responselist.size() > 0) {
+				
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(responselist);
+				request.setAttribute("test22", sJson);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(responselist);
+				request.setAttribute("test22", sJson);
+			}
+		
+		return "ViewResponse";
+
+	}
 	@RequestMapping(value = "/viewCustomerDetails")
 	public String viewDetails(@RequestParam(value = "id", required = true) String customerId,
 			@RequestParam(value = "pgn", required = true) String pgn,Model model,HttpSession session) 
