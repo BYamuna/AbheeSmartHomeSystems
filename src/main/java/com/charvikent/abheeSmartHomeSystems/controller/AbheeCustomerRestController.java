@@ -1360,6 +1360,12 @@ public class AbheeCustomerRestController {
 	public String saveWarranty(@RequestBody ProductGuarantee productGuarantee, HttpServletRequest request,
 			BindingResult bindingresults) throws JSONException {
 		LOGGER.debug("Calling saveProductWarranty at controller");
+		ProductGuarantee productGuarantees = new ProductGuarantee();
+		productGuarantees.setCustomerid(productGuarantee.getCustomerid());
+		productGuarantees.setPurchaseddate(productGuarantee.getPurchaseddate());
+		productGuarantees.setExpireddate(productGuarantee.getExpireddate());
+		String productid= productGuaranteeDao.productid(productGuarantee.getProductmodelid());
+		productGuarantees.setProductmodelid(productid);
 		JSONObject json = new JSONObject();
 		String code = "";
 		if (bindingresults.hasErrors()) {
@@ -1368,26 +1374,26 @@ public class AbheeCustomerRestController {
 		}
 		String id = null;
 		try {
-			ProductGuarantee orgBean = null;
-			if (productGuarantee.getOrderId() != "" && productGuarantee.getOrderId() != null) {
-				orgBean = (ProductGuarantee) productGuaranteeDao.getProductWarrantyDetailsByObject(productGuarantee);
-			}
+			ProductGuarantee orgBean = (ProductGuarantee) productGuaranteeDao.getProductWarrantyDetailsByObject(productGuarantees);;
+			/*if (productGuarantees.getOrderId() != "" && productGuarantees.getOrderId() != null) {
+				orgBean = (ProductGuarantee) productGuaranteeDao.getProductWarrantyDetailsByObject(productGuarantees);
+			}*/
 			String dummyId = null;
 			if (orgBean != null) {
 				dummyId = orgBean.getOrderId();
 			}
-			if (productGuarantee.getOrderId() == "" || productGuarantee.getOrderId() == null) {
+			if (productGuarantees.getOrderId() == "" || productGuarantees.getOrderId() == null) {
 				if (dummyId == null) {
-					productGuarantee.setStatus("1");
-					productGuaranteeDao.saveWarranty(productGuarantee);
+					productGuarantees.setStatus("1");
+					productGuaranteeDao.saveWarranty(productGuarantees);
 					code = "success";
 				} else {
 					code = "exists";
 				}
 			} else {
-				id = productGuarantee.getOrderId();
+				id = productGuarantees.getOrderId();
 				if (id == dummyId || orgBean == null) {
-					productGuaranteeDao.updateWarranty(productGuarantee);
+					productGuaranteeDao.updateWarranty(productGuarantees);
 					code = "updated";
 				} else {
 					code = "exists";
@@ -1400,6 +1406,7 @@ public class AbheeCustomerRestController {
 		json.put("status", code);
 		return String.valueOf(json);
 	}
+	
 
 	@RequestMapping(value = "/warrantylist", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public String getProductWarrantyList() {

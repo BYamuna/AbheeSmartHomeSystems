@@ -61,7 +61,7 @@
 				<div class="panel-heading">
 				<h4 id="productw">Add Product Warranty Details</h4>
 				</div>
-				<form:form class="form-horizontal" modelAttribute="guaranteef"	action="productGuarantee" method="post" >
+				<form:form class="form-horizontal" modelAttribute="guaranteef"	action="productWarranty" method="post" >
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-md-6">
@@ -162,7 +162,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>customer ID</th><th>Order ID</th><th>Product Model Name</th><th>Purchased Date</th><th>Expired Date</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Customer ID</th><th>Order ID</th><th>Product Model Name</th><th>Purchased Date</th><th>Expired Date</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {

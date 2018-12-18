@@ -96,6 +96,22 @@ public class ProductGuaranteeDao
 		return em.find(ProductGuarantee.class, id);	
 	}
 	
+	public String productid(String productname) 
+	{
+		String hql ="select p.id from Product p where p.name='"+productname+"'";
+		Integer otpStr =(Integer) em.createQuery(hql).getResultList().get(0);
+		return String.valueOf(otpStr);
+		
+	}
+	
+	/*public String customerid(String customerid) 
+	{
+		String hql ="select p.id from Product p where p.name='"+productname+"'";
+		String otpStr =	(String) em.createQuery(hql).getResultList().get(0);
+		return otpStr;
+		
+	}*/
+	
 	/*@SuppressWarnings("unchecked")
 	public  List<ProductGuarantee> getProductWarrantyDetails() 
 	{

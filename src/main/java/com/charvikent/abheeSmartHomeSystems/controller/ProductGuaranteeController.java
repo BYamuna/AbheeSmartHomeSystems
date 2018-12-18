@@ -44,10 +44,10 @@ public class ProductGuaranteeController
 		return "productguarantee";
 		
 	}*/
-	@RequestMapping(value = "/productGuarantee" ,method = RequestMethod.POST)
+	@RequestMapping(value = "/productWarranty" ,method = RequestMethod.POST)
 	public String saveProductWarranty(@Valid @ModelAttribute("guaranteef") ProductGuarantee productGuarantee,BindingResult bindingresults, RedirectAttributes redir) throws IOException 
 	{
-		LOGGER.debug("Calling productGuarantee at controller");
+		LOGGER.debug("Calling productWarranty at controller");
 		System.out.println("Enter to post............");
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
@@ -113,10 +113,10 @@ public class ProductGuaranteeController
 		}
 	
 
-		return "redirect:productguarantee";
+		return "redirect:productWarranty";
 		
 	}
-	@RequestMapping(value = "/productGuarantee" ,method = RequestMethod.GET)
+	@RequestMapping(value = "/productWarranty" ,method = RequestMethod.GET)
 	public String  ProductWarrantyList( @ModelAttribute("guaranteef") ProductGuarantee productGuarantee,Model model ,HttpServletRequest request) 
 	{
 		LOGGER.debug("Calling productGuarantee at controller");

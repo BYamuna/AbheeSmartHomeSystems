@@ -562,7 +562,7 @@ function displayAssignedNotifications(listOrders) {
                 <li class="CustomerType"><a href="${baseurl }/customerType"><i class="fa fa-user register"></i> <span>Customer Type</span></a></li>
               </security:authorize> --%>
               <security:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
-                <li class="productGuarantee"><a href="${baseurl }/productGuarantee"><i class="fa fa-certificate cert"></i> <span> Product Warranty</span></a></li>
+                <li class="productGuarantee"><a href="${baseurl }/productWarranty"><i class="fa fa-certificate cert"></i> <span> Product Warranty</span></a></li>
               </security:authorize>
 			</ul>
 		</div>
