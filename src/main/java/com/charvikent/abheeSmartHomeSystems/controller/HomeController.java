@@ -464,7 +464,7 @@ public class HomeController {
 			{ 
 			try
 			{		
-				customerDao.updateCustomerProfileEmail(customer);
+				//customerDao.updateCustomerProfileEmail(customer);
 				return "true";
 			}
 			catch (Exception e) 
@@ -497,7 +497,7 @@ public class HomeController {
 		 {
 			 try 
 			 {
-				customerDao.updateCustomerProfileMobileNo(customer);
+				//customerDao.updateCustomerProfileMobileNo(customer);
 				return "true";	
 			 } 
 			 catch (Exception e) 
