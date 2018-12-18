@@ -53,6 +53,7 @@ import com.charvikent.abheeSmartHomeSystems.dao.ProductGuaranteeDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
 import com.charvikent.abheeSmartHomeSystems.dao.RequestTimeDao;
 import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
+import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeBranch;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeRequestTime;
@@ -67,6 +68,7 @@ import com.charvikent.abheeSmartHomeSystems.model.Product;
 import com.charvikent.abheeSmartHomeSystems.model.ProductGuarantee;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 import com.charvikent.abheeSmartHomeSystems.model.ServiceRequest;
+import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -111,6 +113,8 @@ public class AbheeCustomerRestController {
 	AbheeTaskStatusDao abheeTaskStatusDao;
 	@Autowired
 	RequestTimeDao  requestTimeDao;
+	@Autowired
+	TaskHistoryDao taskHistoryDao;
 
 	/* @Autowired private Environment environment; */
 	@RequestMapping("/Customer")
@@ -1817,5 +1821,17 @@ public class AbheeCustomerRestController {
 			json.put("CustomerIds", "NOT_FOUND");
 			System.out.println("rest call user status:  "+code);
 			return String.valueOf(json);
+	}
+	@RequestMapping(value = "/getNotificationByCustomerId", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getNotificationByCustomerId(@RequestBody TaskHistoryLogs history) throws JsonProcessingException, JSONException {
+		LOGGER.debug("Calling getEmailandMobileById at controller");
+		List<TaskHistoryLogs> listOrderBeans = taskHistoryDao.getNotificationByCustomerId(history);
+		taskHistoryDao.UpdateNotificationByCustomerId(history);
+		JSONObject json = new JSONObject();
+		if (null != listOrderBeans) {
+			json.put("History", listOrderBeans);
+		} else
+			json.put("History", "NOT_FOUND");
+		return String.valueOf(json);
 	}
 }

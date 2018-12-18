@@ -164,7 +164,7 @@ public class ProductGuaranteeDao
 	 {
 			
 		//return em.createQuery("  abg.id,abg.customerid,abg.expireddate,abg.expireddate,p.name as productmodelname from ProductGuarantee abg,Product p where abg.productmodelid=p.id and status='1'").getResultList();
-			String sql="select abg.order_id as orderId,abg.customerid,abg.productmodelid,abg.purchaseddate, abg.expireddate,p.name as productmodelname,abg.status from abheeproductguarantee abg,abhee_product p,abhee_customer c where abg.productmodelid=p.id and abg.status='1'and c.purchase_customer='true' order by abg.updated_time desc";
+			String sql="select abg.order_id as orderId,abg.customerid,abg.productmodelid,abg.purchaseddate, abg.expireddate,p.name as productmodelname,abg.status from abheeproductguarantee abg,abhee_product p where abg.productmodelid=p.id and abg.status='1' order by abg.updated_time desc";
 			System.out.println(sql);
 			
 			List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
