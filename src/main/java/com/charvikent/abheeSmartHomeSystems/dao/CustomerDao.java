@@ -473,18 +473,6 @@ public Customer checkCustomerExistOrNotByEmailOnEdit(String custEmail, String ed
 		RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<Customer>(Customer.class);
 	    return  this.jdbcTemplate.query(hql, rowMapper);
 	}
-	public void updateCustomerEmailOrMobile(Customer user) 
-	{
-		Customer uc= (Customer)entityManager.find(Customer.class ,user.getId());
-		
-		uc.setMobilenumber(user.getMobilenumber());
-		uc.setEmail(user.getEmail());
-		/*uc.setAddress(user.getAddress());
-		uc.setFirstname(user.getFirstname());
-		uc.setLastname(user.getLastname());*/
-		/*uc.setCustomerId(user.getCustomerId());*/
-		entityManager.flush();
-		
-	}
+	
 
 }
