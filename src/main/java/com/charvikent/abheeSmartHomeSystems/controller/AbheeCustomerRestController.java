@@ -1355,6 +1355,49 @@ public class AbheeCustomerRestController {
 		}
 		return String.valueOf(json);
 	}
+	
+	@PostMapping(value = "/editProductWarranty", consumes = "application/json", produces = "application/json")
+	public String updateWarranty(@RequestBody ProductGuarantee productGuarantee, HttpServletRequest request,
+			BindingResult bindingresults) throws JSONException 
+	{
+		JSONObject json = new JSONObject();
+		String code = "";
+		if (bindingresults.hasErrors()) {
+			System.out.println("has some errors");
+			return "redirect:/";
+		}
+		String id = null;
+		try 
+		{
+			ProductGuarantee orgBean = (ProductGuarantee) productGuaranteeDao.getProductWarrantyDetailsByObject(productGuarantee);
+			String dummyId = null;
+			if (orgBean != null) 
+			{
+				dummyId = orgBean.getOrderId();
+			}
+			 else 
+				{
+					id = productGuarantee.getOrderId();
+						if (id == dummyId || orgBean == null) 
+						{
+							productGuaranteeDao.updateWarranty(productGuarantee);
+							code = "updated";
+						} 
+						else 
+						{
+							code = "exists";
+						}
+				}	
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		json.put("status", code);
+		return String.valueOf(json);
+	}
+	
 
 	@PostMapping(value = "/saveProductWarranty", consumes = "application/json", produces = "application/json")
 	public String saveWarranty(@RequestBody ProductGuarantee productGuarantee, HttpServletRequest request,
@@ -1374,7 +1417,7 @@ public class AbheeCustomerRestController {
 		}
 		String id = null;
 		try {
-			ProductGuarantee orgBean = (ProductGuarantee) productGuaranteeDao.getProductWarrantyDetailsByObject(productGuarantees);;
+			ProductGuarantee orgBean = (ProductGuarantee) productGuaranteeDao.getProductWarrantyDetailsByObject(productGuarantees);
 			/*if (productGuarantees.getOrderId() != "" && productGuarantees.getOrderId() != null) {
 				orgBean = (ProductGuarantee) productGuaranteeDao.getProductWarrantyDetailsByObject(productGuarantees);
 			}*/

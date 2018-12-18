@@ -139,7 +139,7 @@ public class ProductGuaranteeDao
 	@SuppressWarnings("unchecked")
 	public ProductGuarantee getProductWarrantyDetailsByObject(ProductGuarantee productGuarantee) 
 	{
-		String hql ="from ProductGuarantee where productmodelid ='"+ productGuarantee.getProductmodelid()+"' and customerid ='"+productGuarantee.getCustomerid()+"'and purchaseddate='"+productGuarantee.getPurchaseddate()+"'";
+		String hql ="from ProductGuarantee where productmodelid ='"+ productGuarantee.getProductmodelid()+"' and customerid ='"+productGuarantee.getCustomerid()/*"'and purchaseddate='"+productGuarantee.getPurchaseddate()*/+"'";
 		List<ProductGuarantee> pwd= em.createQuery(hql).getResultList();
 		if(pwd.size() > 0)
 			return pwd.get(0);
