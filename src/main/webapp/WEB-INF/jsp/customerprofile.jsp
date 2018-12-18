@@ -792,10 +792,11 @@ function modelsubmit()
 {
 	 pmobilenumber =$('#pmobilenumber').val();
 	 cotp=$('#cotp').val();
+	 customerid=$('#customerid').val();
 	$.ajax({
 		type : "POST",
 		url : "modelSubmit1",
-		data :"&pmobilenumber="+pmobilenumber+"&cotp="+cotp,
+		data :"&pmobilenumber="+pmobilenumber+"&cotp="+cotp+"&customerid="+customerid,
 		dataType : "text",
 		beforeSend : function() {
              $.blockUI({ message: 'Please wait' });
@@ -865,10 +866,11 @@ function modelsubmit2()
 {
 	 pemail=$('#pemail').val();
 	 cotp=$('#cotp').val();
+	 customerid=$('#customerid').val();
 	$.ajax({
 		type : "POST",
-		url : "modelSubmit1",
-		data :"&pemail="+pemail+"&cotp="+cotp,
+		url : "modelSubmit2",
+		data :"&pemail="+pemail+"&cotp="+cotp+"&customerid="+customerid,
 		dataType : "text",
 		beforeSend : function() {
              $.blockUI({ message: 'Please wait' });
