@@ -107,10 +107,8 @@ body {font-family: Arial;}
      						orderObj.imgfiles=imgfiles;
      					}
      				serviceUnitArray[orderObj.id] = orderObj;
-     				//var view = "<a class='view viewIt' onclick='viewResponse?id=("+ orderObj.id+ ")'>"+ orderObj.salesrequestnumber+ "</a>"
      			var tblRow = "<tr>"
-     				//+ "<td title='"+orderObj.salesrequestnumber+"'><a href=viewResponse?id='"+ orderObj.salesrequestnumber + "</a></td>"
-     				+ "<td title='"+orderObj.salesrequestnumber+"'><a href='view viewIt' onclick=viewResponse?id='"+ orderObj.salesrequestnumber+"'</a></td>"
+     				+ "<td title='"+orderObj.salesrequestnumber+"'><a href=viewResponse?id='"+ orderObj.salesrequestnumber+"'>"+ orderObj.salesrequestnumber+"</a></td>"
      				+ "<td title='"+orderObj.modelname+"'>"+ orderObj.modelname + "</td>"
      				+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>" 
      				+ "<td title='"+orderObj.reqdesc+"'>"+ orderObj.reqdesc + "</td>" 
@@ -167,7 +165,7 @@ body {font-family: Arial;}
      					}
      				serviceUnitArray[orderObj.id] = orderObj;
      			var tblRow = "<tr>"
-     				+ "<td title='"+orderObj.taskno+"'>"+ orderObj.taskno + "</td>"
+     				+ "<td title='"+orderObj.taskno+"'><a href=viewServiceResponse?id='"+ orderObj.taskno+"'>"+ orderObj.taskno+"</a></td>"
      				+ "<td title='"+orderObj.servicetypename+"'>"+ orderObj.servicetypename
      				+ "<td title='"+orderObj.modelname+"'>"+ orderObj.modelname
      				+ "<td title='"+orderObj.communicationaddress+"'>"+ orderObj.communicationaddress+ "</td>"

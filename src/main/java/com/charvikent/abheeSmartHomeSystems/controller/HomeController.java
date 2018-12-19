@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -56,6 +57,7 @@ public class HomeController {
 	@Autowired OTPDetailsDao oTPDetailsDao;
 	@Autowired KptsUtil kptsUtil;
 	@Autowired AbheeTaskDao abheeTaskDao;
+	@Autowired private Environment environment;
 	static 	String loginurl=""; 
 	static boolean falg =true;
 	String otpnumber ="";
@@ -331,7 +333,6 @@ public class HomeController {
 		return "ticketstatus";
 	}
 	
-	@SuppressWarnings("unused")
 	@RequestMapping(value="/quotationrequests",method = RequestMethod.POST )
 	public @ResponseBody String  quotationRequests(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException {
 		LOGGER.debug("Calling quotationrequests at controller");
@@ -571,7 +572,10 @@ public class HomeController {
 		String custMobile=request.getParameter("pmobilenumber");
 		Random random = new Random();
 		otpnumber = String.format("%04d", random.nextInt(10000));
-		sendSMS.sendSMS(otpnumber,custMobile);
+		String tmsg =environment.getProperty("app.otpmsg");
+		tmsg= tmsg.replaceAll("_otpnumber_", otpnumber);
+		System.out.println(tmsg);
+		sendSMS.sendSMS(tmsg,custMobile);
 		OTPDetails oTPDetails =new OTPDetails();
 		oTPDetails.setMobileno(custMobile);
 		oTPDetails.setOTPnumber(otpnumber);
