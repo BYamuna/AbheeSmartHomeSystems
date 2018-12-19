@@ -220,7 +220,7 @@ public class AbheeDashBoardController {
 				request.setAttribute("test22", sJson);
 			}
 		
-		return "ViewResponse";
+		return "viewResponse";
 
 	}
 	@RequestMapping(value = "/viewCustomerDetails")

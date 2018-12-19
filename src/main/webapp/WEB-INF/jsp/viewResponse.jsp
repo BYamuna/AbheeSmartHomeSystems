@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%-- <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> --%>
 <style type="text/css">
 .fa-square:before {
     content: "\f0c8";
@@ -114,7 +114,8 @@
 				</div>
 							</div>
 						
-				
+	<div align="center">
+<button onclick="goBack()" class="btn btn-primary"> <i class="fa fa-step-backward"></i> Back  </button></div>			
               
 
 </tr>
@@ -188,8 +189,8 @@ var rowdata;
 $("#severityTable").append(rowdata); */
 	
 	
-$(".task").addClass("active");
-$("#pageName").text("View Service Request History");
+ $(".ticketstatus").addClass("active"); 
+$("#pageName").text("Quotation History");
 
 
 </script> 

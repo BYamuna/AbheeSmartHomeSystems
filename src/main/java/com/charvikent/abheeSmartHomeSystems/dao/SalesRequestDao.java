@@ -171,7 +171,7 @@ public class SalesRequestDao
 			return retlist;
 	}
 	public List<Map<String, Object>> getQuationHistory(String id) {
-		 String hql ="select * from abhee_quation_history where quationid ='"+id+"'";
+		 String hql ="select * from abhee_quation_history where quationid ="+id;
 		 System.out.println(hql);
 		
 			List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
@@ -184,7 +184,7 @@ public class SalesRequestDao
 	{
 		AbheeQuationHistory abheeQuationHistory = new AbheeQuationHistory();
 		abheeQuationHistory.setFilename(salesrequest.getQuotationDocuments());
-		abheeQuationHistory.setQuationid(salesrequest.getId().toString());
+		abheeQuationHistory.setQuationid(salesrequest.getSalesrequestnumber());
 		abheeQuationHistory.setNotes(salesrequest.getNotes());
 		abheeQuationHistory.setCreatedTime(salesrequest.getCreatedTime());
 		entityManager.persist(abheeQuationHistory);
