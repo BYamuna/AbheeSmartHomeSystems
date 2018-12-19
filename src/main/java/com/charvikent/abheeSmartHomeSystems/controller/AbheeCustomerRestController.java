@@ -1340,12 +1340,12 @@ public class AbheeCustomerRestController {
 	}
 
 	@RequestMapping(value = "/taskslist", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public String getServiceRequestList(@RequestBody User user, HttpServletRequest request) {
+	public String getServiceRequestList() {
 		LOGGER.debug("Calling taskslist at controller");
 		JSONObject json = new JSONObject();
 		List<Map<String, Object>> listOrderBeans = null;
 		try {
-			listOrderBeans = reportIssueDao.getTasksList();
+			listOrderBeans = reportIssueDao.getTasksList1();
 
 			System.out.println(listOrderBeans);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
