@@ -270,7 +270,7 @@
 
 							<div class="form-group">
 								<div class="col-md-5">
-									<label for="mobile number">Registered Mobile Number Or Email :</label>
+									<label for="mobile number" style="font-size: 12px;">Registered Mobile Number Or Email :</label>
 								</div>
 								<div class="col-md-7">
 									<input	type="text" name="resetmobile" id="resetmobile" onkeydown="removeBorder(this.id)" class="form-control validate2 " placeholder="Registered Mobile Number or Email"/>

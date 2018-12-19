@@ -67,7 +67,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<%-- <form:hidden path= "id" /> --%>
-									<label for="focusedinput" class="col-md-6 control-label ">ProductmodelId<span class="impColor">*</span>
+									<label for="focusedinput" class="col-md-6 control-label ">Product Model Name<span class="impColor">*</span>
 									</label>
 										
 									<form:select path="productmodelid"	class="col-xs-10 col-sm-5 validate"	onfocus="removeBorder(this.id)">

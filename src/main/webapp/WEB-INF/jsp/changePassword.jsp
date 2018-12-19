@@ -8,7 +8,7 @@
     <div class="clearfix"></div>
 	<ol class="breadcrumb">
 		<li><a href="#">Home</a></li>
-		<li><a href="${baseurl }/dashBoard"> --%>Change Password</a></li>
+		<li><a href="${baseurl}/dashBoard">Change Password</a></li>
 	</ol>
 	<div class="clearfix"></div>
 <!-- Body starts here -->

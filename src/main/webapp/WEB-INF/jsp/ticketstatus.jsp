@@ -108,7 +108,7 @@ body {font-family: Arial;}
      					}
      				serviceUnitArray[orderObj.id] = orderObj;
      			var tblRow = "<tr>"
-     				+ "<td title='"+orderObj.salesrequestnumber+"'><a href=viewResponse?id='"+ orderObj.salesrequestnumber+"'>"+ orderObj.salesrequestnumber+"</a></td>"
+     				+ "<td title='"+orderObj.salesrequestnumber+"'><a href=viewResponse?id='"+ orderObj.id+"'>"+ orderObj.salesrequestnumber+"</a></td>"
      				+ "<td title='"+orderObj.modelname+"'>"+ orderObj.modelname + "</td>"
      				+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>" 
      				+ "<td title='"+orderObj.reqdesc+"'>"+ orderObj.reqdesc + "</td>" 

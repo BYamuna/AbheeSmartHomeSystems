@@ -94,7 +94,7 @@ public class SalesRequestDao
 		public List<Map<String, Object>> getSalesRequestListByCustomerId(String custId)
 		 {
 		 
-			 String hql ="select sr.salesrequestnumber,sr.mobileno,ap.name as modelname,sr.address,sr.reqdesc,sr.imgfiles,DATE_FORMAT(sr.created_time,'%d-%b-%y %H:%i')as created_time from abhee_sales_request sr,abhee_product ap where sr.modelnumber=ap.name and sr.customerid='"+custId+"'";
+			 String hql ="select sr.id,sr.salesrequestnumber,sr.mobileno,ap.name as modelname,sr.address,sr.reqdesc,sr.imgfiles,DATE_FORMAT(sr.created_time,'%d-%b-%y %H:%i')as created_time from abhee_sales_request sr,abhee_product ap where sr.modelnumber=ap.name and sr.customerid='"+custId+"'";
 			 System.out.println(hql);
 			
 				List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
@@ -184,7 +184,7 @@ public class SalesRequestDao
 	{
 		AbheeQuationHistory abheeQuationHistory = new AbheeQuationHistory();
 		abheeQuationHistory.setFilename(salesrequest.getQuotationDocuments());
-		abheeQuationHistory.setQuationid(salesrequest.getSalesrequestnumber());
+		abheeQuationHistory.setQuationid(salesrequest.getId().toString());
 		abheeQuationHistory.setNotes(salesrequest.getNotes());
 		abheeQuationHistory.setCreatedTime(salesrequest.getCreatedTime());
 		entityManager.persist(abheeQuationHistory);
