@@ -255,7 +255,7 @@ function inactiveData() {
 	}
 		var formData = new FormData();
 		formData.append('status', status);
-		
+		//formData.append('orderId', id);
 		$.fn.makeMultipartRequest('POST', 'inActiveProductWarranty', false,
 				formData, false, 'text', function(data) {
 			var jsonobj = $.parseJSON(data);
