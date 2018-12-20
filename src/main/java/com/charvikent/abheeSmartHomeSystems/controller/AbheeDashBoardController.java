@@ -228,7 +228,7 @@ public class AbheeDashBoardController {
 			Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException, JSONException 
 	{
 			LOGGER.debug("Calling viewServiceResponse at controller");
-			List<Map<String, Object>> responselist=abheeTaskDao.getAbheeTaskById(taskId);
+			List<Map<String, Object>> responselist=abheeTaskDao.getAbheeTaskByTaskId(taskId);
 			ObjectMapper objectMapper = new ObjectMapper();
 			String sJson;
 			if (responselist != null && responselist.size() > 0) {
