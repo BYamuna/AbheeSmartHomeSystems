@@ -221,7 +221,29 @@ public class AbheeDashBoardController {
 			}
 		
 		return "viewResponse";
+	}
 
+	@RequestMapping(value = "/viewServiceResponse")
+	public String viewService(@RequestParam(value = "id", required = true) String taskId,
+			Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException, JSONException 
+	{
+			LOGGER.debug("Calling viewServiceResponse at controller");
+			List<Map<String, Object>> responselist=abheeTaskDao.getAbheeTaskById(taskId);
+			ObjectMapper objectMapper = new ObjectMapper();
+			String sJson;
+			if (responselist != null && responselist.size() > 0) {
+				
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(responselist);
+				request.setAttribute("test21", sJson);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(responselist);
+				request.setAttribute("test21", sJson);
+			}
+		
+		return "viewServiceResponse";
 	}
 	
 	@RequestMapping(value = "/viewCustomerDetails")
