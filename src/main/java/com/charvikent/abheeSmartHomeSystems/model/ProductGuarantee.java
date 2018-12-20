@@ -52,10 +52,6 @@ public class ProductGuarantee implements Serializable
 	}
 	
 
-
-
-
-
 	public ProductGuarantee(String orderId, String productmodelid, String customerid, String purchaseddate,
 			String expireddate, String status, Date createdTime, Date updatedTime) {
 		super();

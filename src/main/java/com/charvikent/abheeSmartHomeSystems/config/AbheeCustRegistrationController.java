@@ -1,4 +1,4 @@
-package com.charvikent.abheeSmartHomeSystems.controller;
+package com.charvikent.abheeSmartHomeSystems.config;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,9 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
-import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
-import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
+
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 import com.charvikent.abheeSmartHomeSystems.dao.OTPDetailsDao;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;

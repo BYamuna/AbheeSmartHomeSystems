@@ -108,7 +108,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Password <span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:password path="password" class="form-control validate onlyNumbers" maxlength="4" placeholder="Password"/>
+										<form:password path="password" class="form-control validate onlyNumbers" maxlength="4" placeholder="*****"/>
 										<span id="errorPasswordMsg" style="color:red;"></span>
 									</div>
 								</div>
@@ -243,6 +243,7 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.lastname+"'>"+ orderObj.lastname + "</td>"
 			+ "<td title='"+orderObj.email+"'>"+ orderObj.email + "</td>"
 			+ "<td title='"+orderObj.mobilenumber+"'>"+ orderObj.mobilenumber + "</td>"
+			
 			/* + "<td title='"+orderObj.password+"'>"+ orderObj.password + "</td>" */
 			+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
@@ -280,7 +281,19 @@ function editCustomer(id) {
 	/* $('#password').attr('readonly',true); */
 	$("#email").val(serviceUnitArray[id].email);
 	$("#address").val(serviceUnitArray[id].address);
-	//$("#purchaseCustomer").val(serviceUnitArray[id].purchaseCustomer);
+	/*   if($("#purchaseCustomer")==true){
+			
+		  $("#purchaseCustomer").attr('checked',true);
+	}else
+		{
+		$("#purchaseCustomer").attr('checked',false);
+		} */
+	  
+
+	 //boolean purchaseCustomer =false;
+	/* if(purchaseCustomer !=null && purchaseCustomer.length > 0){//If checkbox is checked than assign it with true or 1       
+        purchaseCustomer=true;  
+    } */
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 	//$("#pwd").hide();
