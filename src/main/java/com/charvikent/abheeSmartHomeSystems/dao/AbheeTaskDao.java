@@ -404,7 +404,7 @@ public List<Map<String, Object>> getTasksListByCustomerId(String customerId)
 }
 public void updateTaskStatus(String taskstatus,String taskno)
 {
-	String hql="update abhee_task set taskstatus='1' where taskstatus='0'and id="+taskno+"";
+	String hql="update abhee_task t set t.taskstatus='1',t.kstatus=2 where t.taskstatus='0' and t.taskno='"+taskno+"'";
 	jdbcTemplate.execute(hql);
 }
 

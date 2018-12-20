@@ -155,7 +155,7 @@ public class AbheeDashBoardController {
 	
 	@RequestMapping(value = "/viewTicket")
 	public String viewIssue(@RequestParam(value = "id", required = true) String taskId,
-			@RequestParam(value = "pgn", required = true) String pgn,Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException, JSONException 
+			@RequestParam(value = "pgn", required = true) String pgn,@RequestParam(value = "id", required = true) String taskstatus,@RequestParam(value = "id", required = true) String taskno,Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException, JSONException 
 	{
 		LOGGER.debug("Calling  viewTicket at controller");
 		
@@ -168,11 +168,13 @@ public class AbheeDashBoardController {
 			{
 				abheeTaskDao.openTask(taskId);
 				
+				
 				 taskHistoryLogsDao.historyLog1(viewtaskBean.get(0).get("id"));
+				
 			}
 			
 			List<Map<String, Object>> statuslist=abheeTaskDao.getTaskStatusHistoryByTaskNo(taskId);
-			
+			abheeTaskDao.updateTaskStatus(taskstatus,taskno);
 			ObjectMapper objectMapper = new ObjectMapper();
 			String sJson;
 			ObjectMapper objectMapper1 = new ObjectMapper();
