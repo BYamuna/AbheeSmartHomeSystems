@@ -476,7 +476,7 @@ function viewTask(id){
 		var alldata = jsonobj.allOrders1;
 		$('#HtableId2').html('');
 		var tableHead = '<table id="example2" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>QuotationId</th><th>Date Modified</th><th>sent Quotation</th><th>Notes</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>QuotationId</th><th>Date Modified</th><th>Sent Quotation</th><th>Notes</th></tr></thead><tbody></tbody></table>';
 	$('#HtableId2').html(tableHead);
 	$.each(alldata,function(i, orderObj) {
 		if(orderObj.filename==undefined) orderObj.filename='';

@@ -1432,7 +1432,7 @@ public class AbheeCustomerRestController {
 			if (productGuarantees.getOrderId() == "" || productGuarantees.getOrderId() == null) {
 				if (dummyId == null) {
 					productGuarantees.setStatus("1");
-					productGuaranteeDao.saveWarranty(productGuarantees);
+					//productGuaranteeDao.saveWarranty(productGuarantees);
 					code = "success";
 				} else {
 					code = "exists";
@@ -1833,5 +1833,6 @@ public class AbheeCustomerRestController {
 		} else
 			json.put("History", "NOT_FOUND");
 		return String.valueOf(json);
-	}
+		}
+
 }

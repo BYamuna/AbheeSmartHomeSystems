@@ -226,10 +226,6 @@ public class SalesRequestController
 	}
 	
 	
-	
-	
-	
-	
 	@RequestMapping(value = "/viewTask2")
 	public @ResponseBody String getQuationsHistory(HttpServletRequest request,HttpSession session,@RequestParam("id")  String id) {
 		LOGGER.debug("Calling inActiveEmp at controller");
