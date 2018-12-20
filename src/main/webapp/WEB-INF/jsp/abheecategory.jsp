@@ -156,13 +156,13 @@
 						<div class="col-sm-8">
 							<textarea class="form-control" id="custaddress" name="custaddress" placeholder="Address"  onfocus="removeBorder2(this.id)"></textarea>
 						</div>
-						<div class="col-sm-4">
+						<!-- <div class="col-sm-4">
 							<label>Warranty</label> <span class="impColor">*</span>
 						</div>
 						<div class="col-sm-8" style="padding-top:8px;">
 							<input type="radio" id="warranty" name="warranty" value="0" > Yes
   							<input type="radio" id="warranty" name="warranty" value="1" > No
-						</div><div class="clearfix"></div>
+						</div> --><div class="clearfix"></div>
 						<div class="col-sm-4">
 							<label>Request Time</label> <span class="impColor">*</span>
 						</div>
