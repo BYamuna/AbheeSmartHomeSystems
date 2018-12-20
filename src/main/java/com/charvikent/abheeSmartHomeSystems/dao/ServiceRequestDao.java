@@ -110,10 +110,5 @@ public class ServiceRequestDao
 		return null;
 	}
 	
-	public void updateServiceRequestStatus(String kstatus,String taskno)
-	{
-		String hql="update abhee_task set kstatus='2' where kstatus='1'and id="+taskno+"";
-		jdbcTemplate.execute(hql);
-	}
 	
 }
