@@ -410,7 +410,7 @@ public List<ReportIssue> getAllReportIssues()
 			     editissue.setDiscount(issue.getDiscount());
 			     editissue.setTax(issue.getTax());
 			     editissue.setTotal(issue.getTotal());
-			     
+			     editissue.setWarranty(issue.getWarranty());
 			     taskHistoryLogsDao.historyLog(editissue);
 				
 			}
@@ -426,7 +426,7 @@ public List<ReportIssue> getAllReportIssues()
      editissue.setTaskdeadline(issue.getTaskdeadline());
      editissue.setKstatus(issue.getKstatus());
      editissue.setAddComment(issue.getAddComment());
-    
+     editissue.setWarranty(issue.getWarranty());
      
      if(issue.getUploadfile()!=null)
      {
@@ -498,6 +498,7 @@ public List<ReportIssue> getAllReportIssues()
 				     {
 				     editissue.setImgfile(fileTemplate.concurrentFileNames());
 				     }
+				     editissue.setWarranty(issue.getWarranty());
 				} 
 			     taskHistoryLogsDao.historyLogs(editissue);
 			}     
