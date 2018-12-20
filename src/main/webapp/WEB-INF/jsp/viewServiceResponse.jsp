@@ -244,7 +244,7 @@ var tr=	'<tr>'
 		+'<td>'+ v.customer_id +'</td>'
 		+'<td>'+v.AttachedFiles+'</td>'
 		+'</tr>';
-$('#viewTaskTable tbody').append(tr);
+$('#viewTasksTable tbody').append(tr);
 });
 });
 function goBack() {

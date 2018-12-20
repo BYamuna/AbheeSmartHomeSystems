@@ -78,7 +78,7 @@ public class ProductGuaranteeDao
 	}
 	public void updateWarranty(ProductGuarantee productGuarantee) 
 	{
-		ProductGuarantee pg=getProductWarrantyById(productGuarantee.getOrderId());
+		ProductGuarantee pg=getProductWarrantyByOrderId(productGuarantee.getOrderId());
 		/*pg.setCustomerid(productGuarantee.getCustomerid());
 		pg.setProductmodelid(productGuarantee.getProductmodelid());*/
 		pg.setPurchaseddate(productGuarantee.getPurchaseddate());
@@ -91,9 +91,9 @@ public class ProductGuaranteeDao
 		String sql="update abheeproductguarantee abg set abg.purchaseddate='"+productGuarantee.getPurchaseddate()+"'abg.expireddate='"+productGuarantee.getExpireddate()+"'";
 		jdbcTemplate.execute(sql);
 	}*/
-	public ProductGuarantee getProductWarrantyById(String id) 
+	public ProductGuarantee getProductWarrantyByOrderId(String orderId) 
 	{
-		return em.find(ProductGuarantee.class, id);	
+		return em.find(ProductGuarantee.class, orderId);	
 	}
 	
 	public String productid(String productname) 
