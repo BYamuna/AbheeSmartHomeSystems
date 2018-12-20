@@ -552,7 +552,7 @@ public class TaskController {
 		String images =request.getParameter("images");
 		System.out.println(images);
 		String requesttimeid=request.getParameter("requesttimeid");
-		String warranty=request.getParameter("warranty");
+		//String warranty=request.getParameter("warranty");
 		AbheeTask task =new AbheeTask();
 		task.setAdditionalinfo("0");
 		task.setAssignto("5");
@@ -572,7 +572,7 @@ public class TaskController {
 
 		task.setCustomerId(customerId);
 		task.setRequesttime(requesttimeid);
-		task.setWarranty(warranty);
+		task.setWarranty(" ");
 		task.setCompany(company);
 		task.setUploadfile(images);
 		task.setTaskdeadline(" ");

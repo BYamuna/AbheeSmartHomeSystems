@@ -278,6 +278,14 @@
 									<form:input path="amountreceived" placeholder="Amountreceived" class="col-xs-10 col-sm-5" />
 								</div>
 							</div>
+								<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Warranty</label>
+								<div class="col-md-3 ">
+										<form:checkbox path="warranty"  value ="0" style="width:15px;height:20px;" />
+									</div>
+								</div>
+								</div>
 						</security:authorize>
 						<%-- <security:authorize access="hasRole('ROLE_USER')">	
 							<div class="col-md-6">
