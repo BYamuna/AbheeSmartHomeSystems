@@ -38,6 +38,7 @@ public class TaskHistoryLogsDao {
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		TaskHistoryLogs taskHistoryLogs=new TaskHistoryLogs();
+		taskHistoryLogs.setNotificationstatus(1);
 		taskHistoryLogs.setTaskid(reportIssue.getId());
 		taskHistoryLogs.setServiceType(reportIssue.getServiceType());
 		taskHistoryLogs.setAdditionalinfo(reportIssue.getAdditionalinfo());
@@ -71,6 +72,8 @@ public class TaskHistoryLogsDao {
 		//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		TaskHistoryLogs taskHistoryLogs=new TaskHistoryLogs();
+		
+		taskHistoryLogs.setNotificationstatus(1);
 		taskHistoryLogs.setTaskid(Issue.getId());
 		taskHistoryLogs.setServiceType(Issue.getServiceType());
 		taskHistoryLogs.setAdditionalinfo(Issue.getAdditionalinfo());
@@ -109,6 +112,8 @@ public class TaskHistoryLogsDao {
 		
 		TaskHistoryLogs taskHistoryLogs=new TaskHistoryLogs();
 		
+		
+		taskHistoryLogs.setNotificationstatus(1);
 		taskHistoryLogs.setTaskid(reportIssue.getId());
 		taskHistoryLogs.setServiceType(reportIssue.getServiceType());
 		taskHistoryLogs.setAdditionalinfo(reportIssue.getAdditionalinfo());

@@ -107,7 +107,7 @@ public class AbheeTaskDao {
 		 sql="select t.id,t.assignto,u.username,t.uploadfile,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,t.service_type as servicetypeid,sev.severity, "
 				 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id, t.communicationaddress,t.amountreceived,t.discount,t.tax,t.total,ar.requesttime"
 				+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp,abheerequesttime ar"
-				+" where  t.kstatus<>'4' and t.assignto=u.designation and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and  t.requesttime=ar.requesttimeid and t.status='1'  order by t.created_time desc ";
+				+" where  t.kstatus<>'4' and t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and  t.requesttime=ar.requesttimeid and t.status='1'  order by t.created_time desc ";
 	}
 			else
 			{
@@ -361,9 +361,10 @@ public List<Map<String, Object>> getTasksByCustomerId(Customer customer) {
 	}
 public List<Map<String, Object>> getAdminResponseByCustomerId(String customer) {
 		
-		String hql= "select ap.priority as priority,t.subject,t.status,u.username as assignedto,t.taskdeadline,t.imgfile,t.description from abhee_task t,abheepriority ap,abheeusers u where t.taskno='"+customer+"' and t.priority=ap.id and t.assignto=u.id";
+		//String hql= "select ap.priority as priority,t.subject,t.kstatus,t.status,u.username as assignedto,t.taskdeadline,t.imgfile,t.description from abhee_task t,abheepriority ap,abheeusers u where t.taskno='"+customer+"' and t.priority=ap.id and t.assignto=u.id";
 				
-				System.out.println(hql);
+	String hql= "select ap.priority as priority,t.subject,t.kstatus as kstatusid,ts.name as kstatus,t.status,u.username as assignedto,t.taskdeadline,t.imgfile,t.description from abhee_task t,abheepriority ap,abheeusers u ,abheetaskstatus ts where t.taskno='"+customer+"' and t.priority=ap.id and t.assignto=u.id and t.kstatus=ts.id";		
+	System.out.println(hql);
 		
 		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
 		System.out.println(retlist);
@@ -407,6 +408,7 @@ public void updateTaskStatus(String taskstatus,String taskno)
 	String hql="update abhee_task t set t.taskstatus='1',t.kstatus=2 where t.taskstatus='0' and t.taskno='"+taskno+"'";
 	jdbcTemplate.execute(hql);
 }
+
 
 
 }

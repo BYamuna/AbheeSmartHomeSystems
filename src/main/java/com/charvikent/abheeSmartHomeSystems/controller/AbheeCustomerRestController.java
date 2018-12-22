@@ -550,6 +550,7 @@ public class AbheeCustomerRestController {
 		task.setAssignby("1");
 		task.setTaskdeadline(" ");
 		task.setImgfile(" ");
+		task.setAddComment(" ");
 		Map<String, Object> abheeTask = reportIssueDao.checkServiceRequestExisrOrNot(task);
 		if (null == abheeTask) {
 
@@ -798,8 +799,9 @@ public class AbheeCustomerRestController {
 
 		if (!validUser.isEmpty()) {
 			objJSON.put("status", validUser);
+			objJSON.put("login", "success");
 		} else {
-			objJSON.put("status", "user not exists");
+			objJSON.put("login", "user not exists");
 		}
 		return String.valueOf(objJSON);
 	}
@@ -1311,11 +1313,12 @@ public class AbheeCustomerRestController {
 			id = task.getTaskno();
 			if (id.equals(dummyId) || orgBean == null) 
 			{
-				/*String images = imgdecoder(task.getImgfile(), request);
-					if (!task.getImgfile().isEmpty()) 
+				
+					if (!task.getImgfile().isEmpty() && task.getImgfile().length()!=1 ) 
 					{
+						String images = imgdecoder(task.getImgfile(), request);
 						task.setImgfile(images);
-					}*/
+					}
 				if (task.getKstatus().equals(orgBean.getKstatus()))
 				{
 					code="already updated";
@@ -1432,7 +1435,7 @@ public class AbheeCustomerRestController {
 			if (productGuarantees.getOrderId() == "" || productGuarantees.getOrderId() == null) {
 				if (dummyId == null) {
 					productGuarantees.setStatus("1");
-					//productGuaranteeDao.saveWarranty(productGuarantees);
+					productGuaranteeDao.saveWarranty(productGuarantees);
 					code = "success";
 				} else {
 					code = "exists";
@@ -1832,6 +1835,47 @@ public class AbheeCustomerRestController {
 			json.put("History", listOrderBeans);
 		} else
 			json.put("History", "NOT_FOUND");
+		return String.valueOf(json);
+		}
+	@RequestMapping(value = "/changeKstatusByTaskno", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String changeKstatusByTaskno(@RequestBody AbheeTask task) throws JsonProcessingException, JSONException {
+		LOGGER.debug("Calling changeKstatusByTaskno at controller");
+		//List<TaskHistoryLogs> listOrderBeans = taskHistoryDao.getNotificationByCustomerId(history);
+		String msg="CUSTOMER NOT AVAILABLE";
+		JSONObject json = new JSONObject();
+		if (task.getKstatus().equals(msg)) {
+			taskHistoryDao.UpdateKstatusbyTaskNo(task);
+			json.put("Kstatus", "Updated");
+		}else {
+			json.put("Kstatus", "Alredy Exist or Not Acceptable Request");
+		}
+		return String.valueOf(json);
+		}
+	@RequestMapping(value = "/getNotificationsListByCustomerId", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getNotificationsListByCustomerId(@RequestBody TaskHistoryLogs history) throws JsonProcessingException, JSONException {
+		LOGGER.debug("Calling getNotificationsListByCustomerId at controller");
+		List<TaskHistoryLogs> listOrderBeans = taskHistoryDao.getNotificationsListByCustomerId(history);
+		JSONObject json = new JSONObject();
+		if (null != listOrderBeans) {
+			json.put("NotificationList", listOrderBeans);
+		} else
+			json.put("NotificationList", "NOT_FOUND");
+		return String.valueOf(json);
+		}
+	@RequestMapping(value = "/getServiceDetailsByTaskno", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getServiceDetailsByTaskno(@RequestBody AbheeTask task) throws JsonProcessingException, JSONException {
+		LOGGER.debug("Calling getServiceDetailsByTaskno at controller");
+		List<TaskHistoryLogs> listOrderBeans = taskHistoryDao.getNotificationsListByCustomerId1(task.getTaskno(),task.getCustomerId());
+		System.out.println(listOrderBeans);
+		List<AbheeTask> listOrderBeans1 = taskHistoryDao.getServiceDetailsByTaskno(task);
+		System.out.println(listOrderBeans1);
+		JSONObject json = new JSONObject();
+		if (null != listOrderBeans) {
+			json.put("NotificationList", listOrderBeans);
+			json.put("ServiceDtailsList", listOrderBeans1);
+			json.put("NotificationStatus","Found");
+		} else
+			json.put("NotificationStatus", "NOT_FOUND");
 		return String.valueOf(json);
 		}
 

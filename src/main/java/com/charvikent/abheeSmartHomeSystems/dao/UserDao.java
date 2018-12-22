@@ -239,7 +239,7 @@ public class UserDao {
 	public List<User> getUserNames()
 	{
 		
-		String hql ="from User where designation <>'9'";
+		String hql ="from User where designation<>'9'";
 
 		return em.createQuery(hql).getResultList();
 

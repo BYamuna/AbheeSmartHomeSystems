@@ -575,6 +575,7 @@ public class TaskController {
 		task.setWarranty(" ");
 		task.setCompany(company);
 		task.setUploadfile(images);
+		task.setAddComment(" ");
 		task.setTaskdeadline(" ");
 		task.setImgfile(" ");
 		for(MultipartFile multipartFile : uploadedFiles) {
