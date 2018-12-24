@@ -189,7 +189,10 @@ function displayTable(listOrders) {
 
 
 function editProductWarranty(id) {
+	
+	 editFields = id;
 	$("#productw").text("Edit Warranty Details");
+	//$("#id").val(serviceUnitArray[id].id);
 	$("#orderId").val(serviceUnitArray[id].orderId);
 	$("#customerid").val(serviceUnitArray[id].customerid);
 	$("#productmodelid").val(serviceUnitArray[id].productmodelid);
@@ -198,10 +201,10 @@ function editProductWarranty(id) {
 	$("#expireddate").val(serviceUnitArray[id].expireddate);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
-	 $("#productmodelid").attr('disabled', true);
-	 $("#customerid").attr('disabled', true);
-	 //document.getElementById("productmodelid").readOnly  = true;
-	 //document.getElementById("customerid").readOnly  = true;
+	 /* $("#productmodelid").attr('disabled', true);
+	 $("#customerid").attr('disabled', true); */
+	 document.getElementById("productmodelid").readOnly  = true;
+	 document.getElementById("customerid").readOnly  = true;
 }
 
 function deleteProductWarranty(id,status){
@@ -255,13 +258,12 @@ function inactiveData() {
 	}
 		var formData = new FormData();
 		formData.append('status', status);
-		//formData.append('orderId', id);
 		$.fn.makeMultipartRequest('POST', 'inActiveProductWarranty', false,
 				formData, false, 'text', function(data) {
 			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;
 			displayTable(alldata);
-			console.log(jsonobj.allOrders1);
+			/* console.log(jsonobj.allOrders1); */
 			toolTips();
 				});
 		

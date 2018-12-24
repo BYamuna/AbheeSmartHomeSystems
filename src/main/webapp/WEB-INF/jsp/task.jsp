@@ -556,14 +556,13 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		});
 	});
 
-	// $("#taskdeadline").prop("readonly", true);
 
 	var loginUserDId = "1";
 	var cuserid = "1";
 	var listOrders1 = ${allOrders1};
 	
 
-	/*  */
+	
 
 	if (listOrders1 != "") {
 		displayTable(listOrders1)

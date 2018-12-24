@@ -18,11 +18,11 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "abheeproductguarantee")
 public class ProductGuarantee implements Serializable
 {
-	//@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer  id;
+	private Integer id;
+	@Id
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@GeneratedValue(generator = "order_id") 
 	@GenericGenerator(name = "order_id", strategy = "com.charvikent.abheeSmartHomeSystems.config.OrderIdGenerator")
 	@Column( name= "orderId", unique=true, nullable=false)
@@ -41,14 +41,6 @@ public class ProductGuarantee implements Serializable
 	@CreationTimestamp
 	protected Date UpdatedTime ;
 	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getOrderId() {
 		return orderId;
 	}
@@ -64,10 +56,14 @@ public class ProductGuarantee implements Serializable
 	}
 	
 
+
+
+
+
 	public ProductGuarantee(Integer id,String orderId, String productmodelid, String customerid, String purchaseddate,
 			String expireddate, String status, Date createdTime, Date updatedTime) {
 		super();
-		this.id = id;
+		this.id=id;
 		this.orderId = orderId;
 		this.productmodelid = productmodelid;
 		this.customerid = customerid;
@@ -76,6 +72,14 @@ public class ProductGuarantee implements Serializable
 		this.status = status;
 		this.createdTime = createdTime;
 		UpdatedTime = updatedTime;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getProductmodelid() {
@@ -149,5 +153,6 @@ public class ProductGuarantee implements Serializable
 
 
 
+	
 	
 }

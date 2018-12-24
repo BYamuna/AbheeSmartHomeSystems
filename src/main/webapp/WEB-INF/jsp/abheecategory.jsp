@@ -175,7 +175,7 @@
 										</select>
 						</div>
 						<div class="col-sm-4" style="padding-top:8px;">
-							<label>Attach File(s)</label> <span class="impColor">*</span>
+							<label>Attach File(s)</label>  <!-- <span class="impColor">*</span>  -->
 						</div>
 						
 						<div class="col-sm-8">
@@ -662,16 +662,34 @@ $.each(productdetailslist, function(k,v){
 	   var formData = new FormData();
     	
     	formData.append("salesRequest",JSON.stringify(jsonData));
+    	$('span.error-keyup-4').remove();
 	   
 	   
 	  /*  formData.append('modelnumber',productmodel);
 	   formData.append('email',email);
-	   formData.append('mobileno',mobileno);
+	   formData.append('mobileno',mobileno);*/
 	 //formData.append('locationData',locationData);
 	   formData.append('address',address);
-	   formData.append('reqdesc',reqdesc);  */
-	   
-	   if(imgfile=="" || imgfile==null || imgfile=="undefined")
+	   formData.append('reqdesc',reqdesc);  
+	  
+	
+	 if (address == null || address == "" || address == "undefined") {
+		 $('.impColor0').after('<span class="error error-keyup-4">Fill Address Field </span>');
+		 $('#address' ).css('border-color','#e73d4a');
+			$('#address' ).css('color','#e73d4a');
+		 return false;
+		 
+		 
+	 }
+	 if (reqdesc == null || reqdesc == "" || reqdesc == "undefined") {
+		 $('.impColor0').after('<span class="error error-keyup-4">Fill Description Field </span>');
+		 $('#reqdesc' ).css('border-color','#e73d4a');
+			$('#reqdesc' ).css('color','#e73d4a');
+		 return false;
+		 
+		 
+	 }
+	  if(imgfile=="" || imgfile==null || imgfile=="undefined")
 		{
 			$('.impColor0').after('<span class="error error-keyup-4">Choose file </span>');
 			 $('#imgfile' ).css('border-color','#e73d4a');
@@ -685,12 +703,12 @@ $.each(productdetailslist, function(k,v){
 	{	
 	var portfolio_values = document.getElementById('imgfile').files[i];
 	formData.append('imgfile', portfolio_values);
-	} 
+	}
 	
 	formData.append( "modelnumber",modelnumber);
 	//formData.append( "locationData",locationData);
-	formData.append( "address",address);
-	formData.append( "reqdesc",reqdesc);
+	/* formData.append( "address",address);
+	formData.append( "reqdesc",reqdesc); */
 	console.log(formData);
 		$.ajax({
 		type:"POST",
@@ -737,7 +755,7 @@ $.each(productdetailslist, function(k,v){
 		 servicetypeid =$("#servicetypeid").val();
 		 requesttimeid =$("#requesttimeid").val();
 		 warranty=$("#warranty:checked").val();
-		 fileimg =$('#fileimg').val();
+		 /* fileimg =$('#fileimg').val(); */
 		 
 		 
 		 var objArr = [];
@@ -780,12 +798,12 @@ $.each(productdetailslist, function(k,v){
 			 
 			 
 		 }
-		 if(fileimg=="" || fileimg==null || fileimg=="undefined"){
+		 /* if(fileimg=="" || fileimg==null || fileimg=="undefined"){
 			$('.impColor0').after('<span class="error error-keyup-4">Choose file </span>');
 			 $('#fileimg' ).css('border-color','#e73d4a');
 				$('#fileimg' ).css('color','#e73d4a');
 			 return false;
-		 }
+		 } */
 		 var ins = document.getElementById('fileimg').files.length;
 			
 			for(var i=0; i< ins; i++)
