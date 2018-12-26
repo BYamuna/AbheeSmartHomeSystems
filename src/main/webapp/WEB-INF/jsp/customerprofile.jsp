@@ -214,7 +214,8 @@ color:#000 !important;
                 <li class="arrow_box"><a data-toggle="tab" href="#1_3">Mobile Number</a> </li>
                 <li class="arrow_box"><a data-toggle="tab" href="#1_4">Change Password</a> </li>
                 <li class="arrow_box"><a data-toggle="tab" href="#1_5">My Orders</a> </li>
-                 <li class="ticketstatus"><a href="${baseurl }/ticketstatus">Ticket Status</a></li>
+                <li class="arrow_box"><a data-toggle="tab" href="#1_6">Ticket Status</a> </li>
+                <%-- <li class="ticketstatus"><a href="${baseurl }/ticketstatus">Ticket Status</a></li> --%>
                 
               </ul>
             </div>
@@ -392,6 +393,117 @@ color:#000 !important;
                   	</div>
                   </div>
                 </div>
+                
+                <div class="tab-pane fade" id="1_6">
+                  <div class="tab-data-info">
+                  	<div style="margin-top:-20px;" class="qsrinfo">
+                  		<div class="col-md-6">
+                  			<h3>Ticket Status</h3>
+                  		</div>
+                  		<div class="col-md-6">
+                  		</div><div class="clearfix"></div>
+                  	</div>
+                  	<div class="tab">
+						  <button class="tablinks" onclick="Quotationrequests(),openCity(event, 'customerQuotationTable')" id="defaultOpen">Quotation Requests</button>
+						  <button class="tablinks" onclick="Servicerequest(),openCity(event, 'customerTaskTable')">Service Requests</button>
+					</div>
+                  	<!-- <div class="qsrdata">  -->
+                  	<div id="customerQuotationTable" class="tabcontent">
+				  			<!-- <div class="table-responsive">
+								<table class="table table-bordered priority prioritybg"	style="border: 1px solid #0460a4;" >
+									<thead>
+										<tr style="background-color: #0460a4; color: #fff; text-align: center; font-family:'Roboto'; font-size: 12px;">
+											<th>Quotation No</th>
+											<th>Product Model</th>
+											<th>Address</th>
+											<th>Warranty Expired Date</th>
+										</tr> 
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div> -->
+						</div>
+						<script type="text/javascript">
+         function Quotationrequests(){
+        		$.ajax({
+        			type : "POST",
+        			url : "quotationrequests",
+        			data : '',
+        			dataType : "json",
+        			beforeSend : function() {
+        	            //$.blockUI({ message: 'Please wait' });
+        	          }, 
+        			success : function(data) {
+        				console.log(data);
+        				displayTable2(data);
+        				
+        			},
+        			
+        			error:  function(e){$.unblockUI();console.log(e);
+        			}
+
+        	});
+ } 
+   
+         function displayTable2(listOrders) {
+     		$('#customerQuotationTable').html('');
+     		var tableHead = '<table id="customerQuotationTable" class="table tablestriped table-bordered datatables">'
+     				+ '<thead><tr style=" font-size:12px;background-color: #0460a4; color: #fff;"><th>Quotation No</th><th>Product Model</th><th>Address</th><th>Description</th><th>Quotation Images</th><th>Mobileno</th><th>Quotation Date</th></tr></thead><tbody></tbody></table>';
+     		$('#customerQuotationTable').html(tableHead);
+     		serviceUnitArray = {};
+     		
+     		$.each(listOrders,function(i, orderObj) {
+     				if(orderObj.imgfiles==undefined) orderObj.imgfiles='';
+     				else
+     					{
+     						var list=orderObj.imgfiles.split('*');
+     						var imgfiles='';
+     						for(var i=0;i<list.length;i++)
+     						{
+     							imgfiles=imgfiles+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
+     						}
+     						orderObj.imgfiles=imgfiles;
+     					}
+     				serviceUnitArray[orderObj.id] = orderObj;
+     			var tblRow = "<tr>"
+     				+ "<td title='"+orderObj.salesrequestnumber+"'><a href=viewResponse?id='"+ orderObj.id+"'>"+ orderObj.salesrequestnumber+"</a></td>"
+     				+ "<td title='"+orderObj.modelname+"'>"+ orderObj.modelname + "</td>"
+     				+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>" 
+     				+ "<td title='"+orderObj.reqdesc+"'>"+ orderObj.reqdesc + "</td>" 
+     				+ "<td title='"+orderObj.imgfiles+"'>"+ orderObj.imgfiles + "</td>" 
+     				+ "<td title='"+orderObj.mobileno+"'>"+ orderObj.mobileno + "</td>"
+     				+"<td title='"+orderObj.created_time+"'>"+ orderObj.created_time + "</td>"
+     				+ "</tr>";
+     			$(tblRow).appendTo("#customerQuotationTable table tbody");
+     		});
+     		
+     	} 
+       
+        	</script>
+						<div id="customerTaskTable" class="tabcontent">
+	  							<div class="table-responsive">
+								<table class="table table-bordered priority prioritybg"	style="border: 1px solid #0460a4;" >
+									<thead>
+										<tr style="background-color: #0460a4; color: #fff; text-align: center; font-family:'Roboto'; font-size: 12px;">
+											<th>OrderId</th>
+											<th>Product(s)</th>
+											<th>Date of Purchased</th>
+											<th>Warranty Expired Date</th>
+										</tr> 
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- </div> -->
+						</div>
+						
+                  	</div>
+                  </div>
+                </div>
+                
               </div>
 			  
               <br />
@@ -433,7 +545,130 @@ color:#000 !important;
       </div>
     </div>
   </div> 
-
+<!-- <script type="text/javascript">
+		
+         function Quotationrequests(){
+        		$.ajax({
+        			type : "POST",
+        			url : "quotationrequests",
+        			data : '',
+        			dataType : "json",
+        			beforeSend : function() {
+        	            //$.blockUI({ message: 'Please wait' });
+        	          }, 
+        			success : function(data) {
+        				console.log(data);
+        				displayTable2(data);	
+        			},
+        			error:  function(e){
+        				$.unblockUI();console.log(e);
+        			}
+        	});
+ 		} 
+   
+         function displayTable2(listOrders) {
+     		$('#customerQuotationTable').html('');
+     		var tableHead = '<table id="customerQuotationTable" class="table tablestriped table-bordered datatables">'
+     				+ '<thead><tr style=" font-size:12px;background-color: #0460a4; color: #fff;"><th>Quotation No</th><th>Product Model</th><th>Address</th><th>Description</th><th>Quotation Images</th><th>Mobileno</th><th>Quotation Date</th></tr></thead><tbody></tbody></table>';
+     		$('#customerQuotationTable').html(tableHead);
+     		serviceUnitArray = {};
+     		
+     		$.each(listOrders,function(i, orderObj) {
+     				if(orderObj.imgfiles==undefined) orderObj.imgfiles='';
+     				else
+     					{
+     						var list=orderObj.imgfiles.split('*');
+     						var imgfiles='';
+     						for(var i=0;i<list.length;i++)
+     						{
+     							imgfiles=imgfiles+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
+     						}
+     						orderObj.imgfiles=imgfiles;
+     					}
+     				serviceUnitArray[orderObj.id] = orderObj;
+     			var tblRow = "<tr>"
+     				+ "<td title='"+orderObj.salesrequestnumber+"'><a href=viewResponse?id='"+ orderObj.id+"'>"+ orderObj.salesrequestnumber+"</a></td>"
+     				+ "<td title='"+orderObj.modelname+"'>"+ orderObj.modelname + "</td>"
+     				+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>" 
+     				+ "<td title='"+orderObj.reqdesc+"'>"+ orderObj.reqdesc + "</td>" 
+     				+ "<td title='"+orderObj.imgfiles+"'>"+ orderObj.imgfiles + "</td>" 
+     				+ "<td title='"+orderObj.mobileno+"'>"+ orderObj.mobileno + "</td>"
+     				+"<td title='"+orderObj.created_time+"'>"+ orderObj.created_time + "</td>"
+     				+ "</tr>";
+     			$(tblRow).appendTo("#customerQuotationTable table tbody");
+     		});	
+     	} 
+       
+     </script> -->
+  			 
+  	<script type="text/javascript">
+         function Servicerequest(){
+        		$.ajax({
+        			type : "POST",
+        			url : "servicerequests",
+        			data : '',
+        			dataType : "json",
+        			beforeSend : function() {
+        	            // $.blockUI({ message: 'Please wait' });
+        	          }, 
+        			success : function(data) {
+        				console.log(data);
+        				displayTable3(data);
+        			},
+        			error:  function(e){$.unblockUI();console.log(e);
+        			}
+        			
+        	});
+ 		} 
+         function displayTable3(listOrders) {
+     		$('#customerTaskTable').html('');
+     		var tableHead = '<table id="customerTaskTable" class="table tablestriped table-bordered datatables">'
+     				+ '<thead><tr style=" font-size:12px;background-color: #0460a4; color: #fff;"><th>RequestNo</th><th>ServiceType</th><th>Product Model</th><th>Address</th><th>Description</th><th>Product Images</th><th>Request Date</th></tr></thead><tbody></tbody></table>';
+     		$('#customerTaskTable').html(tableHead);
+     		serviceUnitArray = {};
+     		
+     		$.each(listOrders,function(i, orderObj) {
+     				if(orderObj.uploadfile==undefined) orderObj.uploadfile='';
+     				else
+     					{
+     						var list=orderObj.uploadfile.split('*');
+     						var uploadfile='';
+     						for(var i=0;i<list.length;i++)
+     						{
+     							uploadfile=uploadfile+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
+     						}
+     						orderObj.uploadfile=uploadfile;
+     					}
+     				serviceUnitArray[orderObj.id] = orderObj;
+     			var tblRow = "<tr>"
+     				+ "<td title='"+orderObj.taskno+"'><a href=viewServiceResponse?id='"+ orderObj.taskno+"'>"+ orderObj.taskno+"</a></td>"
+     				+ "<td title='"+orderObj.servicetypename+"'>"+ orderObj.servicetypename
+     				+ "<td title='"+orderObj.modelname+"'>"+ orderObj.modelname
+     				+ "<td title='"+orderObj.communicationaddress+"'>"+ orderObj.communicationaddress+ "</td>"
+     				+ "<td title='"+orderObj.description+"'>"+ orderObj.description+ "</td>"
+     				+ "<td title='"+orderObj.uploadfile+"'>"+ orderObj.uploadfile + "</td>" 
+     				+"<td title='"+orderObj.created_time+"'>"+ orderObj.created_time + "</td>"
+     				+ "</tr>";
+     			$(tblRow).appendTo("#customerTaskTable table tbody");
+     		});
+     	}
+      </script>
+     <script>
+		function openCity(evt, cityName)  {
+		    var i, tabcontent, tablinks;
+		    tabcontent = document.getElementsByClassName("tabcontent");
+		    for (i = 0; i < tabcontent.length; i++) {
+		        tabcontent[i].style.display = "none";
+		    }
+		    tablinks = document.getElementsByClassName("tablinks");
+		    for (i = 0; i < tablinks.length; i++) {
+		        tablinks[i].className = tablinks[i].className.replace(" active", "");
+		    }
+		    document.getElementById(cityName).style.display = "block";
+		    evt.currentTarget.className += " active";
+		}
+		document.getElementById("defaultOpen").click();
+	</script> 
 <script type="text/javascript">
 
 var validation = true;
@@ -934,4 +1169,6 @@ function resendOTP()
 }
 	
 </script>
+
+
 <%@include file="abheefooter.jsp" %>

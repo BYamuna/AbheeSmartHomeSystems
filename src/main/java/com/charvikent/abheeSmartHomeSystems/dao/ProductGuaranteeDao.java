@@ -78,7 +78,7 @@ public class ProductGuaranteeDao
 	}
 	public void updateWarranty(ProductGuarantee productGuarantee) 
 	{
-		ProductGuarantee pg=getProductWarrantyByOrderId(productGuarantee.getOrderId());
+		ProductGuarantee pg=getProductWarrantyById(productGuarantee.getOrderId());
 		/*pg.setCustomerid(productGuarantee.getCustomerid());
 		pg.setProductmodelid(productGuarantee.getProductmodelid());*/
 		pg.setPurchaseddate(productGuarantee.getPurchaseddate());
@@ -91,9 +91,9 @@ public class ProductGuaranteeDao
 		String sql="update abheeproductguarantee abg set abg.purchaseddate='"+productGuarantee.getPurchaseddate()+"'abg.expireddate='"+productGuarantee.getExpireddate()+"'";
 		jdbcTemplate.execute(sql);
 	}*/
-	public ProductGuarantee getProductWarrantyByOrderId(String orderId) 
+	public ProductGuarantee getProductWarrantyById(String id) 
 	{
-		return em.find(ProductGuarantee.class, orderId);	
+		return em.find(ProductGuarantee.class, id);	
 	}
 	
 	public String productid(String productname) 
@@ -193,7 +193,7 @@ public class ProductGuaranteeDao
 
 	public List<Map<String, Object>> getAllInActiveList() 
 	{
-		String sql="select abg.order_id,abg.customerid,abg.productmodelid,abg.purchaseddate,abg.expireddate,p.name as productmodelname,abg.status from abheeproductguarantee abg,abhee_product p where abg.productmodelid=p.id and abg.status='0' order by abg.updated_time desc";
+		String sql="select abg.order_id as orderId,abg.customerid,abg.productmodelid,abg.purchaseddate,abg.expireddate,p.name as productmodelname,abg.status from abheeproductguarantee abg,abhee_product p where abg.productmodelid=p.id and abg.status='0' order by abg.updated_time desc";
 		System.out.println(sql);
 		
 		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});

@@ -251,6 +251,7 @@ function validate(id, errorMessage)
 
 function inactiveData() {
 	var status="0";
+	//var orderId="";
 	if($('#inActive').is(":checked") == true){
 		status="0";
 	}else{

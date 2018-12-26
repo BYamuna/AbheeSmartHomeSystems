@@ -17,6 +17,7 @@
 	src="js/bootstrap-datetimepicker.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css">
+	
 <div class="clearfix"></div>
 <ol class="breadcrumb">
 	<li><a href="dashBoard">Home</a></li>
@@ -37,13 +38,10 @@
 					</div>
 				</div>
 				<div class="panel-body collapse in">
-					<input type="checkbox" class="form-check-input"
-						onclick="inactiveData();" id="inActive"> <label
+					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label
 						class="form-check-label">Show Inactive List</label>
 					<div class="table-responsive" id="tableId">
-						<table cellpadding="0" cellspacing="0" border="0"
-							class="table table-striped table-bordered datatables"
-							id="example">
+						<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 							<thead>
 								<tr>
 									<th>Service Request No</th>
@@ -70,26 +68,19 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h4 id="service">Service Request</h4>
-				
-				<div class="options">
-						<a href="javascript:;" class="panel-collapse"><i
-							class="fa fa-chevron-down"></i></a>
-					</div>
-				</div>	
-				<form:form class="form-horizontal" modelAttribute="taskf"
-					action="savetask1" method="post" enctype="multipart/form-data">
+					<!-- <div class="options"><a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a></div> -->
+				</div>
+			<form:form class="form-horizontal" modelAttribute="taskf" action="savetask1" method="post" enctype="multipart/form-data">
+				<form:hidden path="id"/>
 					<div class="panel-body">
 					  <security:authorize access="hasRole('ROLE_ADMIN')">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Service
 										Type <span class="impColor">*</span>
 									</label>
-									<form:select path="ServiceType"
-										class="col-xs-10 col-sm-5 validate"
-										onfocus="removeBorder(this.id)">
+									<form:select path="ServiceType" class="col-xs-10 col-sm-5 validate" onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${category}" />
 									</form:select>
@@ -100,19 +91,13 @@
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Severity
 										<span class="impColor">*</span>
 									</label>
-
-									<form:select path="severity"
-										class="col-xs-10 col-sm-5 validate"
-										onfocus="removeBorder(this.id)">
+									<form:select path="severity" class="col-xs-10 col-sm-5 validate" onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${severity}" />
 									</form:select>
 									<span class="hasError" id="stationnameError"></span>
-
 								</div>
 							</div>
-
-
 						</div>
 						<div class="row">
 							<div class="col-md-6">
@@ -120,9 +105,7 @@
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Priority
 										<span class="impColor">*</span>
 									</label>
-									<form:select path="priority"
-										class="col-xs-10 col-sm-5 validate"
-										onfocus="removeBorder(this.id)">
+									<form:select path="priority" class="col-xs-10 col-sm-5 validate" onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${priority}"></form:options>
 									</form:select>
@@ -130,60 +113,42 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Assigned
-										to <span class="impColor">*</span>
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Assigned To <span class="impColor">*</span>
 									</label>
-
-									<form:select path="assignto"
-										class="col-xs-10 col-sm-5 validate"
-										onfocus="removeBorder(this.id)">
+									<form:select path="assignto" class="col-xs-10 col-sm-5 validate" onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${userNames}" />
 									</form:select>
 									<span class="hasError" id="stationnameError"></span>
-
 								</div>
 							</div>
-
-
 						</div>
-						  
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Summary
 										<span class="impColor">*</span>
 									</label>
-									<form:input path="subject" placeholder="Summary"
-										class="col-xs-10 col-sm-5 validate" />
+									<form:input path="subject" placeholder="Summary" class="col-xs-10 col-sm-5 validate" />
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">Service Request
-										DeadLine <span class="impColor">*</span>
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">Service Request DeadLine <span class="impColor">*</span>
 									</label>
-									
-										<form:input type="text" path="taskdeadline"
-											class="col-xs-10 col-sm-5 validate"  onfocus="removeBorder(this.id)"/>
-
-									
+										<form:input type="text" path="taskdeadline" class="col-xs-10 col-sm-5 validate1"  onfocus="removeBorder(this.id)"/>
+										<span class="hasError" id="stationnameError"></span>
 								</div>
 							</div>
-							
 						</div>
 						 </security:authorize>
-						 
-						 <form:hidden path="id" />
-
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">
 										Status <span class="impColor">*</span>
 									</label>
-									<form:select path="kstatus" class="col-xs-10 col-sm-5 validate"
-										onfocus="removeBorder(this.id)">
+									<form:select path="kstatus" class="col-xs-10 col-sm-5 validate" onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${taskstatus}" />
 									</form:select>
@@ -194,16 +159,13 @@
 									<label for="focusedinput" class="col-md-6 control-label">Description
 										<!-- <span class="impColor">*</span> -->
 									</label>
-									
-										<form:textarea path="description"
-											class="col-xs-10 col-sm-5" placeholder="Description" />
+										<form:textarea path="description" class="col-xs-10 col-sm-5" placeholder="Description" />
 										<span class="hasError" id="stationnameError"></span>
-									
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">ServiceRequestNumber
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">ServiceRequestNumber
 										<!-- <span class="impColor">*</span> -->
 									</label>
 									<form:input path="taskno" placeholder="ServiceRequestNumber" class="col-xs-10 col-sm-5" />
@@ -214,34 +176,48 @@
 						</div>
 						<div class="row">
 						<div class="col-md-6">
+							<div class="form-group">
+								<label
+									class="ace-file-input ace-file-multiple col-sm-3 col-md-push-3 control-label no-padding-right">Attach
+									File(s)</label>
+								<div class="col-md-8">
+									<input type="file" name="file1" id="file1" class="col-sm-9 col-md-push-5 validate1" multiple="multiple" style="margin: 7px 0px 0px 0px;">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+								<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">Comment
+										<span class="impColor">*</span>
+									</label>
+										<form:textarea path="addComment" class="col-xs-10 col-sm-5 validate " placeholder="Comment" /><span class="hasError" id="stationnameError"></span>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Warranty</label>
+								<div class="col-md-3 ">
+										<input type="checkbox" id="warranty"  value ="0"/>
+									</div>
+								</div>
+							</div>
+							</div>
+							
+						<%-- <div class="col-md-6">
 								<div class="form-group">
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Tax
 										<!-- <span class="impColor">*</span> -->
 									</label>
 									<form:input path="tax" placeholder="Tax" class="col-xs-10 col-sm-5" />
 								</div>
-							</div>
-						<div class="col-md-6">
-								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Comment
-
-										<span class="impColor">*</span>
-									</label>
-									
-										<form:textarea path="addComment"
-											class="col-xs-10 col-sm-5 validate " placeholder="Comment" />
-										<span class="hasError" id="stationnameError"></span>
-									
-								</div>
-							</div>
-							</div>
-					<security:authorize access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
+							</div> --%>
+					<%-- <security:authorize access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Total
-										<!-- <span class="impColor">*</span>
- -->									</label>
+										<span class="impColor">*</span>
+ 									</label>
 									<form:input path="total" placeholder="Total" class="col-xs-10 col-sm-5" />
 								</div>
 							</div>
@@ -250,43 +226,21 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Discount
-										<!-- <span class="impColor">*</span> -->
+										<span class="impColor">*</span>
 									</label>
 									<form:input path="discount" placeholder="Discount" class="col-xs-10 col-sm-5" />
 								</div>
 							</div>
-						</div>	
-						<div class="col-md-6">
-							<div class="form-group">
-								<label
-									class="ace-file-input ace-file-multiple col-sm-3 col-md-push-3 control-label no-padding-right">Attach
-									File(s)</label>
-								<div class="col-md-8">
-									<input type="file" name="file1" id="file1"
-										class="col-sm-9 col-md-push-5 validate1" multiple="multiple"
-										style="margin: 7px 0px 0px 0px;">
-								</div>
-							</div>
-						</div>
-							
-							
-							<div class="col-md-6">
+						</div> --%>
+							<%-- <div class="col-md-6">
 								<div class="form-group">
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Amount Received
-										<!-- <span class="impColor">*</span> -->
+										<span class="impColor">*</span>
 									</label>
 									<form:input path="amountreceived" placeholder="Amountreceived" class="col-xs-10 col-sm-5" />
 								</div>
-							</div>
-								<div class="col-md-6">
-								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Warranty</label>
-								<div class="col-md-3 ">
-										<form:checkbox path="warranty"  value ="0" style="width:15px;height:20px;" />
-									</div>
-								</div>
-								</div>
-						</security:authorize>
+							</div> 
+						 </security:authorize> --%>
 						<%-- <security:authorize access="hasRole('ROLE_USER')">	
 							<div class="col-md-6">
 								<div class="form-group">
@@ -304,7 +258,6 @@
 						</div>	
 						
 						<div id="getting-started"></div>
-					</div>
 					<div class="panel-footer">
 						<div class="row">
 							<div class="col-sm-12">
@@ -317,11 +270,10 @@
 						</div>
 					</div>
 				</form:form>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
 
 <!-- Task History Modal Starts here-->
 <div class="modal fade" id="myModal" data-backdrop="static"
@@ -514,7 +466,125 @@
 </security:authorize>
 
 
+<%-- <div class="modal fade" id="warrantyModal" data-backdrop="static" data-keyboard="false"  role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header" style="background: #2973cf;">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" style="color: white;"> Add Product Warranty Details </h4>
+        	</div>
+        	<div class="modal-body">
+					<form class="form-horizontal" action="productWarranty" method="post" >
+					<div class="panel-body">
+					<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="hidden" id= "warrantyid" />
+									<label for="focusedinput" class="col-md-6 control-label ">Product Model Name<span class="impColor">*</span>
+									</label>
+										
+									<select id="productmodelid"	class="col-xs-10 col-sm-5 validate"	onfocus="removeBorder(this.id)">
+										<option value="" label="--- Select ---" />
+										<c:forEach var="list" items="${productmodelid}">
+												<option value=${list.key}>${list.value} </option>
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+							
+							<div class="col-md-6">
+								<div class="form-group">
+								<input type="hidden" id= "orderId" />
+									<label for="focusedinput" class="col-md-6 control-label ">Customer ID	<span class="impColor">*</span>
+									</label>	
+									<select id="customerid"	class="col-xs-10 col-sm-5 validate"	onfocus="removeBorder(this.id)">
+										<option value="" label="--- Select ---" />
+										<c:forEach var="list" items="${customerid}">
+												<option value=${list.key}>${list.value} </option>
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">Purchased Date	<span class="impColor">*</span>
+									</label>
+										<input type="text" id="purchaseddate"	class="col-xs-10 col-sm-5 validate" />
+
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">Expired Date	<span class="impColor">*</span>
+									</label>
+										<input type="text" id="expireddate"
+											class="col-xs-10 col-sm-5 validate" />
+
+								</div>
+							</div>
+							
+						</div>
+						<div id="getting-started"></div>
+					</div>
+							
+                    <div class="panel-footer">
+				      <div class="row">
+							<div class="col-sm-12">
+								<div class="btn-toolbar text-center">
+									<input type="submit" id="submit1" value="Submit" class="btn-primary btn" /> 
+										<input type="reset" value="Reset" onClick="window.location.reload()" class="btn-danger btn cancel" />
+								</div>
+							</div>
+						</div>	
+			      	</div>
+			      	</form>
+					</div>
+				</div>	
+			</div>
+		</div> --%>
+
 <script type="text/javascript">
+
+
+	/* $('#purchaseddate').datetimepicker({
+	
+		useCurrent : false,
+		format : 'DD-MMM-YYYY',
+		showTodayButton : true,
+		sideBySide : true,
+		
+		toolbarPlacement : 'top',
+		focusOnShow : false,
+	
+	});
+	
+	$('#expireddate').datetimepicker({
+	
+		useCurrent : false,
+		format : 'DD-MMM-YYYY',
+		showTodayButton : true,
+		sideBySide : true,
+		
+		toolbarPlacement : 'top',
+		focusOnShow : false,
+	
+	});
+	
+	function openWarrantyModal(){
+			if($("#warranty").attr('checked',true))
+			{
+				$("#warrantyModal").modal('show');
+			}
+			else
+			{
+				$("#warrantyModal").modal('hide');
+			}	
+	} */
+
+
 	$("#taskdeadline").keypress(function() {
 		return false;
 	})

@@ -135,8 +135,7 @@ body {font-family: Arial;}
         	          }, 
         			success : function(data) {
         				console.log(data);
-        				displayTable3(data);
-        				
+        				displayTable3(data);	
         			},
         			
         			error:  function(e){$.unblockUI();console.log(e);

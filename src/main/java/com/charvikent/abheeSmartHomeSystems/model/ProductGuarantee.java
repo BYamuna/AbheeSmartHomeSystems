@@ -6,7 +6,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+/*import javax.persistence.GenerationType;*/
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,9 +18,11 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "abheeproductguarantee")
 public class ProductGuarantee implements Serializable
 {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	/*
+	 * @Id
+	 * 
+	 * @GeneratedValue(strategy = GenerationType.AUTO) private Integer id;
+	 */
 	@Id
 	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@GeneratedValue(generator = "order_id") 
@@ -60,10 +62,10 @@ public class ProductGuarantee implements Serializable
 
 
 
-	public ProductGuarantee(Integer id,String orderId, String productmodelid, String customerid, String purchaseddate,
+	public ProductGuarantee(/* Integer id, */String orderId, String productmodelid, String customerid, String purchaseddate,
 			String expireddate, String status, Date createdTime, Date updatedTime) {
 		super();
-		this.id=id;
+		/* this.id=id; */
 		this.orderId = orderId;
 		this.productmodelid = productmodelid;
 		this.customerid = customerid;
@@ -74,13 +76,11 @@ public class ProductGuarantee implements Serializable
 		UpdatedTime = updatedTime;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	/*
+	 * public Integer getId() { return id; }
+	 * 
+	 * public void setId(Integer id) { this.id = id; }
+	 */
 
 	public String getProductmodelid() {
 		return productmodelid;
@@ -145,7 +145,7 @@ public class ProductGuarantee implements Serializable
 
 	@Override
 	public String toString() {
-		return "ProductGuarantee [id=" + id + ", orderId=" + orderId + ", productmodelid=" + productmodelid
+		return "ProductGuarantee [orderId=" + orderId + ", productmodelid=" + productmodelid
 				+ ", customerid=" + customerid + ", purchaseddate=" + purchaseddate + ", expireddate=" + expireddate
 				+ ", status=" + status + ", createdTime=" + createdTime + ", UpdatedTime=" + UpdatedTime + "]";
 	}
