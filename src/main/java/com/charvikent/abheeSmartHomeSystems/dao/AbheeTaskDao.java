@@ -218,7 +218,7 @@ private AbheeTask getAbheeTaskByTaskNo(String taskno) {
 
 public List<Map<String, Object>> getAbheeTaskById(String id) {
 	
-	String sql="select t.id,u.username,s.servicetypename,t.created_time,t.description,ts.name as Requeststatus,p.priority,sev.severity, "
+	String sql="select t.id,u.username,s.servicetypename,DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.description,ts.name as Requeststatus,p.priority,sev.severity, "
 			 + " t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id ,t.communicationaddress,t.imgfile as AttachedFiles  "
 			+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp"
 			+" where t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.taskno='"+id+"' order by t.updated_time desc ";

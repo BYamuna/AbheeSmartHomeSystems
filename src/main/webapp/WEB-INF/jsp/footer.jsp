@@ -2,6 +2,7 @@
 <%
 	String baseurl2 =  request.getScheme() + "://" + request.getServerName() +      ":" +   request.getServerPort() +  request.getContextPath();
 	session.setAttribute("baseurl", baseurl2);
+	String session_notification = (String)session.getAttribute("notifications");
 %>
 
 <!-- Footer Starts Here -->
@@ -54,12 +55,13 @@
 	
 <script type="text/javascript">
 var isClick = 'Yes';
-<%-- if(test != null){
-	/* var msgIncrement = 0; */
+var test = <%= session_notification %>;
+ if(test != null){
+	var msgIncrement = 0;
 	$("#taskTableHeader tbody").empty();
 	$.each(test,function(i, orderObj) { 
-		/* if(orderObj.status == 1){
-			msgIncrement++; */
+		 if(orderObj.status == 1){
+			msgIncrement++; 
 		var task = "<tr>"
 			+ "<td title='"+orderObj.taskno+"'><b>"+ orderObj.taskno+ "</b></td>" 
 			+ "<td title='"+orderObj.musername+"'><b>"+ orderObj.musername + "</b></td>"
@@ -67,18 +69,18 @@ var isClick = 'Yes';
 			+"<a class='view viewIt' href='task?"
 			+ "</tr>";
 		
-		$(task).appendTo("#taskTableHeader table tbody");
+		/* $(task).appendTo("#taskTableHeader table tbody"); */
 		
 		 $("#taskTableHeader tbody").append(task);
-		
+		 }
 	});
 	}
-		 /* $("#noOfMessages").text(msgIncrement); */
+		$("#noOfMessages").text(msgIncrement); 
 	</script>
 
 	<script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
 
- --%>
+ 
 </script>
 </body>
 </html>

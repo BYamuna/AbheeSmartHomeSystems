@@ -555,8 +555,9 @@ public class TaskController {
 			return "true";
 		} else {
 			System.out.println("Service Request already received");
-			return "Service Request already received";
 
+			return "false";
+			
 		}
 
 	}

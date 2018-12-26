@@ -165,10 +165,14 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
+<<<<<<< HEAD
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">ServiceRequestNumber
+=======
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Service Request Number
+>>>>>>> 3434d5a64f5f45d141a7feaff46e1547c7eab4bd
 										<!-- <span class="impColor">*</span> -->
 									</label>
-									<form:input path="taskno" placeholder="ServiceRequestNumber" class="col-xs-10 col-sm-5" />
+									<form:input path="taskno" placeholder="Service Request Number" class="col-xs-10 col-sm-5" />
 								</div>
 							</div>
 							
@@ -641,7 +645,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	function displayTable(listOrders) {
 		$('#tableId').html('');
 		var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-				+ '<thead><tr><th>Service Request No</th><th>Category</th><th>Model Name</th><th>CustomerID</th><th>ServiceType</th><th>Priority</th><th>Task Created By</th><th>Service Request Status</th><th>Address</th><th>Requested Time</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
+				+ '<thead><tr><th>Service Request Number</th><th>Category</th><th>Model Name</th><th>CustomerID</th><th>ServiceType</th><th>Priority</th><th>Task Created By</th><th>Service Request Status</th><th>Address</th><th>Requested Time</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
 		$('#tableId').html(tableHead);
 		serviceUnitArray = {};
 

@@ -371,7 +371,7 @@ public class AbheeDashBoardController {
 		try{
 			
 			jsonObj.put("AssignedNotifications",retlist);
-			
+			session.setAttribute("notifications", sJson);
 			
 		}catch(Exception e){
 			e.printStackTrace();

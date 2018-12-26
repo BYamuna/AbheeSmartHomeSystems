@@ -85,7 +85,7 @@
 						
 						<div class="table-responsive">
 								<table class="table table-bordered priority prioritybg" style="border: 1px solid #0460a4; width:;" id="viewTaskTable">
-								 <thead><tr><th>Username</th><th>ServiceTypename</th><th>CreatedTime</th><th>Description</th><th>Requeststatus</th><th>Priority</th><th>Severity</th><th>Subject</th><th>Deadline</th><th>Taskno</th><th>Category</th><th>ModelName</th><th>CustomerId</th>
+								 <thead><tr><th>Username</th><th>Service Type</th><th>CreatedTime</th><th>Description</th><th>Request Status</th><th>Priority</th><th>Severity</th><th>Subject</th><th>Deadline</th><th>Taskno</th><th>Category</th><th>Model Name</th><th>Customer Id</th>
 				                 <th>Files</th></tr><tr></tr></thead><tbody></tbody></table>
 
 			<%-- <c:forEach var="listOuter" items="${test2}">

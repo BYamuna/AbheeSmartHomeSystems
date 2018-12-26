@@ -160,6 +160,15 @@
 							</div>
 							<div class="form-group">
 								<div class="col-md-5">
+									<label for="user_name">Address :</label>
+								</div>
+								<div class="col-md-7">
+									<input	type="text" name="caddress" id="caddress" onkeydown="removeBorder(this.id)" class="form-control validate1 onlyCharacters" placeholder="Address"/>
+								</div><div class="clearfix"></div>
+								<span class="hasError" id="caddressError" style="font-size: 13px;"></span>
+							</div>
+							<div class="form-group">
+								<div class="col-md-5">
 									<label for="user_name">Mobile Number :</label>
 								</div>
 								<div class="col-md-7">
@@ -421,6 +430,7 @@ var cmobile =0
 var cemail =0
 var csname =0
 var cname =0
+var caddress =0
 
 var cpassword =0
 var idArrayCmt1 = null;
@@ -544,6 +554,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		 cemail =$('#cemail').val();
 		 csname =$('#csname').val();
 		 cname =$('#cname').val();
+		 caddress=$('#caddress').val();
 		 cotp=$('#cotp').val();
 		 cpassword =$('#cpassword').val();
 		
@@ -554,7 +565,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		$.ajax({
 			type : "POST",
 			url : "modelSubmit",
-			data :"cmobile="+cmobile+"&cemail="+cemail+"&csname="+csname+"&cname="+cname+"&cotp="+cotp+"&cpassword="+cpassword,
+			data :"cmobile="+cmobile+"&cemail="+cemail+"&csname="+csname+"&cname="+cname+"&cotp="+cotp+"&caddress="+caddress+"&cpassword="+cpassword,
 			dataType : "text",
 			beforeSend : function() {
 	             $.blockUI({ message: 'Please wait' });
@@ -747,6 +758,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 		$('#cmobile').val("");
 		$('#cemail').val("");
 		$('#csname').val("");
+		$('#caddress').val("");
 		$('#cpassword').val("");
 		$('#crtpassword').val("");
 		

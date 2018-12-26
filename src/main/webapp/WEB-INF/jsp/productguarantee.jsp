@@ -247,7 +247,7 @@ function validate(id, errorMessage)
 //			$('#'+id+'Error').text("");
 	}
 	
-}
+} 
 
 function inactiveData() {
 	var status="0";
