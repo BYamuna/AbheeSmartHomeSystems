@@ -337,7 +337,7 @@ color:#000 !important;
                   				<label style="margin-top:-5px;">Current Password: </label>
                   			</div>
                   			<div class="col-md-8">
-                  				<input style="float:left;" id="pcurrentpassword" class="form-control" maxlength="4" type="password" placeholder="*****" disabled="true">
+                  				<input style="float:left;" id="pcurrentpassword" class="form-control" maxlength="4" type="password" placeholder="****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>
                   		<div class="col-sm-6">
@@ -347,7 +347,7 @@ color:#000 !important;
                   				<label style="margin-top:-5px;">New Password: </label>
                   			</div>
                   			<div class="col-md-8">
-                  				<input style="float:left;" id="pnewpassword" class="form-control" maxlength="4" type="password" placeholder="*****" disabled="true">
+                  				<input style="float:left;" id="pnewpassword" class="form-control" maxlength="4" type="password" placeholder="****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>
                   		<div class="col-sm-6">
@@ -357,7 +357,7 @@ color:#000 !important;
                   				<label style="margin-top:-5px;">Confirm Password: </label>
                   			</div>
                   			<div class="col-md-8">
-                  				<input style="float:left;" id="pconfirmpassword" class="form-control" maxlength="4" type="password" placeholder="*****" disabled="true">
+                  				<input style="float:left;" id="pconfirmpassword" class="form-control" maxlength="4" type="password" placeholder="****" disabled="true">
                   			</div><div class="clearfix"></div>
                   		</div>
                   		<div class="col-sm-6">

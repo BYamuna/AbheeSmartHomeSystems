@@ -14,34 +14,28 @@ import com.charvikent.abheeSmartHomeSystems.model.AbheePayment;
 
 @Repository
 @Transactional
-public class AbheepaymentDao {
+public class AbheePaymentDao 
+{
 	@PersistenceContext private EntityManager entityManager;
-	
-	public Map<Integer, String> getPaymentmap()
+	//@Autowired private JdbcTemplate jdbcTemplate;
+	public Map<Integer, String> getPaymentMap() 
 	{
-		Map<Integer, String> paymentMap = new LinkedHashMap<Integer, String>();
+		Map<Integer, String> PaymentMap = new LinkedHashMap<Integer, String>();
 		try
 		{
-		List<AbheePayment> paymentlist= getPayments();
-		System.out.println(paymentlist);
-		for(AbheePayment bean: paymentlist){
-			paymentMap.put(bean.getId(), bean.getPayment());
-		}
-				
+		List<AbheePayment> paymentlist = getPayments();
+		for( AbheePayment bean: paymentlist){
+			PaymentMap.put(bean.getId(),bean.getPayment());
+		}		
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-		return paymentMap;
-				
-		
+		return PaymentMap;
 	}
-
 	@SuppressWarnings("unchecked")
-	private List<AbheePayment> getPayments() 
+	public List<AbheePayment> getPayments() 
 	{
-		
-		return entityManager.createQuery("from AbheePayment").getResultList();
+		return entityManager.createQuery(" from AbheePayment").getResultList();
 	}
-
 }
 */

@@ -35,12 +35,12 @@ public class UserService
 	@SuppressWarnings("unused")
 	public void saveUser(User user) throws IOException
 	{
-		String msg =user.getFirstname()+" "+user.getLastname()+",  Successfully registered with AbheeSmartHomeSystems. \n You can login using \n Username:  "+user.getUsername()+"\n password: "+user.getPassword();
+		String msg =user.getFirstname()+" "+user.getLastname()+",  Successfully registered with AbheeSmartHomeSystems. \n You can login using \n Username:  "+user.getMobilenumber()+"\n password: "+user.getPassword();
 		String mbnum=user.getMobilenumber();
 		 String tmsg =environment.getProperty("app.empregistration");
 		 System.out.println(tmsg);
 		tmsg=  tmsg.replaceAll("_fullname_", user.getFirstname()+" "+user.getLastname());
-		tmsg=  tmsg.replaceAll("_username_", user.getUsername());
+		tmsg=  tmsg.replaceAll("_username_", user.getMobilenumber());
 		tmsg= tmsg.replaceAll("_password_", user.getPassword());
 		userDao.saveuser(user);
 		logger.info("Sending message.......");

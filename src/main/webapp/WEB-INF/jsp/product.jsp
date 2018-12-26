@@ -295,10 +295,13 @@ function editProduct(id) {
 	$("#ProductPrice").val(serviceUnitArray[id].productPrice);
 	$("#ProductModelSpecifications").val(serviceUnitArray[id].productModelSpecifications);
 	$("#submit1").val("Update");
+	//document.getElementById("fileDiv").readOnly  = true;
 	$(window).scrollTop($('#moveTo').offset().top);
 	
 	$("#dtext").html("");
 	    $('#name1').hide();
+	  //  $('#fileDiv').hide();
+	   //$("#fileDiv").attr('disabled', true);
 	    
 	    var productmodelvideoslinks = $('#productmodelvideoslinks').val();
 	    

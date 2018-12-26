@@ -193,7 +193,7 @@ public class ProductGuaranteeDao
 
 	public List<Map<String, Object>> getAllInActiveList() 
 	{
-		String sql="select abg.order_id,abg.customerid,abg.productmodelid,abg.purchaseddate,abg.expireddate,p.name as productmodelname,abg.status from abheeproductguarantee abg,abhee_product p where abg.productmodelid=p.id and abg.status='0' order by abg.updated_time desc";
+		String sql="select abg.id,abg.order_id,abg.customerid,abg.productmodelid,abg.purchaseddate,abg.expireddate,p.name as productmodelname,abg.status from abheeproductguarantee abg,abhee_product p where abg.productmodelid=p.id and abg.status='0' order by abg.updated_time desc";
 		System.out.println(sql);
 		
 		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});

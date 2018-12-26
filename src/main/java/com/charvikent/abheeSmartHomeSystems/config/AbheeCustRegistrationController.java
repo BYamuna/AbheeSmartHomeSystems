@@ -177,6 +177,7 @@ public class AbheeCustRegistrationController
 		String cemail=request.getParameter("cemail");
 		String csname=request.getParameter("csname");
 		String cname=request.getParameter("cname");
+		String caddress=request.getParameter("caddress");
 		String cotp=request.getParameter("cotp");
 		String cpassword=request.getParameter("cpassword");
 		/*AbheeCustRegistration abcust =new AbheeCustRegistration();		
@@ -194,6 +195,7 @@ public class AbheeCustRegistrationController
 		customer.setFirstname(csname);
 		customer.setLastname(cname);
 		customer.setEmail(cemail);
+		customer.setAddress(caddress);
 		customer.setPassword(cpassword);
 		customer.setEnabled("1");
 		customer.setCustomerType("1");

@@ -798,6 +798,14 @@ $.each(productdetailslist, function(k,v){
 			 
 			 
 		 }
+		 if (requesttimeid == null || requesttimeid == "" || requesttimeid == "undefined") {
+			 $('.impColor0').after('<span class="error error-keyup-4">Choose Request Time Field </span>');
+			 $('#requesttimeid' ).css('border-color','#e73d4a');
+				$('#requesttimeid' ).css('color','#e73d4a');
+			 return false;
+			 
+			 
+		 }
 		 /* if(fileimg=="" || fileimg==null || fileimg=="undefined"){
 			$('.impColor0').after('<span class="error error-keyup-4">Choose file </span>');
 			 $('#fileimg' ).css('border-color','#e73d4a');
@@ -840,26 +848,31 @@ $.each(productdetailslist, function(k,v){
 				}); 
 	             //$.blockUI({ message: 'Please wait' });
 	          }, 
-			success : function(result) {
+			success : function(data) {
 				//alert(company);
 				
-				if(result !="" && result != null){
+				/* if(result !="" && result != null){
 			  		alert("Thank you, your request has been submitted successfully.  Our team will contact you soon");
-			  		}
+			  		
 			  		$('#saveServiceRequest').val("");
 			  		$('#fileimg').val("");
 			  		 $('#formModal').modal('toggle');
 				
-				/* if(data ==='true')
+			 }else if(result == "false"){
+				alert("Service Request Already Received!");
+				
+		  		 $('#formModal').modal('toggle');
+			}  */
+				 if(data ==='true')
 				{
 					alert(" Thank you, your request had been submitted successfully. Our team will contact you soon");
 					$('#formModal').modal('toggle');					
 				}
 				else
 					{
-					alert(data);
+					alert("Service Request Already Received!");
 					$('#formModal').modal('toggle');
-					} */
+					} 
 				
 			},
 			complete: function () {

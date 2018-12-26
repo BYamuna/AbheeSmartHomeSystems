@@ -51,7 +51,7 @@
 					<form:form modelAttribute="userForm" action="employee" class="form-horizontal " method="Post">
 	                  <form:hidden path="id"/>
 	                  <div class="sep">
-					<div class="col-md-6"><br>
+					<%-- <div class="col-md-6"><br>
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Username<span class="impColor">*</span></label>
 									<div class="col-md-6">
@@ -59,16 +59,8 @@
 									</div>
 								</div>
 								
-								</div>
-								<div class="col-md-6"><br>
-								<div class="form-group" id="passwordDiv">
-									<label class="col-md-3 control-label no-padding-right">Password<span class="impColor">*</span></label>
-									<div class="col-md-6">
-										<form:password path="password" class="form-control validate" placeholder="Password"/>
-									</div>
-								</div>
-								
-								</div><div class="clearfix"></div>
+								</div> --%>
+								<div class="clearfix"></div>
 								</div>
 								<div class="sep">
 								<div class="col-md-6">
@@ -94,7 +86,17 @@
 									<div class="col-md-6">
 										<form:input path="mobilenumber" class="form-control validate numericOnly2" maxlength="10"  placeholder="Mobile Number"/>
 									</div>
-								</div></div>
+								</div>
+								</div>
+								<div class="col-md-6"><br>
+								<div class="form-group" id="passwordDiv">
+									<label class="col-md-3 control-label no-padding-right">Password<span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<form:password path="password" class="form-control validate" placeholder="Password"/>
+									</div>
+								</div>
+								
+								</div>
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</span></label>
@@ -233,7 +235,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>User Id</th><th>User Name</th><th>Report To</th><th>First Name</th><th>Last Name</th><th>Designation</th><th>Mobile Number</th><th>Branch name</th><th>Aadhar No</th><th style="text-align: center;">Options</th><th></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>User Id</th><th>User Name</th><th>Report To</th><th>First Name</th><th>Last Name</th><th>Designation</th><th>Mobile Number</th><th>Branch name</th><th>Aadhar Number</th><th style="text-align: center;">Options</th><th></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {

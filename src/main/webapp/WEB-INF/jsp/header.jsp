@@ -126,6 +126,7 @@ span.has-error,span.hasError
 .default-class::-webkit-input-placeholder {color: #e73d4a !important;}
 .default-class::-moz-placeholder {color: #e73d4a !important;}
 
+
 .msgcss
 {
 /* 	width: 50% !important; */
@@ -356,6 +357,7 @@ function getAssignedNotifications(){
 			//alert(jsonobj);
 			var assigned_notifications =data;
 			displayAssignedNotifications(jsonobj.AssignedNotifications);
+			 displayNotifications(jsonobj.AssignedNotifications)
 		});  
 }
 
@@ -387,6 +389,34 @@ function displayAssignedNotifications(listOrders) {
 		$(tblRow).appendTo("#ack table tbody");
 	});
 }
+function displayNotifications(listOrders) {
+// 	alert(listOrders);
+	$('#notification').html('');
+	var tableHead = '<table id="notification" class="table table-striped table-bordered datatables">'
+			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">Service Request No</th><th style="text-align:center;">Status</th><th style="text-align:center;">Assigned To</th><th style="text-align:center;">comment</th></thead><tbody></tbody></table>';
+	$('#notification').html(tableHead);
+	//serviceUnitArray = {};
+	$.each(listOrders,function(i, orderObj) {
+		var comment =null;
+		if(orderObj.add_comment == "" ||orderObj.add_comment =="null"||typeof orderObj.add_comment === "undefined")
+			{
+			comment="----";
+			}else{
+				comment =orderObj.add_comment;
+			
+		}
+	//serviceUnitArray[orderObj.id] = orderObj;
+		var tblRow = "<tr>"
+			+ "<td title='"+orderObj.taskno+"'><a href='task'>"+ orderObj.taskno + "</a></td>"
+			+ "<td title='"+orderObj.statusname+"'>"+ orderObj.statusname + "</td>"
+			+ "<td title='"+orderObj.musername+"'>"+ orderObj.musername + "</td>"
+			+ "<td title='"+comment+"'>"+ comment + "</td>"	
+			+"<a class='view viewIt' href='task"
+			+ "</tr>";
+		$(tblRow).appendTo("#notification table tbody");
+	});
+}
+
 
 
 
@@ -448,38 +478,38 @@ function displayAssignedNotifications(listOrders) {
   </div> 
 </div>
                 </li> 
-            <%-- <li style="float:left;">
+             <li style="float:left;">
             <div style="box-shadow:none; margin-right:10px;" class="navbar">
   <div style="border-left:none;" class="dropdown">
     <diV style="color:#166eaf; background:#cccccc; font-size:25px; margin-top:10px;" class="dropbtn"">
 
 
-      <i class="fa fa-bell-o"></i><!-- <span class="badge">5</span> -->
+      <i class="fa fa-bell-o" id="noOfMessages"></i><!-- <span class="badge">5</span> -->
     </div>
-    <c:if test="${not empty notifications}">
-    <div class="dropdown-content">
+   <%--  <c:if test="${not empty notifications}"> --%>
+    <div id="notification"  class="dropdown-content">
       <a style="padding: 10px 16px;" href="#">
       
-      	<table class="table1">
+      	<table class="table1" id="taskTableHeader">
         	<thead>
-            	<tr class="tr1" style="
-    background: #006699;
-    color: #FFF;
-">
+         	<!-- <tr class="tr1" style=" background: #006699; color: #FFF;"> 
+
+   
+   
                 	<th class="th1">Task No.</th>
                 	<th class="th1">Field</th>
                 	<th class="th1">Change</th>
-                </tr>
+                </tr> -->
             </thead>
             <tbody>
-            <c:forEach var="issue" items="${notifications}">
+            <%-- <c:forEach var="issue" items="${notifications}">
             	<tr class="tr1">
                 	<td class="td1">${issue.taskno}</td>
                     <td class="td1">${issue.kpfield}</td>
                     <td class="td1">${issue.kpchange}</td>
                 </tr>
                 </c:forEach>
-                
+                 --%>
                 
             	
             </tbody>
@@ -487,11 +517,11 @@ function displayAssignedNotifications(listOrders) {
       
       </a>
     </div>
-      </c:if>
+     <%--  </c:if> --%>
   </div> 
 </div>
-                </li> --%>
-	             <%-- <li style="float:left;margin-right:35px"><a href="${baseurl}/task" style="color:#f3f1f1;">Create Task</a></li> --%>
+                </li> 
+                	             <%-- <li style="float:left;margin-right:35px"><a href="${baseurl}/task" style="color:#f3f1f1;">Create Task</a></li> --%>
 	             <security:authorize access="hasRole('ROLE_ADMIN')">
 	           <%--  <li style="float:left; margin-right:5px; margin-top:5px;"><a href="${baseurl}/severity?id=Critical" style="color:#ffffff;">Create Task</a></li> --%>
 	           </security:authorize>
