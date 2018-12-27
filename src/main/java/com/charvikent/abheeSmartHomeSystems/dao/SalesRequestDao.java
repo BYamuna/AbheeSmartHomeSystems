@@ -62,7 +62,7 @@ public class SalesRequestDao
 		public List<Map<String, Object>> getSalesRequestList()
 		 {
 		 
-			 String hql ="select * from abhee_sales_request";
+			 String hql ="select sr.* ,c.category from abhee_sales_request sr,abheecategory c where sr.catid=c.id";
 			 System.out.println(hql);
 			
 				List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});

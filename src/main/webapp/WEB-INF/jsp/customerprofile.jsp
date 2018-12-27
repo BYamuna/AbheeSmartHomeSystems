@@ -198,8 +198,45 @@ color:#ea8080 !important;
 .close {
 color:#000 !important;
 }
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 9px 16px;
+    transition: 0.3s;
+    font-size: 15px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
 </style>
-    
 
     <%@include file="abheeheader.jsp" %>
     
@@ -407,105 +444,20 @@ color:#000 !important;
 						  <button class="tablinks" onclick="Quotationrequests(),openCity(event, 'customerQuotationTable')" id="defaultOpen">Quotation Requests</button>
 						  <button class="tablinks" onclick="Servicerequest(),openCity(event, 'customerTaskTable')">Service Requests</button>
 					</div>
-                  	<!-- <div class="qsrdata">  -->
-                  	<div id="customerQuotationTable" class="tabcontent">
-				  			<!-- <div class="table-responsive">
-								<table class="table table-bordered priority prioritybg"	style="border: 1px solid #0460a4;" >
-									<thead>
-										<tr style="background-color: #0460a4; color: #fff; text-align: center; font-family:'Roboto'; font-size: 12px;">
-											<th>Quotation No</th>
-											<th>Product Model</th>
-											<th>Address</th>
-											<th>Warranty Expired Date</th>
-										</tr> 
-									</thead>
-									<tbody>
-									</tbody>
-								</table>
-							</div> -->
-						</div>
-						<script type="text/javascript">
-         function Quotationrequests(){
-        		$.ajax({
-        			type : "POST",
-        			url : "quotationrequests",
-        			data : '',
-        			dataType : "json",
-        			beforeSend : function() {
-        	            //$.blockUI({ message: 'Please wait' });
-        	          }, 
-        			success : function(data) {
-        				console.log(data);
-        				displayTable2(data);
-        				
-        			},
-        			
-        			error:  function(e){$.unblockUI();console.log(e);
-        			}
-
-        	});
- } 
-   
-         function displayTable2(listOrders) {
-     		$('#customerQuotationTable').html('');
-     		var tableHead = '<table id="customerQuotationTable" class="table tablestriped table-bordered datatables">'
-     				+ '<thead><tr style=" font-size:12px;background-color: #0460a4; color: #fff;"><th>Quotation No</th><th>Product Model</th><th>Address</th><th>Description</th><th>Quotation Images</th><th>Mobileno</th><th>Quotation Date</th></tr></thead><tbody></tbody></table>';
-     		$('#customerQuotationTable').html(tableHead);
-     		serviceUnitArray = {};
-     		
-     		$.each(listOrders,function(i, orderObj) {
-     				if(orderObj.imgfiles==undefined) orderObj.imgfiles='';
-     				else
-     					{
-     						var list=orderObj.imgfiles.split('*');
-     						var imgfiles='';
-     						for(var i=0;i<list.length;i++)
-     						{
-     							imgfiles=imgfiles+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
-     						}
-     						orderObj.imgfiles=imgfiles;
-     					}
-     				serviceUnitArray[orderObj.id] = orderObj;
-     			var tblRow = "<tr>"
-     				+ "<td title='"+orderObj.salesrequestnumber+"'><a href=viewResponse?id='"+ orderObj.id+"'>"+ orderObj.salesrequestnumber+"</a></td>"
-     				+ "<td title='"+orderObj.modelname+"'>"+ orderObj.modelname + "</td>"
-     				+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>" 
-     				+ "<td title='"+orderObj.reqdesc+"'>"+ orderObj.reqdesc + "</td>" 
-     				+ "<td title='"+orderObj.imgfiles+"'>"+ orderObj.imgfiles + "</td>" 
-     				+ "<td title='"+orderObj.mobileno+"'>"+ orderObj.mobileno + "</td>"
-     				+"<td title='"+orderObj.created_time+"'>"+ orderObj.created_time + "</td>"
-     				+ "</tr>";
-     			$(tblRow).appendTo("#customerQuotationTable table tbody");
-     		});
-     		
-     	} 
-       
-        	</script>
-						<div id="customerTaskTable" class="tabcontent">
-	  							<div class="table-responsive">
-								<table class="table table-bordered priority prioritybg"	style="border: 1px solid #0460a4;" >
-									<thead>
-										<tr style="background-color: #0460a4; color: #fff; text-align: center; font-family:'Roboto'; font-size: 12px;">
-											<th>OrderId</th>
-											<th>Product(s)</th>
-											<th>Date of Purchased</th>
-											<th>Warranty Expired Date</th>
-										</tr> 
-									</thead>
-									<tbody>
-									</tbody>
-								</table>
+                  	<div class="qsrdata"> 
+	                  	<div id="customerQuotationTable" class="tabcontent">
+					  			
 							</div>
+        	
+						<div id="customerTaskTable" class="tabcontent">
+	  							
 						</div>
-						<!-- </div> -->
-						</div>
-						
+					</div>
+					</div>
                   	</div>
                   </div>
-                </div>
-                
+                </div> 
               </div>
-			  
               <br />
             </div>
           </div>
@@ -545,7 +497,7 @@ color:#000 !important;
       </div>
     </div>
   </div> 
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 		
          function Quotationrequests(){
         		$.ajax({
@@ -599,7 +551,7 @@ color:#000 !important;
      		});	
      	} 
        
-     </script> -->
+     </script>
   			 
   	<script type="text/javascript">
          function Servicerequest(){
@@ -706,9 +658,9 @@ function displayTable(listOrders) {
 
 var productWarrantyOrdersList = ${ordersList};
 if (productWarrantyOrdersList != "") {
-	displayTable2(productWarrantyOrdersList);
+	displayTable4(productWarrantyOrdersList);
 }
-function displayTable2(listOrders) {
+function displayTable4(listOrders) {
 	$('#customerOrderTable').html('');
 	var tableHead = '<table id="customerOrderTable" class="table table-striped table-bordered datatables">'
 			+ '<thead><tr style=" font-size:12px;"><th>orderId</th><th>Products</th><th>Date of Purchased</th><th>Warranty Expired Date</th></tr></thead><tbody></tbody></table>';
@@ -718,7 +670,7 @@ function displayTable2(listOrders) {
 	serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.order_id+"'>"+ orderObj.order_id + "</td>"
-			+ "<td title='"+orderObj.productmodelid+"'>"+ orderObj.productmodelid + "</td>"
+			+ "<td title='"+orderObj.product+"'>"+ orderObj.product + "</td>"
 			+ "<td title='"+orderObj.purchaseddate+"'>"+ orderObj.purchaseddate + "</td>" 
 			+ "<td title='"+orderObj.expireddate+"'>"+ orderObj.expireddate + "</td>" 		
 			+ "</tr>";

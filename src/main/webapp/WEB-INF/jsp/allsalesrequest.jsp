@@ -166,7 +166,7 @@ function displayTable(listOrders) {
 	$('#tableId').html('');
 
 	var tableHead = '<table id="product" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Request Number</th><th>Product Model</th><th>EmailId</th><th>Mobile</th><th>Files</th><th>Location</th><th>Address</th><th>Comments</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Request Number</th><th>Product Category</th><th>Product Model</th><th>EmailId</th><th>Mobile</th><th>Files</th><th>Location</th><th>Address</th><th>Comments</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -206,6 +206,7 @@ function displayTable(listOrders) {
 		/* var checkbox="<input type='checkbox' class='form-check-input' id='salesrequest'>" */
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.salesrequestnumber+"'>"+ orderObj.salesrequestnumber + "</td>"
+			+ "<td title='"+orderObj.category+"'>"+ orderObj.category + "</td>"
 			+ "<td title='"+orderObj.modelnumber+"'>"+ orderObj.modelnumber + "</td>"
 			+ "<td title='"+orderObj.email+"'>"+ orderObj.email + "</td>"
 			+ "<td title='"+orderObj.mobileno+"'>"+ orderObj.mobileno + "</td>"
@@ -476,7 +477,7 @@ function viewTask(id){
 		var alldata = jsonobj.allOrders1;
 		$('#HtableId2').html('');
 		var tableHead = '<table id="example2" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>QuotationId</th><th>Date Modified</th><th>Sent Quotation</th><th>Notes</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Date Modified</th><th>Sent Quotation</th><th>Notes</th></tr></thead><tbody></tbody></table>';
 	$('#HtableId2').html(tableHead);
 	$.each(alldata,function(i, orderObj) {
 		if(orderObj.filename==undefined) orderObj.filename='';
@@ -492,8 +493,8 @@ function viewTask(id){
 			}
 		var tblRow = "<tr>"
 			/*  + "<td title='"+orderObj.id+"'>"+ orderObj.id + "</td>" */ 
-			+ "<td title='"+orderObj.quationid+"'>"+ orderObj.quationid + "</td>"
-			 + "<td title='"+orderObj.created_time+"'>"+ orderObj.created_time + "</td>" 
+			/* + "<td title='"+orderObj.quationid+"'>"+ orderObj.quationid + "</td>" */
+			+ "<td title='"+orderObj.created_time+"'>"+ orderObj.created_time + "</td>" 
 			+ "<td title='"+orderObj.filename+"'>"+ orderObj.filename + "</td>"
 			+ "<td title='"+orderObj.notes+"'>"+ orderObj.notes + "</td>"
 			+ "</tr>";

@@ -328,7 +328,7 @@ function toolTips(){
 		$('.comment').attr('data-toggle', 'tooltip');
 		$('.comment').attr('data-original-title', 'Send Email');
 		$('.time').attr('data-toggle', 'tooltip');
-		$('.time').attr('data-original-title', 'View Deadline');
+		$('.time').attr('data-original-title', 'View Countdown');
 		$('.history').attr('data-toggle','tooltip');
 		$('.history').attr('data-original-title','History');
 		$('[data-toggle="tooltip"]').tooltip(); 

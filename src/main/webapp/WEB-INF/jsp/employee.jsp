@@ -47,7 +47,8 @@
 					<div class="panel-heading">
 						<h4 id="emp">Add Employee</h4>
 					</div>
-					
+					<br>
+					<!-- <div class="clearfix"></div> -->
 					<form:form modelAttribute="userForm" action="employee" class="form-horizontal " method="Post">
 	                  <form:hidden path="id"/>
 	                  <div class="sep">
@@ -158,7 +159,7 @@
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar text-center">
 					      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
-					      			<input type="reset" value="Reset" onClick="window.location.reload()" class="btn-danger btn cancel"/>
+					      			<input type="reset" id="reset" value="Reset" onClick="window.location.reload()" class="btn-danger btn cancel"/>
 				      			</div>
 				      		</div>
 				      	</div>
@@ -235,7 +236,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>User Id</th><th>User Name</th><th>Report To</th><th>First Name</th><th>Last Name</th><th>Designation</th><th>Mobile Number</th><th>Branch name</th><th>Aadhar Number</th><th style="text-align: center;">Options</th><th></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>User Id</th><th>Report To</th><th>First Name</th><th>Last Name</th><th>Designation</th><th>Mobile Number</th><th>Branch name</th><th>Aadhar Number</th><th style="text-align: center;">Options</th><th></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -251,7 +252,7 @@ function displayTable(listOrders) {
 		var tblRow = "<tr class='"+ cls +"'>"
 			/* + "<td title='"+orderObj.id+"'>"+ orderObj.id + "</td>" */
 			+ "<td title='"+orderObj.userId+"'>"+ orderObj.userId + "</td>"
-			+ "<td title='"+orderObj.username+"'>"+ orderObj.username + "</td>"
+			/* + "<td title='"+orderObj.username+"'>"+ orderObj.username + "</td>" */
 			+ "<td title='"+orderObj.reportto+"'>"+ orderObj.reportName + "</td>"
 			+ "<td title='"+orderObj.firstname+"'>"+ orderObj.firstname + "</td>"
 			+ "<td title='"+orderObj.lastname+"'>"+ orderObj.lastname + "</td>"
@@ -339,10 +340,13 @@ function editEmployee(id) {
 	$("#BranchId").val(serviceUnitArray[id].branchId);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
+	$("#reset").hide();
 	document.getElementById("username").readOnly  = true;
 	
 	//document.querySelector("password").required = false;
+	
     $("#passwordDiv").hide();
+    
     var idArray = $.makeArray($('.validate').map(function() {
     	return this.id;
     }));

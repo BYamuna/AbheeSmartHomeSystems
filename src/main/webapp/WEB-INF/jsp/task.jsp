@@ -165,11 +165,7 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-<<<<<<< HEAD
-									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">ServiceRequestNumber
-=======
-									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Service Request Number
->>>>>>> 3434d5a64f5f45d141a7feaff46e1547c7eab4bd
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">Service Request Number
 										<!-- <span class="impColor">*</span> -->
 									</label>
 									<form:input path="taskno" placeholder="Service Request Number" class="col-xs-10 col-sm-5" />
@@ -267,7 +263,7 @@
 							<div class="col-sm-12">
 								<div class="btn-toolbar text-center">
 									<input type="submit" id="submit1" value="Submit"
-										class="btn-primary btn" /> <input type="reset" value="Reset" onClick="window.location.reload()"
+										class="btn-primary btn" /> <input type="reset" id="reset" value="Reset" onClick="window.location.reload()"
 										class="btn-danger btn cancel" />
 								</div>
 							</div>
@@ -645,7 +641,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	function displayTable(listOrders) {
 		$('#tableId').html('');
 		var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-				+ '<thead><tr><th>Service Request Number</th><th>Category</th><th>Model Name</th><th>CustomerID</th><th>ServiceType</th><th>Priority</th><th>Task Created By</th><th>Service Request Status</th><th>Address</th><th>Requested Time</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
+				+ '<thead><tr><th>Service Request Number</th><th>Category</th><th>Model Name</th><th>CustomerID</th><th>ServiceType</th><th>Customer Sent Image</th><th>Priority</th><th>Task Created By</th><th>Service Request Status</th><th>Address</th><th>Requested Time</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
 		$('#tableId').html(tableHead);
 		serviceUnitArray = {};
 
@@ -654,7 +650,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 						listOrders,
 						function(i, orderObj) {
 							
-								/* if (orderObj.uploadfile == undefined)
+								if (orderObj.uploadfile == undefined)
 									orderObj.uploadfile = '';
 								else {
 									var list = orderObj.uploadfile
@@ -665,7 +661,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 												+ '<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
 									}
 									orderObj.uploadfile = uploadfile;
-								} */	
+								} 	
 							if (isRole == 'true') {
 								if (orderObj.status == "1") {
 									var deleterow = "<a class='deactivate' onclick='deletetask("
@@ -733,8 +729,8 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 									+ "<td title='"+orderObj.servicetypename+"'>"
 									+ orderObj.servicetypename
 									+ "</td>"
-									/* + "<td title='"+orderObj.uploadfile+"'>"
-									+ orderObj.uploadfile */
+									+ "<td title='"+orderObj.uploadfile+"'>"
+									+ orderObj.uploadfile
 									+ "</td>"
 									+ "<td title='"+orderObj.priority+"'>"
 									+ orderObj.priority
@@ -799,6 +795,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		$("#kstatus").val(serviceUnitArray[id].kstatus);
 		$("#submit1").val("Update");
 		$(window).scrollTop($('#moveTo').offset().top);
+		$("#reset").hide();
 		document.getElementById("description").readOnly  = true;
 		document.getElementById("taskno").readOnly  = true;
 		//document.getElementById("ServiceType").attr  = true;

@@ -657,7 +657,7 @@ $.each(productdetailslist, function(k,v){
     	//var params = form.serializeArray();
     	
     	var objArr = [];
-    	var jsonData = {"modelnumber":modelnumber,"address":address,"reqdesc":reqdesc /* , "locationData":locationData */ };
+    	var jsonData = {"modelnumber":modelnumber,"address":address,"reqdesc":reqdesc,"catid":catid /* , "locationData":locationData */ };
     	
 	   var formData = new FormData();
     	
@@ -670,7 +670,8 @@ $.each(productdetailslist, function(k,v){
 	   formData.append('mobileno',mobileno);*/
 	 //formData.append('locationData',locationData);
 	   formData.append('address',address);
-	   formData.append('reqdesc',reqdesc);  
+	   formData.append('reqdesc',reqdesc); 
+	   formData.append('catid',catid);
 	  
 	
 	 if (address == null || address == "" || address == "undefined") {

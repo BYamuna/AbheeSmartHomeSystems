@@ -530,6 +530,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 				//$("#register-info").modal('toggle');
 				$('#OTPModel').modal('toggle');
 				$("#OTPModel").modal('show');
+				//makeEmptyOtp();
 				}
 			else
 				{
@@ -580,6 +581,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 				}
 				else
 					alert("Enter valid OTP")
+					makeEmptyOtp();
 				
 			},
 			complete: function () {
@@ -816,15 +818,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 	function makeEmptyOtp()
 	{
 		$('#cotp').val("");
-		/* $('#csname').val("");
-		$('#cname').val("");
-		$('#cmobile').val("");
-		$('#cemail').val("");
-		$('#csname').val("");
-		$('#cpassword').val("");
-		$('#crtpassword').val("");
 		
-		$('#cemail').css('border-color', 'none'); */
 	}
 	
 	

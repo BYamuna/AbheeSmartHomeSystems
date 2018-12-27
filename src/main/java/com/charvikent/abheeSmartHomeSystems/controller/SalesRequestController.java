@@ -2,7 +2,7 @@ package com.charvikent.abheeSmartHomeSystems.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
+/*import java.util.concurrent.ThreadLocalRandom;*/
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -56,6 +56,7 @@ public class SalesRequestController
 			//@RequestParam("locationData") String locationData,
 			@RequestParam("address") String address,
 			@RequestParam("reqdesc") String reqdesc,
+			@RequestParam("catid") String catid,
 			@RequestParam("imgfile") MultipartFile[] uploadedFiles,
 			//@RequestParam("requesttype") String requesttype,
 			HttpServletRequest request,RedirectAttributes redir,HttpSession session) throws IllegalStateException, IOException, MessagingException
@@ -75,6 +76,7 @@ public class SalesRequestController
 		loginDetails.setModelnumber(modelnumber);
 		loginDetails.setAddress(address);
 		loginDetails.setReqdesc(reqdesc);
+		loginDetails.setCatid(catid);
 		loginDetails.setSalesrequestnumber(loginDetails.getSalesrequestnumber());
 		//loginDetails.setLat(str[0]);
 		//loginDetails.setLongitude(str[1]);
@@ -83,6 +85,7 @@ public class SalesRequestController
 		loginDetails.setEmail(customer.getEmail());
 		loginDetails.setCustomerid(customer.getCustomerId());
 		loginDetails.setRequestType("Quotation request");
+		loginDetails.setLocation(" ");
    	 for(MultipartFile multipartFile : uploadedFiles) {
 				String fileName = multipartFile.getOriginalFilename();
 				if(!multipartFile.isEmpty())

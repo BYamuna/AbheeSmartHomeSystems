@@ -212,7 +212,7 @@ public class HomeController {
 		
 		session.invalidate();
 		 
-		return "redirect:"+ referalUrl;
+		return "redirect:/customerlogin";
 	}
 	
 	@RequestMapping("/getCategoryList")

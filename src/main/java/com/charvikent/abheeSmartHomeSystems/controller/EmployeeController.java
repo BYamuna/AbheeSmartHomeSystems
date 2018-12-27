@@ -131,7 +131,7 @@ public class EmployeeController {
 
 
 					user.setEnabled("1");
-
+					//user.setUsername(" ");
 					userService.saveUser(user);
 					sendingMail.sendUserConfirmationEmail(user);
 

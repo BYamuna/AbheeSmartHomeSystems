@@ -118,7 +118,7 @@
 							<div class="col-sm-12">
 								<div class="btn-toolbar text-center">
 									<input type="submit" id="submit1" value="Submit" class="btn-primary btn" /> 
-										<input type="reset" value="Reset" onClick="window.location.reload()" class="btn-danger btn cancel" />
+										<input type="reset" id="reset" value="Reset" onClick="window.location.reload()" class="btn-danger btn cancel" />
 								</div>
 							</div>
 						</div>
@@ -201,6 +201,7 @@ function editProductWarranty(id) {
 	$("#expireddate").val(serviceUnitArray[id].expireddate);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
+	$("#reset").hide();
 	 /* $("#productmodelid").attr('disabled', true);
 	 $("#customerid").attr('disabled', true); */
 	 document.getElementById("productmodelid").readOnly  = true;

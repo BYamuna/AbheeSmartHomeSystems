@@ -204,7 +204,7 @@ public class ProductGuaranteeDao
 
 	public List<Map<String, Object>> getProductWarrantyDetailsByCustomerId(String customerId) 
 	{
-		String hql ="select * from abheeproductguarantee where customerid='"+customerId+"'";
+		String hql ="select apg.*,p.name as product from abheeproductguarantee apg,abhee_product p where customerid='"+customerId+"' and apg.productmodelid=p.id";
 		System.out.println(hql);
 		
 		List<Map<String,Object>>  ordersList = jdbcTemplate.queryForList(hql,new Object[]{});

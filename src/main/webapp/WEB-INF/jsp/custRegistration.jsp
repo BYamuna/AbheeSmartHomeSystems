@@ -146,7 +146,7 @@
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar text-center">
 					      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
-					      			<input type="reset" value="Reset"  onClick="window.location.reload()" class="btn-danger btn cancel"/>
+					      			<input type="reset" id="reset" value="Reset"  onClick="window.location.reload()" class="btn-danger btn cancel"/>
 				      			</div>
 				      		</div>
 				      	</div>
@@ -296,6 +296,7 @@ function editCustomer(id) {
     } */
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
+	$("#reset").hide();
 	//$("#pwd").hide();
 	//document.getElementById("username").readOnly  = true;
 	//document.querySelector("password").required = true;

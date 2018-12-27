@@ -231,7 +231,7 @@ public List<Map<String, Object>> getAbheeTaskById(String id) {
 }
 public List<Map<String, Object>> getAbheeTaskByTaskId(String id) {
 	
-	String sql="select t.id,u.username,s.servicetypename,t.created_time,t.description,ts.name as Requeststatus,p.priority,sev.severity, "
+	String sql="select t.id,u.username,s.servicetypename,DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.description,ts.name as Requeststatus,p.priority,sev.severity, "
 			 + " t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id ,t.communicationaddress,t.imgfile as AttachedFiles  "
 			+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp"
 			+" where t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.taskno="+id+" order by t.updated_time desc ";
@@ -245,7 +245,7 @@ public List<Map<String, Object>> getAbheeTaskByTaskId(String id) {
 public List<Map<String, Object>> getCustomerDetailsById(String id) {
 	//return null;
 	
-	String sql="select c.customer_id,c.firstname,c.lastname,c.address,c.email,c.mobilenumber,CASE WHEN c.registedred_from_android IN ('0') THEN 'No' WHEN c.registedred_from_android IN ('1') THEN 'Yes' ELSE '-----' END AS enabled" + 
+	String sql="select c.customer_id,c.firstname,c.lastname,c.address,c.email,c.mobilenumber,CASE WHEN c.registedred_from_android IN ('0') THEN 'No' WHEN c.registedred_from_android IN ('1') THEN 'Yes' ELSE '-----' END AS Registedred_From_Android" + 
 			" FROM abhee_customer c where c.customer_id='"+id+"' order by c.updated_time desc ";
 	System.out.println(sql);
 	
