@@ -188,7 +188,7 @@ public class ProductController
 				if(id == dummyId || orgBean == null)
 				{
 					
-					int filecount =0;
+					/*int filecount =0;
 		        	 
 		        	 for(MultipartFile multipartFile : productpics) {
 		    				String fileName = multipartFile.getOriginalFilename();
@@ -204,7 +204,7 @@ public class ProductController
 		        		 pro.setProductmodelpics(fileTemplate.concurrentFileNames());
 		        		 fileTemplate.clearFiles();
 		        		 
-		        	 }
+		        	 }*/
 					productDao.UpdateProduct(pro);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");

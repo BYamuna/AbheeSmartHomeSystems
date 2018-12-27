@@ -725,16 +725,35 @@ $.each(productdetailslist, function(k,v){
 				});
 		            // $.blockUI({ message: 'Please wait' });
 		          }, 
-	  	success: function(result){
+	  	success: function(data){
 	  		
-	  		if(result !="" && result != null){
+	  		/*  if(result !="" && result != null){
 	  		alert("We received the Request and will send you the quotation soon. Thanking you.");
-	  		}
+	  	
 	  		$('#salesrequest').val("");
 	  		$('#imgfile').val("");
 	  		 $('#quotationModal').modal('toggle');
-	  	
-	    },
+	  		 }
+	  		
+	    }, */
+	  		if(data ==='false')
+			{
+				alert(" Thank you, your request had been submitted successfully. Our team will contact you soon");
+				$('#formModal').modal('toggle');					
+			}
+			else
+				{
+				alert("Service Request Already Received!");
+				$('#formModal').modal('toggle');
+				} 
+			
+		},
+		complete: function () {
+            
+            $.unblockUI();
+       },
+  		
+	    
 	    error: function (e) {
             console.log(e.responseText);
         }

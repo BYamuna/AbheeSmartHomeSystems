@@ -503,7 +503,7 @@ function viewTask(id){
 		$("#myModal2").modal();
 	});
 }
-
+f
 
 $("#pageName").text("Quotation Requests");
 $(".allsalesrequest").addClass("active"); 

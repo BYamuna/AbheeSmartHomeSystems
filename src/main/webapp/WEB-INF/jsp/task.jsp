@@ -165,11 +165,8 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-<<<<<<< HEAD
-									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">ServiceRequestNumber
-=======
+
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Service Request Number
->>>>>>> 3434d5a64f5f45d141a7feaff46e1547c7eab4bd
 										<!-- <span class="impColor">*</span> -->
 									</label>
 									<form:input path="taskno" placeholder="Service Request Number" class="col-xs-10 col-sm-5" />

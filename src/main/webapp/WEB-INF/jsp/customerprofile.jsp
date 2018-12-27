@@ -409,7 +409,7 @@ color:#000 !important;
 					</div>
                   	<!-- <div class="qsrdata">  -->
                   	<div id="customerQuotationTable" class="tabcontent">
-				  			<!-- <div class="table-responsive">
+				  			 <div class="table-responsive">
 								<table class="table table-bordered priority prioritybg"	style="border: 1px solid #0460a4;" >
 									<thead>
 										<tr style="background-color: #0460a4; color: #fff; text-align: center; font-family:'Roboto'; font-size: 12px;">
@@ -422,7 +422,7 @@ color:#000 !important;
 									<tbody>
 									</tbody>
 								</table>
-							</div> -->
+							</div> 
 						</div>
 						<script type="text/javascript">
          function Quotationrequests(){
@@ -436,7 +436,7 @@ color:#000 !important;
         	          }, 
         			success : function(data) {
         				console.log(data);
-        				displayTable2(data);
+        				displayTable4(data);
         				
         			},
         			
@@ -446,7 +446,7 @@ color:#000 !important;
         	});
  } 
    
-         function displayTable2(listOrders) {
+         function displayTable4(listOrders) {
      		$('#customerQuotationTable').html('');
      		var tableHead = '<table id="customerQuotationTable" class="table tablestriped table-bordered datatables">'
      				+ '<thead><tr style=" font-size:12px;background-color: #0460a4; color: #fff;"><th>Quotation No</th><th>Product Model</th><th>Address</th><th>Description</th><th>Quotation Images</th><th>Mobileno</th><th>Quotation Date</th></tr></thead><tbody></tbody></table>';
@@ -497,7 +497,6 @@ color:#000 !important;
 								</table>
 							</div>
 						</div>
-						<!-- </div> -->
 						</div>
 						
                   	</div>
@@ -545,7 +544,7 @@ color:#000 !important;
       </div>
     </div>
   </div> 
-<!-- <script type="text/javascript">
+ <script type="text/javascript">
 		
          function Quotationrequests(){
         		$.ajax({
@@ -599,7 +598,7 @@ color:#000 !important;
      		});	
      	} 
        
-     </script> -->
+     </script> 
   			 
   	<script type="text/javascript">
          function Servicerequest(){
@@ -652,7 +651,7 @@ color:#000 !important;
      			$(tblRow).appendTo("#customerTaskTable table tbody");
      		});
      	}
-      </script>
+      </script> 
      <script>
 		function openCity(evt, cityName)  {
 		    var i, tabcontent, tablinks;

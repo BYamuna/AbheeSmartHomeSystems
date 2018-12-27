@@ -573,7 +573,7 @@ $('#email').blur(function() {
 
 		}); 
 		
-/* $('#password').focusout(function(){
+ $('#password').focusout(function(){
 	  var cpassword=$(this).val();
 	  
 	/* if(cmobile.length != 10 ){
@@ -589,7 +589,7 @@ $('#email').blur(function() {
 	 }else { */
 
 
-/*  $.ajax({
+ $.ajax({
 			type : "POST",
 			url : "checkCustExstOrnotByPassword",
 			data :"cpassword="+cpassword+"&editFields="+editFields,
@@ -623,9 +623,9 @@ $('#email').blur(function() {
 	       },
 			error :  function(e){$.unblockUI();console.log(e);}	
 		});
+/* });  */
+ 
 }); 
-  */ 
-//}); 
 	
 		
 		
