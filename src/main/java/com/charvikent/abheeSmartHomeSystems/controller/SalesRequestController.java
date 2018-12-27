@@ -101,8 +101,8 @@ public class SalesRequestController
    		 fileTemplate.clearFiles();
    		 
    	 }
-	   	Boolean result =srequestDao.checkSalesrequestExistsorNotByEmailAndModelNo(loginDetails);
-	   	if(result==false)
+	   	Boolean data =srequestDao.checkSalesrequestExistsorNotByEmailAndModelNo(loginDetails);
+	   	if(data==false)
 	   	{
 			srequestDao.saveRequest(loginDetails);
 	   		//sendingMail.SendingSalesRequestByEmail(salesrequest.getEmail());

@@ -294,13 +294,19 @@ function editProduct(id) {
 	$("#maxAllowedDiscount").val(serviceUnitArray[id].maxAllowedDiscount);
 	$("#ProductPrice").val(serviceUnitArray[id].productPrice);
 	$("#ProductModelSpecifications").val(serviceUnitArray[id].productModelSpecifications);
+	
 	$("#submit1").val("Update");
 	//document.getElementById("fileDiv").readOnly  = true;
+	/* $(function () {
+    $('#file1').attr('readonly', 'true'); // mark it as read only
+    $('#file1').css('background-color' , '#DEDEDE'); // change the background color
+}); */
+
 	$(window).scrollTop($('#moveTo').offset().top);
 	$("#reset").hide();
 	$("#dtext").html("");
 	    $('#name1').hide();
-	  //  $('#fileDiv').hide();
+	  // $('#fileDiv').hide();
 	   //$("#fileDiv").attr('disabled', true);
 	    
 	    var productmodelvideoslinks = $('#productmodelvideoslinks').val();

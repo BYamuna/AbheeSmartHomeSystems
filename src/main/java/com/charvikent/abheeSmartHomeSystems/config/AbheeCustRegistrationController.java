@@ -126,7 +126,7 @@ public class AbheeCustRegistrationController
 		return false;
 		
 	}
-	/*@RequestMapping(value = "/checkCustExstOrnotByPassword", method = RequestMethod.POST)
+	@RequestMapping(value = "/checkCustExstOrnotByPassword", method = RequestMethod.POST)
 	public @ResponseBody  Boolean checkCustExstOrnotByPassword(@Validated @ModelAttribute  Customer abheecustregistration,Model model,HttpServletRequest request) throws IOException 
 	{
 		LOGGER.debug("Calling  checkCustExst at controller");
@@ -150,7 +150,7 @@ public class AbheeCustRegistrationController
 		
 		return false;
 		
-	}*/
+	}
 	
 	/*@RequestMapping(value = "/task", method = RequestMethod.GET)
 	public String showtaskPage(@Validated @ModelAttribute Model model,HttpServletRequest request) throws IOException 
@@ -190,7 +190,7 @@ public class AbheeCustRegistrationController
 		*/
 		Customer customer =new Customer();
 		String usernumber =kptsUtil.randNum();
-		String regSuccessMsg =csname+" "+cname+",  Successfully registered with ABhee Smart Homes. \n You can login using  \n Mobilenumber:  "+custMobile+" or Email:"+cemail+"\n password: "+cpassword;
+		String regSuccessMsg =csname+" "+cname+",  Successfully registered with ABhee Smart Homes as Customer. \n You can login using \n Mobilenumber:  "+custMobile+" or Email:"+cemail+" and \n password: "+cpassword;
 		customer.setMobilenumber(custMobile);
 		customer.setFirstname(csname);
 		customer.setLastname(cname);
@@ -465,21 +465,22 @@ public class AbheeCustRegistrationController
 		String tmsg =environment.getProperty("app.otpmsg");
 		 System.out.println(tmsg);
 		tmsg= tmsg.replaceAll("_otpnumber_", otpnumber);
-		sendSMS.sendSMS(tmsg,custMobile);
+		//sendSMS.sendSMS(tmsg,custMobile);
 		OTPDetails oTPDetails =new OTPDetails();
 		oTPDetails.setMobileno(custMobile);
 		oTPDetails.setOTPnumber(otpnumber);
 		List<Map<String, Object>> curotplist=oTPDetailsDao.getCurrentDayList(custMobile);
-		if(curotplist.size()>4) 
+		if(curotplist.size()<=4) 
 		{
-			System.out.println("OTP Limit Expired For Today");
-			return false;
+		    sendSMS.sendSMS(tmsg,custMobile);
+			oTPDetailsDao.saveOTPdetails(oTPDetails);	
+			return true;
+			
 		}
 		else
 		{
-		sendSMS.sendSMS(tmsg,custMobile);
-		oTPDetailsDao.saveOTPdetails(oTPDetails);	
-		return true;
+			System.out.println("OTP Limit Expired For Today");
+			return false;
 		}	
 	}
 	

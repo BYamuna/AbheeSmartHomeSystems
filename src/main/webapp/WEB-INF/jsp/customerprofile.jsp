@@ -447,6 +447,7 @@ body {font-family: Arial;}
                   	<div class="qsrdata"> 
 	                  	<div id="customerQuotationTable" class="tabcontent">
 					  			
+
 							</div>
         	
 						<div id="customerTaskTable" class="tabcontent">
@@ -497,7 +498,11 @@ body {font-family: Arial;}
       </div>
     </div>
   </div> 
+<<<<<<< HEAD
 <script type="text/javascript">
+=======
+ <script type="text/javascript">
+>>>>>>> 4508e42b3d99359a4372e6fc235a63ae1b3f55a8
 		
          function Quotationrequests(){
         		$.ajax({
@@ -551,7 +556,11 @@ body {font-family: Arial;}
      		});	
      	} 
        
+<<<<<<< HEAD
      </script>
+=======
+     </script> 
+>>>>>>> 4508e42b3d99359a4372e6fc235a63ae1b3f55a8
   			 
   	<script type="text/javascript">
          function Servicerequest(){
@@ -604,7 +613,7 @@ body {font-family: Arial;}
      			$(tblRow).appendTo("#customerTaskTable table tbody");
      		});
      	}
-      </script>
+      </script> 
      <script>
 		function openCity(evt, cityName)  {
 		    var i, tabcontent, tablinks;
