@@ -136,7 +136,7 @@
 								<div class="form-group">
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">Service Request DeadLine <span class="impColor">*</span>
 									</label>
-										<form:input type="text" path="taskdeadline" class="col-xs-10 col-sm-5 validate1"  onfocus="removeBorder(this.id)"/>
+										<form:input type="text" path="taskdeadline" class="col-xs-10 col-sm-5 validate"  onfocus="removeBorder(this.id)"/>
 										<span class="hasError" id="stationnameError"></span>
 								</div>
 							</div>
@@ -466,7 +466,7 @@
 	<input id="isRole" type="text" class="hide" value="true" />
 </security:authorize>
 
-
+<security:authorize access="hasRole('ROLE_USER')">
 <div class="modal fade" id="warrantyModal" data-backdrop="static" data-keyboard="false"  role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -544,7 +544,7 @@
 				</div>	
 			</div>
 		</div>
-
+</security:authorize>
 <script type="text/javascript">
 var customerIdDropDown = ${customerid};
 var productmodelidDropDown =${productmodelid};

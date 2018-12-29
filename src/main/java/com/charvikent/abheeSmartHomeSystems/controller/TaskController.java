@@ -103,7 +103,7 @@ public class TaskController {
 
 	@SuppressWarnings("unused")
 	@GetMapping("/task")
-	public String department(Model model, HttpServletRequest request, HttpSession session) {
+	public String department(@ModelAttribute("taskf")AbheeTask abheeTask ,Model model, HttpServletRequest request, HttpSession session) {
 		LOGGER.debug("Calling task at controller");
 		List<Map<String, Object>> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
@@ -112,7 +112,7 @@ public class TaskController {
 		String customerJson=null;
 		String productJson = null;
 		String sJson = null;
-		model.addAttribute("taskf", new AbheeTask());
+		//model.addAttribute("taskf", new AbheeTask());
 
 		model.addAttribute("severity", severityDao.getSeverityMap());
 		model.addAttribute("priority", priorityDao.getPriorityMap());

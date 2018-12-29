@@ -308,7 +308,7 @@ $('#submit1').click(function(event) {
 		 
 		var optional = $("#" + idArray[i]).hasClass('display-none');
 		var errorCls = $("#" + idArray[i]).hasClass('errorCls');
-		if ((value == null || value == "" || value == "undefined" || errorCls) && !optional) {
+		if ((value == null || value == ""  || value == " " || value == "undefined" || errorCls) && !optional) {
 			$('style').append(styleBlock);
 			$("#" + idArray[i] ).attr("placeholder", placeholder);
 			$("#" + idArray[i] ).css('border-color','#e73d4a');
