@@ -640,7 +640,7 @@ public class TaskController {
 	
 	@SuppressWarnings("unused")
 	@GetMapping("/task1")
-	public String department(Model model,TaskHistoryLogs history, HttpServletRequest request, HttpSession session) {
+	public String department(Model model,TaskHistoryLogs history, HttpServletRequest request, HttpSession session,@RequestParam(value = "pgn", required = true) String pgn) {
 		LOGGER.debug("Calling task at controller");
 		List<TaskHistoryLogs> listOrderBeans = null;
 		ObjectMapper objectMapper = null;

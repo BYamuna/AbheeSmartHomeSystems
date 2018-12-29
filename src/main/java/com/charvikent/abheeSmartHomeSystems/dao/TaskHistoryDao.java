@@ -79,8 +79,8 @@ public class TaskHistoryDao {
 	}
 	
 	
-	public void UpdateNotificationByCustomerIds(TaskHistoryLogs history){
-		String hql ="update task_history_logs set webstatus='0' where assignby='"+history.getAssignby()+"'";
+	public void UpdateNotificationByCustomerIds(String history){
+		String hql ="update task_history_logs set webstatus='0' where taskno='"+history+"'and webstatus='1'";
 		System.out.println(hql);
 		jdbcTemplate.execute(hql);
 		
