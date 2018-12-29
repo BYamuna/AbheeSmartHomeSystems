@@ -44,6 +44,7 @@ import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
 //import com.charvikent.abheeSmartHomeSystems.model.KpStatusLogs;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
+import com.charvikent.abheeSmartHomeSystems.model.ProductGuarantee;
 /*import com.charvikent.abheeSmartHomeSystems.model.ProductGuarantee;*/
 /*import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;*/
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
@@ -103,6 +104,10 @@ public class TaskController {
 		LOGGER.debug("Calling task at controller");
 		List<Map<String, Object>> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
+		ObjectMapper customerMapper =null;
+		ObjectMapper productMapper = null;
+		String customerJson=null;
+		String productJson = null;
 		String sJson = null;
 		model.addAttribute("taskf", new AbheeTask());
 
@@ -114,7 +119,10 @@ public class TaskController {
 		 * model.addAttribute("requesttimes",abheeRequestTimeDao.getRequestTimesMap() );
 		 */
 		model.addAttribute("taskstatus", abheeTaskStatusDao.getTaskStatusMap());
-
+		customerMapper =new ObjectMapper();
+		productMapper = new ObjectMapper();
+		
+		
 		User objuserBean = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String id = String.valueOf(objuserBean.getId());
 
@@ -122,6 +130,9 @@ public class TaskController {
 
 		try {
 			listOrderBeans = abheeTaskDao.getTasksListAssignToMe();
+			request.setAttribute("customerid",customerMapper.writeValueAsString( productGuaranteeDao.getCustomersMap()));
+			request.setAttribute("productmodelid", productMapper.writeValueAsString( productGuaranteeDao.getProductsMap()));
+
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -599,19 +610,27 @@ public class TaskController {
 		return String.valueOf(jsonObj);
 	}
 
-	/*
-	 * @RequestMapping(value = "/pWarranty" ,method = RequestMethod.POST) public
-	 * String productWarrantyView(@ModelAttribute("warrantyf") ProductGuarantee
-	 * productGuarantee,Model model ,HttpServletRequest request) {
-	 * LOGGER.debug("Calling pWarranty at controller");
-	 * model.addAttribute("warrantyf", new ProductGuarantee());
-	 * 
-	 * model.addAttribute("customerid", productGuaranteeDao.getCustomersMap());
-	 * model.addAttribute("productmodelid", productGuaranteeDao.getProductsMap());
-	 * 
-	 * return "productguarantee";
-	 * 
-	 * }
-	 */
+	
+	@SuppressWarnings("unused")
+	@RequestMapping(value = "/Warranty" ,method = RequestMethod.POST) 
+	 public String saveProductWarranty(ProductGuarantee pg,Model model ,HttpServletRequest request) {
+		 LOGGER.debug("Calling Warranty at controller"); 
+		 if(pg!=null)
+		 {
+		 String productmodelid=request.getParameter("productmodelid");
+		 String customerid=request.getParameter("customerid");
+		 String purchaseddate=request.getParameter("purchaseddate");
+		 String expireddate=request.getParameter("expireddate");
+		 pg.setStatus("1");
+		 productGuaranteeDao.saveWarranty(pg);
+		 //return "true";
+		 }
+		 else
+		 {
+			 System.out.println("warranty adding failed");
+		 }
+		 return "redirect:\task";
+	 }
+	 
 
 }

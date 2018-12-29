@@ -198,7 +198,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Warranty</label>
 								<div class="col-md-3 ">
-										<input type="checkbox" id="warranty"  value ="0"/>
+										<form:checkbox path="warranty" value ="0" onClick="openWarrantyModal()"/>
 									</div>
 								</div>
 							</div>
@@ -467,7 +467,7 @@
 </security:authorize>
 
 
-<%-- <div class="modal fade" id="warrantyModal" data-backdrop="static" data-keyboard="false"  role="dialog">
+<div class="modal fade" id="warrantyModal" data-backdrop="static" data-keyboard="false"  role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header" style="background: #2973cf;">
@@ -475,7 +475,7 @@
 				<h4 class="modal-title" style="color: white;"> Add Product Warranty Details </h4>
         	</div>
         	<div class="modal-body">
-					<form class="form-horizontal" action="productWarranty" method="post" >
+					<form class="form-horizontal" action="Warranty" method="post" >
 					<div class="panel-body">
 					<div class="row">
 							<div class="col-md-6">
@@ -486,9 +486,9 @@
 										
 									<select id="productmodelid"	class="col-xs-10 col-sm-5 validate"	onfocus="removeBorder(this.id)">
 										<option value="" label="--- Select ---" />
-										<c:forEach var="list" items="${productmodelid}">
+										<%-- <c:forEach var="list" items="${productmodelid}">
 												<option value=${list.key}>${list.value} </option>
-										</c:forEach>
+										</c:forEach> --%>
 									</select>
 								</div>
 							</div>
@@ -500,9 +500,9 @@
 									</label>	
 									<select id="customerid"	class="col-xs-10 col-sm-5 validate"	onfocus="removeBorder(this.id)">
 										<option value="" label="--- Select ---" />
-										<c:forEach var="list" items="${customerid}">
+										<%-- <c:forEach var="list" items="${customerid}">
 												<option value=${list.key}>${list.value} </option>
-										</c:forEach>
+										</c:forEach> --%>
 									</select>
 								</div>
 							</div>
@@ -521,9 +521,7 @@
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Expired Date	<span class="impColor">*</span>
 									</label>
-										<input type="text" id="expireddate"
-											class="col-xs-10 col-sm-5 validate" />
-
+										<input type="text" id="expireddate" class="col-xs-10 col-sm-5 validate" />
 								</div>
 							</div>
 							
@@ -535,7 +533,7 @@
 				      <div class="row">
 							<div class="col-sm-12">
 								<div class="btn-toolbar text-center">
-									<input type="submit" id="submit1" value="Submit" class="btn-primary btn" /> 
+									<input type="submit" id="submit1" value="Submit" onclick="saveWarranty()" class="btn-primary btn" /> 
 										<input type="reset" value="Reset" onClick="window.location.reload()" class="btn-danger btn cancel" />
 								</div>
 							</div>
@@ -545,12 +543,14 @@
 					</div>
 				</div>	
 			</div>
-		</div> --%>
+		</div>
 
 <script type="text/javascript">
+var customerIdDropDown = ${customerid};
+var productmodelidDropDown =${productmodelid};
 
 
-	/* $('#purchaseddate').datetimepicker({
+	 $('#purchaseddate').datetimepicker({
 	
 		useCurrent : false,
 		format : 'DD-MMM-YYYY',
@@ -578,12 +578,71 @@
 			if($("#warranty").attr('checked',true))
 			{
 				$("#warrantyModal").modal('show');
+				var optionsForProductModels = "";
+				
+				optionsForProductModels = $("#customerid").empty();
+				
+				optionsForProductModels.append(new Option("-- Select --",	""));
+				$.each(customerIdDropDown, function(i, tests) {
+					var productId = tests;
+					var productName = tests;
+					optionsForProductModels.append(new Option(productId,	productName));
+				});
+				
+				var optionsForProductModels2 = "";
+				optionsForProductModels2 = $("#productmodelid").empty();
+				optionsForProductModels2.append(new Option("-- Select --",	""));
+					$.each(productmodelidDropDown, function(i, tests) {
+						var productId1 =tests;
+						var productName1 = i;
+						optionsForProductModels2.append(new Option(productId1,	productName1));
+					});
+					
+					
 			}
 			else
 			{
 				$("#warrantyModal").modal('hide');
 			}	
-	} */
+	} 
+	
+	function saveWarranty()
+	{
+		var product=$('#productmodelid').val();
+		var customer=$('#customerid').val();
+		var purchaseddate=$('#purchaseddate').val();
+		var expireddate=$('#expireddate').val();
+		var formData = new FormData();
+		formData.append('productmodelid',product);
+		formData.append('customerid',customer);
+		formData.append('purchaseddate',purchaseddate);
+		formData.append('expireddate',expireddate);
+		//console.log(formData);
+		$.ajax({
+			type:"POST",			
+			url: "Warranty", 
+			data:formData,
+			processData: false,  // tell jQuery not to process the data
+			contentType: false,  // tell jQuery not to set contentType
+			success: function(result){
+				//alert(result);
+			if(result=='true')
+			{
+				
+			alert("Warranty Added Successfully");
+			$('#warrantyModal').modal('toggle');
+			window.location.reload();
+			}
+			else
+			{
+				alert("Warranty Adding Failed!"); 	 
+			}
+		   	},
+		   	error: function (e) {
+		   		console.log(e.responseText);
+		   		}
+		 });
+	}
 
 
 	$("#taskdeadline").keypress(function() {
@@ -614,6 +673,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	$(document).ready(function() {
 		
 		
+	
 		//$("#taskdeadline").attr("disabled", "disabled"); 
 		// 	$("#taskdeadline").attr('readonly', 'readonly');
 		$('#taskdeadline').datetimepicker({
@@ -800,9 +860,9 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		document.getElementById("description").readOnly  = true;
 		document.getElementById("taskno").readOnly  = true;
 		//document.getElementById("ServiceType").attr  = true;
-		/*var idArray = $.makeArray($('.validate').map(function() {
+		var idArray = $.makeArray($('.validate1').map(function() {
 	    	return this.id;
-	    })); */
+	    })); 
 	   $("#ServiceType").attr('disabled', true);
 	    /*$("#description").attr('disabled', true); */ 
 	}
@@ -1206,11 +1266,11 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	}
 
 	// main form validation
-	/* 
-	 var idArrayCmt1 = $.makeArray($('.validate1').map(function() {
+	 
+	 /* var idArrayCmt1 = $.makeArray($('.validate1').map(function() {
 	 return this.id;
 	 }));
-	 $('#submitMainForm').click(function(event) {
+	 $('#submit1').click(function(event) {
 	 validation = true;
 	 $.each(idArrayCmt1, function(i, val) {
 	 var value = $("#" + idArrayCmt1[i]).val();
@@ -1231,18 +1291,18 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	 } 
 	 });
 	 if(validation) {
-	 $("#submitMainForm").attr("disabled",true);
-	 $("#submitMainForm").val("Please wait...");
+	 $("#submit1").attr("disabled",true);
+	 $("#submit1").val("Please wait...");
 	 $("#taskf").submit();											
 	 event.preventDefault();
 	 }else {
 	 return false;
 	 event.preventDefault();
 	 }
-	 });
+	 }); */
 
 
-	 $(".cancel1").click(function()
+	/* $(".cancel1").click(function()
 	 {
 	 $("#id").val(0);
 	 $.each( idArrayCmt11, function(i, val)
@@ -1292,11 +1352,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	 */
 	 $(document).load(function()
 		{
-		 
-		 
 		 $('#moveTo').hide();
-		 
-		 
 		 });
 	 
 	 
