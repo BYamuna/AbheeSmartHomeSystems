@@ -214,7 +214,7 @@ min-width:113px;
     <diV style="color:#fff; background:#166eaf; font-size:25px; margin-top:10px;" class="dropbtn"">
 
 
-      <i class="fa fa-bell-o" ></i> <span class="badge" id="noOfMessages">5</span> 
+      <i class="fa fa-bell-o" ></i> <span class="badge" id="noOfMessages"></span> 
     </div>
    <%--  <c:if test="${not empty notifications}"> --%>
     <div id="notification"  class="dropdown-content">

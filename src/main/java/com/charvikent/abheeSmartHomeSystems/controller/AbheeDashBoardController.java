@@ -36,7 +36,6 @@ import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
-import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -82,19 +81,14 @@ public class AbheeDashBoardController {
 		List<Map<String, Object>> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
-		
 		model.addAttribute("severity", severityDao.getSeverityMap());
 		model.addAttribute("priority", priorityDao.getPriorityMap());
 		model.addAttribute("userNames", userService.getUserName());
 		model.addAttribute("category", serviceDao.getServicemap());
 		model.addAttribute("taskstatus", abheeTaskStatusDao.getTaskStatusMap());
-		
-		
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String id=String.valueOf(objuserBean.getId());
-		
 		model.addAttribute("objuserBean", objuserBean);
-		
 		try {
 			listOrderBeans = abheeTaskDao.getTasksListBySeverityId(sev);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
@@ -107,16 +101,11 @@ public class AbheeDashBoardController {
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", "''");
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);
-
 		}
-		
-		
 		return "task";
-	
 	}
 	
 	
@@ -124,19 +113,15 @@ public class AbheeDashBoardController {
 	public @ResponseBody Object setNotificationData(@RequestParam(value = "ttypeid", required = true) String ttypeid,Model model,HttpServletRequest request, HttpSession session) throws JSONException, JsonProcessingException {
 		
 		LOGGER.debug("Calling  setNotifyData at controller");
-		
 		List<Map<String, Object>> listOrderBeans = null;
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String id=String.valueOf(objuserBean.getId());
 		ObjectMapper objectMapper = null;
 		String sJson = null;
 		JSONObject jsonObj = new JSONObject();
-		
 		listOrderBeans = abheeTaskDao.getOpenTasks(id);
-		
 		 objectMapper = new ObjectMapper();
 		if (listOrderBeans != null && listOrderBeans.size() > 0) {
-			
 			objectMapper = new ObjectMapper();
 			sJson = objectMapper.writeValueAsString(listOrderBeans);
 			request.setAttribute("allOrders1", sJson);
@@ -148,11 +133,7 @@ public class AbheeDashBoardController {
 			request.setAttribute("allOrders1", "''");
 			jsonObj.put("allOrders1", listOrderBeans);
 		}
-		
-		
-		
 		return String.valueOf(jsonObj);
-
 	}
 	
 	
@@ -161,21 +142,13 @@ public class AbheeDashBoardController {
 			@RequestParam(value = "pgn", required = true) String pgn,@RequestParam(value = "id", required = true) String taskstatus,@RequestParam(value = "id", required = true) String taskno,Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException, JSONException 
 	{
 		LOGGER.debug("Calling  viewTicket at controller");
-		
-		
-		
 			List<Map<String, Object>> viewtaskBean = abheeTaskDao.getAbheeTaskById(taskId);
 			model.addAttribute("test2",viewtaskBean);
-			
 			if(pgn.equals("1"))
 			{
 				abheeTaskDao.openTask(taskId);
-				
-				
 				 taskHistoryLogsDao.historyLog1(viewtaskBean.get(0).get("id"));
-				
 			}
-			
 			List<Map<String, Object>> statuslist=abheeTaskDao.getTaskStatusHistoryByTaskNo(taskId);
 			abheeTaskDao.updateTaskStatus(taskstatus,taskno);
 			ObjectMapper objectMapper = new ObjectMapper();
@@ -205,10 +178,44 @@ public class AbheeDashBoardController {
 
 	}
 	
-	@RequestMapping(value = "/viewResponse")
-	public String viewIssue(@RequestParam(value = "id", required = true) String qId,
-			Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException, JSONException 
+	@RequestMapping(value = "/viewQuotation")
+	public String viewTicket(@RequestParam(value = "id", required = true) String quotationId,@RequestParam(value = "id", required = true) String requestno,Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException, JSONException 
 	{
+		LOGGER.debug("Calling  viewQuotation at controller");
+			List<Map<String, Object>> viewquotationBean = srequestDao.getAbheeQuotationByQuotationId(quotationId);
+			model.addAttribute("test3",viewquotationBean);
+			
+			List<Map<String, Object>> statuslist=srequestDao.getQuotationHistoryByRequestNo(requestno);
+			ObjectMapper objectMapper = new ObjectMapper();
+			String sJson;
+			ObjectMapper objectMapper1 = new ObjectMapper();
+			String sJson1;
+			JSONObject jsonObj = new JSONObject();
+			if (statuslist != null && statuslist.size() > 0) {
+				
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(statuslist);
+				sJson1=objectMapper1.writeValueAsString(viewquotationBean);
+				request.setAttribute("quotationlist", sJson);
+				request.setAttribute("test23", sJson1);
+				jsonObj.put("quotationlist", statuslist);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(statuslist);
+				sJson1=objectMapper1.writeValueAsString(viewquotationBean);
+				request.setAttribute("quotationlist", "''");
+				request.setAttribute("test23", sJson1);
+				jsonObj.put("quotationlist", statuslist);
+			}
+		
+		return "ViewQuotation";
+
+	}
+	
+	@RequestMapping(value = "/viewResponse")
+	public String viewQuotation(@RequestParam(value = "id", required = true) String qId,Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException, JSONException 
+		{
 			LOGGER.debug("Calling  viewResponse at controller");
 			List<Map<String, Object>> responselist=srequestDao.getQuationHistory(qId);
 			ObjectMapper objectMapper = new ObjectMapper();

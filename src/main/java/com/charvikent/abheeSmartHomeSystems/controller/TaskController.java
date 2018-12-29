@@ -135,7 +135,6 @@ public class TaskController {
 			listOrderBeans = abheeTaskDao.getTasksListAssignToMe();
 			request.setAttribute("customerid",customerMapper.writeValueAsString( productGuaranteeDao.getCustomersMap()));
 			request.setAttribute("productmodelid", productMapper.writeValueAsString( productGuaranteeDao.getProductsMap()));
-
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);

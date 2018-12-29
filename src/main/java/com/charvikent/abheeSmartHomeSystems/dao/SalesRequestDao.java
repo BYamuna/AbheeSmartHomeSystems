@@ -189,4 +189,25 @@ public class SalesRequestDao
 		abheeQuationHistory.setCreatedTime(salesrequest.getCreatedTime());
 		entityManager.persist(abheeQuationHistory);
 	}
+	
+	public List<Map<String, Object>> getAbheeQuotationByQuotationId(String id)
+	 {
+	 
+		 String hql ="select sr.salesrequestnumber,sr.modelnumber,sr.email,sr.mobileno,sr.imgfiles as AttachedFiles,sr.location,sr.address,sr.reqdesc,c.category from abhee_sales_request sr,abheecategory c where sr.catid=c.id and sr.id="+id;
+		 System.out.println(hql);
+		
+			List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+			System.out.println(retlist);
+			return retlist;
+	 }
+	public List<Map<String, Object>> getQuotationHistoryByRequestNo(String requestno) 
+	{
+		
+		String hql= "select qh.filename as Attachfile,qh.notes,DATE_FORMAT(qh.created_time,'%d-%b-%y %H:%i')as created_time from abhee_quation_history qh where qh.quationid="+requestno;
+	    System.out.println(hql);
+		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+		System.out.println(retlist);
+		return retlist;
+		
+	}
 }

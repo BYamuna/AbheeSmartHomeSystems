@@ -205,7 +205,7 @@ function displayTable(listOrders) {
  		
 		/* var checkbox="<input type='checkbox' class='form-check-input' id='salesrequest'>" */
 		var tblRow = "<tr>"
-			+ "<td title='"+orderObj.salesrequestnumber+"'>"+ orderObj.salesrequestnumber + "</td>"
+			+ "<td title='"+orderObj.salesrequestnumber+"'><a href=viewQuotation?id='"+ orderObj.id+"'>"+ orderObj.salesrequestnumber+"</a></td>"
 			+ "<td title='"+orderObj.category+"'>"+ orderObj.category + "</td>"
 			+ "<td title='"+orderObj.modelnumber+"'>"+ orderObj.modelnumber + "</td>"
 			+ "<td title='"+orderObj.email+"'>"+ orderObj.email + "</td>"
@@ -504,7 +504,7 @@ function viewTask(id){
 		$("#myModal2").modal();
 	});
 }
-f
+
 
 $("#pageName").text("Quotation Requests");
 $(".allsalesrequest").addClass("active"); 
