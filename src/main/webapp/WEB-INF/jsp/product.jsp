@@ -294,8 +294,18 @@ function editProduct(id) {
 	$("#maxAllowedDiscount").val(serviceUnitArray[id].maxAllowedDiscount);
 	$("#ProductPrice").val(serviceUnitArray[id].productPrice);
 	$("#ProductModelSpecifications").val(serviceUnitArray[id].productModelSpecifications);
+		$('#file1').removeClass('validate');
+		console.log(idArray);
+		
+
+		 //for remove field mandatory on edit
+		     idArray.splice($.inArray("file1", idArray),1);
+		     console.log(idArray);
+		   //for remove field mandatory on edit
 	
-	$("#submit1").val("Update");
+		   $("#submit1").val("Update");
+	
+	
 	//document.getElementById("fileDiv").readOnly  = true;
 	/* $(function () {
     $('#file1').attr('readonly', 'true'); // mark it as read only

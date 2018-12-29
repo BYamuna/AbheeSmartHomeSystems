@@ -293,7 +293,6 @@ color: inherit !important;
 			 toolTips();
 			 
 			 getAssignedNotifications();
-				//getNotifications();
 			   var formData = new FormData();
 		    
 			$.fn.makeMultipartRequest('POST', 'getCount', false,
@@ -393,7 +392,7 @@ function displayAssignedNotifications(listOrders) {
 			+ "<td title='"+orderObj.taskno+"'><a href='task'>"+ orderObj.taskno + "</a></td>"
 			+ "<td title='"+orderObj.musername+"'>"+ orderObj.musername + "</td>"
 			+ "<td title='"+comment+"'>"+ comment + "</td>"	
-			+"<a class='view viewIt' href='task"
+			//+"<a class='view viewIt' href='task"
 			+ "</tr>";
 		$(tblRow).appendTo("#ack table tbody");
 	});
@@ -407,20 +406,18 @@ function displayNotifications(listOrders) {
 	//serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
 		var comment =null;
-		if(orderObj.add_comment == "" ||orderObj.add_comment =="null"||typeof orderObj.add_comment === "undefined")
+		if(orderObj.addComment == "" ||orderObj.addComment =="null"||typeof orderObj.addComment === "undefined")
 			{
 			comment="----";
 			}else{
-				comment =orderObj.add_comment;
+				comment =orderObj.addComment;
 			
 		}
 	//serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.taskno+"'><a href='task'>"+ orderObj.taskno + "</a></td>"
 			+ "<td title='"+orderObj.serviceType+"'>"+ orderObj.serviceType + "</td>"
-			/* + "<td title='"+orderObj.musername+"'>"+ orderObj.musername + "</td>" */
-			+ "<td title='"+addComment+"'>"+ addComment + "</td>"	
-			+"<a class='view viewIt' href='task"
+			+ "<td title='"+comment+"'>"+ comment + "</td>"	
 			+ "</tr>";
 		$(tblRow).appendTo("#notification table tbody");
 	});
@@ -471,7 +468,7 @@ function displayNotifications(listOrders) {
     <div id="ack" class="dropdown-content">
       <a style="padding: 10px 16px;" href="#"> 
       
-      	<table class="table1" >
+      	<table class="table1 " >
         	<thead>
             	<!-- <tr class="tr1" style="background: #006699;color: #FFF;">
                 	<th class="th1">ServiceRequestNo</th>
@@ -496,11 +493,12 @@ function displayNotifications(listOrders) {
       <i class="fa fa-bell-o" ></i> <span class="badge" id="noOfMessages"></span> 
     </div>
    <%--  <c:if test="${not empty notifications}"> --%>
+    
     <div id="notification"  class="dropdown-content">
-      <a style="padding: 10px 16px;" href="#">
+      <a style="padding: 10px 16px;" href="task">
       
-      	<table class="table1" id="taskTableHeader">
-        	<thead>
+      	<table class="table1 table table-striped table-bordered datatables"  id="taskTableHeader">
+        	 <thead>
          	<!-- <tr class="tr1" style=" background: #006699; color: #FFF;"> 
 
    

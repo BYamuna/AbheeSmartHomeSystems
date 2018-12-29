@@ -726,9 +726,9 @@ $.each(productdetailslist, function(k,v){
 				});
 		            // $.blockUI({ message: 'Please wait' });
 		          }, 
-	  	success: function(data){
+	  	success: function(result){
 	  		
-	  		/*  if(result !="" && result != null){
+	  		  if(result !="" && result != null){
 	  		alert("We received the Request and will send you the quotation soon. Thanking you.");
 	  	
 	  		$('#salesrequest').val("");
@@ -736,8 +736,8 @@ $.each(productdetailslist, function(k,v){
 	  		 $('#quotationModal').modal('toggle');
 	  		 }
 	  		
-	    }, */
-	  		if(data === false)
+	    },
+	  		/* if(data === false)
 			{
 				alert(" Thank you, your request had been submitted successfully. Our team will contact you soon");
 				$('#quotationModal').modal('toggle');				
@@ -748,7 +748,7 @@ $.each(productdetailslist, function(k,v){
 				$('#quotationModal').modal('toggle');
 				} 
 			
-		},
+		}, */
 		complete: function () {
             
             $.unblockUI();
