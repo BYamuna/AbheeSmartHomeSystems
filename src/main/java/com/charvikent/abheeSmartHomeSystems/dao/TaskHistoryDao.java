@@ -1,6 +1,7 @@
 package com.charvikent.abheeSmartHomeSystems.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -44,10 +45,15 @@ public class TaskHistoryDao {
 		jdbcTemplate.execute(hql);
 	}
 	
-	public List<TaskHistoryLogs> getNotificationsListByCustomerId(TaskHistoryLogs history){
-		String hql ="select th.description,th.taskno,st.servicetypename as servicetype from task_history_logs th ,abheeservicetype st where assignby='"+history.getAssignby()+"' and st.id=th.service_type group by taskno";
-		RowMapper<TaskHistoryLogs> rowMapper = new BeanPropertyRowMapper<TaskHistoryLogs>(TaskHistoryLogs.class);
-	    return  this.jdbcTemplate.query(hql, rowMapper);
+	public List<Map<String, Object>> getNotificationsListByCustomerId(String custid,String taskno){
+		String hql ="select th.description,th.taskno,st.servicetypename as servicetype from task_history_logs th ,abheeservicetype st where assignby='"+custid+"' and th.taskno='"+taskno+"' and st.id=th.service_type group by taskno";
+		/*RowMapper<TaskHistoryLogs> rowMapper = new BeanPropertyRowMapper<TaskHistoryLogs>(TaskHistoryLogs.class);
+		System.out.println(hql);
+	    return  this.jdbcTemplate.query(hql, rowMapper);*/
+
+		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+		System.out.println(retlist);
+		return retlist;
 	}
 	public List<AbheeTask> getServiceDetailsByTaskno(AbheeTask task){
 		String hql ="select t.id,t.taskno,t.description,t.uploadfile,t.customer_id,t.communicationaddress,t.warranty,ar.requesttime ,ap.name as modelname ,ac.category,st.servicetypename as servicetype,c.name as companyname ,a.priority as priority,t.subject,u.username as assignedto,t.taskdeadline,t.imgfile from abhee_task t,abheecategory ac,abhee_company c,abheerequesttime ar,abheeservicetype st,abhee_product ap,abheepriority a,abheeusers u ,abheetaskstatus ts where t.taskno='"+task.getTaskno()+"'  and t.category=ac.id and t.requesttime=ar.requesttimeid and t.modelid=ap.id  and t.service_type=st.id and t.company=c.id and t.kstatus=ts.id and t.priority=a.id  and t.assignto=u.id ";
@@ -59,6 +65,25 @@ public class TaskHistoryDao {
 		System.out.println(hql);
 		RowMapper<TaskHistoryLogs> rowMapper = new BeanPropertyRowMapper<TaskHistoryLogs>(TaskHistoryLogs.class);
 	    return  this.jdbcTemplate.query(hql, rowMapper);
+	}
+	
+	
+	
+	
+	public List<TaskHistoryLogs> getNotificationByCustomerIds(){
+		String hql ="Select t.taskno,t.service_type,t.add_comment,t.webstatus,st.servicetypename as servicetype from task_history_logs t,abheeservicetype st where  webstatus='1' and t.service_type=st.id" ;
+				
+		RowMapper<TaskHistoryLogs> rowMapper = new BeanPropertyRowMapper<TaskHistoryLogs>(TaskHistoryLogs.class);
+	    System.out.println(hql);
+		return  this.jdbcTemplate.query(hql, rowMapper);
+	}
+	
+	
+	public void UpdateNotificationByCustomerIds(TaskHistoryLogs history){
+		String hql ="update task_history_logs set webstatus='0' where assignby='"+history.getAssignby()+"'";
+		System.out.println(hql);
+		jdbcTemplate.execute(hql);
+		
 	}
 	
 }

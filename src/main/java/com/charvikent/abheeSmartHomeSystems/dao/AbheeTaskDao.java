@@ -20,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
+import com.charvikent.abheeSmartHomeSystems.model.TaskHistory;
+import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
 @Repository
@@ -409,6 +411,12 @@ public void updateTaskStatus(String taskstatus,String taskno)
 	jdbcTemplate.execute(hql);
 }
 
-
+public List<String> getTaskNoByCustomerIds(TaskHistoryLogs customer) {
+	
+String hql ="select t.taskno from AbheeTask t where t.customerId ='"+customer.getAssignby()+"'";
+	System.out.println(hql);
+	List<String> list =entityManager.createQuery(hql).getResultList();
+	return list;
+}
 
 }

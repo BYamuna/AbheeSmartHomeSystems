@@ -499,6 +499,9 @@ body {font-family: Arial;}
     </div>
   </div> 
 <script type="text/javascript">
+
+
+ 
          function Quotationrequests(){
         		$.ajax({
         			type : "POST",
@@ -552,6 +555,7 @@ body {font-family: Arial;}
      	} 
        
      </script>
+
 
   			 
   	<script type="text/javascript">

@@ -80,6 +80,7 @@ public class TaskHistoryLogs  {
 	private String requesttime;
 	
 	private int notificationstatus;
+	private int webstatus;
 	
 	public String getImgfile() {
 		return imgfile;
@@ -332,6 +333,13 @@ public class TaskHistoryLogs  {
 	public void setNotificationstatus(int notificationstatus) {
 		this.notificationstatus = notificationstatus;
 	}
+	
+	public int getWebstatus() {
+		return webstatus;
+	}
+	public void setWebstatus(int webstatus) {
+		this.webstatus = webstatus;
+	}
 	@Override
 	public String toString() {
 		return "TaskHistoryLogs [id=" + id + ", taskno=" + taskno + ", taskid=" + taskid + ", createdTime="
@@ -344,7 +352,8 @@ public class TaskHistoryLogs  {
 				+ ", categoryid=" + categoryid + ", priorityid=" + priorityid + ", severityid=" + severityid
 				+ ", assignbyid=" + assignbyid + ", kstatusid=" + kstatusid + ", modelid=" + modelid + ", addComment="
 				+ addComment + ", communicationaddress=" + communicationaddress + ", requesttime=" + requesttime
-				+ ", notificationstatus=" + notificationstatus + ", assignby=" + assignby + "]";
+				+ ", notificationstatus=" + notificationstatus + ", webstatus=" + webstatus + ", assignby=" + assignby
+				+ "]";
 	}
 	
 

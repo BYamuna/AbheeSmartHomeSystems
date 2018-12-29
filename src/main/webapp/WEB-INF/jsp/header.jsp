@@ -281,7 +281,7 @@ color: inherit !important;
 </style>
 <script type="text/javascript">
 	var isClick = 'No';
-	
+
 		window.setTimeout(function() {
 		    $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
 		        $(this).remove(); 
@@ -293,7 +293,7 @@ color: inherit !important;
 			 toolTips();
 			 
 			 getAssignedNotifications();
-			
+				//getNotifications();
 			   var formData = new FormData();
 		    
 			$.fn.makeMultipartRequest('POST', 'getCount', false,
@@ -357,7 +357,16 @@ function getAssignedNotifications(){
 			//alert(jsonobj);
 			var assigned_notifications =data;
 			displayAssignedNotifications(jsonobj.AssignedNotifications);
-			 displayNotifications(jsonobj.AssignedNotifications)
+		});  
+}
+function getNotifications(){
+	 var formData = new FormData();
+		$.fn.makeMultipartRequest('POST', 'dashBoard', false,
+				formData, false, 'text', function(data){
+			var jsonobj = $.parseJSON(data);
+			//alert(jsonobj);
+			var notifications =data;
+			displayNotifications(jsonobj.notifications);
 		});  
 }
 
@@ -393,7 +402,7 @@ function displayNotifications(listOrders) {
 // 	alert(listOrders);
 	$('#notification').html('');
 	var tableHead = '<table id="notification" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">Service Request No</th><th style="text-align:center;">Status</th><th style="text-align:center;">Assigned To</th><th style="text-align:center;">comment</th></thead><tbody></tbody></table>';
+			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">Service Request No</th><th style="text-align:center;">Servicetype</th><th style="text-align:center;">comment</th></thead><tbody></tbody></table>';
 	$('#notification').html(tableHead);
 	//serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -408,9 +417,9 @@ function displayNotifications(listOrders) {
 	//serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.taskno+"'><a href='task'>"+ orderObj.taskno + "</a></td>"
-			+ "<td title='"+orderObj.statusname+"'>"+ orderObj.statusname + "</td>"
-			+ "<td title='"+orderObj.musername+"'>"+ orderObj.musername + "</td>"
-			+ "<td title='"+comment+"'>"+ comment + "</td>"	
+			+ "<td title='"+orderObj.serviceType+"'>"+ orderObj.serviceType + "</td>"
+			/* + "<td title='"+orderObj.musername+"'>"+ orderObj.musername + "</td>" */
+			+ "<td title='"+addComment+"'>"+ addComment + "</td>"	
 			+"<a class='view viewIt' href='task"
 			+ "</tr>";
 		$(tblRow).appendTo("#notification table tbody");
@@ -484,7 +493,7 @@ function displayNotifications(listOrders) {
     <diV style="color:#166eaf; background:#cccccc; font-size:25px; margin-top:10px;" class="dropbtn"">
 
 
-      <i class="fa fa-bell-o" id="noOfMessages"></i><!-- <span class="badge">5</span> -->
+      <i class="fa fa-bell-o" ></i> <span class="badge" id="noOfMessages"></span> 
     </div>
    <%--  <c:if test="${not empty notifications}"> --%>
     <div id="notification"  class="dropdown-content">

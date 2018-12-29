@@ -47,7 +47,74 @@
 <!--      <script src='https://maps.google.com/maps/api/js?sensor=false&libraries=places'></script> -->
 
 <style type="text/css">
+.navbar {
+}
 
+.navbar a {
+    float: left;
+    color:#FFFFFF;
+    text-align: center;
+    text-decoration: none;
+}
+
+.dropdown {
+    float: left;
+}
+
+.dropdown .dropbtn {
+    font-size: 16px;    
+    border: none;
+	border-radius:10px;
+    outline: none;
+    color: white;
+    background-color:#3366CC;
+    font-family: inherit;
+    margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color:#3366FF;
+    
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+   	width: 300px;
+    z-index: 1;
+	margin-left:-35px;
+	right:0;
+	height:200px;
+	overflow-y:auto;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #f9f9f9;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+  	.table1{
+		border:solid 1px;
+		border-color:#CCCCCC;
+		width:260px;
+	}
+	.tr1, .td1, .th1{
+		border:solid 1px;
+		border-color:#CCCCCC;
+	}
 .msgcss
 {
 /* 	width: 50% !important; */
@@ -66,6 +133,31 @@ min-width:113px;
 }
 .ttr li a {
 	text-transform: capitalize;
+}
+ .nav .badge {
+    top: -2px;
+    /* left: 22px; */
+    position: absolute;
+    background-color: #e73c3c;
+}
+ .nav .badge, #sidebar .badge {
+    text-align: center;
+    text-shadow: none !important;
+}
+ .nav .badge {
+    top: -4px;
+    /* left: 22px; */
+    position: absolute;
+    background-color: #e73c3c;
+}
+ .nav .badge, #sidebar .badge {
+    text-align: center;
+    text-shadow: none !important;
+}
+.badge {
+    padding: 4px 6px;
+    font-size: 11px;
+    font-family: 'Source Sans Pro', 'Segoe UI', 'Droid Sans', Tahoma, Arial, sans-serif;
 }
 </style>
 </head>
@@ -114,9 +206,51 @@ min-width:113px;
         <li class="location"><a href="${baseurl }/location">Our Other Locations</a></li>
         <li id="contact"><a href="${baseurl }/contact">Contact Us</a></li>
         <li class="about"><a href="${baseurl }/about">About Us</a></li>
-         <%-- <li class="ticketstatus"><a href="${baseurl }/ticketstatus">Ticket Status</a></li> --%>  
       </ul>
       <ul class="nav navbar-nav navbar-right">
+      <li style="float:left;">
+            <div style="box-shadow:none; margin-right:10px; margin-bottom:0px;" class="navbar">
+  <div style="border-left:none;" class="dropdown">
+    <diV style="color:#fff; background:#166eaf; font-size:25px; margin-top:10px;" class="dropbtn"">
+
+
+      <i class="fa fa-bell-o" ></i> <span class="badge" id="noOfMessages">5</span> 
+    </div>
+   <%--  <c:if test="${not empty notifications}"> --%>
+    <div id="notification"  class="dropdown-content">
+      <a style="padding: 10px 16px;" href="#">
+      
+      	<table class="table1" id="taskTableHeader">
+        	<thead>
+         	<!-- <tr class="tr1" style=" background: #006699; color: #FFF;"> 
+
+   
+   
+                	<th class="th1">Task No.</th>
+                	<th class="th1">Field</th>
+                	<th class="th1">Change</th>
+                </tr> -->
+            </thead>
+            <tbody>
+            <%-- <c:forEach var="issue" items="${notifications}">
+            	<tr class="tr1">
+                	<td class="td1">${issue.taskno}</td>
+                    <td class="td1">${issue.kpfield}</td>
+                    <td class="td1">${issue.kpchange}</td>
+                </tr>
+                </c:forEach>
+                 --%>
+                
+            	
+            </tbody>
+        </table>
+      
+      </a>
+    </div>
+     <%--  </c:if> --%>
+  </div> 
+</div>
+                </li> 
         <li class="dropdown acc">
           <a href="#" class="dropdown-toggle"  data-toggle="dropdown" data-hover="dropdown">Hello! <span id="loggedCustomerName"></span></a>
           <ul style="width:100% !important;" class="dropdown-menu myacd">
@@ -135,6 +269,9 @@ min-width:113px;
   
     </c:otherwise>
 </c:choose>
+
+
+
           </ul>
         </li>
       </ul>

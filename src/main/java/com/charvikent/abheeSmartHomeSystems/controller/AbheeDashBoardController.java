@@ -33,8 +33,10 @@ import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
 import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ServiceDao;
 import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
+import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -47,7 +49,8 @@ public class AbheeDashBoardController {
 	ReportIssueDao reportIssueDao;
 	@Autowired
 	private PriorityDao priorityDao;
-
+	@Autowired
+	TaskHistoryDao taskHistorydao;
 	@Autowired
 	private SeverityDao severityDao;
 	@Autowired
@@ -363,15 +366,15 @@ public class AbheeDashBoardController {
 	public @ResponseBody String getAssignedNotifications(AbheeTask  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) throws JsonProcessingException
 	{
 		LOGGER.debug("Calling  getAssignedNotifications at controller");
+		
+		
 		JSONObject jsonObj = new JSONObject();
 		List<Map<String,Object>> retlist=taskHistoryLogsDao.showAssignedTasksNotification();
 		ObjectMapper objectMapper = new ObjectMapper();
 		String sJson = objectMapper.writeValueAsString(retlist);
-		Integer unseentasks =0;
 		try{
 			
 			jsonObj.put("AssignedNotifications",retlist);
-			session.setAttribute("notifications", sJson);
 			
 		}catch(Exception e){
 			e.printStackTrace();

@@ -60,12 +60,12 @@ var test = <%= session_notification %>;
 	var msgIncrement = 0;
 	$("#taskTableHeader tbody").empty();
 	$.each(test,function(i, orderObj) { 
-		 if(orderObj.status == 1){
+		 if(orderObj.webstatus == 1){
 			msgIncrement++; 
 		var task = "<tr>"
 			+ "<td title='"+orderObj.taskno+"'><b>"+ orderObj.taskno+ "</b></td>" 
-			+ "<td title='"+orderObj.musername+"'><b>"+ orderObj.musername + "</b></td>"
-			+ "<td title='"+orderObj.comment+"'><b>"+ orderObj.comment + "</b></td>"
+			+ "<td title='"+orderObj.serviceType+"'><b>"+ orderObj.serviceType + "</b></td>"
+			+ "<td title='"+orderObj.addComment+"'><b>"+ orderObj.addComment + "</b></td>"
 			+"<a class='view viewIt' href='task?"
 			+ "</tr>";
 		

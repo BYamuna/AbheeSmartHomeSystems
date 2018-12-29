@@ -737,15 +737,15 @@ $.each(productdetailslist, function(k,v){
 	  		 }
 	  		
 	    }, */
-	  		if(data ==='false')
+	  		if(data === false)
 			{
 				alert(" Thank you, your request had been submitted successfully. Our team will contact you soon");
-				$('#formModal').modal('toggle');					
+				$('#quotationModal').modal('toggle');				
 			}
 			else
 				{
 				alert("Service Request Already Received!");
-				$('#formModal').modal('toggle');
+				$('#quotationModal').modal('toggle');
 				} 
 			
 		},
