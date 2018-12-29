@@ -158,12 +158,13 @@ public class AbheeDashBoardController {
 	
 	@RequestMapping(value = "/viewTicket")
 	public String viewIssue(@RequestParam(value = "id", required = true) String taskId,
-			@RequestParam(value = "pgn", required = true) String pgn,@RequestParam(value = "id", required = true) String taskstatus,@RequestParam(value = "id", required = true) String taskno,Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException, JSONException 
+			@RequestParam(value = "pgn", required = true) String pgn,@RequestParam(value = "id", required = true) String taskstatus,@RequestParam(value = "id", required = true) String taskno,Model model,HttpSession session,HttpServletRequest request,@RequestParam(value = "id", required = true) String history) throws JsonProcessingException, JSONException 
 	{
 		LOGGER.debug("Calling  viewTicket at controller");
 		
-		
-		
+		List<TaskHistoryLogs> listOrderBeans = null;
+		ObjectMapper objectMapper2 = null;
+		String sJson2 = null;
 			List<Map<String, Object>> viewtaskBean = abheeTaskDao.getAbheeTaskById(taskId);
 			model.addAttribute("test2",viewtaskBean);
 			
@@ -172,12 +173,23 @@ public class AbheeDashBoardController {
 				abheeTaskDao.openTask(taskId);
 				
 				
-				 taskHistoryLogsDao.historyLog1(viewtaskBean.get(0).get("id"));
+				taskHistoryLogsDao.historyLog1(viewtaskBean.get(0).get("id"));
 				
 			}
-			
+			listOrderBeans = taskHistorydao.getNotificationByCustomerIds();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper2 = new ObjectMapper();
+				sJson2 = objectMapper2.writeValueAsString(listOrderBeans);
+				session.setAttribute("notifications", sJson2);
+			} else {
+				objectMapper2 = new ObjectMapper();
+				
+				sJson2 = objectMapper2.writeValueAsString(listOrderBeans);
+				
+			}
 			List<Map<String, Object>> statuslist=abheeTaskDao.getTaskStatusHistoryByTaskNo(taskId);
 			abheeTaskDao.updateTaskStatus(taskstatus,taskno);
+			taskHistorydao.UpdateNotificationByCustomerIds(history);
 			ObjectMapper objectMapper = new ObjectMapper();
 			String sJson;
 			ObjectMapper objectMapper1 = new ObjectMapper();
@@ -191,6 +203,8 @@ public class AbheeDashBoardController {
 				request.setAttribute("statuslist1", sJson);
 				request.setAttribute("test21", sJson1);
 				jsonObj.put("statuslist1", statuslist);
+				
+				
 				// System.out.println(sJson);
 			} else {
 				objectMapper = new ObjectMapper();
@@ -199,7 +213,11 @@ public class AbheeDashBoardController {
 				request.setAttribute("statuslist1", "''");
 				request.setAttribute("test21", sJson1);
 				jsonObj.put("statuslist1", statuslist);
+				
+				
+				
 			}
+			
 		
 		return "ViewTicket";
 
