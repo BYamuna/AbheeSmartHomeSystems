@@ -458,6 +458,7 @@ public class AbheeCustomerRestController {
 		String location = salesrequest.getLocation();
 		String mobile = salesrequest.getMobileno();
 		String email = salesrequest.getEmail();
+		String catid=salesrequest.getCatid();
 		String imgpath = imgdecoder(salesrequest.getImgfiles(), request);
 		if (!salesrequest.getImgfiles().isEmpty()) {
 			salesrequest.setImgfiles(imgpath);
@@ -547,7 +548,7 @@ public class AbheeCustomerRestController {
 		task.setCustomerId(customerId);
 		task.setWarranty(warranty);
 		task.setRequesttime(requesttime);
-		task.setAssignby("1");
+		//task.setAssignby("1");
 		task.setTaskdeadline(" ");
 		task.setImgfile(" ");
 		task.setAddComment(" ");
@@ -1851,13 +1852,24 @@ public class AbheeCustomerRestController {
 		}
 		return String.valueOf(json);
 		}
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/getNotificationsListByCustomerId", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public String getNotificationsListByCustomerId(@RequestBody TaskHistoryLogs history) throws JsonProcessingException, JSONException {
 		LOGGER.debug("Calling getNotificationsListByCustomerId at controller");
-		List<TaskHistoryLogs> listOrderBeans = taskHistoryDao.getNotificationsListByCustomerId(history);
+		List<String> listOrderBeans = abheeTaskDao.getTaskNoByCustomerIds(history);
+		List<HashMap<String, List<Map<String, Object>>>> listOrderBeans1=new ArrayList<HashMap<String, List<Map<String, Object>>>>();
+		List<Map<String, Object>> listOrderBeans2=new ArrayList<Map<String, Object>>();
+		for(int i=0;i<listOrderBeans.size();i++) {
+			HashMap<String, List<Map<String, Object>>> hm = new HashMap<String, List<Map<String, Object>>>();
+			listOrderBeans2=taskHistoryDao.getNotificationsListByCustomerId(history.getAssignby(),listOrderBeans.get(i).toString());
+		System.out.println(listOrderBeans2);
+		hm.put(""+i, listOrderBeans2);
+		listOrderBeans1.add(hm);
+		}
+		
 		JSONObject json = new JSONObject();
 		if (null != listOrderBeans) {
-			json.put("NotificationList", listOrderBeans);
+			json.put("NotificationList", listOrderBeans1);
 		} else
 			json.put("NotificationList", "NOT_FOUND");
 		return String.valueOf(json);

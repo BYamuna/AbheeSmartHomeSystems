@@ -40,6 +40,7 @@ import com.charvikent.abheeSmartHomeSystems.dao.ProductGuaranteeDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ReportIssueDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ServiceDao;
 import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
+import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
 //import com.charvikent.abheeSmartHomeSystems.model.KpStatusLogs;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
@@ -91,6 +92,8 @@ public class TaskController {
 
 	@Autowired
 	TaskHistoryLogsDao taskHistoryLogsDao;
+	@Autowired
+	TaskHistoryDao taskHistorydao;
 	@Autowired
 	SendingMail sendingMail;
 	/*
@@ -146,7 +149,7 @@ public class TaskController {
 	@PostMapping(value = "/savetask1")
 	public String saveAdmin(@Valid @ModelAttribute("taskf") AbheeTask task, TaskHistoryLogs taskHistoryLogs,
 			BindingResult bindingresults, @RequestParam("file1") MultipartFile[] uploadedFiles,
-			RedirectAttributes redir) throws IOException {
+			RedirectAttributes redir,HttpSession session) throws IOException {
 		LOGGER.debug("Calling savetask1 at controller");
 
 		if (bindingresults.hasErrors()) {
@@ -186,8 +189,9 @@ public class TaskController {
 					task.setStatus("1");
 					task.setAdditionalinfo("0");
 					/* taskHistoryLogsDao.savetaskhistorylogs(taskHistoryLogs); */
-
+					
 					reportIssueDao.saveReportIssue(task);
+				    //session.setAttribute("notifications", task);
 
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");
 					redir.addFlashAttribute("cssMsg", "success");
@@ -613,5 +617,39 @@ public class TaskController {
 	 * 
 	 * }
 	 */
+	
+	@SuppressWarnings("unused")
+	@GetMapping("/task1")
+	public String department(Model model,TaskHistoryLogs history, HttpServletRequest request, HttpSession session) {
+		LOGGER.debug("Calling task at controller");
+		List<TaskHistoryLogs> listOrderBeans = null;
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		
+		User objuserBean = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id = String.valueOf(objuserBean.getId());
+
+
+		try {
+			listOrderBeans = taskHistorydao.getNotificationByCustomerIds();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				session.setAttribute("notifications", sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+
+		return null;
+
+	}
 
 }

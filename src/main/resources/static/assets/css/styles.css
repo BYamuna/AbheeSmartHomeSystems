@@ -9483,8 +9483,8 @@ header .nav .badge,
   text-shadow: none !important;
 }
 header .nav .badge {
-  top: 4px;
-  left: 22px;
+  top: -2px;
+ /*  left: 22px; */
   position: absolute;
   background-color: #e73c3c;
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +19,12 @@ import com.charvikent.abheeSmartHomeSystems.dao.DashBoardDao;
 import com.charvikent.abheeSmartHomeSystems.dao.PriorityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.ServiceDao;
 import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
+import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.DashBoardByCategory;
 import com.charvikent.abheeSmartHomeSystems.model.DashBoardByStatus;
+import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
+import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,6 +35,9 @@ public class DashBoardController {
 	
 	@Autowired
 	private PriorityDao priorityDao;
+	
+	@Autowired
+	TaskHistoryDao taskHistorydao;
 
 	@Autowired
 	private SeverityDao severityDao;
@@ -53,7 +60,7 @@ public class DashBoardController {
    */
 	@SuppressWarnings("unused")
 	@RequestMapping("/dashBoard")
-	public String showDashBoard(Model model,HttpServletRequest request) throws JsonProcessingException
+	public String showDashBoard(Model model,HttpServletRequest request,HttpSession session) throws JsonProcessingException
 	{
 		
 		
@@ -62,11 +69,34 @@ public class DashBoardController {
 		 ObjectMapper deptmapper =new ObjectMapper();
 		List<DashBoardByCategory> list=null;
 		List<DashBoardByStatus> byStatusList=null;
+		List<TaskHistoryLogs> listOrderBeans = null;
+		ObjectMapper objectMapper1 = null;
+		String sJson1 = null;
+		
+		Integer unseentasks =0;
+
+		User objuserBean = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id = String.valueOf(objuserBean.getId());
+		
+		listOrderBeans = taskHistorydao.getNotificationByCustomerIds();
+		
 		try {
 			String json = null;
 			list = dashBoardDao.getCategory();
 			byStatusList=dashBoardDao.getStatusList();
 			ObjectMapper objmapper = new ObjectMapper();
+			
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper1 = new ObjectMapper();
+				sJson1 = objectMapper1.writeValueAsString(listOrderBeans);
+				session.setAttribute("notifications", sJson1);
+			} else {
+				objectMapper1 = new ObjectMapper();
+				
+				sJson1 = objectMapper1.writeValueAsString(listOrderBeans);
+				
+			}
+			
 			if(list !=null ) {
 				json = objmapper.writeValueAsString(list);
 				

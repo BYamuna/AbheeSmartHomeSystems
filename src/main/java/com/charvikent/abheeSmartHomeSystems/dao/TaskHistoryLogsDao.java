@@ -114,6 +114,8 @@ public class TaskHistoryLogsDao {
 		
 		
 		taskHistoryLogs.setNotificationstatus(1);
+		taskHistoryLogs.setWebstatus(1);
+	
 		taskHistoryLogs.setTaskid(reportIssue.getId());
 		taskHistoryLogs.setServiceType(reportIssue.getServiceType());
 		taskHistoryLogs.setAdditionalinfo(reportIssue.getAdditionalinfo());
