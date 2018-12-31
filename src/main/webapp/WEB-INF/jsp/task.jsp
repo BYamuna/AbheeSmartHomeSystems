@@ -289,9 +289,7 @@
 			<div class="modal-body">
 				<div class="row">
 					<div class="table-responsive" id="HtableId">
-						<table cellpadding="0" cellspacing="0" border="0"
-							class="table table-striped table-bordered datatables"
-							id="example">
+						<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 							<thead>
 								<tr class="info">
 									<th>Date Modified</th>

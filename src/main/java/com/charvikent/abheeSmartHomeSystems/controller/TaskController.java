@@ -522,7 +522,7 @@ public class TaskController {
 		// String warranty=request.getParameter("warranty");
 		AbheeTask task = new AbheeTask();
 		task.setAdditionalinfo("0");
-		task.setAssignto("5");
+		task.setAssignto("2");
 		task.setDescription(message);
 		task.setKstatus("5");
 		task.setPriority("3");

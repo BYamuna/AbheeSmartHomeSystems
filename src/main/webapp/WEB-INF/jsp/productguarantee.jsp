@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
@@ -66,7 +65,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<%-- <form:hidden path= "id" /> --%>
+									<form:hidden path= "id" />
 									<label for="focusedinput" class="col-md-6 control-label ">Product Model Name<span class="impColor">*</span>
 									</label>
 										
@@ -81,15 +80,12 @@
 									<form:hidden path="orderId" /> 
 									<label for="focusedinput" class="col-md-6 control-label ">Customer ID	<span class="impColor">*</span>
 									</label>
-										
 									<form:select path="customerid"	class="col-xs-10 col-sm-5 validate"	onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 									<form:options items="${customerid}" />
 									</form:select>
 								</div>
 							</div>
-
-
 						</div>						  
 						<div class="row">
 							<div class="col-md-6">
@@ -97,19 +93,15 @@
 									<label for="focusedinput" class="col-md-6 control-label">Purchased Date	<span class="impColor">*</span>
 									</label>
 										<form:input type="text" path="purchaseddate"	class="col-xs-10 col-sm-5 validate" />
-
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Expired Date	<span class="impColor">*</span>
 									</label>
-										<form:input type="text" path="expireddate"
-											class="col-xs-10 col-sm-5 validate" />
-
+										<form:input type="text" path="expireddate" class="col-xs-10 col-sm-5 validate" />
 								</div>
 							</div>
-							
 						</div>
 						<div id="getting-started"></div>
 					</div>
@@ -126,7 +118,7 @@
 				</form:form>
 			</div>
 		</div>
-	</div>
+	</div> 
 </div>
 <script type="text/javascript">
 
@@ -162,16 +154,16 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Customer ID</th><th>Order ID</th><th>Product Model Name</th><th>Purchased Date</th><th>Expired Date</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Customer ID</th><th>Order ID</th><th>Product Model Name</th><th>Purchased Date</th><th>Expired Date</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
-		if(orderObj.status == "1"){
+		/* if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate' onclick=deleteProductWarranty('"+ orderObj.orderId+ "',0)><i class='fa fa-eye'></i></a>"
 		}else{  
 			var deleterow = "<a class='activate' onclick=deleteProductWarranty('"+ orderObj.orderId+ "',1)><i class='fa fa-eye-slash'></i></a>"
 		}
-		var edit = "<a class='edit editIt' onclick=editProductWarranty('"+orderObj.orderId+"')><i class='fa fa-edit'></i></a>"
+		var edit = "<a class='edit editIt' onclick=editProductWarranty('"+orderObj.orderId+"')><i class='fa fa-edit'></i></a>" */
 		serviceUnitArray[orderObj.orderId] = orderObj;
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.customerid+"'>"+ orderObj.customerid + "</td>"
@@ -179,7 +171,7 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.productmodelname+"'>"+ orderObj.productmodelname + "</td>"
 			+ "<td title='"+orderObj.purchaseddate+"'>"+ orderObj.purchaseddate + "</td>"
 			+ "<td title='"+orderObj.expirededdate+"'>"+ orderObj.expireddate + "</td>"
-			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
+			/* + "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" */ 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});

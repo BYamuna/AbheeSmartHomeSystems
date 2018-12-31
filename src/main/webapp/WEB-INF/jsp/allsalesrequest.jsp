@@ -33,7 +33,7 @@
 					<!--  <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label> -->
 						<div class="table-responsive" id="tableId">
 							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
-								<thead><tr><th>ModelNumber</th><th>EmailId</th><th>Mobile No</th><th>files</th><th>Location</th><th>Address</th><th>Requirements description</th><th></th></tr></thead>
+								<thead><tr><th>Model Number</th><th>Email Id</th><th>Mobile Number</th><th>Files</th><th>Location</th><th>Address</th><th>Requirements description</th><th></th></tr></thead>
 								<tbody></tbody>
 							</table>
 						</div>
@@ -166,7 +166,7 @@ function displayTable(listOrders) {
 	$('#tableId').html('');
 
 	var tableHead = '<table id="product" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Request Number</th><th>Product Category</th><th>Product Model</th><th>EmailId</th><th>Mobile</th><th>Files</th><th>Location</th><th>Address</th><th>Comments</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Request Number</th><th>Product Category</th><th>Product Model</th><th>Email Id</th><th>Mobile Number</th><th>Files</th><th>Location</th><th>Address</th><th>Comments</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
