@@ -29,6 +29,7 @@ strong,
 	width:260px;
 	margin-top:20px;
 }
+
 .cont .col-sm-4 .img1 {
 	margin-left:10px;
 	margin-right:10px;
@@ -182,6 +183,7 @@ strong {
 #cmlist a:hover {
 	color:#26a5de;
 	text-decoration:none;
+	background-color:#000;
 }
 .listdata h2 {
 	margin-left:20px;
