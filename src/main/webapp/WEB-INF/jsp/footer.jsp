@@ -63,10 +63,11 @@ var test = <%= session_notification %>;
 		 if(orderObj.webstatus == 1){
 			msgIncrement++; 
 		var task = "<tr>"
-			+ "<td title='"+orderObj.taskno+"'><b>"+ orderObj.taskno+ "</b></td>" 
+			/* + "<td title='"+orderObj.taskno+"'><a href=viewTicket?id='"+ orderObj.taskno+"'&pgn=0'>"+ orderObj.taskno+"</a></td>" */
+			 + "<td title='"+orderObj.taskno+"'><a href='task'>"+ orderObj.taskno + "</a></td>" 
 			+ "<td title='"+orderObj.serviceType+"'><b>"+ orderObj.serviceType + "</b></td>"
 			+ "<td title='"+orderObj.addComment+"'><b>"+ orderObj.addComment + "</b></td>"
-			+"<a class='view viewIt' href='task?"
+			//+"<a class='view viewIt' href='task?"
 			+ "</tr>";
 		
 		/* $(task).appendTo("#taskTableHeader table tbody"); */
