@@ -70,8 +70,10 @@ public class TaskHistoryDao {
 	
 	
 	
+	/*Queries for Push Notifications*/
+	
 	public List<TaskHistoryLogs> getNotificationByCustomerIds(){
-		String hql ="Select t.taskno,t.service_type,t.add_comment,t.webstatus,st.servicetypename as servicetype from task_history_logs t,abheeservicetype st where  webstatus='1' and t.service_type=st.id" ;
+		String hql ="Select t.taskno,t.add_comment,t.webstatus,st.servicetypename as servicetype,ats.name as kstatus from task_history_logs t,abheeservicetype st ,abheetaskstatus ats where  webstatus='1' and t.service_type=st.id and t.kstatus=ats.id " ;
 				
 		RowMapper<TaskHistoryLogs> rowMapper = new BeanPropertyRowMapper<TaskHistoryLogs>(TaskHistoryLogs.class);
 	    System.out.println(hql);
@@ -85,5 +87,5 @@ public class TaskHistoryDao {
 		jdbcTemplate.execute(hql);
 		
 	}
-	
+	/*Queries for Push Notifications*/
 }
