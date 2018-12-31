@@ -52,7 +52,7 @@
 					<form:form modelAttribute="userForm" action="employee" class="form-horizontal " method="Post">
 	                  <form:hidden path="id"/>
 	                  <div class="sep">
-					<%-- <div class="col-md-6"><br>
+					<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Username<span class="impColor">*</span></label>
 									<div class="col-md-6">
@@ -60,17 +60,17 @@
 									</div>
 								</div>
 								
-								</div> --%>
-								<div class="clearfix"></div>
-								</div>
-								<div class="sep">
-								<div class="col-md-6">
+								</div> <div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:input path="firstname" class="form-control validate onlyCharacters" placeholder="First Name"/>
 									</div>
 								</div></div>
+								<div class="clearfix"></div>
+								</div>
+								<div class="sep">
+								
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Last Name<span class="impColor">*</span></label>
@@ -78,18 +78,18 @@
 										<form:input path="lastname" class="form-control validate onlyCharacters" placeholder="Last Name"/>
 									</div>
 								</div>
-								</div><div class="clearfix"></div>
-								</div>
-								<div class="sep">
-								<div class="col-md-6">
+								</div><div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:input path="mobilenumber" class="form-control validate numericOnly2" maxlength="10"  placeholder="Mobile Number"/>
 									</div>
 								</div>
+								</div><div class="clearfix"></div>
 								</div>
-								<div class="col-md-6"><br>
+								<div class="sep">
+								
+								<div class="col-md-6">
 								<div class="form-group" id="passwordDiv">
 									<label class="col-md-3 control-label no-padding-right">Password<span class="impColor">*</span></label>
 									<div class="col-md-6">
@@ -104,17 +104,18 @@
 									<div class="col-md-6">
 										<form:input path="email" class="form-control validate emailOnly" placeholder="Email"/>
 									</div>
-								</div></div><div class="clearfix"></div>
+								</div></div></div><div class="clearfix"></div>
+								<div class="sep">
 								<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">AadharNumber</label>
+									<label class="col-md-3 control-label no-padding-right">Aadhar Number</label>
 									<div class="col-md-6">
 										<form:input path="aadharno" class="form-control" placeholder="Aadhar number" maxlength="12"/>
 									</div>
 								</div>
 								</div>
-								</div>
-								<div class="sep">
+								
+								
 								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Designation<span class="impColor">*</span></label>
@@ -124,12 +125,9 @@
 											<form:options items="${roles}"/>
 										</form:select>
 									</div>
-								</div></div>
-								 <div class="col-md-6">
-								<div class="form-group">
-								</div></div><div class="clearfix"></div>
-								</div>
+								</div></div></div><div class="clearfix"></div>
 								<div class="sep">
+								 
 								<security:authorize access="hasRole('ROLE_ADMIN')">
 								<div class="col-md-6">
 								<div class="form-group">

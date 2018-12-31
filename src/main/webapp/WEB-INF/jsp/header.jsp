@@ -415,7 +415,8 @@ function displayNotifications(listOrders) {
 		}
 	//serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr>"
-			+ "<td title='"+orderObj.taskno+"'><a href='task'>"+ orderObj.taskno + "</a></td>"
+			/* + "<td title='"+orderObj.taskno+"'><a href=viewTicket?id='"+ orderObj.taskno+"'&pgn=0'>"+ orderObj.taskno+"</a></td>" */
+			 + "<td title='"+orderObj.taskno+"'><a href='task'>"+ orderObj.taskno + "</a></td>" 
 			+ "<td title='"+orderObj.serviceType+"'>"+ orderObj.serviceType + "</td>"
 			+ "<td title='"+comment+"'>"+ comment + "</td>"	
 			+ "</tr>";
