@@ -293,7 +293,18 @@ public List<Map<String,Object>> getTasksListAssignToMeById(String id)
 
 public List<Map<String, Object>> getTaskStatusHistoryByTaskNo(String taskno) {
 	
-	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.uploadfile as Attachfile,t.imgfile from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and t.taskno='"+taskno+" '  order by t.created_time desc";
+	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.uploadfile as Attachfile,t.imgfile from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and t.taskno='"+taskno+"' order by t.created_time desc";
+	
+         System.out.println(hql);
+	
+	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+	System.out.println(retlist);
+	return retlist;
+	
+}
+public List<Map<String, Object>> getTaskHistoryByTaskNo(String taskno) {
+	
+	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.uploadfile as Attachfile,t.imgfile from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and t.taskno="+taskno+"order by t.created_time desc";
 	
          System.out.println(hql);
 	

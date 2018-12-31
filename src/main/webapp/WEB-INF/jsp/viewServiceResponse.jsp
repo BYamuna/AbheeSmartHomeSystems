@@ -128,7 +128,7 @@
 <div class="container">
 <div align="center">
 <button onclick="goBack()" class="btn btn-primary"> <i class="fa fa-step-backward"></i> Back  </button></div>
-<!-- <div class="col-md-12"><br>
+<div class="col-md-12"><br>
 				<div class="panel panel-primary">
 					<div style="margin:0 auto;" class="panel-heading rounded-bottom">
 						<h4>Service Request History</h4>
@@ -186,7 +186,7 @@
 </div>
 
 				</div>
-							</div> -->
+							</div>
 </div>
 </div>
 		
@@ -207,7 +207,32 @@
 	<link rel="stylesheet" type="text/css" href="http://charvikent.com/mantis/css/dropzone-4.3.0.min.css" />
 <script type="text/javascript">
 var viewTasksTable = ${test21};
-
+var allstatus = ${statuslist1};
+$(function(){
+$.each(allstatus, function(k, v){
+	
+		if(v.Attachfile==undefined) v.Attachfile='';
+		else
+			{
+				var list=v.Attachfile.split('*');
+				var Attachfile='';
+				for(var i=0;i<list.length;i++)
+				{
+					Attachfile=Attachfile+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
+				}
+				v.Attachfile=Attachfile;
+			}
+	var tr=	'<tr>'
+			+'<td>'+ v.username +'</td>'
+			+'<td>'+ v.productname +'</td>'
+			+'<td>'+ v.servicestatus +'</td>'
+			+'<td>'+ v.created_time +'</td>'
+			+'<td>'+ v.add_comment +'</td>'
+			+'<td>'+v.Attachfile+'</td>'
+			+'</tr>';
+	$('#viewStatusTable tbody').append(tr);
+});
+});
 $(function(){
               
 $.each(viewTasksTable, function(k, v){

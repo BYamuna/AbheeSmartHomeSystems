@@ -267,19 +267,48 @@ public class AbheeDashBoardController {
 			Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException, JSONException 
 	{
 			LOGGER.debug("Calling viewServiceResponse at controller");
+			
 			List<Map<String, Object>> responselist=abheeTaskDao.getAbheeTaskByTaskId(taskId);
-			ObjectMapper objectMapper = new ObjectMapper();
-			String sJson;
+			ObjectMapper objectMapper2 = new ObjectMapper();
+			String sJson2;
 			if (responselist != null && responselist.size() > 0) {
 				
+				objectMapper2 = new ObjectMapper();
+				sJson2 = objectMapper2.writeValueAsString(responselist);
+				request.setAttribute("test21", sJson2);
+				// System.out.println(sJson);
+			} else {
+				objectMapper2 = new ObjectMapper();
+				sJson2 = objectMapper2.writeValueAsString(responselist);
+				request.setAttribute("test21", sJson2);
+			}
+			List<Map<String, Object>> statuslist=abheeTaskDao.getTaskHistoryByTaskNo(taskId);
+			ObjectMapper objectMapper = new ObjectMapper();
+			String sJson;
+			ObjectMapper objectMapper1 = new ObjectMapper();
+			String sJson1;
+			JSONObject jsonObj = new JSONObject();
+			if (statuslist != null && statuslist.size() > 0) {
+				
 				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(responselist);
-				request.setAttribute("test21", sJson);
+				sJson = objectMapper.writeValueAsString(statuslist);
+				sJson1=objectMapper1.writeValueAsString(responselist);
+				request.setAttribute("statuslist1", sJson);
+				request.setAttribute("test21", sJson1);
+				jsonObj.put("statuslist1", statuslist);
+				
+				
 				// System.out.println(sJson);
 			} else {
 				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(responselist);
-				request.setAttribute("test21", sJson);
+				sJson = objectMapper.writeValueAsString(statuslist);
+				sJson1=objectMapper1.writeValueAsString(responselist);
+				request.setAttribute("statuslist1", "''");
+				request.setAttribute("test21", sJson1);
+				jsonObj.put("statuslist1", statuslist);
+				
+				
+				
 			}
 		
 		return "viewServiceResponse";
