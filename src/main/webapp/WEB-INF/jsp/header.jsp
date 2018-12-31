@@ -401,7 +401,7 @@ function displayNotifications(listOrders) {
 // 	alert(listOrders);
 	$('#notification').html('');
 	var tableHead = '<table id="notification" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">Service Request No</th><th style="text-align:center;">Servicetype</th><th style="text-align:center;">comment</th></thead><tbody></tbody></table>';
+			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">Service Request No</th><th style="text-align:center;">Servicetype</th><th style="text-align:center;">Status</th><th style="text-align:center;">comment</th></thead><tbody></tbody></table>';
 	$('#notification').html(tableHead);
 	//serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -418,6 +418,7 @@ function displayNotifications(listOrders) {
 			/* + "<td title='"+orderObj.taskno+"'><a href=viewTicket?id='"+ orderObj.taskno+"'&pgn=0'>"+ orderObj.taskno+"</a></td>" */
 			 + "<td title='"+orderObj.taskno+"'><a href='task'>"+ orderObj.taskno + "</a></td>" 
 			+ "<td title='"+orderObj.serviceType+"'>"+ orderObj.serviceType + "</td>"
+			+ "<td title='"+orderObj.kstatus+"'>"+ orderObj.kstatus + "</td>"
 			+ "<td title='"+comment+"'>"+ comment + "</td>"	
 			+ "</tr>";
 		$(tblRow).appendTo("#notification table tbody");
