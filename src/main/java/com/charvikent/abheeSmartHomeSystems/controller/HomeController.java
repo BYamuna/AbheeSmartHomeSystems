@@ -465,6 +465,7 @@ public class HomeController {
 			{		
 				//customerDao.updateCustomerProfileEmail(customer);
 				return "true";
+				
 			}
 			catch (Exception e) 
 				{

@@ -281,13 +281,17 @@ function editCustomer(id) {
 	/* $('#password').attr('readonly',true); */
 	$("#email").val(serviceUnitArray[id].email);
 	$("#address").val(serviceUnitArray[id].address);
-	$('#password').removeClass('validate');
-	console.log(idArray);
-	$("#pwd").hide();
+	
 	 //for remove field mandatory on edit
-	     idArray.splice($.inArray("password", idArray),1);
-	     console.log(idArray);
-	   //for remove field mandatory on edit
+	$('#password').removeClass('validate2');
+	console.log(idArray2);
+	
+		
+	idArray2.splice($.inArray("password", idArray2),1);
+	console.log(idArray2);
+	   
+	  $("#pwd").hide();
+	 
 	$("#submit2").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 	//$("#reset").hide();

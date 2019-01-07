@@ -1,6 +1,9 @@
 package com.charvikent.abheeSmartHomeSystems.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 /*import java.util.HashMap;*/
 import java.util.List;
 import java.util.Map;
@@ -621,20 +624,32 @@ public class TaskController {
 	}
 
 	@RequestMapping(value = "/Warranty", method = RequestMethod.POST)
-	public  @ResponseBody  String saveProductWarranty( HttpServletRequest request) {
+	public  @ResponseBody  String saveProductWarranty( HttpServletRequest request) throws ParseException {
 		LOGGER.debug("Calling Warranty at controller");
 		JSONObject json = new JSONObject();
-		
+		//Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		ProductGuarantee pg = new ProductGuarantee();
 		//if (pg != null) {
 			 String productmodelid=request.getParameter("productmodelid"); 
 			 String customerid=request.getParameter("customerid"); 
-			 String purchaseddate=request.getParameter("purchaseddate"); 
+			 String purchaseddate=request.getParameter("purchaseddate");
+			 
+			 SimpleDateFormat sdfSource = new SimpleDateFormat("d-M-yyyy");
+			 Date date = sdfSource.parse(purchaseddate);
+			 SimpleDateFormat sdfDestination = new SimpleDateFormat("d-M-yyyy");
+			 String pDate = sdfDestination.format(date);
+			 
 			 String expireddate=request.getParameter("expireddate");
+			 SimpleDateFormat sdfSource1 = new SimpleDateFormat("d-M-yyyy");
+			 Date date2 = sdfSource1.parse(expireddate);
+			 SimpleDateFormat sdfDestination1 = new SimpleDateFormat("d-M-yyyy");
+			 String eDate = sdfDestination1.format(date2);
+			 
 			 pg.setProductmodelid(productmodelid); 
 			 pg.setCustomerid(customerid);
-			 pg.setPurchaseddate(purchaseddate); 
-			 pg.setExpireddate(expireddate);
+			 pg.setPurchaseddate(pDate ); 
+			 pg.setExpireddate( eDate );
 			 pg.setStatus("1");
 			productGuaranteeDao.saveWarranty(pg);
 			json.put("status","true");

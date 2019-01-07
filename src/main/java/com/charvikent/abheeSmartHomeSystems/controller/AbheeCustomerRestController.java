@@ -509,6 +509,7 @@ public class AbheeCustomerRestController {
 			salesrequest.setImgfiles(imgpath);
 		}
 		salesrequest.setEnable("1");
+		salesrequest.setQstatus("1");
 		if(salesrequest.getLocation()!=null)
 		{	
 		salesrequest.setLocation(location);
@@ -583,7 +584,7 @@ public class AbheeCustomerRestController {
 		String requesttime=serviceRequest.getRequesttime();
 		AbheeTask task = new AbheeTask();
 		task.setAdditionalinfo("0");
-		task.setAssignto("5");
+		task.setAssignto("2");
 		task.setDescription(message);
 		task.setKstatus("5");
 		task.setPriority("3");
@@ -605,6 +606,7 @@ public class AbheeCustomerRestController {
 		task.setTaskdeadline(" ");
 		task.setImgfile(" ");
 		task.setAddComment(" ");
+		task.setRequestType("Service Request");
 		Map<String, Object> abheeTask = reportIssueDao.checkServiceRequestExisrOrNot(task);
 		if (null == abheeTask) {
 

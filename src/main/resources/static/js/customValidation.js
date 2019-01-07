@@ -389,8 +389,8 @@ $('#submit2').click(function(event) {
 		
 		/* optional variable is for hidden and show input field validation  */
 		 
-		var optional = $("#" + idArray[i]).hasClass('display-none');
-		var errorCls = $("#" + idArray[i]).hasClass('errorCls');
+		var optional = $("#" + idArray2[i]).hasClass('display-none');
+		var errorCls = $("#" + idArray2[i]).hasClass('errorCls');
 		if ((value == null || value == ""  || value == " " || value == "undefined" || errorCls) && !optional) {
 			$('style').append(styleBlock);
 			$("#" + idArray2[i] ).attr("placeholder", placeholder);

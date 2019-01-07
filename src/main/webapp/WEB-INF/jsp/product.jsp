@@ -296,12 +296,12 @@ function editProduct(id) {
 	$("#ProductModelSpecifications").val(serviceUnitArray[id].productModelSpecifications);
 		
 	 //for remove field mandatory on edit
-	$('#file1').removeClass('validate');
-	console.log(idArray);
+	$('#file1').removeClass('validate2');
+	console.log(idArray2);
 	
 		
-	idArray.splice($.inArray("file1", idArray),1);
-	console.log(idArray);
+	idArray2.splice($.inArray("file1", idArray2),1);
+	console.log(idArray2);
 		   //for remove field mandatory on edit
 	
 		   $("#submit2").val("Update");
