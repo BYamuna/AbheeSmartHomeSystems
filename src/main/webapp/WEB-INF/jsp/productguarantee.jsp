@@ -70,7 +70,7 @@
 									<label for="focusedinput" class="col-md-6 control-label ">Product Model Name<span class="impColor">*</span>
 									</label>
 										
-									<form:select path="productmodelid"	class="col-xs-10 col-sm-5 validate"	onfocus="removeBorder(this.id)">
+									<form:select path="productmodelid"	class="col-xs-10 col-sm-5 validate2"	onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 									<form:options items="${productmodelid}" />
 									</form:select>
@@ -82,7 +82,7 @@
 									<label for="focusedinput" class="col-md-6 control-label ">Customer ID	<span class="impColor">*</span>
 									</label>
 										
-									<form:select path="customerid"	class="col-xs-10 col-sm-5 validate"	onfocus="removeBorder(this.id)">
+									<form:select path="customerid"	class="col-xs-10 col-sm-5 validate2"	onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 									<form:options items="${customerid}" />
 									</form:select>
@@ -96,7 +96,7 @@
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Purchased Date	<span class="impColor">*</span>
 									</label>
-										<form:input type="text" path="purchaseddate"	class="col-xs-10 col-sm-5 validate" />
+										<form:input type="text" path="purchaseddate"	class="col-xs-10 col-sm-5 validate2" />
 
 								</div>
 							</div>
@@ -105,7 +105,7 @@
 									<label for="focusedinput" class="col-md-6 control-label">Expired Date	<span class="impColor">*</span>
 									</label>
 										<form:input type="text" path="expireddate"
-											class="col-xs-10 col-sm-5 validate" />
+											class="col-xs-10 col-sm-5 validate2" />
 
 								</div>
 							</div>
@@ -117,7 +117,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="btn-toolbar text-center">
-									<input type="submit" id="submit1" value="Submit" class="btn-primary btn" /> 
+									<input type="submit" id="submit2" value="Submit" class="btn-primary btn" /> 
 										<input type="reset" id="reset" value="Reset" onClick="window.location.reload()" class="btn-danger btn cancel" />
 								</div>
 							</div>
@@ -199,7 +199,7 @@ function editProductWarranty(id) {
 	$("#productmodelname").val(serviceUnitArray[id].productmodelname);
 	$("#purchaseddate").val(serviceUnitArray[id].purchaseddate);
 	$("#expireddate").val(serviceUnitArray[id].expireddate);
-	$("#submit1").val("Update");
+	$("#submit2").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 	//$("#reset").hide();
 	 /* $("#productmodelid").attr('disabled', true);

@@ -294,20 +294,24 @@ var idArrayCmt = $.makeArray($('.validateCmt').map(function() {
 	return this.id;
 }));
 
-var idArray1 = $.makeArray($('.validate1').map(function() {
+/*var idArray1 = $.makeArray($('.validate1').map(function() {
+	return this.id;
+}));*/
+
+var idArray2 = $.makeArray($('.validate2').map(function() {
 	return this.id;
 }));
 
 
-var validation4 = true;
+/*var validation4 = true;*/
 
-$('#submit4').click(function(event) {
+/*$('#submit4').click(function(event) {
 	validation4 = true;
 	$.each(idArray1, function(i, val) {
 		var value = $("#" + idArray1[i]).val();
 		var placeholder = $("#" + idArray1[i]).attr('placeholder');
 		
-		/* optional variable is for hidden and show input field validation  */
+		 optional variable is for hidden and show input field validation  
 		 
 		var optional = $("#" + idArray1[i]).hasClass('display-none');
 		var errorCls = $("#" + idArray1[i]).hasClass('errorCls');
@@ -334,7 +338,7 @@ $('#submit4').click(function(event) {
 		event.preventDefault();
 		return false;
 	}
-});
+});*/
 
 //console.log(idArray);
 // submit validation
@@ -369,6 +373,43 @@ $('#submit1').click(function(event) {
 		$("#submit1").attr("disabled",true);
 		$("#submit1").val("Please wait...");
 		$("#serviceRequestForm").submit();											
+	}else {
+		event.preventDefault();
+		return false;
+	}
+});
+
+var validation2 = true;
+
+$('#submit2').click(function(event) {
+	validation2 = true;
+	$.each(idArray2, function(i, val) {
+		var value = $("#" + idArray2[i]).val();
+		var placeholder = $("#" + idArray2[i]).attr('placeholder');
+		
+		/* optional variable is for hidden and show input field validation  */
+		 
+		var optional = $("#" + idArray[i]).hasClass('display-none');
+		var errorCls = $("#" + idArray[i]).hasClass('errorCls');
+		if ((value == null || value == ""  || value == " " || value == "undefined" || errorCls) && !optional) {
+			$('style').append(styleBlock);
+			$("#" + idArray2[i] ).attr("placeholder", placeholder);
+			$("#" + idArray2[i] ).css('border-color','#e73d4a');
+			$("#" + idArray2[i] ).css('color','#e73d4a');
+			$("#" + idArray2[i] ).addClass('placeholder-style your-class');
+			 var id11 = $("#" + idArray2[i]+"_chosen").length;
+			if ($("#" + idArray2[i]+"_chosen").length)
+			{
+				$("#" + idArray2[i]+"_chosen").children('a').css('border-color','#e73d4a');
+			}
+//			$("#" + idArray[i] + "Error").text("Please " + placeholder);
+			validation2 = false;
+		} 
+	});
+	if(validation2) {
+		$("#submit2").attr("disabled",true);
+		$("#submit2").val("Please wait...");
+		$("form").submit();											
 	}else {
 		event.preventDefault();
 		return false;

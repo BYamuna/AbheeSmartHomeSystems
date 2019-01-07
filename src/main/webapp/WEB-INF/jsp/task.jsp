@@ -80,7 +80,7 @@
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Service
 										Type <span class="impColor">*</span>
 									</label>
-									<form:select path="ServiceType" class="col-xs-10 col-sm-5 " onfocus="removeBorder(this.id)">
+									<form:select path="ServiceType" class="col-xs-10 col-sm-5 validate" onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${category}" />
 									</form:select>
@@ -91,7 +91,7 @@
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Severity
 										<span class="impColor">*</span>
 									</label>
-									<form:select path="severity" class="col-xs-10 col-sm-5 " onfocus="removeBorder(this.id)">
+									<form:select path="severity" class="col-xs-10 col-sm-5 validate" onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${severity}" />
 									</form:select>
@@ -105,7 +105,7 @@
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Priority
 										<span class="impColor">*</span>
 									</label>
-									<form:select path="priority" class="col-xs-10 col-sm-5 " onfocus="removeBorder(this.id)">
+									<form:select path="priority" class="col-xs-10 col-sm-5 validate" onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${priority}"></form:options>
 									</form:select>
@@ -115,7 +115,7 @@
 								<div class="form-group">
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Assigned To <span class="impColor">*</span>
 									</label>
-									<form:select path="assignto" class="col-xs-10 col-sm-5 " onfocus="removeBorder(this.id)">
+									<form:select path="assignto" class="col-xs-10 col-sm-5 validate" onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${userNames}" />
 									</form:select>
@@ -129,12 +129,12 @@
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Summary
 										<span class="impColor">*</span>
 									</label>
-									<form:input path="subject" placeholder="Summary" class="col-xs-10 col-sm-5 " />
+									<form:input path="subject" placeholder="Summary" class="col-xs-10 col-sm-5 validate" />
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">Service Request DeadLine <span class="impColor">*</span>
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Service Request DeadLine <span class="impColor">*</span>
 									</label>
 										<form:input type="text" path="taskdeadline" class="col-xs-10 col-sm-5 validate"  onfocus="removeBorder(this.id)"/>
 										<span class="hasError" id="stationnameError"></span>
@@ -148,7 +148,7 @@
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">
 										Status <span class="impColor">*</span>
 									</label>
-									<form:select path="kstatus" class="col-xs-10 col-sm-5 validate1" onfocus="removeBorder(this.id)">
+									<form:select path="kstatus" class="col-xs-10 col-sm-5 validate" onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${taskstatus}" />
 									</form:select>
@@ -159,7 +159,7 @@
 									<label for="focusedinput" class="col-md-6 control-label">Description
 										<!-- <span class="impColor">*</span> -->
 									</label>
-										<form:textarea path="description" class="col-xs-10 col-sm-5" placeholder="Description" />
+										<form:textarea path="description" class="col-xs-10 col-sm-5 validate" placeholder="Description" />
 										<span class="hasError" id="stationnameError"></span>
 								</div>
 							</div>
@@ -169,7 +169,7 @@
 
 										<!-- <span class="impColor">*</span> -->
 									</label>
-									<form:input path="taskno" placeholder="Service Request Number" class="col-xs-10 col-sm-5" />
+									<form:input path="taskno" placeholder="Service Request Number" class="col-xs-10 col-sm-5 " />
 								</div>
 							</div>
 							
@@ -504,7 +504,7 @@
 								<input type="hidden" id= "orderId" />
 									<label for="focusedinput" class="col-md-6 control-label ">Year<span class="impColor">*</span>
 									</label>
-									<select id="year" class="col-xs-10 col-sm-5 validate"	onfocus="removeBorder(this.id)">
+									<select id="year" class="col-xs-10 col-sm-5 "	onfocus="removeBorder(this.id)">
 										<option value="" label="--- Select ---" />
 										<option value="1" label="1" />  
 										<option value="2" label="2" />
@@ -526,7 +526,7 @@
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Purchased Date	<span class="impColor">*</span>
 									</label>
-										<input type="text" id="purchaseddate"	class="col-xs-10 col-sm-5 validate" />
+										<input type="text" id="purchaseddate"	class="col-xs-10 col-sm-5 " />
 
 								</div>
 							</div>
@@ -534,7 +534,7 @@
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Expired Date	<span class="impColor">*</span>
 									</label>
-										<input type="text" id="expireddate" class="col-xs-10 col-sm-5 validate" />
+										<input type="text" id="expireddate" class="col-xs-10 col-sm-5 " />
 								</div>
 							</div>
 							
@@ -904,9 +904,9 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		$(window).scrollTop($('#moveTo').offset().top);
 		//$("#reset").hide();
 		document.getElementById("description").readOnly  = true;
-		document.getElementById("taskno").readOnly  = true;
+		document.getElementById("taskno").disabled  = true;
 		//document.getElementById("ServiceType").attr  = true;
-		var idArray = $.makeArray($('.validate1').map(function() {
+		var idArray = $.makeArray($('.validate').map(function() {
 	    	return this.id;
 	    })); 
 	   $("#ServiceType").attr('disabled', true);

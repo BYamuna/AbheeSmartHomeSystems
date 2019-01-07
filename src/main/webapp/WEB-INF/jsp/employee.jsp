@@ -56,7 +56,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Username<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="username" class="form-control validate" placeholder="Username"/>
+										<form:input path="username" class="form-control validate2" placeholder="Username"/>
 									</div>
 								</div>
 								
@@ -64,7 +64,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="firstname" class="form-control validate onlyCharacters" placeholder="First Name"/>
+										<form:input path="firstname" class="form-control validate2 onlyCharacters" placeholder="First Name"/>
 									</div>
 								</div></div>
 								<div class="clearfix"></div>
@@ -75,14 +75,14 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Last Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="lastname" class="form-control validate onlyCharacters" placeholder="Last Name"/>
+										<form:input path="lastname" class="form-control validate2 onlyCharacters" placeholder="Last Name"/>
 									</div>
 								</div>
 								</div><div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="mobilenumber" class="form-control validate numericOnly2" maxlength="10"  placeholder="Mobile Number"/>
+										<form:input path="mobilenumber" class="form-control validate2 numericOnly2" maxlength="10"  placeholder="Mobile Number"/>
 									</div>
 								</div>
 								</div><div class="clearfix"></div>
@@ -93,7 +93,7 @@
 								<div class="form-group" id="passwordDiv">
 									<label class="col-md-3 control-label no-padding-right">Password<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:password path="password" class="form-control validate" placeholder="Password"/>
+										<form:password path="password" class="form-control validate2" placeholder="Password"/>
 									</div>
 								</div>
 								
@@ -102,7 +102,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="email" class="form-control validate emailOnly" placeholder="Email"/>
+										<form:input path="email" class="form-control validate2 emailOnly" placeholder="Email"/>
 									</div>
 								</div></div></div><div class="clearfix"></div>
 								<div class="sep">
@@ -120,7 +120,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Designation<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:select path="designation" class="form-control validate " >
+										<form:select path="designation" class="form-control validate2 " >
 											<form:option value="">-- Select Designation --</form:option>
 											<form:options items="${roles}"/>
 										</form:select>
@@ -133,7 +133,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Report To<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:select path ="reportto" class="form-control validate" onfocus="removeBorder(this.id)">
+										<form:select path ="reportto" class="form-control validate2" onfocus="removeBorder(this.id)">
 											<form:option value="">-- Select Report to --</form:option>
 								     		<form:options items="${reportto}"/>
 										</form:select>
@@ -144,7 +144,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Branch<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:select path ="BranchId" class="form-control validate" onfocus="removeBorder(this.id)">
+										<form:select path ="BranchId" class="form-control validate2" onfocus="removeBorder(this.id)">
 											<form:option value="">-- Select Branch--</form:option>
 								     		<form:options items="${orgNames}"/>
 										</form:select>
@@ -156,7 +156,7 @@
 				      	<div class="row">
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar text-center">
-					      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
+					      			<input type="submit" id="submit2" value="Submit" class="btn-primary btn"/>
 					      			<input type="reset" id="reset" value="Reset" onClick="window.location.reload()" class="btn-danger btn cancel"/>
 				      			</div>
 				      		</div>
@@ -336,7 +336,7 @@ function editEmployee(id) {
 	$("#email").val(serviceUnitArray[id].email);
 	$("#aadharno").val(serviceUnitArray[id].aadharno);
 	$("#BranchId").val(serviceUnitArray[id].branchId);
-	$("#submit1").val("Update");
+	$("#submit2").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 	//$("#reset").hide();
 	document.getElementById("username").readOnly  = true;

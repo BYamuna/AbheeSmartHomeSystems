@@ -47,7 +47,7 @@
                     				<form:hidden path="id"/>
                     				<label for="focusedinput" class="col-md-6 control-label">Category <span class="impColor">*</span></label>
 									<div class="col-md-5">
-									<form:select path="category" class="form-control validate"  onfocus="removeBorder(this.id)">
+									<form:select path="category" class="form-control validate2"  onfocus="removeBorder(this.id)">
 											<form:option value="">-- Select Category --</form:option>
 											<form:options items="${CategoriesMap}"/>
 										</form:select>
@@ -58,7 +58,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Company Name <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="name" class="form-control validate onlyCharacters" placeholder="Company Name"/>	
+										<form:input path="name" class="form-control validate2 onlyCharacters" placeholder="Company Name"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -67,7 +67,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Company Description <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:textarea path="description" class="form-control validate onlyCharacters" placeholder="Company Description"/>	
+										<form:textarea path="description" class="form-control validate2 onlyCharacters" placeholder="Company Description"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -76,7 +76,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Company Images <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<input type="file" name="file1" id="file1" class="validate "  accept="image/*" style="margin: 7px 0px 0px 0px;">
+										<input type="file" name="file1" id="file1" class="validate2 "  accept="image/*" style="margin: 7px 0px 0px 0px;">
 									</div>
                     			</div>
                     		</div>
@@ -91,7 +91,7 @@
 				      	<div class="row">
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar text-center">
-					      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
+					      			<input type="submit" id="submit2" value="Submit" class="btn-primary btn"/>
 					      			<input type="reset" id="reset" value="Reset" onClick="window.location.reload()" class="btn-danger btn cancel"/>
 				      			</div>
 				      		</div>
@@ -171,7 +171,7 @@ function editCompany(id) {
 	$("#name").val(serviceUnitArray[id].name);
 	$("#description").val(serviceUnitArray[id].description);
 	$("#status").val(serviceUnitArray[id].status);
-	$("#submit1").val("Update");
+	$("#submit2").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 	//$("#reset").hide();
 }

@@ -52,7 +52,7 @@
                     			<form:hidden path="id"/>
 									<label for="focusedinput" class="col-md-6 control-label">Product Category <span class="impColor">*</span></label>
 									<div class="col-md-5">
-									<form:select path="categoryid" class="form-control validate"  onfocus="removeBorder(this.id)">
+									<form:select path="categoryid" class="form-control validate2"  onfocus="removeBorder(this.id)">
 											<form:option value="">-- Select Product Category --</form:option>
 											<form:options items="${CategoriesMap}"/>
 										</form:select>
@@ -63,7 +63,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Product Company <span class="impColor">*</span></label>
 									<div class="col-md-5">
-									<form:select path="companyid" id="companyid" class="form-control validate" onkeydown="removeBorder(this.id)" onfocus="removeBorder(this.id)">
+									<form:select path="companyid" id="companyid" class="form-control validate2" onkeydown="removeBorder(this.id)" onfocus="removeBorder(this.id)">
 											<form:option value="">-- Select Product Company --</form:option> 
 											<form:options items="${companiesMap}"/>
 										</form:select>
@@ -78,7 +78,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Product Model<span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="name" class="form-control validate" placeholder="Product Model"/>	
+										<form:input path="name" class="form-control validate2" placeholder="Product Model"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -89,7 +89,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Description <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:textarea path="description" class="form-control validate" placeholder="Product Model Description"/>	
+										<form:textarea path="description" class="form-control validate2" placeholder="Product Model Description"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -100,7 +100,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Specifications <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:textarea path="ProductModelSpecifications" class="form-control validate" placeholder="Product Model Specifications"/>	
+										<form:textarea path="ProductModelSpecifications" class="form-control validate2" placeholder="Product Model Specifications"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -110,7 +110,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Product Price<span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="ProductPrice" class="form-control validate numericOnly" placeholder="Product Price"/>	
+										<form:input path="ProductPrice" class="form-control validate2 numericOnly" placeholder="Product Price"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -121,7 +121,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Maximum  Allowed Discount(%) <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="maxAllowedDiscount" class="form-control validate numericOnly" maxlength="2" placeholder="Maximum  Allowed Discount"/>	
+										<form:input path="maxAllowedDiscount" class="form-control validate2 numericOnly" maxlength="2" placeholder="Maximum  Allowed Discount"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -130,7 +130,7 @@
                     			<div class="form-group" id="fileDiv">
 									<label for="focusedinput" class="col-md-6 control-label">Product Images <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<input type="file" name="file1" id="file1" class="validate"  accept="image/*"  multiple="multiple" style="margin: 7px 0px 0px 0px;">
+										<input type="file" name="file1" id="file1" class="validate2"  accept="image/*"  multiple="multiple" style="margin: 7px 0px 0px 0px;">
 									</div>
                     			</div>
                     		</div>
@@ -164,7 +164,7 @@
 				      	<div class="row">
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar text-center">
-					      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
+					      			<input type="submit" id="submit2" value="Submit" class="btn-primary btn"/>
 					      			<input type="reset" id="reset" value="Reset" onClick="window.location.reload()" class="btn-danger btn cancel"/>
 				      			</div>
 				      		</div>
@@ -304,7 +304,7 @@ function editProduct(id) {
 	console.log(idArray);
 		   //for remove field mandatory on edit
 	
-		   $("#submit1").val("Update");
+		   $("#submit2").val("Update");
 	
 	
 	$(window).scrollTop($('#moveTo').offset().top);

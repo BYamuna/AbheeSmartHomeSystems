@@ -61,7 +61,7 @@
 		<div class="main-content-inner">
 			<div class="breadcrumbs ace-save-state" id="breadcrumbs">
 				<ul class="breadcrumb">
-					<li class="">Quotation Request History</li>
+					<!-- <li class="">Quotation Request History</li> -->
 				</ul><!-- /.breadcrumb -->
 			</div>
 			
@@ -73,7 +73,7 @@
 				<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div style="margin:0 auto;" class="panel-heading">
-						<h4>Quotation Request History</h4>
+						<h4>Quotation Request Details</h4>
 						<div class="options">
 							<a href="" class="panel-collapse"><i class="fa fa-chevron-up"></i></a>
 						</div>
@@ -98,10 +98,10 @@
 </div>
 
 
-<div class="container">
-<div align="center">
-<button onclick="goBack()" class="btn btn-primary"> <i class="fa fa-step-backward"></i> Back  </button></div>
-<div class="col-md-12"><br>
+					<div class="container">
+					<div align="center">
+					<button onclick="goBack()" class="btn btn-primary"> <i class="fa fa-step-backward"></i> Back  </button></div>
+					<div class="col-md-12"><br>
 				<div class="panel panel-primary">
 					<div style="margin:0 auto;" class="panel-heading rounded-bottom">
 						<h4>Quotation Request History</h4>

@@ -56,7 +56,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Customer Type<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:select path="customerType" class="form-control validate" onfocus="removeBorder(this.id)" placeholder="Select Customer Type">
+										<form:select path="customerType" class="form-control validate2" onfocus="removeBorder(this.id)" placeholder="Select Customer Type">
 											<option value="">-- Select Customer Type--</option>
 											<c:forEach var="customerTypes" items="${allCustomerTypes}">
 											<option value ="${customerTypes.id}" >${customerTypes.customerType}</option>
@@ -69,7 +69,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="firstname" class="form-control validate onlyCharacters" placeholder="First Name"/>
+										<form:input path="firstname" class="form-control validate2 onlyCharacters" placeholder="First Name"/>
 									</div>
 								</div>
 								
@@ -79,7 +79,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Last name<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="lastname" class="form-control validate onlyCharacters" placeholder="last Name"/>
+										<form:input path="lastname" class="form-control validate2 onlyCharacters" placeholder="last Name"/>
 									</div>
 								</div>
 								
@@ -88,7 +88,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="email" class="form-control validate emailOnly" placeholder="Email"/>
+										<form:input path="email" class="form-control validate2 emailOnly" placeholder="Email"/>
 										 <span id="errorEmaiMsg" style="color:red;"></span>
 									</div>
 								</div>
@@ -99,7 +99,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile Number<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:input path="mobilenumber"   class="form-control validate  numericOnly2"  maxlength="10"  placeholder="Mobile Number"/>
+										<form:input path="mobilenumber"   class="form-control validate2  numericOnly2"  maxlength="10"  placeholder="Mobile Number"/>
 										<span id="errorMobileMsg" style="color:red;"></span>
 									</div>
 								</div>
@@ -108,7 +108,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Password <span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:password path="password" class="form-control validate onlyNumbers" maxlength="4" placeholder="*****"/>
+										<form:password path="password" class="form-control validate2 onlyNumbers" maxlength="4" placeholder="*****"/>
 										<span id="errorPasswordMsg" style="color:red;"></span>
 									</div>
 								</div>
@@ -119,7 +119,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Address<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:textarea path="address" class="form-control validate " placeholder="Address"/>
+										<form:textarea path="address" class="form-control validate2 " placeholder="Address"/>
 									</div>
 								</div>
 								</div>
@@ -127,7 +127,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">GST<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:input path="gst" class="form-control  validate"  maxlength="15" placeholder="GST"/>
+										<form:input path="gst" class="form-control  validate2"  maxlength="15" placeholder="GST"/>
 									</div>
 								</div>
 								</div>
@@ -145,7 +145,7 @@
 				      	<div class="row">
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar text-center">
-					      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
+					      			<input type="submit" id="submit2" value="Submit" class="btn-primary btn"/>
 					      			<input type="reset" id="reset" value="Reset"  onClick="window.location.reload()" class="btn-danger btn cancel"/>
 				      			</div>
 				      		</div>
@@ -288,7 +288,7 @@ function editCustomer(id) {
 	     idArray.splice($.inArray("password", idArray),1);
 	     console.log(idArray);
 	   //for remove field mandatory on edit
-	$("#submit1").val("Update");
+	$("#submit2").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 	//$("#reset").hide();
 	

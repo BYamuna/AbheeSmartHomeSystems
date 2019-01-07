@@ -411,7 +411,7 @@ String hql ="select t.taskno from AbheeTask t where t.customerId ='"+customer.ge
 
 public List<Map<String, Object>> getTasksListByCustomerId(String customerId) 
 {
-	String sql="select t.id,s.servicetypename,t.add_comment,t.taskno,abp.name as modelname,t.communicationaddress,t.description,t.uploadfile, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time FROM abhee_task t,abheeservicetype s,abhee_product abp where  t.service_type=s.id and abp.id=t.modelid and t.customer_id='"+customerId+"'and t.status='1' order by t.created_time desc ";
+	String sql="select t.id,s.servicetypename,t.add_comment,t.taskno,abp.name as modelname,t.communicationaddress,t.description,t.uploadfile, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time FROM abhee_task t,abheeservicetype s,abhee_product abp where  t.service_type=s.id and abp.id=t.modelid and t.customer_id='"+customerId+"'order by t.created_time desc ";
 	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
 	System.out.println(retlist);
 	return retlist;

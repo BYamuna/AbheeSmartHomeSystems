@@ -36,7 +36,7 @@ import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
-
+import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 /*import com.charvikent.abheeSmartHomeSystems.model.ProductGuarantee;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;*/
 //import com.charvikent.abheeSmartHomeSystems.model.Customer;
@@ -422,7 +422,7 @@ public List<ReportIssue> getAllReportIssues()
 			     editissue.setDiscount(issue.getDiscount());
 			     editissue.setTax(issue.getTax());
 			     editissue.setTotal(issue.getTotal());
-			    // history.setWebstatus(1);
+			     //history.setWebstatus(1);
 			     taskHistoryLogsDao.historyLog(editissue);
 				
 			}
