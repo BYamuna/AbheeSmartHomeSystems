@@ -140,13 +140,23 @@ public class AbheeDashBoardController {
 	
 	@RequestMapping(value = "/viewTicket")
 	public String viewIssue(@RequestParam(value = "id", required = true) String taskId,
-			@RequestParam(value = "pgn", required = true) String pgn,@RequestParam(value = "id", required = true) String taskstatus,@RequestParam(value = "id", required = true) String taskno,Model model,HttpSession session,HttpServletRequest request,@RequestParam(value = "id", required = true) String history) throws JsonProcessingException, JSONException 
+							@RequestParam(value = "pgn", required = true) String pgn,
+							@RequestParam(value = "id", required = true) String taskstatus,
+							@RequestParam(value = "id", required = true) String taskno,
+							Model model,HttpSession session,
+							HttpServletRequest request
+							) throws JsonProcessingException, JSONException 
 	{
 		LOGGER.debug("Calling  viewTicket at controller");
-
+		List<TaskHistoryLogs> listOrderBeansForNotification = null;
+		
+		
+		
 		List<TaskHistoryLogs> listOrderBeans = null;
-		ObjectMapper objectMapper2 = null;
-		String sJson2 = null;
+		//ObjectMapper objectMapper2 = null;
+		ObjectMapper objectMapperNotificaton = null;
+		//String sJson2 = null;
+		String sJsonNotificaton = null;
 			List<Map<String, Object>> viewtaskBean = abheeTaskDao.getAbheeTaskById(taskId);
 			model.addAttribute("test2",viewtaskBean);
 			if(pgn.equals("1"))
@@ -158,20 +168,35 @@ public class AbheeDashBoardController {
 				taskHistoryLogsDao.historyLog1(viewtaskBean.get(0).get("id"));
 				
 			}
-			listOrderBeans = taskHistorydao.getNotificationByCustomerIds();
-			if (listOrderBeans != null && listOrderBeans.size() > 0) {
-				objectMapper2 = new ObjectMapper();
-				sJson2 = objectMapper2.writeValueAsString(listOrderBeans);
-				session.setAttribute("notifications", sJson2);
-			} else {
-				objectMapper2 = new ObjectMapper();
-				
-				sJson2 = objectMapper2.writeValueAsString(listOrderBeans);
+			
+			User objuserBean = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String id = String.valueOf(objuserBean.getId());
+			
+			if(!id.equals("1") && !id.equals("2")) {
+			
+			listOrderBeansForNotification = taskHistorydao.getNotificationByCustomerIds(id);
+			taskHistorydao.UpdateNotificationByCustomerIds(taskId);
+			
+			}
+			else {
+				listOrderBeansForNotification = taskHistorydao.getNotificationforAdmin();
 				
 			}
+			
+			if (listOrderBeansForNotification != null && listOrderBeansForNotification.size() > 0) {
+				objectMapperNotificaton = new ObjectMapper();
+				sJsonNotificaton = objectMapperNotificaton.writeValueAsString(listOrderBeans);
+				session.setAttribute("notifications", sJsonNotificaton);
+			} else {
+				objectMapperNotificaton = new ObjectMapper();
+				
+				sJsonNotificaton = objectMapperNotificaton.writeValueAsString(listOrderBeans);
+				
+			}
+			
 			List<Map<String, Object>> statuslist=abheeTaskDao.getTaskStatusHistoryByTaskNo(taskId);
+			
 			abheeTaskDao.updateTaskStatus(taskstatus,taskno);
-			taskHistorydao.UpdateNotificationByCustomerIds(history);
 			ObjectMapper objectMapper = new ObjectMapper();
 			String sJson;
 			ObjectMapper objectMapper1 = new ObjectMapper();

@@ -551,6 +551,7 @@ public class TaskController {
 		task.setAddComment(" ");
 		task.setTaskdeadline(" ");
 		task.setImgfile(" ");
+		task.setRequestType("Service Request");
 		for (MultipartFile multipartFile : uploadedFiles) {
 			String fileName = multipartFile.getOriginalFilename();
 			if (!multipartFile.isEmpty()) {
@@ -646,38 +647,36 @@ public class TaskController {
 		 */
 	}
 
-	@SuppressWarnings("unused")
-	@GetMapping("/task1")
-	public String department(Model model, TaskHistoryLogs history, HttpServletRequest request, HttpSession session,
-			@RequestParam(value = "pgn", required = true) String pgn) {
-		LOGGER.debug("Calling task at controller");
-		List<TaskHistoryLogs> listOrderBeans = null;
-		ObjectMapper objectMapper = null;
-		String sJson = null;
+	/*
+	 * @SuppressWarnings("unused")
+	 * 
+	 * @GetMapping("/task1") public String department(Model model, TaskHistoryLogs
+	 * history, HttpServletRequest request, HttpSession session,
+	 * 
+	 * @RequestParam(value = "pgn", required = true) String pgn) {
+	 * LOGGER.debug("Calling task at controller"); List<TaskHistoryLogs>
+	 * listOrderBeans = null; ObjectMapper objectMapper = null; String sJson = null;
+	 * 
+	 * User objuserBean = (User)
+	 * SecurityContextHolder.getContext().getAuthentication().getPrincipal(); String
+	 * id = String.valueOf(objuserBean.getId());
+	 * 
+	 * try { listOrderBeans = taskHistorydao.getNotificationByCustomerIds(); if
+	 * (listOrderBeans != null && listOrderBeans.size() > 0) { objectMapper = new
+	 * ObjectMapper(); sJson = objectMapper.writeValueAsString(listOrderBeans);
+	 * session.setAttribute("notifications", sJson); } else { objectMapper = new
+	 * ObjectMapper(); sJson = objectMapper.writeValueAsString(listOrderBeans);
+	 * 
+	 * }
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); System.out.println(e);
+	 * 
+	 * }
+	 * 
+	 * return null;
+	 * 
+	 * }
+	 */
 
-		User objuserBean = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String id = String.valueOf(objuserBean.getId());
-
-		try {
-			listOrderBeans = taskHistorydao.getNotificationByCustomerIds();
-			if (listOrderBeans != null && listOrderBeans.size() > 0) {
-				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(listOrderBeans);
-				session.setAttribute("notifications", sJson);
-			} else {
-				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(listOrderBeans);
-
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e);
-
-		}
-
-		return null;
-
-	}
 
 }

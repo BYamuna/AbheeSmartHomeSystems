@@ -80,6 +80,7 @@ public class SalesRequestController
 		//loginDetails.setLat(str[0]);
 		//loginDetails.setLongitude(str[1]);
 		loginDetails.setEnable("1");
+		loginDetails.setWebstatus(1);
 		loginDetails.setMobileno(customer.getMobilenumber());
 		loginDetails.setEmail(customer.getEmail());
 		loginDetails.setCustomerid(customer.getCustomerId());

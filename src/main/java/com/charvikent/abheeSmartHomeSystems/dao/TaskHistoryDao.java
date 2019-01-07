@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
+import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistory;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 
@@ -70,11 +71,22 @@ public class TaskHistoryDao {
 	
 	
 	
-	/*Queries for Push Notifications*/
+	/*Queries for Push Notifications to ServiceRequest*/
 	
-	public List<TaskHistoryLogs> getNotificationByCustomerIds(){
-		String hql ="Select t.taskno,t.add_comment,t.webstatus,st.servicetypename as servicetype,ats.name as kstatus from task_history_logs t,abheeservicetype st ,abheetaskstatus ats where  webstatus='1' and t.service_type=st.id and t.kstatus=ats.id " ;
-				
+	
+	public List<TaskHistoryLogs> getNotificationforAdmin(){
+		String hql ="Select t.taskno,t.add_comment,t.webstatus,st.servicetypename as servicetype,ats.name as kstatus,t.request_type from task_history_logs t,abheeservicetype st ,abheetaskstatus ats where  webstatus='1' and t.service_type=st.id and t.kstatus=ats.id " ;
+		//String hql="Select t.taskno,t.add_comment,t.webstatus,st.servicetypename as servicetype,ats.name as kstatus,t.request_type,q.request_type from task_history_logs t,abheeservicetype st ,abheetaskstatus ats ,abhee_sales_request q where  q.webstatus='1' and t.webstatus='1' and t.service_type=st.id and t.kstatus=ats.id";
+		RowMapper<TaskHistoryLogs> rowMapper = new BeanPropertyRowMapper<TaskHistoryLogs>(TaskHistoryLogs.class);
+	    System.out.println(hql);
+		return  this.jdbcTemplate.query(hql, rowMapper);
+	}
+	
+	
+	public List<TaskHistoryLogs> getNotificationByCustomerIds(String history){
+		System.out.println(history);
+		//String hql ="Select t.taskno,t.add_comment,t.webstatus,st.servicetypename as servicetype,ats.name as kstatus from task_history_logs t,abheeservicetype st ,abheetaskstatus ats where  webstatus='1' and t.service_type=st.id and t.kstatus=ats.id " ;
+		String hql="Select t.taskno,t.add_comment,t.webstatus,st.servicetypename as servicetype,ats.name as kstatus,t.assignto,t.request_type from task_history_logs t,abheeservicetype st ,abheetaskstatus ats,abheeusers u where  webstatus='1' and t.service_type=st.id and t.kstatus=ats.id  and t.assignto=u.id  and t.assignto='"+history+"'";
 		RowMapper<TaskHistoryLogs> rowMapper = new BeanPropertyRowMapper<TaskHistoryLogs>(TaskHistoryLogs.class);
 	    System.out.println(hql);
 		return  this.jdbcTemplate.query(hql, rowMapper);
@@ -88,4 +100,17 @@ public class TaskHistoryDao {
 		
 	}
 	/*Queries for Push Notifications*/
+	
+	/*Queries for getQuotation for PushNotifications*/
+	public List<SalesRequest> getQuotationNotificationforAdmin(){
+		String hql ="select q.address,q.imgfiles,q.reqdesc,q.request_type,q.webstatus from abhee_sales_request q where webstatus='1'" ;
+		RowMapper<SalesRequest> rowMapper = new BeanPropertyRowMapper<SalesRequest>(SalesRequest.class);
+	    System.out.println(hql);
+		return  this.jdbcTemplate.query(hql, rowMapper);
+	}
+	
+	
+	
+	
+	
 }

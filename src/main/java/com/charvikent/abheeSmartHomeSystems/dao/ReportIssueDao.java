@@ -36,6 +36,9 @@ import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
+
+/*import com.charvikent.abheeSmartHomeSystems.model.ProductGuarantee;
+import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;*/
 //import com.charvikent.abheeSmartHomeSystems.model.Customer;
 //import com.charvikent.abheeSmartHomeSystems.model.TaskHistory;
 //import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
@@ -396,6 +399,8 @@ public List<ReportIssue> getAllReportIssues()
 		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			Collection<? extends GrantedAuthority> authorities =authentication.getAuthorities();
 			
+			//TaskHistoryLogs history=new TaskHistoryLogs();
+			
 			AbheeTask editissue=getReportIssueById(issue.getId());
 			 editissue.setAdditionalinfo("0");
 			
@@ -417,6 +422,7 @@ public List<ReportIssue> getAllReportIssues()
 			     editissue.setDiscount(issue.getDiscount());
 			     editissue.setTax(issue.getTax());
 			     editissue.setTotal(issue.getTotal());
+			    // history.setWebstatus(1);
 			     taskHistoryLogsDao.historyLog(editissue);
 				
 			}

@@ -35,6 +35,7 @@ public class SalesRequest
 	private String customername;
 	private String requestType;
 	private String notes;
+	
 	private String catid;
 	@CreationTimestamp
 	protected Date createdTime ;
@@ -43,6 +44,7 @@ public class SalesRequest
 	protected Date updatedTime ;
 	
 	private int status;
+	private int webstatus;
 	
 	@Transient
 	private String locationData;
@@ -53,7 +55,8 @@ public class SalesRequest
 
 	}
 	public SalesRequest(Integer id, String modelnumber, String email, String mobileno, String location, String address,String catid,
-			String reqdesc, String imgfiles,String customername,String requestType,int status,Date createdTime,Date updatedTime, String notes,String qstatus) 
+			String reqdesc, String imgfiles,String customername,String requestType,int status,Date createdTime,Date updatedTime, String notes,String qstatus,int webstatus) 
+
 	{
 		super();
 		this.id = id;
@@ -72,6 +75,7 @@ public class SalesRequest
 		this.notes=notes;
 		this.catid=catid;
 		this.qstatus=qstatus;
+		this.webstatus=webstatus;
 	}
 	public Date getCreatedTime() {
 		return createdTime;
@@ -229,6 +233,12 @@ public class SalesRequest
 	public void setQstatus(String qstatus) {
 		this.qstatus = qstatus;
 	}
+	public int getWebstatus() {
+		return webstatus;
+	}
+	public void setWebstatus(int webstatus) {
+		this.webstatus = webstatus;
+	}
 	@Override
 	public String toString() {
 		return "SalesRequest [id=" + id + ", modelnumber=" + modelnumber + ", email=" + email + ", mobileno=" + mobileno
@@ -237,7 +247,8 @@ public class SalesRequest
 				+ ", enable=" + enable + ", qstatus=" + qstatus + ", lat=" + lat + ", longitude=" + longitude
 				+ ", customerid=" + customerid + ", customername=" + customername + ", requestType=" + requestType
 				+ ", notes=" + notes + ", catid=" + catid + ", createdTime=" + createdTime + ", updatedTime="
-				+ updatedTime + ", status=" + status + ", locationData=" + locationData + "]";
+				+ updatedTime + ", status=" + status + ", webstatus=" + webstatus + ", locationData=" + locationData
+				+ "]";
 	}
 	
 	

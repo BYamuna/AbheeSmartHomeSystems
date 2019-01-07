@@ -363,7 +363,7 @@ function getNotifications(){
 		$.fn.makeMultipartRequest('POST', 'dashBoard', false,
 				formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
-			//alert(jsonobj);
+			alert(jsonobj);
 			var notifications =data;
 			displayNotifications(jsonobj.notifications);
 		});  
@@ -375,7 +375,7 @@ function displayAssignedNotifications(listOrders) {
 // 	alert(listOrders);
 	$('#ack').html('');
 	var tableHead = '<table id="ack" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">SR.No</th><th style="text-align:center;">Assigned To</th><th style="text-align:center;">comment</th></thead><tbody></tbody></table>';
+			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">SR.No</th><th style="text-align:center;">Assigned By</th><th style="text-align:center;">comment</th></thead><tbody></tbody></table>';
 	$('#ack').html(tableHead);
 	//serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -401,7 +401,7 @@ function displayNotifications(listOrders) {
 // 	alert(listOrders);
 	$('#notification').html('');
 	var tableHead = '<table id="notification" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">Service Request No</th><th style="text-align:center;">Servicetype</th><th style="text-align:center;">Status</th><th style="text-align:center;">comment</th></thead><tbody></tbody></table>';
+			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">SR.No</th><th style="text-align:center;">Status</th><th style="text-align:center;">Request Type</th></thead><tbody></tbody></table>';
 	$('#notification').html(tableHead);
 	//serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -416,10 +416,10 @@ function displayNotifications(listOrders) {
 	//serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr>"
 			/* + "<td title='"+orderObj.taskno+"'><a href=viewTicket?id='"+ orderObj.taskno+"'&pgn=0'>"+ orderObj.taskno+"</a></td>" */
-			 + "<td title='"+orderObj.taskno+"'><a href='task'>"+ orderObj.taskno + "</a></td>" 
-			+ "<td title='"+orderObj.serviceType+"'>"+ orderObj.serviceType + "</td>"
+			 + "<td title='"+orderObj.taskno+"'>"+ orderObj.taskno + "</a></td>" 
+			//+ "<td title='"+orderObj.serviceType+"'>"+ orderObj.serviceType + "</td>"
 			+ "<td title='"+orderObj.kstatus+"'>"+ orderObj.kstatus + "</td>"
-			+ "<td title='"+comment+"'>"+ comment + "</td>"	
+			+ "<td title='"+orderObj.requestType+"'>"+ orderObj.requestType + "</td>"
 			+ "</tr>";
 		$(tblRow).appendTo("#notification table tbody");
 	});
@@ -497,18 +497,19 @@ function displayNotifications(listOrders) {
    <%--  <c:if test="${not empty notifications}"> --%>
     
     <div id="notification"  class="dropdown-content">
-      <a style="padding: 10px 16px;" href="task">
+      <a style="padding: 10px 16px;" href="#">
       
-      	<table class="table1 table table-striped table-bordered datatables"  id="taskTableHeader">
+      	<table class="table1 table table-striped table-bordered "  id="taskTableHeader">
         	 <thead>
-         	<!-- <tr class="tr1" style=" background: #006699; color: #FFF;"> 
+         	<tr class="tr1" style=" background: #006699; color: #FFF;"> 
 
    
    
-                	<th class="th1">Task No.</th>
-                	<th class="th1">Field</th>
-                	<th class="th1">Change</th>
-                </tr> -->
+                	<th class="th1">SR.No</th>
+                	<th class="th1">Status</th>
+                	<!-- <th class="th1">Service Type</th> -->
+                	<th class="th1">Request Type</th>
+                </tr> 
             </thead>
             <tbody>
             <%-- <c:forEach var="issue" items="${notifications}">
