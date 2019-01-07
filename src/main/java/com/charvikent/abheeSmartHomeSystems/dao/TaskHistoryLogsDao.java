@@ -40,6 +40,7 @@ public class TaskHistoryLogsDao {
 		TaskHistoryLogs taskHistoryLogs=new TaskHistoryLogs();
 		taskHistoryLogs.setWebstatus(1);
 		taskHistoryLogs.setNotificationstatus(1);
+		taskHistoryLogs.setRequestType("Service Request");
 		taskHistoryLogs.setTaskid(reportIssue.getId());
 		taskHistoryLogs.setServiceType(reportIssue.getServiceType());
 		taskHistoryLogs.setAdditionalinfo(reportIssue.getAdditionalinfo());
@@ -136,7 +137,7 @@ public class TaskHistoryLogsDao {
 		taskHistoryLogs.setAddComment(reportIssue.getAddComment());
 		taskHistoryLogs.setCommunicationaddress(reportIssue.getCommunicationaddress());
 		taskHistoryLogs.setRequesttime(reportIssue.getRequesttime());
-		
+		taskHistoryLogs.setRequestType(reportIssue.getRequestType());
 		
 		
 		taskHistoryLogs.setUploadfile(reportIssue.getUploadfile());

@@ -294,31 +294,24 @@ function editProduct(id) {
 	$("#maxAllowedDiscount").val(serviceUnitArray[id].maxAllowedDiscount);
 	$("#ProductPrice").val(serviceUnitArray[id].productPrice);
 	$("#ProductModelSpecifications").val(serviceUnitArray[id].productModelSpecifications);
-		$('#file1').removeClass('validate');
-		console.log(idArray);
 		
-
-		 //for remove field mandatory on edit
-		     idArray.splice($.inArray("file1", idArray),1);
-		     console.log(idArray);
+	 //for remove field mandatory on edit
+	$('#file1').removeClass('validate');
+	console.log(idArray);
+	
+		
+	idArray.splice($.inArray("file1", idArray),1);
+	console.log(idArray);
 		   //for remove field mandatory on edit
 	
 		   $("#submit1").val("Update");
 	
 	
-	//document.getElementById("fileDiv").readOnly  = true;
-	/* $(function () {
-    $('#file1').attr('readonly', 'true'); // mark it as read only
-    $('#file1').css('background-color' , '#DEDEDE'); // change the background color
-}); */
-
 	$(window).scrollTop($('#moveTo').offset().top);
 	$("#reset").hide();
 	$("#dtext").html("");
 	    $('#name1').hide();
-	  // $('#fileDiv').hide();
-	   //$("#fileDiv").attr('disabled', true);
-	    
+	  
 	    var productmodelvideoslinks = $('#productmodelvideoslinks').val();
 	    
 	    var videosParts =productmodelvideoslinks.split('*');

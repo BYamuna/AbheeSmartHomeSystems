@@ -63,11 +63,11 @@ var test = <%= session_notification %>;
 		 if(orderObj.webstatus == 1){
 			msgIncrement++; 
 		var task = "<tr>"
-			/* + "<td title='"+orderObj.taskno+"'><a href=viewTicket?id='"+ orderObj.taskno+"'&pgn=0'>"+ orderObj.taskno+"</a></td>" */
-			 + "<td title='"+orderObj.taskno+"'><a href='task'>"+ orderObj.taskno + "</a></td>" 
-			+ "<td title='"+orderObj.serviceType+"'><b>"+ orderObj.serviceType + "</b></td>"
+			 + "<td title='"+orderObj.taskno+"'><a href=viewTicket?id="+ orderObj.taskno+"&pgn=0>"+ orderObj.taskno+"</a></td>" 
+			// + "<td title='"+orderObj.taskno+"'><a href='task'>"+ orderObj.taskno + "</a></td>" 
+			//+ "<td title='"+orderObj.serviceType+"'><b>"+ orderObj.serviceType + "</b></td>"
 			+ "<td title='"+orderObj.kstatus+"'>"+ orderObj.kstatus + "</td>"
-			+ "<td title='"+orderObj.addComment+"'><b>"+ orderObj.addComment + "</b></td>"
+			+ "<td title='"+orderObj.requestType+"'><b>"+ orderObj.requestType + "</b></td>"
 			//+"<a class='view viewIt' href='task?"
 			+ "</tr>";
 		
@@ -76,6 +76,7 @@ var test = <%= session_notification %>;
 		 $("#taskTableHeader tbody").append(task);
 		 }
 	});
+	 
 	}
 		$("#noOfMessages").text(msgIncrement); 
 	</script>

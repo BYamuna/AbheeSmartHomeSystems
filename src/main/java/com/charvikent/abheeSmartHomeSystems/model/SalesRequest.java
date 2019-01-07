@@ -34,6 +34,7 @@ public class SalesRequest
 	private String customername;
 	private String requestType;
 	private String notes;
+	
 	private String catid;
 	@CreationTimestamp
 	protected Date createdTime ;
@@ -42,6 +43,7 @@ public class SalesRequest
 	protected Date updatedTime ;
 	
 	private int status;
+	private int webstatus;
 	
 	@Transient
 	private String locationData;
@@ -52,7 +54,7 @@ public class SalesRequest
 
 	}
 	public SalesRequest(Integer id, String modelnumber, String email, String mobileno, String location, String address,String catid,
-			String reqdesc, String imgfiles,String customername,String requestType,int status,Date createdTime,Date updatedTime, String notes) 
+			String reqdesc, String imgfiles,String customername,String requestType,int status,Date createdTime,Date updatedTime, String notes,int webstatus) 
 	{
 		super();
 		this.id = id;
@@ -70,6 +72,7 @@ public class SalesRequest
 		this.updatedTime=updatedTime;
 		this.notes=notes;
 		this.catid=catid;
+		this.setWebstatus(webstatus);
 	}
 	public Date getCreatedTime() {
 		return createdTime;
@@ -221,6 +224,13 @@ public class SalesRequest
 		this.catid = catid;
 	}
 	
+	
+	public int getWebstatus() {
+		return webstatus;
+	}
+	public void setWebstatus(int webstatus) {
+		this.webstatus = webstatus;
+	}
 	@Override
 	public String toString() {
 		return "SalesRequest [id=" + id + ", modelnumber=" + modelnumber + ", email=" + email + ", mobileno=" + mobileno
@@ -229,7 +239,7 @@ public class SalesRequest
 				+ ", enable=" + enable + ", lat=" + lat + ", longitude=" + longitude + ", customerid=" + customerid
 				+ ", customername=" + customername + ", requestType=" + requestType + ", notes=" + notes + ", catid="
 				+ catid + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", status=" + status
-				+ ", locationData=" + locationData + "]";
+				+ ", webstatus=" + webstatus + ", locationData=" + locationData + "]";
 	}
 	
 	

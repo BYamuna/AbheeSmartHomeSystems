@@ -128,7 +128,7 @@ public void updateCustomer(Customer user)
 	uc.setFirstname(user.getFirstname());
 	uc.setLastname(user.getLastname());
 	//uc.setStatus(user.getStatus());
-	uc.setPassword(user.getPassword());
+	//uc.setPassword(user.getPassword());
     uc.setPurchaseCustomer(user.isPurchaseCustomer());
 	
 	entityManager.flush();

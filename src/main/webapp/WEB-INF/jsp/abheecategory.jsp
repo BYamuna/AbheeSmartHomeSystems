@@ -885,7 +885,7 @@ $.each(productdetailslist, function(k,v){
 			}  */
 				 if(data ==='true')
 				{
-					alert(" Thank you, your request had been submitted successfully. Our team will contact you soon");
+					alert(" Thank you, your request has been submitted successfully. Our team will contact you soon");
 					$('#formModal').modal('toggle');					
 				}
 				else

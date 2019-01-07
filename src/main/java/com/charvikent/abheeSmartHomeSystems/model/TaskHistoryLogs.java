@@ -52,7 +52,7 @@ public class TaskHistoryLogs  {
 	private String taskdeadlineid;
 	
 	private String ServiceType;
-	
+	private String requestType;
 	private String ModifiedBy;
 	
 	
@@ -340,6 +340,13 @@ public class TaskHistoryLogs  {
 	public void setWebstatus(int webstatus) {
 		this.webstatus = webstatus;
 	}
+
+	public String getRequestType() {
+		return requestType;
+	}
+	public void setRequestType(String requestType) {
+		this.requestType = requestType;
+	}
 	@Override
 	public String toString() {
 		return "TaskHistoryLogs [id=" + id + ", taskno=" + taskno + ", taskid=" + taskid + ", createdTime="
@@ -348,12 +355,12 @@ public class TaskHistoryLogs  {
 				+ description + ", uploadfile=" + uploadfile + ", imgfile=" + imgfile + ", gapdays=" + gapdays
 				+ ", gapcount=" + gapcount + ", kstatus=" + kstatus + ", status=" + status + ", additionalinfo="
 				+ additionalinfo + ", taskdeadline=" + taskdeadline + ", taskdeadlineid=" + taskdeadlineid
-				+ ", ServiceType=" + ServiceType + ", ModifiedBy=" + ModifiedBy + ", assigntoid=" + assigntoid
-				+ ", categoryid=" + categoryid + ", priorityid=" + priorityid + ", severityid=" + severityid
-				+ ", assignbyid=" + assignbyid + ", kstatusid=" + kstatusid + ", modelid=" + modelid + ", addComment="
-				+ addComment + ", communicationaddress=" + communicationaddress + ", requesttime=" + requesttime
-				+ ", notificationstatus=" + notificationstatus + ", webstatus=" + webstatus + ", assignby=" + assignby
-				+ "]";
+				+ ", ServiceType=" + ServiceType + ", requestType=" + requestType + ", ModifiedBy=" + ModifiedBy
+				+ ", assigntoid=" + assigntoid + ", categoryid=" + categoryid + ", priorityid=" + priorityid
+				+ ", severityid=" + severityid + ", assignbyid=" + assignbyid + ", kstatusid=" + kstatusid
+				+ ", modelid=" + modelid + ", addComment=" + addComment + ", communicationaddress="
+				+ communicationaddress + ", requesttime=" + requesttime + ", notificationstatus=" + notificationstatus
+				+ ", webstatus=" + webstatus + ", assignby=" + assignby + "]";
 	}
 	
 

@@ -1,5 +1,6 @@
 package com.charvikent.abheeSmartHomeSystems.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.DashBoardByCategory;
 import com.charvikent.abheeSmartHomeSystems.model.DashBoardByStatus;
+import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
@@ -78,8 +80,17 @@ public class DashBoardController {
 
 		User objuserBean = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String id = String.valueOf(objuserBean.getId());
+		if(!id.equals("1") && !id.equals("2")) {
 		
-		listOrderBeans = taskHistorydao.getNotificationByCustomerIds();
+		listOrderBeans = taskHistorydao.getNotificationByCustomerIds(id);
+		}
+		else {
+			
+			listOrderBeans = taskHistorydao.getNotificationforAdmin();
+			
+			
+		}
+		
 		
 		try {
 			String json = null;

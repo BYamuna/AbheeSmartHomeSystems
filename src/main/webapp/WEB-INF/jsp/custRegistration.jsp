@@ -281,23 +281,18 @@ function editCustomer(id) {
 	/* $('#password').attr('readonly',true); */
 	$("#email").val(serviceUnitArray[id].email);
 	$("#address").val(serviceUnitArray[id].address);
-	/*   if($("#purchaseCustomer")==true){
-			
-		  $("#purchaseCustomer").attr('checked',true);
-	}else
-		{
-		$("#purchaseCustomer").attr('checked',false);
-		} */
-	  
+	$('#password').removeClass('validate');
+	console.log(idArray);
+	
 
-	 //boolean purchaseCustomer =false;
-	/* if(purchaseCustomer !=null && purchaseCustomer.length > 0){//If checkbox is checked than assign it with true or 1       
-        purchaseCustomer=true;  
-    } */
+	 //for remove field mandatory on edit
+	     idArray.splice($.inArray("password", idArray),1);
+	     console.log(idArray);
+	   //for remove field mandatory on edit
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 	$("#reset").hide();
-	//$("#pwd").hide();
+	$("#pwd").hide();
 	//document.getElementById("username").readOnly  = true;
 	//document.querySelector("password").required = true;
      /* var idArray = $.makeArray($('.validate').map(function() {
@@ -573,21 +568,11 @@ $('#email').blur(function() {
 	}
 
 		}); 
-		
- $('#password').focusout(function(){
+/* 		
+   $('#password').focusout(function(){
 	  var cpassword=$(this).val();
 	  
-	/* if(cmobile.length != 10 ){
-		
-		$('#cmobile').css('border-color', 'red');
-	// $('#submitModel').prop('disabled', true);
-	$('#errorMobileMsg').text( "*Mobile Number Length Must Be 10 Digits") ;
-	setTimeout(function() { $("#errorMobileMsg").text(''); }, 3000);
-				 
-	 subValidation =false;
-	 
-	 event.preventDefault();
-	 }else { */
+	
 
 
  $.ajax({
@@ -624,10 +609,10 @@ $('#email').blur(function() {
 	       },
 			error :  function(e){$.unblockUI();console.log(e);}	
 		});
-/* });  */
+ });  
  
-}); 
-	
+});
+	  */
 		
 		
 	$('#gstDiv').hide();

@@ -126,7 +126,7 @@ public class AbheeCustRegistrationController
 		return false;
 		
 	}
-	@RequestMapping(value = "/checkCustExstOrnotByPassword", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/checkCustExstOrnotByPassword", method = RequestMethod.POST)
 	public @ResponseBody  Boolean checkCustExstOrnotByPassword(@Validated @ModelAttribute  Customer abheecustregistration,Model model,HttpServletRequest request) throws IOException 
 	{
 		LOGGER.debug("Calling  checkCustExst at controller");
@@ -150,7 +150,7 @@ public class AbheeCustRegistrationController
 		
 		return false;
 		
-	}
+	}*/
 	
 	/*@RequestMapping(value = "/task", method = RequestMethod.GET)
 	public String showtaskPage(@Validated @ModelAttribute Model model,HttpServletRequest request) throws IOException 
