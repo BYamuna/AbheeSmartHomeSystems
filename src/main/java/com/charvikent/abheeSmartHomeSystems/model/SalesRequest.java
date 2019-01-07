@@ -28,6 +28,7 @@ public class SalesRequest
 	private String salesrequestnumber;
 	private String quotationDocuments;
 	private String enable;
+	private String qstatus;
 	private String lat;
 	private String longitude;
 	private String customerid;
@@ -52,7 +53,7 @@ public class SalesRequest
 
 	}
 	public SalesRequest(Integer id, String modelnumber, String email, String mobileno, String location, String address,String catid,
-			String reqdesc, String imgfiles,String customername,String requestType,int status,Date createdTime,Date updatedTime, String notes) 
+			String reqdesc, String imgfiles,String customername,String requestType,int status,Date createdTime,Date updatedTime, String notes,String qstatus) 
 	{
 		super();
 		this.id = id;
@@ -70,6 +71,7 @@ public class SalesRequest
 		this.updatedTime=updatedTime;
 		this.notes=notes;
 		this.catid=catid;
+		this.qstatus=qstatus;
 	}
 	public Date getCreatedTime() {
 		return createdTime;
@@ -221,16 +223,23 @@ public class SalesRequest
 		this.catid = catid;
 	}
 	
+	public String getQstatus() {
+		return qstatus;
+	}
+	public void setQstatus(String qstatus) {
+		this.qstatus = qstatus;
+	}
 	@Override
 	public String toString() {
 		return "SalesRequest [id=" + id + ", modelnumber=" + modelnumber + ", email=" + email + ", mobileno=" + mobileno
 				+ ", location=" + location + ", address=" + address + ", reqdesc=" + reqdesc + ", imgfiles=" + imgfiles
 				+ ", salesrequestnumber=" + salesrequestnumber + ", quotationDocuments=" + quotationDocuments
-				+ ", enable=" + enable + ", lat=" + lat + ", longitude=" + longitude + ", customerid=" + customerid
-				+ ", customername=" + customername + ", requestType=" + requestType + ", notes=" + notes + ", catid="
-				+ catid + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", status=" + status
-				+ ", locationData=" + locationData + "]";
+				+ ", enable=" + enable + ", qstatus=" + qstatus + ", lat=" + lat + ", longitude=" + longitude
+				+ ", customerid=" + customerid + ", customername=" + customername + ", requestType=" + requestType
+				+ ", notes=" + notes + ", catid=" + catid + ", createdTime=" + createdTime + ", updatedTime="
+				+ updatedTime + ", status=" + status + ", locationData=" + locationData + "]";
 	}
+	
 	
 	
 	

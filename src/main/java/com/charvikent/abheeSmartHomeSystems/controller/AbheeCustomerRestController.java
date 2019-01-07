@@ -324,27 +324,72 @@ public class AbheeCustomerRestController {
 		LOGGER.debug("Calling logincredentails at controller");
 		String code = null;
 		String username = customer.getUsername();
+		String password=customer.getPassword();
+		String message="";
+		String breakpoint="0";
 		HashMap<String, String> hm = new HashMap<String, String>();
 		JSONObject json = new JSONObject();
 		System.out.println("rest call user called at end");
-		List<Customer> userBean = customerDao.checkcustomerExistOrNot(customer);
-		System.out.println("rest call user called at staring" + userBean);
-		ObjectMapper objectMapper = new ObjectMapper();
-		try {
-			if (!userBean.isEmpty()) {
-				code = customer.getFirstname() + " " + customer.getLastname();
-				json.put("userbean", userBean);
-				json.put("status", "success");
-			} else {
-				System.out.println("rest call user called at end");
-				code = "NOT_FOUND";
-				json.put("status", code);
+		List<Customer> custMobileOrEmail=customerDao.checkMobileOrEmailExistOrNot(username,password);
+		
+		if(username.length()==10) {
+			for(int i=0;i<custMobileOrEmail.size();i++) {
+				if(username.equals(custMobileOrEmail.get(i).getMobilenumber())&& breakpoint.equals("0")){
+					message="OK";
+					breakpoint="1";
+				}else if(breakpoint.equals("0")){
+					code="Invalid Mobile Number";
+				}
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			json.put("status", "fail");
-			return String.valueOf(json);
+		}else {
+			for(int i=0;i<custMobileOrEmail.size();i++) {
+				if(username.equals(custMobileOrEmail.get(i).getEmail())&& breakpoint.equals("0"))
+				{
+					message="OK";
+					breakpoint="1";
+				}else if(breakpoint.equals("0")){
+					code="Invalid Email Id";
+				}
+			}
 		}
+		System.out.println(message);
+		 if (message.equals("OK")) 
+		 { 
+			 List<Customer> userBean =customerDao.checkcustomerExistOrNot(customer);
+			 System.out.println("rest call user called at staring" + userBean);
+			 ObjectMapper objectMapper = new ObjectMapper();
+			 try 
+			 { 
+				 if (!userBean.isEmpty()) 
+				 {
+				 code = customer.getFirstname() + " " + customer.getLastname();
+				 json.put("userbean", userBean); 
+				 json.put("status","success"); 
+				 }
+				 else {
+					 code ="Customer Details NOT_FOUND";
+					 json.put("status",code);
+				 }
+			 } 
+			 catch (Exception e) 
+			 {
+					  e.printStackTrace(); 
+					  json.put("status", "fail"); 
+					  return String.valueOf(json);
+			 } 
+		 } 
+		 else 
+		 	{ 
+			 if(custMobileOrEmail.size()==0) {
+				 code ="Customer Details NOT_FOUND";
+			 }
+			 else
+			 { 
+				 code +=" So,Customer Details NOT_FOUND";
+			 }
+			 System.out.println("rest call user called at end"); 
+			 json.put("status", code); 
+			 }
 		return String.valueOf(json);
 	}
 
@@ -638,10 +683,42 @@ public class AbheeCustomerRestController {
 		String custMobile = user.getMobilenumber();
 		Customer custbean2 = customerDao.checkCustomerExistOrNotbyMobile(custMobile);
 		String password = "Dear" + " " + custbean2.getFirstname() + " " + custbean2.getLastname()
-				+ ", your password for Abhee smart home systems account" + " '" + custbean2.getMobilenumber() + "' "
+				+ ", your password for Abhee smart home systems customer account" + " '" + custbean2.getMobilenumber() + "' "
 				+ "is:" + custbean2.getPassword();
 		try {
 			String status = sendSMS.sendSMS(password, custMobile);
+			if (status.equals("OK")) {
+				code = HttpStatus.OK;
+			} else {
+				code = HttpStatus.NOT_FOUND;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		json.put("password", password);
+		return String.valueOf(json);
+		/*
+		 * ResponseEntity<String> response = new
+		 * ResponseEntity<String>(custbean2.getPassword(),code); return response;
+		 */
+	}
+	
+	@SuppressWarnings("unused")
+	@RequestMapping(value = "/restAdminForgotPassword", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getAdminForgotPassword(@RequestBody User user, HttpServletRequest request)
+			throws IOException, JSONException {
+		LOGGER.debug("Calling  restAdminForgotPassword at controller");
+		System.out.println("enter to restForgotPassword");
+		HttpStatus code = null;
+		JSONObject json = new JSONObject();
+		String empMobile = user.getMobilenumber();
+		User custbean2 = userService.checkCustomerExistOrNotbyMobile(empMobile);
+		String password=custbean2.getPassword();
+		String msg = "Dear" + " " + custbean2.getFirstname() + " " + custbean2.getLastname()
+				+ ", your password for Abhee smart home systems employee account" + " '" + custbean2.getMobilenumber() + "' "
+				+ "is:" + custbean2.getPassword();
+		try {
+			String status = sendSMS.sendSMS(msg, empMobile);
 			if (status.equals("OK")) {
 				code = HttpStatus.OK;
 			} else {
@@ -669,8 +746,9 @@ public class AbheeCustomerRestController {
 			List<HashMap<String, ArrayList<HashMap<String, List<Map<String, Object>>>>>> list1 = new ArrayList<HashMap<String, ArrayList<HashMap<String, List<Map<String, Object>>>>>>();
 			System.out.println(listOrderBeans);
 			if (null != listOrderBeans) {
-				
+				int j=0;
 				for (int i = 0; i < listOrderBeans.size(); i++) {
+					
 					System.out.println(listOrderBeans.get(i));
 					ArrayList<HashMap<String, List<Map<String, Object>>>> list = new ArrayList<HashMap<String, List<Map<String, Object>>>>();
 					list.clear();
@@ -694,20 +772,30 @@ public class AbheeCustomerRestController {
 					case "1":
 						hm.put("CustomerBean", listOrderBeans2);
 						hm.put("AdminBean", listOrderBeans1);
+						list.add(hm);
+						hm1.put("" + j, list);
+						j++;
+						list1.add(hm1);
+						
 						//continue;
 						break;
 					case "0":
-						hm.put("CustomerBean", listOrderBeans2);
-						hm.put("AdminBean", listOrderBeans3);
+						/*
+						 * hm.put("CustomerBean", listOrderBeans2);
+						 *  hm.put("AdminBean",listOrderBeans3);
+						 */
 						break;
 
 					default:
 						
 						break;
 					}
-					list.add(hm);
-					hm1.put("" + i, list);
-					list1.add(hm1);
+					/*
+					 * list.add(hm); hm1.put("" + i, list);
+					 * j++;
+						list1.add(hm1);
+					 */
+					
 
 				}
 
@@ -780,15 +868,11 @@ public class AbheeCustomerRestController {
 			srequestDao.saveRequest(salesrequest);
 			code = "Enquiry details sent successfully";
 			hm.put("status", code);
-
 		} else {
-
 			code = "Not Found";
 			hm.put("status", code);
-
 		}
 		// srequestDao.saveRequest(salesrequest);
-
 		return hm;
 	}
 
@@ -805,7 +889,6 @@ public class AbheeCustomerRestController {
 	public String checkUserLogin(@RequestBody User user, HttpServletRequest request) throws JSONException {
 		JSONObject objJSON = new JSONObject();
 		List<Map<String, Object>> validUser = userService.checkUserExistence(user);
-
 		if (!validUser.isEmpty()) {
 			objJSON.put("status", validUser);
 			objJSON.put("login", "success");

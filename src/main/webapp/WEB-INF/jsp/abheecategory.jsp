@@ -463,6 +463,9 @@ function makeServiceRequestFieldsEmpty()
 {
 	$('#message').val("");
 	$('#custaddress').val("");
+	$('#fileimg').val("");
+	$('#servicetypeid').val("");
+	$("#requesttimeid").val("");	
 }
 
 function makeQuotationRequestFieldsEmpty()

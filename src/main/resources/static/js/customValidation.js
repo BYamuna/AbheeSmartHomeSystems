@@ -288,11 +288,53 @@ var idArray = $.makeArray($('.validate').map(function() {
 	return this.id;
 }));
 
+
+
 var idArrayCmt = $.makeArray($('.validateCmt').map(function() {
 	return this.id;
 }));
 
+var idArray1 = $.makeArray($('.validate1').map(function() {
+	return this.id;
+}));
 
+
+var validation4 = true;
+
+$('#submit4').click(function(event) {
+	validation4 = true;
+	$.each(idArray1, function(i, val) {
+		var value = $("#" + idArray1[i]).val();
+		var placeholder = $("#" + idArray1[i]).attr('placeholder');
+		
+		/* optional variable is for hidden and show input field validation  */
+		 
+		var optional = $("#" + idArray1[i]).hasClass('display-none');
+		var errorCls = $("#" + idArray1[i]).hasClass('errorCls');
+		if ((value == null || value == ""  || value == " " || value == "undefined" || errorCls) && !optional) {
+			$('style').append(styleBlock);
+			$("#" + idArray1[i] ).attr("placeholder", placeholder);
+			$("#" + idArray1[i] ).css('border-color','#e73d4a');
+			$("#" + idArray1[i] ).css('color','#e73d4a');
+			$("#" + idArray1[i] ).addClass('placeholder-style your-class');
+			 var id11 = $("#" + idArray1[i]+"_chosen").length;
+			if ($("#" + idArray1[i]+"_chosen").length)
+			{
+				$("#" + idArray1[i]+"_chosen").children('a').css('border-color','#e73d4a');
+			}
+//			$("#" + idArray[i] + "Error").text("Please " + placeholder);
+			validation4 = false;
+		} 
+	});
+	if(validation4) {
+		$("#submit4").attr("disabled",true);
+		$("#submit4").val("Please wait...");
+		$("form").submit();											
+	}else {
+		event.preventDefault();
+		return false;
+	}
+});
 
 //console.log(idArray);
 // submit validation
@@ -326,7 +368,7 @@ $('#submit1').click(function(event) {
 	if(validation) {
 		$("#submit1").attr("disabled",true);
 		$("#submit1").val("Please wait...");
-		$("form").submit();											
+		$("#serviceRequestForm").submit();											
 	}else {
 		event.preventDefault();
 		return false;
@@ -359,7 +401,7 @@ $('#submit3').click(function(event) {
 	if(validation) {
 		$("#submit3").attr("disabled",true);
 		$("#submit3").val("Please wait...");
-		$("form").submit();											
+		//$("form").submit();											
 		event.preventDefault();
 	}else {
 		event.preventDefault();

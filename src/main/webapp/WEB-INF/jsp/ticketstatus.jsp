@@ -187,7 +187,10 @@ body {font-family: Arial;}
 										<th>Quotation No</th>
 										<th>Product Model</th>
 										<th>Address</th>
-										<th>Warranty Expired Date</th>
+										<th>Description</th>
+										<th>Quotation Images</th>
+										<th>Mobile No </th>
+										<th>Quotation Date</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -201,10 +204,13 @@ body {font-family: Arial;}
 							<table class="table table-bordered priority prioritybg"	style="border: 1px solid #0460a4;" >
 								<thead>
 									<tr style="background-color: #0460a4; color: #fff; text-align: center; font-family:'Roboto'; font-size: 12px;">
-										<th>OrderId</th>
-										<th>Product(s)</th>
-										<th>Date of Purchased</th>
-										<th>Warranty Expired Date</th>
+										<th>Request No</th>
+										<th>Service Type</th>
+										<th>Product Model</th>
+										<th>Address</th>
+										<th>Description</th>
+										<th>Product Images</th>
+										<th>Request Date</th>
 									</tr>
 								</thead>
 								<tbody>

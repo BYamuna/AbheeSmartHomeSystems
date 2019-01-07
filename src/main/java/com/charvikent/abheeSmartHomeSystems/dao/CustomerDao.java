@@ -79,7 +79,12 @@ public Customer checkuserExistOrNot(Customer customer) {
 	return usersList.get(0);
 	
 }
-
+public List<Customer> checkMobileOrEmailExistOrNot(String username, String password) 
+{
+	String hql ="select c.mobilenumber,c.email from abhee_customer c where (mobilenumber='"+username+"'or email='"+username+"' or c.password='"+password+"')";
+	RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<Customer>(Customer.class);
+    return  this.jdbcTemplate.query(hql, rowMapper);
+}
 public List<Customer> checkcustomerExistOrNot(Customer customer) 
 {
 	String hql =" select * from  abhee_customer where (mobilenumber='" +customer.getUsername()+"'or email='"+customer.getUsername()+"') and password='"+customer.getPassword()+"'";

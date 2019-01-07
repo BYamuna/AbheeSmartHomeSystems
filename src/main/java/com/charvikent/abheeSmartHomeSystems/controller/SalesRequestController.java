@@ -29,7 +29,6 @@ import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
-import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -175,6 +174,7 @@ public class SalesRequestController
    		 salesrequest.setQuotationDocuments(fileTemplate.concurrentFileNames());
    		  salesrequest.setEnable("0");
    		  salesrequest.setStatus(1);
+   		  salesrequest.setQstatus("1");
    		  salesrequest.setNotes(description);
    		 fileTemplate.clearFiles();
    		 
@@ -191,14 +191,14 @@ public class SalesRequestController
 	
 	
 	@RequestMapping(value = "/inTotalSales")
-	public @ResponseBody String getAllActiveOrInactiveOrgnizations(User  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
-		LOGGER.debug("Calling inActiveEmp at controller");
+	public @ResponseBody String getAllActiveOrInactiveQuotations(SalesRequest  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling inTotalSales at controller");
 		List<Map<String, Object>> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
 		String sJson=null;
 		try{
-			if(objdept.getStatus().equals("0"))
+			if(objdept.getQstatus().equals("0"))
 				listOrderBeans = srequestDao.getInActiveList();
 				else
 					listOrderBeans = srequestDao.getSalesRequestList();
@@ -228,6 +228,46 @@ public class SalesRequestController
 		return String.valueOf(jsonObj);
 	}
 	
+	@RequestMapping(value = "/deleteTotalSales")
+	public @ResponseBody String deleteQuotation(SalesRequest  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling deleteTotalSales at controller");
+		List<Map<String, Object>> listOrderBeans  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		boolean delete = false;
+		try{
+			if(objorg.getId() != 0){
+ 				delete = srequestDao.deleteQuotation(objorg.getId(),objorg.getQstatus());
+ 				if(delete){
+ 					jsonObj.put("message", "deleted");
+ 				}else{
+ 					jsonObj.put("message", "delete fail");
+ 				}
+ 			}
+ 				
+			listOrderBeans = srequestDao.getSalesRequestList();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println(e);
+			return String.valueOf(jsonObj);
+			
+		}
+		return String.valueOf(jsonObj);
+	}
 	
 	@RequestMapping(value = "/viewTask2")
 	public @ResponseBody String getQuationsHistory(HttpServletRequest request,HttpSession session,@RequestParam("id")  String id) {

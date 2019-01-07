@@ -70,7 +70,7 @@
 					<h4 id="service">Service Request</h4>
 					<!-- <div class="options"><a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a></div> -->
 				</div>
-			<form:form class="form-horizontal" modelAttribute="taskf" action="savetask1" method="post" enctype="multipart/form-data">
+			<form:form class="form-horizontal" id="serviceRequestForm"  modelAttribute="taskf" action="savetask1" method="post" enctype="multipart/form-data">
 				<form:hidden path="id"/>
 					<div class="panel-body">
 					  <security:authorize access="hasRole('ROLE_ADMIN')">
@@ -80,7 +80,7 @@
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Service
 										Type <span class="impColor">*</span>
 									</label>
-									<form:select path="ServiceType" class="col-xs-10 col-sm-5 validate" onfocus="removeBorder(this.id)">
+									<form:select path="ServiceType" class="col-xs-10 col-sm-5 " onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${category}" />
 									</form:select>
@@ -91,7 +91,7 @@
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Severity
 										<span class="impColor">*</span>
 									</label>
-									<form:select path="severity" class="col-xs-10 col-sm-5 validate" onfocus="removeBorder(this.id)">
+									<form:select path="severity" class="col-xs-10 col-sm-5 " onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${severity}" />
 									</form:select>
@@ -105,7 +105,7 @@
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Priority
 										<span class="impColor">*</span>
 									</label>
-									<form:select path="priority" class="col-xs-10 col-sm-5 validate" onfocus="removeBorder(this.id)">
+									<form:select path="priority" class="col-xs-10 col-sm-5 " onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${priority}"></form:options>
 									</form:select>
@@ -115,7 +115,7 @@
 								<div class="form-group">
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Assigned To <span class="impColor">*</span>
 									</label>
-									<form:select path="assignto" class="col-xs-10 col-sm-5 validate" onfocus="removeBorder(this.id)">
+									<form:select path="assignto" class="col-xs-10 col-sm-5 " onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${userNames}" />
 									</form:select>
@@ -129,7 +129,7 @@
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label ">Summary
 										<span class="impColor">*</span>
 									</label>
-									<form:input path="subject" placeholder="Summary" class="col-xs-10 col-sm-5 validate" />
+									<form:input path="subject" placeholder="Summary" class="col-xs-10 col-sm-5 " />
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -148,7 +148,7 @@
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">
 										Status <span class="impColor">*</span>
 									</label>
-									<form:select path="kstatus" class="col-xs-10 col-sm-5 validate" onfocus="removeBorder(this.id)">
+									<form:select path="kstatus" class="col-xs-10 col-sm-5 validate1" onfocus="removeBorder(this.id)">
 										<form:option value="" label="--- Select ---" />
 										<form:options items="${taskstatus}" />
 									</form:select>
@@ -182,7 +182,7 @@
 									class="ace-file-input ace-file-multiple col-sm-3 col-md-push-3 control-label no-padding-right">Attach
 									File(s)</label>
 								<div class="col-md-8">
-									<input type="file" name="file1" id="file1" class="col-sm-9 col-md-push-5 validate1" multiple="multiple" style="margin: 7px 0px 0px 0px;">
+									<input type="file" name="file1" id="file1" class="col-sm-9 col-md-push-5 " multiple="multiple" style="margin: 7px 0px 0px 0px;">
 								</div>
 							</div>
 						</div>
@@ -198,7 +198,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Warranty</label>
 								<div class="col-md-3 ">
-										<form:checkbox path="warranty" value ="0" onClick="openWarrantyModal()"/>
+										<form:checkbox path="warranty" id ="warranty" value ="0" onClick="openWarrantyModal()"/>
 									</div>
 								</div>
 							</div>
@@ -263,8 +263,8 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="btn-toolbar text-center">
-									<input type="submit" id="submit1" value="Submit"
-										class="btn-primary btn" /> <input type="reset" id="reset" value="Reset" onClick="window.location.reload()"
+									<input type="submit" id="submit1" value="Submit"class="btn-primary btn"  /> 
+									<input type="reset" id="reset" value="Reset" onClick="window.location.reload()"
 										class="btn-danger btn cancel" />
 								</div>
 							</div>
@@ -469,25 +469,25 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header" style="background: #2973cf;">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<button type="button" class="close" id="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title" style="color: white;"> Add Product Warranty Details </h4>
         	</div>
         	<div class="modal-body">
-					<form class="form-horizontal" action="Warranty" method="post" >
+					<form class="form-horizontal"  method="post" >
 					<div class="panel-body">
 					<div class="row">
-							<div class="col-md-6">
+						<div class="col-md-6">
 								<div class="form-group">
 									<input type="hidden" id= "warrantyid" />
 									<label for="focusedinput" class="col-md-6 control-label ">Product Model Name<span class="impColor">*</span>
 									</label>
-										
-									<select id="productmodelid"	class="col-xs-10 col-sm-5 validate"	onfocus="removeBorder(this.id)">
+									<input type="text" name="modelid" id="modelid" />
+								<%--<select id="productmodelid"	class="col-xs-10 col-sm-5 validate"	onfocus="removeBorder(this.id)">
 										<option value="" label="--- Select ---" />
-										<%-- <c:forEach var="list" items="${productmodelid}">
+										 <c:forEach var="list" items="${productmodelid}">
 												<option value=${list.key}>${list.value} </option>
-										</c:forEach> --%>
-									</select>
+										</c:forEach> 
+									</select>--%>
 								</div>
 							</div>
 							
@@ -495,12 +495,27 @@
 								<div class="form-group">
 								<input type="hidden" id= "orderId" />
 									<label for="focusedinput" class="col-md-6 control-label ">Customer ID	<span class="impColor">*</span>
-									</label>	
-									<select id="customerid"	class="col-xs-10 col-sm-5 validate"	onfocus="removeBorder(this.id)">
+									</label>
+									<input type="text" name="customerId" id="customerId" />	
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+								<input type="hidden" id= "orderId" />
+									<label for="focusedinput" class="col-md-6 control-label ">Year<span class="impColor">*</span>
+									</label>
+									<select id="year" class="col-xs-10 col-sm-5 validate"	onfocus="removeBorder(this.id)">
 										<option value="" label="--- Select ---" />
-										<%-- <c:forEach var="list" items="${customerid}">
-												<option value=${list.key}>${list.value} </option>
-										</c:forEach> --%>
+										<option value="1" label="1" />  
+										<option value="2" label="2" />
+										<option value="3" label="3" />
+										<option value="4" label="4" />
+										<option value="5" label="5" />
+										<option value="6" label="6" />
+										<option value="7" label="7" />
+										<option value="8" label="8" />
+										<option value="9" label="9" />
+										<option value="10" label="10"/>
 									</select>
 								</div>
 							</div>
@@ -531,8 +546,8 @@
 				      <div class="row">
 							<div class="col-sm-12">
 								<div class="btn-toolbar text-center">
-									<input type="submit" id="submit1" value="Submit" onclick="saveWarranty()" class="btn-primary btn" /> 
-										<input type="reset" value="Reset" onClick="window.location.reload()" class="btn-danger btn cancel" />
+									<input type="submit" id="submit3" value="Submit" onclick="saveWarranty()" class="btn-primary btn" /> 
+										<input type="reset" value="Reset"  class="btn-danger btn cancel" />
 								</div>
 							</div>
 						</div>	
@@ -544,7 +559,37 @@
 		</div>
 </security:authorize>
 <script type="text/javascript">
-var customerIdDropDown = ${customerid};
+/* function testing()
+{
+	var status=$("#kstatus").val();
+	var comment=$("#addComment").val();
+	alert(status+comment);
+	//alert(comment);
+	
+	} */
+
+var modelid="";
+function getCurrentDate() {
+	   var purchaseddate = new Date();
+	   var dd = purchaseddate.getDate(); //yields day
+	   var MM = purchaseddate.getMonth(); //yields month
+	   var yyyy = purchaseddate.getFullYear(); //yields year
+	   var currentDate= dd + "-" +( MM+1) + "-" + yyyy;	
+	   return currentDate;
+	}
+
+function getExpiryDate(year1) {
+	   var expireddate = new Date();
+	   var dd = expireddate.getDate(); //yields day
+	   var MM = expireddate.getMonth(); //yields month
+	   var yyyy = expireddate.getFullYear(); //yields year
+	   var year = yyyy+parseInt(year1);
+	   var year2 = expireddate.setFullYear(year);
+	   var currentDate= dd + "-" +( MM+1) + "-" + year;
+
+	   return currentDate;
+	}
+/* var customerIdDropDown = ${customerid};
 var productmodelidDropDown =${productmodelid};
 
 
@@ -570,23 +615,20 @@ var productmodelidDropDown =${productmodelid};
 		toolbarPlacement : 'top',
 		focusOnShow : false,
 	
-	});
+	}); */
 	
 	function openWarrantyModal(){
 			if($("#warranty").attr('checked',true))
 			{
 				$("#warrantyModal").modal('show');
-				var optionsForProductModels = "";
-				
+				/*  var optionsForProductModels = "";
 				optionsForProductModels = $("#customerid").empty();
-				
 				optionsForProductModels.append(new Option("-- Select --",	""));
 				$.each(customerIdDropDown, function(i, tests) {
 					var productId = tests;
 					var productName = tests;
 					optionsForProductModels.append(new Option(productId,	productName));
 				});
-				
 				var optionsForProductModels2 = "";
 				optionsForProductModels2 = $("#productmodelid").empty();
 				optionsForProductModels2.append(new Option("-- Select --",	""));
@@ -594,53 +636,75 @@ var productmodelidDropDown =${productmodelid};
 						var productId1 =tests;
 						var productName1 = i;
 						optionsForProductModels2.append(new Option(productId1,	productName1));
-					});
-					
-					
+					}); */	
 			}
 			else
 			{
 				$("#warrantyModal").modal('hide');
 			}	
-	} 
-	
+	}  
 	function saveWarranty()
 	{
-		var product=$('#productmodelid').val();
-		var customer=$('#customerid').val();
+		//var product=$('#model').val();
+		
+		var product=modelid;
+		var customer=$('#customerId').val();
 		var purchaseddate=$('#purchaseddate').val();
 		var expireddate=$('#expireddate').val();
 		var formData = new FormData();
 		formData.append('productmodelid',product);
 		formData.append('customerid',customer);
 		formData.append('purchaseddate',purchaseddate);
-		formData.append('expireddate',expireddate);
-		//console.log(formData);
-		$.ajax({
+		formData.append('expireddate',expireddate);  
+		
+		
+		/* $.fn.makeMultipartRequest('POST', 'Warranty', false, formData,false, 'json', function(data) {
+			var data = JSON.parse(result);
+			console.log(data);
+			//alert(data);
+						if(data[0] =="true")
+						{
+							
+						alert("Warranty Added Successfully");
+						$('#warrantyModal').modal('toggle');
+					//$("#warranty").prop('checked', true);
+						}
+						else
+						{
+							alert("Warranty Adding Failed!"); 
+							
+						}
+
+				}); */
+		 $.ajax({
 			type:"POST",			
 			url: "Warranty", 
+			//data :"&productmodelid="+product+"&customerid="+customer+"&purchaseddate="+purchaseddate+"&expireddate="+expireddate,
 			data:formData,
 			processData: false,  // tell jQuery not to process the data
 			contentType: false,  // tell jQuery not to set contentType
+			dataType : "json",
+			 async: false,
 			success: function(result){
-				//alert(result);
-			if(result=='true')
+				//var data = JSON.parse(result);
+				console.log(result);
+				//alert(data);
+			if(result.status =="true")
 			{
 				
 			alert("Warranty Added Successfully");
-			$('#warrantyModal').modal('toggle');
-			window.location.reload();
+			$('#warrantyModal').modal("hide");
+			//$("#warranty").prop('checked', true);
 			}
 			else
 			{
-				alert("Warranty Adding Failed!"); 	 
+				alert("Warranty Adding Failed!"); 
+				
 			}
-		   	},
-		   	error: function (e) {
-		   		console.log(e.responseText);
-		   		}
-		 });
-	}
+		   	}
+		   
+		 }); 
+	} 
 
 
 	$("#taskdeadline").keypress(function() {
@@ -670,8 +734,14 @@ var date = new Date();
 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	$(document).ready(function() {
 		
+		$("#year").change(function(evt){
+			$("#expireddate").val(getExpiryDate(($("#year").val())));
+		});
 		
-	
+		$("#close").click(function(){
+			$("#warranty").attr('checked',false);
+			});
+		
 		//$("#taskdeadline").attr("disabled", "disabled"); 
 		// 	$("#taskdeadline").attr('readonly', 'readonly');
 		$('#taskdeadline').datetimepicker({
@@ -773,62 +843,24 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
 							serviceUnitArray[orderObj.id] = orderObj;
 							var tblRow = "<tr>"
-									+ "<td title='"+orderObj.taskno+"'>"
-									+ view2
-									+ "</td>"
-									+ "<td title='"+orderObj.category+"'>"
-									+ orderObj.category
-									+ "</td>"
-									+ "<td title='"+orderObj.modelname+"'>"
-									+ orderObj.modelname
-									+ "</td>"
-									+ "<td title='"+orderObj.customer_id+"'>"
-									+ view3
-									+ "</td>"
-									+ "<td title='"+orderObj.servicetypename+"'>"
-									+ orderObj.servicetypename
-									+ "</td>"
-									+ "<td title='"+orderObj.uploadfile+"'>"
-									+ orderObj.uploadfile
-									+ "</td>"
-									+ "<td title='"+orderObj.priority+"'>"
-									+ orderObj.priority
-									+ "</td>"
-									+ "<td title='"+orderObj.subject+"'>"
-									+ orderObj.subject
-									+ "</td>"
-									+ "</td>"
-									+ "<td title='"+orderObj.statusname+"'>"
-									+ orderObj.statusname
-									+ "</td>"
-									+ "<td title='"+orderObj.communicationaddress+"'>"
-									+ orderObj.communicationaddress
-									+ "</td>"
-									/* + "<td title='"+orderObj.amountreceived+"'>"
-									+ orderObj.amountreceived
-									+ "</td>"
-									+ "<td title='"+orderObj.discount+"'>"
-									+ orderObj.discount
-									+ "</td>"
-									+ "<td title='"+orderObj.tax+"'>"
-									+ orderObj.tax
-									+ "</td>"
-									+ "<td title='"+orderObj.total+"'>"
-									+ orderObj.total */
-									+ "<td title='"+orderObj.requesttime+"'>"
-									+ orderObj.requesttime
-									+ "</td>"
-									/* + "<td title='"+orderObj.paymentstatus+"'>"
-									+ orderObj.paymentstatus
-									+ "</td>" */
-									+ "<td style='text-align: center;white-space: nowrap;'>"
-									+ edit
-									+ "&nbsp;&nbsp;"
-									+ deleterow
-									+ "&nbsp;&nbsp;"
-									+ time
-									+ "&nbsp;&nbsp;"
-									+ "</td>" + "</tr>";
+									+ "<td title='"+orderObj.taskno+"'>"+ view2 + "</td>"
+									+ "<td title='"+orderObj.category+"'>"+ orderObj.category + "</td>"
+									+ "<td title='"+orderObj.modelname+"'>"+ orderObj.modelname + "</td>"
+									+ "<td title='"+orderObj.customer_id+"'>"+ view3+ "</td>"
+									+ "<td title='"+orderObj.servicetypename+"'>"+ orderObj.servicetypename+ "</td>"
+									+ "<td title='"+orderObj.uploadfile+"'>"+ orderObj.uploadfile	+ "</td>"
+									+ "<td title='"+orderObj.priority+"'>"+ orderObj.priority+ "</td>"
+									+ "<td title='"+orderObj.subject+"'>"+ orderObj.subject+ "</td>"
+									+ "<td title='"+orderObj.statusname+"'>"+ orderObj.statusname+ "</td>"
+									+ "<td title='"+orderObj.communicationaddress+"'>"+ orderObj.communicationaddress+ "</td>"
+									/* + "<td title='"+orderObj.amountreceived+"'>"+ orderObj.amountreceived + "</td>"
+									+ "<td title='"+orderObj.discount+"'>"+ orderObj.discount + "</td>"
+									+ "<td title='"+orderObj.tax+"'>"+ orderObj.tax + "</td>"
+									+ "<td title='"+orderObj.total+"'>"+ orderObj.total */
+									+ "<td title='"+orderObj.requesttime+"'>"+ orderObj.requesttime+ "</td>"
+									/* + "<td title='"+orderObj.paymentstatus+"'>"+ orderObj.paymentstatus+ "</td>" */
+									+ "<td style='text-align: center;white-space: nowrap;'>"+ edit+ "&nbsp;&nbsp;"+ deleterow+ "&nbsp;&nbsp;"+ time+ "&nbsp;&nbsp;"+ "</td>"
+									+ "</tr>";	 
 							$(tblRow).appendTo("#tableId table tbody");
 						});
 		if (isClick == 'Yes')
@@ -852,9 +884,25 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		$("#description").val(serviceUnitArray[id].description);
 		$("#taskdeadline").val(serviceUnitArray[id].taskdeadline);
 		$("#kstatus").val(serviceUnitArray[id].kstatus);
+		$("#addComment").val(serviceUnitArray[id].add_comment);
+		//$("#model").val(serviceUnitArray[id].modelid);
+		modelid=serviceUnitArray[id].modelid;
+		var warrantydata=serviceUnitArray[id].warranty
+		 //$("#warranty").val(serviceUnitArray[id].warranty);
+		 if(warrantydata =='0')
+		{
+			 $("#warranty").prop('checked',true);	 
+		}
+		else
+		{
+			$("#warranty").prop('checked',false);
+		} 
+		$("#modelid").val(serviceUnitArray[id].modelname);
+		$("#customerId").val(serviceUnitArray[id].customer_id);
+		$("#purchaseddate").val(getCurrentDate());
 		$("#submit1").val("Update");
 		$(window).scrollTop($('#moveTo').offset().top);
-		$("#reset").hide();
+		//$("#reset").hide();
 		document.getElementById("description").readOnly  = true;
 		document.getElementById("taskno").readOnly  = true;
 		//document.getElementById("ServiceType").attr  = true;

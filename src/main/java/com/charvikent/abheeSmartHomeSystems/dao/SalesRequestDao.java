@@ -62,7 +62,7 @@ public class SalesRequestDao
 		public List<Map<String, Object>> getSalesRequestList()
 		 {
 		 
-			 String hql ="select sr.* ,c.category from abhee_sales_request sr,abheecategory c where sr.catid=c.id";
+			 String hql ="select sr.* ,c.category from abhee_sales_request sr,abheecategory c where sr.catid=c.id and sr.qstatus='1'";
 			 System.out.println(hql);
 			
 				List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
@@ -94,7 +94,7 @@ public class SalesRequestDao
 		public List<Map<String, Object>> getSalesRequestListByCustomerId(String custId)
 		 {
 		 
-			 String hql ="select sr.id,sr.salesrequestnumber,sr.mobileno,ap.name as modelname,sr.address,sr.reqdesc,sr.imgfiles,DATE_FORMAT(sr.created_time,'%d-%b-%y %H:%i')as created_time from abhee_sales_request sr,abhee_product ap where sr.modelnumber=ap.name and sr.customerid='"+custId+"'";
+			 String hql ="select sr.id,sr.salesrequestnumber,sr.mobileno,ap.name as modelname,sr.address,sr.reqdesc,sr.imgfiles,DATE_FORMAT(sr.created_time,'%d-%b-%y %H:%i')as created_time from abhee_sales_request sr,abhee_product ap where sr.modelnumber=ap.name and sr.customerid='"+custId+"' and sr.qstatus='1'";
 			 System.out.println(hql);
 			
 				List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
@@ -163,7 +163,8 @@ public class SalesRequestDao
 		return (SalesRequest) entityManager.createQuery(hql).setParameter("id", Integer.parseInt(id)).getSingleResult();
 	}
 	public List<Map<String, Object>> getInActiveList() {
-		 String hql ="select * from abhee_sales_request where enable =0";
+		 //String hql ="select * from abhee_sales_request where enable =0";
+		String hql="select * from abhee_sales_request where qstatus='0'";
 		 System.out.println(hql);
 		
 			List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
@@ -209,5 +210,22 @@ public class SalesRequestDao
 		System.out.println(retlist);
 		return retlist;
 		
+	}
+	
+	public boolean deleteQuotation(Integer id, String status) {
+		Boolean delete=false;
+		try{
+			
+			SalesRequest cate= (SalesRequest)entityManager.find(SalesRequest.class ,id);
+			   cate.setQstatus(status);
+			   entityManager.merge(cate);
+			if(!status.equals(cate.getQstatus()))
+			{
+				delete=true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return delete;
 	}
 }

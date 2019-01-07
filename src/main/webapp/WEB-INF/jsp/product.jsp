@@ -313,7 +313,7 @@ function editProduct(id) {
 }); */
 
 	$(window).scrollTop($('#moveTo').offset().top);
-	$("#reset").hide();
+	//$("#reset").hide();
 	$("#dtext").html("");
 	    $('#name1').hide();
 	  // $('#fileDiv').hide();

@@ -296,7 +296,7 @@ function editCustomer(id) {
     } */
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
-	$("#reset").hide();
+	//$("#reset").hide();
 	//$("#pwd").hide();
 	//document.getElementById("username").readOnly  = true;
 	//document.querySelector("password").required = true;

@@ -1,6 +1,7 @@
 package com.charvikent.abheeSmartHomeSystems.controller;
 
 import java.io.IOException;
+/*import java.util.HashMap;*/
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+/*import org.springframework.web.bind.annotation.RequestBody;*/
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -103,16 +105,17 @@ public class TaskController {
 
 	@SuppressWarnings("unused")
 	@GetMapping("/task")
-	public String department(@ModelAttribute("taskf")AbheeTask abheeTask ,Model model, HttpServletRequest request, HttpSession session) {
+	public String department(@ModelAttribute("taskf") AbheeTask abheeTask, Model model, HttpServletRequest request,
+			HttpSession session) {
 		LOGGER.debug("Calling task at controller");
 		List<Map<String, Object>> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
-		ObjectMapper customerMapper =null;
+		ObjectMapper customerMapper = null;
 		ObjectMapper productMapper = null;
-		String customerJson=null;
+		String customerJson = null;
 		String productJson = null;
 		String sJson = null;
-		//model.addAttribute("taskf", new AbheeTask());
+		// model.addAttribute("taskf", new AbheeTask());
 
 		model.addAttribute("severity", severityDao.getSeverityMap());
 		model.addAttribute("priority", priorityDao.getPriorityMap());
@@ -122,10 +125,9 @@ public class TaskController {
 		 * model.addAttribute("requesttimes",abheeRequestTimeDao.getRequestTimesMap() );
 		 */
 		model.addAttribute("taskstatus", abheeTaskStatusDao.getTaskStatusMap());
-		customerMapper =new ObjectMapper();
+		customerMapper = new ObjectMapper();
 		productMapper = new ObjectMapper();
-		
-		
+
 		User objuserBean = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String id = String.valueOf(objuserBean.getId());
 
@@ -133,8 +135,12 @@ public class TaskController {
 
 		try {
 			listOrderBeans = abheeTaskDao.getTasksListAssignToMe();
-			request.setAttribute("customerid",customerMapper.writeValueAsString( productGuaranteeDao.getCustomersMap()));
-			request.setAttribute("productmodelid", productMapper.writeValueAsString( productGuaranteeDao.getProductsMap()));
+			/*
+			 * request.setAttribute("customerid",customerMapper.writeValueAsString(
+			 * productGuaranteeDao.getCustomersMap()));
+			 * request.setAttribute("productmodelid", productMapper.writeValueAsString(
+			 * productGuaranteeDao.getProductsMap()));
+			 */
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -159,7 +165,7 @@ public class TaskController {
 	@PostMapping(value = "/savetask1")
 	public String saveAdmin(@Valid @ModelAttribute("taskf") AbheeTask task, TaskHistoryLogs taskHistoryLogs,
 			BindingResult bindingresults, @RequestParam("file1") MultipartFile[] uploadedFiles,
-			RedirectAttributes redir,HttpSession session) throws IOException {
+			RedirectAttributes redir, HttpSession session) throws IOException {
 		LOGGER.debug("Calling savetask1 at controller");
 
 		if (bindingresults.hasErrors()) {
@@ -199,9 +205,9 @@ public class TaskController {
 					task.setStatus("1");
 					task.setAdditionalinfo("0");
 					/* taskHistoryLogsDao.savetaskhistorylogs(taskHistoryLogs); */
-					
+
 					reportIssueDao.saveReportIssue(task);
-				    //session.setAttribute("notifications", task);
+					// session.setAttribute("notifications", task);
 
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");
 					redir.addFlashAttribute("cssMsg", "success");
@@ -571,7 +577,7 @@ public class TaskController {
 			System.out.println("Service Request already received");
 
 			return "false";
-			
+
 		}
 
 	}
@@ -613,42 +619,44 @@ public class TaskController {
 		return String.valueOf(jsonObj);
 	}
 
-	
-	@SuppressWarnings("unused")
-	@RequestMapping(value = "/Warranty" ,method = RequestMethod.POST) 
-	 public String saveProductWarranty(ProductGuarantee pg,Model model ,HttpServletRequest request) {
-		 LOGGER.debug("Calling Warranty at controller"); 
-		 if(pg!=null)
-		 {
-		 String productmodelid=request.getParameter("productmodelid");
-		 String customerid=request.getParameter("customerid");
-		 String purchaseddate=request.getParameter("purchaseddate");
-		 String expireddate=request.getParameter("expireddate");
-		 pg.setStatus("1");
-		 productGuaranteeDao.saveWarranty(pg);
-		 //return "true";
-		 }
-		 else
-		 {
-			 System.out.println("warranty adding failed");
-		 }
-		 return "redirect:\task";
-	 }
-	 
+	@RequestMapping(value = "/Warranty", method = RequestMethod.POST)
+	public  @ResponseBody  String saveProductWarranty( HttpServletRequest request) {
+		LOGGER.debug("Calling Warranty at controller");
+		JSONObject json = new JSONObject();
+		
+		ProductGuarantee pg = new ProductGuarantee();
+		//if (pg != null) {
+			 String productmodelid=request.getParameter("productmodelid"); 
+			 String customerid=request.getParameter("customerid"); 
+			 String purchaseddate=request.getParameter("purchaseddate"); 
+			 String expireddate=request.getParameter("expireddate");
+			 pg.setProductmodelid(productmodelid); 
+			 pg.setCustomerid(customerid);
+			 pg.setPurchaseddate(purchaseddate); 
+			 pg.setExpireddate(expireddate);
+			 pg.setStatus("1");
+			productGuaranteeDao.saveWarranty(pg);
+			json.put("status","true");
+			return String.valueOf(json);
+		/*
+		 * } else { System.out.println("warranty adding failed");
+		 * json.put("status","false"); return String.valueOf(json);
+		 * 
+		 * }
+		 */
+	}
 
-	
-	
 	@SuppressWarnings("unused")
 	@GetMapping("/task1")
-	public String department(Model model,TaskHistoryLogs history, HttpServletRequest request, HttpSession session,@RequestParam(value = "pgn", required = true) String pgn) {
+	public String department(Model model, TaskHistoryLogs history, HttpServletRequest request, HttpSession session,
+			@RequestParam(value = "pgn", required = true) String pgn) {
 		LOGGER.debug("Calling task at controller");
 		List<TaskHistoryLogs> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
-		
+
 		User objuserBean = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String id = String.valueOf(objuserBean.getId());
-
 
 		try {
 			listOrderBeans = taskHistorydao.getNotificationByCustomerIds();
@@ -659,7 +667,7 @@ public class TaskController {
 			} else {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
-				
+
 			}
 
 		} catch (Exception e) {

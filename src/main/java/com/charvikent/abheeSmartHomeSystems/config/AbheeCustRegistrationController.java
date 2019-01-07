@@ -397,7 +397,7 @@ public class AbheeCustRegistrationController
 		Customer custbean2 =customerDao.checkCustomerExistOrNotbyMobileOrEmail(custMobile,custEmail);
 		if(custbean2 != null)
 		{
-			sendSMS.sendSMS("Dear"+" "+custbean2.getFirstname()+" "+custbean2.getLastname()+", your password for Abhee smart home systems account"+" '"+custbean2.getMobilenumber()+"' "+"is:"+custbean2.getPassword(),custMobile);
+			sendSMS.sendSMS("Dear"+" "+custbean2.getFirstname()+" "+custbean2.getLastname()+", your password for Abhee smart home systems customer account"+" '"+custbean2.getMobilenumber()+"' "+"is:"+custbean2.getPassword(),custMobile);
 			sendingMail.resetPassword(custbean2);
 			return true;
 		}

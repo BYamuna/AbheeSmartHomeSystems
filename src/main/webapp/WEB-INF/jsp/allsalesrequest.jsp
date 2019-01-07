@@ -30,7 +30,7 @@
 						</div>
 					</div>
 					<div class="panel-body collapse in">
-					<!--  <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label> -->
+					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
 						<div class="table-responsive" id="tableId">
 							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 								<thead><tr><th>Model Number</th><th>Email Id</th><th>Mobile Number</th><th>Files</th><th>Location</th><th>Address</th><th>Requirements description</th><th></th></tr></thead>
@@ -192,12 +192,12 @@ function displayTable(listOrders) {
 					}
 					orderObj.quotation_documents=quotation_documents; */
 
-		/* if(orderObj.status == "1"){
+		 if(orderObj.qstatus == "1"){
 			var deleterow = "<a class='deactivate' onclick='deleteTotalSales("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
 			var deleterow = "<a class='activate' onclick='deleteTotalSales("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
-		var edit = "<a class='edit editIt' onclick='editTotalSales("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"*/		
+					/*var edit = "<a class='edit editIt' onclick='editTotalSales("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"*/		
  		var comment = "<a class='comment commentIt' onclick='addComment("	+ orderObj.id+ ")'>   <i class='fa fa-comments'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
  		
@@ -214,7 +214,7 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.location+"'>"+ orderObj.location + "</td>"
 			+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>"
 			+ "<td title='"+orderObj.reqdesc+"'>"+ orderObj.reqdesc + "</td>"
-			+ "<td style='text-align: center;white-space: nowrap;' title='Quotation History'>" +comment+ "&nbsp;&nbsp;"+history+"</td>" 
+			+ "<td style='text-align: center;white-space: nowrap;' title='Quotation History'>" +comment+ "&nbsp;&nbsp;"+history+"&nbsp;&nbsp;" + deleterow +"</td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -346,12 +346,12 @@ if(validation) {
 	$("#reqdesc").val(serviceUnitArray[id].reqdesc);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
-}
+}*/
 
-function deleteTotalSales(id,status)
+function deleteTotalSales(id,qstatus)
 {
 	var checkstr=null;
-	if(status == 0){
+	if(qstatus == 0){
 		 checkstr = confirm('Are you sure you want to Deactivate?');
 	}else{
 		 checkstr = confirm('Are you sure you want to Activate?');
@@ -359,7 +359,7 @@ function deleteTotalSales(id,status)
 	if(checkstr == true){
 		var formData = new FormData();
 	    formData.append('id', id);
-	    formData.append('status', status);
+	    formData.append('qstatus', qstatus);
 		$.fn.makeMultipartRequest('POST', 'deleteTotalSales', false, formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;
@@ -369,7 +369,7 @@ function deleteTotalSales(id,status)
 		});
 	}
 }
- */
+ 
 function validate(id, errorMessage)
 {
 	var styleBlock = '.placeholder-style.placeholder-style::-moz-placeholder {color: #cc0000;} .placeholder-style::-webkit-input-placeholder {color: #cc0000;}';
@@ -392,14 +392,14 @@ function validate(id, errorMessage)
 
 function inactiveData() 
 {
-	var status="0";
+	var qstatus="0";
 	if($('#inActive').is(":checked") == true){
-		status="0";
+		qstatus="0";
 	}else{
-		status="1";
+		qstatus="1";
 	}
 		var formData = new FormData();
-		formData.append('status', status);
+		formData.append('qstatus', qstatus);
 		
 		$.fn.makeMultipartRequest('POST', 'inTotalSales', false,
 				formData, false, 'text', function(data) {

@@ -422,7 +422,6 @@ public class HomeController {
 		}
 	}
 	
-	@SuppressWarnings("unused")
 	@RequestMapping(value = "/saveProfilePassword", method = RequestMethod.POST)
 	public @ResponseBody  String saveProfilePassword(Model model,Customer cust,HttpServletRequest request) throws IOException, MessagingException 
 	{
@@ -623,7 +622,7 @@ public class HomeController {
 		
 		if (custbean2 != null) {
 			String password = "Dear" + " " + custbean2.getFirstname() + " " + custbean2.getLastname()
-			+ ", your password for Abhee smart home systems account" + " '" + custbean2.getMobilenumber() + "' "
+			+ ", your password for Abhee smart home systems employee account" + " '" + custbean2.getMobilenumber() + "' "
 			+ "is:" + custbean2.getPassword();
 			sendSMS.sendSMS(password,username);
 			//mailTemplate.resetPassword(custbean2);

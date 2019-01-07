@@ -107,14 +107,14 @@ public class AbheeTaskDao {
 			{
 			
 		 sql="select t.id,t.assignto,u.username,t.uploadfile,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,t.service_type as servicetypeid,sev.severity, "
-				 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id, t.communicationaddress,t.amountreceived,t.discount,t.tax,t.total,ar.requesttime"
+				 + "t.status,t.subject,t.taskdeadline,t.taskno,t.modelid,ab.category,abp.name as modelname,t.customer_id, t.communicationaddress,t.amountreceived,t.discount,t.tax,t.total,ar.requesttime,t.modelid,t.warranty,t.add_comment "
 				+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp,abheerequesttime ar"
 				+" where  t.kstatus<>'4' and t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and  t.requesttime=ar.requesttimeid and t.status='1'  order by t.created_time desc ";
 	}
 			else
 			{
 				sql="select t.id,t.assignto,u.username,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,sev.severity, "
-						 + "t.status,t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id , t.communicationaddress,t.amountreceived,t.discount,t.tax,t.total,ar.requesttime "
+						 + "t.status,t.subject,t.taskdeadline,t.taskno,t.modelid,ab.category,abp.name as modelname,t.customer_id , t.communicationaddress,t.amountreceived,t.discount,t.tax,t.total,ar.requesttime,t.warranty,t.add_comment "
 						+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp,abheerequesttime ar"
 						+" where  t.kstatus<>'4' and  t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.requesttime=ar.requesttimeid and t.status='1'and  t.assignto='"+objuserBean.getId()+" ' order by t.created_time desc " ;
 			}
@@ -364,7 +364,7 @@ public List<Map<String, Object>> getTasksByCustomerId(Customer customer) {
 	
 	public List<Map<String, Object>> getCustomerResponseByCustomerId(String customer) {
 		
-		String hql= "select t.id,t.taskno,t.description,t.uploadfile,t.customer_id,t.communicationaddress,t.warranty,ar.requesttime ,ap.name as modelname ,ac.category,st.servicetypename as servicetype,c.name as companyname from abhee_task t,abheecategory ac,abhee_company c,abheerequesttime ar,abheeservicetype st,abhee_product ap where t.taskno='"+customer+"' and t.category=ac.id and t.requesttime=ar.requesttimeid and t.modelid=ap.id and t.service_type=st.id and t.company=c.id";
+		String hql= "select t.id,t.taskno,t.description,t.uploadfile,t.customer_id,t.communicationaddress,t.warranty,ar.requesttime ,ap.name as modelname ,ac.category,st.servicetypename as servicetype,c.name as companyname from abhee_task t,abheecategory ac,abhee_company c,abheerequesttime ar,abheeservicetype st,abhee_product ap where t.taskno='"+customer+"' and t.category=ac.id and t.requesttime=ar.requesttimeid and t.modelid=ap.id and t.service_type=st.id and t.company=c.id and t.status='1'";
 	     System.out.println(hql);
 		
 		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
@@ -376,7 +376,7 @@ public List<Map<String, Object>> getAdminResponseByCustomerId(String customer) {
 		
 		//String hql= "select ap.priority as priority,t.subject,t.kstatus,t.status,u.username as assignedto,t.taskdeadline,t.imgfile,t.description from abhee_task t,abheepriority ap,abheeusers u where t.taskno='"+customer+"' and t.priority=ap.id and t.assignto=u.id";
 				
-	String hql= "select ap.priority as priority,t.subject,t.kstatus as kstatusid,ts.name as kstatus,t.status,u.username as assignedto,t.taskdeadline,t.imgfile,t.description from abhee_task t,abheepriority ap,abheeusers u ,abheetaskstatus ts where t.taskno='"+customer+"' and t.priority=ap.id and t.assignto=u.id and t.kstatus=ts.id";		
+	String hql= "select ap.priority as priority,t.subject,t.kstatus as kstatusid,ts.name as kstatus,t.status,u.username as assignedto,u.mobilenumber,t.taskdeadline,t.imgfile,t.description from abhee_task t,abheepriority ap,abheeusers u ,abheetaskstatus ts where t.taskno='"+customer+"' and t.priority=ap.id and t.assignto=u.id and t.kstatus=ts.id and t.status='1'";		
 	System.out.println(hql);
 		
 		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
@@ -411,7 +411,7 @@ String hql ="select t.taskno from AbheeTask t where t.customerId ='"+customer.ge
 
 public List<Map<String, Object>> getTasksListByCustomerId(String customerId) 
 {
-	String sql="select t.id,s.servicetypename,t.add_comment,t.taskno,abp.name as modelname,t.communicationaddress,t.description,t.uploadfile, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time FROM abhee_task t,abheeservicetype s,abhee_product abp where  t.service_type=s.id and abp.id=t.modelid and t.customer_id='"+customerId+"'order by t.created_time desc ";
+	String sql="select t.id,s.servicetypename,t.add_comment,t.taskno,abp.name as modelname,t.communicationaddress,t.description,t.uploadfile, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time FROM abhee_task t,abheeservicetype s,abhee_product abp where  t.service_type=s.id and abp.id=t.modelid and t.customer_id='"+customerId+"'and t.status='1' order by t.created_time desc ";
 	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
 	System.out.println(retlist);
 	return retlist;

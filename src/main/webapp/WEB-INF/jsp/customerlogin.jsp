@@ -97,7 +97,7 @@
 					<div class="login-top"> 	
 						  <input type="hidden" name="userType" id="userType" value="customerUser"/>
 							<input type="text"  name="username" id="cmusername" class="form-control validate"  onfocus="this.placeholder=''" onblur="this.placeholder='Mobile Number or Email'"    placeholder="Mobile Number or Email"/>
-							<input type="password"  name="password"  id="cmpassword" onfocus="this.placeholder=''"  class="form-control  numericOnly"  maxlength="4"  onblur="this.placeholder='Password'" placeholder="Password"  />
+							<input type="password"  name="password"  id="cmpassword" onfocus="this.placeholder=''"  class="form-control  numericOnly2"  maxlength="4"  onblur="this.placeholder='Password'" placeholder="Password"  />
 						
 					</div> 
 					<div class="login-bottom"> 
@@ -191,7 +191,7 @@
 									<label for="user_name">Password (Max 4 Digits) :</label>
 								</div>
 								<div class="col-md-7">
-									<input	type="password" name="cpassword" id="cpassword" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control validate1 numericOnly" placeholder="Password" />
+									<input	type="password" name="cpassword" id="cpassword" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control validate1 numericOnly2" placeholder="Password" />
 								</div><div class="clearfix"></div> 
 								<span class="hasError" id="cpasswordError" style="font-size: 13px;"></span>
 							</div>
@@ -200,7 +200,7 @@
 									<label for="user_name">Confirm password :</label>
 								</div>
 								<div class="col-md-7">
-									<input	type="password" name="crtpassword"  id="crtpassword" onkeydown="removeBorder(this.id)"  maxlength="4" class="form-control validate1 numericOnly" placeholder="Confirm Password"/>
+									<input	type="password" name="crtpassword"  id="crtpassword" onkeydown="removeBorder(this.id)"  maxlength="4" class="form-control validate1 numericOnly2" placeholder="Confirm Password"/>
 								</div><div class="clearfix"></div> 
 								<span class="hasError" id="crtpasswordError" style="font-size: 13px;"></span>
 							</div>

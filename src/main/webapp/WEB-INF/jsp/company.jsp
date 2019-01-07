@@ -173,7 +173,7 @@ function editCompany(id) {
 	$("#status").val(serviceUnitArray[id].status);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
-	$("#reset").hide();
+	//$("#reset").hide();
 }
 
 function deleteCompany(id,status)
