@@ -32,7 +32,7 @@
 					<div class="panel-body collapse in">
 					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
 						<div class="table-responsive" id="tableId">
-							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
+							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered " id="example">
 								<thead><tr><th>Model Number</th><th>Email Id</th><th>Mobile Number</th><th>Files</th><th>Location</th><th>Address</th><th>Requirements description</th><th></th></tr></thead>
 								<tbody></tbody>
 							</table>
@@ -122,7 +122,7 @@
         	<div class="modal-body">
 				<div class="row">
 				<div class="table-responsive" id="HtableId2">
-							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example2">
+							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered " id="example2">
 								<thead><tr class="info"><th>Date Modified</th><th>User Name</th><th>Attachment</th><th>Field</th><th>Change</th></tr></thead>
 								<tbody></tbody>
 							</table>
@@ -165,7 +165,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 
-	var tableHead = '<table id="product" class="table table-striped table-bordered datatables">'
+	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
 			+ '<thead><tr><th>Request Number</th><th>Product Category</th><th>Product Model</th><th>Email Id</th><th>Mobile Number</th><th>Files</th><th>Location</th><th>Address</th><th>Comments</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};

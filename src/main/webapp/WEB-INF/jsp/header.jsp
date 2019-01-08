@@ -330,6 +330,8 @@ function toolTips(){
 		$('.time').attr('data-original-title', 'View Countdown');
 		$('.history').attr('data-toggle','tooltip');
 		$('.history').attr('data-original-title','History');
+		$('.invoice').attr('data-toggle','tooltip');
+		$('.invoice').attr('data-original-title','Invoice');
 		$('[data-toggle="tooltip"]').tooltip(); 
 }
 

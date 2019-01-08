@@ -10,6 +10,25 @@
     color: #fff;
     opacity: 1;
 }
+	table, th, td {
+  border: 1px solid black;
+  
+}
+th, td {
+  
+  text-align: left;
+}
+.ser{
+			padding-top: 25px;
+		}
+		.panel{
+
+		}
+
+		.dov{
+			padding-top:25px;
+		
+		} 
 </style>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
@@ -57,7 +76,7 @@
 								</tr>
 							</thead>
 							<tbody></tbody>
-						</table>
+						</table>voi
 					</div>
 				</div>
 			</div>
@@ -558,16 +577,209 @@
 			</div>
 		</div>
 </security:authorize>
-<script type="text/javascript">
-/* function testing()
-{
-	var status=$("#kstatus").val();
-	var comment=$("#addComment").val();
-	alert(status+comment);
-	//alert(comment);
-	
-	} */
+<security:authorize access="hasRole('ROLE_ADMIN')">
+<div class="modal fade" id="InvoiceModal" data-backdrop="static" data-keyboard="false"  role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header" style="background: #2973cf;padding:11px;">
+				<button type="button" class="close" id="close" data-dismiss="modal" style="margin-top: -9px;">&times;</button>
+				<h4 class="modal-title" style="color: white;"> Invoice Details </h4>
+        	</div>
+        	<div class="modal-body" style="height:824px;">
+					<div class="col-md-12">
+		        	 <%-- <div class="col-md-6">
+                            <img width="200px" src="${baseurl }/abhee/images/logo.png" class="img-resposive" alt="logo">
+                        </div> --%>
+                         <div class="dov" style="text-align:right;">Invoice Id:
+  						<input type="text" name="firstname">
+  						&nbsp;&nbsp;Date:
+  						<input type="text" name="firstname"></div>
+					<div class="panel panel-default">
+					<div class="panel-heading" style="padding-top: 1px;">
+					</div>
+					<div style="text-align: center; ; background-color: blue;"><h3 style="color: white">Invoice/Bill</h3></div>
+					<br>
+					<!-- <div class="clearfix"></div> -->
+					<form id="userForm" class="form-horizontal " action="invoice" method="Post">
+	                  <input id="id" name="id" type="hidden" value=""/>
+	                  <div >
+					
+								
 
+								<div class="col-md-12 ser">
+								<div class="col-md-9">
+								<div class="form-group">
+									<label class="col-md-5 control-label no-padding-right">Request Number<span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<input id="requestno" name="requestno" placeholder="Request Number" class="form-control validate onlyCharacters" type="text" value=""/>
+									</div>
+								</div></div>
+								</div>
+							
+								<div class="col-md-12">
+								<div class="col-md-9">
+								<div class="form-group">
+									<label class="col-md-5 control-label no-padding-right">Product Model<span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<input id="product Model" name="product model" placeholder="Product model" class="form-control validate onlyCharacters" type="text" value=""/>
+									</div>
+								</div></div>
+								</div>
+								<div class="col-md-12">
+								<div class="col-md-9">
+								<div class="form-group">
+									<label class="col-md-5 control-label no-padding-right">Type of request<span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<input id="requesttype" name="requesttype" placeholder="Type of request" class="form-control validate onlyCharacters" type="text" value=""/>
+									</div>
+								</div></div>
+								</div>
+								</div>
+								<div class="sep">
+									<div class="clearfix"></div>
+								</div>
+                                <div class="col-md-12">
+                                	<h4 style=" ">Parts Added & Price</h4>
+                                	
+                                </div>
+
+								  <div style="margin-bottom: 15px;" class="col-md-12" id="dtext">
+                                	<div class="col-md-3">
+                                		<label>Sno.</label><br>
+                                		<input type="text" name="sno" id="sno">
+                                	</div>
+                                	<div class="col-md-3">
+                                		<label>Part Name</label><br>
+                                		<input type="text" name="partname" id="partname">
+                                	</div>
+                                		<div class="col-md-3">
+                                		<label>Price</label><br>
+                                		<input type="text" name="price" id="price">
+                                	</div>
+                                		<div class="col-md-3">
+                                		<br>
+                                		<button  style="margin-top:8px;" class="pull-right btn btn-success" onclick="addNewTextBox()">add</button>
+                                	</div>
+
+                                </div>
+ 								<div class="clearfix"></div>
+								<div class="sep">
+								<div class="col-md-12">
+								<div class="col-md-9">
+								<div class="form-group">
+									<label class="col-md-5 control-label no-padding-right">Total Price<span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<input id="Total Price" name="Total Price" placeholder="Total Price" class="form-control validate" type="name" value=""/>
+									</div>
+								</div>
+								
+								</div>
+							</div>
+								
+							   	<div class="col-md-12">
+								<div class="col-md-9">
+								<div class="form-group">
+									<label class="col-md-5 control-label no-padding-right">CGST</label>
+									<div class="col-md-6">
+										<input id="CGST" name="CGST" placeholder="CGST" class="form-control" type="text" value="" maxlength="12"/>
+									</div>
+								</div>
+								</div>
+							</div>
+							  </div>
+							  <div class="clearfix"></div>
+								<div class="sep">
+
+									<div class="col-md-12">
+								<div class="col-md-9">
+								<div class="form-group">
+									<label class="col-md-5 control-label no-padding-right">SGST</label>
+									<div class="col-md-6">
+										<input id="SGST" name="SGST" placeholder="SGST" class="form-control" type="text" value="" maxlength="12"/>
+									</div>
+								</div>
+								</div>
+							</div>
+								
+								
+						</div>
+
+                        <div class="col-md-12">
+								<div class="col-md-9">
+								<div class="form-group">
+									<label class="col-md-5 control-label no-padding-right">Discount</label>
+									<div class="col-md-6">
+										<input id="Discount" name="Discount" placeholder="Discount" class="form-control" type="text" value="" maxlength="12"/>
+									</div>
+								</div>
+								</div>
+							</div>
+
+
+							<div class="col-md-12">
+								<div class="col-md-9">
+								<div class="form-group">
+									<label class="col-md-5 control-label no-padding-right">Amount to be recieved</label>
+									<div class="col-md-6">
+										<input id="Amount " name="Amount " placeholder="Amount " class="form-control" type="text" value="" maxlength="12"/>
+									</div>
+								</div>
+								</div>
+							</div>	
+						<div class="clearfix"></div>
+								<div class="sep">
+								 
+								
+							<div class="clearfix"></div>
+								
+								</div>
+						<div class="panel-footer">
+				      	<div class="row">
+				      		<div class="col-sm-12">
+				      			<div class="btn-toolbar text-center">
+					      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
+					      			<input type="reset" id="reset" value="Reset" onClick="window.location.reload()" class="btn-danger btn cancel"/>
+				      			</div>
+				      		</div>
+				      	</div>
+			      	</div>
+					<div>
+			</div></form>
+				</div>
+			</div>
+			</div>	
+		</div>
+	</div>
+</div>	
+</security:authorize>
+<script type="text/javascript">
+
+function addNewTextBox()
+{
+	 var  dvalue =  $("#sno"+k).val().trim();
+	 if((dvalue == undefined) || (dvalue==''))
+	 {
+		 return false;
+		 
+	 }
+	 else
+		 {
+			k=k+1;
+	var row ="<div id="+k+"><input type='Number' name='sno' id='sno"+k+"' class='form-control validate' placeholder='Sno'/><a href='javascript:void(0);' style='color: red;' onclick='removeDependentRow("+k+");'><i class='fa fa-trash' style='color: red;text-decoration: none;cursor: pointer; float: right; margin-top:-25px; margin-right:-25px;'></i></a></div>";
+	$("#dtext").append(row);
+	
+		 }
+	
+	
+	}
+function removeDependentRow(dependentRowCount) {
+	jQuery('#' + dependentRowCount).remove();
+	
+	k=k-1;
+
+	
+	
+}
 var modelid="";
 function getCurrentDate() {
 	   var purchaseddate = new Date();
@@ -705,7 +917,11 @@ var productmodelidDropDown =${productmodelid};
 		   
 		 }); 
 	} 
-
+	
+	 function addInvoice()
+	{
+		$("#InvoiceModal").modal('show');
+	} 
 
 	$("#taskdeadline").keypress(function() {
 		return false;
@@ -770,7 +986,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	function displayTable(listOrders) {
 		$('#tableId').html('');
 		var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-				+ '<thead><tr><th>Service Request Number</th><th>Category</th><th>Model Name</th><th>CustomerID</th><th>ServiceType</th><th>Customer Sent Image</th><th>Priority</th><th>Task Created By</th><th>Service Request Status</th><th>Address</th><th>Requested Time</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
+				+ '<thead><tr><th>Service Request Number</th><th>Category</th><th>Model Name</th><th>Customer ID</th><th>Service Type</th><th>Customer Sent Image</th><th>Priority</th><th>Task Created By</th><th>Service Request Status</th><th>Address</th><th>Requested Time</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
 		$('#tableId').html(tableHead);
 		serviceUnitArray = {};
 
@@ -840,7 +1056,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 							var history = "<a class='history historyit' onclick='viewTask("
 									+ orderObj.id
 									+ ")'> <i class='fa fa-history'></i></a>"
-
+							var invoice="<a class='invoice invoiceIt' onclick='addInvoice("+ orderObj.id+ ")'><i class='fa fa-money'></i></a>"
 							serviceUnitArray[orderObj.id] = orderObj;
 							var tblRow = "<tr>"
 									+ "<td title='"+orderObj.taskno+"'>"+ view2 + "</td>"
@@ -859,7 +1075,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 									+ "<td title='"+orderObj.total+"'>"+ orderObj.total */
 									+ "<td title='"+orderObj.requesttime+"'>"+ orderObj.requesttime+ "</td>"
 									/* + "<td title='"+orderObj.paymentstatus+"'>"+ orderObj.paymentstatus+ "</td>" */
-									+ "<td style='text-align: center;white-space: nowrap;'>"+ edit+ "&nbsp;&nbsp;"+ deleterow+ "&nbsp;&nbsp;"+ time+ "&nbsp;&nbsp;"+ "</td>"
+									+ "<td style='text-align: center;white-space: nowrap;'>"+ edit+ "&nbsp;&nbsp;"+ deleterow+ "&nbsp;&nbsp;"+ time+ "&nbsp;&nbsp;"+invoice+ "&nbsp;&nbsp;"+ "</td>"
 									+ "</tr>";	 
 							$(tblRow).appendTo("#tableId table tbody");
 						});
