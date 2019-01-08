@@ -363,11 +363,22 @@ function getNotifications(){
 		$.fn.makeMultipartRequest('POST', 'dashBoard', false,
 				formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
-			alert(jsonobj);
+			//alert(jsonobj);
 			var notifications =data;
 			displayNotifications(jsonobj.notifications);
 		});  
 }
+ function getQuotationNotifications(){
+	 var formData = new FormData();
+		$.fn.makeMultipartRequest('POST', 'dashBoard', false,
+				formData, false, 'text', function(data){
+			var jsonobj = $.parseJSON(data);
+		//	alert(jsonobj);
+			var quotationType =data;
+			displayQuotationNotifications(jsonobj.quotationType)
+		});  
+}
+ 
 
 
 
@@ -401,7 +412,7 @@ function displayNotifications(listOrders) {
 // 	alert(listOrders);
 	$('#notification').html('');
 	var tableHead = '<table id="notification" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">SR.No</th><th style="text-align:center;">Status</th><th style="text-align:center;">Request Type</th></thead><tbody></tbody></table>';
+			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">Request.No</th><th style="text-align:center;">Status</th><th style="text-align:center;">Request Type</th></thead><tbody></tbody></table>';
 	$('#notification').html(tableHead);
 	//serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -419,6 +430,27 @@ function displayNotifications(listOrders) {
 			 + "<td title='"+orderObj.taskno+"'>"+ orderObj.taskno + "</a></td>" 
 			//+ "<td title='"+orderObj.serviceType+"'>"+ orderObj.serviceType + "</td>"
 			+ "<td title='"+orderObj.kstatus+"'>"+ orderObj.kstatus + "</td>"
+			+ "<td title='"+orderObj.requestType+"'>"+ orderObj.requestType + "</td>"
+			+ "</tr>";
+		$(tblRow).appendTo("#notification table tbody");
+	});
+}
+
+
+
+function displayQuotationNotifications(listOrders) {
+// 	alert(listOrders);
+	$('#notification').html('');
+	var tableHead = '<table id="notification" class="table table-striped table-bordered datatables">'
+			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">Request.No</th><th style="text-align:center;">Status</th><th style="text-align:center;">Request Type</th></thead><tbody></tbody></table>';
+	$('#notification').html(tableHead);
+	//serviceUnitArray = {};
+	$.each(listOrders,function(i, orderObj) {
+		
+	//serviceUnitArray[orderObj.id] = orderObj;
+		var tblRow = "<tr>"
+			+ "<td title='"+orderObj.salesrequestnumber+"'><a href=viewQuotation?id='"+ orderObj.id+"'>"+ orderObj.salesrequestnumber+"</a></td>"
+			+ "<td title='"+orderObj.kstatus+"'>New</td>"
 			+ "<td title='"+orderObj.requestType+"'>"+ orderObj.requestType + "</td>"
 			+ "</tr>";
 		$(tblRow).appendTo("#notification table tbody");
@@ -500,30 +532,13 @@ function displayNotifications(listOrders) {
       <a style="padding: 10px 16px;" href="#">
       
       	<table class="table1 table table-striped table-bordered "  id="taskTableHeader">
-        	 <thead>
-         	<tr class="tr1" style=" background: #006699; color: #FFF;"> 
-
-   
-   
-                	<th class="th1">SR.No</th>
-                	<th class="th1">Status</th>
-                	<!-- <th class="th1">Service Type</th> -->
-                	<th class="th1">Request Type</th>
-                </tr> 
+        	 <thead><tr class="tr1" style=" background: #006699; color: #FFF;"><th class="th1">Request.No</th><th class="th1">Status</th>
+                	<th class="th1">Request Type</th></tr> 
             </thead>
-            <tbody>
-            <%-- <c:forEach var="issue" items="${notifications}">
-            	<tr class="tr1">
-                	<td class="td1">${issue.taskno}</td>
-                    <td class="td1">${issue.kpfield}</td>
-                    <td class="td1">${issue.kpchange}</td>
-                </tr>
-                </c:forEach>
-                 --%>
-                
-            	
-            </tbody>
+            <tbody></tbody>
         </table>
+        
+        
       
       </a>
     </div>

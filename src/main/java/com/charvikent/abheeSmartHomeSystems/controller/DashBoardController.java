@@ -73,13 +73,19 @@ public class DashBoardController {
 		List<DashBoardByCategory> list=null;
 		List<DashBoardByStatus> byStatusList=null;
 		List<TaskHistoryLogs> listOrderBeans = null;
+		
+		List<SalesRequest> listOrderBeans1 = null;
 		ObjectMapper objectMapper1 = null;
 		String sJson1 = null;
+		
+		ObjectMapper objectMapper2 = null;
+		String sJson2 = null;
 		
 		Integer unseentasks =0;
 
 		User objuserBean = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String id = String.valueOf(objuserBean.getId());
+		
 		if(!id.equals("1") && !id.equals("2")) {
 		
 		listOrderBeans = taskHistorydao.getNotificationByCustomerIds(id);
@@ -88,7 +94,7 @@ public class DashBoardController {
 			
 			listOrderBeans = taskHistorydao.getNotificationforAdmin();
 			
-			
+			listOrderBeans1=taskHistorydao.getQuotationNotificationforAdmin();
 		}
 		
 		
@@ -98,14 +104,25 @@ public class DashBoardController {
 			byStatusList=dashBoardDao.getStatusList();
 			ObjectMapper objmapper = new ObjectMapper();
 			
-			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+			//if ((listOrderBeans != null && listOrderBeans.size() > 0) && (listOrderBeans1 != null && listOrderBeans1.size() > 0)) {
+			if(true) {	
 				objectMapper1 = new ObjectMapper();
 				sJson1 = objectMapper1.writeValueAsString(listOrderBeans);
+				
+				objectMapper2 = new ObjectMapper();
+				sJson2 = objectMapper2.writeValueAsString(listOrderBeans1);
+				
 				session.setAttribute("notifications", sJson1);
+				
+				session.setAttribute("quotationType", sJson2);
 			} else {
 				objectMapper1 = new ObjectMapper();
 				
 				sJson1 = objectMapper1.writeValueAsString(listOrderBeans);
+				
+				objectMapper2 = new ObjectMapper();
+				sJson2 = objectMapper2.writeValueAsString(listOrderBeans1);
+				
 				
 			}
 			

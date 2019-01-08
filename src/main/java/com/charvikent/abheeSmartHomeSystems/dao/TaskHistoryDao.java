@@ -103,13 +103,18 @@ public class TaskHistoryDao {
 	
 	/*Queries for getQuotation for PushNotifications*/
 	public List<SalesRequest> getQuotationNotificationforAdmin(){
-		String hql ="select q.address,q.imgfiles,q.reqdesc,q.request_type,q.webstatus from abhee_sales_request q where webstatus='1'" ;
+		String hql ="select q.id,q.salesrequestnumber,q.webstatus,q.request_type from abhee_sales_request q  where q.webstatus='1'" ;
 		RowMapper<SalesRequest> rowMapper = new BeanPropertyRowMapper<SalesRequest>(SalesRequest.class);
 	    System.out.println(hql);
 		return  this.jdbcTemplate.query(hql, rowMapper);
 	}
 	
-	
+	public void UpdateQuotationNotificationByRequestno(String requestno){
+		String hql ="update abhee_sales_request t set t.webstatus='0' where t.id="+requestno+" and t.webstatus='1'";
+		System.out.println(hql);
+		jdbcTemplate.execute(hql);
+		
+	}
 	
 	
 	

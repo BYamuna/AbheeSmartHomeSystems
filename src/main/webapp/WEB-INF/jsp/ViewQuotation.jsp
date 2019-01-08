@@ -157,10 +157,10 @@
 	<link rel="stylesheet" type="text/css" href="http://charvikent.com/mantis/css/dropzone-4.3.0.min.css" />
 <script type="text/javascript">
 var viewQuotationTable = ${test23};
-var quotation = ${quotationlist};
+var viewquotation = ${quotationlist};
 //allstatus=JSON.parse(allstatus);
 $(function(){
-$.each(quotation, function(k, v){
+$.each(viewquotation, function(k, v){
 	
 		if(v.Attachfile==undefined) v.Attachfile='';
 		else

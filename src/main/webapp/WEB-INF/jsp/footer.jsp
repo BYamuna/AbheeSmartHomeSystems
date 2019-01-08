@@ -3,6 +3,7 @@
 	String baseurl2 =  request.getScheme() + "://" + request.getServerName() +      ":" +   request.getServerPort() +  request.getContextPath();
 	session.setAttribute("baseurl", baseurl2);
 	String session_notification = (String)session.getAttribute("notifications");
+	String quotation_notification = (String)session.getAttribute("quotationType");
 %>
 
 <!-- Footer Starts Here -->
@@ -56,7 +57,9 @@
 <script type="text/javascript">
 var isClick = 'Yes';
 var test = <%= session_notification %>;
- if(test != null){
+var quotation = <%= quotation_notification %>;
+
+ //if(test != null){
 	var msgIncrement = 0;
 	$("#taskTableHeader tbody").empty();
 	$.each(test,function(i, orderObj) { 
@@ -64,11 +67,8 @@ var test = <%= session_notification %>;
 			msgIncrement++; 
 		var task = "<tr>"
 			 + "<td title='"+orderObj.taskno+"'><a href=viewTicket?id="+ orderObj.taskno+"&pgn=0>"+ orderObj.taskno+"</a></td>" 
-			// + "<td title='"+orderObj.taskno+"'><a href='task'>"+ orderObj.taskno + "</a></td>" 
-			//+ "<td title='"+orderObj.serviceType+"'><b>"+ orderObj.serviceType + "</b></td>"
 			+ "<td title='"+orderObj.kstatus+"'>"+ orderObj.kstatus + "</td>"
 			+ "<td title='"+orderObj.requestType+"'><b>"+ orderObj.requestType + "</b></td>"
-			//+"<a class='view viewIt' href='task?"
 			+ "</tr>";
 		
 		/* $(task).appendTo("#taskTableHeader table tbody"); */
@@ -77,7 +77,25 @@ var test = <%= session_notification %>;
 		 }
 	});
 	 
-	}
+	//}
+ 
+ if(quotation != null){
+		var msgIncrement = 0;
+		$.each(quotation,function(i, orderObj) { 
+			 if(orderObj.webstatus == 1){
+				msgIncrement++; 
+			var task1 = "<tr>"
+				+ "<td title='"+orderObj.salesrequestnumber+"'><a href=viewQuotation?id='"+ orderObj.id+"'>"+ orderObj.salesrequestnumber+"</a></td>"
+				+ "<td title='"+orderObj.kstatus+"'>New</td>"
+				+ "<td title='"+orderObj.requestType+"'><b>"+ orderObj.requestType + "</b></td>"
+				+ "</tr>";
+			
+			
+			 $("#taskTableHeader tbody").append(task1);
+			 }
+		});
+		 
+		}
 		$("#noOfMessages").text(msgIncrement); 
 	</script>
 

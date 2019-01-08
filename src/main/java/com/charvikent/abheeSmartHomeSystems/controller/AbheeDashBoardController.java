@@ -36,6 +36,7 @@ import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
@@ -148,16 +149,26 @@ public class AbheeDashBoardController {
 							) throws JsonProcessingException, JSONException 
 	{
 		LOGGER.debug("Calling  viewTicket at controller");
+		
 		List<TaskHistoryLogs> listOrderBeansForNotification = null;
 		
-		
+		//List<SalesRequest> listOrderBeansForNotification1 = null;
 		
 		List<TaskHistoryLogs> listOrderBeans = null;
-		//ObjectMapper objectMapper2 = null;
+		
+		//List<SalesRequest> listOrderBeans1 = null;
+		
 		ObjectMapper objectMapperNotificaton = null;
-		//String sJson2 = null;
+		
+	/*	ObjectMapper objectMapperNotificaton1 = null;
+		
+		String sJsonNotificaton1 = null;
+		*/
 		String sJsonNotificaton = null;
-			List<Map<String, Object>> viewtaskBean = abheeTaskDao.getAbheeTaskById(taskId);
+			
+		
+		
+		List<Map<String, Object>> viewtaskBean = abheeTaskDao.getAbheeTaskById(taskId);
 			model.addAttribute("test2",viewtaskBean);
 			if(pgn.equals("1"))
 			{
@@ -180,18 +191,34 @@ public class AbheeDashBoardController {
 			}
 			else {
 				listOrderBeansForNotification = taskHistorydao.getNotificationforAdmin();
+			//	listOrderBeansForNotification1= taskHistorydao.getQuotationNotificationforAdmin();
+				
+				taskHistorydao.UpdateNotificationByCustomerIds(taskId);
+				
 				
 			}
 			
-			if (listOrderBeansForNotification != null && listOrderBeansForNotification.size() > 0) {
+			if (listOrderBeansForNotification != null && listOrderBeansForNotification.size() > 0) //&& ( listOrderBeansForNotification1 !=null && listOrderBeansForNotification1.size() > 0)) 
+			{
 				objectMapperNotificaton = new ObjectMapper();
+				
+			//	objectMapperNotificaton1 = new ObjectMapper();
+				
 				sJsonNotificaton = objectMapperNotificaton.writeValueAsString(listOrderBeans);
+				
+		//	sJsonNotificaton1 = objectMapperNotificaton1.writeValueAsString(listOrderBeans1);
+				
 				session.setAttribute("notifications", sJsonNotificaton);
+				//session.setAttribute("quotationType", sJsonNotificaton1);
+				
 			} else {
 				objectMapperNotificaton = new ObjectMapper();
 				
+				//objectMapperNotificaton1 = new ObjectMapper();
+				
 				sJsonNotificaton = objectMapperNotificaton.writeValueAsString(listOrderBeans);
 				
+				//sJsonNotificaton1 = objectMapperNotificaton1.writeValueAsString(listOrderBeans1);
 			}
 			
 			List<Map<String, Object>> statuslist=abheeTaskDao.getTaskStatusHistoryByTaskNo(taskId);
@@ -234,6 +261,29 @@ public class AbheeDashBoardController {
 	public String viewTicket(@RequestParam(value = "id", required = true) String quotationId,@RequestParam(value = "id", required = true) String requestno,Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException, JSONException 
 	{
 		LOGGER.debug("Calling  viewQuotation at controller");
+		
+		List<SalesRequest> listOrderBeansForNotification1 = null;
+		List<SalesRequest> listOrderBeans1 = null;
+		ObjectMapper objectMapperNotificaton1 = null;
+		
+		String sJsonNotificaton1 = null;
+		
+		User objuserBean = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id = String.valueOf(objuserBean.getId());
+		listOrderBeansForNotification1= taskHistorydao.getQuotationNotificationforAdmin();
+		if( listOrderBeansForNotification1 !=null && listOrderBeansForNotification1.size() > 0) {
+			objectMapperNotificaton1 = new ObjectMapper();
+			
+			
+			sJsonNotificaton1 = objectMapperNotificaton1.writeValueAsString(listOrderBeans1);
+			session.setAttribute("quotationType", sJsonNotificaton1);
+		}else {
+			objectMapperNotificaton1 = new ObjectMapper();
+			sJsonNotificaton1 = objectMapperNotificaton1.writeValueAsString(listOrderBeans1);
+		}
+		
+		
+		
 			List<Map<String, Object>> viewquotationBean = srequestDao.getAbheeQuotationByQuotationId(quotationId);
 			model.addAttribute("test3",viewquotationBean);
 			
@@ -251,6 +301,7 @@ public class AbheeDashBoardController {
 				request.setAttribute("quotationlist", sJson);
 				request.setAttribute("test23", sJson1);
 				jsonObj.put("quotationlist", statuslist);
+				taskHistorydao.UpdateQuotationNotificationByRequestno(requestno);
 				// System.out.println(sJson);
 			} else {
 				objectMapper = new ObjectMapper();
@@ -259,6 +310,7 @@ public class AbheeDashBoardController {
 				request.setAttribute("quotationlist", "''");
 				request.setAttribute("test23", sJson1);
 				jsonObj.put("quotationlist", statuslist);
+				taskHistorydao.UpdateQuotationNotificationByRequestno(requestno);
 			}
 		
 		return "ViewQuotation";

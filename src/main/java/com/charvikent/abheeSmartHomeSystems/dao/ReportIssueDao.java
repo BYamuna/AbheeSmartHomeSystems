@@ -438,7 +438,12 @@ public List<ReportIssue> getAllReportIssues()
      editissue.setTaskdeadline(issue.getTaskdeadline());
      editissue.setKstatus(issue.getKstatus());
      editissue.setAddComment(issue.getAddComment());
+     if(issue.getWarranty() == null) {
+    	 editissue.setWarranty(" ");
+     }else {
      editissue.setWarranty(issue.getWarranty());
+     }
+     //editissue.setWarranty(issue.getWarranty());
      
      if(issue.getUploadfile()!=null)
      {
