@@ -84,7 +84,7 @@ public class HomeController {
 	@RequestMapping("/login")
 	public String loginView(Model model) {
 		LOGGER.debug("Calling Login page index::{} at controller");
-		System.out.println("login called at /Rlogin page");
+		System.out.println("login called at /login page");
 		//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 //userService.setLoginRecord(objuserBean.getId(),"login");
 		//userService.checkuserExistOrNot(objuserBean);

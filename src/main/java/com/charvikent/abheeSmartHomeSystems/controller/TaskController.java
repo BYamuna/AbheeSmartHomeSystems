@@ -528,7 +528,6 @@ public class TaskController {
 		String images = request.getParameter("images");
 		System.out.println(images);
 		String requesttimeid = request.getParameter("requesttimeid");
-		// String warranty=request.getParameter("warranty");
 		AbheeTask task = new AbheeTask();
 		task.setAdditionalinfo("0");
 		task.setAssignto("2");
@@ -537,20 +536,24 @@ public class TaskController {
 		task.setPriority("3");
 		task.setSeverity("3");
 		task.setStatus("1");
-		// task.setSubject("Task created By Customer");
 		task.setServiceType(servicetypeid);
 		task.setCategory(catid);
 		task.setModelid(modelid);
 		task.setCommunicationaddress(custaddress);
-
 		Customer customer = customerDao.findCustomerByCustId(customerId);
 		task.setSubject("Task created By " + customer.getFirstname() + " " + customer.getLastname());
-
 		task.setCustomerId(customerId);
 		task.setRequesttime(requesttimeid);
 		task.setWarranty(" ");
 		task.setCompany(company);
+		if(task.getUploadfile()!=null)
+		{	
 		task.setUploadfile(images);
+		}
+		else
+		{
+			task.setUploadfile(" ");
+		}
 		task.setAddComment(" ");
 		task.setTaskdeadline(" ");
 		task.setImgfile(" ");
@@ -628,7 +631,7 @@ public class TaskController {
 		LOGGER.debug("Calling Warranty at controller");
 		JSONObject json = new JSONObject();
 		//Date date = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		//SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		ProductGuarantee pg = new ProductGuarantee();
 		//if (pg != null) {
 			 String productmodelid=request.getParameter("productmodelid"); 

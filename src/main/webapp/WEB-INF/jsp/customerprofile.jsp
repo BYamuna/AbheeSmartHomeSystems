@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> 
     
+<link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/datatables/dataTables.css' /> 
 <style>
 .fancy-select {
   position: absolute;
@@ -445,12 +446,12 @@ body {font-family: Arial;}
 						  <button class="tablinks" onclick="Servicerequest(),openCity(event, 'customerTaskTable')">Service Requests</button>
 					</div><br/>
                   	<div class="qsrdata"> 
-	                  	<div class="col-md-3 pull-right">
-	                  		 <input type="text" id = "search" name="search"  placeholder="search ..">
-	                  	</div> 
+	                  	<!--<div class="col-md-3 pull-right">
+	                  		  <input type="text" id = "search" name="search"  placeholder="search ..">
+	                  	</div>  -->
                   		<div class="clearfix"></div>
 	                  	<div id="customerQuotationTable" class="tabcontent">
-						  			<table class="table table-bordered priority prioritybg datatables"	style="border: 1px solid #0460a4;" >
+						  			<table class="table table-bordered priority prioritybg "	style="border: 1px solid #0460a4;" >
 									<thead>
 										<tr style="background-color: #0460a4; color: #fff; text-align: center; font-family:'Roboto'; font-size: 12px;">
 											<th>Quotation No.</th>
@@ -467,7 +468,7 @@ body {font-family: Arial;}
 								</table>
 							</div>
 						<div id="customerTaskTable" class="tabcontent">
-	  						<table class="table table-bordered priority prioritybg datatables"	style="border: 1px solid #0460a4;" >
+	  						<table class="table table-bordered priority prioritybg "	style="border: 1px solid #0460a4;" >
 								<thead>
 									<tr style="background-color: #0460a4; color: #fff; text-align: center; font-family:'Roboto'; font-size: 12px;">
 										<th>Request No.</th>
@@ -528,8 +529,11 @@ body {font-family: Arial;}
       </div>
     </div>
   </div> 
+<script type='text/javascript' src='${baseurl }/assets/plugins/datatables/jquery.dataTables.min.js'></script> 
+<script type='text/javascript' src='${baseurl }/assets/plugins/datatables/dataTables.bootstrap.js'></script> 
+<script type='text/javascript' src='${baseurl }/assets/demo/demo-datatables.js'></script> 
 <script type="text/javascript">
-
+var isCheck=false;
 $("#search").on("keyup", function() {
     var value = $(this).val().toUpperCase();
 
@@ -538,7 +542,7 @@ $("#search").on("keyup", function() {
 
             $row = $(this);
 
-            var id = $row.find("td:first").text();
+            var id = $row.find("td").text();
 
             if (id.indexOf(value) !== 0) {
                 $row.hide();
@@ -561,7 +565,8 @@ $("#search").on("keyup", function() {
         	          }, 
         			success : function(data) {
         				console.log(data);
-        				displayTable2(data);	
+        				displayTable2(data);
+        				isCheck=true;	
         			},
         			error:  function(e){
         				$.unblockUI();console.log(e);
@@ -600,6 +605,8 @@ $("#search").on("keyup", function() {
      				+ "</tr>";
      			$(tblRow).appendTo("#customerQuotationTable table tbody");
      		});	
+     		if(isCheck) $('#customerQuotationTable table').DataTable({});
+     		$(".dataTables_filter input").attr('placeholder','Search...');
      	} 
        
      </script>
@@ -656,6 +663,8 @@ $("#search").on("keyup", function() {
      				+ "</tr>";
      			$(tblRow).appendTo("#customerTaskTable table tbody");
      		});
+     		if(isCheck) $('#customerTaskTable table').DataTable({});
+     		$(".dataTables_filter input").attr('placeholder','Search...');
      	}
       </script> 
      <script>
@@ -675,7 +684,6 @@ $("#search").on("keyup", function() {
 		document.getElementById("defaultOpen").click();
 	</script> 
 <script type="text/javascript">
-
 var validation = true;
 var mobilevalidation=true;
 var subValidation =false;
@@ -729,7 +737,6 @@ function displayTable4(listOrders) {
 			+ "</tr>";
 		$(tblRow).appendTo("#customerOrderTable table tbody");
 	});
-	
 }
 
 $('#customer').blur(function() {
@@ -1172,8 +1179,5 @@ function resendOTP()
 		
 	});
 }
-	
 </script>
-
-
 <%@include file="abheefooter.jsp" %>

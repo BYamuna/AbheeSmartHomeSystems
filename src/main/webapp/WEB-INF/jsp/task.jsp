@@ -10,33 +10,64 @@
     color: #fff;
     opacity: 1;
 }
-	table, th, td {
-  border: 1px solid black;
-  
+.countclass{
+display: none;
 }
-th, td {
-  
-  text-align: left;
+.nopad {
+padding:0px;}
+.butt {
+	border:none;
+    width: 121px;
+    margin-top: 10px;
 }
-.ser{
-			padding-top: 25px;
-		}
-		.panel{
+.butt a hover{
+	text-decoration: none;
+    
+}
+.table1 {
+    font-family: arial, sans-serif;
+    /* border-collapse: collapse; */
+    width: 100%;
+    border:none;
+}
+.commonclass {
+width:96%;}
 
-		}
-
-		.dov{
-			padding-top:25px;
-		
-		} 
+#mod-foot {
+border:none;}
+.form-control {
+margin:4px;}
+.tablerow {
+    /* border: 1px solid #FF335E; */
+    text-align: left;
+    padding: 8px;
+}
+.preview td:nth-child(4) {
+display:none;}
+.bt1 {
+    padding: 7px 34px;
+    cursor: pointer;
+    list-style: none;
+    text-decoration: none;
+}
+.fg {
+display:inline-flex;
+text-align:center;
+}
+.fg .butt {
+margin:2px;
+}
 </style>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
-<script type="text/javascript"
-	src="js/bootstrap-datetimepicker.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css">
-	
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://html2canvas.hertzen.com/build/html2canvas.js"></script>
+<script src="https://github.com/tsayen/dom-to-image"></script>
+<script src="https://github.com/eligrey/FileSaver.js/"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css">
+<script type="text/javascript" src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/src/js/bootstrap-datetimepicker.js"></script>	
 <div class="clearfix"></div>
 <ol class="breadcrumb">
 	<li><a href="dashBoard">Home</a></li>
@@ -76,7 +107,7 @@ th, td {
 								</tr>
 							</thead>
 							<tbody></tbody>
-						</table>voi
+						</table>
 					</div>
 				</div>
 			</div>
@@ -585,201 +616,473 @@ th, td {
 				<button type="button" class="close" id="close" data-dismiss="modal" style="margin-top: -9px;">&times;</button>
 				<h4 class="modal-title" style="color: white;"> Invoice Details </h4>
         	</div>
-        	<div class="modal-body" style="height:824px;">
-					<div class="col-md-12">
-		        	 <%-- <div class="col-md-6">
-                            <img width="200px" src="${baseurl }/abhee/images/logo.png" class="img-resposive" alt="logo">
-                        </div> --%>
-                         <div class="dov" style="text-align:right;">Invoice Id:
-  						<input type="text" name="firstname">
-  						&nbsp;&nbsp;Date:
-  						<input type="text" name="firstname"></div>
-					<div class="panel panel-default">
-					<div class="panel-heading" style="padding-top: 1px;">
-					</div>
-					<div style="text-align: center; ; background-color: blue;"><h3 style="color: white">Invoice/Bill</h3></div>
-					<br>
-					<!-- <div class="clearfix"></div> -->
-					<form id="userForm" class="form-horizontal " action="invoice" method="Post">
-	                  <input id="id" name="id" type="hidden" value=""/>
-	                  <div >
-					
-								
+        	<div class="modal-body" style=" overflow-y: auto;	">
+        	
 
-								<div class="col-md-12 ser">
-								<div class="col-md-9">
+  <!-- Modal content -->
+  
+    <div id="qqqq1"  >
+      
+     <div class="">
+                            <img src="${baseurl }/abhee/images/logo.png" style="text-align: left;width:200px;">
+                        </div>
+                         <div class="" >
+                         <span class="pull-left">Invoice Id:
+						  <input type="text" name="firstname" id="inv1" class="form-control"></span>
+						   <span class="pull-right">Date:
+						  <input type="text" name="firstname" id="indate1" class="form-control"></span></div>
+						  <div class="col-md-12 ser">
+								<div class="col-md-10">
 								<div class="form-group">
-									<label class="col-md-5 control-label no-padding-right">Request Number<span class="impColor">*</span></label>
+									<label class="col-md-4 control-label no-padding-right">Request Number<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<input id="requestno" name="requestno" placeholder="Request Number" class="form-control validate onlyCharacters" type="text" value=""/>
+										<input id="rno" name="rno" placeholder="Request Number" class="form-control" type="text" value=""/>
 									</div>
 								</div></div>
-								</div>
+								</div><div class="clearfix"></div>
 							
 								<div class="col-md-12">
-								<div class="col-md-9">
+								<div class="col-md-10">
 								<div class="form-group">
-									<label class="col-md-5 control-label no-padding-right">Product Model<span class="impColor">*</span></label>
+									<label class="col-md-4 control-label no-padding-right">Product Model<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<input id="product Model" name="product model" placeholder="Product model" class="form-control validate onlyCharacters" type="text" value=""/>
+										<input id="model" name="model" placeholder="Product model" class="form-control" type="text" value=""/>
 									</div>
 								</div></div>
 								</div>
 								<div class="col-md-12">
-								<div class="col-md-9">
+								<div class="col-md-10">
 								<div class="form-group">
-									<label class="col-md-5 control-label no-padding-right">Type of request<span class="impColor">*</span></label>
+									<label class="col-md-4 control-label no-padding-right">Type of Service<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<input id="requesttype" name="requesttype" placeholder="Type of request" class="form-control validate onlyCharacters" type="text" value=""/>
+										<input id="rtype" name="rtype" placeholder="Type of service" class="form-control" type="text" value=""/>
 									</div>
 								</div></div>
 								</div>
+	<div></div>
+  </div>
+  
+  <div id="qqqq2" class="" >
+  <div class="" id="billheader" style=" display: none;">
+                            <img src="${baseurl }/abhee/images/logo.png" style="text-align: left;width:200px;">
+                        
+                        
+                        <div class="col-md-12 " >
+                        <div class="col-md-6 nopad">
+                        <div class="form-group ">
+									<label class="col-md-6 control-label no-padding-right " id="indate">Invoice Id:<span class="impColor">*</span></label>
+									<div class="col-md-6 nopad">
+										<input type="text" name="firstname" id="inv2" class="form-control " placeholder="Invoice Id"  >
+									</div>
+								</div></div> <div class="col-md-6 nopad">
+								 <div class="form-group">
+									<label class="col-md-6 control-label no-padding-right" id="indate">Date:<span class="impColor">*</span></label>
+									<div class="col-md-6 nopad">
+										<input type="text" name="firstname" id="indate2" class="form-control"  placeholder="Date">
+									</div>
+								</div></div></div>
+								<div class="clearfix"></div>
+								<div class="col-md-12 "  style="display:inline-flex;margin-bottom: -13px;">
+								<div class="form-group">
+									<label class="col-md-6 control-label no-padding-right" id="indate3">Request Number<span class="impColor">*</span></label>
+									<div class="col-md-6 nopad">
+										<input id="requestno" name="requestno" placeholder="Request Number" class="form-control" type="text" value=""/>
+									</div>
 								</div>
-								<div class="sep">
-									<div class="clearfix"></div>
+								<div class="form-group">
+									<label class="col-md-6 control-label no-padding-right" id="indate3">Type of Service<span class="impColor">*</span></label>
+									<div class="col-md-6 nopad">
+										<input id="requesttype" name="requesttype" placeholder="Type of service" class="form-control" type="text" value=""/>
+									</div>
 								</div>
-                                <div class="col-md-12">
-                                	<h4 style=" ">Parts Added & Price</h4>
-                                	
-                                </div>
-
-								  <div style="margin-bottom: 15px;" class="col-md-12" id="dtext">
-                                	<div class="col-md-3">
-                                		<label>Sno.</label><br>
-                                		<input type="text" name="sno" id="sno">
-                                	</div>
-                                	<div class="col-md-3">
-                                		<label>Part Name</label><br>
-                                		<input type="text" name="partname" id="partname">
-                                	</div>
-                                		<div class="col-md-3">
-                                		<label>Price</label><br>
-                                		<input type="text" name="price" id="price">
-                                	</div>
-                                		<div class="col-md-3">
-                                		<br>
-                                		<button  style="margin-top:8px;" class="pull-right btn btn-success" onclick="addNewTextBox()">add</button>
-                                	</div>
-
-                                </div>
- 								<div class="clearfix"></div>
-								<div class="sep">
+								
+								</div><div class="clearfix"></div>
+							
 								<div class="col-md-12">
-								<div class="col-md-9">
+								<div class="col-md-6 nopad">
 								<div class="form-group">
-									<label class="col-md-5 control-label no-padding-right">Total Price<span class="impColor">*</span></label>
-									<div class="col-md-6">
-										<input id="Total Price" name="Total Price" placeholder="Total Price" class="form-control validate" type="name" value=""/>
-									</div>
-								</div>
-								
-								</div>
-							</div>
-								
-							   	<div class="col-md-12">
-								<div class="col-md-9">
-								<div class="form-group">
-									<label class="col-md-5 control-label no-padding-right">CGST</label>
-									<div class="col-md-6">
-										<input id="CGST" name="CGST" placeholder="CGST" class="form-control" type="text" value="" maxlength="12"/>
+									<label class="col-md-6 control-label no-padding-right" id="indate3">Product Model<span class="impColor">*</span></label>
+									<div class="col-md-6 nopad">
+										<input id="pmodel" name="pmodel" placeholder="Product model" class="form-control" type="text" value=""/>
 									</div>
 								</div>
 								</div>
-							</div>
-							  </div>
-							  <div class="clearfix"></div>
-								<div class="sep">
+								<div class="col-md-12">
+								<div class="col-md-10">
+								</div>
+								</div>
+								</div>
+                         
+ </div>
+  <table id="myTable" class="table1 " style="" cellspacing="0" cellpadding="0">
+  <tr id="gg0" class="row1 tablerow">
+    <th id="headersofbill1" class="header"></th>
+    <th id="headersofbill2" class="header">&nbsp; Item Name</th>
+    <th id="headersofbill3" class="header">&nbsp; Price</th>
+  </tr>
+  <tr id="gg1" class="tablerow">
+    <td class="tdata"> <input  class="pro1 countclass commonclass form-control" type="text"   name="proCoun" id="proCoun1" ></td>
+    <td class="tdata"> <input class="pro1 commonclass form-control" type="text"   name="proName" id="proName1" ></td>
+    <td class="tdata"> <input class="commonclass form-control"  type="text"  onkeypress="return isNumber(event)" name="priceAfterDiscount" id="priceAfterDiscount1"></td>
+    <td>
+    <img  id="addbtn1" name="imgbtn" alt="Add Button" src="${baseurl }/abhee/images/blue_add_buttonn.jpg" onclick="addFieldd();"> 
+    <img  id="clsbtn1" name="cl1" alt="Close Button" src="${baseurl }/abhee/images/close_button.jpg" onclick="closeSelectedRow(this);">  </td>
+  </tr>  
+  </table>
 
-									<div class="col-md-12">
-								<div class="col-md-9">
+     <div class="col-md-12">
+								<div class="col-md-10">
 								<div class="form-group">
-									<label class="col-md-5 control-label no-padding-right">SGST</label>
+									<label class="col-md-4 control-label no-padding-right">Discount %:<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<input id="SGST" name="SGST" placeholder="SGST" class="form-control" type="text" value="" maxlength="12"/>
+										<input  id="givenDiscount"  onkeypress="return isNumber(event)" name="givenDiscount" placeholder="Discount" class="form-control validate onlyCharacters" type="text" value=""/>
 									</div>
+								</div></div>
 								</div>
-								</div>
-							</div>
-								
-								
-						</div>
-
-                        <div class="col-md-12">
-								<div class="col-md-9">
+	
+     <div class="col-md-12">
+								<div class="col-md-10">
 								<div class="form-group">
-									<label class="col-md-5 control-label no-padding-right">Discount</label>
+									<label class="col-md-4 control-label no-padding-right">GST tax:<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<input id="Discount" name="Discount" placeholder="Discount" class="form-control" type="text" value="" maxlength="12"/>
+										<input  id="gstTax"  onkeypress="return isNumber(event)" name="givenDiscount" placeholder="Discount" class="form-control validate onlyCharacters" type="text" value=""/>
 									</div>
+								</div></div>
 								</div>
-								</div>
-							</div>
-
-
-							<div class="col-md-12">
-								<div class="col-md-9">
+	
+     <div class="col-md-12">
+								<div class="col-md-10">
 								<div class="form-group">
-									<label class="col-md-5 control-label no-padding-right">Amount to be recieved</label>
+									<label class="col-md-4 control-label no-padding-right">Total :<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<input id="Amount " name="Amount " placeholder="Amount " class="form-control" type="text" value="" maxlength="12"/>
+										<input  id="totalwithtax"  onkeypress="return isNumber(event)" name="givenDiscount" placeholder="Discount" class="form-control validate onlyCharacters" type="text" value=""/>
 									</div>
+								</div></div>
 								</div>
-								</div>
-							</div>	
-						<div class="clearfix"></div>
-								<div class="sep">
-								 
-								
-							<div class="clearfix"></div>
-								
-								</div>
-						<div class="panel-footer">
-				      	<div class="row">
-				      		<div class="col-sm-12">
-				      			<div class="btn-toolbar text-center">
-					      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
-					      			<input type="reset" id="reset" value="Reset" onClick="window.location.reload()" class="btn-danger btn cancel"/>
-				      			</div>
-				      		</div>
-				      	</div>
-			      	</div>
-					<div>
-			</div></form>
-				</div>
+								<b id="test" style="color:#FFF;">Invoice Generated</b>
+    
+  </div>
+  
+    <div id="mod-foot" class="modal-footer">    
+    
+    <div class="col-md-12">
+    <div class="col-md-12 nopad">
+                        <div class="form-group fg ">
+                        	<input id="prevButton" class="butt butto btn-success"  type="button" value="Preview" onclick="prev();">    
+   							<a id="atag" onclick="hhhh();" data-auto-download download="proposed_file_name" class="butt butto btn-primary bt1"  >Download</a>
+    						<input id="enterbut" class="butt butto btn-warning" type="button" value="Enter" onclick="itemsPrice();">
+    						<input id="resetbut" class="butt butto btn-danger" type="reset" value="Reset">
+                        </div>
+    </div>
+    </div>    
+    
+  <img id="textScreenshot" src="">     
+        
+  </div>  
+  </div>
+  
+
+				
 			</div>
-			</div>	
-		</div>
+		</div>	
 	</div>
-</div>	
+</div>
 </security:authorize>
 <script type="text/javascript">
 
-function addNewTextBox()
-{
-	 var  dvalue =  $("#sno"+k).val().trim();
-	 if((dvalue == undefined) || (dvalue==''))
-	 {
-		 return false;
-		 
-	 }
-	 else
-		 {
-			k=k+1;
-	var row ="<div id="+k+"><input type='Number' name='sno' id='sno"+k+"' class='form-control validate' placeholder='Sno'/><a href='javascript:void(0);' style='color: red;' onclick='removeDependentRow("+k+");'><i class='fa fa-trash' style='color: red;text-decoration: none;cursor: pointer; float: right; margin-top:-25px; margin-right:-25px;'></i></a></div>";
-	$("#dtext").append(row);
-	
-		 }
-	
-	
-	}
-function removeDependentRow(dependentRowCount) {
-	jQuery('#' + dependentRowCount).remove();
-	
-	k=k-1;
+$('#indate1').datetimepicker({
 
+	useCurrent : false,
+	format : 'DD-MMM-YYYY',
+	showTodayButton : true,
+	sideBySide : true,
 	
+	toolbarPlacement : 'top',
+	focusOnShow : false,
+
+});
+document.getElementById("atag").style.display="none";
+document.getElementById("billheader").style.display="none";
+var currentRow;
+var totalItemsPrice = 0;
+var str = "javascript";
+
+function addFieldd() {	
 	
+	var myTable = document.getElementById("myTable");
+    var currentIndex = myTable.rows.length;
+    currentRow = myTable.insertRow(myTable.rows.length); 
+    currentRow.setAttribute("class", "tablerow"); 
+    currentRow.setAttribute("id", "gg" +myTable.rows.length); 
+    
+    var procount = document.createElement("input");
+    procount.setAttribute("id", "proCoun" +(myTable.rows.length-1));
+    procount.setAttribute("readonly", true);
+    procount.setAttribute("class", "countclass commonclass form-control");    
+    
+    var proNameBox = document.createElement("input");
+    proNameBox.setAttribute("name", "proName" + myTable.rows.length);
+    proNameBox.setAttribute("class", "rowwidth commonclass form-control");
+    proNameBox.setAttribute("id", "proName" +(myTable.rows.length-1));
+
+    /* var proPriceBox = document.createElement("input");
+    proPriceBox.setAttribute("name", "proPrice" + myTable.rows.length);     
+    proPriceBox.setAttribute("onkeypress", "return isNumber(event)");
+    proPriceBox.setAttribute("class", "rowwidth commonclass");
+    proPriceBox.setAttribute("id", "proPrice" +(myTable.rows.length-1));    
+
+     var proDiscountBox = document.createElement("input");
+    proDiscountBox.setAttribute("name", "proDiscount" + myTable.rows.length);    
+    proDiscountBox.setAttribute("onkeypress", "return isNumber(event)");
+    proDiscountBox.setAttribute("class", "rowwidth commonclass");
+    proDiscountBox.setAttribute("id", "proDiscount" +(myTable.rows.length-1));*/
+    
+    var priceAfterDiscountBox = document.createElement("input");
+    priceAfterDiscountBox.setAttribute("name", "priceAfterDiscount" + myTable.rows.length);    
+    priceAfterDiscountBox.setAttribute("onkeypress", "return isNumber(event)");
+    priceAfterDiscountBox.setAttribute("class", "commonclass form-control");
+    priceAfterDiscountBox.setAttribute("id", "priceAfterDiscount" +(myTable.rows.length-1)); 
+    
+    var addRowBox = document.createElement("img");
+    addRowBox.setAttribute("src", "Images/blue_add_buttonn.jpg");
+    addRowBox.setAttribute("onclick", "addFieldd();");
+    addRowBox.setAttribute("id", "addbtn" +(myTable.rows.length-1));
+        
+    var deleteRowBox = document.createElement("img");
+    deleteRowBox.setAttribute("src", "Images/close_button.jpg");
+    deleteRowBox.setAttribute("onclick", "closeSelectedRow(this);");
+    deleteRowBox.setAttribute("id", "clsbtn" +(myTable.rows.length-1));
+    deleteRowBox.setAttribute("name", "cl" +(myTable.rows.length-1));    
+
+    var currentCell = currentRow.insertCell(0);
+    currentCell.appendChild(procount);
+    
+    currentCell = currentRow.insertCell(1);
+    currentCell.appendChild(proNameBox);
+
+    /* currentCell = currentRow.insertCell(2);
+    currentCell.appendChild(proPriceBox);
+
+    currentCell = currentRow.insertCell(2);
+    currentCell.appendChild(proDiscountBox);  */
+    
+    currentCell = currentRow.insertCell(2);
+    currentCell.appendChild(priceAfterDiscountBox);
+    currentCell = currentRow.insertCell(3);
+    currentCell.appendChild(addRowBox);
+    currentCell.appendChild(deleteRowBox);   
+    //hhhh();
+    
 }
+
+
+
+function hhhh(){
+	$('#atag[data-auto-download]').each(function(){
+  	  var $this = $(this);
+  	  setTimeout(function() {
+  	  window.location = $this.attr('href');
+  	  }, 2000);
+  	  });
+	/* html2canvas(document.getElementById("qqqq2"), {
+	    onrendered: function(canvas) {
+	      var screenshot = canvas.toDataURL("image/png");
+	      document.getElementById("textScreenshot").setAttribute("src", screenshot);
+	      document.getElementById("textScreenshot").style.display = "none";
+	      document.getElementById("atag").setAttribute("href", screenshot);	
+	      //document.getElementById("atag").setAttribute("download","INV001" );	
+	      $('#atag[data-auto-download]').each(function(){
+	    	  var $this = $(this);
+	    	  setTimeout(function() {
+	    	  window.location = $this.attr('href');
+	    	  }, 2000);
+	    	  });
+	    }
+	  }); */
+}
+
+function closeSelectedRow(e){	
+	
+	var rr = e.getAttribute("name");
+	var lastChar = rr[rr.length -1];
+	var x = document.getElementsByClassName("tablerow");
+	
+    var tt = e.parentNode.parentNode.rowIndex;
+    document.getElementById("myTable").deleteRow(tt);           
+}
+
+// USED url: https://ctrlq.org/code/20056-convert-text-to-images-with-javascript
+function prev() {
+	
+	document.getElementById("atag").style.display="block";
+	document.getElementById("atag").setAttribute("download","INV001" );
+	document.getElementById("prevButton").style.display="none";
+	  document.getElementById("myTable").className ='table-bordered preview';
+	  var x = document.getElementById("myTable").rows.length;		
+	  for (i = 1; i <= x;i++) { 
+		
+		document.getElementById('addbtn' +i).style.visibility = 'hidden';
+	  	document.getElementById('clsbtn' +i).style.visibility = 'hidden';	
+	  	document.getElementById('enterbut').style.visibility = 'hidden';
+	  	document.getElementById('resetbut').style.visibility = 'hidden';
+	  	document.getElementById('mod-foot').style.backgroundColor = "#ffffff";
+	  	document.getElementById('qqqq1').style.display = "none";
+	  	document.getElementById('billheader').style.display = "block";
+
+	  	document.getElementById('inv1').style.display = 'none';
+	  	document.getElementById('indate1' ).style.display = 'none'; 
+	  	document.getElementById("inv2").value = document.getElementById('inv1' ).value;
+	  	document.getElementById("indate2").value = document.getElementById('indate1' ).value;
+	  	document.getElementById('indate').style.display = 'block';
+	  	document.getElementById('inv2').style.border = 'none';
+	  	document.getElementById('indate2' ).style.border = 'none';  
+	  	
+	  	
+	  	
+	  	document.getElementById('rno').style.display = 'none';
+	  	document.getElementById('model' ).style.display = 'none'; 
+		document.getElementById('rtype' ).style.display = 'none'; 
+	  	document.getElementById("requestno").value = document.getElementById('rno' ).value;
+	  	document.getElementById("pmodel").value = document.getElementById('model' ).value;
+		document.getElementById("requesttype").value = document.getElementById('rtype' ).value;
+	  	document.getElementById('indate3').style.display = 'block';
+	  	document.getElementById('requestno').style.border = 'none';
+	  	document.getElementById('pmodel' ).style.border = 'none';
+		document.getElementById('requesttype' ).style.border = 'none';
+		
+		document.getElementById('inv2').readOnly = true;
+		document.getElementById('indate2').readOnly = true;
+		document.getElementById('requestno').readOnly = true;
+		document.getElementById('pmodel').readOnly = true;
+		document.getElementById('requesttype').readOnly = true;
+		
+		document.getElementById('inv2').style.background = "#fff";
+		document.getElementById('indate2').style.background = "#fff";
+		document.getElementById('requestno').style.background = "#fff";
+		document.getElementById('pmodel').style.background = "#fff";
+		document.getElementById('requesttype').style.background = "#fff";
+	  	
+	  	document.getElementById('proCoun' +i).style.border = 'none';
+	  	document.getElementById('proCoun' +i).readOnly = true;
+	  	document.getElementById('proName' +i).style.border = 'none';
+	  	document.getElementById('proName' +i).readOnly = true;
+	  	document.getElementById('priceAfterDiscount' +i).style.border = 'none';
+	  	document.getElementById('priceAfterDiscount' +i).readOnly = true;
+	  	
+	  	document.getElementById('givenDiscount').style.border = 'none';
+	  	document.getElementById('givenDiscount').readOnly = true;
+	  	document.getElementById('givenDiscount').style.background = "#fff";
+	  	
+	  	document.getElementById('gstTax').style.border = 'none';
+	  	document.getElementById('gstTax').readOnly = true;
+	  	document.getElementById('gstTax').style.background = "#fff";
+	  	
+	  	document.getElementById('totalwithtax').style.border = 'none';
+	  	document.getElementById('totalwithtax').readOnly = true;
+	  	document.getElementById('totalwithtax').style.background = "#fff";
+	  	
+	  	document.getElementById('headersofbill1').style.display = "block";
+	  	document.getElementById("myTable").rows[0].cells[0].innerHTML = "&nbsp; S.No";
+	  	document.getElementById('proCoun' +i).style.display = "block";
+	  	document.getElementById('proCoun' +i).style.background = "#fff";
+	  	document.getElementById('proCoun' +i).style.width = "80px";
+	  	document.getElementById('proName' +i).style.background = "#fff";
+	  	document.getElementById('priceAfterDiscount' +i).style.background = "#fff";
+	  	document.getElementById('priceAfterDiscount' +i).style.width = "220px";
+	  	
+	  	document.getElementById('headersofbill1').style.border = '';
+	  	document.getElementById('headersofbill2').style.border = '';
+	  	document.getElementById('headersofbill3').style.border = '';
+	  	
+	  	document.getElementById('proCoun' +i).value = i;	  	
+	  	document.getElementById('proName' +i).style.borderLeft = 'none';
+	  	document.getElementById('priceAfterDiscount' +i).style.borderLeft = 'none';
+	  	
+	  	
+	  	
+	  	html2canvas(document.getElementById("qqqq2"), {
+		    onrendered: function(canvas) {
+		      var screenshot = canvas.toDataURL("image/png");
+		      document.getElementById("textScreenshot").setAttribute("src", screenshot);
+		      document.getElementById("textScreenshot").style.display = "none";
+		      document.getElementById("atag").setAttribute("href", screenshot);	
+		      //document.getElementById("atag").setAttribute("download","INV001" );	
+		       document.getElementById("test").style.display = "none";
+		      $('#atag[data-auto-download]').each(function(){
+		    	  var $this = $(this);
+		    	  setTimeout(function() {
+		    	  window.location = $this.attr('href');
+		    	  }, 2000);
+		    	  });
+		    }
+		  });
+	  		  	
+	}	
+}
+
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if ((charCode>31)&&(charCode<48||charCode> 57)) {
+        return false;
+    }
+    return true;
+}
+
+// USED URL: https://www.codexworld.com/export-html-to-word-doc-docx-using-javascript/
+function Export2Doc(element, filename = ''){	  
+	
+    var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+    var postHtml = "</body></html>";
+    var html = preHtml+document.getElementById(element).innerHTML+postHtml;
+
+    var blob = new Blob(['\ufeff', html], {
+        type: 'application/msword'
+    });
+    
+    // Specify link url
+    var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+    
+    // Specify file name
+    filename = filename?filename+'.doc':'document.doc';
+    
+    // Create download link element
+    var downloadLink = document.createElement("a");
+
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob ){
+        navigator.msSaveOrOpenBlob(blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = url;
+        
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+    
+    document.body.removeChild(downloadLink); 
+    
+}
+
+function itemsPrice(){	
+		
+	var x = document.getElementById("myTable").rows.length;		
+	
+	for (i = 1; i <= x;i++) {    
+    	
+    	 /*  document.getElementById("priceAfterDiscount" +i).value = 
+    		(document.getElementById("proPrice" +i).value) *
+    		(document.getElementById("proDiscount" +i).value); */
+    	  
+    	totalItemsPrice =  totalItemsPrice + Number(document.getElementById("priceAfterDiscount" +i).value);
+    	document.getElementById("totalwithtax").value = totalItemsPrice *(1 -((Number(document.getElementById("gstTax").value) + Number(document.getElementById("givenDiscount").value))/100));
+  
+    }    
+} 	
 var modelid="";
 function getCurrentDate() {
 	   var purchaseddate = new Date();
@@ -918,10 +1221,7 @@ var productmodelidDropDown =${productmodelid};
 		 }); 
 	} 
 	
-	 function addInvoice()
-	{
-		$("#InvoiceModal").modal('show');
-	} 
+	
 
 	$("#taskdeadline").keypress(function() {
 		return false;
@@ -1056,7 +1356,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 							var history = "<a class='history historyit' onclick='viewTask("
 									+ orderObj.id
 									+ ")'> <i class='fa fa-history'></i></a>"
-							var invoice="<a class='invoice invoiceIt' onclick='addInvoice("+ orderObj.id+ ")'><i class='fa fa-money'></i></a>"
+							var invoice="<a class='invoice invoiceIt' onclick='addInvoice("+ orderObj.id+ ")'><i class='fa fa-money'></i></a>" 
 							serviceUnitArray[orderObj.id] = orderObj;
 							var tblRow = "<tr>"
 									+ "<td title='"+orderObj.taskno+"'>"+ view2 + "</td>"
@@ -1075,7 +1375,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 									+ "<td title='"+orderObj.total+"'>"+ orderObj.total */
 									+ "<td title='"+orderObj.requesttime+"'>"+ orderObj.requesttime+ "</td>"
 									/* + "<td title='"+orderObj.paymentstatus+"'>"+ orderObj.paymentstatus+ "</td>" */
-									+ "<td style='text-align: center;white-space: nowrap;'>"+ edit+ "&nbsp;&nbsp;"+ deleterow+ "&nbsp;&nbsp;"+ time+ "&nbsp;&nbsp;"+invoice+ "&nbsp;&nbsp;"+ "</td>"
+									+ "<td style='text-align: center;white-space: nowrap;'>"+ edit+ "&nbsp;&nbsp;"+ deleterow+ "&nbsp;&nbsp;"+ time+ "&nbsp;&nbsp;"+invoice+ "</td>"
 									+ "</tr>";	 
 							$(tblRow).appendTo("#tableId table tbody");
 						});
@@ -1128,6 +1428,15 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	   $("#ServiceType").attr('disabled', true);
 	    /*$("#description").attr('disabled', true); */ 
 	}
+	
+	
+	 function addInvoice(id)
+		{
+			 	$("#rno").val(serviceUnitArray[id].taskno);
+				$("#model").val(serviceUnitArray[id].modelname);
+				$("#rtype").val(serviceUnitArray[id].servicetypename); 
+			$("#InvoiceModal").modal('show');
+		} 
 
 	/* view task history */
 

@@ -128,7 +128,7 @@
 				<div class="col-sm-12">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-						<input type="password" name="password" id="mpass" class="form-control "  placeholder="Password"/>
+						<input type="password" name="password" id="mpass" class="form-control"  maxlength="6" placeholder="Password"/>
 					</div>
 				</div>
 			</div>

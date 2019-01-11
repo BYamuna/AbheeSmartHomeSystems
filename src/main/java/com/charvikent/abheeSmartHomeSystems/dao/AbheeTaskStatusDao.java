@@ -53,7 +53,7 @@ Authentication authentication = SecurityContextHolder.getContext().getAuthentica
 		else
 			{
 			for(AbheeTaskStatus bean: rolesList){
-				if(bean.getId() == 3 ||bean.getId() == 7 ||bean.getId() == 8 )
+				if(bean.getId() == 3 ||bean.getId() == 7 ||bean.getId() == 8 ||bean.getId() == 10 )
 				rolesMap.put(bean.getId(), bean.getName());
 			}
 			

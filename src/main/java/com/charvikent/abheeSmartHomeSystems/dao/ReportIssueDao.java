@@ -36,7 +36,6 @@ import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
-import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 /*import com.charvikent.abheeSmartHomeSystems.model.ProductGuarantee;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;*/
 //import com.charvikent.abheeSmartHomeSystems.model.Customer;
