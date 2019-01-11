@@ -81,7 +81,9 @@ public class SalesRequestController
 		//loginDetails.setLongitude(str[1]);
 		loginDetails.setEnable("1");
 		loginDetails.setWebstatus(1);
+		loginDetails.setQuotationstatus(1);
 		loginDetails.setQstatus("1");
+		loginDetails.setNotes(" ");
 		loginDetails.setMobileno(customer.getMobilenumber());
 		loginDetails.setEmail(customer.getEmail());
 		loginDetails.setCustomerid(customer.getCustomerId());
@@ -176,7 +178,9 @@ public class SalesRequestController
    		 salesrequest.setQuotationDocuments(fileTemplate.concurrentFileNames());
    		  salesrequest.setEnable("0");
    		  salesrequest.setStatus(1);
-   		  salesrequest.setQstatus("1");
+   		  //salesrequest.setQstatus("1");
+   		 salesrequest.setCstatus(1);
+   		salesrequest.setQuotationstatus(1);
    		  salesrequest.setNotes(description);
    		 fileTemplate.clearFiles();
    		 

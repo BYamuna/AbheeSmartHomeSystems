@@ -487,7 +487,7 @@ th, td {
 <div class="modal fade" id="warrantyModal" data-backdrop="static" data-keyboard="false"  role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<div class="modal-header" style="background: #2973cf;">
+			<div class="modal-header" style="background: #2973cf;    padding: 7px;">
 				<button type="button" class="close" id="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title" style="color: white;"> Add Product Warranty Details </h4>
         	</div>
@@ -495,12 +495,13 @@ th, td {
 					<form class="form-horizontal"  method="post" >
 					<div class="panel-body">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-9">
 								<div class="form-group">
 									<input type="hidden" id= "warrantyid" />
 									<label for="focusedinput" class="col-md-6 control-label ">Product Model Name<span class="impColor">*</span>
 									</label>
-									<input type="text" name="modelid" id="modelid" />
+									<input type="text" name="modelid" id="modelid" class="col-md-6" />
+									
 								<%--<select id="productmodelid"	class="col-xs-10 col-sm-5 validate"	onfocus="removeBorder(this.id)">
 										<option value="" label="--- Select ---" />
 										 <c:forEach var="list" items="${productmodelid}">
@@ -509,21 +510,22 @@ th, td {
 									</select>--%>
 								</div>
 							</div>
+							<div class="clearfix"></div>
 							
-							<div class="col-md-6">
+							<div class="col-md-9">
 								<div class="form-group">
 								<input type="hidden" id= "orderId" />
 									<label for="focusedinput" class="col-md-6 control-label ">Customer ID	<span class="impColor">*</span>
 									</label>
-									<input type="text" name="customerId" id="customerId" />	
+									<input type="text" name="customerId" id="customerId" class="col-md-6" />	
 								</div>
-							</div>
-							<div class="col-md-6">
+							</div><div class="clearfix"></div>
+							<div class="col-md-9">
 								<div class="form-group">
 								<input type="hidden" id= "orderId" />
 									<label for="focusedinput" class="col-md-6 control-label ">Year<span class="impColor">*</span>
 									</label>
-									<select id="year" class="col-xs-10 col-sm-5 "	onfocus="removeBorder(this.id)">
+									<select id="year" class="col-md-6 "	onfocus="removeBorder(this.id)">
 										<option value="" label="--- Select ---" />
 										<option value="1" label="1" />  
 										<option value="2" label="2" />
@@ -541,19 +543,19 @@ th, td {
 						</div>
 						
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-9">
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Purchased Date	<span class="impColor">*</span>
 									</label>
-										<input type="text" id="purchaseddate"	class="col-xs-10 col-sm-5 " />
+										<input type="text" id="purchaseddate"	class="col-md-6 " />
 
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-9">
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Expired Date	<span class="impColor">*</span>
 									</label>
-										<input type="text" id="expireddate" class="col-xs-10 col-sm-5 " />
+										<input type="text" id="expireddate" class="col-md-6 " />
 								</div>
 							</div>
 							
@@ -611,7 +613,7 @@ th, td {
 								<div class="form-group">
 									<label class="col-md-5 control-label no-padding-right">Request Number<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<input id="requestno" name="requestno" placeholder="Request Number" class="form-control validate onlyCharacters" type="text" value=""/>
+										<input id="requestno" name="requestno" placeholder="Request Number" class="form-control " type="text" value=""/>
 									</div>
 								</div></div>
 								</div>
@@ -621,7 +623,7 @@ th, td {
 								<div class="form-group">
 									<label class="col-md-5 control-label no-padding-right">Product Model<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<input id="product Model" name="product model" placeholder="Product model" class="form-control validate onlyCharacters" type="text" value=""/>
+										<input id="product Model" name="product model" placeholder="Product model" class="form-control " type="text" value=""/>
 									</div>
 								</div></div>
 								</div>
@@ -630,7 +632,7 @@ th, td {
 								<div class="form-group">
 									<label class="col-md-5 control-label no-padding-right">Type of request<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<input id="requesttype" name="requesttype" placeholder="Type of request" class="form-control validate onlyCharacters" type="text" value=""/>
+										<input id="requesttype" name="requesttype" placeholder="Type of request" class="form-control" type="text" value=""/>
 									</div>
 								</div></div>
 								</div>
@@ -669,7 +671,7 @@ th, td {
 								<div class="form-group">
 									<label class="col-md-5 control-label no-padding-right">Total Price<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<input id="Total Price" name="Total Price" placeholder="Total Price" class="form-control validate" type="name" value=""/>
+										<input id="Total Price" name="Total Price" placeholder="Total Price" class="form-control" type="name" value=""/>
 									</div>
 								</div>
 								
@@ -737,7 +739,7 @@ th, td {
 				      	<div class="row">
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar text-center">
-					      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
+					      			<input type="submit" id="submit3" value="Submit" class="btn-primary btn"/>
 					      			<input type="reset" id="reset" value="Reset" onClick="window.location.reload()" class="btn-danger btn cancel"/>
 				      			</div>
 				      		</div>

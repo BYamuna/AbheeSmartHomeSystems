@@ -32,25 +32,34 @@ public class TaskHistoryDao {
 		entityManager.persist(taskHistory);
 		
 	}
-	public List<TaskHistoryLogs> getNotificationByCustomerId(TaskHistoryLogs history){
-		String hql ="select th.add_comment,ts.name as kstatus from task_history_logs th,abheetaskstatus ts where th.assignby='"+history.getAssignby()+"' and th.notificationstatus='1' and ts.id=th.kstatus";
+	public List<TaskHistoryLogs> getNotificationByCustomerId(SalesRequest history){
+		String hql =" select th.add_comment,ts.name as kstatus ,th.request_type from task_history_logs th,abheetaskstatus ts where th.assignby='"+history.getCustomerid()+"' and th.notificationstatus='1' and ts.id=th.kstatus";
+		RowMapper<TaskHistoryLogs> rowMapper = new BeanPropertyRowMapper<TaskHistoryLogs>(TaskHistoryLogs.class);
+		System.out.println(hql);
+	    return  this.jdbcTemplate.query(hql, rowMapper);
+	}
+	public void UpdateNotificationByCustomerId(SalesRequest history){
+		String hql ="update task_history_logs set notificationstatus='0' where assignby='"+history.getCustomerid()+"'";
+		jdbcTemplate.execute(hql);
+	}
+	public List<TaskHistoryLogs> getNotificationByTechnicianId(TaskHistoryLogs history){
+		String hql ="select th.add_comment,ts.name as kstatus ,u.user_id as assignto  from task_history_logs th,abheetaskstatus ts ,abheeusers  u where u.user_id='"+history.getAssignto()+"' and th.tstatus='1' and ts.id=th.kstatus ";
 		RowMapper<TaskHistoryLogs> rowMapper = new BeanPropertyRowMapper<TaskHistoryLogs>(TaskHistoryLogs.class);
 	    return  this.jdbcTemplate.query(hql, rowMapper);
 	}
-	public void UpdateNotificationByCustomerId(TaskHistoryLogs history){
-		String hql ="update task_history_logs set notificationstatus='0' where assignby='"+history.getAssignby()+"'";
+	
+	public void UpdateNotificationByTechnicianId(TaskHistoryLogs history){
+		String hql ="update task_history_logs t, abheeusers u set t.tstatus='0' where u.user_id='"+history.getAssignto()+"' and t.tstatus='1' and t.assignto=u.id ";
+		System.out.println(hql);
 		jdbcTemplate.execute(hql);
 	}
 	public void UpdateKstatusbyTaskNo(AbheeTask task){
-		String hql ="update abhee_task set kstatus='6' where taskno='"+task.getTaskno()+"' ";
+		String hql ="update abhee_task set kstatus='6',add_comment='Please Reassign another Technician for this Task' where taskno='"+task.getTaskno()+"' ";
 		jdbcTemplate.execute(hql);
 	}
 	
 	public List<Map<String, Object>> getNotificationsListByCustomerId(String custid,String taskno){
-		String hql ="select th.description,th.taskno,st.servicetypename as servicetype from task_history_logs th ,abheeservicetype st where assignby='"+custid+"' and th.taskno='"+taskno+"' and st.id=th.service_type group by taskno";
-		/*RowMapper<TaskHistoryLogs> rowMapper = new BeanPropertyRowMapper<TaskHistoryLogs>(TaskHistoryLogs.class);
-		System.out.println(hql);
-	    return  this.jdbcTemplate.query(hql, rowMapper);*/
+		String hql ="select th.description,th.taskno,th.request_type from task_history_logs th where assignby='"+custid+"' and th.taskno='"+taskno+"'  group by taskno";
 
 		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
 		System.out.println(retlist);
@@ -116,6 +125,6 @@ public class TaskHistoryDao {
 		
 	}
 	
-	
+	/*Queries for getQuotation for PushNotifications*/
 	
 }

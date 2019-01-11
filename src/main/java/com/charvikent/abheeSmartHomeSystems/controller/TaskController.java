@@ -207,6 +207,7 @@ public class TaskController {
 
 					task.setStatus("1");
 					task.setAdditionalinfo("0");
+					
 					/* taskHistoryLogsDao.savetaskhistorylogs(taskHistoryLogs); */
 
 					reportIssueDao.saveReportIssue(task);

@@ -73,8 +73,7 @@ public class AbheeTask
 	private String discount;
 	private String tax;
 	private String amountreceived;
-	
-	
+	private int cstatus;
 	public int getTaskstatus() {
 		return taskstatus;
 	}
@@ -347,6 +346,14 @@ public class AbheeTask
 	public void setRequestType(String requestType) {
 		this.requestType = requestType;
 	}
+	
+	
+	public int getCstatus() {
+		return cstatus;
+	}
+	public void setCstatus(int cstatus) {
+		this.cstatus = cstatus;
+	}
 	@Override
 	public String toString() {
 		return "AbheeTask [id=" + id + ", taskno=" + taskno + ", customerId=" + customerId + ", taskstatus="
@@ -361,8 +368,10 @@ public class AbheeTask
 				+ ", severityid=" + severityid + ", servicetypeid=" + servicetypeid + ", requesttimeid=" + requesttimeid
 				+ ", assignbyid=" + assignbyid + ", kstatusid=" + kstatusid + ", modelid=" + modelid + ", addComment="
 				+ addComment + ", communicationaddress=" + communicationaddress + ", warranty=" + warranty + ", total="
-				+ total + ", discount=" + discount + ", tax=" + tax + ", amountreceived=" + amountreceived + "]";
+				+ total + ", discount=" + discount + ", tax=" + tax + ", amountreceived=" + amountreceived
+				+ ", cstatus=" + cstatus + "]";
 	}
+	
 	
 	
 	
