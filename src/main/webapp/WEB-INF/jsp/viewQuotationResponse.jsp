@@ -54,10 +54,7 @@
 	background:#166eaf;
 	color:#ffffff;
 }
-.table>thead>tr>th {
-    padding: 3px;
-    }
-    .bodypanel {
+.bodypanel {
 border: none !important;
     box-shadow: none !important;
     padding: 5px !important;
@@ -73,7 +70,7 @@ border: none !important;
 		<div class="main-content-inner">
 			<div class="breadcrumbs ace-save-state" id="breadcrumbs">
 				<ul class="breadcrumb">
-				<!-- 	<li class="">Service Request History</li> -->
+					<!-- <li class="">Quotation Request History</li> -->
 				</ul><!-- /.breadcrumb -->
 			</div>
 			
@@ -85,7 +82,7 @@ border: none !important;
 				<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div style="margin:0 auto;" class="panel-heading">
-						<h4>Service Request Details</h4>
+						<h4>Quotation Request Details</h4>
 						<!-- <div class="options">
 							<a href="" class="panel-collapse"><i class="fa fa-chevron-up"></i></a>
 						</div> -->
@@ -96,54 +93,27 @@ border: none !important;
 						<div class="col-md-12">
 						
 						<div class="table-responsive">
-								<table class="table table-bordered priority prioritybg" style="border: 1px solid #0460a4; width:;" id="viewTasksTable">
-								 <thead><tr><th>Username</th><th>ServiceTypename</th><th>CreatedTime</th><th>Description</th><th>Requeststatus</th><th>Priority</th><th>Severity</th><th>Subject</th><th>Deadline</th><th>Taskno</th><th>Category</th><th>ModelName</th><th>CustomerId</th>
-				                 <th>Files</th></tr><tr></tr></thead><tbody></tbody></table>
-
-			<%-- <c:forEach var="listOuter" items="${test2}">
-       
-              <c:forEach var="listInner" items="${listOuter}">
-                 <tr>
-                  <td>
-                      ${listInner.key}
-                  </td>
-                  <td>
-                      ${listInner.value}
-                  </td>
-                   </tr>
-              </c:forEach>
-         
-      </c:forEach>
-					 --%>				
-					 
-
-									
-
+								<table class="table table-bordered priority prioritybg" style="border: 1px solid #0460a4; width:;" id="viewQuotationTable">
+								 <thead><tr><th>Request Number</th><th>Product Category</th><th>Product Model</th><th>EmailId</th><th>Mobile</th><th>Files</th><th>Location</th><th>Address</th><th>Comments</th></tr><tr></tr></thead><tbody></tbody></table>
 							</div>
-</div>
-	<div class="col-md-2"></div>
-</div>
-
+						</div>
+							<div class="col-md-2"></div>
+						</div>
 				</div>
-							</div>
-						
-				
-              
-
+							</div>            
 </tr>
-
 								</table>
 			
 </div>
 
 
-<div class="container">
-<div align="center">
-<button onclick="goBack()" class="btn btn-primary"> <i class="fa fa-step-backward"></i> Back  </button></div>
-<div class="col-md-12"><br>
+					<div class="container">
+					<div align="center">
+					<button onclick="goBack()" class="btn btn-primary"> <i class="fa fa-step-backward"></i> Back  </button></div>
+					<div class="col-md-12"><br>
 				<div class="panel panel-primary">
 					<div style="margin:0 auto;" class="panel-heading rounded-bottom">
-						<h4>Service Request History</h4>
+						<h4>Quotation Request History</h4>
 						<!-- <div class="options">
 							<a href="" class="panel-collapse"><i class="fa fa-chevron-up"></i></a>
 						</div> -->
@@ -155,53 +125,30 @@ border: none !important;
 						<div class="col-md-8">
 						
 						<div class="table-responsive">
-								<table class="table table-bordered priority prioritybg" style="border: 1px solid #0460a4; width:;" id="viewStatusTable">
-
-
-       
-              
+								<table class="table table-bordered priority prioritybg" style="border: 1px solid #0460a4; width:;" id="viewQuotationHistoryTable">
                  <thead><tr>
                   <th>
-                   Modified User Name   
+                   Date Modified   
                   </th>
                   <th>
-                    Product model
+                   Sent Quotation
                   </th>
                   <th>
-                    Modified Status
-                  </th>
-                  <th>
-                     created_time  
-                  </th>
-                  <th>
-                     Note
-                  </th>
-                  <th>
-                     Attached Files
+                   Notes
                   </th>
                    </tr>
                  <tr>
                  
-                 </tr>
-                
-              
-         
-      
-									
-
-									
-
-																	</thead><tbody></tbody></table>
+                 </tr>					
+		</thead><tbody></tbody></table>
 							</div>
 </div>
 	<div class="col-md-2"></div>
 </div>
-
 				</div>
 							</div>
 </div>
 </div>
-		
 					</div><!-- /.page-content -->
 								
 								
@@ -219,10 +166,11 @@ border: none !important;
 	<link rel="stylesheet" type="text/css" href="http://charvikent.com/mantis/css/dropzone-4.3.0.min.css" />
 	<%@include file="abheefooter.jsp" %>
 <script type="text/javascript">
-var viewTasksTable = ${test21};
-var allstatus = ${statuslist1};
+var viewQuotationTable = ${test23};
+var viewquotation = ${quotationlist};
+//allstatus=JSON.parse(allstatus);
 $(function(){
-$.each(allstatus, function(k, v){
+$.each(viewquotation, function(k, v){
 	
 		if(v.Attachfile==undefined) v.Attachfile='';
 		else
@@ -236,62 +184,57 @@ $.each(allstatus, function(k, v){
 				v.Attachfile=Attachfile;
 			}
 	var tr=	'<tr>'
-			+'<td>'+ v.username +'</td>'
-			+'<td>'+ v.productname +'</td>'
-			+'<td>'+ v.servicestatus +'</td>'
 			+'<td>'+ v.created_time +'</td>'
-			+'<td>'+ v.add_comment +'</td>'
 			+'<td>'+v.Attachfile+'</td>'
+			+'<td>'+ v.notes +'</td>'
 			+'</tr>';
-	$('#viewStatusTable tbody').append(tr);
+	$('#viewQuotationHistoryTable tbody').append(tr);
 });
 });
 $(function(){
               
-$.each(viewTasksTable, function(k, v){
+$.each(viewQuotationTable, function(k, v){
 	console.log(v);
 	
 	if(v.AttachedFiles==undefined) v.AttachedFiles='';
 	else
 		{
 			var list=v.AttachedFiles.split('*');
-			var Attachfile='';
+			var Attachfiles='';
 			for(var i=0;i<list.length;i++)
 			{
-				Attachfile=Attachfile+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
+				Attachfiles=Attachfiles+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
 			}
-			v.AttachedFiles=Attachfile;
+			v.AttachedFiles=Attachfiles;
 		}
-	if(v.description==null){
+	if(v.reqdesc==null){
 		
-		v.description='---';
+		v.reqdesc='---';
 	}
 var tr=	'<tr>'
-		+'<td>'+ v.username +'</td>'
-		+'<td>'+ v.servicetypename +'</td>'
-		+'<td>'+ v.created_time +'</td>'
-		+'<td>'+ v.description +'</td>'
-		+'<td>'+ v.Requeststatus  +'</td>'
-		+'<td>'+ v.priority +'</td>'
-		+'<td>'+ v.severity +'</td>'
-		+'<td>'+ v.subject +'</td>'
-		+'<td>'+ v.taskdeadline +'</td>'
-		+'<td>'+ v.taskno +'</td>'
+		+'<td>'+ v.salesrequestnumber +'</td>'
 		+'<td>'+ v.category +'</td>'
-		+'<td>'+ v.modelname +'</td>'
-		+'<td>'+ v.customer_id +'</td>'
-		+'<td>'+v.AttachedFiles+'</td>'
+		+'<td>'+ v.modelnumber +'</td>'
+		+'<td>'+ v.email +'</td>'
+		+'<td>'+ v.mobileno +'</td>'
+		+'<td>'+ v.AttachedFiles +'</td>'
+		+'<td>'+ v.location +'</td>'
+		+'<td>'+ v.address +'</td>'
+		+'<td>'+ v.reqdesc +'</td>'
 		+'</tr>';
-$('#viewTasksTable tbody').append(tr);
+$('#viewQuotationTable tbody').append(tr);
 });
 });
 function goBack() {
     window.history.go(-1);
     //window.location.reload();
 }
+
+
+	
 	
 $(".ticketstatus").addClass("active");
-$("#pageName").text("Service Request History");
- 
+$("#pageName").text("Quotation Request History");
+
 
 </script> 

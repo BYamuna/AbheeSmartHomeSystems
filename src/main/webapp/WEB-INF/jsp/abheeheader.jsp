@@ -161,6 +161,69 @@ min-width:113px;
     font-family: 'Source Sans Pro', 'Segoe UI', 'Droid Sans', Tahoma, Arial, sans-serif;
 }
 </style>
+
+<script>
+function getQuotationNotifications1(){
+	 var formData = new FormData();
+		$.fn.makeMultipartRequest('POST', 'customerlogin', false,
+				formData, false, 'text', function(data){
+			var jsonobj = $.parseJSON(data);
+		//	alert(jsonobj);
+			var cquotationType =data;
+			var cserviceType =data;
+			displayQuotationNotifications1(jsonobj.cquotationType)
+			displayNotifications1(cserviceType)
+		});  
+}
+
+
+function displayQuotationNotifications1(listOrders) {
+// 	alert(listOrders);
+	$('#notification1').html('');
+	var tableHead = '<table id="notification1" class="table table-striped table-bordered datatables">'
+			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">Request.No</th><th style="text-align:center;">Status</th><th style="text-align:center;">Request Type</th></thead><tbody></tbody></table>';
+	$('#notification1').html(tableHead);
+	//serviceUnitArray = {};
+	$.each(listOrders,function(i, orderObj) {
+		
+	//serviceUnitArray[orderObj.id] = orderObj;
+		var tblRow = "<tr>"
+			+ "<td title='"+orderObj.salesrequestnumber+"'>"+ orderObj.salesrequestnumber + "</td>"
+			+ "<td title='"+orderObj.kstatus+"'>New</td>"
+			+ "<td title='"+orderObj.requestType+"'>"+ orderObj.requestType + "</td>"
+			+ "</tr>";
+		$(tblRow).appendTo("#notification1 table tbody");
+	});
+}
+function displayNotifications1(listOrders) {
+// 	alert(listOrders);
+	$('#notification1').html('');
+	var tableHead = '<table id="notification1" class="table table-striped table-bordered datatables">'
+			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">Request.No</th><th style="text-align:center;">Status</th><th style="text-align:center;">Request Type</th></thead><tbody></tbody></table>';
+	$('#notification1').html(tableHead);
+	//serviceUnitArray = {};
+	$.each(listOrders,function(i, orderObj) {
+		var comment =null;
+		if(orderObj.addComment == "" ||orderObj.addComment =="null"||typeof orderObj.addComment === "undefined")
+			{
+			comment="----";
+			}else{
+				comment =orderObj.addComment;
+			
+		}
+	//serviceUnitArray[orderObj.id] = orderObj;
+		var tblRow = "<tr>"
+			/* + "<td title='"+orderObj.taskno+"'><a href=viewTicket?id='"+ orderObj.taskno+"'&pgn=0'>"+ orderObj.taskno+"</a></td>" */
+			 + "<td title='"+orderObj.taskno+"'>"+ orderObj.taskno + "</a></td>" 
+			//+ "<td title='"+orderObj.serviceType+"'>"+ orderObj.serviceType + "</td>"
+			+ "<td title='"+orderObj.kstatus+"'>"+ orderObj.kstatus + "</td>"
+			+ "<td title='"+orderObj.requestType+"'>"+ orderObj.requestType + "</td>"
+			+ "</tr>";
+		$(tblRow).appendTo("#notification1 table tbody");
+	});
+}
+</script>
+
 </head>
 <body>
 <%-- <c:if test="${not empty msg}">
@@ -215,36 +278,28 @@ min-width:113px;
     <diV style="color:#fff; background:#166eaf; font-size:25px; margin-top:10px;" class="dropbtn"">
 
 
-      <i class="fa fa-bell-o" ></i> <span class="badge" id="noOfMessages"></span> 
+
+
+
+
+
+
+
+
+      <i class="fa fa-bell-o" ></i> <span class="badge" id="noOfMessages1"></span> 
     </div>
    <%--  <c:if test="${not empty notifications}"> --%>
-    <div id="notification"  class="dropdown-content">
+<div id="notification1"  class="dropdown-content">
       <a style="padding: 10px 16px;" href="#">
       
-      	<table class="table1" id="taskTableHeader">
-        	<thead>
-         	<!-- <tr class="tr1" style=" background: #006699; color: #FFF;"> 
-
-   
-   
-                	<th class="th1">Task No.</th>
-                	<th class="th1">Field</th>
-                	<th class="th1">Change</th>
-                </tr> -->
+      	<table class="table1 table table-striped table-bordered "  id="taskTableHeader1">
+        	 <thead><tr class="tr1" style=" background: #006699; color: #FFF;"><th class="th1">Request.No</th><th class="th1">Status</th>
+                	<th class="th1">Request Type</th></tr> 
             </thead>
-            <tbody>
-            <%-- <c:forEach var="issue" items="${notifications}">
-            	<tr class="tr1">
-                	<td class="td1">${issue.taskno}</td>
-                    <td class="td1">${issue.kpfield}</td>
-                    <td class="td1">${issue.kpchange}</td>
-                </tr>
-                </c:forEach>
-                 --%>
-                
-            	
-            </tbody>
+            <tbody></tbody>
         </table>
+        
+        
       
       </a>
     </div>

@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskStatusDao;
+import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
 /*import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;*/
 import com.charvikent.abheeSmartHomeSystems.dao.DashBoardDao;
 import com.charvikent.abheeSmartHomeSystems.dao.PriorityDao;
@@ -36,6 +37,7 @@ import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
+import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 import com.charvikent.abheeSmartHomeSystems.model.User;
@@ -74,7 +76,8 @@ public class AbheeDashBoardController {
 	DashBoardDao dashBoardDao;
 	@Autowired
 	TaskHistoryLogsDao taskHistoryLogsDao;
-	
+	@Autowired
+	CustomerDao customerDao;
 	
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/severityBy")
@@ -258,7 +261,7 @@ public class AbheeDashBoardController {
 	}
 	
 	@RequestMapping(value = "/viewQuotation")
-	public String viewTicket(@RequestParam(value = "id", required = true) String quotationId,@RequestParam(value = "id", required = true) String requestno,Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException, JSONException 
+	public String viewTicket(@RequestParam(value = "id", required = true) String quotationId,@RequestParam(value = "id", required = true) String customerId,@RequestParam(value = "id", required = true) String requestno,Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException, JSONException 
 	{
 		LOGGER.debug("Calling  viewQuotation at controller");
 		
@@ -268,8 +271,9 @@ public class AbheeDashBoardController {
 		
 		String sJsonNotificaton1 = null;
 		
-		User objuserBean = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String id = String.valueOf(objuserBean.getId());
+		/*User objuserBean = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id = String.valueOf(objuserBean.getId());*/
+		
 		listOrderBeansForNotification1= taskHistorydao.getQuotationNotificationforAdmin();
 		if( listOrderBeansForNotification1 !=null && listOrderBeansForNotification1.size() > 0) {
 			objectMapperNotificaton1 = new ObjectMapper();
@@ -302,6 +306,7 @@ public class AbheeDashBoardController {
 				request.setAttribute("test23", sJson1);
 				jsonObj.put("quotationlist", statuslist);
 				taskHistorydao.UpdateQuotationNotificationByRequestno(requestno);
+				customerDao.UpdateQuotationNotificationByCustomerId(requestno);
 				// System.out.println(sJson);
 			} else {
 				objectMapper = new ObjectMapper();
@@ -311,6 +316,7 @@ public class AbheeDashBoardController {
 				request.setAttribute("test23", sJson1);
 				jsonObj.put("quotationlist", statuslist);
 				taskHistorydao.UpdateQuotationNotificationByRequestno(requestno);
+				customerDao.UpdateQuotationNotificationByCustomerId(requestno);
 			}
 		
 		return "ViewQuotation";
@@ -340,10 +346,20 @@ public class AbheeDashBoardController {
 	}
 
 	@RequestMapping(value = "/viewServiceResponse")
-	public String viewService(@RequestParam(value = "id", required = true) String taskId,
+	public String viewService(@RequestParam(value = "id", required = true) String taskId,@RequestParam(value = "id", required = true) String taskno,
 			Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException, JSONException 
 	{
 			LOGGER.debug("Calling viewServiceResponse at controller");
+			
+			List<TaskHistoryLogs> listOrderBeansForNotification = null;
+			
+			ObjectMapper objectMapperNotificaton1 = null;
+			String sJsonNotificaton = null;
+			
+			String sJsonNotificaton1 = null;
+			List<SalesRequest> customerNotification = null;
+			ObjectMapper objectMapperNotificaton = null;
+			
 			
 			List<Map<String, Object>> responselist=abheeTaskDao.getAbheeTaskByTaskId(taskId);
 			ObjectMapper objectMapper2 = new ObjectMapper();
@@ -359,6 +375,9 @@ public class AbheeDashBoardController {
 				sJson2 = objectMapper2.writeValueAsString(responselist);
 				request.setAttribute("test21", sJson2);
 			}
+		
+			
+			
 			List<Map<String, Object>> statuslist=abheeTaskDao.getTaskHistoryByTaskNo(taskId);
 			ObjectMapper objectMapper = new ObjectMapper();
 			String sJson;
@@ -373,9 +392,8 @@ public class AbheeDashBoardController {
 				request.setAttribute("statuslist1", sJson);
 				request.setAttribute("test21", sJson1);
 				jsonObj.put("statuslist1", statuslist);
+				customerDao.UpdateServiceNotificationByCustomerId(taskno);
 				
-				
-				// System.out.println(sJson);
 			} else {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(statuslist);
@@ -384,10 +402,31 @@ public class AbheeDashBoardController {
 				request.setAttribute("test21", sJson1);
 				jsonObj.put("statuslist1", statuslist);
 				
-				
+				customerDao.UpdateServiceNotificationByCustomerId(taskno);
 				
 			}
-		
+			Customer custbean=(Customer) session.getAttribute("customer");
+			String id = String.valueOf(custbean.getCustomerId());
+			
+			listOrderBeansForNotification=	customerDao.getServiceNotificationByCustomerIds(id);
+			customerNotification = customerDao.getNotificationByCustomerIds(id);
+			
+			
+			if (true)
+			{	
+				objectMapperNotificaton = new ObjectMapper();
+				objectMapperNotificaton1 = new ObjectMapper();
+				sJsonNotificaton1 = objectMapperNotificaton.writeValueAsString(customerNotification);
+				sJsonNotificaton=objectMapperNotificaton1.writeValueAsString(listOrderBeansForNotification);
+				
+				session.setAttribute("services", sJsonNotificaton);
+				session.setAttribute("quotations", sJsonNotificaton1);
+			}
+			/*else {
+				objectMapperNotificaton1 = new ObjectMapper();
+				sJsonNotificaton=objectMapperNotificaton1.writeValueAsString(listOrderBeansForNotification);
+			}
+		*/
 		return "viewServiceResponse";
 	}
 	
@@ -411,14 +450,70 @@ public class AbheeDashBoardController {
 	}
 	
 	@RequestMapping(value = "/viewQuotationDetails")
-	public String viewQuotationDetails(@RequestParam(value = "id", required = true) String salesrequestnumber,
-			@RequestParam(value = "pgn", required = true) String pgn,Model model,HttpSession session) 
+	public String viewQuotationDetails(@RequestParam(value = "id", required = true) String quotationId,@RequestParam(value = "id", required = true) String customerId,@RequestParam(value = "id", required = true) String requestno,Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException 
 	{
 		LOGGER.debug("Calling  viewQuotationDetails at controller");
 		
-			List<Map<String, Object>> viewQuotationBean = srequestDao.getQuotationDocsByRequestNo(salesrequestnumber);
-			model.addAttribute("test3",viewQuotationBean);
-		return "viewquotationdetails";
+		List<SalesRequest> customerNotification = null;
+		List<TaskHistoryLogs> listOrderBeansForNotification = null;
+		ObjectMapper objectMapperNotificaton = null;
+		ObjectMapper objectMapperNotificaton12 = null;
+		
+		String sJsonNotificaton1 = null;
+		String sJsonNotificaton = null;
+		Customer custbean=(Customer) session.getAttribute("customer");
+		String id = custbean.getCustomerId();
+		
+		
+		
+		
+			List<Map<String, Object>> viewquotationBean = srequestDao.getAbheeQuotationByQuotationId(quotationId);
+			model.addAttribute("test3",viewquotationBean);
+			
+			List<Map<String, Object>> statuslist=srequestDao.getQuotationHistoryByRequestNo(requestno);
+			ObjectMapper objectMapper = new ObjectMapper();
+			String sJson;
+			ObjectMapper objectMapper1 = new ObjectMapper();
+			String sJson1;
+			JSONObject jsonObj = new JSONObject();
+			if (statuslist != null && statuslist.size() > 0) {
+				
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(statuslist);
+				sJson1=objectMapper1.writeValueAsString(viewquotationBean);
+				request.setAttribute("quotationlist", sJson);
+				request.setAttribute("test23", sJson1);
+				jsonObj.put("quotationlist", statuslist);
+				//taskHistorydao.UpdateQuotationNotificationByRequestno(requestno);
+				customerDao.UpdateQuotationNotificationByCustomerId(requestno);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(statuslist);
+				sJson1=objectMapper1.writeValueAsString(viewquotationBean);
+				request.setAttribute("quotationlist", "''");
+				request.setAttribute("test23", sJson1);
+				jsonObj.put("quotationlist", statuslist);
+				//taskHistorydao.UpdateQuotationNotificationByRequestno(requestno);
+				customerDao.UpdateQuotationNotificationByCustomerId(requestno);
+			}
+			customerNotification = customerDao.getNotificationByCustomerIds(id);
+			listOrderBeansForNotification=	customerDao.getServiceNotificationByCustomerIds(id);
+			
+			objectMapperNotificaton = new ObjectMapper();
+			objectMapperNotificaton12 = new ObjectMapper();
+			if (true) {
+				sJsonNotificaton1 = objectMapperNotificaton.writeValueAsString(customerNotification);
+				sJsonNotificaton=objectMapperNotificaton12.writeValueAsString(listOrderBeansForNotification);
+				session.setAttribute("quotations", sJsonNotificaton1);
+				session.setAttribute("services", sJsonNotificaton);
+			}
+			/*else {
+				sJsonNotificaton1 = objectMapperNotificaton.writeValueAsString(customerNotification);
+				
+			}*/
+		
+		return "viewQuotationResponse";
+
 	}
 	
 	@SuppressWarnings("unused")

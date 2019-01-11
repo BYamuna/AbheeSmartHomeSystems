@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeQuationHistory;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
+import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 
 @Repository
 @Transactional
@@ -74,6 +75,17 @@ public class SalesRequestDao
 		 {
 		 
 			String hql ="select sr.request_type,sr.salesrequestnumber,ap.name as modelname from abhee_sales_request sr,abhee_product ap where sr.customerid='"+salesRequest.getCustomerid()+"' and sr.modelnumber=ap.name";
+			 /*String hql ="select sr.request_type,sr.salesrequestnumber,sr.modelnumber from abhee_sales_request sr where sr.customerid='"+salesRequest.getCustomerid()+"'"; */
+			System.out.println(hql);
+			
+				List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+				System.out.println(retlist);
+				return retlist;
+		 }
+		public List<Map<String, Object>> getquotationList1(TaskHistoryLogs salesRequest)
+		 {
+		 
+			String hql ="select sr.request_type,sr.salesrequestnumber,ap.name as modelname,sr.reqdesc from abhee_sales_request sr,abhee_product ap where sr.customerid='"+salesRequest.getAssignby()+"' and sr.modelnumber=ap.name";
 			 /*String hql ="select sr.request_type,sr.salesrequestnumber,sr.modelnumber from abhee_sales_request sr where sr.customerid='"+salesRequest.getCustomerid()+"'"; */
 			System.out.println(hql);
 			

@@ -26,7 +26,9 @@ import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeCustomerTypes;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
+import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 /*import com.charvikent.abheeSmartHomeSystems.model.User;*/
+import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 
 
 @Repository
@@ -479,5 +481,53 @@ public Customer checkCustomerExistOrNotByEmailOnEdit(String custEmail, String ed
 	    return  this.jdbcTemplate.query(hql, rowMapper);
 	}
 	
-
+	
+	/*Queries for Push Notifications in Customer Module*/
+	
+	public List<SalesRequest> getNotificationByCustomerIds(String history){
+		System.out.println(history);
+		String hql="select sr.id,sr.notes,sr.quotation_documents,sr.request_type,sr.cstatus ,sr.customerid,sr.salesrequestnumber from abhee_sales_request sr  where customerid='"+history+"' and cstatus='1'";
+		RowMapper<SalesRequest> rowMapper = new BeanPropertyRowMapper<SalesRequest>(SalesRequest.class);
+	    System.out.println(hql);
+		return  this.jdbcTemplate.query(hql, rowMapper);
+	}
+	public List<TaskHistoryLogs> getServiceNotificationByCustomerIds(String history){
+		System.out.println(history);
+		String hql="select t.id, t.taskno,t.add_comment,t.cstatus,st.servicetypename as servicetype,ats.name as kstatus,t.assignto,t.request_type ,t.assignby from task_history_logs t,abheeservicetype st ,abheetaskstatus ats,abheeusers u  where  cstatus='1' and t.service_type=st.id and t.kstatus=ats.id  and t.assignto=u.id  and t.assignby='"+history+"'";
+		RowMapper<TaskHistoryLogs> rowMapper = new BeanPropertyRowMapper<TaskHistoryLogs>(TaskHistoryLogs.class);
+	    System.out.println(hql);
+		return  this.jdbcTemplate.query(hql, rowMapper);
+	}
+	
+	public void UpdateQuotationNotificationByCustomerId(String history){
+		String hql ="update abhee_sales_request t set t.cstatus='0' where t.id="+history+" and t.cstatus='1'";
+		System.out.println(hql);
+		jdbcTemplate.execute(hql);
+		
+	}
+	public void UpdateServiceNotificationByCustomerId(String history){
+		String hql ="update task_history_logs t set t.cstatus='0' where t.taskno="+history+"and t.cstatus='1'";
+		System.out.println(hql);
+		jdbcTemplate.execute(hql);
+		
+	}
+	/*Queries for Push Notifications in Customer Module*/
+	
+	
+	
+	
+	/*Queries for  API's on push notification in customer*/	
+	public List<SalesRequest> getQuotationNotificationByCustomerIds(SalesRequest history){
+		String hql="select sr.id,sr.notes,sr.request_type,sr.customerid,sr.salesrequestnumber from abhee_sales_request sr  where sr.customerid='"+history.getCustomerid()+"' and sr.quotationstatus='1'";
+		RowMapper<SalesRequest> rowMapper = new BeanPropertyRowMapper<SalesRequest>(SalesRequest.class);
+	    System.out.println(hql);
+		return  this.jdbcTemplate.query(hql, rowMapper);
+	}
+	public void UpdateQuotationNotificationByCustomerIds(SalesRequest history){
+		String hql ="update abhee_sales_request t set t.quotationstatus='0' where t.customerid='"+history.getCustomerid()+"' and t.quotationstatus='1'";
+		System.out.println(hql);
+		jdbcTemplate.execute(hql);
+		
+	}
+	/*Queries for  API's on push notification in customer*/	
 }

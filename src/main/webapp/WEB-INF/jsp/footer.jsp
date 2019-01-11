@@ -76,11 +76,11 @@ var quotation = <%= quotation_notification %>;
 		 $("#taskTableHeader tbody").append(task);
 		 }
 	});
-	 
+	//$("#noOfMessages").text(msgIncrement); 
 	//}
  
  if(quotation != null){
-		var msgIncrement = 0;
+		//var msgIncrement = 0;
 		$.each(quotation,function(i, orderObj) { 
 			 if(orderObj.webstatus == 1){
 				msgIncrement++; 

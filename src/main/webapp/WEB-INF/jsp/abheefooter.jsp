@@ -1,4 +1,12 @@
+<% 
+ String session_quotation = (String)session.getAttribute("quotations");
+String service_notification = (String)session.getAttribute("services");
+%>
+
+
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
 .btn1 {
@@ -10,8 +18,7 @@ label, .form-control {
 }
 </style>
  
-
-	<div class="container">
+<div class="container">
         <div class="footer">
         	<div style="padding-left:15px;padding-right:15px;" class="col-md-3">
             	<h4 style="color:#ffffff">About</h4>
@@ -174,7 +181,50 @@ $( document ).ready(function() {
 	
 	
 </script>
-	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+ var isClick = 'Yes';
+ var test = <%= session_quotation %>; 
+ var service = <%= service_notification %>;
+// if(test != null){
+	var msgIncrement = 0;
+	$("#taskTableHeader1 tbody").empty();
+	$.each(test,function(i, orderObj) { 
+		 if(orderObj.cstatus == 1){
+			msgIncrement++; 
+		var task = "<tr>"
+			+ "<td title='"+orderObj.salesrequestnumber+"'><a href=viewQuotationDetails?id='"+ orderObj.id+"'>"+ orderObj.salesrequestnumber+"</a></td>"
+			 + "<td title='"+orderObj.kstatus+"'>New</td>"
+			+ "<td title='"+orderObj.requestType+"'><b>"+ orderObj.requestType + "</b></td>"
+			+ "</tr>";
+		
+		/* $(task).appendTo("#taskTableHeader table tbody"); */
+		
+		 $("#taskTableHeader1 tbody").append(task);
+		 }
+	});
+	if(service != null){
+		//var msgIncrement = 0;
+		$.each(service,function(i, orderObj) { 
+			 if(orderObj.cstatus == 1){
+				msgIncrement++; 
+			var task1 = "<tr>"
+				+ "<td title='"+orderObj.taskno+"'><a href=viewServiceResponse?id='"+ orderObj.taskno+"'>"+ orderObj.taskno+"</a></td>"
+				+ "<td title='"+orderObj.kstatus+"'>"+ orderObj.kstatus + "</td>"
+				+ "<td title='"+orderObj.requestType+"'><b>"+ orderObj.requestType + "</b></td>"
+				+ "</tr>";
+			
+			
+			 $("#taskTableHeader1 tbody").append(task1);
+			 }
+		});
+		 
+		}
+		$("#noOfMessages1").text(msgIncrement); 
+	 
+	//} 
+// $("#noOfMessages1").text(msgIncrement); 
+</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	  <script type='text/javascript' src="${baseurl }/js/jquery.blockUI.min.js" ></script>
 </body>
 </html>

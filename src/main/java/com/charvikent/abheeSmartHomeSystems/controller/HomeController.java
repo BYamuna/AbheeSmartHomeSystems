@@ -39,6 +39,8 @@ import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
 import com.charvikent.abheeSmartHomeSystems.model.Category;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.OTPDetails;
+import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
+import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 /*import com.charvikent.abheeSmartHomeSystems.model.ProductGuarantee;*/
 import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.charvikent.abheeSmartHomeSystems.service.UserService;
@@ -131,6 +133,22 @@ public class HomeController {
 	public String validateCustomerLogin(Model model,HttpServletRequest request,HttpSession session,RedirectAttributes redir) throws JsonProcessingException {
 		
 		LOGGER.debug("Validating Customer Login page index::{} at controller");
+		
+		
+		
+		List<SalesRequest> customerNotification = null;
+		
+		List<TaskHistoryLogs> listOrderBeansForNotification = null;
+		
+		
+		
+		ObjectMapper objectMapperNotificaton = null;
+		ObjectMapper objectMapperNotificaton1 = null;
+		
+		String sJsonNotificaton = null;
+		String sJsonNotificaton1 = null;
+	
+		
 		String loginid=request.getParameter("username");
 		String password=request.getParameter("password");
 		
@@ -138,7 +156,7 @@ public class HomeController {
 		String referalUrl=request.getHeader("referer");
 		
 		if(null ==customer)
-		{
+		{   
 			System.out.println("Customer does not exists"+referalUrl);
 			falg=false;
 			redir.addFlashAttribute("msg", "Invalid Details");
@@ -151,16 +169,49 @@ public class HomeController {
 			session.setAttribute("loggedstatus", "login");
 			session.setAttribute("customerId", customer.getCustomerId());
 			session.setAttribute("customerName", customer.getFirstname());
+			
+			
+			
+			
 			return "redirect:/";
 			
 				}
 		else
 			
 		{
+			
 		session.setAttribute("customer", customer);
 		session.setAttribute("loggedstatus", "login");
 		session.setAttribute("customerId", customer.getCustomerId());
 		session.setAttribute("customerName", customer.getFirstname());
+		
+		
+		String customerid = customer.getCustomerId();
+			
+		customerNotification = customerDao.getNotificationByCustomerIds(customerid);
+		listOrderBeansForNotification=	customerDao.getServiceNotificationByCustomerIds(customerid);
+		
+		objectMapperNotificaton = new ObjectMapper();
+		objectMapperNotificaton1 = new ObjectMapper();
+		if(true)//((customerNotification != null && customerNotification.size() > 0) && (listOrderBeansForNotification != null && listOrderBeansForNotification.size() > 0))
+			
+		{
+			sJsonNotificaton1 = objectMapperNotificaton.writeValueAsString(customerNotification);
+			sJsonNotificaton=objectMapperNotificaton1.writeValueAsString(listOrderBeansForNotification);
+			
+			session.setAttribute("quotations", sJsonNotificaton1);
+			session.setAttribute("services", sJsonNotificaton);
+			
+		} /*else {
+			objectMapperNotificaton = new ObjectMapper();
+			objectMapperNotificaton1 = new ObjectMapper();
+			
+			sJsonNotificaton1 = objectMapperNotificaton.writeValueAsString(customerNotification);
+			sJsonNotificaton=objectMapperNotificaton1.writeValueAsString(listOrderBeansForNotification);
+			
+		}*/
+		
+		
 			System.out.println("()()()()()()()()()()("+loginurl);
 			return "redirect:"+ loginurl;
 		}
@@ -631,4 +682,6 @@ public class HomeController {
 		} else
 			return false;
 	}
+	
+	
 }

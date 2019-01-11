@@ -46,6 +46,11 @@ public class SalesRequest
 	private int status;
 	private int webstatus;
 	
+	private int cstatus;
+	
+	private int quotationstatus;
+	
+	
 	@Transient
 	private String locationData;
 
@@ -55,7 +60,7 @@ public class SalesRequest
 
 	}
 	public SalesRequest(Integer id, String modelnumber, String email, String mobileno, String location, String address,String catid,
-			String reqdesc, String imgfiles,String customername,String requestType,int status,Date createdTime,Date updatedTime, String notes,String qstatus,int webstatus) 
+			String reqdesc, String imgfiles,String customername,String requestType,int status,Date createdTime,Date updatedTime, String notes,String qstatus,int webstatus,int cstatus,int quotationstatus) 
 
 	{
 		super();
@@ -76,6 +81,8 @@ public class SalesRequest
 		this.catid=catid;
 		this.qstatus=qstatus;
 		this.webstatus=webstatus;
+		this.cstatus=cstatus;
+		this.quotationstatus=quotationstatus;
 	}
 	public Date getCreatedTime() {
 		return createdTime;
@@ -239,6 +246,19 @@ public class SalesRequest
 	public void setWebstatus(int webstatus) {
 		this.webstatus = webstatus;
 	}
+	
+	public int getCstatus() {
+		return cstatus;
+	}
+	public void setCstatus(int cstatus) {
+		this.cstatus = cstatus;
+	}
+	public int getQuotationstatus() {
+		return quotationstatus;
+	}
+	public void setQuotationstatus(int quotationstatus) {
+		this.quotationstatus = quotationstatus;
+	}
 	@Override
 	public String toString() {
 		return "SalesRequest [id=" + id + ", modelnumber=" + modelnumber + ", email=" + email + ", mobileno=" + mobileno
@@ -247,16 +267,9 @@ public class SalesRequest
 				+ ", enable=" + enable + ", qstatus=" + qstatus + ", lat=" + lat + ", longitude=" + longitude
 				+ ", customerid=" + customerid + ", customername=" + customername + ", requestType=" + requestType
 				+ ", notes=" + notes + ", catid=" + catid + ", createdTime=" + createdTime + ", updatedTime="
-				+ updatedTime + ", status=" + status + ", webstatus=" + webstatus + ", locationData=" + locationData
-				+ "]";
+				+ updatedTime + ", status=" + status + ", webstatus=" + webstatus + ", cstatus=" + cstatus
+				+ ", quotationstatus=" + quotationstatus + ", locationData=" + locationData + "]";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

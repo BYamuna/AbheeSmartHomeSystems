@@ -510,6 +510,8 @@ public class AbheeCustomerRestController {
 		}
 		salesrequest.setEnable("1");
 		salesrequest.setQstatus("1");
+		salesrequest.setQuotationstatus(1);
+		salesrequest.setNotes(" ");
 		if(salesrequest.getLocation()!=null)
 		{	
 		salesrequest.setLocation(location);
@@ -1919,18 +1921,23 @@ public class AbheeCustomerRestController {
 			System.out.println("rest call user status:  "+code);
 			return String.valueOf(json);
 	}
-	@RequestMapping(value = "/getNotificationByCustomerId", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	
+	@RequestMapping(value = "/getNotificationByTechnicianId", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public String getNotificationByCustomerId(@RequestBody TaskHistoryLogs history) throws JsonProcessingException, JSONException {
 		LOGGER.debug("Calling getEmailandMobileById at controller");
-		List<TaskHistoryLogs> listOrderBeans = taskHistoryDao.getNotificationByCustomerId(history);
-		taskHistoryDao.UpdateNotificationByCustomerId(history);
 		JSONObject json = new JSONObject();
-		if (null != listOrderBeans) {
-			json.put("History", listOrderBeans);
-		} else
-			json.put("History", "NOT_FOUND");
+		
+		 if(history.getAssignto() != null){
+			List<TaskHistoryLogs> listOrderBeans1 = taskHistoryDao.getNotificationByTechnicianId(history);
+			taskHistoryDao.UpdateNotificationByTechnicianId(history);
+			if (null != listOrderBeans1) {
+				json.put("History1", listOrderBeans1);
+			} else
+				json.put("History1", "NOT_FOUND");
+		}
 		return String.valueOf(json);
 		}
+	
 	@RequestMapping(value = "/changeKstatusByTaskno", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public String changeKstatusByTaskno(@RequestBody AbheeTask task) throws JsonProcessingException, JSONException {
 		LOGGER.debug("Calling changeKstatusByTaskno at controller");
@@ -1945,6 +1952,7 @@ public class AbheeCustomerRestController {
 		}
 		return String.valueOf(json);
 		}
+
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/getNotificationsListByCustomerId", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public String getNotificationsListByCustomerId(@RequestBody TaskHistoryLogs history) throws JsonProcessingException, JSONException {
@@ -1959,12 +1967,25 @@ public class AbheeCustomerRestController {
 		hm.put(""+i, listOrderBeans2);
 		listOrderBeans1.add(hm);
 		}
-		
 		JSONObject json = new JSONObject();
-		if (null != listOrderBeans) {
-			json.put("NotificationList", listOrderBeans1);
-		} else
-			json.put("NotificationList", "NOT_FOUND");
+		String message=" ";
+		List<Map<String, Object>> listOrderBeans3 = srequestDao.getquotationList1(history);
+		if ( listOrderBeans1.size()!=0) {
+			message="Service_List";
+			json.put("Service", listOrderBeans1);
+		} 
+		if( listOrderBeans3.size()!=0) {
+			message =message+",Quotation_List";
+			json.put("Quotation", listOrderBeans3);
+		}
+		if(message.length()==0) {
+			json.put("status", "Not_Found");
+		}
+		else {
+			json.put("status",message);
+		}
+		
+		
 		return String.valueOf(json);
 		}
 	@RequestMapping(value = "/getServiceDetailsByTaskno", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
@@ -1983,5 +2004,36 @@ public class AbheeCustomerRestController {
 			json.put("NotificationStatus", "NOT_FOUND");
 		return String.valueOf(json);
 		}
+	@RequestMapping(value = "/getQuotationNotificationByCustomerId", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getQuotationNotificationByCustomerId(@RequestBody SalesRequest history) throws JsonProcessingException, JSONException {
+		LOGGER.debug("Calling getQuotationNotificationByCustomerId at controller");
+		JSONObject json = new JSONObject();
+		String message="";
+		if(history.getCustomerid() != null) {
+			
+			List<TaskHistoryLogs> listOrderBeans = taskHistoryDao.getNotificationByCustomerId(history);
+			taskHistoryDao.UpdateNotificationByCustomerId(history);
+			
+			List<SalesRequest> listOrderBeans1 = customerDao.getQuotationNotificationByCustomerIds(history);
+			customerDao.UpdateQuotationNotificationByCustomerIds(history);
+			
+		
+		if ( listOrderBeans1.size()!=0) {
+			message="Quotation_List";
+			json.put("Quotation", listOrderBeans1);
+		} 
+		if( listOrderBeans.size()!=0) {
+			message =message+",Service_List";
+			json.put("Service", listOrderBeans);
+		}
+		if(message.length()==0) {
+			json.put("status", "Not_Found");
+		}
+		else {
+			json.put("status",message);
+		}
+		}
+		return String.valueOf(json);
+	}
 
 }

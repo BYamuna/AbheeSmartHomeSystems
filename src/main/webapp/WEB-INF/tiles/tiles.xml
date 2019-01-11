@@ -145,13 +145,11 @@
 	<definition name="customerProfile" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/jsp/customerprofile.jsp" />
 	</definition>
-	<definition name="viewResponse" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/jsp/viewResponse.jsp" />
-	</definition>
+	
 	<definition name="ViewQuotation" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/jsp/ViewQuotation.jsp" />
 	</definition>
-	<definition name="viewServiceResponse" extends="base.definition">
+	<!-- <definition name="viewServiceResponse" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/jsp/viewServiceResponse.jsp" />
-	</definition>
+	</definition> -->
 </tiles-definitions>

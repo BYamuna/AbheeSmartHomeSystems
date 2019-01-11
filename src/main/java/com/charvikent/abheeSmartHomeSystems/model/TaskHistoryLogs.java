@@ -17,6 +17,13 @@ public class TaskHistoryLogs  {
 
 
 	
+	public int getCstatus() {
+		return cstatus;
+	}
+	public void setCstatus(int cstatus) {
+		this.cstatus = cstatus;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer  id;
@@ -80,8 +87,17 @@ public class TaskHistoryLogs  {
 	private String requesttime;
 	
 	private int notificationstatus;
+	private int tstatus;
 	private int webstatus;
 	
+	private int cstatus;
+	
+	public int getTstatus() {
+		return tstatus;
+	}
+	public void setTstatus(int tstatus) {
+		this.tstatus = tstatus;
+	}
 	public String getImgfile() {
 		return imgfile;
 	}
@@ -360,8 +376,13 @@ public class TaskHistoryLogs  {
 				+ ", severityid=" + severityid + ", assignbyid=" + assignbyid + ", kstatusid=" + kstatusid
 				+ ", modelid=" + modelid + ", addComment=" + addComment + ", communicationaddress="
 				+ communicationaddress + ", requesttime=" + requesttime + ", notificationstatus=" + notificationstatus
-				+ ", webstatus=" + webstatus + ", assignby=" + assignby + "]";
+				+ ", tstatus=" + tstatus + ", webstatus=" + webstatus + ", cstatus=" + cstatus + ", assignby="
+				+ assignby + "]";
 	}
+	
+	
+	
+	
 	
 
 }
