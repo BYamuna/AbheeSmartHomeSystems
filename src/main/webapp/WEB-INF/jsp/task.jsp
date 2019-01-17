@@ -740,7 +740,7 @@ margin:2px;
 								<div class="form-group">
 									<label class="col-md-4 control-label no-padding-right">Discount %:<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<input  id="givenDiscount"  onkeypress="return isNumber(event)" name="givenDiscount" placeholder="Discount" class="form-control validate onlyCharacters" type="text" value=""/>
+										<input  id="givenDiscount"  onkeypress="return isNumber(event)" name="givenDiscount" placeholder="Discount" class="form-control " type="text" value=""/>
 									</div>
 								</div></div>
 								</div>
@@ -750,7 +750,7 @@ margin:2px;
 								<div class="form-group">
 									<label class="col-md-4 control-label no-padding-right">GST tax:<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<input  id="gstTax"  onkeypress="return isNumber(event)" name="givenDiscount" placeholder="Discount" class="form-control validate onlyCharacters" type="text" value=""/>
+										<input  id="gstTax"  onkeypress="return isNumber(event)" name="givenDiscount" placeholder="Discount" class="form-control " type="text" value=""/>
 									</div>
 								</div></div>
 								</div>
@@ -760,7 +760,7 @@ margin:2px;
 								<div class="form-group">
 									<label class="col-md-4 control-label no-padding-right">Total :<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<input  id="totalwithtax"  onkeypress="return isNumber(event)" name="givenDiscount" placeholder="Discount" class="form-control validate onlyCharacters" type="text" value=""/>
+										<input  id="totalwithtax"  onkeypress="return isNumber(event)" name="givenDiscount" placeholder="Discount" class="form-control " type="text" value=""/>
 									</div>
 								</div></div>
 								</div>
@@ -803,8 +803,8 @@ $('#indate1').datetimepicker({
 	focusOnShow : false,
 
 });
-document.getElementById("atag").style.display="none";
-document.getElementById("billheader").style.display="none";
+/* document.getElementById("atag").style.display="none"; */
+/* document.getElementById("billheader").style.display="none"; */
 var currentRow;
 var totalItemsPrice = 0;
 var str = "javascript";
@@ -1025,13 +1025,13 @@ function prev() {
 function isNumber(evt) {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if ((charCode>31)&&(charCode<48||charCode> 57)) {
+    if ((charCode>31)&&(charCode<48||charCode>57)) {
         return false;
     }
     return true;
 }
 
-// USED URL: https://www.codexworld.com/export-html-to-word-doc-docx-using-javascript/
+/*  USED URL: https://www.codexworld.com/export-html-to-word-doc-docx-using-javascript/ */
 function Export2Doc(element, filename = ''){	  
 	
     var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
