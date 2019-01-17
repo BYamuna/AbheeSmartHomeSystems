@@ -33,7 +33,7 @@ public class TaskHistoryDao {
 		
 	}
 	public List<TaskHistoryLogs> getNotificationByCustomerId(SalesRequest history){
-		String hql =" select th.add_comment,ts.name as kstatus ,th.request_type from task_history_logs th,abheetaskstatus ts where th.assignby='"+history.getCustomerid()+"' and th.notificationstatus='1' and ts.id=th.kstatus";
+		String hql =" select th.taskno,th.add_comment,ts.name as kstatus ,th.request_type from task_history_logs th,abheetaskstatus ts where th.assignby='"+history.getCustomerid()+"' and th.notificationstatus='1' and ts.id=th.kstatus";
 		RowMapper<TaskHistoryLogs> rowMapper = new BeanPropertyRowMapper<TaskHistoryLogs>(TaskHistoryLogs.class);
 		System.out.println(hql);
 	    return  this.jdbcTemplate.query(hql, rowMapper);

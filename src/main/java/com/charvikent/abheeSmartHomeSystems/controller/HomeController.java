@@ -29,6 +29,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
+import com.charvikent.abheeSmartHomeSystems.dao.AbheePaymentDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CategoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.CustomerDao;
@@ -60,6 +61,7 @@ public class HomeController {
 	@Autowired KptsUtil kptsUtil;
 	@Autowired AbheeTaskDao abheeTaskDao;
 	@Autowired private Environment environment;
+	@Autowired AbheePaymentDao abheePaymentDao;
 	static 	String loginurl=""; 
 	static boolean falg =true;
 	String otpnumber ="";
@@ -290,7 +292,8 @@ public class HomeController {
 	
 	@RequestMapping("/customerprofile")
 	public String customerProfile(@ModelAttribute("customerProfile") Customer customer, Model model,HttpServletRequest request,HttpSession session,RedirectAttributes redir) throws JSONException, JsonProcessingException {
-		LOGGER.debug("Calling Customer Profile  page at controller");	
+		LOGGER.debug("Calling Customer Profile  page at controller");
+		model.addAttribute("paymentmode",abheePaymentDao.getPaymentMap());
 		Customer customerProfile=(Customer) session.getAttribute("customer");
 		//String id=String.valueOf(objuserBean.getId());
           if(null !=customerProfile)
@@ -362,25 +365,10 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/ticketstatus")
-	public String ticketstatus(HttpServletRequest request,HttpSession session) throws JsonProcessingException {
-			/*String sJson=null;
-			Customer customerProfile=(Customer) session.getAttribute("customer");
-			Customer customerId=(Customer) session.getAttribute("customerId");
-			System.out.println(customerId);
-			if(null !=customerProfile)
-	        {
-				List<Map<String, Object>> QuotationsList=srequestDao.getSalesRequestListByCustomerId(customerProfile.getCustomerId());
-				System.out.println(QuotationsList);
-				ObjectMapper objectMapper = new ObjectMapper(); 
-				 sJson = objectMapper.writeValueAsString(QuotationsList);
-		
-			request.setAttribute("QuotationsList", sJson);
-	          }
-	          else
-	          {
-	        		request.setAttribute("QuotationsList", "''");    	  
-	          }*/
+	public String ticketstatus(Model model,HttpServletRequest request,HttpSession session) throws JsonProcessingException {
+			
 		LOGGER.debug("Calling ticketstatus at controller");
+		//model.addAttribute("paymentmode",abheePaymentDao.getPaymentMap());
 		return "ticketstatus";
 	}
 	
