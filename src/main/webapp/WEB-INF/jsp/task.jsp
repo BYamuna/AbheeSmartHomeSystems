@@ -213,6 +213,8 @@ margin:2px;
 										<span class="hasError" id="stationnameError"></span>
 								</div>
 							</div>
+							</div>
+							<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">Service Request Number
@@ -223,7 +225,14 @@ margin:2px;
 								</div>
 							</div>
 							
-							
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="focusedinput" class="col-md-6 control-label">Comment
+										<span class="impColor">*</span>
+									</label>
+										<form:textarea path="addComment" class="col-xs-10 col-sm-5 validate " placeholder="Comment" /><span class="hasError" id="stationnameError"></span>
+								</div>
+							</div>
 						</div>
 						<div class="row">
 						<div class="col-md-6">
@@ -236,14 +245,7 @@ margin:2px;
 								</div>
 							</div>
 						</div>
-						<div class="col-md-6">
-								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Comment
-										<span class="impColor">*</span>
-									</label>
-										<form:textarea path="addComment" class="col-xs-10 col-sm-5 validate " placeholder="Comment" /><span class="hasError" id="stationnameError"></span>
-								</div>
-							</div>
+						
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Warranty</label>

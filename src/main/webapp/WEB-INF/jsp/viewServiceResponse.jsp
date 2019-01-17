@@ -65,6 +65,9 @@ border: none !important;
 .panel-heading {
     padding: 1px 15px;
     }
+    .table>tbody>tr>td {
+    padding: 6px;
+    }
 </style>
 
 <!-- Body starts here -->
