@@ -3,6 +3,7 @@
    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> 
     
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/datatables/dataTables.css' /> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 .fancy-select {
   position: absolute;
@@ -529,6 +530,47 @@ body {font-family: Arial;}
       </div>
     </div>
   </div> 
+  
+  
+  <div class="modal fade" id="PaymentModal" data-backdrop="static" data-keyboard="false"  role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header" style="background: #2973cf;    padding: 7px;">
+				<button type="button" class="close" id="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" style="color: white;"> Payment Details </h4>
+        	</div>
+        	<div class="modal-body">
+					<form class="form-horizontal"  method="post" >
+					<div class="panel-body">
+						<div class="col-md-6">
+								<div class="form-group">
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">Payment Mode <span class="impColor">*</span></label>
+									<select id="paymentstatus"	class="col-xs-10 col-sm-5 "	onfocus="removeBorder(this.id)">
+										 <option value="" >--- Select --- </option>
+										 <c:forEach var="list" items="${paymentmode}">
+												<option value=${list.key}>${list.value} </option>
+										</c:forEach>  
+									</select>
+								</div>
+							</div>	
+							<div id="getting-started"></div>
+					</div>	
+                    <div class="panel-footer">
+				      <div class="row">
+							<div class="col-sm-12">
+								<div class="btn-toolbar text-center">
+									<input type="submit" id="submit3" value="Submit" onclick="" class="btn-primary btn" /> 
+										<input type="reset" value="Reset"  class="btn-danger btn cancel" />
+								</div>
+							</div>
+						</div>	
+			      	</div>	
+			      	</form>
+					</div>
+				</div>	
+			</div>
+		</div>
+  
 <script type='text/javascript' src='${baseurl }/assets/plugins/datatables/jquery.dataTables.min.js'></script> 
 <script type='text/javascript' src='${baseurl }/assets/plugins/datatables/dataTables.bootstrap.js'></script> 
 <script type='text/javascript' src='${baseurl }/assets/demo/demo-datatables.js'></script> 
@@ -635,7 +677,7 @@ $("#search").on("keyup", function() {
          function displayTable3(listOrders) {
      		$('#customerTaskTable').html('');
      		var tableHead = '<table id="customerTaskTable" class="table tablestriped table-bordered datatables">'
-     				+ '<thead><tr style=" font-size:12px;background-color: #0460a4; color: #fff;"><th>Request No.</th><th>Service Type</th><th>Product Model</th><th>Address</th><th>Description</th><th>Product Images</th><th>Request Date</th></tr></thead><tbody></tbody></table>';
+     				+ '<thead><tr style=" font-size:12px;background-color: #0460a4; color: #fff;"><th>Request No.</th><th>Service Type</th><th>Product Model</th><th>Address</th><th>Description</th><th>Product Images</th><th>Invoice</th><th>Request Date</th></tr></thead><tbody></tbody></table>';
      		$('#customerTaskTable').html(tableHead);
      		serviceUnitArray = {};
      		
@@ -651,6 +693,18 @@ $("#search").on("keyup", function() {
      						}
      						orderObj.uploadfile=uploadfile;
      					}
+         				if(orderObj.imgfile==undefined) orderObj.imgfile='';
+         				else
+         					{
+         						var list=orderObj.imgfile.split('*');
+         						var imgfile='';
+         						for(var i=0;i<list.length;i++)
+         						{
+         							imgfile=imgfile+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
+         						}
+         						orderObj.imgfile=imgfile;
+         					}	
+     				/* var payment = "<a class='comment commentIt' onclick='paymentRequest("+ orderObj.id+ ")'>   <i class='fa fa-paypal'></i></a>" */
      				serviceUnitArray[orderObj.id] = orderObj;
      			var tblRow = "<tr>"
      				+ "<td title='"+orderObj.taskno+"'><a href=viewServiceResponse?id='"+ orderObj.taskno+"'>"+ orderObj.taskno+"</a></td>"
@@ -659,13 +713,16 @@ $("#search").on("keyup", function() {
      				+ "<td title='"+orderObj.communicationaddress+"'>"+ orderObj.communicationaddress+ "</td>"
      				+ "<td title='"+orderObj.description+"'>"+ orderObj.description+ "</td>"
      				+ "<td title='"+orderObj.uploadfile+"'>"+ orderObj.uploadfile + "</td>" 
+     				+ "<td title='"+orderObj.imgfile+"'>"+ orderObj.imgfile + "</td>" 
      				+"<td title='"+orderObj.created_time+"'>"+ orderObj.created_time + "</td>"
+     				/* + "<td style='text-align: center;white-space: nowrap;'>"+ payment+ "</td>" */
      				+ "</tr>";
      			$(tblRow).appendTo("#customerTaskTable table tbody");
      		});
      		if(isCheck) $('#customerTaskTable table').DataTable({});
      		$(".dataTables_filter input").attr('placeholder','Search...');
-     	}
+     		
+         }		
       </script> 
      <script>
 		function openCity(evt, cityName)  {
@@ -1179,5 +1236,23 @@ function resendOTP()
 		
 	});
 }
+
+//var paymentDropDown = ${paymentmode};
+	function paymentRequest()
+	{
+	
+		$("#PaymentModal").modal('show');
+		 /* var optionsForPayment = "";
+		 optionsForPayment = $("#paymentstatus").empty();
+		 optionsForPayment.append(new Option("-- Select --",	""));
+			$.each(paymentDropDown, function(i, tests) {
+				var productId = tests;
+				var productName = tests;
+				optionsForPayment.append(new Option(productId,	productName));
+			}); */
+	}
+	
+	
+
 </script>
 <%@include file="abheefooter.jsp" %>

@@ -411,7 +411,7 @@ String hql ="select t.taskno from AbheeTask t where t.customerId ='"+customer.ge
 
 public List<Map<String, Object>> getTasksListByCustomerId(String customerId) 
 {
-	String sql="select t.id,s.servicetypename,t.add_comment,t.taskno,abp.name as modelname,t.communicationaddress,t.description,t.uploadfile, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time FROM abhee_task t,abheeservicetype s,abhee_product abp where  t.service_type=s.id and abp.id=t.modelid and t.customer_id='"+customerId+"'order by t.created_time desc ";
+	String sql="select t.id,s.servicetypename,t.add_comment,t.taskno,abp.name as modelname,t.communicationaddress,t.description,t.uploadfile,t.imgfile, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time FROM abhee_task t,abheeservicetype s,abhee_product abp where  t.service_type=s.id and abp.id=t.modelid and t.customer_id='"+customerId+"'order by t.created_time desc ";
 	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
 	System.out.println(retlist);
 	return retlist;
@@ -429,7 +429,18 @@ String hql ="select t.taskno from AbheeTask t where t.customerId ='"+customer.ge
 	List<String> list =entityManager.createQuery(hql).getResultList();
 	return list;
 }
-
+public List<Map<String, Object>> getNotificationByTaskno(AbheeTask taskno) {
+	
+			
+String hql= "select t.id,t.taskno,t.description,t.uploadfile,t.customer_id,t.communicationaddress,t.warranty,ar.requesttime ,ap.name as modelname ,ac.category,st.servicetypename as servicetype,c.name as companyname,a.priority as priority,t.subject,t.kstatus as kstatusid,ts.name as kstatus,t.status,u.username as assignedto,u.mobilenumber,t.taskdeadline,t.imgfile,t.description  from abhee_task t,abheecategory ac,abhee_company c,abheerequesttime ar,abheeservicetype st,abhee_product ap ,abheepriority a,abheeusers u ,abheetaskstatus ts  where t.taskno='"+taskno.getTaskno()+"' and t.category=ac.id  and t.requesttime=ar.requesttimeid and t.modelid=ap.id and t.service_type=st.id and t.company=c.id  and t.priority=a.id and t.assignto=u.id and t.kstatus=ts.id and t.status='1'"; 
+			
+System.out.println(hql);
+	
+	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+	System.out.println(retlist);
+	return retlist;
+	
+}	
 
 
 

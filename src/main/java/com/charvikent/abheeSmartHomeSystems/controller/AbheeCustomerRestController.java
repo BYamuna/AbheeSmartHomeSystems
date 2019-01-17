@@ -1953,7 +1953,6 @@ public class AbheeCustomerRestController {
 		return String.valueOf(json);
 		}
 
-	@SuppressWarnings("unused")
 	@RequestMapping(value = "/getNotificationsListByCustomerId", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public String getNotificationsListByCustomerId(@RequestBody TaskHistoryLogs history) throws JsonProcessingException, JSONException {
 		LOGGER.debug("Calling getNotificationsListByCustomerId at controller");
@@ -2035,5 +2034,16 @@ public class AbheeCustomerRestController {
 		}
 		return String.valueOf(json);
 	}
-
+	@RequestMapping(value = "/getNotificationByTaskno", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getNotificationByTaskno(@RequestBody AbheeTask taskno) throws JsonProcessingException, JSONException {
+		LOGGER.debug("Calling getproducts at controller");
+		List<Map<String, Object>> listOrderBeans = abheeTaskDao.getNotificationByTaskno(taskno);
+		JSONObject json = new JSONObject();
+		
+		if (null != listOrderBeans) {
+			json.put("NotificationList", listOrderBeans);
+		} else
+			json.put("NotificationList", "NOT_FOUND");
+		return String.valueOf(json);
+	}
 }
