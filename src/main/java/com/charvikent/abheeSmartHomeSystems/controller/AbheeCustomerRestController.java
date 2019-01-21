@@ -607,6 +607,7 @@ public class AbheeCustomerRestController {
 		//task.setAssignby("1");
 		task.setTaskdeadline(" ");
 		task.setImgfile(" ");
+		task.setInvimg(" ");
 		task.setAddComment(" ");
 		task.setRequestType("Service Request");
 		Map<String, Object> abheeTask = reportIssueDao.checkServiceRequestExisrOrNot(task);
@@ -1459,6 +1460,7 @@ public class AbheeCustomerRestController {
 		return String.valueOf(json);
 	}
 	
+	@SuppressWarnings("unused")
 	@PostMapping(value = "/editProductWarranty", consumes = "application/json", produces = "application/json")
 	public String updateWarranty(@RequestBody ProductGuarantee productGuarantee, HttpServletRequest request,
 			BindingResult bindingresults) throws JSONException 

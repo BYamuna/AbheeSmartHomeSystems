@@ -44,7 +44,7 @@ public class TaskHistoryLogs  {
 	private String description;
 	private  String uploadfile;
 	private String imgfile;
-	
+	private String invimg;
 	@Transient
 	private Integer gapdays;
 	@Transient
@@ -92,6 +92,13 @@ public class TaskHistoryLogs  {
 	
 	private int cstatus;
 	
+	
+	public String getInvimg() {
+		return invimg;
+	}
+	public void setInvimg(String invimg) {
+		this.invimg = invimg;
+	}
 	public int getTstatus() {
 		return tstatus;
 	}
@@ -363,26 +370,22 @@ public class TaskHistoryLogs  {
 	public void setRequestType(String requestType) {
 		this.requestType = requestType;
 	}
+	
 	@Override
 	public String toString() {
 		return "TaskHistoryLogs [id=" + id + ", taskno=" + taskno + ", taskid=" + taskid + ", createdTime="
 				+ createdTime + ", updatedTime=" + updatedTime + ", category=" + category + ", severity=" + severity
 				+ ", priority=" + priority + ", assignto=" + assignto + ", subject=" + subject + ", description="
-				+ description + ", uploadfile=" + uploadfile + ", imgfile=" + imgfile + ", gapdays=" + gapdays
-				+ ", gapcount=" + gapcount + ", kstatus=" + kstatus + ", status=" + status + ", additionalinfo="
-				+ additionalinfo + ", taskdeadline=" + taskdeadline + ", taskdeadlineid=" + taskdeadlineid
-				+ ", ServiceType=" + ServiceType + ", requestType=" + requestType + ", ModifiedBy=" + ModifiedBy
-				+ ", assigntoid=" + assigntoid + ", categoryid=" + categoryid + ", priorityid=" + priorityid
-				+ ", severityid=" + severityid + ", assignbyid=" + assignbyid + ", kstatusid=" + kstatusid
+				+ description + ", uploadfile=" + uploadfile + ", imgfile=" + imgfile + ", invimg=" + invimg
+				+ ", gapdays=" + gapdays + ", gapcount=" + gapcount + ", kstatus=" + kstatus + ", status=" + status
+				+ ", additionalinfo=" + additionalinfo + ", taskdeadline=" + taskdeadline + ", taskdeadlineid="
+				+ taskdeadlineid + ", ServiceType=" + ServiceType + ", requestType=" + requestType + ", ModifiedBy="
+				+ ModifiedBy + ", assigntoid=" + assigntoid + ", categoryid=" + categoryid + ", priorityid="
+				+ priorityid + ", severityid=" + severityid + ", assignbyid=" + assignbyid + ", kstatusid=" + kstatusid
 				+ ", modelid=" + modelid + ", addComment=" + addComment + ", communicationaddress="
 				+ communicationaddress + ", requesttime=" + requesttime + ", notificationstatus=" + notificationstatus
 				+ ", tstatus=" + tstatus + ", webstatus=" + webstatus + ", cstatus=" + cstatus + ", assignby="
 				+ assignby + "]";
 	}
-	
-	
-	
-	
-	
 
 }

@@ -14,7 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.charvikent.abheeSmartHomeSystems.model.Category;
+/*import com.charvikent.abheeSmartHomeSystems.model.Category;*/
 import com.charvikent.abheeSmartHomeSystems.model.Company;
 
 

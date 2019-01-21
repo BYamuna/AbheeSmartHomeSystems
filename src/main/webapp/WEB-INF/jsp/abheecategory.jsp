@@ -655,7 +655,7 @@ $.each(productdetailslist, function(k,v){
     	//var locationData=$('#locationData').val();
     	var address=$('#address').val();
     	var reqdesc=$('#reqdesc').val();
-    	var imgfile=$('#imgfile').val();
+    	//var imgfile=$('#imgfile').val();
     	 //Serializing all For Input Values (not files!) in an Array Collection so that we can iterate this collection later.
     	//var params = form.serializeArray();
     	
@@ -693,13 +693,13 @@ $.each(productdetailslist, function(k,v){
 		 
 		 
 	 }
-	  if(imgfile=="" || imgfile==null || imgfile=="undefined")
+	  /* if(imgfile=="" || imgfile==null || imgfile=="undefined")
 		{
 			$('.impColor0').after('<span class="error error-keyup-4">Choose file </span>');
 			 $('#imgfile' ).css('border-color','#e73d4a');
 				$('#imgfile' ).css('color','#e73d4a');
 			 return false;
-		}  
+		}  */ 
 	   
 	 var ins = document.getElementById('imgfile').files.length;
 	
@@ -793,15 +793,13 @@ $.each(productdetailslist, function(k,v){
 		 
 		
 		 
- if (servicetypeid == null || servicetypeid == "" || servicetypeid == "undefined") {
-			 
-			 $('.impColor0').after('<span class="error error-keyup-4">Fill Service Type Field </span>');
-			 $('#servicetypeid' ).css('border-color','#e73d4a');
-				$('#servicetypeid' ).css('color','#e73d4a');
-			 return false;
-			 
-			 
-		 }
+		 		if (servicetypeid == null || servicetypeid == "" || servicetypeid == "undefined") 
+		 		{
+					 $('.impColor0').after('<span class="error error-keyup-4">Fill Service Type Field </span>');
+					 $('#servicetypeid' ).css('border-color','#e73d4a');
+						$('#servicetypeid' ).css('color','#e73d4a');
+					 return false;  
+				 }
  
 		 
 		 if (message == null || message == "" || message == "undefined") {

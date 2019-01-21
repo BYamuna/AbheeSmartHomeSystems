@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
+/*import javax.persistence.Temporal;*/
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -49,7 +49,7 @@ public class Category {
 		return company;
 	}
 
-	public void setCompay(Integer compay) {
+	public void setCompay(Integer company) {
 		this.company = company;
 	}
 

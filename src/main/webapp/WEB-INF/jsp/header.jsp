@@ -630,7 +630,7 @@ function displayQuotationNotifications(listOrders) {
     		<div id="wrap">
 	        <div id="page-heading" class="row">
 	        	<div class="col-md-6">
-					<h1 id="pageName">Branch Master</h1>
+					<h1 id="pageName"></h1>
 				</div>
 				
 				   <security:authorize access="hasRole('ROLE_USER') or hasRole('ROLE_BRANCHHEAD')">

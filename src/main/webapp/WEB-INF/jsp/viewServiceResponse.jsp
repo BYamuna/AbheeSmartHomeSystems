@@ -88,7 +88,7 @@ border: none !important;
 				<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div style="margin:0 auto;" class="panel-heading">
-						<h4>Service Request Details</h4>
+						<h4>Service  Request  Details</h4>
 						<!-- <div class="options">
 							<a href="" class="panel-collapse"><i class="fa fa-chevron-up"></i></a>
 						</div> -->
@@ -100,7 +100,7 @@ border: none !important;
 						
 						<div class="table-responsive">
 								<table class="table table-bordered priority prioritybg" style="border: 1px solid #0460a4; width:;" id="viewTasksTable">
-								 <thead><tr><th>Username</th><th>ServiceTypename</th><th>CreatedTime</th><th>Description</th><th>Requeststatus</th><th>Priority</th><th>Severity</th><th>Subject</th><th>Deadline</th><th>Taskno</th><th>Category</th><th>ModelName</th><th>CustomerId</th>
+								 <thead><tr><th>Assigned To</th><th>ServiceTypename</th><th>CreatedTime</th><th>Description</th><th>Requeststatus</th><th>Priority</th><th>Severity</th><th>Subject</th><th>Deadline</th><th>Taskno</th><th>Category</th><th>ModelName</th><th>CustomerId</th>
 				                 <th>Files</th></tr><tr></tr></thead><tbody></tbody></table>
 
 			<%-- <c:forEach var="listOuter" items="${test2}">

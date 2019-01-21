@@ -118,12 +118,15 @@ public class TaskController {
 		String customerJson = null;
 		String productJson = null;
 		String sJson = null;
+		String invoiceid=reportIssueDao.randomInvoiceId();
 		// model.addAttribute("taskf", new AbheeTask());
-
+		
 		model.addAttribute("severity", severityDao.getSeverityMap());
 		model.addAttribute("priority", priorityDao.getPriorityMap());
 		model.addAttribute("userNames", userService.getUserName());
 		model.addAttribute("category", serviceDao.getServicemap());
+		model.addAttribute("invoiceid",invoiceid);
+		
 		/*
 		 * model.addAttribute("requesttimes",abheeRequestTimeDao.getRequestTimesMap() );
 		 */
@@ -167,10 +170,10 @@ public class TaskController {
 
 	@PostMapping(value = "/savetask1")
 	public String saveAdmin(@Valid @ModelAttribute("taskf") AbheeTask task, TaskHistoryLogs taskHistoryLogs,
-			BindingResult bindingresults, @RequestParam("file1") MultipartFile[] uploadedFiles,
+			BindingResult bindingresults, @RequestParam("file1") MultipartFile[] uploadedFiles,@RequestParam("file") MultipartFile[] Files,
 			RedirectAttributes redir, HttpSession session) throws IOException {
 		LOGGER.debug("Calling savetask1 at controller");
-
+		//String invoiceid=reportIssueDao.randomInvoiceId();
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
 			return "redirect:/";
@@ -201,6 +204,7 @@ public class TaskController {
 								multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 							}
 						}
+						
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
 					}
@@ -237,12 +241,25 @@ public class TaskController {
 								multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 							}
 						}
+						
+						if(task.getKstatus().equals("3"))
+						{
+							for (MultipartFile multipartFile : Files) {
+								String fileName = multipartFile.getOriginalFilename();
+								if (!multipartFile.isEmpty()) {
+									task.setInvimg("user browsed file(s)"); // add dummy value to check file upload status
+																				// in dao layers
+									multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+								}
+							}	
+						}
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
 					}
 					/* taskHistoryLogsDao.savetaskhistorylogs(taskHistoryLogs); */
 					// sendingMail.sendingMailWithTaskStatus(task);
 					reportIssueDao.updateIssue(task);
+					//task.setInvoiceId(invoiceid);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
 
@@ -558,6 +575,7 @@ public class TaskController {
 		task.setAddComment(" ");
 		task.setTaskdeadline(" ");
 		task.setImgfile(" ");
+		task.setInvimg(" ");
 		task.setRequestType("Service Request");
 		for (MultipartFile multipartFile : uploadedFiles) {
 			String fileName = multipartFile.getOriginalFilename();

@@ -272,19 +272,18 @@ if(validation) {
 		   formData.append('id',id);*/
 		    
 		  var id= $('#salesRequestid').val();
-		   var notes= $('#notes').val();
-		   
-    	var ins = document.getElementById('fileupload').files.length;
-      var data = new FormData();
-     data.append('id',id); 
-     data.append('description',notes); 
+		  var notes= $('#notes').val();
+		  var ins = document.getElementById('fileupload').files.length;
+		  var data = new FormData();
+		  data.append('id',id); 
+		  data.append('description',notes); 
 
     	  for(var i=0; i< ins; i++)
-    	{	
-    	var quotation = document.getElementById('fileupload').files[i];
-    	
-		data.append('file', quotation);
-		} 
+	    	{	
+	    	var quotation = document.getElementById('fileupload').files[i];
+	    	
+			data.append('file', quotation);
+			} 
     	 
 		/* jQuery.each(jQuery('#fileupload')[0].files, function(i, file) {
 			data.append('file-'+i, file);

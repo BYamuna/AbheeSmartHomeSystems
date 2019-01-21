@@ -8,8 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+/*import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;*/
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,13 +20,15 @@ import com.charvikent.abheeSmartHomeSystems.model.AbheeRequestTime;
 public class AbheeRequestTimeDao 
 {
 	@PersistenceContext private EntityManager entityManager;
-	@Autowired private JdbcTemplate jdbcTemplate;
-	
+
+	/* @Autowired private JdbcTemplate jdbcTemplate; */
+	@SuppressWarnings("unchecked")
 	public Map<Integer, String> getRequestTimesMap() 
 	{
 		String hql =" from AbheeRequestTime";
 		Query query =entityManager.createQuery(hql);  
-		 List<AbheeRequestTime> list= query.getResultList();
+		 
+		List<AbheeRequestTime> list= query.getResultList();
 		 
 		Map<Integer, String> abheeBranchHeadMap = new LinkedHashMap<Integer, String>();
 		for(AbheeRequestTime abheeRequestTime:list)

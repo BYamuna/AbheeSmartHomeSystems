@@ -1,4 +1,3 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
@@ -59,11 +58,11 @@ margin:2px;
 }
 </style>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://html2canvas.hertzen.com/build/html2canvas.js"></script>
 <script src="https://github.com/tsayen/dom-to-image"></script>
-<script src="https://github.com/eligrey/FileSaver.js/"></script>
+<script src="https://github.com/eligrey/FileSaver.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
 <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css">
@@ -234,9 +233,30 @@ margin:2px;
 								</div>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row" id="invoiceDiv">
+						<div class="col-md-6">
+						<div class="form-group">
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">Invoice Number
+										<!-- <span class="impColor">*</span> -->
+									</label>
+									<form:input path="invoiceId" placeholder="Invoice Number" class="col-xs-10 col-sm-5 " />
+								</div>
+						
+							
+						</div>
 						<div class="col-md-6">
 							<div class="form-group">
+								<label
+									class="ace-file-input ace-file-multiple col-sm-3 col-md-push-3 control-label no-padding-right">Attach Invoice</label>
+								<div class="col-md-8">
+									<input type="file" name="file" id="file" class="col-sm-9 col-md-push-5 " multiple="multiple" style="margin: 7px 0px 0px 0px;">
+								</div>
+							</div>
+						</div>
+						</div>
+						<div class="row">
+						<div class="col-md-6">
+						<div class="form-group">
 								<label
 									class="ace-file-input ace-file-multiple col-sm-3 col-md-push-3 control-label no-padding-right">Attach
 									File(s)</label>
@@ -244,8 +264,7 @@ margin:2px;
 									<input type="file" name="file1" id="file1" class="col-sm-9 col-md-push-5 " multiple="multiple" style="margin: 7px 0px 0px 0px;">
 								</div>
 							</div>
-						</div>
-						
+								</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Warranty</label>
@@ -516,7 +535,11 @@ margin:2px;
 	<input id="isRole" type="text" class="hide" value="true" />
 </security:authorize>
 
-<security:authorize access="hasRole('ROLE_USER')">
+<security:authorize access="hasRole('ROLE_BRANCHHEAD')">
+	<input id="isRole" type="text" class="hide" value="true" />
+</security:authorize>
+
+<%-- <security:authorize access="hasRole('ROLE_USER')"> --%>
 <div class="modal fade" id="warrantyModal" data-backdrop="static" data-keyboard="false"  role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -556,7 +579,7 @@ margin:2px;
 							<div class="col-md-9">
 								<div class="form-group">
 								<input type="hidden" id= "orderId" />
-									<label for="focusedinput" class="col-md-6 control-label ">Year<span class="impColor">*</span>
+									<label for="focusedinput" class="col-md-6 control-label ">No.Of.Years<span class="impColor">*</span>
 									</label>
 									<select id="year" class="col-md-6 "	onfocus="removeBorder(this.id)">
 										<option value="" label="--- Select ---" />
@@ -601,7 +624,7 @@ margin:2px;
 							<div class="col-sm-12">
 								<div class="btn-toolbar text-center">
 									<input type="submit" id="submit3" value="Submit" onclick="saveWarranty()" class="btn-primary btn" /> 
-										<input type="reset" value="Reset"  class="btn-danger btn cancel" />
+										<input type="reset" value="Reset"   class="btn-danger btn cancel" />
 								</div>
 							</div>
 						</div>	
@@ -611,7 +634,7 @@ margin:2px;
 				</div>	
 			</div>
 		</div>
-</security:authorize>
+<%-- </security:authorize> --%>
 <security:authorize access="hasRole('ROLE_ADMIN')">
 <div class="modal fade" id="InvoiceModal" data-backdrop="static" data-keyboard="false"  role="dialog">
 	<div class="modal-dialog">
@@ -919,7 +942,7 @@ function closeSelectedRow(e){
 function prev() {
 	
 	document.getElementById("atag").style.display="block";
-	document.getElementById("atag").setAttribute("download","INV001" );
+	document.getElementById("atag").setAttribute("download",invnum );
 	document.getElementById("prevButton").style.display="none";
 	  document.getElementById("myTable").className ='table-bordered preview';
 	  var x = document.getElementById("myTable").rows.length;		
@@ -1161,7 +1184,17 @@ var productmodelidDropDown =${productmodelid};
 			{
 				$("#warrantyModal").modal('hide');
 			}	
-	}  
+	} 
+	
+	/* $("#reset").click(function(){
+		makeWarrantyModalEmpty();
+		});
+	function makeWarrantyModalEmpty()
+	{
+		$('#year').val("");
+		$('#expireddate').val("");
+		
+	} */
 	function saveWarranty()
 	{
 		//var product=$('#model').val();
@@ -1275,7 +1308,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		});
 	});
 
-
+	var invnum='${invoiceid}';
 	var loginUserDId = "1";
 	var cuserid = "1";
 	var listOrders1 = ${allOrders1};
@@ -1306,8 +1339,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 											.split('*');
 									var uploadfile = '';
 									for (var i = 0; i < list.length; i++) {
-										uploadfile = uploadfile
-												+ '<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
+										uploadfile = uploadfile + '<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
 									}
 									orderObj.uploadfile = uploadfile;
 								} 	
@@ -1420,6 +1452,17 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		$("#modelid").val(serviceUnitArray[id].modelname);
 		$("#customerId").val(serviceUnitArray[id].customer_id);
 		$("#purchaseddate").val(getCurrentDate());
+		var taskstatus=serviceUnitArray[id].kstatus;
+		if(taskstatus == "3")
+		{
+			$("#invoiceDiv").show();
+			//document.getElementById("invoiceDiv").style.display='block';
+		}
+		else
+		{
+			//document.getElementById("invoiceDiv").style.display='none';
+			$("#invoiceDiv").hide();
+		}	
 		$("#submit1").val("Update");
 		$(window).scrollTop($('#moveTo').offset().top);
 		//$("#reset").hide();
@@ -1438,7 +1481,8 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		{
 			 	$("#rno").val(serviceUnitArray[id].taskno);
 				$("#model").val(serviceUnitArray[id].modelname);
-				$("#rtype").val(serviceUnitArray[id].servicetypename); 
+				$("#rtype").val(serviceUnitArray[id].servicetypename);
+				$("#inv1").val(invnum.toString());
 			$("#InvoiceModal").modal('show');
 		} 
 
@@ -1474,7 +1518,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 													var uploadfiles = '';
 													for (var i = 0; i < list.length; i++) {
 														uploadfiles = uploadfiles
-																+ '<a href="abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><i class="fa fa-paperclip fa-lg grey"></i></a>';
+																+ '<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"><i class="fa fa-paperclip fa-lg grey"></i></a>';
 													}
 													orderObj.uploadfiles = uploadfiles;
 												}
@@ -1534,7 +1578,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 													var uploadfiles = '';
 													for (var i = 0; i < list.length; i++) {
 														uploadfiles = uploadfiles
-																+ '<a href="reportDocuments/'+list[i]+'" target="_blank" title="'+list[i]+'"><i class="fa fa-paperclip fa-lg grey"></i></a>';
+																+ '<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"><i class="fa fa-paperclip fa-lg grey"></i></a>';
 													}
 													orderObj.uploadfiles = uploadfiles;
 												}

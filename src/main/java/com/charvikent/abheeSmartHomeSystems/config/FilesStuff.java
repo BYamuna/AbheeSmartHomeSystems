@@ -22,6 +22,7 @@ public class FilesStuff {
 	 * @param fileName     user browsed file name
 	 * @return     getTime() return value added to  @param fileName before "."
 	 */
+	@SuppressWarnings("unused")
 	public String renameFile(String fileName)
 	{
 		String extension = "";

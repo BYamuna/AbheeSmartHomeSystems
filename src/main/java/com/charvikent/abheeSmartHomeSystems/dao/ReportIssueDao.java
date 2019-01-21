@@ -89,6 +89,8 @@ public class ReportIssueDao {
 			 fileTemplate.clearFiles();
 			
 	     } 
+		
+		//reportIssue.setInvoiceId(randomInvoiceId("00000"));
 		em.persist(reportIssue);
 		
 		
@@ -413,9 +415,21 @@ public List<ReportIssue> getAllReportIssues()
 			     }else {
 			     editissue.setWarranty(issue.getWarranty());
 			     }
-			     if(issue.getUploadfile()!=null)
+			     if(issue.getImgfile()!=null)
 			     {
-			     editissue.setUploadfile(fileTemplate.concurrentFileNames());
+			     editissue.setImgfile(fileTemplate.concurrentFileNames());
+			     }
+			     else
+			     {
+			    	 editissue.setImgfile(" ");
+			     }
+			     if(issue.getInvimg()!=null)
+			     {
+			     editissue.setInvimg(fileTemplate.concurrentFileNames());
+			     }
+			     else
+			     {
+			    	 editissue.setInvimg(" ");
 			     }
 			     editissue.setAmountreceived(issue.getAmountreceived());
 			     editissue.setDiscount(issue.getDiscount());
@@ -448,10 +462,27 @@ public List<ReportIssue> getAllReportIssues()
      {
      editissue.setUploadfile(fileTemplate.concurrentFileNames());
      }
+     
+     if(issue.getInvimg()!=null)
+     {
+     editissue.setInvimg(fileTemplate.concurrentFileNames());
+     }
+     else
+     {
+    	 editissue.setInvimg(" ");
+     }
+     if(issue.getInvoiceId().length()!=0)
+     {
+    	 editissue.setInvoiceId(issue.getInvoiceId());
+     }
+     else
+     {
+    	 editissue.setInvoiceId("(NULL)");
+     }
+    
 		//em.flush();
      	
-
-
+			
         
 		taskHistoryLogsDao.historyLog(editissue);
 		try 
@@ -517,7 +548,12 @@ public List<ReportIssue> getAllReportIssues()
 				    }else {
 				    	 editissue.setImgfile(" ");
 				    }
-				     
+				    
+				    if(issue.getKstatus().toString().equals("3")) {
+					     editissue.setInvimg(issue.getImgfile().toString());
+					    }else {
+					    	 editissue.setInvimg(" ");
+					    }
 				     editissue.setWarranty(issue.getWarranty());
 				} 
 			     taskHistoryLogsDao.historyLogs(editissue);
@@ -922,6 +958,48 @@ public List<ReportIssue> getAllReportIssues()
 			return pwd.get(0);
 		return null;
 	}
+	
+	public String randomInvoiceId()
+	{
+		String prefix="";
+		String sql="select invoice_id from abhee_task where (invoice_id IS NULL or invoice_id <> ' ') order by invoice_id asc  limit 1,1";
+		String result = jdbcTemplate.queryForObject(sql, String.class);
+		if(result!=null)
+		{
+			prefix=result;
+		}
+		else
+		{
+			prefix="00000";
+		}
+		String invid="";
+	    //String prefix = "11111"; 
+	    int sufix=Integer.parseInt(prefix)+1;
+	    String randnum=String.valueOf(sufix);
+	    switch(randnum.length())  
+	    {
+	        case 1 :
+	             invid="0000"+randnum;
+	             break;
+	        case 2 :
+	             invid="000"+randnum;
+	             break;
+	        case 3 :
+	            invid="00"+randnum;
+	             break;
+	        case 4 :
+	            invid="0"+randnum;
+	             break;
+	        default:
+	        invid=randnum;
+	    }
+	      System.out.println(prefix);
+	      System.out.println(sufix);
+	      System.out.println(invid);
+		return invid;
+	}
+	
+	
 }
 
 

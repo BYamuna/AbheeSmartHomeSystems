@@ -1,13 +1,13 @@
 package com.charvikent.abheeSmartHomeSystems.dao;
 
 import java.util.Collection;
-import java.util.HashMap;
+/*import java.util.HashMap;*/
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+/*import javax.persistence.Query;*/
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
-import com.charvikent.abheeSmartHomeSystems.model.TaskHistory;
+/*import com.charvikent.abheeSmartHomeSystems.model.TaskHistory;*/
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
 import com.charvikent.abheeSmartHomeSystems.model.User;
 
@@ -293,7 +293,7 @@ public List<Map<String,Object>> getTasksListAssignToMeById(String id)
 
 public List<Map<String, Object>> getTaskStatusHistoryByTaskNo(String taskno) {
 	
-	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.uploadfile as Attachfile,t.imgfile from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and t.taskno='"+taskno+"' order by t.created_time desc";
+	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.uploadfile as Attachfile,t.imgfile as Attachfile from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and t.taskno='"+taskno+"' order by t.created_time desc";
 	
          System.out.println(hql);
 	
@@ -376,7 +376,7 @@ public List<Map<String, Object>> getAdminResponseByCustomerId(String customer) {
 		
 		//String hql= "select ap.priority as priority,t.subject,t.kstatus,t.status,u.username as assignedto,t.taskdeadline,t.imgfile,t.description from abhee_task t,abheepriority ap,abheeusers u where t.taskno='"+customer+"' and t.priority=ap.id and t.assignto=u.id";
 				
-	String hql= "select ap.priority as priority,t.subject,t.kstatus as kstatusid,ts.name as kstatus,t.status,u.username as assignedto,u.mobilenumber,t.taskdeadline,t.imgfile,t.description from abhee_task t,abheepriority ap,abheeusers u ,abheetaskstatus ts where t.taskno='"+customer+"' and t.priority=ap.id and t.assignto=u.id and t.kstatus=ts.id and t.status='1'";		
+	String hql= "select ap.priority as priority,t.subject,t.kstatus as kstatusid,ts.name as kstatus,t.status,u.username as assignedto,u.mobilenumber,t.taskdeadline,t.imgfile,t.invimg,t.description from abhee_task t,abheepriority ap,abheeusers u ,abheetaskstatus ts where t.taskno='"+customer+"' and t.priority=ap.id and t.assignto=u.id and t.kstatus=ts.id and t.status='1'";		
 	System.out.println(hql);
 		
 		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
@@ -422,6 +422,7 @@ public void updateTaskStatus(String taskstatus,String taskno)
 	jdbcTemplate.execute(hql);
 }
 
+@SuppressWarnings("unchecked")
 public List<String> getTaskNoByCustomerIds(TaskHistoryLogs customer) {
 	
 String hql ="select t.taskno from AbheeTask t where t.customerId ='"+customer.getAssignby()+"'";

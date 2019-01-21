@@ -693,16 +693,16 @@ $("#search").on("keyup", function() {
      						}
      						orderObj.uploadfile=uploadfile;
      					}
-         				if(orderObj.imgfile==undefined) orderObj.imgfile='';
+         				if(orderObj.invimg==undefined) orderObj.invimg='';
          				else
          					{
-         						var list=orderObj.imgfile.split('*');
-         						var imgfile='';
+         						var list=orderObj.invimg.split('*');
+         						var invimg='';
          						for(var i=0;i<list.length;i++)
          						{
-         							imgfile=imgfile+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
+         							invimg=invimg+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
          						}
-         						orderObj.imgfile=imgfile;
+         						orderObj.invimg=invimg;
          					}	
      				/* var payment = "<a class='comment commentIt' onclick='paymentRequest("+ orderObj.id+ ")'>   <i class='fa fa-paypal'></i></a>" */
      				serviceUnitArray[orderObj.id] = orderObj;
@@ -713,7 +713,7 @@ $("#search").on("keyup", function() {
      				+ "<td title='"+orderObj.communicationaddress+"'>"+ orderObj.communicationaddress+ "</td>"
      				+ "<td title='"+orderObj.description+"'>"+ orderObj.description+ "</td>"
      				+ "<td title='"+orderObj.uploadfile+"'>"+ orderObj.uploadfile + "</td>" 
-     				+ "<td title='"+orderObj.imgfile+"'>"+ orderObj.imgfile + "</td>" 
+     				+ "<td title='"+orderObj.invimg+"'>"+ orderObj.invimg + "</td>" 
      				+"<td title='"+orderObj.created_time+"'>"+ orderObj.created_time + "</td>"
      				/* + "<td style='text-align: center;white-space: nowrap;'>"+ payment+ "</td>" */
      				+ "</tr>";

@@ -66,6 +66,8 @@ public class TaskHistoryLogsDao {
 		
 		
 		taskHistoryLogs.setUploadfile(reportIssue.getUploadfile());
+		taskHistoryLogs.setImgfile(reportIssue.getImgfile());
+		taskHistoryLogs.setInvimg(reportIssue.getInvimg());
 		
 		entityManager.persist(taskHistoryLogs);
 	}
@@ -103,9 +105,9 @@ public class TaskHistoryLogsDao {
 		taskHistoryLogs.setCommunicationaddress(Issue.getCommunicationaddress());
 		
 		
-		
+		taskHistoryLogs.setUploadfile(Issue.getUploadfile());
 		taskHistoryLogs.setImgfile(Issue.getImgfile());
-		
+		taskHistoryLogs.setInvimg(Issue.getInvimg());
 		entityManager.persist(taskHistoryLogs);
 	}
 	
