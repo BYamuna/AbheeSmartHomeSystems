@@ -943,7 +943,7 @@ public List<ReportIssue> getAllReportIssues()
 	public List<Map<String, Object>> getTasksList1() 
 	{
 		//String sql="select t.id,t.additionalinfo,t.imgfile,t.created_time,t.description,t.subject,t.taskdeadline,t.taskno,t.updated_time,t.uploadfile,t.add_comment,t.customer_id,t.communicationaddress,t.warranty,u2.username as assignto,c.category,ts.name as kstatus,p.priority,s.severity,st.servicetypename as servicetype,ap.name as modelname,u2.user_id as empid  from abhee_task t,abheeusers u2,abheecategory c, abheetaskstatus ts,abheepriority p,abheeseverity s,abheeservicetype st,abhee_product ap  where  t.assignto=u2.id and t.category=c.id and t.kstatus=ts.id  and t.priority=p.id and t.severity=s.id and t.service_type =st.id and t.modelid=ap.id  and t.status='1' and t.kstatus<>'4'"; 
-			String sql="select t.id,t.additionalinfo,t.imgfile,t.created_time,t.description,t.subject,t.taskdeadline,t.taskno,t.updated_time,t.uploadfile,t.add_comment,t.customer_id,t.communicationaddress,t.warranty,u2.username as assignto,c.category,ts.name as kstatus,p.priority,s.severity,st.servicetypename as servicetype,ap.name as modelname,u2.user_id as empid,ac.firstname,ac.lastname,ac.mobilenumber  from abhee_task t,abheeusers u2,abheecategory c, abheetaskstatus ts,abheepriority p,abheeseverity s,abheeservicetype st,abhee_product ap,abhee_customer ac  where  t.assignto=u2.id and t.category=c.id and t.kstatus=ts.id  and t.priority=p.id and t.severity=s.id and t.service_type =st.id and t.modelid=ap.id  and t.status='1' and t.customer_id=ac.customer_id and t.kstatus<>'4'";	
+			String sql="select t.id,t.additionalinfo,t.imgfile,t.invimg,t.created_time,t.description,t.subject,t.taskdeadline,t.taskno,t.updated_time,t.uploadfile,t.add_comment,t.customer_id,t.communicationaddress,t.warranty,u2.username as assignto,c.category,ts.name as kstatus,p.priority,s.severity,st.servicetypename as servicetype,ap.name as modelname,u2.user_id as empid,ac.firstname,ac.lastname,ac.mobilenumber  from abhee_task t,abheeusers u2,abheecategory c, abheetaskstatus ts,abheepriority p,abheeseverity s,abheeservicetype st,abhee_product ap,abhee_customer ac  where  t.assignto=u2.id and t.category=c.id and t.kstatus=ts.id  and t.priority=p.id and t.severity=s.id and t.service_type =st.id and t.modelid=ap.id  and t.status='1' and t.customer_id=ac.customer_id and t.kstatus<>'4'";	
 	    List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
 		System.out.println(retlist);
 		return retlist;
@@ -962,7 +962,7 @@ public List<ReportIssue> getAllReportIssues()
 	public String randomInvoiceId()
 	{
 		String prefix="";
-		String sql="select invoice_id from abhee_task where (invoice_id IS NULL or invoice_id <> ' ') order by invoice_id asc  limit 1,1";
+		String sql="select invoice_id from abhee_task where (invoice_id IS NULL or invoice_id <> ' ') order by invoice_id desc  limit 1";
 		String result = jdbcTemplate.queryForObject(sql, String.class);
 		if(result!=null)
 		{

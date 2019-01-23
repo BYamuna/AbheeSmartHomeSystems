@@ -1323,7 +1323,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	function displayTable(listOrders) {
 		$('#tableId').html('');
 		var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-				+ '<thead><tr><th>Service Request Number</th><th>Category</th><th>Model Name</th><th>Customer ID</th><th>Service Type</th><th>Customer Sent Image</th><th>Priority</th><th>Task Created By</th><th>Service Request Status</th><th>Address</th><th>Requested Time</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
+				+ '<thead><tr><th>Service Request Number</th><th>Category</th><th>Model Name</th><th>Customer ID</th><th>Service Type</th><th>Customer Sent Image</th><th>Invoice</th><th>Priority</th><th>Task Created By</th><th>Service Request Status</th><th>Address</th><th>Requested Time</th><th style="text-align: center;">Options	</th></tr></thead><tbody></tbody></table>';
 		$('#tableId').html(tableHead);
 		serviceUnitArray = {};
 
@@ -1342,7 +1342,20 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 										uploadfile = uploadfile + '<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
 									}
 									orderObj.uploadfile = uploadfile;
-								} 	
+								}
+								
+								if(isRole == 'true'){
+								if (orderObj.invimg == undefined)
+									orderObj.invimg = '';
+								else {
+									var list = orderObj.invimg
+											.split('*');
+									var invimg = '';
+									for (var i = 0; i < list.length; i++) {
+										invimg = invimg + '<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
+									}
+									orderObj.invimg = invimg;
+								} 	}
 							if (isRole == 'true') {
 								if (orderObj.status == "1") {
 									var deleterow = "<a class='deactivate' onclick='deletetask("
@@ -1401,6 +1414,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 									+ "<td title='"+orderObj.customer_id+"'>"+ view3+ "</td>"
 									+ "<td title='"+orderObj.servicetypename+"'>"+ orderObj.servicetypename+ "</td>"
 									+ "<td title='"+orderObj.uploadfile+"'>"+ orderObj.uploadfile	+ "</td>"
+									+ "<td title='"+orderObj.invimg+"'>"+ orderObj.invimg	+ "</td>"
 									+ "<td title='"+orderObj.priority+"'>"+ orderObj.priority+ "</td>"
 									+ "<td title='"+orderObj.subject+"'>"+ orderObj.subject+ "</td>"
 									+ "<td title='"+orderObj.statusname+"'>"+ orderObj.statusname+ "</td>"
@@ -1823,6 +1837,16 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 			$.fn.makeMultipartRequest('POST', 'deleteTask', false, formData,
 					false, 'text', function(data) {
 						var jsonobj = $.parseJSON(data);
+						var jsonobj = $.parseJSON(data);
+						if(status==1)
+						{
+							alert("Service Request Activated Successfully");
+						}
+								
+						else
+							{
+							alert("Service Request Deactivated Successfully");
+							}
 						var alldata = jsonobj.allOrders1;
 						var result = $.parseJSON(alldata);
 						displayTable(result);

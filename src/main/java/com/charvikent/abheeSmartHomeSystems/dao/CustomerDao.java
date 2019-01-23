@@ -338,8 +338,48 @@ public boolean deleteCustomer(Integer id, String status) {
 @SuppressWarnings("unchecked")
 public List<Customer> getCustomerInActiveList() 
 {
-	return (List<Customer>)entityManager.createQuery("from Customer where enabled='0' order by updatedTime desc").getResultList();
+	List<Customer> listCustomer =new ArrayList<Customer>();
+	//select c.id,c.createdTime,c.customerId,c.mobilenumber,c.updatedTime,c.BranchId,c.address,c.branchName,c.email,c.enabled,c.firstname,c.lastname,c.mobilenumber,c.status,c.registedredFromAndroid,ct.customerType,c.gst,c.purchaseCustomer
 	
+	String hql="select c.id,c.customerId,c.mobilenumber,c.BranchId,c.address,c.branchName,c.email,c.enabled,c.firstname,c.lastname,c.status,c.registedredFromAndroid,ct.customerType,c.gst,c.purchaseCustomer, c.customerType from Customer c, AbheeCustomerTypes ct where c.enabled='0' and c.customerType=ct.id";
+	
+	try{//String hql ="SELECT c FROM Customer c, AbheeCustomerTypes ct where c.enabled='1' and  c.customerType=ct.id";
+	List<Object[]> rows = entityManager.createQuery(hql).getResultList();
+	
+	for (Object[] row : rows) {
+		Customer customer =new Customer();
+		
+		customer.setId(Integer.parseInt(String.valueOf(row[0])));
+
+		customer.setCustomerId((String) row[1]);
+		customer.setMobilenumber((String) row[2]);
+		customer.setBranchId((String) row[3]);
+		customer.setAddress((String) row[4]);
+		customer.setBranchName((String) row[5]);
+		customer.setEmail((String) row[6]);
+		customer.setEnabled((String) row[7]);
+		customer.setFirstname((String) row[8]);
+		customer.setLastname((String) row[9]);
+		customer.setStatus((String) row[10]);
+		customer.setRegistedredFromAndroid((String) row[11]);
+		customer.setCustomerTypeName((String) row[12]);
+		customer.setGst((String) row[13]);
+		customer.setPurchaseCustomer((boolean) row[14]);
+		customer.setCustomerType((String) row[15]);
+	
+		
+		
+		listCustomer.add(customer);
+
+	}
+	}catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	//return (List<Customer>)entityManager.createQuery(hql).getResultList();
+	
+	 return listCustomer;
+
 }
 
 

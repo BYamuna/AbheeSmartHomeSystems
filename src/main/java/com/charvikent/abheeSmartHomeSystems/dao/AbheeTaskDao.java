@@ -113,7 +113,7 @@ public class AbheeTaskDao {
 	}
 			else
 			{
-				sql="select t.id,t.assignto,u.username,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,sev.severity, "
+				sql="select t.id,t.assignto,u.username,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.invimg,t.severity as severityid,sev.severity, "
 						 + "t.status,t.subject,t.taskdeadline,t.taskno,t.modelid,ab.category,abp.name as modelname,t.customer_id , t.communicationaddress,t.amountreceived,t.discount,t.tax,t.total,ar.requesttime,t.warranty,t.add_comment "
 						+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp,abheerequesttime ar"
 						+" where  t.kstatus<>'4' and  t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.requesttime=ar.requesttimeid and t.status='1'and  t.assignto='"+objuserBean.getId()+" ' order by t.created_time desc " ;
@@ -411,7 +411,7 @@ String hql ="select t.taskno from AbheeTask t where t.customerId ='"+customer.ge
 
 public List<Map<String, Object>> getTasksListByCustomerId(String customerId) 
 {
-	String sql="select t.id,s.servicetypename,t.add_comment,t.taskno,abp.name as modelname,t.communicationaddress,t.description,t.uploadfile,t.imgfile, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time FROM abhee_task t,abheeservicetype s,abhee_product abp where  t.service_type=s.id and abp.id=t.modelid and t.customer_id='"+customerId+"'order by t.created_time desc ";
+	String sql="select t.id,s.servicetypename,t.add_comment,t.taskno,abp.name as modelname,t.communicationaddress,t.description,t.uploadfile,t.invimg, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time FROM abhee_task t,abheeservicetype s,abhee_product abp where  t.service_type=s.id and abp.id=t.modelid and t.customer_id='"+customerId+"'order by t.created_time desc ";
 	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
 	System.out.println(retlist);
 	return retlist;

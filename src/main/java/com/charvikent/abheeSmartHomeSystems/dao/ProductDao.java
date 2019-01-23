@@ -87,7 +87,7 @@ public class ProductDao
 		
 		List<Product> listProducts =new ArrayList<Product>();
 		
-		String hql ="select p.id,p.categoryid,cat.category,p.companyid,com.name,p.description,p.name,p.productmodelpics,p.productmodelvideoslinks,p.status,p.updatedTime from Product  p , Category cat , Company com where p.categoryid=cat.id and p.companyid=com.id and p.status='0' order by p.updatedTime desc";
+		String hql ="select p.id,p.categoryid,cat.category,p.companyid,com.name,p.description,p.name,p.productmodelpics,p.productmodelvideoslinks,p.status,p.ProductModelSpecifications,p.ProductPrice,p.maxAllowedDiscount,p.updatedTime from Product  p , Category cat , Company com where p.categoryid=cat.id and p.companyid=com.id and p.status='0' order by p.updatedTime desc";
 
 		List<Object[]> rows = entityManager.createQuery(hql).getResultList();
 		
@@ -104,13 +104,15 @@ public class ProductDao
 			product.setProductmodelpics((String) row[7]);
 			product.setProductmodelvideoslinks((String) row[8]);
 			product.setStatus((String) row[9]);
+			product.setProductModelSpecifications((String) row[10]);
+			product.setProductPrice((String) row[11]);
+			product.setMaxAllowedDiscount((String) row[12]);
 			
 			listProducts.add(product);
 
 	}
 		 return listProducts;
 	}
-	
 	@SuppressWarnings("unchecked")
 	public List<Product> getProductDetails()
 	 {

@@ -63,7 +63,7 @@ public class SalesRequestDao
 		public List<Map<String, Object>> getSalesRequestList()
 		 {
 		 
-			 String hql ="select sr.* ,c.category from abhee_sales_request sr,abheecategory c where sr.catid=c.id and sr.qstatus='1'";
+			 String hql ="select sr.* ,c.category from abhee_sales_request sr,abheecategory c where sr.catid=c.id and sr.qstatus='1' order by updated_time desc";
 			 System.out.println(hql);
 			
 				List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
@@ -176,7 +176,8 @@ public class SalesRequestDao
 	}
 	public List<Map<String, Object>> getInActiveList() {
 		 //String hql ="select * from abhee_sales_request where enable =0";
-		String hql="select * from abhee_sales_request where qstatus='0'";
+		//String hql="select * from abhee_sales_request where qstatus='0'";
+		String hql="select sr.* ,c.category from abhee_sales_request sr,abheecategory c where sr.catid=c.id and sr.qstatus='0'";
 		 System.out.println(hql);
 		
 			List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});

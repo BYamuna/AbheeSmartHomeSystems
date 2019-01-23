@@ -56,7 +56,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Username<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="username" class="form-control validate2" placeholder="Username"/>
+										<form:input path="username" class="form-control validate2" onfocus="removeBorder(this.id)" placeholder="Username"/>
 									</div>
 								</div>
 								
@@ -64,7 +64,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="firstname" class="form-control validate2 onlyCharacters" placeholder="First Name"/>
+										<form:input path="firstname" class="form-control validate2 onlyCharacters" onfocus="removeBorder(this.id)" placeholder="First Name"/>
 									</div>
 								</div></div>
 								<div class="clearfix"></div>
@@ -75,14 +75,14 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Last Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="lastname" class="form-control validate2 onlyCharacters" placeholder="Last Name"/>
+										<form:input path="lastname" class="form-control validate2 onlyCharacters" onfocus="removeBorder(this.id)" placeholder="Last Name"/>
 									</div>
 								</div>
 								</div><div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="mobilenumber" class="form-control validate2 numericOnly2" maxlength="10"  placeholder="Mobile Number"/>
+										<form:input path="mobilenumber" class="form-control validate2 numericOnly2" onfocus="removeBorder(this.id)" maxlength="10"  placeholder="Mobile Number"/>
 									</div>
 								</div>
 								</div><div class="clearfix"></div>
@@ -93,7 +93,7 @@
 								<div class="form-group" id="passwordDiv">
 									<label class="col-md-3 control-label no-padding-right">Password<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:password path="password" class="form-control validate2" placeholder="Password"/>
+										<form:password path="password" class="form-control validate2" onfocus="removeBorder(this.id)"  placeholder="Password"/>
 									</div>
 								</div>
 								
@@ -102,7 +102,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="email" class="form-control validate2 emailOnly" placeholder="Email"/>
+										<form:input path="email" class="form-control validate2 emailOnly" onfocus="removeBorder(this.id)" placeholder="Email"/>
 									</div>
 								</div></div></div><div class="clearfix"></div>
 								<div class="sep">
@@ -110,7 +110,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Aadhar Number</label>
 									<div class="col-md-6">
-										<form:input path="aadharno" class="form-control" placeholder="Aadhar number" maxlength="12"/>
+										<form:input path="aadharno" class="form-control"  placeholder="Aadhar number" maxlength="12"/>
 									</div>
 								</div>
 								</div>
@@ -120,7 +120,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Designation<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:select path="designation" class="form-control validate2 " >
+										<form:select path="designation" class="form-control validate2 " onfocus="removeBorder(this.id)" >
 											<form:option value="">-- Select Designation --</form:option>
 											<form:options items="${roles}"/>
 										</form:select>
@@ -364,6 +364,15 @@ function deleteEmployee(id,status){
 	    formData.append('status', status);
 		$.fn.makeMultipartRequest('POST', 'deleteUser', false, formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
+			if(status==1)
+			{
+				alert("Employee Activated Successfully");
+			}
+					
+			else
+				{
+				alert("Employee Deactivated Successfully");
+				}
 			var alldata = jsonobj.allOrders1;
 			displayTable(alldata);
 			toolTips(); //calling tool tips defined at header
