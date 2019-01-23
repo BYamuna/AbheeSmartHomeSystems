@@ -84,6 +84,7 @@ public class SalesRequestController
 		loginDetails.setQuotationstatus(1);
 		loginDetails.setQstatus("1");
 		loginDetails.setNotes(" ");
+		loginDetails.setKstatus("New");
 		loginDetails.setMobileno(customer.getMobilenumber());
 		loginDetails.setEmail(customer.getEmail());
 		loginDetails.setCustomerid(customer.getCustomerId());
@@ -180,6 +181,8 @@ public class SalesRequestController
    		  salesrequest.setStatus(1);
    		  //salesrequest.setQstatus("1");
    		 salesrequest.setCstatus(1);
+   		 salesrequest.setKstatus("Sent Quotation");
+
    		salesrequest.setQuotationstatus(1);
    		  salesrequest.setNotes(description);
    		 fileTemplate.clearFiles();

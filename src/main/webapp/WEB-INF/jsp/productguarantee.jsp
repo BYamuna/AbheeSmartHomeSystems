@@ -222,6 +222,15 @@ function deleteProductWarranty(id,status){
 	    formData.append('status', status);
 		$.fn.makeMultipartRequest('POST', 'deleteProductWarranty', false, formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
+			if(status==1)
+			{
+				alert("Warranty Activated Successfully");
+			}
+					
+			else
+				{
+				alert("Warranty Deactivated Successfully");
+				}
 			var alldata = jsonobj.allOrders1;
 			displayTable(alldata);
 			toolTips();

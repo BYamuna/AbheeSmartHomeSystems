@@ -49,6 +49,7 @@ public class SalesRequest
 	private int cstatus;
 	
 	private int quotationstatus;
+	private String kstatus;
 	
 	
 	@Transient
@@ -60,7 +61,7 @@ public class SalesRequest
 
 	}
 	public SalesRequest(Integer id, String modelnumber, String email, String mobileno, String location, String address,String catid,
-			String reqdesc, String imgfiles,String customername,String requestType,int status,Date createdTime,Date updatedTime, String notes,String qstatus,int webstatus,int cstatus,int quotationstatus) 
+			String reqdesc, String imgfiles,String customername,String requestType,int status,Date createdTime,Date updatedTime, String notes,String qstatus,int webstatus,int cstatus,int quotationstatus,String kstatus) 
 
 	{
 		super();
@@ -83,6 +84,7 @@ public class SalesRequest
 		this.webstatus=webstatus;
 		this.cstatus=cstatus;
 		this.quotationstatus=quotationstatus;
+		this.kstatus=kstatus;
 	}
 	public Date getCreatedTime() {
 		return createdTime;
@@ -259,6 +261,13 @@ public class SalesRequest
 	public void setQuotationstatus(int quotationstatus) {
 		this.quotationstatus = quotationstatus;
 	}
+	
+	public String getKstatus() {
+		return kstatus;
+	}
+	public void setKstatus(String kstatus) {
+		this.kstatus = kstatus;
+	}
 	@Override
 	public String toString() {
 		return "SalesRequest [id=" + id + ", modelnumber=" + modelnumber + ", email=" + email + ", mobileno=" + mobileno
@@ -268,7 +277,8 @@ public class SalesRequest
 				+ ", customerid=" + customerid + ", customername=" + customername + ", requestType=" + requestType
 				+ ", notes=" + notes + ", catid=" + catid + ", createdTime=" + createdTime + ", updatedTime="
 				+ updatedTime + ", status=" + status + ", webstatus=" + webstatus + ", cstatus=" + cstatus
-				+ ", quotationstatus=" + quotationstatus + ", locationData=" + locationData + "]";
+				+ ", quotationstatus=" + quotationstatus + ", kstatus=" + kstatus + ", locationData=" + locationData
+				+ "]";
 	}
 	
 

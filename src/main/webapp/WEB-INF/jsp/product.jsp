@@ -355,6 +355,15 @@ function deleteProduct(id,status)
 	    formData.append('status', status);
 		$.fn.makeMultipartRequest('POST', 'deleteProduct', false, formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
+			if(status==1)
+			{
+				alert("Product Model Activated Successfully");
+			}
+					
+			else
+				{
+				alert("Product Model Deactivated Successfully");
+				}
 			var alldata = jsonobj.allOrders1;
 			displayTable(alldata);
 			toolTips();

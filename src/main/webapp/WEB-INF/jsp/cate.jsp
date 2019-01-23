@@ -169,6 +169,15 @@ function deletecate(id,status){
 	    formData.append('status', status);
 		$.fn.makeMultipartRequest('POST', 'deleteCate', false, formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
+			if(status==1)
+			{
+				alert("Product Activated Successfully");
+			}
+					
+			else
+				{
+				alert("Product Deactivated Successfully");
+				}
 			var alldata = jsonobj.allOrders1;
 			displayTable(alldata);
 			toolTips();

@@ -65,7 +65,7 @@
                     		<div class="form-group" style=" width: 154%;">
 									<label class="ace-file-input ace-file-multiple col-sm-3 control-label no-padding-right" >Attach File(s)</label>
 									<div class="col-md-9">
-										<input type="file" name="fileupload" id="fileupload"  class="validate "  multiple style="margin: 8px 0px 0px 0px;">
+										<input type="file" name="fileupload" id="fileupload"  class="validate2 " onfocus="removeBorder(this.id)"  multiple style="margin: 8px 0px 0px 0px;">
 									</div>
 							</div>
 							
@@ -82,7 +82,7 @@
 								<div class="form-group" style=" width: 154%;">
 									<label class="col-sm-3 control-label no-padding-right">Notes</label>
 										<div class="col-md-6">
-											<textarea class="form-control validate" name="notes" id= "notes"  placeholder="Notes"></textarea>
+											<textarea class="form-control validate2" onfocus="removeBorder(this.id)" name="notes" id= "notes"  placeholder="Notes"></textarea>
 										</div>
 								</div>	
 							</div>
@@ -165,8 +165,8 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 
-	var tableHead = '<table id="example" class="table table-striped table-bordered ">'
-			+ '<thead><tr><th>Request Number</th><th>Product Category</th><th>Product Model</th><th>Email Id</th><th>Mobile Number</th><th>Files</th><th>Location</th><th>Address</th><th>Comments</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+	var tableHead = '<table id="example" class="table table-striped table-bordered datatables ">'
+			+ '<thead><tr><th>Request Number</th><th>Product Category</th><th>Product Model</th><th>Email Id</th><th>Mobile Number</th><th>Files</th><th>Status</th><th>Location</th><th>Address</th><th>Comments</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -211,6 +211,7 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.email+"'>"+ orderObj.email + "</td>"
 			+ "<td title='"+orderObj.mobileno+"'>"+ orderObj.mobileno + "</td>"
 			+ "<td title='"+orderObj.imgfiles+"'>"+ orderObj.imgfiles + "</td>"
+			+ "<td title='"+orderObj.kstatus+"'>"+ orderObj.kstatus + "</td>"
 			+ "<td title='"+orderObj.location+"'>"+ orderObj.location + "</td>"
 			+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>"
 			+ "<td title='"+orderObj.reqdesc+"'>"+ orderObj.reqdesc + "</td>"
@@ -232,7 +233,7 @@ function addComment(id)
 var idArrayCmt11 = null;
 
 function submitCommet()
-{"src/main/resources"
+{
  idArrayCmt11 = $.makeArray($('.validate2').map(function() {
 	return this.id;
 	}));
@@ -257,19 +258,14 @@ $.each(idArrayCmt11, function(i, val) {
 });
 if(validation) {
 	
-}else {
+	$("#modelSubmit").prop('disabled',true);
+	$("#modelSubmit").val("Please wait..."); 
+}
+	
+else {
 	return false;
 }
-		/* 
-	     var commet=$('#commet').val();
-	   
-	    var id=$('#id').val();
-		   
-		   var formData = new FormData();
-		   
-		   formData.append('commet', commet); 
-		   
-		   formData.append('id',id);*/
+		
 		    
 		  var id= $('#salesRequestid').val();
 		  var notes= $('#notes').val();
@@ -293,25 +289,27 @@ if(validation) {
  		$.ajax({
 			type:"post",
 			enctype: 'multipart/form-data',
-		  	
 		  	processData: false,  // tell jQuery not to process the data
 			contentType: false,  // tell jQuery not to set contentType
 			url: "sendingQuotation", 
 		  	data:data,
-			beforeSend : function() {
-				$("#modelSubmit").click(function(){
-					$("#modelSubmit").prop('disabled',true);
-					$("#modelSubmit").val('Please wait...');
-					$("form").submit();	
+		 // beforeSend : function() {
+				//$("#modelSubmit").click(function(){
+					/* $("#modelSubmit").prop('disabled',true);
+					$("#modelSubmit").val('Please wait...'); */
+					//$("form").submit();	
 					
-				}); 
-				//$.blockUI({ message: 'Please wait' });
-	          },
+				//}); 
+			//$.blockUI({ message: 'Please wait' });
+	        //  }, 
+	        async:false,
 		  	success: function(result){
 		  		
+		  	
 		  		if(result =="true"){
 		  			alert("Quotation sent successfully");
 		  			$('#formModal').modal('hide');
+		  			window.location.reload();
 		  		
 		  		/* $('#commet').val("");
 		  		$('#fileupload').val("");
@@ -324,6 +322,10 @@ if(validation) {
 		  			}
 		  	
 		    },
+		    complete: function () {
+	            
+	            $.unblockUI();
+	       },
 		    error: function (e) {
 	            console.log(e.responseText);
 	        }
@@ -361,6 +363,15 @@ function deleteTotalSales(id,qstatus)
 	    formData.append('qstatus', qstatus);
 		$.fn.makeMultipartRequest('POST', 'deleteTotalSales', false, formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
+			if(qstatus==1)
+			{
+				alert("Quotation Activated Successfully");
+			}
+					
+			else
+				{
+				alert("Quotation Deactivated Successfully");
+				}
 			var alldata = jsonobj.allOrders1;
 			displayTable(alldata);
 			toolTips();

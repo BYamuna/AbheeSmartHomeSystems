@@ -370,8 +370,7 @@ public class UserDao {
 
 
 		try {
-			List<Object[]> rows = em.createQuery("select u.id,u.username,u.mobilenumber,u.email,u.reportto,u2.username,d.name,"
-					+ "u.firstname,u.lastname,u.reportto,u.designation ,u.department , u.enabled as status,u.userId,u.aadharno,u.updatedTime from User u,User u2,Designation d where u.enabled='0'  and u.designation= d.id and  u.reportto=u2.id and u.designation !='9' order by u.updatedTime desc ").getResultList();
+			List<Object[]> rows = em.createQuery("select  u.id,u.username,u.mobilenumber,u.email,u.reportto,u2.username,CASE WHEN u.enabled IN ('0') THEN 'Deactive' WHEN u.enabled IN ('1') THEN 'Active' ELSE '-----' END AS enabled,d.name,u.firstname,u.lastname,u.reportto,u.designation,u.enabled as status,u.password,u.BranchId,ab.name,u.userId,u.aadharno,u.updatedTime from User u,User u2,Designation d,AbheeBranch ab where u.enabled='0' and u.designation= d.id and ab.id=u.BranchId and u.reportto=u2.id order by u.updatedTime desc ").getResultList();
 			for (Object[] row : rows) {
 				User users =new User();
 
@@ -382,17 +381,20 @@ public class UserDao {
 				users.setEmail((String) row[3]);
 				users.setReportto((String) row[4]);
 				users.setReportName((String) row[5]);
-				//users.setEnabled((String) row[6]);
-				//users.setDepartmentName((String) row[6]);
-				users.setDesignationName((String) row[6]);
-				users.setFirstname((String) row[7]);
-				users.setLastname((String) row[8]);
-				users.setReportId((String) row[9]);
-				users.setDesignation((String) row[10]);
-				users.setDepartment((String) row[11]);
+				users.setEnabled((String) row[6]);
+				//users.setDepartmentName((String) row[7]);
+				users.setDesignationName((String) row[7]);
+				users.setFirstname((String) row[8]);
+				users.setLastname((String) row[9]);
+				users.setReportId((String) row[10]);
+				users.setDesignation((String) row[11]);
+			//	users.setDepartment((String) row[13]);
 				users.setStatus((String) row[12]);
-				users.setUserId((String) row[13]);
-				users.setAadharno((String) row[14]);
+				users.setPassword((String) row[13]);
+				users.setBranchId((String) row[14]);
+				users.setBranchName((String) row[15]);
+				users.setUserId((String) row[16]);
+				users.setAadharno((String) row[17]);
 				listusers.add(users);
 
 			}

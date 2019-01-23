@@ -269,6 +269,7 @@ public class EmployeeController {
 
 
 		model.addAttribute("editProfile", userService.getUserById(objuserBean.getId()));
+		
 
 		return "editProfile";
 

@@ -69,7 +69,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="firstname" class="form-control validate2 onlyCharacters" placeholder="First Name"/>
+										<form:input path="firstname" class="form-control validate2 onlyCharacters" onfocus="removeBorder(this.id)" placeholder="First Name"/>
 									</div>
 								</div>
 								
@@ -79,7 +79,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Last name<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="lastname" class="form-control validate2 onlyCharacters" placeholder="last Name"/>
+										<form:input path="lastname" class="form-control validate2 onlyCharacters" onfocus="removeBorder(this.id)" placeholder="last Name"/>
 									</div>
 								</div>
 								
@@ -88,7 +88,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="email" class="form-control validate2 emailOnly" placeholder="Email"/>
+										<form:input path="email" class="form-control validate2 emailOnly" onfocus="removeBorder(this.id)" placeholder="Email"/>
 										 <span id="errorEmaiMsg" style="color:red;"></span>
 									</div>
 								</div>
@@ -99,7 +99,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile Number<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:input path="mobilenumber"   class="form-control validate2  numericOnly2"  maxlength="10"  placeholder="Mobile Number"/>
+										<form:input path="mobilenumber"   class="form-control validate2  numericOnly2" onfocus="removeBorder(this.id)"  maxlength="10"  placeholder="Mobile Number"/>
 										<span id="errorMobileMsg" style="color:red;"></span>
 									</div>
 								</div>
@@ -108,7 +108,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Password <span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:password path="password" class="form-control validate2 onlyNumbers" maxlength="4" placeholder="*****"/>
+										<form:password path="password" class="form-control validate2 numericOnly2" onfocus="removeBorder(this.id)" maxlength="4" placeholder="*****"/>
 										<span id="errorPasswordMsg" style="color:red;"></span>
 									</div>
 								</div>
@@ -119,7 +119,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Address<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:textarea path="address" class="form-control validate2 " placeholder="Address"/>
+										<form:textarea path="address" class="form-control validate2 " onfocus="removeBorder(this.id)" placeholder="Address"/>
 									</div>
 								</div>
 								</div>
@@ -127,7 +127,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">GST<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:input path="gst" class="form-control  validate2"  maxlength="15" placeholder="GST"/>
+										<form:input path="gst" class="form-control  validate2" onfocus="removeBorder(this.id)"  maxlength="15" placeholder="GST"/>
 									</div>
 								</div>
 								</div>
@@ -432,6 +432,15 @@ function deleteCustomer(id,status){
 	    formData.append('enabled', status);
 		$.fn.makeMultipartRequest('POST', 'deleteCustomer', false, formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
+			if(status==1)
+			{
+				alert("Customer Activated Successfully");
+			}
+					
+			else
+				{
+				alert("Customer Deactivated Successfully");
+				}
 			var alldata = jsonobj.allOrders1;
 			displayTable(alldata);
 			toolTips(); //calling tool tips defined at header

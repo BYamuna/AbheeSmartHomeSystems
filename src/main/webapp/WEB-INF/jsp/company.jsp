@@ -190,6 +190,15 @@ function deleteCompany(id,status)
 	    formData.append('status', status);
 		$.fn.makeMultipartRequest('POST', 'deleteCompany', false, formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
+			if(status==1)
+			{
+				alert("Company Activated Successfully");
+			}
+					
+			else
+				{
+				alert("Company Deactivated Successfully");
+				}
 			var alldata = jsonobj.allOrders1;
 			displayTable(alldata);
 			toolTips();
