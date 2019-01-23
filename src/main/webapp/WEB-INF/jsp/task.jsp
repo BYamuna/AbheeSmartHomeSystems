@@ -1342,7 +1342,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 										uploadfile = uploadfile + '<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
 									}
 									orderObj.uploadfile = uploadfile;
-								} 	
+								}  	
 							if (isRole == 'true') {
 								if (orderObj.status == "1") {
 									var deleterow = "<a class='deactivate' onclick='deletetask("

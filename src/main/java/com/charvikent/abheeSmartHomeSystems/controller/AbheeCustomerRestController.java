@@ -504,6 +504,7 @@ public class AbheeCustomerRestController {
 		String mobile = salesrequest.getMobileno();
 		String email = salesrequest.getEmail();
 		String catid=salesrequest.getCatid();
+		//String description=salesrequest.getReqdesc();
 		String imgpath = imgdecoder(salesrequest.getImgfiles(), request);
 		if (!salesrequest.getImgfiles().isEmpty()) {
 			salesrequest.setImgfiles(imgpath);
@@ -520,6 +521,7 @@ public class AbheeCustomerRestController {
 		{
 			salesrequest.setLocation(" ");	
 		}
+		//salesrequest.setReqdesc(description);
 		srequestDao.saveRequest(salesrequest);
 		code = "requestSubmittedSuccessfully";
 		HashMap<String, String> hm = new HashMap<String, String>();

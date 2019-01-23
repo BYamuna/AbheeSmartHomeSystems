@@ -221,7 +221,7 @@ private AbheeTask getAbheeTaskByTaskNo(String taskno) {
 public List<Map<String, Object>> getAbheeTaskById(String id) {
 	
 	String sql="select t.id,u.username,s.servicetypename,DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.description,ts.name as Requeststatus,p.priority,sev.severity, "
-			 + " t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id ,t.communicationaddress,t.imgfile as AttachedFiles  "
+			 + " t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id ,t.communicationaddress,t.uploadfile as AttachedFiles  "
 			+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp"
 			+" where t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.taskno='"+id+"' order by t.updated_time desc ";
 	System.out.println(sql);
@@ -234,7 +234,7 @@ public List<Map<String, Object>> getAbheeTaskById(String id) {
 public List<Map<String, Object>> getAbheeTaskByTaskId(String id) {
 	
 	String sql="select t.id,u.username,s.servicetypename,DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.description,ts.name as Requeststatus,p.priority,sev.severity, "
-			 + " t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id ,t.communicationaddress,t.imgfile as AttachedFiles  "
+			 + " t.subject,t.taskdeadline,t.taskno,ab.category,abp.name as modelname,t.customer_id ,t.communicationaddress,t.uploadfile as AttachedFiles  "
 			+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp"
 			+" where t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.taskno="+id+" order by t.updated_time desc ";
 	System.out.println(sql);
@@ -293,7 +293,7 @@ public List<Map<String,Object>> getTasksListAssignToMeById(String id)
 
 public List<Map<String, Object>> getTaskStatusHistoryByTaskNo(String taskno) {
 	
-	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.uploadfile as Attachfile,t.imgfile as Attachfile from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and t.taskno='"+taskno+"' order by t.created_time desc";
+	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.imgfile as Attachfile from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and t.taskno='"+taskno+"' order by t.created_time desc";
 	
          System.out.println(hql);
 	
@@ -304,7 +304,7 @@ public List<Map<String, Object>> getTaskStatusHistoryByTaskNo(String taskno) {
 }
 public List<Map<String, Object>> getTaskHistoryByTaskNo(String taskno) {
 	
-	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.uploadfile as Attachfile,t.imgfile from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and t.taskno="+taskno+"order by t.created_time desc";
+	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.imgfile as Attachfile from task_history_logs t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and t.taskno="+taskno+"order by t.created_time desc";
 	
          System.out.println(hql);
 	
@@ -411,7 +411,7 @@ String hql ="select t.taskno from AbheeTask t where t.customerId ='"+customer.ge
 
 public List<Map<String, Object>> getTasksListByCustomerId(String customerId) 
 {
-	String sql="select t.id,s.servicetypename,t.add_comment,t.taskno,abp.name as modelname,t.communicationaddress,t.description,t.uploadfile,t.imgfile, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time FROM abhee_task t,abheeservicetype s,abhee_product abp where  t.service_type=s.id and abp.id=t.modelid and t.customer_id='"+customerId+"'order by t.created_time desc ";
+	String sql="select t.id,s.servicetypename,t.add_comment,t.taskno,abp.name as modelname,t.communicationaddress,t.description,t.uploadfile,t.invimg, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time FROM abhee_task t,abheeservicetype s,abhee_product abp where  t.service_type=s.id and abp.id=t.modelid and t.customer_id='"+customerId+"'order by t.created_time desc ";
 	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
 	System.out.println(retlist);
 	return retlist;

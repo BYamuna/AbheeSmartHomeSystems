@@ -1072,7 +1072,7 @@ function getOtp()
 		success : function(data) {
 			if(data == 'true')
 				{
-				alert("OTP Send to Your Mobile Number ");
+				alert("OTP Sent to Your Mobile Number ");
 				$('#OTPModel').modal('toggle');
 				$("#OTPModel").modal('show');
 				}

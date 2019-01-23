@@ -471,14 +471,16 @@ public List<ReportIssue> getAllReportIssues()
      {
     	 editissue.setInvimg(" ");
      }
-     if(issue.getInvoiceId().length()!=0)
-     {
-    	 editissue.setInvoiceId(issue.getInvoiceId());
-     }
-     else
-     {
-    	 editissue.setInvoiceId("(NULL)");
-     }
+			
+	if(issue.getInvoiceId().length()!=0) 
+	{
+		editissue.setInvoiceId(issue.getInvoiceId()); 
+	} 
+	else 
+	{
+		editissue.setInvoiceId("(NULL)"); 
+	}
+			
     
 		//em.flush();
      	
@@ -962,7 +964,7 @@ public List<ReportIssue> getAllReportIssues()
 	public String randomInvoiceId()
 	{
 		String prefix="";
-		String sql="select invoice_id from abhee_task where (invoice_id IS NULL or invoice_id <> ' ') order by invoice_id asc  limit 1,1";
+		String sql="select invoice_id from abhee_task where (invoice_id IS NULL or invoice_id <> '') order by invoice_id desc  limit 1";
 		String result = jdbcTemplate.queryForObject(sql, String.class);
 		if(result!=null)
 		{

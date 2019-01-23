@@ -254,7 +254,7 @@
 								</div>
 								<div class="clearfix"></div>
 								<div class="form-group">
-								<label class="col-md-4 control-label no-padding-right ">Attach <span class="impColor">*</span></label> 
+								<label class="col-md-4 control-label no-padding-right ">Attach <!-- <span class="impColor">*</span> --></label> 
 									<div class="col-md-6">
 										<input class="validate " type="file" name="imgfile"  accept="image/*"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="imgfile" multiple />
 									</div>

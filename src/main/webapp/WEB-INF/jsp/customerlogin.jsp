@@ -526,7 +526,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 			if(data ==='true')
 				{
 				//location.reload();
-				alert("OTP Send to Your Mobile Number ");
+				alert("OTP Sent to Your Mobile Number ");
 				$('#register-info').modal('hide');
 				//$("#register-info").modal('toggle');
 				$('#OTPModel').modal('toggle');

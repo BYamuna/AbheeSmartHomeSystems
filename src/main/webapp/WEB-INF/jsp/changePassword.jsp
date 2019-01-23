@@ -122,7 +122,7 @@
 											<div class="form-group" id="passwordDiv">
 												<label class="col-md-3 control-label no-padding-right">Current	Password<span class="impColor">*</span></label>
 												<div class="col-md-6">
-													<form:password path="password"	class="form-control validate" placeholder="Enter Password" />
+													<form:password path="password"	class="form-control validate numericOnly2" placeholder="Enter Password" />
 												</div>
 											</div>
 
@@ -131,7 +131,7 @@
 											<div class="form-group" id="passwordDiv">
 												<label class="col-md-3 control-label no-padding-right">New Password<span class="impColor">*</span></label>
 												<div class="col-md-6">
-													<form:password path="npassword"	class="form-control validate"	placeholder="Enter  New Password" />
+													<form:password path="npassword"	class="form-control validate numericOnly2"	placeholder="Enter  New Password" />
 												</div>
 											</div>
 
@@ -140,7 +140,7 @@
 											<div class="form-group" id="passwordDiv">
 												<label class="col-md-3 control-label no-padding-right">Confirm Password<span class="impColor">*</span></label>
 												<div class="col-md-6">
-													<form:password path="cpassword"	class="form-control validate"	placeholder="Re-Enter New Password" />
+													<form:password path="cpassword"	class="form-control validate numericOnly2"	placeholder="Re-Enter New Password" />
 												</div>
 								           <span id="errorMsg" style="color:red;"></span>
 											</div>

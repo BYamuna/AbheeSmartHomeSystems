@@ -243,12 +243,12 @@ $.each(viewTaskTable, function(k, v){
 	else
 		{
 			var list=v.AttachedFiles.split('*');
-			var Attachfile='';
+			var Attachfiles='';
 			for(var i=0;i<list.length;i++)
 			{
-				Attachfile=Attachfile+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
+				Attachfiles=Attachfiles+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
 			}
-			v.AttachedFiles=Attachfile;
+			v.AttachedFiles=Attachfiles;
 		}
 	if(v.description==null){
 		
