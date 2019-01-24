@@ -577,6 +577,7 @@ public class TaskController {
 		task.setImgfile(" ");
 		task.setInvimg(" ");
 		task.setRequestType("Service Request");
+		//task.setInvoiceId(null); 
 		for (MultipartFile multipartFile : uploadedFiles) {
 			String fileName = multipartFile.getOriginalFilename();
 			if (!multipartFile.isEmpty()) {

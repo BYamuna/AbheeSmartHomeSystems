@@ -1342,12 +1342,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 										uploadfile = uploadfile + '<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
 									}
 									orderObj.uploadfile = uploadfile;
-<<<<<<< HEAD
 								}  	
-=======
-								}
-								
-								if(isRole == 'true'){
 								if (orderObj.invimg == undefined)
 									orderObj.invimg = '';
 								else {
@@ -1358,8 +1353,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 										invimg = invimg + '<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
 									}
 									orderObj.invimg = invimg;
-								} 	}
->>>>>>> 4c84b75a5f243b5e5c48161f984be8b6736ef456
+								} 	
 							if (isRole == 'true') {
 								if (orderObj.status == "1") {
 									var deleterow = "<a class='deactivate' onclick='deletetask("

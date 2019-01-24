@@ -188,8 +188,8 @@ public class SalesRequestController
    		 fileTemplate.clearFiles();
    		 
    	 }
-			srequestDao.saveRequest(salesrequest);
-			srequestDao.saveQuationHistory(salesrequest);
+			srequestDao.saveQuotationRequest(salesrequest);
+		/* srequestDao.saveQuationHistory(salesrequest); */
 	   		sendingMail.sendSalesRequestEmailWithMultipleAttachment(email.toString(), uploadedFiles,description);
 	   		String str ="true";
 	   		

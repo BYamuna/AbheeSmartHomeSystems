@@ -521,6 +521,8 @@ public class AbheeCustomerRestController {
 		{
 			salesrequest.setLocation(" ");	
 		}
+		salesrequest.setQuotationDocuments(" ");	
+		salesrequest.setKstatus("New");
 		//salesrequest.setReqdesc(description);
 		srequestDao.saveRequest(salesrequest);
 		code = "requestSubmittedSuccessfully";

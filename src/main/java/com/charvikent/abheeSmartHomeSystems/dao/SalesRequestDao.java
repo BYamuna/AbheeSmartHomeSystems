@@ -33,6 +33,12 @@ public class SalesRequestDao
 		//saveQuationHistory(salesrequest);
 
 	}
+	public void saveQuotationRequest(SalesRequest salesrequest) 
+	{
+		entityManager.persist(salesrequest);
+		saveQuationHistory(salesrequest);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public  Boolean checkSalesrequestExistsorNotByEmailAndModelNo(SalesRequest salesrequest)
 	{
@@ -74,7 +80,7 @@ public class SalesRequestDao
 		public List<Map<String, Object>> getSalesRequestList1(SalesRequest salesRequest)
 		 {
 		 
-			String hql ="select sr.request_type,sr.salesrequestnumber,ap.name as modelname from abhee_sales_request sr,abhee_product ap where sr.customerid='"+salesRequest.getCustomerid()+"' and sr.modelnumber=ap.name";
+			String hql ="select sr.request_type,sr.salesrequestnumber,ap.name as modelname,sr.kstatus from abhee_sales_request sr,abhee_product ap where sr.customerid='"+salesRequest.getCustomerid()+"' and sr.modelnumber=ap.name";
 			 /*String hql ="select sr.request_type,sr.salesrequestnumber,sr.modelnumber from abhee_sales_request sr where sr.customerid='"+salesRequest.getCustomerid()+"'"; */
 			System.out.println(hql);
 			

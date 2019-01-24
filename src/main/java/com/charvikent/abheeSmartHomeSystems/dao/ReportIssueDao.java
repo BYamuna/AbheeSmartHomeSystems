@@ -1000,8 +1000,6 @@ public List<ReportIssue> getAllReportIssues()
 	      System.out.println(invid);
 		return invid;
 	}
-	
-	
 }
 
 

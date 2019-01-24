@@ -256,15 +256,15 @@ $.each(idArrayCmt11, function(i, val) {
 		validation = false;
 	} 
 });
-if(validation) {
+ if(validation) {
 	
-	$("#modelSubmit").prop('disabled',true);
-	$("#modelSubmit").val("Please wait..."); 
+	/* $("#modelSubmit").prop('disabled',true);
+	$("#modelSubmit").val("Please wait..."); */  
 }
 	
 else {
 	return false;
-}
+} 
 		
 		    
 		  var id= $('#salesRequestid').val();
@@ -278,7 +278,7 @@ else {
 	    	{	
 	    	var quotation = document.getElementById('fileupload').files[i];
 	    	
-			data.append('file', quotation);
+			data.append('fileupload', quotation);
 			} 
     	 
 		/* jQuery.each(jQuery('#fileupload')[0].files, function(i, file) {
@@ -293,15 +293,15 @@ else {
 			contentType: false,  // tell jQuery not to set contentType
 			url: "sendingQuotation", 
 		  	data:data,
-		 // beforeSend : function() {
-				//$("#modelSubmit").click(function(){
-					/* $("#modelSubmit").prop('disabled',true);
-					$("#modelSubmit").val('Please wait...'); */
+		 beforeSend : function() {
+				$("#modelSubmit").click(function(){
+					 $("#modelSubmit").prop('disabled',true);
+					$("#modelSubmit").val('Please wait...'); 
 					//$("form").submit();	
 					
-				//}); 
+				}); 
 			//$.blockUI({ message: 'Please wait' });
-	        //  }, 
+	         }, 
 	        async:false,
 		  	success: function(result){
 		  		
