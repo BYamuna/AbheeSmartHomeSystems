@@ -118,14 +118,15 @@ public class TaskController {
 		String customerJson = null;
 		String productJson = null;
 		String sJson = null;
-		String invoiceid=reportIssueDao.randomInvoiceId();
+		
+		//String invoiceid=reportIssueDao.randomInvoiceId();
 		// model.addAttribute("taskf", new AbheeTask());
 		
 		model.addAttribute("severity", severityDao.getSeverityMap());
 		model.addAttribute("priority", priorityDao.getPriorityMap());
 		model.addAttribute("userNames", userService.getUserName());
 		model.addAttribute("category", serviceDao.getServicemap());
-		model.addAttribute("invoiceid",invoiceid);
+		//model.addAttribute("invoiceid",invoiceid);
 		
 		/*
 		 * model.addAttribute("requesttimes",abheeRequestTimeDao.getRequestTimesMap() );
@@ -243,7 +244,7 @@ public class TaskController {
 						}
 						
 						if(task.getKstatus().equals("3"))
-						{
+						{	
 							for (MultipartFile multipartFile : Files) {
 								String fileName = multipartFile.getOriginalFilename();
 								if (!multipartFile.isEmpty()) {
@@ -251,7 +252,7 @@ public class TaskController {
 																				// in dao layers
 									multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 								}
-							}	
+							}
 						}
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
@@ -533,7 +534,6 @@ public class TaskController {
 	public @ResponseBody String modelSubmit(Model model, HttpServletRequest request,
 			@RequestParam("fileimg") MultipartFile[] uploadedFiles) throws IOException, MessagingException {
 		LOGGER.debug("Calling saveServiceRequest at controller");
-
 		System.out.println("enter to task controller Submit");
 		int filecount = 0;
 		String message = request.getParameter("message");
@@ -544,9 +544,12 @@ public class TaskController {
 		String customerId = request.getParameter("customerId");
 		String custaddress = request.getParameter("custaddress");
 		String images = request.getParameter("images");
+	//	String invoiceid=reportIssueDao.randomInvoiceId();
+		
 		System.out.println(images);
 		String requesttimeid = request.getParameter("requesttimeid");
 		AbheeTask task = new AbheeTask();
+		//task.setInvoiceId(invoiceid);
 		task.setAdditionalinfo("0");
 		task.setAssignto("2");
 		task.setDescription(message);
