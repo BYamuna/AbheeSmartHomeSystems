@@ -92,7 +92,8 @@
 				      	<div class="row">
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar text-center">
-					      			<input type="button" id="modelSubmit" value="Submit"  onclick="submitCommet()"  class="btn-primary btn"/>
+					      			<button type="button" id="modelSubmit"  onclick="submitCommet()"  class="btn-primary btn">Submit</button>
+					      			<button type="button" id="modelPlease"  disabled style="display:none"  class="btn-primary btn">Please wait...</button>
 					      			<input type="reset" value="Reset" class="btn-danger btn cancel1"/>
 				      			</div>
 				      		</div>
@@ -260,6 +261,7 @@ $.each(idArrayCmt11, function(i, val) {
 	
 	/* $("#modelSubmit").prop('disabled',true);
 	$("#modelSubmit").val("Please wait..."); */  
+
 }
 	
 else {
@@ -284,8 +286,9 @@ else {
 		/* jQuery.each(jQuery('#fileupload')[0].files, function(i, file) {
 			data.append('file-'+i, file);
 		}); */
-    	console.log(data);
-		
+		/* $("#modelSubmit").attr('display','none');
+		$("#modelPlease").attr('display','block'); */
+		//alert($("#modelSubmit").html());
  		$.ajax({
 			type:"post",
 			enctype: 'multipart/form-data',
@@ -302,8 +305,7 @@ else {
 				}); 
 			//$.blockUI({ message: 'Please wait' });
 	         }, 
-	        async:false,
-		  	success: function(result){
+	        		  	success: function(result){
 		  		
 		  	
 		  		if(result =="true"){

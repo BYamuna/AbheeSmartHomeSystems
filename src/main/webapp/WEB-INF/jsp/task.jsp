@@ -233,7 +233,7 @@ margin:2px;
 								</div>
 							</div>
 						</div>
-						<div class="row" id="invoiceDiv">
+						<%-- <div class="row" id="invoiceDiv">
 						<div class="col-md-6">
 						<div class="form-group">
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">Invoice Number
@@ -253,7 +253,7 @@ margin:2px;
 								</div>
 							</div>
 						</div>
-						</div>
+						</div> --%>
 						<div class="row">
 						<div class="col-md-6">
 						<div class="form-group">
@@ -1343,6 +1343,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 									}
 									orderObj.uploadfile = uploadfile;
 								}  	
+
 								if (orderObj.invimg == undefined)
 									orderObj.invimg = '';
 								else {
@@ -1403,7 +1404,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 							var history = "<a class='history historyit' onclick='viewTask("
 									+ orderObj.id
 									+ ")'> <i class='fa fa-history'></i></a>"
-							var invoice="<a class='invoice invoiceIt' onclick='addInvoice("+ orderObj.id+ ")'><i class='fa fa-money'></i></a>" 
+							//var invoice="<a class='invoice invoiceIt' onclick='addInvoice("+ orderObj.id+ ")'><i class='fa fa-money'></i></a>" 
 							serviceUnitArray[orderObj.id] = orderObj;
 							var tblRow = "<tr>"
 									+ "<td title='"+orderObj.taskno+"'>"+ view2 + "</td>"
@@ -1423,7 +1424,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 									+ "<td title='"+orderObj.total+"'>"+ orderObj.total */
 									+ "<td title='"+orderObj.requesttime+"'>"+ orderObj.requesttime+ "</td>"
 									/* + "<td title='"+orderObj.paymentstatus+"'>"+ orderObj.paymentstatus+ "</td>" */
-									+ "<td style='text-align: center;white-space: nowrap;'>"+ edit+ "&nbsp;&nbsp;"+ deleterow+ "&nbsp;&nbsp;"+ time+ "&nbsp;&nbsp;"+invoice+ "</td>"
+									+ "<td style='text-align: center;white-space: nowrap;'>"+ edit+ "&nbsp;&nbsp;"+ deleterow+ "&nbsp;&nbsp;"+ time+ "</td>"
 									+ "</tr>";	 
 							$(tblRow).appendTo("#tableId table tbody");
 						});
@@ -1464,7 +1465,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		$("#modelid").val(serviceUnitArray[id].modelname);
 		$("#customerId").val(serviceUnitArray[id].customer_id);
 		$("#purchaseddate").val(getCurrentDate());
-		var taskstatus=serviceUnitArray[id].kstatus;
+		/* var taskstatus=serviceUnitArray[id].kstatus;
 		if(taskstatus == "3")
 		{
 			$("#invoiceDiv").show();
@@ -1474,7 +1475,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		{
 			//document.getElementById("invoiceDiv").style.display='none';
 			$("#invoiceDiv").hide();
-		}	
+		}	 */
 		$("#submit1").val("Update");
 		$(window).scrollTop($('#moveTo').offset().top);
 		//$("#reset").hide();

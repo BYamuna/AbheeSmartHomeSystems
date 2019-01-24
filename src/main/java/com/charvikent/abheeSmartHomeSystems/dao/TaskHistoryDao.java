@@ -83,7 +83,7 @@ public class TaskHistoryDao {
 	
 	
 	public List<TaskHistoryLogs> getNotificationforAdmin(){
-		String hql ="Select t.taskno,t.add_comment,t.webstatus,st.servicetypename as servicetype,ats.name as kstatus,t.request_type from task_history_logs t,abheeservicetype st ,abheetaskstatus ats where  webstatus='1' and t.service_type=st.id and t.kstatus=ats.id " ;
+		String hql ="Select t.taskno,t.add_comment,t.webstatus,st.servicetypename as servicetype,ats.name as kstatus,t.request_type from task_history_logs t,abheeservicetype st ,abheetaskstatus ats where  webstatus='1' and t.service_type=st.id and t.kstatus=ats.id order by t.updated_time desc " ;
 		//String hql="Select t.taskno,t.add_comment,t.webstatus,st.servicetypename as servicetype,ats.name as kstatus,t.request_type,q.request_type from task_history_logs t,abheeservicetype st ,abheetaskstatus ats ,abhee_sales_request q where  q.webstatus='1' and t.webstatus='1' and t.service_type=st.id and t.kstatus=ats.id";
 		RowMapper<TaskHistoryLogs> rowMapper = new BeanPropertyRowMapper<TaskHistoryLogs>(TaskHistoryLogs.class);
 	    System.out.println(hql);
@@ -94,7 +94,7 @@ public class TaskHistoryDao {
 	public List<TaskHistoryLogs> getNotificationByCustomerIds(String history){
 		System.out.println(history);
 		//String hql ="Select t.taskno,t.add_comment,t.webstatus,st.servicetypename as servicetype,ats.name as kstatus from task_history_logs t,abheeservicetype st ,abheetaskstatus ats where  webstatus='1' and t.service_type=st.id and t.kstatus=ats.id " ;
-		String hql="select t.taskno,t.add_comment,t.webstatus,st.servicetypename as servicetype,ats.name as kstatus,t.assignto,t.request_type from task_history_logs t,abheeservicetype st ,abheetaskstatus ats,abheeusers u where  webstatus='1' and t.service_type=st.id and t.kstatus=ats.id  and t.assignto=u.id  and t.assignto='"+history+"'";
+		String hql="select t.taskno,t.add_comment,t.webstatus,st.servicetypename as servicetype,ats.name as kstatus,t.assignto,t.request_type from task_history_logs t,abheeservicetype st ,abheetaskstatus ats,abheeusers u where  webstatus='1' and t.service_type=st.id and t.kstatus=ats.id  and t.assignto=u.id  and t.assignto='"+history+"' order by t.updated_time desc ";
 		RowMapper<TaskHistoryLogs> rowMapper = new BeanPropertyRowMapper<TaskHistoryLogs>(TaskHistoryLogs.class);
 	    System.out.println(hql);
 		return  this.jdbcTemplate.query(hql, rowMapper);
@@ -111,7 +111,7 @@ public class TaskHistoryDao {
 	
 	/*Queries for getQuotation for PushNotifications*/
 	public List<SalesRequest> getQuotationNotificationforAdmin(){
-		String hql ="select q.id,q.salesrequestnumber,q.webstatus,q.request_type from abhee_sales_request q  where q.webstatus='1'" ;
+		String hql ="select q.id,q.salesrequestnumber,q.webstatus,q.request_type from abhee_sales_request q  where q.webstatus='1'  order by q.updated_time desc " ;
 		RowMapper<SalesRequest> rowMapper = new BeanPropertyRowMapper<SalesRequest>(SalesRequest.class);
 	    System.out.println(hql);
 		return  this.jdbcTemplate.query(hql, rowMapper);
