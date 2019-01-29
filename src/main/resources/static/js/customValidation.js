@@ -1,4 +1,4 @@
-/*  $('.nospecialCharacter').bind('keypress', function(e) {
+''/*  $('.nospecialCharacter').bind('keypress', function(e) {
 	    console.log( e.which );
 	        var k = e.which;
 	        var ok = k >= 65 && k <= 90 || // A-Z
@@ -178,6 +178,7 @@ $(".emailOnly").on(	"blur",	function(e) {
 					 */
 					if (expr.test(inputVal)) {
 						console.log("Email");
+						$('.emailOnly' ).removeClass("errorCls");
 						return true;
 					}else{
 						

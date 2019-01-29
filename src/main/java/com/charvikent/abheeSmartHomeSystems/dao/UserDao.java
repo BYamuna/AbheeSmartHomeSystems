@@ -12,13 +12,16 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 /*import org.springframework.jdbc.core.BeanPropertyRowMapper;*/
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 /*import org.springframework.jdbc.core.RowMapper;*/
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 import com.charvikent.abheeSmartHomeSystems.config.KptsUtil;
+import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Department;
 import com.charvikent.abheeSmartHomeSystems.model.Designation;
 import com.charvikent.abheeSmartHomeSystems.model.User;
@@ -489,7 +492,7 @@ public class UserDao {
 	}
 
 	public User getUserDesignationById(Integer id) {
-		String hql ="select  ku.username, kd.name from abheedesignation kd,abheeusers ku where ku.designation=kd.id and ku.id=:id";
+		String hql ="select  ku.username, kd.name,kd.id  from abheedesignation kd,abheeusers ku where ku.designation=kd.id and ku.id=:id";
 		User users =new User();
 		try{
 			
@@ -500,6 +503,7 @@ public class UserDao {
 			
 			users.setUsername((String) row[0]);
 			users.setDesignationName((String) row[1]);
+			users.setId((Integer) row[2]);
 					
 		}
 	} catch (Exception e) {
@@ -638,6 +642,19 @@ public void deactiveUser(String status, Integer id)
 	jdbcTemplate.execute(sql);	
 }	
 	
+
+public List<Map<String, Object>> getTechnicianNotificationByUserId(User user) {
+	
+	
+String hql= "select t.taskno,st.servicetypename as servicetype,ats.name as kstatus,t.assignto,t.request_type,u.user_id from task_history_logs t,abheeservicetype st ,abheetaskstatus ats,abheeusers u where  t.service_type=st.id and t.kstatus=ats.id  and t.assignto=u.id  and u.user_id='"+user.getUserId()+"' order by t.updated_time desc"; 
+			
+System.out.println(hql);
+	
+	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+	System.out.println(retlist);
+	return retlist;
+	
+}	
 
 
 

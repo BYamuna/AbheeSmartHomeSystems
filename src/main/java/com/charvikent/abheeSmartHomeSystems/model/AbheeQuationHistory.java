@@ -28,7 +28,7 @@ public class AbheeQuationHistory {
 	
 	private String quationid;
 	private String notes;
-	
+	private int cstatus;
 	
 
 	@CreationTimestamp
@@ -78,13 +78,23 @@ public class AbheeQuationHistory {
 		this.createdTime = createdTime;
 	}
 
-	@Override
-	public String toString() {
-		return "AbheeQuationHistory [id=" + id + ", filename=" + filename + ", quationid=" + quationid + ", notes="
-				+ notes + ", createdTime=" + createdTime + "]";
+	
+
+	
+	public int getCstatus() {
+		return cstatus;
+	}
+
+	public void setCstatus(int cstatus) {
+		this.cstatus = cstatus;
 	}
 
 	
+	@Override
+	public String toString() {
+		return "AbheeQuationHistory [id=" + id + ", filename=" + filename + ", quationid=" + quationid + ", notes="
+				+ notes + ", cstatus=" + cstatus + ", createdTime=" + createdTime + "]";
+	}
 
 	
 	

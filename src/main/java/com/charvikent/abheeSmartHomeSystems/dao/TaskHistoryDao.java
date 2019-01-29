@@ -17,6 +17,7 @@ import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistory;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
+import com.charvikent.abheeSmartHomeSystems.model.User;
 
 @Repository
 @Transactional
@@ -125,5 +126,10 @@ public class TaskHistoryDao {
 	}
 	
 	/*Queries for getQuotation for PushNotifications*/
+	
+
+	
+	
+	
 	
 }

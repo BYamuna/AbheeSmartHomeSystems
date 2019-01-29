@@ -51,7 +51,7 @@ public class SalesRequestController
 	
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/salesRequest", method = RequestMethod.POST)
-	public String saveRequestDetails(@RequestParam("modelnumber") String modelnumber,
+	public @ResponseBody String saveRequestDetails(@RequestParam("modelnumber") String modelnumber,
 			//@RequestParam("locationData") String locationData,
 			@RequestParam("address") String address,
 			@RequestParam("reqdesc") String reqdesc,
@@ -115,11 +115,11 @@ public class SalesRequestController
 	   	else {
 	   		redir.addFlashAttribute("msg","Record Already Exists");
 	   		System.out.println("record Already Exists");
-		return "redirect:abheecategory";
+		return "false";
 		}
 	   	redir.addFlashAttribute("msg","We Received The Request and will send you the Quotation soon. Thanking you.");
 	   	System.out.println("&&&&&&&&&&&&&&&&&&&&& Mail Sent");
-	   	return "redirect:abheecategory";
+	   	return "true";
 		
 	}
 	@RequestMapping("/allsalesrequest")
@@ -180,7 +180,7 @@ public class SalesRequestController
    		  salesrequest.setStatus(1);
    		  //salesrequest.setQstatus("1");
    		 salesrequest.setCstatus(1);
-   		 salesrequest.setKstatus("Sent Quotation");
+   		 salesrequest.setKstatus("Quotation Sent");
 
    		salesrequest.setQuotationstatus(1);
    		  salesrequest.setNotes(description);

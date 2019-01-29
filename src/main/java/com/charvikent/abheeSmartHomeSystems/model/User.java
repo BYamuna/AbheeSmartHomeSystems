@@ -257,8 +257,8 @@ public class User {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer row) {
+		this.id = row;
 	}
 
 	public Date getCreatedTime() {

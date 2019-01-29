@@ -153,9 +153,24 @@
 			<!-- container -->
 </body>
 <script type="text/javascript">
+var designation = <%= session.getAttribute("userDesignationSession1") %>;
+var designationid=designation["id"];
+
+if (designationid != 1 && designationid != 2){
+	
+	
+	$("#email").attr('disabled', true);
+	$("#mobilenumber").attr('disabled', true); 
+	
+}else{
+	
+	$("#email").attr('disabled', false);
+	$("#mobilenumber").attr('disabled', false);
+	
+} 
+
 
 $("#userId").attr('disabled', true);
-
 
 
 

@@ -112,7 +112,7 @@ public class SalesRequestDao
 		public List<Map<String, Object>> getSalesRequestListByCustomerId(String custId)
 		 {
 		 
-			 String hql ="select sr.id,sr.salesrequestnumber,sr.mobileno,ap.name as modelname,sr.address,sr.reqdesc,sr.imgfiles,DATE_FORMAT(sr.created_time,'%d-%b-%y %H:%i')as created_time from abhee_sales_request sr,abhee_product ap where sr.modelnumber=ap.name and sr.customerid='"+custId+"'";
+			 String hql ="select sr.id,sr.salesrequestnumber,sr.mobileno,ap.name as modelname,sr.address,sr.reqdesc,sr.imgfiles,DATE_FORMAT(sr.created_time,'%d-%b-%y %H:%i')as created_time from abhee_sales_request sr,abhee_product ap where sr.modelnumber=ap.name and sr.customerid='"+custId+"' order by sr.updated_time desc";
 			 System.out.println(hql);
 			
 				List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
@@ -137,7 +137,7 @@ public class SalesRequestDao
 		public List<Map<String, Object>> getAdminResponseListByRequestNo(SalesRequest req)
 		 {
 		 
-			 String hql ="select sr.reqdesc,sr.status,sr.quotation_documents,sr.notes from abhee_sales_request sr where sr.salesrequestnumber='"+req.getSalesrequestnumber()+"'";
+			 String hql ="select qr.filename,qr.notes,DATE_FORMAT(sr.updated_time,'%d-%b-%y %H:%i') as updated_time from abhee_quation_history qr,abhee_sales_request sr where sr.salesrequestnumber='"+req.getSalesrequestnumber()+"'  and sr.id=qr.quationid ";
 			 System.out.println(hql);
 			
 				List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
@@ -207,6 +207,7 @@ public class SalesRequestDao
 		abheeQuationHistory.setQuationid(salesrequest.getId().toString());
 		abheeQuationHistory.setNotes(salesrequest.getNotes());
 		abheeQuationHistory.setCreatedTime(salesrequest.getCreatedTime());
+		//abheeQuationHistory.setCstatus(1);
 		entityManager.persist(abheeQuationHistory);
 	}
 	
@@ -247,4 +248,14 @@ public class SalesRequestDao
 		}
 		return delete;
 	}
+	
+	public List<Map<String, Object>> getAdminResponseByRequestNo(SalesRequest req)
+	 {
+	 
+			String hql ="select sr.reqdesc,sr.status,sr.quotation_documents,sr.notes from abhee_sales_request sr where sr.salesrequestnumber='"+req.getSalesrequestnumber()+"'";
+			System.out.println(hql);
+			List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+			System.out.println(retlist);
+			return retlist;	
+	 }
 }

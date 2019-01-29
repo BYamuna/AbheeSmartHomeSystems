@@ -440,7 +440,7 @@ $('#email').blur(function() {
 				success : function(data) {
 					if(data ==='true')
 						{
-						//alert("username already exists")
+						alert("Email already exists");
 	 					$('#email').css('border-color', 'red');
 	 					 $('#submit1').prop('disabled', true);
 						}

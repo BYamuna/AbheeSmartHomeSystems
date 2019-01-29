@@ -123,10 +123,45 @@ public class HomeController {
 		return "403";
 	}*/
 	@RequestMapping("/customerlogin")
-	public String ShowCustomerLoginPage(Model model,HttpServletRequest request) {
+	public String ShowCustomerLoginPage(Model model,HttpServletRequest request,HttpSession session) throws JsonProcessingException {
 		LOGGER.debug("Calling Customer Login page index::{} at controller");
 		if(falg)
 		loginurl =request.getHeader("referer");
+		
+
+		/*List<SalesRequest> customerNotification = null;
+		
+		List<TaskHistoryLogs> listOrderBeansForNotification = null;
+		
+		
+		
+		ObjectMapper objectMapperNotificaton = null;
+		ObjectMapper objectMapperNotificaton1 = null;
+		
+		String sJsonNotificaton = null;
+		String sJsonNotificaton1 = null;
+
+		
+		Customer customerProfile=(Customer) session.getAttribute("customer");
+		String customerid = customerProfile.getCustomerId();
+			
+		customerNotification = customerDao.getNotificationByCustomerIds(customerid);
+		listOrderBeansForNotification=	customerDao.getServiceNotificationByCustomerIds(customerid);
+		
+		objectMapperNotificaton = new ObjectMapper();
+		objectMapperNotificaton1 = new ObjectMapper();
+		if(true)//((customerNotification != null && customerNotification.size() > 0) && (listOrderBeansForNotification != null && listOrderBeansForNotification.size() > 0))
+			
+		{
+			sJsonNotificaton1 = objectMapperNotificaton.writeValueAsString(customerNotification);
+			sJsonNotificaton=objectMapperNotificaton1.writeValueAsString(listOrderBeansForNotification);
+			
+			session.setAttribute("quotations", sJsonNotificaton1);
+			session.setAttribute("services", sJsonNotificaton);
+			
+		} */
+	
+		
 		
 		return "customerlogin";
 	}
@@ -241,9 +276,21 @@ public class HomeController {
 	}*/
 	
 	@RequestMapping("/")
-	public String ShowAbhee(Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException 
+	public String ShowAbhee(@ModelAttribute("customerProfile") Customer customer,Model model,HttpServletRequest request,HttpSession session) throws JSONException, JsonProcessingException 
 	{
 		LOGGER.debug("Calling Abhee site Main page at controller");
+		List<SalesRequest> customerNotification = null;
+		
+		List<TaskHistoryLogs> listOrderBeansForNotification = null;
+		
+		
+		
+		ObjectMapper objectMapperNotificaton = null;
+		ObjectMapper objectMapperNotificaton1 = null;
+		
+		String sJsonNotificaton = null;
+		String sJsonNotificaton1 = null;
+		
 		List<Category> listOrderBeans = categoryDao.getCategoryNames();
 		//model.addAttribute("categories", listOrderBeans);
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -251,7 +298,36 @@ public class HomeController {
 		request.setAttribute("allOrders1", sJson);
 		String referalUrl=request.getHeader("referer");
 		System.out.println(referalUrl);
+		
+		Customer customerProfile=(Customer) session.getAttribute("customer");
+		
+		if(null !=customerProfile) {
+			
+			String customerid = customerProfile.getCustomerId();
+			
+	  		customerNotification = customerDao.getNotificationByCustomerIds(customerid);
+	  		listOrderBeansForNotification=	customerDao.getServiceNotificationByCustomerIds(customerid);
+	  		
+	  		objectMapperNotificaton = new ObjectMapper();
+	  		objectMapperNotificaton1 = new ObjectMapper();
+	  		if(true)
+	  			
+	  		{
+	  			sJsonNotificaton1 = objectMapperNotificaton.writeValueAsString(customerNotification);
+	  			sJsonNotificaton=objectMapperNotificaton1.writeValueAsString(listOrderBeansForNotification);
+	  			
+	  			session.setAttribute("quotations", sJsonNotificaton1);
+	  			session.setAttribute("services", sJsonNotificaton);
+	  			
+	  		} 
+			
+		}
+	
+			
+			
 		return "abheeindex";
+		
+		
 	}
 	
 	
@@ -293,6 +369,21 @@ public class HomeController {
 	@RequestMapping("/customerprofile")
 	public String customerProfile(@ModelAttribute("customerProfile") Customer customer, Model model,HttpServletRequest request,HttpSession session,RedirectAttributes redir) throws JSONException, JsonProcessingException {
 		LOGGER.debug("Calling Customer Profile  page at controller");
+
+	/*	List<SalesRequest> customerNotification = null;
+		
+		List<TaskHistoryLogs> listOrderBeansForNotification = null;
+		
+		
+		
+		ObjectMapper objectMapperNotificaton = null;
+		ObjectMapper objectMapperNotificaton1 = null;
+		
+		String sJsonNotificaton = null;
+		String sJsonNotificaton1 = null;
+	*/
+	
+		
 		model.addAttribute("paymentmode",abheePaymentDao.getPaymentMap());
 		Customer customerProfile=(Customer) session.getAttribute("customer");
 		//String id=String.valueOf(objuserBean.getId());
@@ -313,6 +404,25 @@ public class HomeController {
         		request.setAttribute("customerProfile1", "''");
         		request.setAttribute("ordersList", "''");    	  
           }
+       
+        /* String customerid = customerProfile.getCustomerId();
+			
+  		customerNotification = customerDao.getNotificationByCustomerIds(customerid);
+  		listOrderBeansForNotification=	customerDao.getServiceNotificationByCustomerIds(customerid);
+  		
+  		objectMapperNotificaton = new ObjectMapper();
+  		objectMapperNotificaton1 = new ObjectMapper();
+  		if(true)
+  			
+  		{
+  			sJsonNotificaton1 = objectMapperNotificaton.writeValueAsString(customerNotification);
+  			sJsonNotificaton=objectMapperNotificaton1.writeValueAsString(listOrderBeansForNotification);
+  			
+  			session.setAttribute("quotations", sJsonNotificaton1);
+  			session.setAttribute("services", sJsonNotificaton);
+  			
+  		} */
+          
 		return "customerprofile";
 	}
 	

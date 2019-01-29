@@ -1105,21 +1105,22 @@ public class AbheeCustomerRestController {
 			listOrderBeans2 = srequestDao.getAdminResponseListByRequestNoWhenStatusZero(request);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 
-				listOrderBeans1.get(0).get("status");
-				System.out.println("Status Code:" + listOrderBeans1.get(0).get("status"));
+				listOrderBeans2.get(0).get("status");
+				System.out.println("Status Code:" + listOrderBeans2.get(0).get("status"));
 
-				if (!listOrderBeans1.get(0).get("status").equals(0)) {
+				if (!listOrderBeans2.get(0).get("status").equals(0)) {
 					json.put("quotationslist", listOrderBeans);
+					json.put("AdminResponseStatus", listOrderBeans2.get(0).get("status"));
 					json.put("AdminResponseList", listOrderBeans1);
 				}
 
 				else {
-					listOrderBeans1.get(0).get("status");
-					System.out.println("Status Code:" + listOrderBeans1.get(0).get("status"));
+					listOrderBeans2.get(0).get("status");
+					System.out.println("Status Code:" + listOrderBeans2.get(0).get("status"));
 
 					json.put("quotationslist", listOrderBeans);
-
-					json.put("AdminResponseList", listOrderBeans2);
+					json.put("AdminResponseStatus", listOrderBeans2.get(0).get("status"));
+					//json.put("AdminResponseList", listOrderBeans2);
 				}
 			} else {
 				json.put("quotationslist", "NOT_FOUND");
@@ -2063,6 +2064,65 @@ public class AbheeCustomerRestController {
 			json.put("NotificationList", listOrderBeans);
 		} else
 			json.put("NotificationList", "NOT_FOUND");
+		return String.valueOf(json);
+	}
+
+	@RequestMapping(value = "/getTechnicianNotificationByUserId", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getTechnicianNotificationByUserId(@RequestBody User user,HttpServletRequest request)
+			throws JsonProcessingException, JSONException {
+		LOGGER.debug("Calling getTechnicianNotificationByUserId at controller");
+		
+		
+		List<Map<String, Object>> listOrderBeans = userDao.getTechnicianNotificationByUserId(user);
+		JSONObject jsonObj = new JSONObject();
+		
+		if (null != listOrderBeans) {
+			jsonObj.put("TechnicianNotificationList", listOrderBeans);
+		}
+		else
+			jsonObj.put("TechnicianNotificationList", "NOT_FOUND");
+		
+			return String.valueOf(jsonObj);
+	}
+	@RequestMapping(value = "/getquotationByRequestNo", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getquotationByRequestNo(@RequestBody SalesRequest request)
+			throws JsonProcessingException, JSONException {
+		LOGGER.debug("Calling getquotationByRequestNo at controller");
+		JSONObject json = new JSONObject();
+		List<Map<String, Object>> listOrderBeans = null;
+		List<Map<String, Object>> listOrderBeans1 = null, listOrderBeans2 = null;
+
+		try {
+			listOrderBeans = srequestDao.getSalesRequestListByRequestNo(request);
+			listOrderBeans1 = srequestDao.getAdminResponseByRequestNo(request);
+			listOrderBeans2 = srequestDao.getAdminResponseListByRequestNoWhenStatusZero(request);
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+
+				listOrderBeans1.get(0).get("status");
+				System.out.println("Status Code:" + listOrderBeans1.get(0).get("status"));
+
+				if (!listOrderBeans1.get(0).get("status").equals(0)) {
+					json.put("quotationslist", listOrderBeans);
+					json.put("AdminResponseList", listOrderBeans1);
+				}
+
+				else {
+					listOrderBeans1.get(0).get("status");
+					System.out.println("Status Code:" + listOrderBeans1.get(0).get("status"));
+
+					json.put("quotationslist", listOrderBeans);
+
+					json.put("AdminResponseList", listOrderBeans2);
+				}
+			} else {
+				json.put("quotationslist", "NOT_FOUND");
+			}
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
 		return String.valueOf(json);
 	}
 }
