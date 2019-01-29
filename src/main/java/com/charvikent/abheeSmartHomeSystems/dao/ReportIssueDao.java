@@ -964,8 +964,11 @@ else
 	public String randomInvoiceId()
 	{
 		String prefix="";
-		String sql="select invoice_id from abhee_task where (invoice_id IS NULL or invoice_id <> '') order by invoice_id desc";
-		String result = jdbcTemplate.queryForObject(sql, String.class);
+		String result="";
+		String sql="select invoice_id from abhee_task where (invoice_id IS NULL or invoice_id <> ' ') order by invoice_id desc limit 1 ";
+		System.out.println(sql);
+		result = jdbcTemplate.queryForObject(sql, String.class);
+		System.out.println(result);
 		if(result!=null)
 		{
 			prefix=result;

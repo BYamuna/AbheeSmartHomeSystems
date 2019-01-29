@@ -100,7 +100,7 @@ border: none !important;
 						
 						<div class="table-responsive">
 								<table class="table table-bordered priority prioritybg" style="border: 1px solid #0460a4; width:;" id="viewTasksTable">
-								 <thead><tr><th>Assigned To</th><th>ServiceTypename</th><th>CreatedTime</th><th>Description</th><th>Requeststatus</th><th>Priority</th><th>Severity</th><th>Subject</th><th>Deadline</th><th>Taskno</th><th>Category</th><th>ModelName</th><th>CustomerId</th>
+								 <thead><tr><th>Assigned To</th><th>Service Type</th><th>CreatedTime</th><th>Description</th><th>Requeststatus</th><th>Priority</th><th>Severity</th><th>Subject</th><th>Deadline</th><th>Taskno</th><th>Category</th><th>ModelName</th><th>CustomerId</th>
 				                 <th>Files</th></tr><tr></tr></thead><tbody></tbody></table>
 
 			<%-- <c:forEach var="listOuter" items="${test2}">

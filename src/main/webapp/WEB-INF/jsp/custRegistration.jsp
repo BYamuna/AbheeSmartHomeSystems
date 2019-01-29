@@ -505,7 +505,7 @@ function inactiveData() {
 	 					$('#mobilenumber').css('border-color', 'red');
 						$('#errorMobileMsg').text( "* Mobile Number already exists") ;
 						setTimeout(function() { $("#errorMobileMsg").text(''); }, 3000);
-						 $('#submit1').prop('disabled', true);
+						 $('#submit2').prop('disabled', true);
 						 
 	 					subValidation =false;
 	 					
@@ -514,7 +514,7 @@ function inactiveData() {
 					 else
 						{
 						$('#mobilenumber').css('border-color', 'none');
-						 $('#submit1').prop('disabled', false);
+						 $('#submit2').prop('disabled', false);
 						 subValidation =true;
 						} 	
 				},
@@ -553,14 +553,14 @@ $('#email').blur(function() {
 	 					$('#email').css('border-color', 'red');
 						$('#errorEmaiMsg').text( "* Email already exists") ;
 						setTimeout(function() { $("#errorEmaiMsg").hide(); }, 3000);
-						 $('#submit1').prop('disabled', true);
+						 $('#submit2').prop('disabled', true);
 						 event.preventDefault();
 							return false;
 						}
 					else
 						{
 						$('#email').css('border-color', 'none');
-						 $('#submit1').prop('disabled', false);
+						 $('#submit2').prop('disabled', false);
 						}
 					
 				},

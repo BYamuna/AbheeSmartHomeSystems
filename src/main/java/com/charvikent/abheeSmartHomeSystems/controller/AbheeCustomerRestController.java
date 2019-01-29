@@ -506,8 +506,15 @@ public class AbheeCustomerRestController {
 		String catid=salesrequest.getCatid();
 		//String description=salesrequest.getReqdesc();
 		String imgpath = imgdecoder(salesrequest.getImgfiles(), request);
-		if (!salesrequest.getImgfiles().isEmpty()) {
-			salesrequest.setImgfiles(imgpath);
+		if(salesrequest.getImgfiles().length()!=1)
+		{
+			if (!salesrequest.getImgfiles().isEmpty()) {
+				salesrequest.setImgfiles(imgpath);
+			}	
+		}
+		else
+		{
+			salesrequest.setImgfiles("ZNYX934.jpg");
 		}
 		salesrequest.setEnable("1");
 		salesrequest.setQstatus("1");
@@ -609,17 +616,23 @@ public class AbheeCustomerRestController {
 		task.setWarranty(warranty);
 		task.setRequesttime(requesttime);
 		//task.setAssignby("1");
-		task.setTaskdeadline(" ");
-		task.setImgfile(" ");
-		task.setInvimg(" ");
+		task.setTaskdeadline(" ");	
+		task.setImgfile("ZNYX934.jpg ");
+		task.setInvimg("ZNYX934.jpg ");
 		task.setAddComment(" ");
 		task.setRequestType("Service Request");
 		Map<String, Object> abheeTask = reportIssueDao.checkServiceRequestExisrOrNot(task);
 		if (null == abheeTask) {
-
-			if (serviceRequest.getImgname() != null) {
-				String imgpath = imgdecoder(serviceRequest.getImgname(), request);
-				task.setUploadfile(imgpath);
+			if(serviceRequest.getImgname().length()!=1) {
+				if (serviceRequest.getImgname() != null) 
+				{
+					String imgpath = imgdecoder(serviceRequest.getImgname(), request);
+					task.setUploadfile(imgpath);
+				}
+			}
+			else
+			{
+				task.setUploadfile("ZNYX934.jpg ");
 			}
 			reportIssueDao.saveServiceRequest(task);
 			// taskHistoryLogsDao.historyLogForcustomerEntry(task);

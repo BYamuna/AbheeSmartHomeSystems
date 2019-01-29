@@ -751,9 +751,9 @@ margin:2px;
     <th id="headersofbill3" class="header">&nbsp; Price</th>
   </tr>
   <tr id="gg1" class="tablerow">
-    <td class="tdata"> <input  class="pro1 countclass commonclass form-control" type="text"   name="proCoun" id="proCoun1" ></td>
+    <td class="tdata"> <input  class="pro1 countclass commonclass form-control" type="text"  name="proCoun" id="proCoun1" ></td>
     <td class="tdata"> <input class="pro1 commonclass form-control" type="text"   name="proName" id="proName1" ></td>
-    <td class="tdata"> <input class="commonclass form-control"  type="text"  onkeypress="return isNumber(event)" name="priceAfterDiscount" id="priceAfterDiscount1"></td>
+    <td class="tdata"> <input class="commonclass form-control"  type="text" onkeypress="return isNumber(event)" name="priceAfterDiscount" id="priceAfterDiscount1"></td>
     <td>
     <img  id="addbtn1" name="imgbtn" alt="Add Button" src="${baseurl }/abhee/images/blue_add_buttonn.jpg" onclick="addFieldd();"> 
     <img  id="clsbtn1" name="cl1" alt="Close Button" src="${baseurl }/abhee/images/close_button.jpg" onclick="closeSelectedRow(this);">  </td>
@@ -775,7 +775,7 @@ margin:2px;
 								<div class="form-group">
 									<label class="col-md-4 control-label no-padding-right">GST tax:<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<input  id="gstTax"  onkeypress="return isNumber(event)" name="givenDiscount" placeholder="Discount" class="form-control " type="text" value=""/>
+										<input  id="gstTax"  onkeypress="return isNumber(event)" name="givenDiscount" placeholder="GST" class="form-control " type="text" value=""/>
 									</div>
 								</div></div>
 								</div>
@@ -785,7 +785,7 @@ margin:2px;
 								<div class="form-group">
 									<label class="col-md-4 control-label no-padding-right">Total :<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<input  id="totalwithtax"  onkeypress="return isNumber(event)" name="givenDiscount" placeholder="Discount" class="form-control " type="text" value=""/>
+										<input  id="totalwithtax"  disabled="true" onkeypress="return isNumber(event)" name="givenDiscount" placeholder="Total" class="form-control " type="text" value=""/>
 									</div>
 								</div></div>
 								</div>
@@ -868,6 +868,9 @@ function addFieldd() {
     priceAfterDiscountBox.setAttribute("name", "priceAfterDiscount" + myTable.rows.length);    
     priceAfterDiscountBox.setAttribute("onkeypress", "return isNumber(event)");
     priceAfterDiscountBox.setAttribute("class", "commonclass form-control");
+    
+    //var pattern ="^\d*(\.\d{0,2})?$"		
+    //priceAfterDiscountBox.setAttribute("pattern", "^\d*(\.\d{0,2})?$");	
     priceAfterDiscountBox.setAttribute("id", "priceAfterDiscount" +(myTable.rows.length-1)); 
     
     var addRowBox = document.createElement("img");
@@ -1050,7 +1053,7 @@ function prev() {
 function isNumber(evt) {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if ((charCode>31)&&(charCode<48||charCode>57)) {
+   if ((charCode>31) && (charCode<46||charCode>46) &&(charCode<48||charCode>57)) {
         return false;
     }
     return true;
@@ -1106,9 +1109,16 @@ function itemsPrice(){
   		(document.getElementById("proDiscount" +i).value); */
     	  
     	totalItemsPrice =  totalItemsPrice + Number(document.getElementById("priceAfterDiscount" +i).value);
-    	document.getElementById("totalwithtax").value = totalItemsPrice *(1 -((Number(document.getElementById("gstTax").value) + Number(document.getElementById("givenDiscount").value))/100));
-  
+    	//document.getElementById("totalwithtax").value = totalItemsPrice *(1 -((Number(document.getElementById("gstTax").value) + Number(document.getElementById("givenDiscount").value))/100));
+    	
+    	document.getElementById("totalwithtax").value =((totalItemsPrice-(totalItemsPrice*(Number(document.getElementById("givenDiscount").value)/100)))+(totalItemsPrice*(Number(document.getElementById("gstTax").value)/100)));
     }    
+	/* var dis=(totalItemsPrice*(Number(document.getElementById("givenDiscount").value)/100));
+	console.log(dis);
+	var gst =(totalItemsPrice*(Number(document.getElementById("gstTax").value)/100));
+	console.log(gst);
+	var total=((totalItemsPrice-dis)+gst);
+	console.log(total); */
 } 	
 var modelid="";
 function getCurrentDate() {
@@ -1404,7 +1414,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 							var history = "<a class='history historyit' onclick='viewTask("
 									+ orderObj.id
 									+ ")'> <i class='fa fa-history'></i></a>"
-							//var invoice="<a class='invoice invoiceIt' onclick='addInvoice("+ orderObj.id+ ")'><i class='fa fa-money'></i></a>" 
+							var invoice="<a class='invoice invoiceIt' onclick='addInvoice("+ orderObj.id+ ")'><i class='fa fa-money'></i></a>" 
 							serviceUnitArray[orderObj.id] = orderObj;
 							var tblRow = "<tr>"
 									+ "<td title='"+orderObj.taskno+"'>"+ view2 + "</td>"
@@ -1424,7 +1434,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 									+ "<td title='"+orderObj.total+"'>"+ orderObj.total */
 									+ "<td title='"+orderObj.requesttime+"'>"+ orderObj.requesttime+ "</td>"
 									/* + "<td title='"+orderObj.paymentstatus+"'>"+ orderObj.paymentstatus+ "</td>" */
-									+ "<td style='text-align: center;white-space: nowrap;'>"+ edit+ "&nbsp;&nbsp;"+ deleterow+ "&nbsp;&nbsp;"+ time+ "</td>"
+									+ "<td style='text-align: center;white-space: nowrap;'>"+ edit+ "&nbsp;&nbsp;"+ deleterow+ "&nbsp;&nbsp;"+ time+ "&nbsp;&nbsp;"+invoice+"</td>"
 									+ "</tr>";	 
 							$(tblRow).appendTo("#tableId table tbody");
 						});

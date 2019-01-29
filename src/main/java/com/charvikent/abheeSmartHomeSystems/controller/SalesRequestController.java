@@ -168,10 +168,9 @@ public class SalesRequestController
 				
 				if(!multipartFile.isEmpty())
 				{
-					filecount++;
+				filecount++;
 				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 				}
-
 			}
  
    	 if(filecount>0)

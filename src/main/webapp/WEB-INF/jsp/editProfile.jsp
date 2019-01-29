@@ -63,7 +63,7 @@
 								<security:authorize access="hasRole('ROLE_USER')">
 								<div class="col-md-6"><br>
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">UserId</label>
+									<label class="col-md-3 control-label no-padding-right">User Id</label>
 									<div class="col-md-6">
 										<form:input path="userId" class="form-control validate onlyCharacters" placeholder="userId"/>
 									</div>

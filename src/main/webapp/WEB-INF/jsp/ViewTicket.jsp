@@ -237,7 +237,7 @@ $.each(allstatus, function(k, v){
 $(function(){
               
 $.each(viewTaskTable, function(k, v){
-	console.log(v);
+	//console.log(v);
 	
 	if(v.AttachedFiles==undefined) v.AttachedFiles='';
 	else
