@@ -92,8 +92,8 @@
 				      	<div class="row">
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar text-center">
-					      			<button type="button" id="modelSubmit"  onclick="submitCommet()"  class="btn-primary btn">Submit</button>
-					      			<button type="button" id="modelPlease"  disabled style="display:none"  class="btn-primary btn">Please wait...</button>
+					      			<!-- <input type="button" id="modelSubmit" value="Submit"  onclick="submitCommet()"  class="btn-primary btn"/>  -->
+					      	 		<button type="button" id="modelSubmit"  onclick="submitCommet()"  class="btn-primary btn">Submit</button>
 					      			<input type="reset" value="Reset" class="btn-danger btn cancel1"/>
 				      			</div>
 				      		</div>
@@ -135,20 +135,8 @@
 </div>
 <!-- Modal Ends here-->				
 </body>
-
-
-
-
-
-
-
-
-
-
 <%-- <script type='text/javascript' src='${baseurl }/js/custemValidation.js'></script>  --%>
-
 <script type="text/javascript">
-
 /* $(document).ready(function() {
 	 var table = $('#example').DataTable();
 	  
@@ -157,15 +145,12 @@
 	     alert( 'You clicked on '+data[0]+'\'s row' );
 	 } );
 }); */
-
-
 var listOrders1 = ${allOrders1};
 if (listOrders1 != "") {
 	displayTable(listOrders1);
 }
 function displayTable(listOrders) {
 	$('#tableId').html('');
-
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables ">'
 			+ '<thead><tr><th>Request Number</th><th>Product Category</th><th>Product Model</th><th>Email Id</th><th>Mobile Number</th><th>Files</th><th>Status</th><th>Location</th><th>Address</th><th>Comments</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
@@ -192,7 +177,6 @@ function displayTable(listOrders) {
 						quotation_documents=quotation_documents+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
 					}
 					orderObj.quotation_documents=quotation_documents; */
-
 		 if(orderObj.qstatus == "1"){
 			var deleterow = "<a class='deactivate' onclick='deleteTotalSales("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
@@ -232,7 +216,6 @@ function addComment(id)
 	$("#formModal").modal();	
 }
 var idArrayCmt11 = null;
-
 function submitCommet()
 {
  idArrayCmt11 = $.makeArray($('.validate2').map(function() {
@@ -257,16 +240,17 @@ $.each(idArrayCmt11, function(i, val) {
 		validation = false;
 	} 
 });
- if(validation) {
+if(validation) {
 	
+	$("#modelSubmit").prop('disabled',true);
+	$("#modelSubmit").text("Please wait..."); 
 	/* $("#modelSubmit").prop('disabled',true);
-	$("#modelSubmit").val("Please wait..."); */  
-
+	$("#modelSubmit").val("Please wait...");  */
 }
 	
 else {
 	return false;
-} 
+}
 		
 		    
 		  var id= $('#salesRequestid').val();
@@ -275,37 +259,43 @@ else {
 		  var data = new FormData();
 		  data.append('id',id); 
 		  data.append('description',notes); 
-
     	  for(var i=0; i< ins; i++)
 	    	{	
 	    	var quotation = document.getElementById('fileupload').files[i];
 	    	
-			data.append('fileupload', quotation);
+			data.append('file', quotation);
 			} 
     	 
 		/* jQuery.each(jQuery('#fileupload')[0].files, function(i, file) {
 			data.append('file-'+i, file);
 		}); */
+    	console.log(data);
+		
 		/* $("#modelSubmit").attr('display','none');
 		$("#modelPlease").attr('display','block'); */
 		//alert($("#modelSubmit").html());
+		$("#modelSubmit").prop('disabled',true);
+		$("#modelSubmit").html('Please Wait...');
+		/* $("#modelSubmit").css('display','none');
+		$("#modelPlease").css('display','block'); */
  		$.ajax({
 			type:"post",
 			enctype: 'multipart/form-data',
 		  	processData: false,  // tell jQuery not to process the data
-			contentType: false,  // tell jQuery not to set contentType
+			contentType: false,  // tell jQuery not to set contentType 
 			url: "sendingQuotation", 
 		  	data:data,
+		 // beforeSend : function() {
 		 beforeSend : function() {
-				$("#modelSubmit").click(function(){
-					 $("#modelSubmit").prop('disabled',true);
-					$("#modelSubmit").val('Please wait...'); 
-					//$("form").submit();	
-					
-				}); 
+				//$("#modelSubmit").click(function(){
+					/* $("#modelSubmit").prop('disabled',true);
+					$("#modelSubmit").val('Please wait...'); */
+					//$("form").submit();
+				//}); 
 			//$.blockUI({ message: 'Please wait' });
-	         }, 
-	        		  	success: function(result){
+	        //  }, 
+	          },	         
+		  	success: function(result){
 		  		
 		  	
 		  		if(result =="true"){
@@ -323,20 +313,11 @@ else {
 		  			console.log("Backend error");
 		  			}
 		  	
-		    },
-		    complete: function () {
-	            
-	            $.unblockUI();
-	       },
-		    error: function (e) {
-	            console.log(e.responseText);
-	        }
-				    
+		    }			    
 		});
 	
 }
 	
-
 /* function editTotalSales(id) 
 {
 	$("#id").val(serviceUnitArray[id].id);
@@ -350,7 +331,6 @@ else {
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 }*/
-
 function deleteTotalSales(id,qstatus)
 {
 	var checkstr=null;
@@ -401,7 +381,6 @@ function validate(id, errorMessage)
 	}
 	
 }
-
 function inactiveData() 
 {
 	var qstatus="0";
@@ -422,9 +401,7 @@ function inactiveData()
 				});
 		
 }
-
 /*
-
 var i =1;
 function addNewTextBox()
 {
@@ -446,7 +423,6 @@ function addNewTextBox()
 	}
 	
  */	
-
 /* document.getElementById("file1").onchange = function () {
     var reader = new FileReader();
     
@@ -474,13 +450,10 @@ function addNewTextBox()
         document.getElementById("menu_image").src = e.target.result;
         $("#file1").show(); 
     };
-
     // read the image file as a data URL.
     reader.readAsDataURL(this.files[0]);
     }
 }; */
-
-
 function viewTask(id){
 	var formData = new FormData();
     formData.append('id', id);
@@ -516,8 +489,6 @@ function viewTask(id){
 		$("#myModal2").modal();
 	});
 }
-
-
 $("#pageName").text("Quotation Requests");
 $(".allsalesrequest").addClass("active"); 
 </script>

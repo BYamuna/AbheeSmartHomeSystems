@@ -179,7 +179,7 @@
 						</div>
 						
 						<div class="col-sm-8">
-							<input class="validate" type="file" name="fileimg"  accept="image/*"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="fileimg" multiple />
+							<input class="validate" type="file" name="fileimg"  accept="image/*"  onchange="validateImages(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="fileimg" multiple />
 						</div>
 						
 							<!--<div class="col-sm-4">
@@ -729,29 +729,32 @@ $.each(productdetailslist, function(k,v){
 				});
 		            // $.blockUI({ message: 'Please wait' });
 		          }, 
-	  	success: function(result){
-	  		
+	  	success: function(data){
+	  		/* 
 	  		  if(result !="" && result != null){
 	  		alert("We received the Request and will send you the quotation soon. Thanking you.");
 	  	
 	  		$('#salesrequest').val("");
 	  		$('#imgfile').val("");
 	  		 $('#quotationModal').modal('toggle');
-	  		 }
+	  		 } 
 	  		
-	    },
-	  		/* if(data === false)
+	    },*/
+	  		if(data === 'false')
 			{
-				alert(" Thank you, your request had been submitted successfully. Our team will contact you soon");
-				$('#quotationModal').modal('toggle');				
+	  			alert("Quotation Request Already Received!");
+				
+				$('#quotationModal').modal('toggle');	
+				window.location.reload();
 			}
 			else
 				{
-				alert("Service Request Already Received!");
+				alert(" Thank you, your request had been submitted successfully. Our team will contact you soon");
 				$('#quotationModal').modal('toggle');
+				window.location.reload();
 				} 
 			
-		}, */
+		}, 
 		complete: function () {
             
             $.unblockUI();
@@ -854,7 +857,8 @@ $.each(productdetailslist, function(k,v){
 				$("#modelSubmit").val('Please wait...');
 				$("#modelSubmit").prop('disabled',true);
 			}); */
-			
+			$("#modelSubmit").val('Please wait...');
+			$("#modelSubmit").prop('disabled',true);
 		$.ajax({
 			type : "POST",
 			processData:false,
@@ -863,11 +867,7 @@ $.each(productdetailslist, function(k,v){
 			data :formData,
 			dataType : "text",
 			beforeSend : function() {
-				$("#modelSubmit").click(function(){
-					$("#modelSubmit").val('Please wait...');
-					$("#modelSubmit").prop('disabled',true);
-				}); 
-	             //$.blockUI({ message: 'Please wait' });
+				
 	          }, 
 			success : function(data) {
 				//alert(company);
@@ -887,12 +887,14 @@ $.each(productdetailslist, function(k,v){
 				 if(data ==='true')
 				{
 					alert(" Thank you, your request has been submitted successfully. Our team will contact you soon");
-					$('#formModal').modal('toggle');					
+					$('#formModal').modal('toggle');
+					window.location.reload();
 				}
 				else
 					{
 					alert("Service Request Already Received!");
 					$('#formModal').modal('toggle');
+					window.location.reload();
 					} 
 				
 			},
@@ -929,15 +931,79 @@ $.each(productdetailslist, function(k,v){
                     {
                     	console.log(id);
                     	 $('#'+id).after('<span class="error error-keyup-4"> Upload images only. </span>');
+                    	 $("#submit1").prop('disabled',true);
                         return false;
-                    }else{removeBorder(id);}
+                    }else{
+                    removeBorder(id);
+                    $("#submit1").prop('disabled',false);
+                    }
 
                 }else{
                 	$('#'+id).after('<span class="error error-keyup-4"> Image size should be less than 1MB. </span>');
+                	$("#submit1").prop('disabled',true);
                     return false;
                 }                        
             }else{
-                //alert("fill all fields..");         
+                //alert("fill all fields..");     
+                return false;
+            }
+        }
+	 
+	   /*  var t = file.type.split('/').pop().toLowerCase();
+	    if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") {
+	        alert('Please select a valid image file');
+	        document.getElementById(id).value = '';
+	        return false;
+	    }
+	    if (file.size > 1024000) {
+	        alert('Max Upload size is 1MB only');
+	        document.getElementById(id).value = '';
+	        return false;
+	    }
+	    return true; */
+	}
+	
+	
+	
+	
+	
+	function validateImages(id) {
+		$('span.error-keyup-4').remove();
+		removeBorder(id);
+		 var photos = document.getElementById(id);
+         var howmany = photos.files.length;
+         var err = 0;
+
+         var img = new Array();
+         
+         
+         for (var i = 0; i < howmany; i++) {               
+	    
+            var file1=photos.files[i];
+            //document.getElementById('imgfile').files[i];
+            if(file1){                        
+                var file_size=file1.size;
+                if(file_size<=1024000){
+                    var ext = file1.name.split('.').pop().toLowerCase();                            
+                    //if($.inArray(ext,['jpg','jpeg','gif', 'png','bmp'])===-1)
+                     if(file1.type.indexOf("image")==-1)
+                    {
+                    	console.log(id);
+                    	 $('#'+id).after('<span class="error error-keyup-4"> Upload images only. </span>');
+                    	 $("#modelSubmit").prop('disabled',true);
+                        return false;
+                    }else{
+                    removeBorder(id);
+                    $("#modelSubmit").prop('disabled',false);
+                    }
+
+                }else{
+                	$('#'+id).after('<span class="error error-keyup-4"> Image size should be less than 1MB. </span>');
+                	$("#modelSubmit").prop('disabled',true);
+                    return false;
+                }                        
+            }else{
+                //alert("fill all fields..");     
                 return false;
             }
         }

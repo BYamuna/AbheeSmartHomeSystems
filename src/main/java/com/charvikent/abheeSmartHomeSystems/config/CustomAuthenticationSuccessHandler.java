@@ -83,7 +83,11 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 			User userDesignation= userService.getUserDesignationById(objuserBean.getId());
 				
 				 session.setAttribute("userDesignationSession", userDesignation);
+				 ObjectMapper om = new ObjectMapper();
 				 
+				 String designationJson= om.writeValueAsString(userDesignation);
+				 
+				 session.setAttribute("userDesignationSession1", designationJson);
 				 System.out.println(dashBoardDao.getSeverityCountsUnderReportTo());
 				 
 				 session.setAttribute("sessionUser", objuserBean.getFirstname());

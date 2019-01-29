@@ -103,7 +103,7 @@
 			   
 			   <div class="msgcss1 row">
 									<div align="center" class="form-group">
-										<div style="width:80%" class=" msgcss alert alert-danger fadeIn animated">Invalid username and password.</div>
+										<div style="width:80%" class=" msgcss alert alert-danger fadeIn animated">Incorrect Mobile Number and Password.</div>
 									</div>
 								</div>
 				<%-- <div class="alert-danger">Invalid username and password.</div>
