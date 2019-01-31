@@ -480,7 +480,9 @@ public List<ReportIssue> getAllReportIssues()
 		{
 			editissue.setInvoiceId("(NULL)"); 
 		}
-			
+		
+	     editissue.setExpenditure(issue.getExpenditure());
+	     	
     
 		//em.flush();
      	
