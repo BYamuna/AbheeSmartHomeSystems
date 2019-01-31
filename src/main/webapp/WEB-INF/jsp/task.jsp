@@ -259,6 +259,19 @@ label{margin-left: 20px;}
 							</div>
 						</div>
 						</div>
+						
+						<div class="row" id="closedDiv">
+						<div class="col-md-6">
+						<div class="form-group">
+									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">Expenditure
+										<!-- <span class="impColor">*</span> -->
+									</label>
+									<form:input path="expenditure" placeholder="Expenditure" class="col-xs-10 col-sm-5 " />
+								</div>
+						
+							
+						</div>
+						</div>
 						<div class="row">
 						<div class="col-md-6">
 						<div class="form-group">
@@ -776,7 +789,7 @@ label{margin-left: 20px;}
   </tr>  
   </table>
 
-     <div class="col-md-12">
+     <div id="nottodisplay" class="col-md-12">
 								<div class="col-md-10">
 								<div class="form-group">
 									<label class="col-md-4 control-label no-padding-right">Discount %:<span class="impColor">*</span></label>
@@ -786,7 +799,7 @@ label{margin-left: 20px;}
 								</div></div>
 								</div>
 	
-     <div class="col-md-12">
+     <div id="nottodisplay1" class="col-md-12">
 								<div class="col-md-10">
 								<div class="form-group">
 									<label class="col-md-4 control-label no-padding-right">GST tax:<span class="impColor">*</span></label>
@@ -890,12 +903,12 @@ function addFieldd() {
     priceAfterDiscountBox.setAttribute("id", "priceAfterDiscount" +(myTable.rows.length-1)); 
     
     var addRowBox = document.createElement("img");
-    addRowBox.setAttribute("src", "Images/blue_add_buttonn.jpg");
+    addRowBox.setAttribute("src", "abhee/images/blue_add_buttonn.jpg");
     addRowBox.setAttribute("onclick", "addFieldd();");
     addRowBox.setAttribute("id", "addbtn" +(myTable.rows.length-1));
         
     var deleteRowBox = document.createElement("img");
-    deleteRowBox.setAttribute("src", "Images/close_button.jpg");
+    deleteRowBox.setAttribute("src", "abhee/images/close_button.jpg");
     deleteRowBox.setAttribute("onclick", "closeSelectedRow(this);");
     deleteRowBox.setAttribute("id", "clsbtn" +(myTable.rows.length-1));
     deleteRowBox.setAttribute("name", "cl" +(myTable.rows.length-1));    
@@ -954,7 +967,8 @@ function closeSelectedRow(e){
 	var x = document.getElementsByClassName("tablerow");
 	
     var tt = e.parentNode.parentNode.rowIndex;
-    document.getElementById("myTable").deleteRow(tt);           
+    
+    document.getElementById("myTable").deleteRow(tt);   
 }
 
 // USED url: https://ctrlq.org/code/20056-convert-text-to-images-with-javascript
@@ -1017,10 +1031,12 @@ function prev() {
 	  	
 	  	document.getElementById('givenDiscount').style.border = 'none';
 	  	document.getElementById('givenDiscount').readOnly = true;
+	  	document.getElementById("nottodisplay").style.display = 'none';
 	  	document.getElementById('givenDiscount').style.background = "#fff";
 	  	
 	  	document.getElementById('gstTax').style.border = 'none';
 	  	document.getElementById('gstTax').readOnly = true;
+	  	document.getElementById("nottodisplay1").style.display = 'none';
 	  	document.getElementById('gstTax').style.background = "#fff";
 	  	
 	  	document.getElementById('totalwithtax').style.border = 'none';
@@ -1491,7 +1507,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		$("#modelid").val(serviceUnitArray[id].modelname);
 		$("#customerId").val(serviceUnitArray[id].customer_id);
 		$("#purchaseddate").val(getCurrentDate());
-		 var taskstatus=serviceUnitArray[id].kstatus;
+		var taskstatus=serviceUnitArray[id].kstatus;
 		if(taskstatus == "3")
 		{
 			$("#invoiceDiv").show();
@@ -1502,6 +1518,16 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 			//document.getElementById("invoiceDiv").style.display='none';
 			$("#invoiceDiv").hide();
 		}	 
+		
+		if( $( "#kstatus option:selected" ).text() == "4"){
+			
+			$('#closedDiv').show();
+			$('#closedDiv').find('input').removeClass('display-none');
+			$("#expenditure").val(serviceUnitArray[id].expenditure); 
+			
+		}else{
+			$('#closedDiv').hide();
+		}
 		$("#submit1").val("Update");
 		$(window).scrollTop($('#moveTo').offset().top);
 		//$("#reset").hide();
@@ -2051,6 +2077,48 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	        todayHighlight: true
 	  }).datepicker('update', new Date());
 	}); 
+	
+	
+$('#closedDiv').hide();
+$('#closedDiv').find('input').addClass('display-none');
+	
+$('#kstatus').change(function(){
+	//var option = $(this).find('option:selected');
+	
+	if($( "#kstatus option:selected" ).text() == "CLOSED"){
+		
+		$('#closedDiv').find('input').removeClass('display-none');
+		$('#closedDiv').show();
+		
+		
+	}else{
+		$('#closedDiv').hide();
+		$('#closedDiv').find('input').addClass('display-none');
+	}
+	
+});
+
+$('#invoiceDiv').hide();
+$('#invoiceDiv').find('input').addClass('display-none');
+	
+$('#kstatus').change(function(){
+	//var option = $(this).find('option:selected');
+	
+	if($( "#kstatus option:selected" ).text() == "RESOLVED"){
+		
+		$('#invoiceDiv').find('input').removeClass('display-none');
+		$('#invoiceDiv').show();
+		
+		
+	}else{
+		$('#invoiceDiv').hide();
+		$('#invoiceDiv').find('input').addClass('display-none');
+	}
+	
+});
+	
+	
+	
 	</script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
