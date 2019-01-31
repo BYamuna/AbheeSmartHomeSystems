@@ -423,14 +423,14 @@ public List<ReportIssue> getAllReportIssues()
 			     {
 			    	 editissue.setImgfile(" ");
 			     }
-			     if(issue.getInvimg()!=null)
+			     /*if(issue.getInvimg()!=null)
 			     {
 			     editissue.setInvimg(fileTemplate.concurrentFileNames());
 			     }
 			     else
 			     {
 			    	 editissue.setInvimg(" ");
-			     }
+			     }*/
 			     editissue.setAmountreceived(issue.getAmountreceived());
 			     editissue.setDiscount(issue.getDiscount());
 			     editissue.setTax(issue.getTax());
@@ -463,24 +463,24 @@ public List<ReportIssue> getAllReportIssues()
      editissue.setUploadfile(fileTemplate.concurrentFileNames());
      }
      
-   /*  if(issue.getInvimg()!=null)
-     {
-     editissue.setInvimg(fileTemplate.concurrentFileNames());
-     }
-     else
-     {
-    	 editissue.setInvimg(" ");
-     }
+	   if(issue.getInvimg()!=null)
+	     {
+	     editissue.setInvimg(fileTemplate.concurrentFileNames());
+	     }
+	     else
+	     {
+	    	 editissue.setInvimg(" ");
+	     }
 			
-	if(issue.getInvoiceId().length()!=0) 
-	{
-		editissue.setInvoiceId(issue.getInvoiceId()); 
-	} 
-else 
-	{
-		editissue.setInvoiceId("(NULL)"); 
-	}
-			*/
+		if(issue.getInvoiceId().length()!=0) 
+		{
+			editissue.setInvoiceId(issue.getInvoiceId()); 
+		} 
+		else 
+		{
+			editissue.setInvoiceId("(NULL)"); 
+		}
+			
     
 		//em.flush();
      	
@@ -969,7 +969,7 @@ else
 		System.out.println(sql);
 		result = jdbcTemplate.queryForObject(sql, String.class);
 		System.out.println(result);
-		if(result!=null)
+		if(!result.equals("(NULL)"))
 		{
 			prefix=result;
 		}

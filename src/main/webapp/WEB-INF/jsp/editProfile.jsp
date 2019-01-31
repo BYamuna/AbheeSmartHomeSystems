@@ -161,6 +161,9 @@ if (designationid != 1 && designationid != 2){
 	
 	$("#email").attr('disabled', true);
 	$("#mobilenumber").attr('disabled', true); 
+	$("#firstname").attr('disabled', true);
+	$("#lastname").attr('disabled', true);
+	
 	
 }else{
 	

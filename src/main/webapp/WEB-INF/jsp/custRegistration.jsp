@@ -243,9 +243,9 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.lastname+"'>"+ orderObj.lastname + "</td>"
 			+ "<td title='"+orderObj.email+"'>"+ orderObj.email + "</td>"
 			+ "<td title='"+orderObj.mobilenumber+"'>"+ orderObj.mobilenumber + "</td>"
-			
 			/* + "<td title='"+orderObj.password+"'>"+ orderObj.password + "</td>" */
 			+ "<td title='"+orderObj.address+"'>"+ orderObj.address + "</td>"
+			/* + "<td title='"+orderObj.gst+"'>"+ orderObj.gst + "</td>" */
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");

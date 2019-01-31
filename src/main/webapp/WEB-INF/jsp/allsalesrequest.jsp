@@ -61,7 +61,7 @@
 					<div class="panel-body">
 					<input type="hidden" id="salesRequestid" />
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-8">
                     		<div class="form-group" style=" width: 154%;">
 									<label class="ace-file-input ace-file-multiple col-sm-3 control-label no-padding-right" >Attach File(s)<span class="impColor">*</span></label>
 									<div class="col-md-9">
@@ -78,7 +78,7 @@
 							</div>
 							</div>
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-8">
 								<div class="form-group" style=" width: 154%;">
 									<label class="col-sm-3 control-label no-padding-right">Notes<span class="impColor">*</span></label>
 										<div class="col-md-6">

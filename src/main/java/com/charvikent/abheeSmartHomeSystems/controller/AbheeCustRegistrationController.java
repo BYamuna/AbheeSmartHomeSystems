@@ -202,6 +202,7 @@ public class AbheeCustRegistrationController
 		customer.setPassword(cpassword);
 		customer.setEnabled("1");
 		customer.setCustomerType("1");
+		//customer.setGst(" ");
 		//customer.setUsername(str);
 		String returnmsg ="";
 		if(otpnumber.equals(cotp))
@@ -355,6 +356,7 @@ public class AbheeCustRegistrationController
 				if(dummyId ==0)
 				{
 					user.setEnabled("1");
+					user.setGst(" ");
 					customerDao.saveAbheeCustomer(user);	
 					sendingMail.sendConfirmationEmail(user);
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");

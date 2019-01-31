@@ -153,6 +153,7 @@ public class TaskController {
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", sJson);
 				String invoiceid=reportIssueDao.randomInvoiceId();
+				System.out.println(invoiceid);
 				model.addAttribute("invoiceid",invoiceid);
 				// System.out.println(sJson);
 			} else {

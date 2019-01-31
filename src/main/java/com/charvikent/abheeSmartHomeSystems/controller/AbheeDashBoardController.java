@@ -226,7 +226,7 @@ public class AbheeDashBoardController {
 			
 			List<Map<String, Object>> statuslist=abheeTaskDao.getTaskStatusHistoryByTaskNo(taskId);
 			
-			abheeTaskDao.updateTaskStatus(taskstatus,taskno);
+			//abheeTaskDao.updateTaskStatus(taskstatus,taskno);
 			ObjectMapper objectMapper = new ObjectMapper();
 			String sJson;
 			ObjectMapper objectMapper1 = new ObjectMapper();

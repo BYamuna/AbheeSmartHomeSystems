@@ -134,6 +134,7 @@ public void updateCustomer(Customer user)
 	//uc.setEnabled(user.getEnabled());
 	uc.setFirstname(user.getFirstname());
 	uc.setLastname(user.getLastname());
+	//uc.setGst(user.getGst());
 	//uc.setStatus(user.getStatus());
 	//uc.setPassword(user.getPassword());
     uc.setPurchaseCustomer(user.isPurchaseCustomer());

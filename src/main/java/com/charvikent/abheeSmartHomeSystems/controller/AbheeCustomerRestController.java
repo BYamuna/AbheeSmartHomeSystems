@@ -514,7 +514,7 @@ public class AbheeCustomerRestController {
 		}
 		else
 		{
-			salesrequest.setImgfiles("ZNYX934.jpg");
+			salesrequest.setImgfiles("icon.png");
 		}
 		salesrequest.setEnable("1");
 		salesrequest.setQstatus("1");
@@ -617,8 +617,8 @@ public class AbheeCustomerRestController {
 		task.setRequesttime(requesttime);
 		//task.setAssignby("1");
 		task.setTaskdeadline(" ");	
-		task.setImgfile("ZNYX934.jpg ");
-		task.setInvimg("ZNYX934.jpg ");
+		task.setImgfile("icon.png");
+		task.setInvimg("icon.png ");
 		task.setAddComment(" ");
 		task.setRequestType("Service Request");
 		Map<String, Object> abheeTask = reportIssueDao.checkServiceRequestExisrOrNot(task);
@@ -632,7 +632,7 @@ public class AbheeCustomerRestController {
 			}
 			else
 			{
-				task.setUploadfile("ZNYX934.jpg ");
+				task.setUploadfile("icon.png ");
 			}
 			reportIssueDao.saveServiceRequest(task);
 			// taskHistoryLogsDao.historyLogForcustomerEntry(task);

@@ -9,11 +9,13 @@
     color: #fff;
     opacity: 1;
 }
+.date{
+padding-right:30px;}
 .countclass{
 display: none;
 }
 .nopad {
-padding:0px;}
+padding:0px;} 
 .butt {
 	border:none;
     width: 121px;
@@ -56,6 +58,9 @@ text-align:center;
 .fg .butt {
 margin:2px;
 }
+label{margin-left: 20px;}
+#datepicker{width:180px; margin: 0 20px 20px 20px;}
+#datepicker > span:hover{cursor: pointer;}
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
@@ -233,7 +238,7 @@ margin:2px;
 								</div>
 							</div>
 						</div>
-						<%-- <div class="row" id="invoiceDiv">
+						<div class="row" id="invoiceDiv">
 						<div class="col-md-6">
 						<div class="form-group">
 									<label style="margin-top:-7px;" for="focusedinput" class="col-md-6 control-label">Invoice Number
@@ -253,7 +258,7 @@ margin:2px;
 								</div>
 							</div>
 						</div>
-						</div> --%>
+						</div>
 						<div class="row">
 						<div class="col-md-6">
 						<div class="form-group">
@@ -554,7 +559,7 @@ margin:2px;
 						<div class="col-md-9">
 								<div class="form-group">
 									<input type="hidden" id= "warrantyid" />
-									<label for="focusedinput" class="col-md-6 control-label ">Product Model Name<span class="impColor">*</span>
+									<label for="focusedinput" class="col-md-5 control-label ">Product Model Name<span class="impColor">*</span>
 									</label>
 									<input type="text" name="modelid" id="modelid" class="col-md-6" />
 									
@@ -571,7 +576,7 @@ margin:2px;
 							<div class="col-md-9">
 								<div class="form-group">
 								<input type="hidden" id= "orderId" />
-									<label for="focusedinput" class="col-md-6 control-label ">Customer ID	<span class="impColor">*</span>
+									<label for="focusedinput" class="col-md-5 control-label ">Customer ID	<span class="impColor">*</span>
 									</label>
 									<input type="text" name="customerId" id="customerId" class="col-md-6" />	
 								</div>
@@ -579,7 +584,7 @@ margin:2px;
 							<div class="col-md-9">
 								<div class="form-group">
 								<input type="hidden" id= "orderId" />
-									<label for="focusedinput" class="col-md-6 control-label ">No.Of.Years<span class="impColor">*</span>
+									<label for="focusedinput" class="col-md-5 control-label ">No.Of.Years<span class="impColor">*</span>
 									</label>
 									<select id="year" class="col-md-6 "	onfocus="removeBorder(this.id)">
 										<option value="" label="--- Select ---" />
@@ -601,7 +606,7 @@ margin:2px;
 						<div class="row">
 							<div class="col-md-9">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Purchased Date	<span class="impColor">*</span>
+									<label for="focusedinput" class="col-md-5 control-label">Purchased Date	<span class="impColor">*</span>
 									</label>
 										<input type="text" id="purchaseddate"	class="col-md-6 " />
 
@@ -609,7 +614,7 @@ margin:2px;
 							</div>
 							<div class="col-md-9">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Expired Date	<span class="impColor">*</span>
+									<label for="focusedinput" class="col-md-5 control-label">Expired Date	<span class="impColor">*</span>
 									</label>
 										<input type="text" id="expireddate" class="col-md-6 " />
 								</div>
@@ -624,7 +629,7 @@ margin:2px;
 							<div class="col-sm-12">
 								<div class="btn-toolbar text-center">
 									<input type="submit" id="submit3" value="Submit" onclick="saveWarranty()" class="btn-primary btn" /> 
-										<input type="reset" value="Reset"   class="btn-danger btn cancel" />
+										<!-- <input type="reset" value="Reset"   class="btn-danger btn cancel" /> -->
 								</div>
 							</div>
 						</div>	
@@ -657,7 +662,18 @@ margin:2px;
                          <span class="pull-left">Invoice Id:
 						  <input type="text" name="firstname" id="inv1" class="form-control"></span>
 						   <span class="pull-right">Date:
-						  <input type="text" name="firstname" id="indate1" class="form-control"></span></div>
+ 						   <input type="text" name="firstname" id="indate1" class="form-control date">  
+    <!-- <div id="datepicker" class="input-group date"  data-date-format="mm-dd-yyyy">
+    <input class="form-control" style="margin:0px;" id="indate1" type="text" /> 
+    <span class="input-group-addon"><i class="fa  fa-calendar"></i></span>
+       </div> -->
+    <!--    <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div> -->
+						  </span></div>
 						  <div class="col-md-12 ser">
 								<div class="col-md-10">
 								<div class="form-group">
@@ -701,12 +717,12 @@ margin:2px;
                         <div class="col-md-6 nopad">
                         <div class="form-group ">
 									<label class="col-md-6 control-label no-padding-right " id="indate">Invoice Id:<span class="impColor">*</span></label>
-									<div class="col-md-6 nopad">
+									<div class="col-md-4 nopad">
 										<input type="text" name="firstname" id="inv2" class="form-control " placeholder="Invoice Id"  >
 									</div>
 								</div></div> <div class="col-md-6 nopad">
 								 <div class="form-group">
-									<label class="col-md-6 control-label no-padding-right" id="indate">Date:<span class="impColor">*</span></label>
+									<label class="col-md-4 control-label no-padding-right" id="indate">Date:<span class="impColor">*</span></label>
 									<div class="col-md-6 nopad">
 										<input type="text" name="firstname" id="indate2" class="form-control"  placeholder="Date">
 									</div>
@@ -715,14 +731,14 @@ margin:2px;
 								<div class="col-md-12 "  style="display:inline-flex;margin-bottom: -13px;">
 								<div class="form-group">
 									<label class="col-md-6 control-label no-padding-right" id="indate3">Request Number<span class="impColor">*</span></label>
-									<div class="col-md-6 nopad">
+									<div class="col-md-4 nopad">
 										<input id="requestno" name="requestno" placeholder="Request Number" class="form-control" type="text" value=""/>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-6 control-label no-padding-right" id="indate3">Type of Service<span class="impColor">*</span></label>
-									<div class="col-md-6 nopad">
-										<input id="requesttype" name="requesttype" placeholder="Type of service" class="form-control" type="text" value=""/>
+									<div class="col-md-4 nopad">
+										<input id="requesttype" name="requesttype" placeholder="service" class="form-control" type="text" value=""/>
 									</div>
 								</div>
 								
@@ -732,7 +748,7 @@ margin:2px;
 								<div class="col-md-6 nopad">
 								<div class="form-group">
 									<label class="col-md-6 control-label no-padding-right" id="indate3">Product Model<span class="impColor">*</span></label>
-									<div class="col-md-6 nopad">
+									<div class="col-md-5 nopad">
 										<input id="pmodel" name="pmodel" placeholder="Product model" class="form-control" type="text" value=""/>
 									</div>
 								</div>
@@ -1111,7 +1127,7 @@ function itemsPrice(){
     	totalItemsPrice =  totalItemsPrice + Number(document.getElementById("priceAfterDiscount" +i).value);
     	//document.getElementById("totalwithtax").value = totalItemsPrice *(1 -((Number(document.getElementById("gstTax").value) + Number(document.getElementById("givenDiscount").value))/100));
     	
-    	document.getElementById("totalwithtax").value =((totalItemsPrice-(totalItemsPrice*(Number(document.getElementById("givenDiscount").value)/100)))+(totalItemsPrice*(Number(document.getElementById("gstTax").value)/100)));
+    	document.getElementById("totalwithtax").value =(totalItemsPrice-(totalItemsPrice*(Number(document.getElementById("givenDiscount").value)/100))+(totalItemsPrice*(Number(document.getElementById("gstTax").value)/100)));
     }    
 	/* var dis=(totalItemsPrice*(Number(document.getElementById("givenDiscount").value)/100));
 	console.log(dis);
@@ -1475,7 +1491,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		$("#modelid").val(serviceUnitArray[id].modelname);
 		$("#customerId").val(serviceUnitArray[id].customer_id);
 		$("#purchaseddate").val(getCurrentDate());
-		/* var taskstatus=serviceUnitArray[id].kstatus;
+		 var taskstatus=serviceUnitArray[id].kstatus;
 		if(taskstatus == "3")
 		{
 			$("#invoiceDiv").show();
@@ -1485,7 +1501,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		{
 			//document.getElementById("invoiceDiv").style.display='none';
 			$("#invoiceDiv").hide();
-		}	 */
+		}	 
 		$("#submit1").val("Update");
 		$(window).scrollTop($('#moveTo').offset().top);
 		//$("#reset").hide();
@@ -2011,3 +2027,30 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	$("#pageName").text("Service Request Master");
 	$(".task").addClass("active");
 </script>
+
+<!-- <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script> -->
+        <script>
+/* $('#indate1').datetimepicker({
+
+	useCurrent : false,
+	format : 'DD-MMM-YYYY',
+	showTodayButton : true,
+	sideBySide : true,
+	
+	toolbarPlacement : 'top',
+	focusOnShow : false,
+
+}); */
+ $(function () {
+	  $("#datepicker").datepicker({ 
+	        autoclose: false, 
+	        todayHighlight: true
+	  }).datepicker('update', new Date());
+	}); 
+	</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>

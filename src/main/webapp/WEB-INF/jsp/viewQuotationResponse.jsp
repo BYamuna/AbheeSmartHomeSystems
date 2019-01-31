@@ -94,7 +94,7 @@ border: none !important;
 						
 						<div class="table-responsive">
 								<table class="table table-bordered priority prioritybg" style="border: 1px solid #0460a4; width:;" id="viewQuotationTable">
-								 <thead><tr><th>Request Number</th><th>Product Category</th><th>Product Model</th><th>EmailId</th><th>Mobile</th><th>Files</th><th>Location</th><th>Address</th><th>Comments</th></tr><tr></tr></thead><tbody></tbody></table>
+								 <thead><tr><th>Request Number</th><th>Product Category</th><th>Product Model</th><th>Email Id</th><th>Mobile</th><th>Files</th><th>Location</th><th>Address</th><th>Comments</th></tr><tr></tr></thead><tbody></tbody></table>
 							</div>
 						</div>
 							<div class="col-md-2"></div>
