@@ -946,7 +946,7 @@ function hhhh(){
 	    }
 	  }); */
 }
-
+document.getElementById("clsbtn1").style.display='none';
 function closeSelectedRow(e){	
 	
 	var rr = e.getAttribute("name");
@@ -954,7 +954,14 @@ function closeSelectedRow(e){
 	var x = document.getElementsByClassName("tablerow");
 	
     var tt = e.parentNode.parentNode.rowIndex;
-    document.getElementById("myTable").deleteRow(tt);           
+    if(tt == 1)
+    {
+    	document.getElementById("clsbtn1").style.display='none';
+    }
+    else
+    {	
+    document.getElementById("myTable").deleteRow(tt);  
+    }
 }
 
 // USED url: https://ctrlq.org/code/20056-convert-text-to-images-with-javascript

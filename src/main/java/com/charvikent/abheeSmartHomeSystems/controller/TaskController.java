@@ -590,12 +590,10 @@ public class TaskController {
 			reportIssueDao.saveServiceRequestFromCustomer(task);
 			// taskHistoryLogsDao.historyLogForcustomerEntry(task);
 			// sendingMail.sendingMailWithTaskStatus(task);
-
 			System.out.println(message + "  " + servicetypeid);
 			return "true";
 		} else {
 			System.out.println("Service Request already received");
-
 			return "false";
 
 		}
