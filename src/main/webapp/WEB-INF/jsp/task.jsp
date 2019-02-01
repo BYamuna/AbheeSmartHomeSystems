@@ -654,14 +654,14 @@ label{margin-left: 20px;}
 		</div>
 <%-- </security:authorize> --%>
 <security:authorize access="hasRole('ROLE_ADMIN')">
-<div class="modal fade" id="InvoiceModal" data-backdrop="static" data-keyboard="false"  role="dialog">
+<div class="modal fade" id="InvoiceModal" data-backdrop="static"  data-keyboard="false"  role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header" style="background: #2973cf;padding:11px;">
 				<button type="button" class="close" id="close" data-dismiss="modal" style="margin-top: -9px;">&times;</button>
 				<h4 class="modal-title" style="color: white;"> Invoice Details </h4>
         	</div>
-        	<div class="modal-body" style=" overflow-y: auto;	">
+        	<div class="modal-body" style=" overflow-y: auto;background:#ffffff;	">
         	
 
   <!-- Modal content -->
@@ -792,7 +792,7 @@ label{margin-left: 20px;}
      <div id="nottodisplay" class="col-md-12">
 								<div class="col-md-10">
 								<div class="form-group">
-									<label class="col-md-4 control-label no-padding-right">Discount %:<span class="impColor">*</span></label>
+									<label class="col-md-4 control-label no-padding-right">Discount %:</label>
 									<div class="col-md-6">
 										<input  id="givenDiscount"  onkeypress="return isNumber(event)" name="givenDiscount" placeholder="Discount" class="form-control " type="text" value=""/>
 									</div>
@@ -802,7 +802,7 @@ label{margin-left: 20px;}
      <div id="nottodisplay1" class="col-md-12">
 								<div class="col-md-10">
 								<div class="form-group">
-									<label class="col-md-4 control-label no-padding-right">GST tax:<span class="impColor">*</span></label>
+									<label class="col-md-4 control-label no-padding-right">GST tax:</label>
 									<div class="col-md-6">
 										<input  id="gstTax"  onkeypress="return isNumber(event)" name="givenDiscount" placeholder="GST" class="form-control " type="text" value=""/>
 									</div>
@@ -812,7 +812,7 @@ label{margin-left: 20px;}
      <div class="col-md-12">
 								<div class="col-md-10">
 								<div class="form-group">
-									<label class="col-md-4 control-label no-padding-right">Total :<span class="impColor">*</span></label>
+									<label class="col-md-4 control-label no-padding-right">Total :</label>
 									<div class="col-md-6">
 										<input  id="totalwithtax"  disabled="true" onkeypress="return isNumber(event)" name="givenDiscount" placeholder="Total" class="form-control " type="text" value=""/>
 									</div>
@@ -845,7 +845,7 @@ label{margin-left: 20px;}
 </div>
 </security:authorize>
 <script type="text/javascript">
-
+var screenshot="";
 $('#indate1').datetimepicker({
 
 	useCurrent : false,
@@ -937,12 +937,42 @@ function addFieldd() {
 
 
 function hhhh(){
-	$('#atag[data-auto-download]').each(function(){
+	 $('#atag[data-auto-download]').each(function(){
   	  var $this = $(this);
   	  setTimeout(function() {
   	  window.location = $this.attr('href');
   	  }, 2000);
-  	  });
+  	  }); 
+  //	var atag = $('#atag').val();
+  	
+  	  var formData = new FormData();
+
+	  formData.append('screenshot', screenshot);
+	
+	//formData.append('invnum',invnum);
+	
+	$.ajax({
+		type : "post",
+		enctype : 'multipart/form-data',
+		url : "imageupload",
+		data : formData,
+		processData : false, // tell jQuery not to process the data
+		contentType : false, // tell jQuery not to set contentType
+
+		success : function(data) {
+		alert(data);
+		
+		},
+		error : function(e) {
+			console.log(e.responseText);
+		}
+
+	});
+
+
+		
+		
+		
 	/* html2canvas(document.getElementById("qqqq2"), {
 	    onrendered: function(canvas) {
 	      var screenshot = canvas.toDataURL("image/png");
@@ -1070,18 +1100,18 @@ function prev() {
 	  	
 	  	html2canvas(document.getElementById("qqqq2"), {
 		    onrendered: function(canvas) {
-		      var screenshot = canvas.toDataURL("image/png");
+		       screenshot = canvas.toDataURL("image/png");
 		      document.getElementById("textScreenshot").setAttribute("src", screenshot);
 		      document.getElementById("textScreenshot").style.display = "none";
 		      document.getElementById("atag").setAttribute("href", screenshot);	
 		      //document.getElementById("atag").setAttribute("download","INV001" );	
 		       document.getElementById("test").style.display = "none";
-		      $('#atag[data-auto-download]').each(function(){
+		       $('#atag[data-auto-download]').each(function(){
 		    	  var $this = $(this);
 		    	  setTimeout(function() {
 		    	  window.location = $this.attr('href');
 		    	  }, 2000);
-		    	  });
+		    	  }); 
 		    }
 		  });
 	  		  	

@@ -1,5 +1,7 @@
 package com.charvikent.abheeSmartHomeSystems.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.castor.core.util.Base64Decoder;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +37,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
+import com.charvikent.abheeSmartHomeSystems.config.KhaibarGasUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeRequestTimeDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
@@ -706,6 +710,58 @@ public class TaskController {
 	 * 
 	 * }
 	 */
+	
+	
+	
 
+	@RequestMapping(value = "/imageupload", method = RequestMethod.POST)
+	public @ResponseBody String imageupload(Model model,AbheeTask task, HttpServletRequest request,String screenshot) throws IOException, MessagingException {
+		LOGGER.debug("Calling saveServiceRequest at controller");
+		System.out.println("enter to task controller Submit");
+		
+		String images=request.getParameter("screenshot");
+		System.out.println(images);
+		String strNew = images.replaceFirst("data:image/png;base64,", "");
+		System.out.println(strNew);
+		String invoiceimage = imgdecoder(strNew, request);
+		return invoiceimage ;
+		
+	}
+	@SuppressWarnings("static-access")
+	private String imgdecoder(String imgData, HttpServletRequest request) {
+		String filepath = null;
+		FileOutputStream osf;
+		KhaibarGasUtil utils = new KhaibarGasUtil();
+		String id = utils.randNum(4);
+		Base64Decoder decoder = new Base64Decoder();
+		// byte[] imgBytes = decoder.decode(imgData.split(",")[1]);
+		byte[] imgBytes = decoder.decode(imgData);
+		/*
+		 * name=name.substring(n + 1); name=name+".png";
+		 */
+		long millis = System.currentTimeMillis() % 1000;
+		filepath = id + millis + ".png";
+		// String rootPath = request.getSession().getServletContext().getRealPath("/");
+		String rootPath = System.getProperty("catalina.base");
+		// File dir = new File(rootPath + File.separator + "reportDocuments");
+		File dir = new File(rootPath + File.separator + "webapps" + File.separator + "abheeimg");
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
 
+		System.out.println(dir);
+
+		try {
+			osf = new FileOutputStream(new File(dir.getAbsolutePath() + File.separator + filepath));
+			osf.write(imgBytes);
+			osf.flush();
+		} catch (IOException e) {
+			System.out.println("error : " + e);
+		}
+		// filepath= "abheeimg/"+filepath;
+		return filepath;
+	}
+	
 }
+
+

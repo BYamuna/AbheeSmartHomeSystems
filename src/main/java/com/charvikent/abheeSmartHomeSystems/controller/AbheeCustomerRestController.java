@@ -2068,12 +2068,12 @@ public class AbheeCustomerRestController {
 	}
 
 	@RequestMapping(value = "/getTechnicianNotificationByUserId", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public String getTechnicianNotificationByUserId(@RequestBody User user,HttpServletRequest request)
+	public String getTechnicianNotificationByUserId(@RequestBody TaskHistoryLogs user,HttpServletRequest request)
 			throws JsonProcessingException, JSONException {
 		LOGGER.debug("Calling getTechnicianNotificationByUserId at controller");
 		
 		
-		List<Map<String, Object>> listOrderBeans = userDao.getTechnicianNotificationByUserId(user);
+		List<Map<String, Object>> listOrderBeans = userDao.getTechnicianNotificationByUserId(user.getAssignto(),user.getTaskno());
 		JSONObject jsonObj = new JSONObject();
 		
 		if (null != listOrderBeans) {
