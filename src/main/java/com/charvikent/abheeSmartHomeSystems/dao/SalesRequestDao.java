@@ -42,7 +42,7 @@ public class SalesRequestDao
 	@SuppressWarnings("unchecked")
 	public  Boolean checkSalesrequestExistsorNotByEmailAndModelNo(SalesRequest salesrequest)
 	{
-		String hql="from SalesRequest where enable='1' and modelnumber='"+salesrequest.getModelnumber()+"'"+ "and "+"email='"+salesrequest.getEmail()+"'";
+		String hql="from SalesRequest where qstatus='1' and modelnumber='"+salesrequest.getModelnumber()+"'"+ "and "+"email='"+salesrequest.getEmail()+"'";
 		List<SalesRequest> list=entityManager.createQuery(hql).getResultList();
 		if(list.size()>0)
 			return true;

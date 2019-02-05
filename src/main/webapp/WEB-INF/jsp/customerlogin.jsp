@@ -239,7 +239,7 @@
 									<label for="user_name">OTP :</label>
 								</div>
 								<div class="col-md-9">
-									<input	type="password" name="cotp" id="cotp" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control validate1 numericOnly" placeholder="OTP"/>
+									<input	type="password" name="cotp" id="cotp" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control validate2 numericOnly2" placeholder="OTP"/>
 								</div><div class="clearfix"></div> 
 								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
 							</div>

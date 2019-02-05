@@ -989,7 +989,7 @@ function hhhh(){
 	    }
 	  }); */
 }
-document.getElementById("clsbtn1").style.display='none';
+//document.getElementById("clsbtn1").style.display='none';
 function closeSelectedRow(e){	
 	
 	var rr = e.getAttribute("name");
@@ -1434,6 +1434,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 									orderObj.invimg = invimg;
 								} 	
 							if (isRole == 'true') {
+								var invoice="<a class='invoice invoiceIt' onclick='addInvoice("+ orderObj.id+ ")'><i class='fa fa-money'></i></a>"
 								if (orderObj.status == "1") {
 									var deleterow = "<a class='deactivate' onclick='deletetask("
 											+ orderObj.id
@@ -1446,6 +1447,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
 							} else if (isRole == 'false') {
 								deleterow = " ";
+								invoice   = " ";
 							}
 
 							var edit = "<a class='edit editIt' onclick='editTask("
@@ -1482,7 +1484,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 							var history = "<a class='history historyit' onclick='viewTask("
 									+ orderObj.id
 									+ ")'> <i class='fa fa-history'></i></a>"
-							var invoice="<a class='invoice invoiceIt' onclick='addInvoice("+ orderObj.id+ ")'><i class='fa fa-money'></i></a>" 
+							/* var invoice="<a class='invoice invoiceIt' onclick='addInvoice("+ orderObj.id+ ")'><i class='fa fa-money'></i></a>" */  
 							serviceUnitArray[orderObj.id] = orderObj;
 							var tblRow = "<tr>"
 									+ "<td title='"+orderObj.taskno+"'>"+ view2 + "</td>"
@@ -1544,9 +1546,10 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 		$("#customerId").val(serviceUnitArray[id].customer_id);
 		$("#purchaseddate").val(getCurrentDate());
 		var taskstatus=serviceUnitArray[id].kstatus;
-		if(taskstatus == "3")
+		if($("#kstatus option:selected" ).text() == "9")
 		{
 			$("#invoiceDiv").show();
+			$('#invoiceDiv').find('input').removeClass('display-none');
 			//document.getElementById("invoiceDiv").style.display='block';
 		}
 		else
@@ -2139,8 +2142,8 @@ $('#invoiceDiv').find('input').addClass('display-none');
 	
 $('#kstatus').change(function(){
 	//var option = $(this).find('option:selected');
-	
-	if($( "#kstatus option:selected" ).text() == "RESOLVED"){
+	if (isRole == 'true') {
+	if($( "#kstatus option:selected" ).text() == "INVOICE GENERATED"){
 		
 		$('#invoiceDiv').find('input').removeClass('display-none');
 		$('#invoiceDiv').show();
@@ -2150,6 +2153,7 @@ $('#kstatus').change(function(){
 		$('#invoiceDiv').hide();
 		$('#invoiceDiv').find('input').addClass('display-none');
 	}
+}	
 	
 });
 	
