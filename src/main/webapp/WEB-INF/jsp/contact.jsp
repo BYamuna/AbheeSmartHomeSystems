@@ -29,7 +29,7 @@ padding-top:8px;
                     	<label>Full Name: </label>
                     </div>
                 	<div class="col-sm-7">
-                    	<form:input path="fullname" class="form-control validate onlyCharacters" placeholder="Full Name"/>
+                    	<form:input path="fullname" class="form-control validate2 onlyCharacters" placeholder="Full Name" onfocus="removeBorder(this.id)"/>
                     </div><div class="clearfix"></div>
                 </div>
             	<div class="col-md-6">
@@ -37,7 +37,7 @@ padding-top:8px;
                     	<label>Email Id: </label>
                     </div>
                 	<div class="col-sm-7">
-                    	<form:input path="emailid" class="form-control validate emailOnly" placeholder="Email Id" />
+                    	<form:input path="emailid" class="form-control validate2 emailOnly" placeholder="Email Id" onfocus="removeBorder(this.id)"/>
                     </div><div class="clearfix"></div>
                 </div><div class="clearfix"></div>
             	<div class="col-md-6">
@@ -45,7 +45,7 @@ padding-top:8px;
                     	<label>Mobile Number: </label>
                     </div>
                 	<div class="col-sm-7">
-                    	<form:input path="mobilenumber" class="form-control validate numericOnly2" placeholder="Mobile Number" maxlength="10"/>
+                    	<form:input path="mobilenumber" class="form-control validate2 numericOnly2" placeholder="Mobile Number" maxlength="10" onfocus="removeBorder(this.id)"/>
                     </div><div class="clearfix"></div>
                 </div>
             	<div class="col-md-6">
@@ -53,10 +53,10 @@ padding-top:8px;
                     	<label>Subject: </label>
                     </div>
                 	<div class="col-sm-7">
-                    	<form:input path="subject" class="form-control validate onlyCharacters" placeholder="Subject" />
+                    	<form:input path="subject" class="form-control validate2 onlyCharacters" placeholder="Subject" onfocus="removeBorder(this.id)"/>
                     </div><div class="clearfix"></div>
                 </div><div class="clearfix"></div>
-               <center> <a  style="float:right;margin-right:99px;margin-top:10px;" id="submit1" class="btn btn-primary" type="button">Submit</a></center>
+               <center> <a  style="float:right;margin-right:99px;margin-top:10px;" id="submit2" class="btn btn-primary" type="button">Submit</a></center>
             </form:form>
         </div>
         <!-- Contact us starts here -->
