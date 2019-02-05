@@ -960,7 +960,6 @@ function hhhh(){
 		contentType : false, // tell jQuery not to set contentType
 
 		success : function(data) {
-		alert(data);
 		
 		},
 		error : function(e) {
@@ -989,7 +988,7 @@ function hhhh(){
 	    }
 	  }); */
 }
-document.getElementById("clsbtn1").style.display='none';
+//document.getElementById("clsbtn1").style.display='none';
 function closeSelectedRow(e){	
 	
 	var rr = e.getAttribute("name");
