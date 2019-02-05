@@ -239,7 +239,7 @@
 									<label for="user_name">OTP :</label>
 								</div>
 								<div class="col-md-9">
-									<input	type="password" name="cotp" id="cotp" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control validate2 numericOnly2" placeholder="OTP"/>
+									<input	type="password" name="cotp" id="cotp" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control validate1 numericOnly2" placeholder="OTP"/>
 								</div><div class="clearfix"></div> 
 								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
 							</div>
@@ -251,7 +251,7 @@
 			<a onclick="resendOTP()" class="btn btn-warning" style="margin-top:10px;">Resend OTP</a>
 		</div>
         <div class="modal-footer">
-          <button type="button" id="submit2" onclick="modelsubmit()" class="btn btn-primary" >Submit</button>
+          <button type="button" id="submitModel" onclick="modelsubmit()" class="btn btn-primary" >Submit</button>
          
         </div>
       </div>
@@ -451,7 +451,7 @@ var idArrayCmt1 = null;
 		
 	$.each(idArrayCmt1, function(i, val) {
 		var value = $("#" + idArrayCmt1[i]).val();
-		var errorCls = $("#" + idArray[i]).hasClass('errorCls');
+		var errorCls = $("#" + idArrayCmt1[i]).hasClass('errorCls');
 		var placeholder = $("#" + idArrayCmt1[i]).attr('placeholder');
 		if (value == null || value == "" || value == "undefined" || errorCls) {
 			$('style').append(styleBlock);
@@ -489,9 +489,9 @@ var idArrayCmt1 = null;
 	
 	
 	if(validation && mobilevalidation) {
-		$("#submit1").attr("disabled",true);
-		$("#submit1").val("Please wait...");
-		$("#submit1").submit();											
+		$("#submitModel").attr("disabled",true);
+		$("#submitModel").val("Please wait...");
+		$("#submitModel").submit();											
 		getOTP();
 	}else {
 		return false;
@@ -536,7 +536,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 			else
 				{
 				$('#cmobile').css('border-color', 'none');
-				$('#submit1').prop('disabled', false);
+				$('#submitModel').prop('disabled', false);
 				}
 			
 		},

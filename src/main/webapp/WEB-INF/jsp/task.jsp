@@ -960,7 +960,6 @@ function hhhh(){
 		contentType : false, // tell jQuery not to set contentType
 
 		success : function(data) {
-		alert(data);
 		
 		},
 		error : function(e) {
