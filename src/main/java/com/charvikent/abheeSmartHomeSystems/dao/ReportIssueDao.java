@@ -419,15 +419,15 @@ public List<ReportIssue> getAllReportIssues()
 			     {
 			     editissue.setImgfile(fileTemplate.concurrentFileNames());
 			     }
-			     else
+			     /*else
 			     {
 			    	 editissue.setImgfile(" ");
-			     }
-			     /*if(issue.getInvimg()!=null)
+			     }*/
+			     if(issue.getInvimg()!=null)
 			     {
 			     editissue.setInvimg(fileTemplate.concurrentFileNames());
 			     }
-			     else
+			     /*else
 			     {
 			    	 editissue.setInvimg(" ");
 			     }*/
@@ -462,15 +462,6 @@ public List<ReportIssue> getAllReportIssues()
      {
      editissue.setUploadfile(fileTemplate.concurrentFileNames());
      }
-     
-	   if(issue.getInvimg()!=null)
-	     {
-	     editissue.setInvimg(fileTemplate.concurrentFileNames());
-	     }
-	     else
-	     {
-	    	 editissue.setInvimg(" ");
-	     }
 			
 		if(issue.getInvoiceId().length()!=0) 
 		{
@@ -481,9 +472,20 @@ public List<ReportIssue> getAllReportIssues()
 			editissue.setInvoiceId("(NULL)"); 
 		}
 		
+		if(issue.getInvimg()!=null)
+	     {
+	     editissue.setInvimg(fileTemplate.concurrentFileNames());
+	     }
 	     editissue.setExpenditure(issue.getExpenditure());
 	     	
-    
+	     if(issue.getImgfile()!=null)
+	     {
+	     editissue.setImgfile(fileTemplate.concurrentFileNames());
+	     }
+	     /*else
+	     {
+	    	 editissue.setImgfile(" ");
+	     }*/
 		//em.flush();
      	
 			

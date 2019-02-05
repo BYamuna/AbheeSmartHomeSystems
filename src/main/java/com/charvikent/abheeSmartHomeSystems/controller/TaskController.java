@@ -250,7 +250,7 @@ public class TaskController {
 							}
 						}
 						
-						if(task.getKstatus().equals("3"))
+						if(task.getKstatus().equals("9"))
 						{	
 							for (MultipartFile multipartFile : Files) {
 								String fileName = multipartFile.getOriginalFilename();
