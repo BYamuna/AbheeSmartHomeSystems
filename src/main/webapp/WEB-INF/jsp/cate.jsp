@@ -47,7 +47,7 @@
                     				<form:hidden path="id"/>
 									<label for="focusedinput" class="col-md-6 control-label">Product Name <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="category" class="form-control validate2 onlyCharacters" placeholder="Category  Name"/>	
+										<form:input path="category" class="form-control validate2 onlyCharacters" onfocus="removeBorder(this.id)"  placeholder="Category  Name"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -56,7 +56,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Product Images <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<input type="file" name="file1" id="file1" class="validate2 "  accept="image/*" style="margin: 7px 0px 0px 0px;">
+										<input type="file" name="file1" id="file1" class="validate2 " onfocus="removeBorder(this.id)"   accept="image/*" style="margin: 7px 0px 0px 0px;">
 									</div>
                     			</div>
                     		</div>

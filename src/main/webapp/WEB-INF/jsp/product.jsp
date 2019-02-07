@@ -78,7 +78,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Product Model<span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="name" class="form-control validate2" placeholder="Product Model"/>	
+										<form:input path="name" class="form-control validate2" onfocus="removeBorder(this.id)" placeholder="Product Model"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -89,7 +89,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Description <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:textarea path="description" class="form-control validate2" placeholder="Product Model Description"/>	
+										<form:textarea path="description" class="form-control validate2" onfocus="removeBorder(this.id)" placeholder="Product Model Description"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -100,7 +100,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Specifications <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:textarea path="ProductModelSpecifications" class="form-control validate2" placeholder="Product Model Specifications"/>	
+										<form:textarea path="ProductModelSpecifications" class="form-control validate2" onfocus="removeBorder(this.id)" placeholder="Product Model Specifications"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -110,7 +110,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Product Price<span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="ProductPrice" class="form-control validate2 numericOnly" placeholder="Product Price"/>	
+										<form:input path="ProductPrice" class="form-control validate2 numericOnly" onfocus="removeBorder(this.id)" placeholder="Product Price"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -121,7 +121,7 @@
                     			<div class="form-group">
 									<label for="focusedinput" class="col-md-6 control-label">Maximum  Allowed Discount(%) <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="maxAllowedDiscount" class="form-control validate2 numericOnly" maxlength="2" placeholder="Maximum  Allowed Discount"/>	
+										<form:input path="maxAllowedDiscount" class="form-control validate2 numericOnly" onfocus="removeBorder(this.id)" maxlength="2" placeholder="Maximum  Allowed Discount"/>	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
                     			</div>
@@ -130,7 +130,7 @@
                     			<div class="form-group" id="fileDiv">
 									<label for="focusedinput" class="col-md-6 control-label">Product Images <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<input type="file" name="file1" id="file1" class="validate2"  accept="image/*"  multiple="multiple" style="margin: 7px 0px 0px 0px;">
+										<input type="file" name="file1" id="file1" class="validate2" onfocus="removeBorder(this.id)"  accept="image/*"  multiple="multiple" style="margin: 7px 0px 0px 0px;">
 									</div>
                     			</div>
                     		</div>

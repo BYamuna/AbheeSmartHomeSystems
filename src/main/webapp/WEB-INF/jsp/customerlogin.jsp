@@ -172,7 +172,7 @@
 									<label for="user_name">Mobile Number :</label>
 								</div>
 								<div class="col-md-7">
-									<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" maxlength="10" class="form-control validate1 numericOnly2" placeholder="Mobile Number"/>
+									<input	type="text" name="cmobile" id="cmobile" onkeydown="removeBorder(this.id)" maxlength="10" class="form-control numericOnly2 validate1" placeholder="Mobile Number"/>
 								</div><div class="clearfix"></div>
 								<span class="hasError" id="cmobileError" style="font-size: 13px;"></span>
 							</div>
@@ -372,7 +372,7 @@ $('#cmobile').blur(function() {
 						alert("Mobile Number already exists")
 	 					$('#cmobile').css('border-color', 'red');
 	 					 $('#submitModel').prop('disabled', true);
-	 					$('#submitModel').html('<i class="fa fa-spin"></i> Please wait...');
+	 					//$('#submitModel').html('<i class="fa fa-spin"></i> Please wait...');
 						$('#submitModel').css('padding-top', '-35px');
 	 					 //alert("customer could not be registered")
 	 					 mobilevalidation=false;

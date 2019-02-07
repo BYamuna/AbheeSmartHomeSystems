@@ -417,6 +417,7 @@ public List<ReportIssue> getAllReportIssues()
 			     }
 			     if(issue.getImgfile()!=null)
 			     {
+			    	 
 			     editissue.setImgfile(fileTemplate.concurrentFileNames());
 			     }
 			     /*else

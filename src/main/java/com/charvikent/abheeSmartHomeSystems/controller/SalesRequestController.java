@@ -88,6 +88,7 @@ public class SalesRequestController
 		loginDetails.setMobileno(customer.getMobilenumber());
 		loginDetails.setEmail(customer.getEmail());
 		loginDetails.setCustomerid(customer.getCustomerId());
+		loginDetails.setImgfiles("icon.png");
 		loginDetails.setRequestType("Quotation request");
 		loginDetails.setLocation(" ");
    	 for(MultipartFile multipartFile : uploadedFiles) {
