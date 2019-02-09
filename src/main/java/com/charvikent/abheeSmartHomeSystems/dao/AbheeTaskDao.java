@@ -113,7 +113,7 @@ public class AbheeTaskDao {
 	}
 			else
 			{
-				sql="select t.id,t.assignto,u.username,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.invimg,t.severity as severityid,sev.severity, "
+				sql="select t.id,t.assignto,u.username,t.uploadfile,t.category as categoryid,s.servicetypename,t.created_time,t.description,t.kstatus,ts.name as statusname,t.priority as priorityid,p.priority,t.severity as severityid,sev.severity, "
 						 + "t.status,t.subject,t.taskdeadline,t.taskno,t.expenditure,t.invimg,t.modelid,ab.category,abp.name as modelname,t.customer_id , t.communicationaddress,t.amountreceived,t.discount,t.tax,t.total,ar.requesttime,t.warranty,t.add_comment "
 						+" FROM abhee_task t,abheeusers u,abheeservicetype s,abheetaskstatus ts,abheepriority p,abheeseverity sev,abheecategory ab ,abhee_product abp,abheerequesttime ar"
 						+" where  t.kstatus<>'4' and  t.assignto=u.id and t.category=ab.id and t.kstatus=ts.id and t.priority=p.id and t.severity=sev.id and t.service_type=s.id and abp.id=t.modelid and t.requesttime=ar.requesttimeid and t.status='1'and  t.assignto='"+objuserBean.getId()+" ' order by t.created_time desc " ;
@@ -293,7 +293,7 @@ public List<Map<String,Object>> getTasksListAssignToMeById(String id)
 
 public List<Map<String, Object>> getTaskStatusHistoryByTaskNo(String taskno) {
 	
-	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.imgfile as Attachfile from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and t.taskno='"+taskno+"' order by t.created_time desc";
+	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.imgfile as Attachfile1,t.invimg as Attachfile from task_history_logs  t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and t.taskno='"+taskno+"' order by t.created_time desc";
 	
          System.out.println(hql);
 	
@@ -304,7 +304,7 @@ public List<Map<String, Object>> getTaskStatusHistoryByTaskNo(String taskno) {
 }
 public List<Map<String, Object>> getTaskHistoryByTaskNo(String taskno) {
 	
-	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.imgfile as Attachfile from task_history_logs t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and t.taskno="+taskno+"order by t.created_time desc";
+	String hql= "select t.add_comment,u.username,s.name as servicestatus,p.name as productname, DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,t.imgfile as Attachfile1,t.invimg as Attachfile from task_history_logs t,abheetaskstatus s ,abhee_product p ,abheeusers u where t.kstatus=s.id and  t.modelid =p.id and u.id=t.modified_by and t.taskno="+taskno+"order by t.created_time desc";
 	
          System.out.println(hql);
 	

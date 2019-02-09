@@ -211,27 +211,44 @@ var allstatus = ${statuslist1};
 //allstatus=JSON.parse(allstatus);
 $(function(){
 $.each(allstatus, function(k, v){
-	
-		if(v.Attachfile==undefined) v.Attachfile='';
-		else
-			{
-				var list=v.Attachfile.split('*');
+
 				var Attachfile='';
+	   if(v.Attachfile1 != null && v.Attachfile1 != ''){
+				var list=v.Attachfile1.split('*');
+				
 				for(var i=0;i<list.length;i++)
 				{
 					Attachfile=Attachfile+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
 				}
-				v.Attachfile=Attachfile;
-			}
+				//v.Attachfile1=Attachfile;
+	   }
+		/* if(v.Attachedfile==undefined) v.Attachedfile='';
+		else
+			{
+				var list=v.Attachedfile.split('*');
+				var Attachedfile='';
+				for(var i=0;i<list.length;i++)
+				{
+					Attachedfile=Attachedfile+'<a href="../abheeimg/'+list[i]+'" target="_blank" title="'+list[i]+'"><img src="../abheeimg/'+list[i]+'" style="height:42px; width:42px"></a>';
+				}
+				v.Attachedfile=Attachedfile;
+			} */
 	var tr=	'<tr>'
 			+'<td>'+ v.username +'</td>'
 			+'<td>'+ v.productname +'</td>'
 			+'<td>'+ v.servicestatus +'</td>'
 			+'<td>'+ v.created_time +'</td>'
 			+'<td>'+ v.add_comment +'</td>'
-			+'<td>'+v.Attachfile+'</td>'
+			+'<td id=img'+k+'>'+Attachfile+'</td>'
+			/* +'<td>'+v.Attachedfile+'</td>' */
 			+'</tr>';
 	$('#viewStatusTable tbody').append(tr);
+	
+	if(v.Attachfile != null && v.Attachfile != ''){
+		
+	$('#img'+k).text('');
+	$('#img'+k).append('<a href="../abheeimg/'+v.Attachfile+'" target="_blank" title="'+v.Attachfile+'"><img src="../abheeimg/'+v.Attachfile+'" style="height:42px; width:42px"></a>');
+	}
 });
 });
 $(function(){

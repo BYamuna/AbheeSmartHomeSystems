@@ -463,7 +463,9 @@ public List<ReportIssue> getAllReportIssues()
      {
      editissue.setUploadfile(fileTemplate.concurrentFileNames());
      }
-			
+   /*  else {
+    	 editissue.setUploadfile("icon.png");
+     }*/
 		if(issue.getInvoiceId().length()!=0) 
 		{
 			editissue.setInvoiceId(issue.getInvoiceId()); 

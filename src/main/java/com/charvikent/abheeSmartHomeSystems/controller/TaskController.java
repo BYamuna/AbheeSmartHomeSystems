@@ -574,8 +574,8 @@ public class TaskController {
 		task.setUploadfile(images);
 		task.setAddComment(" ");
 		task.setTaskdeadline(" ");
-		task.setImgfile("icon.png");
-		task.setInvimg("icon.png ");
+		/*task.setImgfile("icon.png");
+		task.setInvimg("icon.png ");*/
 		task.setRequestType("Service Request");
 		for (MultipartFile multipartFile : uploadedFiles) {
 			String fileName = multipartFile.getOriginalFilename();
@@ -590,6 +590,9 @@ public class TaskController {
 			fileTemplate.clearFiles();
 
 		}
+		/*else {
+			task.setUploadfile("icon.png");
+		}*/
 
 		Map<String, Object> abheeTask = reportIssueDao.checkServiceRequestExisrOrNot(task);
 		if (null == abheeTask) {
