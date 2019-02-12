@@ -18,6 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import javax.mail.MessagingException;
 /*import javax.mail.MessagingException;*/
 import javax.servlet.http.HttpServletRequest;
+
 /*import org.apache.commons.lang.StringUtils;*/
 import org.castor.core.util.Base64Decoder;
 import org.json.JSONException;
@@ -36,6 +37,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.KhaibarGasUtil;
 import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
@@ -419,10 +421,12 @@ public class AbheeCustomerRestController {
 		HashMap<String, String> hm = new HashMap<String, String>();
 		List<Category> listOrderBeans = categoryDao.getCategoryNames();
 		JSONObject json = new JSONObject();
-		// ObjectMapper objectMapper = new ObjectMapper();
+		/*String jsonObj = null;
+		ObjectMapper om = new ObjectMapper();*/
 		// String userjson = objectMapper.writeValueAsString(userBean);
 		// String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
 		if (null != listOrderBeans) {
+			/*jsonObj=om.writeValueAsString(listOrderBeans);*/
 			json.put("categorieslist", listOrderBeans);
 		} else
 			// code="NOT_FOUND";
@@ -431,14 +435,17 @@ public class AbheeCustomerRestController {
 		return String.valueOf(json);
 	}
 
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/getproducts", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public String getProductslist(@RequestBody Product product) throws JsonProcessingException, JSONException {
 		LOGGER.debug("Calling getproducts at controller");
 		List<Map<String, Object>> listOrderBeans = productDao.getProductsDescription(product);
 		JSONObject json = new JSONObject();
-		
+		/*String jobj = null;
+		ObjectMapper om = new ObjectMapper();*/
 		if (null != listOrderBeans) {
 			json.put("productDetails", listOrderBeans);
+			//jobj=om.writeValueAsString(listOrderBeans);
 		} else
 			// code="NOT_FOUND";
 			json.put("productDetails", "NOT_FOUND");
@@ -449,26 +456,31 @@ public class AbheeCustomerRestController {
 		LOGGER.debug("Calling getproducts at controller");
 		List<Map<String, Object>> listOrderBeans = productDao.getProducts();
 		JSONObject json = new JSONObject();
+		/*String jobj = null;
+		ObjectMapper om = new ObjectMapper();*/
 		// ObjectMapper objectMapper = new ObjectMapper();
 		// String userjson = objectMapper.writeValueAsString(userBean);
 		// String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
 		if (null != listOrderBeans) {
 			json.put("productslist", listOrderBeans);
+			/*jobj=om.writeValueAsString(listOrderBeans);*/
 		} else
 			// code="NOT_FOUND";
 			json.put("productslist", "NOT_FOUND");
 		return String.valueOf(json);
 	}
 	
-	
 	@RequestMapping(value = "/getcompanies", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public String getCompaniesBycategoryId(@RequestParam(value = "id", required = false) String categoryid)
 			throws JsonProcessingException, JSONException {
 		LOGGER.debug("Calling getcompanies at controller");
+		/*String jobj = null;
+		ObjectMapper om = new ObjectMapper();*/
 		List<Map<String, Object>> listOrderBeans = companyDao.getCompaniesByCategoryId(categoryid);
 		JSONObject json = new JSONObject();
 		if (null != listOrderBeans) {
 			json.put("companyDetails", listOrderBeans);
+			//jobj=om.writeValueAsString(listOrderBeans);
 		} else
 			json.put("companyDetails", "NOT_FOUND");
 		return String.valueOf(json);
@@ -478,11 +490,14 @@ public class AbheeCustomerRestController {
 	public String getProductsByCompanyId(@RequestParam(value = "id", required = false) String companyid)
 			throws JsonProcessingException, JSONException {
 		LOGGER.debug("Calling getproductsby at controller");
+		/*String jobj = null;
+		ObjectMapper om = new ObjectMapper();*/
 		System.out.println(companyid);
 		List<Map<String, Object>> listOrderBeans = productDao.getProductsByCompanyId(companyid);
 		JSONObject json = new JSONObject();
 		if (null != listOrderBeans) {
 			json.put("productDetails", listOrderBeans);
+			//jobj=om.writeValueAsString(listOrderBeans);
 		} else
 			json.put("productDetails", "NOT_FOUND");
 		return String.valueOf(json);
@@ -617,23 +632,26 @@ public class AbheeCustomerRestController {
 		task.setRequesttime(requesttime);
 		//task.setAssignby("1");
 		task.setTaskdeadline(" ");	
-		task.setImgfile("icon.png");
-		task.setInvimg("icon.png ");
+		if(task.getImgfile()==" ")
+		{
+		task.setImgfile("(NULL)");
+		}
+		/*task.setInvimg("icon.png ");*/
 		task.setAddComment(" ");
 		task.setRequestType("Service Request");
 		Map<String, Object> abheeTask = reportIssueDao.checkServiceRequestExisrOrNot(task);
 		if (null == abheeTask) {
-			if(serviceRequest.getImgname().length()!=1) {
+			/*if(serviceRequest.getImgname().length()!=1) {*/
 				if (serviceRequest.getImgname() != null) 
 				{
 					String imgpath = imgdecoder(serviceRequest.getImgname(), request);
 					task.setUploadfile(imgpath);
 				}
-			}
+			/*}
 			else
 			{
 				task.setUploadfile("icon.png ");
-			}
+			}*/
 			reportIssueDao.saveServiceRequest(task);
 			// taskHistoryLogsDao.historyLogForcustomerEntry(task);
 			// sendingMail.sendingMailWithTaskStatus(task);
@@ -657,8 +675,11 @@ public class AbheeCustomerRestController {
 		LOGGER.debug("Calling getproductcompanies at controller");
 		List<Map<String, Object>> listOrderBeans = productDao.getProductCompaniesdesc(product);
 		JSONObject json = new JSONObject();
+		/*String jobj = null;
+		ObjectMapper om = new ObjectMapper();*/
 		if (null != listOrderBeans) {
 			json.put("productcompanyDetails", listOrderBeans);
+			//jobj=om.writeValueAsString(listOrderBeans);
 		} else
 			json.put("productcompanyDetails", "NOT_FOUND");
 		return String.valueOf(json);
@@ -937,11 +958,13 @@ public class AbheeCustomerRestController {
 		HashMap<String, String> hm = new HashMap<String, String>();
 		List<Map<String, Object>> listOrderBeans = abheeTaskDao.getPriority();
 		JSONObject json = new JSONObject();
-		// ObjectMapper objectMapper = new ObjectMapper();
+		/*ObjectMapper om = new ObjectMapper();
+		String jsonObj = null;*/
 		// String userjson = objectMapper.writeValueAsString(userBean);
 		// String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
 		if (null != listOrderBeans) {
 			json.put("prioritieslist", listOrderBeans);
+			//jsonObj=om.writeValueAsString(listOrderBeans);
 		} else
 			// code="NOT_FOUND";
 			json.put("prioritieslist", "NOT_FOUND");
@@ -957,10 +980,13 @@ public class AbheeCustomerRestController {
 		HashMap<String, String> hm = new HashMap<String, String>();
 		List<Map<String, Object>> listOrderBeans = abheeTaskDao.getSeverity();
 		JSONObject json = new JSONObject();
+		/*ObjectMapper om = new ObjectMapper();
+		String jsonObj = null;*/
 		// ObjectMapper objectMapper = new ObjectMapper();
 		// String userjson = objectMapper.writeValueAsString(userBean);
 		// String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
 		if (null != listOrderBeans) {
+			//jsonObj=om.writeValueAsString(listOrderBeans);
 			json.put("severitieslist", listOrderBeans);
 		} else
 			// code="NOT_FOUND";
@@ -977,10 +1003,12 @@ public class AbheeCustomerRestController {
 		HashMap<String, String> hm = new HashMap<String, String>();
 		List<User> listOrderBeans = userDao.getAllUsers();
 		JSONObject json = new JSONObject();
-		// ObjectMapper objectMapper = new ObjectMapper();
+		/*String jsonObj = null;
+		ObjectMapper om = new ObjectMapper();*/
 		// String userjson = objectMapper.writeValueAsString(userBean);
 		// String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
 		if (null != listOrderBeans) {
+			//jsonObj=om.writeValueAsString(listOrderBeans);
 			json.put("userslist", listOrderBeans);
 		} else
 			// code="NOT_FOUND";
@@ -1040,10 +1068,14 @@ public class AbheeCustomerRestController {
 		LOGGER.debug("Calling productslist at controller");
 		JSONObject json = new JSONObject();
 		List<Category> listOrderBeans = null;
+		/*String jsonObj = null;
+		ObjectMapper om = new ObjectMapper();*/
 		try {
 			listOrderBeans = categoryDao.getCategoryNames();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				json.put("productslist", listOrderBeans);
+				/*jsonObj=om.writeValueAsString(listOrderBeans);*/
+				
 			} else {
 				json.put("productslist", "NOT_FOUND");
 			}
@@ -1058,11 +1090,14 @@ public class AbheeCustomerRestController {
 	public String getQuotationList(@RequestBody SalesRequest salesRequest) throws JsonProcessingException, JSONException {
 		LOGGER.debug("Calling getquotationlist at controller");
 		JSONObject json = new JSONObject();
+		/*String jsonObj = null;
+		ObjectMapper om = new ObjectMapper();*/
 		List<Map<String, Object>> listOrderBeans = null;
 		try {
 			listOrderBeans = srequestDao.getSalesRequestList1(salesRequest);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				json.put("quotationslist", listOrderBeans);
+				/*jsonObj=om.writeValueAsString(listOrderBeans);*/
 			} else {
 				json.put("quotationslist", "NOT_FOUND");
 			}
@@ -1076,11 +1111,14 @@ public class AbheeCustomerRestController {
 	public String getQuotationLists(@RequestBody SalesRequest salesRequest) throws JsonProcessingException, JSONException {
 		LOGGER.debug("Calling getquotationlist at controller");
 		JSONObject json = new JSONObject();
+		/*String jsonObj = null;
+		ObjectMapper om = new ObjectMapper();*/
 		List<Map<String, Object>> listOrderBeans = null;
 		try {
 			listOrderBeans = srequestDao.getSalesRequestList2(salesRequest);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				json.put("quotationslist", listOrderBeans);
+				//jsonObj=om.writeValueAsString(listOrderBeans);
 			} else {
 				json.put("quotationslist", "NOT_FOUND");
 			}
@@ -1096,6 +1134,8 @@ public class AbheeCustomerRestController {
 			throws JsonProcessingException, JSONException {
 		LOGGER.debug("Calling getquotationlist at controller");
 		JSONObject json = new JSONObject();
+		/*String jsonObj = null;
+		ObjectMapper om = new ObjectMapper();*/
 		List<Map<String, Object>> listOrderBeans = null;
 		List<Map<String, Object>> listOrderBeans1 = null, listOrderBeans2 = null;
 
@@ -1109,6 +1149,9 @@ public class AbheeCustomerRestController {
 				System.out.println("Status Code:" + listOrderBeans2.get(0).get("status"));
 
 				if (!listOrderBeans2.get(0).get("status").equals(0)) {
+					/*jsonObj=om.writeValueAsString(listOrderBeans);
+					jsonObj=om.writeValueAsString(listOrderBeans2.get(0).get("status"));
+					jsonObj=om.writeValueAsString(listOrderBeans1);*/
 					json.put("quotationslist", listOrderBeans);
 					json.put("AdminResponseStatus", listOrderBeans2.get(0).get("status"));
 					json.put("AdminResponseList", listOrderBeans1);
@@ -1117,7 +1160,8 @@ public class AbheeCustomerRestController {
 				else {
 					listOrderBeans2.get(0).get("status");
 					System.out.println("Status Code:" + listOrderBeans2.get(0).get("status"));
-
+					/*jsonObj=om.writeValueAsString(listOrderBeans);
+					jsonObj=om.writeValueAsString(listOrderBeans2.get(0).get("status"));*/
 					json.put("quotationslist", listOrderBeans);
 					json.put("AdminResponseStatus", listOrderBeans2.get(0).get("status"));
 					//json.put("AdminResponseList", listOrderBeans2);
@@ -1266,11 +1310,14 @@ public class AbheeCustomerRestController {
 	public String getProductsModelsList() {
 		LOGGER.debug("Calling productmodelslist at controller");
 		JSONObject json = new JSONObject();
+		/*String jsonObj = null;
+		ObjectMapper om = new ObjectMapper();*/
 		List<Product> listOrderBeans = null;
 		try {
 			listOrderBeans = productDao.getProductDetails();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				json.put("productmodelslist", listOrderBeans);
+				//jsonObj=om.writeValueAsString(listOrderBeans);
 			} else {
 				json.put("productmodelslist", "NOT_FOUND");
 			}
@@ -1330,10 +1377,13 @@ public class AbheeCustomerRestController {
 	public String getCustomersList() {
 		LOGGER.debug("Calling customerslist at controller");
 		JSONObject json = new JSONObject();
+		/*String jsonObj = null;
+		ObjectMapper om = new ObjectMapper();*/
 		List<Customer> listOrderBeans = null;
 		try {
 			listOrderBeans = customerDao.getAbheeCustomerNames();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				/*jsonObj=om.writeValueAsString(listOrderBeans);*/
 				json.put("customerslist", listOrderBeans);
 			} else {
 				json.put("customerslist", "NOT_FOUND");
@@ -1392,10 +1442,13 @@ public class AbheeCustomerRestController {
 	public String getEmployeesList() {
 		LOGGER.debug("Calling userslist at controller");
 		JSONObject json = new JSONObject();
+		/*String jsonObj = null;
+		ObjectMapper om = new ObjectMapper();*/
 		List<User> listOrderBeans = null;
 		try {
 			listOrderBeans = userDao.getAllUsers();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				//jsonObj=om.writeValueAsString(listOrderBeans);
 				json.put("userslist", listOrderBeans);
 			} else {
 				json.put("userslist", "NOT_FOUND");
@@ -1461,12 +1514,15 @@ public class AbheeCustomerRestController {
 	public String getServiceRequestList() {
 		LOGGER.debug("Calling taskslist at controller");
 		JSONObject json = new JSONObject();
+		/*String jsonObj = null;
+		ObjectMapper om = new ObjectMapper();*/
 		List<Map<String, Object>> listOrderBeans = null;
 		try {
 			listOrderBeans = reportIssueDao.getTasksList1();
 
 			System.out.println(listOrderBeans);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				//jsonObj=om.writeValueAsString(listOrderBeans);
 				json.put("taskslist", listOrderBeans);
 			} else {
 				json.put("taskslist", "NOT_FOUND");
@@ -1578,10 +1634,13 @@ public class AbheeCustomerRestController {
 	public String getProductWarrantyList() {
 		LOGGER.debug("Calling warrantylist at controller");
 		JSONObject json = new JSONObject();
+		/*String jsonObj = null;
+		ObjectMapper om = new ObjectMapper();*/
 		List<Map<String, Object>> listOrderBeans = null;
 		try {
 			listOrderBeans = productGuaranteeDao.getWarrantyList();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				//jsonObj=om.writeValueAsString(listOrderBeans);
 				json.put("warrantylist", listOrderBeans);
 			} else {
 				json.put("warrantylist", "NOT_FOUND");
@@ -1655,9 +1714,12 @@ public class AbheeCustomerRestController {
 		LOGGER.debug("Calling getReportToUsers at controller");
 		String code = null;
 		HashMap<String, String> hm = new HashMap<String, String>();
+		/*String jsonObj = null;
+		ObjectMapper om = new ObjectMapper();*/
 		List<User> listOrderBeans = userDao.getUserNames();
 		JSONObject json = new JSONObject();
 		if (null != listOrderBeans) {
+			/*jsonObj=om.writeValueAsString(listOrderBeans);*/
 			json.put("reporttouserslist", listOrderBeans);
 		} else
 			json.put("reporttouserslist", "NOT_FOUND");
@@ -2060,30 +2122,67 @@ public class AbheeCustomerRestController {
 		List<Map<String, Object>> listOrderBeans = abheeTaskDao.getNotificationByTaskno(taskno);
 		JSONObject json = new JSONObject();
 		
+		/*ObjectMapper om = new ObjectMapper();
+		String jsonObj = null;*/
 		if (null != listOrderBeans) {
 			json.put("NotificationList", listOrderBeans);
+			
+			//jsonObj=om.writeValueAsString(listOrderBeans);
 		} else
 			json.put("NotificationList", "NOT_FOUND");
 		return String.valueOf(json);
 	}
 
 	@RequestMapping(value = "/getTechnicianNotificationByUserId", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public String getTechnicianNotificationByUserId(@RequestBody TaskHistoryLogs user,HttpServletRequest request)
+	public String getTechnicianNotificationByUserId(@RequestBody User users,HttpServletRequest request)
 			throws JsonProcessingException, JSONException {
 		LOGGER.debug("Calling getTechnicianNotificationByUserId at controller");
-		
-		
-		List<Map<String, Object>> listOrderBeans = userDao.getTechnicianNotificationByUserId(user.getAssignto(),user.getTaskno());
-		JSONObject jsonObj = new JSONObject();
-		
-		if (null != listOrderBeans) {
-			jsonObj.put("TechnicianNotificationList", listOrderBeans);
+		List<Map<String, Object>> listOrderBeans = userDao.getTechnicianNotificationByUserId(users.getUserId());
+		JSONObject json = new JSONObject();
+		/*String jsonObj = null;
+		ObjectMapper om = new ObjectMapper();*/
+		if (null != listOrderBeans) 
+		{
+			//jsonObj=om.writeValueAsString(listOrderBeans);
+			json.put("TechnicianNotificationList", listOrderBeans);
 		}
 		else
-			jsonObj.put("TechnicianNotificationList", "NOT_FOUND");
-		
-			return String.valueOf(jsonObj);
+			json.put("TechnicianNotificationList", "NOT_FOUND");
+			return String.valueOf(json);
 	}
+	
+	@RequestMapping(value = "/getTechnicianNotificationList", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public String getTechnicianNotificationList(@RequestBody AbheeTask task,HttpServletRequest request)
+			throws JsonProcessingException, JSONException {
+		LOGGER.debug("Calling getTechnicianNotificationList at controller");
+		List<Map<String, Object>> listOrderBeans1 = abheeTaskDao.getCustomerResponseByTaskno(task.getTaskno());
+		List<Map<String, Object>> listOrderBeans2 = abheeTaskDao.getAdminResponseByTaskno(task.getTaskno());
+		JSONObject json = new JSONObject();
+		/*String jsonObj1 = null;
+		String jsonObj2 = null;
+		String jsonObj3=null;
+		ObjectMapper om = new ObjectMapper();
+		ObjectMapper objectMapper = new ObjectMapper();*/
+		if (null != listOrderBeans1 && null != listOrderBeans2) 
+		{
+			//jsonObj1=om.writeValueAsString(listOrderBeans1);
+			/*jsonObj1=om.writerWithDefaultPrettyPrinter().writeValueAsString(listOrderBeans1);
+			jsonObj1=om.writerWithDefaultPrettyPrinter().writeValueAsString(listOrderBeans2);*/
+			//jsonObj2=objectMapper.writeValueAsString(listOrderBeans2);
+			//jsonObj3=jsonObj1.concat(jsonObj2);
+			/*request.setAttribute("list1", listOrderBeans1);
+			request.setAttribute("list2", listOrderBeans2);*/
+			json.put("TechnicianNotificationList1", listOrderBeans1);
+			json.put("TechnicianNotificationList2",listOrderBeans2);
+			//JSON.parse(jsonObj1);
+			//jsonObj.put("TechnicianNotificationList", listOrderBeans);
+		}
+		else
+			json.put("TechnicianNotificationList", "NOT_FOUND");
+	return String.valueOf(json);
+			
+	}
+	
 	@RequestMapping(value = "/getquotationByRequestNo", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public String getquotationByRequestNo(@RequestBody SalesRequest request)
 			throws JsonProcessingException, JSONException {

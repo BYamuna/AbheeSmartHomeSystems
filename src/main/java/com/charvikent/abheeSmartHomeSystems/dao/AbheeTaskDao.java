@@ -441,8 +441,24 @@ System.out.println(hql);
 	System.out.println(retlist);
 	return retlist;
 	
-}	
+}
 
+public List<Map<String, Object>> getAdminResponseByTaskno(String taskno) 
+{
+	String hql= "SELECT ap.priority AS priority,s.severity AS severity,t.subject,ts.name AS kstatus,t.add_comment,u.username AS assignedto,u.mobilenumber,t.taskdeadline,t.imgfile,t.invoice_id,t.invimg,t.description,t.expenditure FROM abhee_task t,abheepriority ap,abheeusers u ,abheeseverity s,abheetaskstatus ts WHERE t.taskno='"+taskno+"'AND t.priority=ap.id AND t.assignto=u.id AND t.kstatus=ts.id  AND t.severity=s.id AND t.kstatus <> '5'";		
+	System.out.println(hql);
+	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+	System.out.println(retlist);
+	return retlist;	
+}
 
+public List<Map<String, Object>> getCustomerResponseByTaskno(String taskno) 
+{
+	String hql= "select t.id,t.taskno,t.description,t.uploadfile,t.customer_id,t.communicationaddress,t.warranty,ar.requesttime ,ap.name AS modelname ,ac.category,st.servicetypename AS servicetype,c.name AS companyname FROM abhee_task t,abheecategory ac,abhee_company c,abheerequesttime ar,abheeservicetype st,abhee_product ap WHERE t.taskno='"+taskno+"' AND t.category=ac.id AND t.requesttime=ar.requesttimeid AND t.modelid=ap.id AND t.service_type=st.id AND t.company=c.id ";
+    System.out.println(hql);
+	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+	System.out.println(retlist);
+	return retlist;
+}
 
 }

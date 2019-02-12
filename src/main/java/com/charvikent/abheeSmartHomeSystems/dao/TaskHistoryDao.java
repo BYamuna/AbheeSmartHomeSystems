@@ -17,7 +17,7 @@ import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistory;
 import com.charvikent.abheeSmartHomeSystems.model.TaskHistoryLogs;
-import com.charvikent.abheeSmartHomeSystems.model.User;
+/*import com.charvikent.abheeSmartHomeSystems.model.User;*/
 
 @Repository
 @Transactional
@@ -66,12 +66,12 @@ public class TaskHistoryDao {
 		return retlist;
 	}
 	public List<AbheeTask> getServiceDetailsByTaskno(AbheeTask task){
-		String hql ="select t.id,t.taskno,t.description,t.uploadfile,t.customer_id,t.communicationaddress,t.warranty,ar.requesttime ,ap.name as modelname ,ac.category,st.servicetypename as servicetype,c.name as companyname ,a.priority as priority,t.subject,u.username as assignedto,t.taskdeadline,t.imgfile from abhee_task t,abheecategory ac,abhee_company c,abheerequesttime ar,abheeservicetype st,abhee_product ap,abheepriority a,abheeusers u ,abheetaskstatus ts where t.taskno='"+task.getTaskno()+"'  and t.category=ac.id and t.requesttime=ar.requesttimeid and t.modelid=ap.id  and t.service_type=st.id and t.company=c.id and t.kstatus=ts.id and t.priority=a.id  and t.assignto=u.id ";
+		String hql ="select t.id,t.description,t.taskno,t.uploadfile,t.customer_id,t.communicationaddress,t.warranty,ar.requesttime ,ap.name as modelname ,ac.category,st.servicetypename as servicetype,c.name as companyname ,a.priority as priority,t.subject,u.username as assignedto,t.taskdeadline,t.imgfile,ts.name as kstatus from abhee_task t,abheecategory ac,abhee_company c,abheerequesttime ar,abheeservicetype st,abhee_product ap,abheepriority a,abheeusers u ,abheetaskstatus ts where t.taskno='"+task.getTaskno()+"'  and t.category=ac.id and t.requesttime=ar.requesttimeid and t.modelid=ap.id  and t.service_type=st.id and t.company=c.id and t.kstatus=ts.id and t.priority=a.id  and t.assignto=u.id ";
 		RowMapper<AbheeTask> rowMapper = new BeanPropertyRowMapper<AbheeTask>(AbheeTask.class);
 	    return  this.jdbcTemplate.query(hql, rowMapper);
 	}
 	public List<TaskHistoryLogs> getNotificationsListByCustomerId1(String history,String customerid){
-		String hql ="select th.description,th.taskno,th.add_comment,st.servicetypename as service from task_history_logs th ,abheeservicetype st where th.assignby='"+customerid+"' and st.id=th.service_type and th.taskno='"+history+"'";
+		String hql ="select th.add_comment, ts.name as kstatus,th.taskdeadline,th.imgfile,u.username as assignedto from task_history_logs th ,abheeservicetype st,abheetaskstatus ts,abheeusers u where th.assignby='"+customerid+"' and st.id=th.service_type and th.taskno='"+history+"' and th.kstatus=ts.id and th.assignto=u.id ";
 		System.out.println(hql);
 		RowMapper<TaskHistoryLogs> rowMapper = new BeanPropertyRowMapper<TaskHistoryLogs>(TaskHistoryLogs.class);
 	    return  this.jdbcTemplate.query(hql, rowMapper);

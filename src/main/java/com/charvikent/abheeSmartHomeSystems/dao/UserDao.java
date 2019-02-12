@@ -643,20 +643,22 @@ public void deactiveUser(String status, Integer id)
 }	
 	
 
-public List<Map<String, Object>> getTechnicianNotificationByUserId(String user,String taskno) {
-	
-	
-String hql= "select t.taskno,st.servicetypename as servicetype,ats.name as kstatus,t.assignto,t.request_type,u.user_id,DATE_FORMAT(t.updated_time,'%d-%b-%y %H:%i')as updated_time   from task_history_logs t,abheeservicetype st ,abheetaskstatus ats,abheeusers u   where  t.service_type=st.id and t.kstatus=ats.id  and t.assignto=u.id and t.assignto='23'  and t.taskno='HYAPY' group by t.taskno order by t.updated_time desc " ; 
-		
-			
-System.out.println(hql);
-	
+public List<Map<String, Object>> getTechnicianNotificationByUserId(String userid) 
+{
+	String hql= "select t.taskno,st.servicetypename as servicetype,t.request_type,DATE_FORMAT(t.created_time,'%d-%b-%y %H:%i')as created_time,ats.name AS kstatus  from abhee_task t,abheeservicetype st ,abheetaskstatus ats,abheeusers u   where  t.service_type=st.id and t.kstatus=ats.id  and u.user_id='"+userid+"'order by t.created_time desc " ; 
+	System.out.println(hql);
 	List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
 	System.out.println(retlist);
 	return retlist;
-	
 }	
 
-
+/*public List<Map<String, Object>> getTechNotificationByUserId() {
+		String hql= "select t.taskno,st.servicetypename as servicetype,t.request_type,DATE_FORMAT(t.updated_time,'%d-%b-%y %H:%i')as updated_time   from task_history_logs t,abheeservicetype st ,abheetaskstatus ats,abheeusers u   where  t.service_type=st.id and t.kstatus=ats.id  and t.taskno='"+taskno+"' group by t.taskno order by t.updated_time desc " ; 	
+		System.out.println(hql);
+		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+		System.out.println(retlist);
+		return retlist;
+	
+}*/	
 
 }
