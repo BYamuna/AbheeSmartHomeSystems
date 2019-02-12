@@ -244,7 +244,7 @@ public class TaskController {
 						for (MultipartFile multipartFile : uploadedFiles) {
 							String fileName = multipartFile.getOriginalFilename();
 							if (!multipartFile.isEmpty()) {
-								task.setImgfile("user browsed file(s)"); // add dummy value to check file upload status
+								task.setImgfile(fileName); // add dummy value to check file upload status
 																			// in dao layers
 								multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 							}
@@ -255,7 +255,7 @@ public class TaskController {
 							for (MultipartFile multipartFile : Files) {
 								String fileName = multipartFile.getOriginalFilename();
 								if (!multipartFile.isEmpty()) {
-									task.setInvimg("user browsed file(s)"); // add dummy value to check file upload status
+									task.setInvimg(fileName); // add dummy value to check file upload status
 																				// in dao layers
 									multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 								}

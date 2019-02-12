@@ -88,7 +88,7 @@ public class SalesRequestController
 		loginDetails.setMobileno(customer.getMobilenumber());
 		loginDetails.setEmail(customer.getEmail());
 		loginDetails.setCustomerid(customer.getCustomerId());
-		loginDetails.setImgfiles("icon.png");
+		//loginDetails.setImgfiles("icon.png");
 		loginDetails.setRequestType("Quotation request");
 		loginDetails.setLocation(" ");
    	 for(MultipartFile multipartFile : uploadedFiles) {
@@ -98,14 +98,22 @@ public class SalesRequestController
 					filecount++;
 				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 				}
+				 if(filecount>0)
+			   	 {
+			   		loginDetails.setImgfiles(fileName);
+			   		
+			   		 fileTemplate.clearFiles();
+			   		 
+			   	 }
 			}
    	 
-   	 if(filecount>0)
+   	/* if(filecount>0)
    	 {
    		loginDetails.setImgfiles(fileTemplate.concurrentFileNames());
+   		
    		 fileTemplate.clearFiles();
    		 
-   	 }
+   	 }*/
 	   	Boolean data =srequestDao.checkSalesrequestExistsorNotByEmailAndModelNo(loginDetails);
 	   	if(data==false)
 	   	{

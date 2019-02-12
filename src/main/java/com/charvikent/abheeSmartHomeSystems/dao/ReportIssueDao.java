@@ -418,16 +418,16 @@ public List<ReportIssue> getAllReportIssues()
 			     if(issue.getImgfile()!=null)
 			     {
 			    	 
-			     editissue.setImgfile(fileTemplate.concurrentFileNames());
+			     editissue.setImgfile(issue.getImgfile());
 			     }
 			     /*else
 			     {
 			    	 editissue.setImgfile(" ");
 			     }*/
-			     if(issue.getInvimg()!=null)
+			   /*  if(issue.getInvimg()!=null)
 			     {
 			     editissue.setInvimg(fileTemplate.concurrentFileNames());
-			     }
+			     }*/
 			     /*else
 			     {
 			    	 editissue.setInvimg(" ");
@@ -477,13 +477,13 @@ public List<ReportIssue> getAllReportIssues()
 		
 		if(issue.getInvimg()!=null)
 	     {
-	     editissue.setInvimg(fileTemplate.concurrentFileNames());
+	     editissue.setInvimg(issue.getInvimg());
 	     }
 	     editissue.setExpenditure(issue.getExpenditure());
 	     	
 	     if(issue.getImgfile()!=null)
 	     {
-	     editissue.setImgfile(fileTemplate.concurrentFileNames());
+	     editissue.setImgfile(issue.getImgfile());
 	     }
 	     /*else
 	     {
