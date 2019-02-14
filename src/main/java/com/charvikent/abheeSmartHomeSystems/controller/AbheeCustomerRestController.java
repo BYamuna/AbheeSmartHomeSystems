@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;*/
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 //import java.util.Deque;
 //import org.apache.commons.codec.binary.Base64;
 import java.util.HashMap;
@@ -640,12 +641,28 @@ public class AbheeCustomerRestController {
 		task.setAddComment(" ");
 		task.setRequestType("Service Request");
 		Map<String, Object> abheeTask = reportIssueDao.checkServiceRequestExisrOrNot(task);
-		if (null == abheeTask) {
-			/*if(serviceRequest.getImgname().length()!=1) {*/
-				if (serviceRequest.getImgname() != null) 
-				{
-					String imgpath = imgdecoder(serviceRequest.getImgname(), request);
-					task.setUploadfile(imgpath);
+		
+		System.out.println("@@@@@@@@@@"+serviceRequest.getImgname() );
+		
+				String[] imgBytes =serviceRequest.getImgname().split(",");
+				/*byte[] imageByteArray = Base64.getDecoder().decode(imgBytes[1]);*/
+				//byte[] imageByteArray = Base64Decoder.decode(imgBytes[1]);
+		
+				 if (null == abheeTask) {
+				if (imgBytes  != null) 
+				{		String sfn ="";
+					for(int i=0;i<imgBytes.length;i++) {
+						if(i==0) {
+					 sfn =sfn+imgdecoder(imgBytes[i], request);
+					System.out.println(sfn);
+						}
+						else {
+							
+							sfn =sfn+"*"+imgdecoder(imgBytes[i], request);
+							System.out.println(sfn);
+						}
+					}
+					task.setUploadfile(sfn);
 				}
 			/*}
 			else
@@ -860,7 +877,7 @@ public class AbheeCustomerRestController {
 		KhaibarGasUtil utils = new KhaibarGasUtil();
 		String id = utils.randNum(4);
 		Base64Decoder decoder = new Base64Decoder();
-		// byte[] imgBytes = decoder.decode(imgData.split(",")[1]);
+		//byte[] imgBytes = decoder.decode(imgData.split(",")[1]);
 		byte[] imgBytes = decoder.decode(imgData);
 		/*
 		 * name=name.substring(n + 1); name=name+".png";
