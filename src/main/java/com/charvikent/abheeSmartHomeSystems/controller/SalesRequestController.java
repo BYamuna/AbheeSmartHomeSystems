@@ -98,22 +98,16 @@ public class SalesRequestController
 					filecount++;
 				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 				}
-				 if(filecount>0)
-			   	 {
-			   		loginDetails.setImgfiles(fileName);
-			   		
-			   		 fileTemplate.clearFiles();
-			   		 
-			   	 }
+				
 			}
    	 
-   	/* if(filecount>0)
+   if(filecount>0)
    	 {
    		loginDetails.setImgfiles(fileTemplate.concurrentFileNames());
    		
-   		 fileTemplate.clearFiles();
+   		fileTemplate.clearFiles();
    		 
-   	 }*/
+   	 }
 	   	Boolean data =srequestDao.checkSalesrequestExistsorNotByEmailAndModelNo(loginDetails);
 	   	if(data==false)
 	   	{

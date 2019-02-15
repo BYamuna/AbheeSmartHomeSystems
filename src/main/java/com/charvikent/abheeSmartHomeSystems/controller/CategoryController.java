@@ -115,7 +115,7 @@ public class CategoryController {
 							String fileName = multipartFile.getOriginalFilename();
 							if(!multipartFile.isEmpty())
 							{
-								filecount++;
+							filecount++;
 							 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 							}
 						}
