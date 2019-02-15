@@ -204,14 +204,22 @@ public class TaskController {
 				if (dummyId == 0) {
 
 					try {
+						int filecount =0;
 						for (MultipartFile multipartFile : uploadedFiles) {
 							String fileName = multipartFile.getOriginalFilename();
-							if (!multipartFile.isEmpty()) {
-								task.setImgfile("user browsed file(s)"); // add dummy value to check file upload status
-																			// in dao layers
+							if (!multipartFile.isEmpty()) 
+							{
+								//task.setImgfile("user browsed file(s)"); // add dummy value to check file upload status
+								filecount++;
 								multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 							}
 						}
+						if(filecount>0)
+				    	 {
+							task.setImgfile(fileTemplate.concurrentFileNames());
+				    		fileTemplate.clearFiles();
+				    		 
+				    	 }
 						
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
@@ -241,25 +249,38 @@ public class TaskController {
 				if (id == dummyId || orgBean == null) {
 
 					try {
+						int filecount=0;
 						for (MultipartFile multipartFile : uploadedFiles) {
 							String fileName = multipartFile.getOriginalFilename();
 							if (!multipartFile.isEmpty()) {
-								task.setImgfile(fileName); // add dummy value to check file upload status
-																			// in dao layers
+								//task.setImgfile(fileName); // add dummy value to check file upload status
+								filecount++;											// in dao layers
 								multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 							}
 						}
+						if(filecount>0)
+				    	 {
+							task.setImgfile(fileTemplate.concurrentFileNames());
+				    		 fileTemplate.clearFiles();
+				    		 
+				    	 }
 						
 						if(task.getKstatus().equals("9"))
 						{	
 							for (MultipartFile multipartFile : Files) {
 								String fileName = multipartFile.getOriginalFilename();
 								if (!multipartFile.isEmpty()) {
-									task.setInvimg(fileName); // add dummy value to check file upload status
-																				// in dao layers
+									filecount++;
+									//task.setInvimg(fileName); // add dummy value to check file upload status											// in dao layers
 									multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 								}
 							}
+							if(filecount>0)
+					    	 {
+								task.setInvimg(fileTemplate.concurrentFileNames());
+					    		 fileTemplate.clearFiles();
+					    		 
+					    	 }
 						}
 					} catch (IllegalStateException e) {
 						e.printStackTrace();
@@ -571,7 +592,7 @@ public class TaskController {
 		task.setRequesttime(requesttimeid);
 		task.setWarranty(" ");
 		task.setCompany(company);
-		task.setUploadfile(images);
+		//task.setUploadfile(images);
 		task.setAddComment(" ");
 		task.setTaskdeadline(" ");
 		/*task.setImgfile("icon.png");
@@ -606,7 +627,6 @@ public class TaskController {
 			return "false";
 
 		}
-
 	}
 
 	@RequestMapping(value = "/inActiveTasks")
