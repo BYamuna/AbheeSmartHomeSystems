@@ -91,29 +91,21 @@ public class SalesRequestController
 		//loginDetails.setImgfiles("icon.png");
 		loginDetails.setRequestType("Quotation request");
 		loginDetails.setLocation(" ");
-   	 for(MultipartFile multipartFile : uploadedFiles) {
+   	 for(MultipartFile multipartFile : uploadedFiles) 
+   	 {
 				String fileName = multipartFile.getOriginalFilename();
 				if(!multipartFile.isEmpty())
 				{
 					filecount++;
 				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
 				}
-				 if(filecount>0)
-			   	 {
-			   		loginDetails.setImgfiles(fileName);
-			   		
-			   		 fileTemplate.clearFiles();
-			   		 
-			   	 }
 			}
-   	 
-   	/* if(filecount>0)
+   	 if(filecount>0)
    	 {
    		loginDetails.setImgfiles(fileTemplate.concurrentFileNames());
    		
-   		 fileTemplate.clearFiles();
-   		 
-   	 }*/
+   		 fileTemplate.clearFiles(); 
+   	 }
 	   	Boolean data =srequestDao.checkSalesrequestExistsorNotByEmailAndModelNo(loginDetails);
 	   	if(data==false)
 	   	{
