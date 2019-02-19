@@ -480,7 +480,7 @@ function makeQuotationRequestFieldsEmpty()
  /* var productdetailslist =${productdetails};
 	var rowdata;
 	$.each(productdetailslist, function(k,v){	
-		//rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
+		rowdata ="<li><a href='abheecategory?id="+v.id+" ' >"+v.category+"</a> </li>";
 		rowdata= "<a href='#' onclick='getCompanys("+v.companyid+") '>"+v.companyname+"</a><br>";
 		$("#catcom").append(rowdata);
 	}); */
