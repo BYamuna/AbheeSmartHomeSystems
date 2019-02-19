@@ -484,7 +484,7 @@ function makeQuotationRequestFieldsEmpty()
 		rowdata= "<a href='#' onclick='getCompanys("+v.companyid+") '>"+v.companyname+"</a><br>";
 		$("#catcom").append(rowdata);
 	}); */
-	var productmodelslist =${productmodels};
+/*  var productmodelslist =${productmodels};
 $.each(productmodelslist, function(k,v){
 		var divData= "<div class='img'>"
 		+"<a href='#'onclick='getModels("+v.id+")' >"
@@ -494,9 +494,9 @@ $.each(productmodelslist, function(k,v){
         +"</a>"
         +"</div>";
 		$("#productModels").append(divData);
-		 /* toolTips(); */
-	});
-	
+		 // toolTips(); 
+	}); 
+	*/
 	/* function getCompanys(id){
 		var url      = '${baseurl }/abheecategory?id='+catid; 
 		url.replace("#", "");
@@ -510,9 +510,9 @@ $.each(productmodelslist, function(k,v){
 	var productdetailslist =${productdetails};
 	var rowdata;
 	var productmodelslist =${productmodels};
-	
-$.each(productmodelslist, function(k,v){
 	$("#productModels").empty();
+$.each(productmodelslist, function(k,v){
+	
 		var divData= "<div class='img'>"
 		+"<a href='#'onclick='getModels("+v.id+")' >"
 		+"<img src='../abheeimg/"+v.productmodelpics+"' class='img-responsive' alt='1810' title='"+v.name+"'>"
