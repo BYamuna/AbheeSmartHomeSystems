@@ -520,18 +520,25 @@ public class AbheeCustomerRestController {
 		String mobile = salesrequest.getMobileno();
 		String email = salesrequest.getEmail();
 		String catid=salesrequest.getCatid();
+		System.out.println("@@@@@@@@@@"+salesrequest.getImgfiles() );
+		String[] imgBytes =salesrequest.getImgfiles().split(",");
 		//String description=salesrequest.getReqdesc();
-		String imgpath = imgdecoder(salesrequest.getImgfiles(), request);
-		if(salesrequest.getImgfiles().length()!=1)
-		{
-			if (!salesrequest.getImgfiles().isEmpty()) {
-				salesrequest.setImgfiles(imgpath);
+		//String imgpath = imgdecoder(salesrequest.getImgfiles(), request);
+			if (imgBytes != null) {
+				String sfn ="";
+				for(int i=0;i<imgBytes.length;i++) {
+					if(i==0) {
+				 sfn =sfn+imgdecoder(imgBytes[i], request);
+				System.out.println(sfn);
+					}
+					else {
+						
+						sfn =sfn+"*"+imgdecoder(imgBytes[i], request);
+						System.out.println(sfn);
+					}
+				}
+				salesrequest.setImgfiles(sfn);
 			}	
-		}
-		else
-		{
-			salesrequest.setImgfiles("icon.png");
-		}
 		salesrequest.setEnable("1");
 		salesrequest.setQstatus("1");
 		salesrequest.setQuotationstatus(1);
@@ -643,8 +650,7 @@ public class AbheeCustomerRestController {
 		Map<String, Object> abheeTask = reportIssueDao.checkServiceRequestExisrOrNot(task);
 		
 		System.out.println("@@@@@@@@@@"+serviceRequest.getImgname() );
-		
-				String[] imgBytes =serviceRequest.getImgname().split(",");
+		String[] imgBytes =serviceRequest.getImgname().split(",");
 				/*byte[] imageByteArray = Base64.getDecoder().decode(imgBytes[1]);*/
 				//byte[] imageByteArray = Base64Decoder.decode(imgBytes[1]);
 		
