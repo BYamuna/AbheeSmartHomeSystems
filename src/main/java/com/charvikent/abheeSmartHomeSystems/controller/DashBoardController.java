@@ -84,7 +84,7 @@ public class DashBoardController {
 		Integer unseentasks =0;
 
 		User objuserBean = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String id = String.valueOf(objuserBean.getId());
+		String id = String.valueOf(objuserBean.getDesignation());
 		
 		if(!id.equals("1") && !id.equals("2")) {
 		
