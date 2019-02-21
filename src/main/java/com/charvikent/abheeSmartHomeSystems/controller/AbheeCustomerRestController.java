@@ -436,7 +436,6 @@ public class AbheeCustomerRestController {
 		return String.valueOf(json);
 	}
 
-	@SuppressWarnings("unused")
 	@RequestMapping(value = "/getproducts", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public String getProductslist(@RequestBody Product product) throws JsonProcessingException, JSONException {
 		LOGGER.debug("Calling getproducts at controller");
@@ -520,11 +519,13 @@ public class AbheeCustomerRestController {
 		String mobile = salesrequest.getMobileno();
 		String email = salesrequest.getEmail();
 		String catid=salesrequest.getCatid();
+		Boolean quotation =srequestDao.checkSalesrequestExistsorNotByEmailAndModelNo(salesrequest);
 		System.out.println("@@@@@@@@@@"+salesrequest.getImgfiles() );
 		String[] imgBytes =salesrequest.getImgfiles().split(",");
-		//String description=salesrequest.getReqdesc();
-		//String imgpath = imgdecoder(salesrequest.getImgfiles(), request);
-			if (imgBytes != null) {
+		if (quotation==false) 
+		{
+			if (imgBytes != null) 
+			{
 				String sfn ="";
 				for(int i=0;i<imgBytes.length;i++) {
 					if(i==0) {
@@ -553,9 +554,13 @@ public class AbheeCustomerRestController {
 		}
 		salesrequest.setQuotationDocuments(" ");	
 		salesrequest.setKstatus("New");
-		//salesrequest.setReqdesc(description);
 		srequestDao.saveRequest(salesrequest);
 		code = "requestSubmittedSuccessfully";
+		}
+		else
+		{
+			code="Request Already Exists";
+		}
 		HashMap<String, String> hm = new HashMap<String, String>();
 		hm.put("status", code);
 		return hm;
