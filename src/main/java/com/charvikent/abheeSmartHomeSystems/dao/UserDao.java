@@ -578,10 +578,10 @@ public class UserDao {
 	@SuppressWarnings("unchecked")
 	public User checkEmployeeExistOrNotbyEmail(String empcemail, String editFieldsId) {
 		
-		String hql ="from User where id <> '"+editFieldsId+" '   email ='"+empcemail+"'";
+		String hql ="from User where id <> '"+editFieldsId+" ' and  email ='"+empcemail+"'";
 		Query query =em.createQuery(hql);
 
-		List<User>usersList =query.getResultList();
+		List<User> usersList =query.getResultList();
 		if(usersList.isEmpty())
                return null;
                else
@@ -590,10 +590,10 @@ public class UserDao {
 
 	@SuppressWarnings("unchecked")
 	public User checkEmployeeExistOrNotbyMobileOnEdit(String custMobile, String editFieldsId) {
-		String hql ="from User where id <> '"+ editFieldsId+ " '  mobilenumber ='"+custMobile+"'";
+		String hql ="from User where id <> '"+ editFieldsId+ " ' and  mobilenumber ='"+custMobile+"'";
 		Query query =em.createQuery(hql);
 
-		List<User>usersList =query.getResultList();
+		List<User> usersList =query.getResultList();
 		if(usersList.isEmpty())
                return null;
                else

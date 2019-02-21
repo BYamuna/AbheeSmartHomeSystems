@@ -500,7 +500,7 @@ function inactiveData() {
 		             $.blockUI({ message: 'Please wait' });
 		          }, 
 				success : function(data) {
-					if(data === true)
+					if(data === 'true')
 						{
 	 					$('#mobilenumber').css('border-color', 'red');
 						$('#errorMobileMsg').text( "* Mobile Number already exists") ;
