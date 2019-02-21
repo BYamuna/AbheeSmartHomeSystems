@@ -399,12 +399,12 @@ $('#username').blur(function() {
 						{
 						//alert("username already exists")
 	 					$('#username').css('border-color', 'red');
-						 $('#submit1').prop('disabled', true);
+						 $('#submit2').prop('disabled', true);
 						}
 					else
 						{
 						$('#username').css('border-color', 'none');
-						$('#submit1').prop('disabled', false);
+						$('#submit2').prop('disabled', false);
 						}
 					
 				},
@@ -426,7 +426,7 @@ $('#email').blur(function() {
 	var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	  if( regex.test(cemail))
 		  {
-		  $('#submit1').prop('disabled', false);
+		  $('#submit2').prop('disabled', false);
 	
 	
 	$.ajax({
@@ -442,12 +442,12 @@ $('#email').blur(function() {
 						{
 						alert("Email already exists");
 	 					$('#email').css('border-color', 'red');
-	 					 $('#submit1').prop('disabled', true);
+	 					 $('#submit2').prop('disabled', true);
 						}
 					else
 						{
 						$('#email').css('border-color', 'none');
-						 $('#submit1').prop('disabled', false);
+						 $('#submit2').prop('disabled', false);
 						}
 					
 				},
@@ -463,7 +463,7 @@ $('#email').blur(function() {
 		  
 	{
 		  $('#email').css('border-color', 'red');
-		  $('#submit1').prop('disabled', true);
+		  $('#submit2').prop('disabled', true);
 		  
 	}
 
@@ -482,7 +482,7 @@ $('#mobilenumber').blur(function() {
 		 alert("Mobile Number Length Must Be 10 Digits")
 		 $('#mobilenumber').css('border-color', 'red');
 		 
-			 $('#submit1').prop('disabled', true);
+			 $('#submit2').prop('disabled', true);
 		 
 		 }
 	 
@@ -504,13 +504,14 @@ $('#mobilenumber').blur(function() {
 						{
 						alert("Mobile Number already exists")
 	 					$('#mobilenumber').css('border-color', 'red');
-	 					 $('#submit1').prop('disabled', true);
+	 					 $('#submit2').prop('disabled', true);
 	 					subValidation =false;
+	 					event.preventDefault();
 						}
 					 else
 						{
 						$('#mobilenumber').css('border-color', 'none');
-						 $('#submit1').prop('disabled', false);
+						 $('#submit2').prop('disabled', false);
 						 subValidation =true;
 						} 
 					

@@ -540,6 +540,7 @@ public class AbheeCustomerRestController {
 				salesrequest.setImgfiles(sfn);
 			}	
 		salesrequest.setEnable("1");
+		salesrequest.setWebstatus(1);
 		salesrequest.setQstatus("1");
 		salesrequest.setQuotationstatus(1);
 		salesrequest.setNotes(" ");
