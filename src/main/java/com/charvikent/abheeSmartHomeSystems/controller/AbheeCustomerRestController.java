@@ -1515,6 +1515,8 @@ public class AbheeCustomerRestController {
 					{
 						String images = imgdecoder(task.getImgfile(), request);
 						task.setImgfile(images);
+					}else {
+						task.setImgfile(task.getAssignby());
 					}
 				if (task.getKstatus().equals(orgBean.getKstatus()))
 				{

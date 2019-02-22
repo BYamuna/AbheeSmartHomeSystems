@@ -420,18 +420,11 @@ public List<ReportIssue> getAllReportIssues()
 			    	 
 			     editissue.setImgfile(issue.getImgfile());
 			     }
-			     /*else
+			     else
 			     {
-			    	 editissue.setImgfile(" ");
-			     }*/
-			   /*  if(issue.getInvimg()!=null)
-			     {
-			     editissue.setInvimg(fileTemplate.concurrentFileNames());
-			     }*/
-			     /*else
-			     {
-			    	 editissue.setInvimg(" ");
-			     }*/
+			    	 editissue.setImgfile(issue.getImgfile());
+			     }
+			  
 			     editissue.setAmountreceived(issue.getAmountreceived());
 			     editissue.setDiscount(issue.getDiscount());
 			     editissue.setTax(issue.getTax());
@@ -555,13 +548,13 @@ public List<ReportIssue> getAllReportIssues()
 				    if(issue.getKstatus().toString().equals("8")) {
 				     editissue.setImgfile(issue.getImgfile().toString());
 				    }else {
-				    	 editissue.setImgfile(" ");
+				    	 editissue.setImgfile(issue.getAssignto());
 				    }
 				    
 				    if(issue.getKstatus().toString().equals("3")) {
 					     editissue.setInvimg(issue.getImgfile().toString());
 					    }else {
-					    	 editissue.setInvimg(" ");
+					    	 editissue.setInvimg(issue.getInvimg());
 					    }
 				     editissue.setWarranty(issue.getWarranty());
 				} 

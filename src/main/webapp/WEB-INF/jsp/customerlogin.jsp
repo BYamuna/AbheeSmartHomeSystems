@@ -282,7 +282,7 @@
 									<label for="mobile number" style="font-size: 12px;">Registered Mobile Number Or Email :</label>
 								</div>
 								<div class="col-md-7">
-									<input	type="text" name="resetmobile" id="resetmobile" onkeydown="removeBorder(this.id)" class="form-control validate1 " placeholder="Registered Mobile Number or Email"/>
+									<input	type="text" name="resetmobile" id="resetmobile" onkeydown="removeBorder(this.id)" class="form-control validate11 " placeholder="Registered Mobile Number or Email"/>
 								</div><div class="clearfix"></div> 
 								<span class="hasError" id="cmobileError" style="font-size: 13px;"></span>
 							</div>				
@@ -686,7 +686,7 @@ alert(cmobile+"-->"+cemail+"-->"+csname+"-->"+cname);
 			}
 		
 		$('#resetpassword').prop('disabled', true);
-	 idArrayCmt11 = $.makeArray($('.validate1').map(function() {
+	 idArrayCmt11 = $.makeArray($('.validate11').map(function() {
 		return this.id;
 		}));
 	validation = true;

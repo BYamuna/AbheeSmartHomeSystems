@@ -100,7 +100,7 @@ public class TaskHistoryLogsDao {
 		taskHistoryLogs.setTaskdeadline(Issue.getTaskdeadline());
 		taskHistoryLogs.setTaskno(Issue.getTaskno());
 		taskHistoryLogs.setAddComment(Issue.getAddComment());
-		
+		taskHistoryLogs.setModifiedBy(Issue.getAssignto());
 		/*taskHistoryLogs.setModifiedBy(String.valueOf(objuserBean.getId()));*/
 		taskHistoryLogs.setCommunicationaddress(Issue.getCommunicationaddress());
 		
