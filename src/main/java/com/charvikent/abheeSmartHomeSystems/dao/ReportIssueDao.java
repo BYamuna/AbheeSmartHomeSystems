@@ -472,16 +472,20 @@ public List<ReportIssue> getAllReportIssues()
 	     {
 	     editissue.setInvimg(issue.getInvimg());
 	     }
+		else 
+		{
+			editissue.setInvimg(issue.getInvimg());
+		}
 	     editissue.setExpenditure(issue.getExpenditure());
 	     	
 	     if(issue.getImgfile()!=null)
 	     {
 	     editissue.setImgfile(issue.getImgfile());
 	     }
-	     /*else
+	   else
 	     {
-	    	 editissue.setImgfile(" ");
-	     }*/
+		   editissue.setImgfile(issue.getImgfile());
+	     }
 		//em.flush();
      	
 			
@@ -551,11 +555,11 @@ public List<ReportIssue> getAllReportIssues()
 				    	 editissue.setImgfile(issue.getAssignto());
 				    }
 				    
-				    if(issue.getKstatus().toString().equals("3")) {
-					     editissue.setInvimg(issue.getImgfile().toString());
+				   /* if(issue.getKstatus().toString().equals("3")) {
+					     editissue.setInvimg(issue.getInvimg().toString());
 					    }else {
 					    	 editissue.setInvimg(issue.getInvimg());
-					    }
+					    }*/
 				     editissue.setWarranty(issue.getWarranty());
 				} 
 			     taskHistoryLogsDao.historyLogs(editissue);
