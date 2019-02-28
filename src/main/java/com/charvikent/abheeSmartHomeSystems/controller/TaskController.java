@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +39,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
 import com.charvikent.abheeSmartHomeSystems.config.KhaibarGasUtil;
+import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeRequestTimeDao;
 import com.charvikent.abheeSmartHomeSystems.dao.AbheeTaskDao;
@@ -51,6 +53,7 @@ import com.charvikent.abheeSmartHomeSystems.dao.ServiceDao;
 import com.charvikent.abheeSmartHomeSystems.dao.SeverityDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryDao;
 import com.charvikent.abheeSmartHomeSystems.dao.TaskHistoryLogsDao;
+import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
 //import com.charvikent.abheeSmartHomeSystems.model.KpStatusLogs;
 import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
@@ -78,7 +81,8 @@ public class TaskController {
 	private SeverityDao severityDao;
 	@Autowired
 	private UserService userService;
-
+	@Autowired
+	UserDao userDao;
 	/*
 	 * @Autowired private CategoryDao categoryDao;
 	 */
@@ -109,7 +113,10 @@ public class TaskController {
 	/*
 	 * @Autowired DashBoardService dashBoardService;
 	 */
-
+	@Autowired
+	SendSMS sendSMS;
+	@Autowired
+	private Environment environment;
 	@SuppressWarnings("unused")
 	@GetMapping("/task")
 	public String department(@ModelAttribute("taskf") AbheeTask abheeTask, Model model, HttpServletRequest request,
@@ -577,7 +584,9 @@ public class TaskController {
 		AbheeTask task = new AbheeTask();
 		task.setAdditionalinfo("0");
 		task.setAssignto("2");
+		
 		task.setDescription(message);
+		
 		task.setKstatus("5");
 		task.setPriority("3");
 		task.setSeverity("3");
@@ -619,7 +628,18 @@ public class TaskController {
 		if (null == abheeTask) {
 			reportIssueDao.saveServiceRequestFromCustomer(task);
 			// taskHistoryLogsDao.historyLogForcustomerEntry(task);
-			// sendingMail.sendingMailWithTaskStatus(task);
+			/*User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String id = String.valueOf(user.getDesignation());*/
+			String assigntechnician=task.getAssignto();
+			User user=userDao.getUserById(Integer.parseInt(assigntechnician));
+			String mobilenum=user.getMobilenumber();
+			String tmsg =environment.getProperty("app.tsmsg");
+			tmsg= tmsg.replaceAll("_username_", user.getFirstname()+" "+user.getLastname());
+			/*tmsg= tmsg.replaceAll("_mobilenum_", customer.getMobilenumber());*/
+			tmsg= tmsg.replaceAll("_ServiceRequestNo_", task.getTaskno());
+			tmsg= tmsg.replaceAll("_productname_",task.getCategory());
+			System.out.println(tmsg);
+			sendSMS.sendSMS(tmsg,mobilenum);
 			System.out.println(message + "  " + servicetypeid);
 			return "true";
 		} else {
@@ -694,6 +714,7 @@ public class TaskController {
 			 pg.setPurchaseddate(pDate ); 
 			 pg.setExpireddate( eDate );
 			 pg.setStatus("1");
+			 pg.setWarrantystatus("Inprogress");
 			productGuaranteeDao.saveWarranty(pg);
 			json.put("status","true");
 			return String.valueOf(json);
@@ -787,6 +808,24 @@ public class TaskController {
 		return filepath;
 	}
 	
+	
+	
+	@RequestMapping(value = "/approveProductWarranty")
+	public @ResponseBody String approveProductWarranty(ProductGuarantee  productGuarantee ,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		LOGGER.debug("Calling deleteProductWarranty at controller");
+		String orderId=request.getParameter("orderId");
+		
+		if(productGuarantee.getOrderId() !=null)
+		{
+			productGuaranteeDao.updateProductWarranty(orderId);
+			
+			return "true";
+		}
+		else
+			return "false";	
+	
+
+}
 }
 
 

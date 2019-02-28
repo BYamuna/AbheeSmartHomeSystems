@@ -332,6 +332,8 @@ function toolTips(){
 		$('.history').attr('data-original-title','History');
 		$('.invoice').attr('data-toggle','tooltip');
 		$('.invoice').attr('data-original-title','Invoice');
+		$('.warranty').attr('data-toggle','tooltip');
+		$('.warranty').attr('data-original-title','Warranty');
 		$('[data-toggle="tooltip"]').tooltip(); 
 }
 
@@ -618,7 +620,7 @@ function displayQuotationNotifications(listOrders) {
 			<%--  <security:authorize access="hasRole('ROLE_USER') or hasRole('ROLE_BRANCHHEAD')">
                 <li class="CustomerType"><a href="${baseurl }/customerType"><i class="fa fa-user register"></i> <span>Customer Type</span></a></li>
               </security:authorize> --%>
-              <security:authorize access="hasRole('ROLE_ADMIN') ">
+              <security:authorize access="hasRole('ROLE_ADMIN')  or hasRole('ROLE_USER')">
                 <li class="productGuarantee"><a href="${baseurl }/productWarranty"><i class="fa fa-certificate cert"></i> <span> Product Warranty</span></a></li>
               </security:authorize>
 			</ul>

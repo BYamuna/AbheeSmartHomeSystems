@@ -27,7 +27,7 @@ public class SalesRequestDao
 	@Autowired KptsUtil utilities;
 	public void saveRequest(SalesRequest salesrequest) 
 	{
-		String randomNum = utilities.randNum();
+		String randomNum = utilities.abheeQuotationRequestRandNum();
 		salesrequest.setSalesrequestnumber(randomNum);
 		entityManager.persist(salesrequest);
 		//saveQuationHistory(salesrequest);

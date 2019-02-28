@@ -33,6 +33,7 @@ public class ProductGuarantee implements Serializable
 	private String customerid;
 	private String purchaseddate;
 	private String expireddate;
+	private String warrantystatus;
 	private String status;
 	
 	/*@GenericGenerator(name = "sequence_order_id", strategy = "com.charvikent.abheeSmartHomeSystems.config.OrderIdGenerator")
@@ -63,7 +64,7 @@ public class ProductGuarantee implements Serializable
 
 
 	public ProductGuarantee(/* Integer id, */String orderId, String productmodelid, String customerid, String purchaseddate,
-			String expireddate, String status, Date createdTime, Date updatedTime) {
+			String expireddate, String status, Date createdTime, Date updatedTime,String warrantystatus ) {
 		super();
 		/* this.id=id; */
 		this.orderId = orderId;
@@ -74,6 +75,8 @@ public class ProductGuarantee implements Serializable
 		this.status = status;
 		this.createdTime = createdTime;
 		UpdatedTime = updatedTime;
+		this.setWarrantystatus(warrantystatus);
+		
 	}
 
 	/*
@@ -143,14 +146,24 @@ public class ProductGuarantee implements Serializable
 		UpdatedTime = updatedTime;
 	}
 
-	@Override
-	public String toString() {
-		return "ProductGuarantee [orderId=" + orderId + ", productmodelid=" + productmodelid
-				+ ", customerid=" + customerid + ", purchaseddate=" + purchaseddate + ", expireddate=" + expireddate
-				+ ", status=" + status + ", createdTime=" + createdTime + ", UpdatedTime=" + UpdatedTime + "]";
+	
+
+	public String getWarrantystatus() {
+		return warrantystatus;
+	}
+
+	public void setWarrantystatus(String warrantystatus) {
+		this.warrantystatus = warrantystatus;
 	}
 
 
+	@Override
+	public String toString() {
+		return "ProductGuarantee [orderId=" + orderId + ", productmodelid=" + productmodelid + ", customerid="
+				+ customerid + ", purchaseddate=" + purchaseddate + ", expireddate=" + expireddate + ", warrantystatus="
+				+ warrantystatus + ", status=" + status + ", createdTime=" + createdTime + ", UpdatedTime="
+				+ UpdatedTime + "]";
+	}
 
 
 	

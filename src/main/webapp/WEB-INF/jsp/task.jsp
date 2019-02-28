@@ -213,7 +213,7 @@ label{margin-left: 20px;}
 									<label for="focusedinput" class="col-md-6 control-label">Description
 										<!-- <span class="impColor">*</span> -->
 									</label>
-										<form:textarea path="description" class="col-xs-10 col-sm-5 validate" placeholder="Description" />
+										<form:textarea path="description" class="col-xs-10 col-sm-5 " placeholder="Description" />
 										<span class="hasError" id="stationnameError"></span>
 								</div>
 							</div>
@@ -283,6 +283,8 @@ label{margin-left: 20px;}
 								</div>
 							</div>
 								</div>
+								
+								 <security:authorize access="hasRole('ROLE_ADMIN')">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Warranty</label>
@@ -291,6 +293,10 @@ label{margin-left: 20px;}
 									</div>
 								</div>
 							</div>
+							
+							</security:authorize>
+							
+							
 							</div>
 							
 						<%-- <div class="col-md-6">
@@ -659,7 +665,7 @@ label{margin-left: 20px;}
 		<div class="modal-content">
 			<div class="modal-header" style="background: #2973cf;padding:11px;">
 				<button type="button" class="close" id="close" data-dismiss="modal" style="margin-top: -9px;">&times;</button>
-				<h4 class="modal-title" style="color: white;"> Invoice Details </h4>
+				<h4 class="modal-title" style="color: white;"> Cash Receipt </h4>
         	</div>
         	<div class="modal-body" style=" overflow-y: auto;background:#ffffff;	">
         	
@@ -2142,7 +2148,7 @@ $('#invoiceDiv').find('input').addClass('display-none');
 $('#kstatus').change(function(){
 	//var option = $(this).find('option:selected');
 	if (isRole == 'true') {
-	if($( "#kstatus option:selected" ).text() == "INVOICE GENERATED"){
+	if($( "#kstatus option:selected" ).text() == "CASH RECEIPT GENERATED"){
 		
 		$('#invoiceDiv').find('input').removeClass('display-none');
 		$('#invoiceDiv').show();

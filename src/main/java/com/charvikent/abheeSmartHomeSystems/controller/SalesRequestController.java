@@ -11,6 +11,8 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -25,10 +27,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.abheeSmartHomeSystems.config.FilesStuff;
+import com.charvikent.abheeSmartHomeSystems.config.SendSMS;
 import com.charvikent.abheeSmartHomeSystems.config.SendingMail;
 import com.charvikent.abheeSmartHomeSystems.dao.SalesRequestDao;
+import com.charvikent.abheeSmartHomeSystems.dao.UserDao;
+import com.charvikent.abheeSmartHomeSystems.model.AbheeTask;
 import com.charvikent.abheeSmartHomeSystems.model.Customer;
 import com.charvikent.abheeSmartHomeSystems.model.SalesRequest;
+import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -42,6 +48,13 @@ public class SalesRequestController
 	FilesStuff fileTemplate;
 	@Autowired
 	SendingMail sendingMail;
+	
+	@Autowired
+	UserDao userDao;
+	@Autowired
+	SendSMS sendSMS;
+	@Autowired
+	private Environment environment;
 	@RequestMapping(value = "/salesRequest" ,method = RequestMethod.GET)
 	public String saveRequest(@ModelAttribute("salesRequest")SalesRequest salesrequest,Model model)
 	{ 
@@ -110,11 +123,26 @@ public class SalesRequestController
    		 
 
    	 }
+  /*User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	String id = String.valueOf(user.getDesignation());*/
+   		AbheeTask task = new AbheeTask();
+   		task.setAssignto("2");
+	
 	   	Boolean data =srequestDao.checkSalesrequestExistsorNotByEmailAndModelNo(loginDetails);
 	   	if(data==false)
 	   	{
 			srequestDao.saveRequest(loginDetails);
 	   		//sendingMail.SendingSalesRequestByEmail(salesrequest.getEmail());
+			String assigntechnician=task.getAssignto();
+			User user=userDao.getUserById(Integer.parseInt(assigntechnician));
+			String mobilenum=user.getMobilenumber();
+			String tmsg =environment.getProperty("app.qrmsg");
+			tmsg= tmsg.replaceAll("_username_", user.getFirstname()+" "+user.getLastname());
+			/*tmsg= tmsg.replaceAll("_mobilenum_", customer.getMobilenumber());*/
+			tmsg= tmsg.replaceAll("_QuotationRequestNo_", loginDetails.getSalesrequestnumber());
+			tmsg= tmsg.replaceAll("_productname_",loginDetails.getModelnumber());
+			//System.out.println(tmsg);
+			sendSMS.sendSMS(tmsg,mobilenum);
 	   		sendingMail.sendSalesRequestEmailWithattachment(customer.getEmail(),uploadedFiles);
 	   	}
 	   	else {

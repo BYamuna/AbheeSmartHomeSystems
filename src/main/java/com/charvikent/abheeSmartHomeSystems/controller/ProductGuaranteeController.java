@@ -73,6 +73,7 @@ public class ProductGuaranteeController
 				if(dummyId ==null)
 				{	
 					productGuarantee.setStatus("1");
+					productGuarantee.setWarrantystatus("Inprogress");
 					productGuaranteeDao.saveWarranty(productGuarantee);
 					
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");
@@ -228,5 +229,6 @@ public class ProductGuaranteeController
 		}
 		return String.valueOf(jsonObj);
 	}
-
+	
+	
 }

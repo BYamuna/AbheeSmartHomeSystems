@@ -83,6 +83,7 @@ public class ProductGuaranteeDao
 		pg.setProductmodelid(productGuarantee.getProductmodelid());*/
 		pg.setPurchaseddate(productGuarantee.getPurchaseddate());
 		pg.setExpireddate(productGuarantee.getExpireddate());
+		//pg.setWarrantystatus("Accepted");
 		em.flush();
 		
 	}
@@ -151,7 +152,7 @@ public class ProductGuaranteeDao
 	 {
 			
 		//return em.createQuery("  abg.id,abg.customerid,abg.expireddate,abg.expireddate,p.name as productmodelname from ProductGuarantee abg,Product p where abg.productmodelid=p.id and status='1'").getResultList();
-			String sql="select abg.order_id as orderId,abg.customerid,abg.productmodelid,abg.purchaseddate,abg.expireddate,p.name as productmodelname,abg.status from abheeproductguarantee abg,abhee_product p where abg.productmodelid=p.id and abg.status='1'  order by abg.updated_time desc";
+			String sql="select abg.order_id as orderId,abg.customerid,abg.productmodelid,abg.purchaseddate,abg.expireddate,p.name as productmodelname,abg.status ,abg.warrantystatus from abheeproductguarantee abg,abhee_product p where abg.productmodelid=p.id and abg.status='1'  order by abg.updated_time desc";
 			System.out.println(sql);
 			
 			List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
@@ -193,7 +194,7 @@ public class ProductGuaranteeDao
 
 	public List<Map<String, Object>> getAllInActiveList() 
 	{
-		String sql="select abg.order_id as orderId,abg.customerid,abg.productmodelid,abg.purchaseddate,abg.expireddate,p.name as productmodelname,abg.status from abheeproductguarantee abg,abhee_product p where abg.productmodelid=p.id and abg.status='0' order by abg.updated_time desc";
+		String sql="select abg.order_id as orderId,abg.customerid,abg.productmodelid,abg.purchaseddate,abg.expireddate,p.name as productmodelname,abg.status,abg.warrantystatus  from abheeproductguarantee abg,abhee_product p where abg.productmodelid=p.id and abg.status='0' order by abg.updated_time desc";
 		System.out.println(sql);
 		
 		List<Map<String,Object>>  retlist = jdbcTemplate.queryForList(sql,new Object[]{});
@@ -223,4 +224,12 @@ public class ProductGuaranteeDao
 		RowMapper<ProductGuarantee> rowMapper = new BeanPropertyRowMapper<ProductGuarantee>(ProductGuarantee.class);
 		return  this.jdbcTemplate.query(sql, rowMapper);	
 	}
+	
+	
+	public void updateProductWarranty(String orderId) 
+	{
+		String sql="update abheeproductguarantee abg set abg.warrantystatus='Accepted' where abg.warrantystatus='Inprogress' and abg.order_id='"+orderId+"'";
+		jdbcTemplate.execute(sql);		
+	}
+	
 }

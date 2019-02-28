@@ -182,13 +182,13 @@
 									<label for="user_name">Email :</label>
 								</div>
 								<div class="col-md-7">
-									<input	type="text" name="cemail" id="cemail" onkeydown="removeBorder(this.id)" class="form-control validate1" placeholder="Email"/>
+									<input	type="text" name="cemail" id="cemail" onkeydown="removeBorder(this.id)" class="form-control" placeholder="Email"/>
 								</div><div class="clearfix"></div>
 								<span class="hasError" id="emailError" style="font-size: 13px;"></span>
 							</div>
 							<div class="form-group">
 								<div class="col-md-5">
-									<label for="user_name">Password (Max 4 Digits) :</label>
+									<label for="user_name">Create Password (Max 4 Digits) :</label>
 								</div>
 								<div class="col-md-7">
 									<input	type="password" name="cpassword" id="cpassword" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control validate1 numericOnly2" placeholder="Password" />

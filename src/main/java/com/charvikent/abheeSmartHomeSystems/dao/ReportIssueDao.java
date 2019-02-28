@@ -914,10 +914,22 @@ public List<ReportIssue> getAllReportIssues()
 	
 	
 	public void saveServiceRequestFromCustomer(AbheeTask reportIssue) {
-		String randomNum = utilities.randNum();
+		//String randomNum = utilities.randNum();
 		
+		String randomNum = null;
+		
+		if(reportIssue.getServiceType().equals("2"))
+		{
+		randomNum = utilities.abheeServiceRequestForInstallationRandNum();
+		
+		}else {
+			
+			randomNum = utilities.abheeServiceRequestForServiceAndRepairRandNum();
+			
+		}
+		if(randomNum != null) {
 		reportIssue.setTaskno(randomNum);
-		
+		}
 		
 		em.persist(reportIssue);
 		

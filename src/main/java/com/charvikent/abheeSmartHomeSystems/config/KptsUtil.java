@@ -84,6 +84,51 @@ public class KptsUtil {
 		return randNum;
 
 	}
+	
+	public  String abheeServiceRequestForInstallationRandNum() {
+		final String  preFix = "ABIN" ;
+		Date currentDate = new Date();
+		SimpleDateFormat dateDigits = new SimpleDateFormat("dd");
+		SimpleDateFormat monthDigits = new SimpleDateFormat("MM");
+		String date = dateDigits.format(currentDate);
+		String month = monthDigits.format(currentDate);
+		String randNum = randomString(CHARSET_AZ_09, 5);
+		
+		String finalNumber = preFix + date + month + randNum ; 
+		return finalNumber;
+
+	}
+	public  String abheeServiceRequestForServiceAndRepairRandNum() {
+		final String  preFix = "ABSR" ;
+		Date currentDate = new Date();
+		SimpleDateFormat dateDigits = new SimpleDateFormat("dd");
+		SimpleDateFormat monthDigits = new SimpleDateFormat("MM");
+		String date = dateDigits.format(currentDate);
+		String month = monthDigits.format(currentDate);
+		String randNum = randomString(CHARSET_AZ_09, 5);
+		
+		String finalNumber = preFix + date + month + randNum ; 
+		return finalNumber;
+
+	}
+	
+	public  String abheeQuotationRequestRandNum() {
+		final String  preFix = "ABQR" ;
+		Date currentDate = new Date();
+		SimpleDateFormat dateDigits = new SimpleDateFormat("dd");
+		SimpleDateFormat monthDigits = new SimpleDateFormat("MM");
+		String date = dateDigits.format(currentDate);
+		String month = monthDigits.format(currentDate);
+		String randNum = randomString(CHARSET_AZ_09, 5);
+		
+		String finalNumber = preFix + date + month + randNum ; 
+		return finalNumber;
+
+	}
+	
+	
+	
+	
 	/*public static  UsersBean  getLoginSession(HttpSession session){
 		UsersBean objuserBean = null;
 		try{

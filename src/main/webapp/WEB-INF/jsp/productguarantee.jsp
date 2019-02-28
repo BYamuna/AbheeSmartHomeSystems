@@ -55,6 +55,7 @@
 			</div>
 		</div>
 	</div>
+	<security:authorize access="hasRole('ROLE_ADMIN')">
 	<div class="row" id="moveTo">
 		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-primary">
@@ -127,6 +128,7 @@
 			</div>
 		</div>
 	</div>
+	</security:authorize>
 </div>
 <script type="text/javascript">
 
@@ -162,16 +164,22 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Customer ID</th><th>Order ID</th><th>Product Model Name</th><th>Purchased Date</th><th>Expired Date</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Customer ID</th><th>Order ID</th><th>Product Model Name</th><th>Purchased Date</th><th>Expired Date</th><th>Warranty Status</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
+		var designation = <%= session.getAttribute("userDesignationSession1") %>;
+		var designationid=designation["id"];
+		if (designationid == 1 ){
+		var warranty="<a class='warranty' onclick=approveProductWarranty('"+ orderObj.orderId +"')><i class='fa fa-check'></i></a>"
 		if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate' onclick=deleteProductWarranty('"+ orderObj.orderId+ "',0)><i class='fa fa-eye'></i></a>"
 		}else{  
 			var deleterow = "<a class='activate' onclick=deleteProductWarranty('"+ orderObj.orderId+ "',1)><i class='fa fa-eye-slash'></i></a>"
 		}
 		var edit = "<a class='edit editIt' onclick=editProductWarranty('"+orderObj.orderId+"')><i class='fa fa-edit'></i></a>" 
+		
+		
 		serviceUnitArray[orderObj.orderId] = orderObj;
 		var tblRow = "<tr>"
 			+ "<td title='"+orderObj.customerid+"'>"+ orderObj.customerid + "</td>"
@@ -179,9 +187,36 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.productmodelname+"'>"+ orderObj.productmodelname + "</td>"
 			+ "<td title='"+orderObj.purchaseddate+"'>"+ orderObj.purchaseddate + "</td>"
 			+ "<td title='"+orderObj.expirededdate+"'>"+ orderObj.expireddate + "</td>"
-			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"  
+			  
+			+ "<td title='"+orderObj.warrantystatus+"'>"+ orderObj.warrantystatus + "</td>"
+			
+			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "&nbsp;&nbsp;" +warranty+ "</td>"  
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
+		
+		}else{
+		if(orderObj.status == "1"){
+			var deleterow = "<a class='deactivate' onclick=deleteProductWarranty('"+ orderObj.orderId+ "',0)><i class='fa fa-eye'></i></a>"
+		}else{  
+			var deleterow = "<a class='activate' onclick=deleteProductWarranty('"+ orderObj.orderId+ "',1)><i class='fa fa-eye-slash'></i></a>"
+		}
+		var edit = "<a class='edit editIt' onclick=editProductWarranty('"+orderObj.orderId+"')><i class='fa fa-edit'></i></a>" 
+		
+		
+		serviceUnitArray[orderObj.orderId] = orderObj;
+		var tblRow = "<tr>"
+			+ "<td title='"+orderObj.customerid+"'>"+ orderObj.customerid + "</td>"
+			+ "<td title='"+orderObj.orderId+"'>"+ orderObj.orderId + "</td>"
+			+ "<td title='"+orderObj.productmodelname+"'>"+ orderObj.productmodelname + "</td>"
+			+ "<td title='"+orderObj.purchaseddate+"'>"+ orderObj.purchaseddate + "</td>"
+			+ "<td title='"+orderObj.expirededdate+"'>"+ orderObj.expireddate + "</td>"
+			  
+			+ "<td title='"+orderObj.warrantystatus+"'>"+ orderObj.warrantystatus + "</td>"
+			
+			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow +  "</td>"  
+			+ "</tr>";
+		$(tblRow).appendTo("#tableId table tbody");
+		}
 	});
 	if(isClick=='Yes') $('.datatables').dataTable();
 	
@@ -259,7 +294,7 @@ function validate(id, errorMessage)
 	
 } 
 
-function inactiveData() {
+function inactiveData() {	
 	var status="0";
 	//var orderId="";
 	if($('#inActive').is(":checked") == true){
@@ -280,7 +315,40 @@ function inactiveData() {
 		
 }
 
-
+  function approveProductWarranty(id)  { 
+	
+	 var formData = new FormData();
+	 formData.append('orderId', id);
+	/*  
+	 if(id != null){   
+			alert(id);
+		 }else{
+				 alert(id);
+			 }   */
+  var checkstr=null;
+	if(status == 0){
+		 checkstr = confirm('Are You Sure to Accept the Product Warranty ?');
+	}else{
+		 checkstr = confirm('not ok');
+	} 
+	if(checkstr == true){
+		var formData = new FormData();
+	    formData.append('orderId', id);
+		$.fn.makeMultipartRequest('POST', 'approveProductWarranty', false, formData, false, 'text', function(data){
+			var jsonobj = $.parseJSON(data);
+			if(jsonobj == true){
+				window.location.reload();
+			}else{
+				alert("Warranty is not updated")
+			}
+			
+			$('#inActive').prop('checked', false);
+		});
+	} 
+ 		
+ }
+ 
+ 
 
 $("#pageName").text("Product Warranty Details");
 $(".productGuarantee").addClass("active");

@@ -144,7 +144,7 @@
 										</select>
 						</div>
 						<div class="col-sm-4">
-							<label>Description</label> <span class="impColor">*</span>
+							<label>Description</label> <!-- <span class="impColor">*</span> -->
 						</div>
 						<div class="col-sm-8">
 							<textarea class="form-control" id="message" name="message" placeholder="Description"  onfocus="removeBorder2(this.id)"></textarea>
@@ -164,7 +164,7 @@
   							<input type="radio" id="warranty" name="warranty" value="1" > No
 						</div> --><div class="clearfix"></div>
 						<div class="col-sm-4">
-							<label>Request Time</label> <span class="impColor">*</span>
+							<label>Customer Available Time</label> <span class="impColor">*</span>
 						</div>
 						<div class="col-sm-8">
 											<select  id="requesttimeid"  class="form-control" onfocus="removeBorder2(this.id)">
@@ -175,7 +175,7 @@
 										</select>
 						</div>
 						<div class="col-sm-4" style="padding-top:8px;">
-							<label>Attach File(s)</label>  <!-- <span class="impColor">*</span>  -->
+							<label>Attach File(s)</label>  <span class="impColor">*</span> 
 						</div>
 						
 						<div class="col-sm-8">
@@ -247,14 +247,14 @@
 								</div>
 								<div class="clearfix"></div>
 								<div class="form-group">
-									<label class="col-md-4 control-label no-padding-right">Description<span class="impColor">*</span></label> 
+									<label class="col-md-4 control-label no-padding-right">Description<!-- <span class="impColor">*</span> --></label> 
 									<div class="col-md-6">
-										<input type="textarea" id="reqdesc" class="form-control validate" placeholder=" Description"/>
+										<input type="textarea" id="reqdesc" class="form-control" placeholder=" Description"/>
 									</div>
 								</div>
 								<div class="clearfix"></div>
 								<div class="form-group">
-								<label class="col-md-4 control-label no-padding-right ">Attach <!-- <span class="impColor">*</span> --></label> 
+								<label class="col-md-4 control-label no-padding-right ">Attach <span class="impColor">*</span> </label> 
 									<div class="col-md-6">
 										<input class="validate " type="file" name="imgfile"  accept="image/*"  onchange="validateImage(this.id)" onfocus="removeBorder(this.id)" style= "margin-top:15px;" id="imgfile" multiple />
 									</div>
@@ -654,8 +654,8 @@ $.each(productdetailslist, function(k,v){
 		var modelnumber=$('#modelnumber').val();
     	//var locationData=$('#locationData').val();
     	var address=$('#address').val();
-    	var reqdesc=$('#reqdesc').val();
-    	//var imgfile=$('#imgfile').val();
+    	 var reqdesc=$('#reqdesc').val();
+    	var imgfile=$('#imgfile').val();
     	 //Serializing all For Input Values (not files!) in an Array Collection so that we can iterate this collection later.
     	//var params = form.serializeArray();
     	
@@ -685,21 +685,21 @@ $.each(productdetailslist, function(k,v){
 		 
 		 
 	 }
-	 if (reqdesc == null || reqdesc == "" || reqdesc == "undefined") {
+	/*  if (reqdesc == null || reqdesc == "" || reqdesc == "undefined") {
 		 $('.impColor0').after('<span class="error error-keyup-4">Fill Description Field </span>');
 		 $('#reqdesc' ).css('border-color','#e73d4a');
 			$('#reqdesc' ).css('color','#e73d4a');
 		 return false;
 		 
 		 
-	 }
-	  /* if(imgfile=="" || imgfile==null || imgfile=="undefined")
+	 } */
+	  if(imgfile=="" || imgfile==null || imgfile=="undefined")
 		{
 			$('.impColor0').after('<span class="error error-keyup-4">Choose file </span>');
 			 $('#imgfile' ).css('border-color','#e73d4a');
 				$('#imgfile' ).css('color','#e73d4a');
 			 return false;
-		}  */ 
+		} 
 	   
 	 var ins = document.getElementById('imgfile').files.length;
 	
@@ -774,14 +774,14 @@ $.each(productdetailslist, function(k,v){
 	function serviceSubmit()
 	{
 		
-		 message =$('#message').val();
+		 message =$('#message').val(); 
 		 servicetypeid =$('#servicetypeid').val();
 		 custaddress =$('#custaddress').val();
 		 
 		 servicetypeid =$("#servicetypeid").val();
 		 requesttimeid =$("#requesttimeid").val();
 		 warranty=$("#warranty:checked").val();
-		 /* fileimg =$('#fileimg').val(); */
+		 fileimg =$('#fileimg').val();
 		 
 		 
 		 var objArr = [];
@@ -805,7 +805,7 @@ $.each(productdetailslist, function(k,v){
 				 }
  
 		 
-		 if (message == null || message == "" || message == "undefined") {
+		/*  if (message == null || message == "" || message == "undefined") {
 			 
 			 $('.impColor0').after('<span class="error error-keyup-4">Fill Message Field </span>');
 			 $('#message' ).css('border-color','#e73d4a');
@@ -813,7 +813,7 @@ $.each(productdetailslist, function(k,v){
 			 return false;
 			 
 			 
-		 }
+		 } */
 		 if (custaddress == null || custaddress == "" || custaddress == "undefined") {
 			 $('.impColor0').after('<span class="error error-keyup-4">Fill Address Field </span>');
 			 $('#custaddress' ).css('border-color','#e73d4a');
@@ -830,12 +830,12 @@ $.each(productdetailslist, function(k,v){
 			 
 			 
 		 }
-		 /* if(fileimg=="" || fileimg==null || fileimg=="undefined"){
+		 if(fileimg=="" || fileimg==null || fileimg=="undefined"){
 			$('.impColor0').after('<span class="error error-keyup-4">Choose file </span>');
 			 $('#fileimg' ).css('border-color','#e73d4a');
 				$('#fileimg' ).css('color','#e73d4a');
 			 return false;
-		 } */
+		 } 
 		 var ins = document.getElementById('fileimg').files.length;
 			
 			for(var i=0; i< ins; i++)
