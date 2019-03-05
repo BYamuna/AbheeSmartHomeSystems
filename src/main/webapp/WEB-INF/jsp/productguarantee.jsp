@@ -162,14 +162,47 @@ if (listOrders1 != "") {
 }
 
 function displayTable(listOrders) {
+	
+	var designation = <%= session.getAttribute("userDesignationSession1") %>;
+	var designationid=designation["id"];
 	$('#tableId').html('');
-	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Customer ID</th><th>Order ID</th><th>Product Model Name</th><th>Purchased Date</th><th>Expired Date</th><th>Warranty Status</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
-	$('#tableId').html(tableHead);
-	serviceUnitArray = {};
+	
+	
+	
+		
+				if (designationid == 1 ){
+					var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
+						+ '<thead><tr><th>Customer ID</th><th>Order ID</th><th>Product Model Name</th><th>Purchased Date</th><th>Expired Date</th><th>Warranty Status</th><th>Warranty Sent By</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+						
+					
+				}else if (designationid == 2 ){
+					
+					var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
+						+ '<thead><tr><th>Customer ID</th><th>Order ID</th><th>Product Model Name</th><th>Purchased Date</th><th>Expired Date</th><th>Warranty Status</th><th>Warranty Accepted By</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+						
+					
+				}
+				else{
+					var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
+						+ '<thead><tr><th>Customer ID</th><th>Order ID</th><th>Product Model Name</th><th>Purchased Date</th><th>Expired Date</th><th>Warranty Status</th><th>Warranty Accepted By</th></tr></thead><tbody></tbody></table>';
+					
+				}
+		$('#tableId').html(tableHead);
+		
+		serviceUnitArray = {};
+	
 	$.each(listOrders,function(i, orderObj) {
-		var designation = <%= session.getAttribute("userDesignationSession1") %>;
-		var designationid=designation["id"];
+		
+		/*  var view3 = "<a class='view viewIt' href='viewCustomer?id="
+				+ orderObj.customerid
+				+ "&pgn=0'>"
+				+ orderObj.customerid + "</a>" */
+				var view3 = "<a class='view viewIt' href='viewCustomer?id="
+					+ orderObj.customerid
+					+ "&pgn=0'>"
+					+ orderObj.customerid + "</a>"
+		
+		
 		if (designationid == 1 ){
 		var warranty="<a class='warranty' onclick=approveProductWarranty('"+ orderObj.orderId +"')><i class='fa fa-check'></i></a>"
 		if(orderObj.status == "1"){
@@ -182,19 +215,19 @@ function displayTable(listOrders) {
 		
 		serviceUnitArray[orderObj.orderId] = orderObj;
 		var tblRow = "<tr>"
-			+ "<td title='"+orderObj.customerid+"'>"+ orderObj.customerid + "</td>"
+			+ "<td title='"+orderObj.customerid+"'>"+ view3 + "</td>"
 			+ "<td title='"+orderObj.orderId+"'>"+ orderObj.orderId + "</td>"
 			+ "<td title='"+orderObj.productmodelname+"'>"+ orderObj.productmodelname + "</td>"
 			+ "<td title='"+orderObj.purchaseddate+"'>"+ orderObj.purchaseddate + "</td>"
-			+ "<td title='"+orderObj.expirededdate+"'>"+ orderObj.expireddate + "</td>"
-			  
+			+ "<td title='"+orderObj.expirededdate+"'>"+ orderObj.expireddate + "</td>" 
 			+ "<td title='"+orderObj.warrantystatus+"'>"+ orderObj.warrantystatus + "</td>"
+			+ "<td title='"+orderObj.warrantysentby+"'>"+ orderObj.warrantysentby + "</td>"
 			
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "&nbsp;&nbsp;" +warranty+ "</td>"  
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 		
-		}else{
+		}else if (designationid == 2 ){
 		if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate' onclick=deleteProductWarranty('"+ orderObj.orderId+ "',0)><i class='fa fa-eye'></i></a>"
 		}else{  
@@ -205,19 +238,36 @@ function displayTable(listOrders) {
 		
 		serviceUnitArray[orderObj.orderId] = orderObj;
 		var tblRow = "<tr>"
-			+ "<td title='"+orderObj.customerid+"'>"+ orderObj.customerid + "</td>"
+			+ "<td title='"+orderObj.customerid+"'>"+ view3 + "</td>"
 			+ "<td title='"+orderObj.orderId+"'>"+ orderObj.orderId + "</td>"
 			+ "<td title='"+orderObj.productmodelname+"'>"+ orderObj.productmodelname + "</td>"
 			+ "<td title='"+orderObj.purchaseddate+"'>"+ orderObj.purchaseddate + "</td>"
-			+ "<td title='"+orderObj.expirededdate+"'>"+ orderObj.expireddate + "</td>"
-			  
+			+ "<td title='"+orderObj.expirededdate+"'>"+ orderObj.expireddate + "</td>"  
 			+ "<td title='"+orderObj.warrantystatus+"'>"+ orderObj.warrantystatus + "</td>"
-			
+			+ "<td title='"+orderObj.warrantyacceptedby+"'>"+ orderObj.warrantyacceptedby + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow +  "</td>"  
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 		}
+		else{
+			serviceUnitArray[orderObj.orderId] = orderObj;
+			var tblRow = "<tr>"
+				+ "<td title='"+orderObj.customerid+"'>"+ view3 + "</td>"
+				+ "<td title='"+orderObj.orderId+"'>"+ orderObj.orderId + "</td>"
+				+ "<td title='"+orderObj.productmodelname+"'>"+ orderObj.productmodelname + "</td>"
+				+ "<td title='"+orderObj.purchaseddate+"'>"+ orderObj.purchaseddate + "</td>"
+				+ "<td title='"+orderObj.expirededdate+"'>"+ orderObj.expireddate + "</td>"  
+				+ "<td title='"+orderObj.warrantystatus+"'>"+ orderObj.warrantystatus + "</td>"
+				+ "<td title='"+orderObj.warrantyacceptedby+"'>"+ orderObj.warrantyacceptedby + "</td>"
+				+ "</tr>";
+			$(tblRow).appendTo("#tableId table tbody");
+		}
+				
+				
+				
+				
 	});
+	
 	if(isClick=='Yes') $('.datatables').dataTable();
 	
 }

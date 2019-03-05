@@ -101,16 +101,21 @@ public class ReportIssueDao {
 	}
 	
 	public void saveServiceRequest(AbheeTask reportIssue) {
-		String randomNum = utilities.randNum();
+		String randomNum = null;
 		
-		reportIssue.setTaskno(randomNum);
+		if(reportIssue.getServiceType().equals("2"))
+		{
+		randomNum = utilities.abheeServiceRequestForInstallationRandNum();
 		
-		/*if(reportIssue.getUploadfile()!=null)
-	     {
-			reportIssue.setUploadfile(fileTemplate.concurrentFileNames());
-			 fileTemplate.clearFiles();
+		}else {
 			
-	     }*/ 
+			randomNum = utilities.abheeServiceRequestForServiceAndRepairRandNum();
+			
+		}
+		if(randomNum != null) {
+		reportIssue.setTaskno(randomNum);
+		}
+		
 		em.persist(reportIssue);
 		
 		

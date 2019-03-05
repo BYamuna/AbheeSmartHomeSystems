@@ -31,6 +31,8 @@ public class ProductGuarantee implements Serializable
 	private String  orderId=null;
 	private String productmodelid;
 	private String customerid;
+	private String warrantysentby;
+	private String warrantyacceptedby;
 	private String purchaseddate;
 	private String expireddate;
 	private String warrantystatus;
@@ -64,18 +66,21 @@ public class ProductGuarantee implements Serializable
 
 
 	public ProductGuarantee(/* Integer id, */String orderId, String productmodelid, String customerid, String purchaseddate,
-			String expireddate, String status, Date createdTime, Date updatedTime,String warrantystatus ) {
+			String expireddate, String status, Date createdTime, Date updatedTime,String warrantystatus,String warrantysentby,String warrantyacceptedby ) {
 		super();
 		/* this.id=id; */
 		this.orderId = orderId;
 		this.productmodelid = productmodelid;
 		this.customerid = customerid;
+		
 		this.purchaseddate = purchaseddate;
 		this.expireddate = expireddate;
 		this.status = status;
 		this.createdTime = createdTime;
 		UpdatedTime = updatedTime;
-		this.setWarrantystatus(warrantystatus);
+		this.warrantystatus = warrantystatus;
+		this.warrantysentby = warrantysentby;
+		this.setWarrantyacceptedby(warrantyacceptedby);
 		
 	}
 
@@ -157,10 +162,30 @@ public class ProductGuarantee implements Serializable
 	}
 
 
+	
+
+	public String getWarrantysentby() {
+		return warrantysentby;
+	}
+
+	public void setWarrantysentby(String warrantysentby) {
+		this.warrantysentby = warrantysentby;
+	}
+
+	
+	public String getWarrantyacceptedby() {
+		return warrantyacceptedby;
+	}
+
+	public void setWarrantyacceptedby(String warrantyacceptedby) {
+		this.warrantyacceptedby = warrantyacceptedby;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductGuarantee [orderId=" + orderId + ", productmodelid=" + productmodelid + ", customerid="
-				+ customerid + ", purchaseddate=" + purchaseddate + ", expireddate=" + expireddate + ", warrantystatus="
+				+ customerid + ", warrantysentby=" + warrantysentby + ", warrantyacceptedby=" + warrantyacceptedby
+				+ ", purchaseddate=" + purchaseddate + ", expireddate=" + expireddate + ", warrantystatus="
 				+ warrantystatus + ", status=" + status + ", createdTime=" + createdTime + ", UpdatedTime="
 				+ UpdatedTime + "]";
 	}

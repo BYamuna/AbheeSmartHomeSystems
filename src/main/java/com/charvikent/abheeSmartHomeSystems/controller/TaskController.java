@@ -687,13 +687,21 @@ public class TaskController {
 	}
 
 	@RequestMapping(value = "/Warranty", method = RequestMethod.POST)
-	public  @ResponseBody  String saveProductWarranty( HttpServletRequest request) throws ParseException {
+	public  @ResponseBody  String saveProductWarranty( HttpServletRequest request,Model model) throws ParseException {
 		LOGGER.debug("Calling Warranty at controller");
 		JSONObject json = new JSONObject();
 		//Date date = new Date();
 		//SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		ProductGuarantee pg = new ProductGuarantee();
 		//if (pg != null) {
+		
+		User objuserBean = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id = String.valueOf(objuserBean.getLastname());
+
+		
+		
+		
+		
 			 String productmodelid=request.getParameter("productmodelid"); 
 			 String customerid=request.getParameter("customerid"); 
 			 String purchaseddate=request.getParameter("purchaseddate");
@@ -713,8 +721,13 @@ public class TaskController {
 			 pg.setCustomerid(customerid);
 			 pg.setPurchaseddate(pDate ); 
 			 pg.setExpireddate( eDate );
+			
 			 pg.setStatus("1");
 			 pg.setWarrantystatus("Inprogress");
+			 pg.setWarrantysentby(id);
+			 
+			 pg.setWarrantyacceptedby(" ");
+			
 			productGuaranteeDao.saveWarranty(pg);
 			json.put("status","true");
 			return String.valueOf(json);
@@ -813,11 +826,16 @@ public class TaskController {
 	@RequestMapping(value = "/approveProductWarranty")
 	public @ResponseBody String approveProductWarranty(ProductGuarantee  productGuarantee ,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		LOGGER.debug("Calling deleteProductWarranty at controller");
-		String orderId=request.getParameter("orderId");
 		
-		if(productGuarantee.getOrderId() !=null)
+		String orderId=request.getParameter("orderId");
+		User objuserBean = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id = String.valueOf(objuserBean.getDesignation());
+		
+		if(id !=null)
 		{
 			productGuaranteeDao.updateProductWarranty(orderId);
+			
+			
 			
 			return "true";
 		}

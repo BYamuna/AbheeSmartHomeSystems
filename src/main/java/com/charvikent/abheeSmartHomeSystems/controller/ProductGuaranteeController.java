@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.charvikent.abheeSmartHomeSystems.dao.ProductGuaranteeDao;
 /*import com.charvikent.abheeSmartHomeSystems.model.AbheeBranch;*/
 import com.charvikent.abheeSmartHomeSystems.model.ProductGuarantee;
+import com.charvikent.abheeSmartHomeSystems.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -49,6 +51,8 @@ public class ProductGuaranteeController
 	{
 		LOGGER.debug("Calling productWarranty at controller");
 		System.out.println("Enter to post............");
+		User objuserBean = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String name = String.valueOf(objuserBean.getLastname());
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
 			return "redirect:/";
@@ -74,6 +78,8 @@ public class ProductGuaranteeController
 				{	
 					productGuarantee.setStatus("1");
 					productGuarantee.setWarrantystatus("Inprogress");
+					productGuarantee.setWarrantyacceptedby(" ");
+					productGuarantee.setWarrantysentby(name);
 					productGuaranteeDao.saveWarranty(productGuarantee);
 					
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");

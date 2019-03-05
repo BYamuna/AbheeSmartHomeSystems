@@ -448,6 +448,21 @@ public class AbheeDashBoardController {
 		return "viewcustomerdetails";
 
 	}
+	@RequestMapping(value = "/viewCustomer")
+	public String viewDetails1(@RequestParam(value = "id", required = true) String customerId,
+			@RequestParam(value = "pgn", required = true) String pgn,Model model,HttpSession session) 
+	{
+		LOGGER.debug("Calling  viewCustomerDetails at controller");
+	
+		
+			List<Map<String, Object>> viewcustomerBean1 = abheeTaskDao.getCustomerDetailsById(customerId);
+			model.addAttribute("test3",viewcustomerBean1);
+			
+			
+		
+		return "viewCustomer";
+
+	}
 	
 	@RequestMapping(value = "/viewQuotationDetails")
 	public String viewQuotationDetails(@RequestParam(value = "id", required = true) String quotationId,@RequestParam(value = "id", required = true) String customerId,@RequestParam(value = "id", required = true) String requestno,Model model,HttpSession session,HttpServletRequest request) throws JsonProcessingException 
