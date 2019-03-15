@@ -138,6 +138,9 @@
 	<definition name="viewcustomerdetails" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/jsp/viewcustomerdetails.jsp" />
 	</definition>   
+	 <definition name="viewCustomer" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/viewCustomer.jsp" />
+	</definition>  
 		<definition name="productguarantee" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/jsp/productguarantee.jsp" />
 	</definition>

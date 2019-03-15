@@ -405,23 +405,7 @@ public class HomeController {
         		request.setAttribute("ordersList", "''");    	  
           }
        
-        /* String customerid = customerProfile.getCustomerId();
-			
-  		customerNotification = customerDao.getNotificationByCustomerIds(customerid);
-  		listOrderBeansForNotification=	customerDao.getServiceNotificationByCustomerIds(customerid);
-  		
-  		objectMapperNotificaton = new ObjectMapper();
-  		objectMapperNotificaton1 = new ObjectMapper();
-  		if(true)
-  			
-  		{
-  			sJsonNotificaton1 = objectMapperNotificaton.writeValueAsString(customerNotification);
-  			sJsonNotificaton=objectMapperNotificaton1.writeValueAsString(listOrderBeansForNotification);
-  			
-  			session.setAttribute("quotations", sJsonNotificaton1);
-  			session.setAttribute("services", sJsonNotificaton);
-  			
-  		} */
+        
           
 		return "customerprofile";
 	}
